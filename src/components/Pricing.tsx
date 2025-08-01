@@ -3,32 +3,21 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
-import { CheckCircle, Star } from "lucide-react";
+import { CheckCircle, Star, Crown } from "lucide-react";
 
 const Pricing = () => {
-  const handleSubscribe = () => {
+  const handleStripeCheckout = (planType: string) => {
     // This will be replaced with actual Stripe integration
-    console.log("Starting subscription flow...");
-    alert("Stripe integration will be set up next! Please provide your Stripe Secret Key to complete the payment setup.");
+    console.log(`Starting ${planType} subscription flow...`);
+    alert(`Stripe integration will be set up for ${planType} plan! Please provide your Stripe Secret Key to complete the payment setup.`);
   };
-
-  const features = [
-    "10 premium articles per month",
-    "SEO keyword research included",
-    "24-hour delivery guarantee",
-    "Unlimited revisions",
-    "Dedicated account manager",
-    "Content calendar planning",
-    "Performance analytics",
-    "Money-back guarantee"
-  ];
 
   return (
     <section id="pricing" className="py-20 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
-            Simple, Transparent <span className="text-primary">Pricing</span>
+            Simple, Transparent <span className="text-[#3498DB]">Pricing</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Everything you need to scale your content marketing. 
@@ -36,14 +25,14 @@ const Pricing = () => {
           </p>
         </div>
 
-        {/* Individual Service Pricing Table */}
-        <div className="max-w-4xl mx-auto mb-16">
+        {/* Main Pricing Comparison Grid */}
+        <div className="max-w-6xl mx-auto mb-16">
           <div className="text-center mb-8">
             <h3 className="text-2xl md:text-3xl font-bold mb-4 text-foreground">
-              Individual Service <span className="text-primary">Pricing</span>
+              Choose Your <span className="text-[#3498DB]">Content Plan</span>
             </h3>
             <p className="text-muted-foreground">
-              À la carte pricing for individual content pieces
+              Compare per-article pricing vs subscription savings
             </p>
           </div>
 
@@ -52,34 +41,30 @@ const Pricing = () => {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="font-semibold">Service</TableHead>
-                    <TableHead className="font-semibold">Base Price</TableHead>
-                    <TableHead className="font-semibold text-primary">+SEO ($20)</TableHead>
-                    <TableHead className="font-semibold text-primary">+Human Edit ($15)</TableHead>
-                    <TableHead className="font-semibold text-primary">Total Upsell Price</TableHead>
+                    <TableHead className="font-semibold text-lg">Service</TableHead>
+                    <TableHead className="font-semibold text-lg">Per-Article</TableHead>
+                    <TableHead className="font-semibold text-lg text-[#3498DB]">Subscription</TableHead>
+                    <TableHead className="font-semibold text-lg text-[#2ECC71]">Savings</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  <TableRow>
-                    <TableCell className="font-medium">SEO Blog Post</TableCell>
-                    <TableCell>$60</TableCell>
-                    <TableCell className="font-bold text-primary">$80</TableCell>
-                    <TableCell className="font-bold text-primary">$75</TableCell>
-                    <TableCell className="font-bold text-primary">$95 (both)</TableCell>
+                  <TableRow className="border-b">
+                    <TableCell className="font-medium text-base">SEO Blog</TableCell>
+                    <TableCell className="text-base">$60</TableCell>
+                    <TableCell className="font-bold text-[#3498DB] text-base">$497/month ($49.70/article)</TableCell>
+                    <TableCell className="font-bold text-[#2ECC71] text-base">Save 17%</TableCell>
+                  </TableRow>
+                  <TableRow className="border-b">
+                    <TableCell className="font-medium text-base">Social Posts</TableCell>
+                    <TableCell className="text-base">$15</TableCell>
+                    <TableCell className="font-bold text-[#3498DB] text-base">$300/month (50 posts)</TableCell>
+                    <TableCell className="font-bold text-[#2ECC71] text-base">Save 10%</TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell className="font-medium">Social Media Post</TableCell>
-                    <TableCell>$15</TableCell>
-                    <TableCell className="font-bold text-primary">$35</TableCell>
-                    <TableCell className="font-bold text-primary">$30</TableCell>
-                    <TableCell className="font-bold text-primary">$50 (both)</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">Product Description</TableCell>
-                    <TableCell>$10</TableCell>
-                    <TableCell className="font-bold text-primary">$30</TableCell>
-                    <TableCell className="font-bold text-primary">$25</TableCell>
-                    <TableCell className="font-bold text-primary">$45 (both)</TableCell>
+                    <TableCell className="font-medium text-base">Product Descriptions</TableCell>
+                    <TableCell className="text-base">$10</TableCell>
+                    <TableCell className="font-bold text-[#3498DB] text-base">$400/month (100 products)</TableCell>
+                    <TableCell className="font-bold text-[#2ECC71] text-base">Save 20%</TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
@@ -87,126 +72,135 @@ const Pricing = () => {
           </Card>
         </div>
 
-        {/* Premium Upgrades Section */}
-        <div className="max-w-4xl mx-auto mb-16">
-          <div className="text-center mb-8">
-            <h3 className="text-2xl md:text-3xl font-bold mb-6 text-foreground">
-              Premium <span className="text-primary">Upgrades</span>
-            </h3>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6 mb-8">
-            <Card className="p-6 relative">
-              <div className="absolute top-4 right-4">
-                <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20">
-                  Most Popular
-                </Badge>
-              </div>
-              <div className="flex items-center gap-3 mb-4 mt-8">
-                <Checkbox id="seo-upgrade" />
-                <label htmlFor="seo-upgrade" className="text-lg font-semibold cursor-pointer">
-                  [🔍] +SEO Optimization ($20/article) → Rank #1 on Google
-                </label>
-              </div>
-            </Card>
-
-            <Card className="p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <Checkbox id="human-edit" />
-                <label htmlFor="human-edit" className="text-lg font-semibold cursor-pointer">
-                  [✏️] +Human Editing ($15/article) → Flawless, natural tone 🇺🇸🇬🇧🇪🇺🇭🇰🇲🇽
-                </label>
-              </div>
-            </Card>
-          </div>
-
-          <Card className="p-6 bg-primary/5 border border-primary/20">
-            <h4 className="font-bold text-lg mb-4">Why upsell? Our AI delivers 80% quality at 50% cost. For mission-critical content, upgrades add:</h4>
-            
-            <div className="space-y-4">
-              <div>
-                <p className="font-semibold text-primary mb-2">+SEO Optimization:</p>
-                <p className="text-sm text-muted-foreground">
-                  SurferSEO-powered, keyword clusters, backlink strategy.
-                </p>
-              </div>
-              
-              <div>
-                <p className="font-semibold text-primary mb-2">+Human Polish:</p>
-                <p className="text-sm text-muted-foreground">
-                  Culture-savvy editors refine tone for your target audience (US/UK/EU/Asia/LATAM).
-                </p>
-              </div>
-            </div>
-          </Card>
-        </div>
-
-        <div className="max-w-md mx-auto mt-8">
-          <Card className="shadow-elegant border-2 border-primary/20 bg-card relative overflow-visible">
-            {/* Popular Badge */}
+        {/* Main Subscription Button - Best Value */}
+        <div className="max-w-md mx-auto mb-12">
+          <Card className="shadow-elegant border-2 border-[#2ECC71]/30 bg-card relative overflow-visible">
+            {/* Most Popular Badge */}
             <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              <div className="bg-gradient-primary text-white px-6 py-2 rounded-full text-sm font-semibold flex items-center gap-1">
-                <Star className="h-4 w-4" />
+              <div className="bg-[#2ECC71] text-white px-6 py-2 rounded-full text-sm font-semibold flex items-center gap-1">
+                <Crown className="h-4 w-4" />
                 Most Popular
               </div>
             </div>
 
             <CardHeader className="text-center pt-12 pb-8">
-              <CardTitle className="text-3xl font-bold mb-2">Content Pro</CardTitle>
-              <CardDescription className="text-lg mb-6">
-                Perfect for growing SaaS & eCommerce brands
+              <CardTitle className="text-2xl font-bold mb-4">
+                🔥 BEST VALUE: 10 SEO Articles = $497/mo
+              </CardTitle>
+              <CardDescription className="text-lg mb-6 text-[#2ECC71] font-semibold">
+                Save $103 compared to per-article pricing!
               </CardDescription>
               
-              <div className="mb-6">
-                <div className="flex items-baseline justify-center gap-1">
-                  <span className="text-5xl font-bold text-primary">$497</span>
-                  <span className="text-xl text-muted-foreground">/month</span>
-                </div>
-                <p className="text-sm text-muted-foreground mt-2">
-                  That's just $49.70 per article
-                </p>
-              </div>
-
               <Button 
-                variant="cta" 
+                className="w-full text-xl py-6 h-auto bg-[#2ECC71] hover:bg-[#27AE60] text-white font-bold"
                 size="lg" 
-                onClick={handleSubscribe}
-                className="w-full text-xl py-6 h-auto"
+                onClick={() => handleStripeCheckout('SEO Blog Subscription')}
               >
-                Start Your Subscription
+                Start SEO Blog Subscription
               </Button>
               
               <p className="text-sm text-muted-foreground mt-4">
                 ✨ 7-day free trial • Cancel anytime • Money-back guarantee
               </p>
             </CardHeader>
-
-            <CardContent className="pt-0">
-              <div className="space-y-4">
-                <h4 className="font-semibold text-lg mb-4">Everything included:</h4>
-                {features.map((feature, index) => (
-                  <div key={index} className="flex items-center gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
-                    <span className="text-sm">{feature}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-8 p-4 bg-primary/5 rounded-lg border border-primary/20">
-                <p className="text-sm text-center">
-                  <strong>Bonus:</strong> Get a free content audit worth $297 when you subscribe today!
-                </p>
-              </div>
-            </CardContent>
           </Card>
         </div>
 
-        {/* Additional Info */}
+        {/* Other Subscription Options */}
+        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-16">
+          <Card className="p-6 border border-[#3498DB]/20">
+            <h4 className="text-xl font-bold mb-2 text-[#3498DB]">Social Media Package</h4>
+            <p className="text-2xl font-bold mb-4">$300/month</p>
+            <p className="text-muted-foreground mb-4">50 social posts • Save 10%</p>
+            <Button 
+              className="w-full bg-[#3498DB] hover:bg-[#2980B9] text-white"
+              onClick={() => handleStripeCheckout('Social Media Package')}
+            >
+              Start Social Package
+            </Button>
+          </Card>
+
+          <Card className="p-6 border border-[#3498DB]/20">
+            <h4 className="text-xl font-bold mb-2 text-[#3498DB]">Product Description Package</h4>
+            <p className="text-2xl font-bold mb-4">$400/month</p>
+            <p className="text-muted-foreground mb-4">100 descriptions • Save 20%</p>
+            <Button 
+              className="w-full bg-[#3498DB] hover:bg-[#2980B9] text-white"
+              onClick={() => handleStripeCheckout('Product Description Package')}
+            >
+              Start Product Package
+            </Button>
+          </Card>
+        </div>
+
+        {/* Upsell Modules */}
+        <div className="max-w-4xl mx-auto mb-16">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl md:text-3xl font-bold mb-6 text-foreground">
+              Premium <span className="text-[#3498DB]">Add-Ons</span>
+            </h3>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 mb-8">
+            <Card className="p-6 border border-[#3498DB]/20">
+              <div className="flex items-center gap-3 mb-4">
+                <Checkbox id="seo-addon" />
+                <label htmlFor="seo-addon" className="text-lg font-semibold cursor-pointer">
+                  + Professional SEO Optimization (+$200/month)
+                </label>
+              </div>
+              <p className="text-sm text-muted-foreground ml-8">
+                Keyword research, SurferSEO integration, ranking reports
+              </p>
+            </Card>
+
+            <Card className="p-6 border border-[#3498DB]/20">
+              <div className="flex items-center gap-3 mb-4">
+                <Checkbox id="editing-addon" />
+                <label htmlFor="editing-addon" className="text-lg font-semibold cursor-pointer">
+                  + Native-Language Editing (+$150/month)
+                </label>
+              </div>
+              <p className="text-sm text-muted-foreground ml-8">
+                Human polish for US/UK/EU/Asia markets 🇺🇸🇬🇧🇪🇺🇭🇰🇲🇽
+              </p>
+            </Card>
+          </div>
+        </div>
+
+        {/* Annual Plan Option */}
+        <div className="max-w-md mx-auto mb-12">
+          <Card className="p-6 bg-gradient-to-br from-[#3498DB]/10 to-[#2ECC71]/10 border-2 border-[#3498DB]/30">
+            <div className="text-center">
+              <h4 className="text-xl font-bold mb-2 flex items-center justify-center gap-2">
+                💰 Annual Plan <Badge className="bg-[#2ECC71] text-white">Get 2 Months Free</Badge>
+              </h4>
+              <p className="text-lg mb-4">Pay yearly and save 20%</p>
+              <Button 
+                className="w-full bg-[#3498DB] hover:bg-[#2980B9] text-white font-bold"
+                onClick={() => handleStripeCheckout('Annual Plan')}
+              >
+                Switch to Annual Billing
+              </Button>
+            </div>
+          </Card>
+        </div>
+
+        {/* Footnote */}
+        <div className="text-center max-w-3xl mx-auto">
+          <Card className="p-6 bg-muted/30">
+            <p className="text-sm text-muted-foreground">
+              <strong>All subscriptions include:</strong> 24-hr delivery, 2 free revisions, and content calendar access. Cancel anytime.
+            </p>
+          </Card>
+        </div>
+
+        {/* Contact Sales */}
         <div className="text-center mt-12">
           <p className="text-sm text-muted-foreground mb-4">
             Need a custom plan? Enterprise solutions available.
           </p>
-          <Button variant="ghost" className="text-primary hover:text-primary-dark">
+          <Button variant="ghost" className="text-[#3498DB] hover:text-[#2980B9]">
             Contact Sales Team
           </Button>
         </div>
