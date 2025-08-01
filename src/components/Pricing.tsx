@@ -146,7 +146,7 @@ const Pricing = () => {
               <div className="flex items-center gap-3 mb-4">
                 <Checkbox id="seo-addon" />
                 <label htmlFor="seo-addon" className="text-lg font-semibold cursor-pointer">
-                  + Professional SEO Optimization (+$197/month)
+                  + Professional SEO Optimization (<span className="line-through text-muted-foreground">$220</span> $197/month)
                 </label>
               </div>
               <p className="text-sm text-muted-foreground ml-8">
@@ -157,9 +157,15 @@ const Pricing = () => {
             <Card className="p-6 border border-[#3498DB]/20">
               <div className="flex items-center gap-3 mb-4">
                 <Checkbox id="editing-addon" />
-                <label htmlFor="editing-addon" className="text-lg font-semibold cursor-pointer">
+                <label htmlFor="editing-addon" className="text-lg font-semibold cursor-pointer flex items-center gap-2">
                   + Native-Language Editing (+$147/month)
+                  <Badge style={{ backgroundColor: '#00C4CC', color: 'white' }} className="text-xs">
+                    Most Popular
+                  </Badge>
                 </label>
+                <Badge variant="secondary" className="text-xs bg-[#2ECC71] text-white">
+                  Save 12%
+                </Badge>
               </div>
               <p className="text-sm text-muted-foreground ml-8">
                 Human polish for US/UK/EU/Asia markets 🇺🇸🇬🇧🇪🇺🇭🇰🇲🇽
