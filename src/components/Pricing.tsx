@@ -33,8 +33,8 @@ const Pricing = () => {
           </p>
         </div>
 
-        <div className="max-w-md mx-auto">
-          <Card className="shadow-elegant border-2 border-primary/20 bg-card relative overflow-hidden">
+        <div className="max-w-md mx-auto mt-8">
+          <Card className="shadow-elegant border-2 border-primary/20 bg-card relative overflow-visible">
             {/* Popular Badge */}
             <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
               <div className="bg-gradient-primary text-white px-6 py-2 rounded-full text-sm font-semibold flex items-center gap-1">
