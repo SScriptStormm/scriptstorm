@@ -146,7 +146,7 @@ const Pricing = () => {
               <div className="flex items-center gap-3 mb-4">
                 <Checkbox id="seo-addon" />
                 <label htmlFor="seo-addon" className="text-lg font-semibold cursor-pointer">
-                  + Professional SEO Optimization (+$200/month)
+                  + Professional SEO Optimization (+$197/month)
                 </label>
               </div>
               <p className="text-sm text-muted-foreground ml-8">
@@ -158,7 +158,7 @@ const Pricing = () => {
               <div className="flex items-center gap-3 mb-4">
                 <Checkbox id="editing-addon" />
                 <label htmlFor="editing-addon" className="text-lg font-semibold cursor-pointer">
-                  + Native-Language Editing (+$150/month)
+                  + Native-Language Editing (+$147/month)
                 </label>
               </div>
               <p className="text-sm text-muted-foreground ml-8">
