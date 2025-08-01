@@ -50,20 +50,20 @@ const Pricing = () => {
                 <TableBody>
                   <TableRow className="border-b">
                     <TableCell className="font-medium text-base">SEO Blog</TableCell>
-                    <TableCell className="text-base">$60</TableCell>
-                    <TableCell className="font-bold text-[#3498DB] text-base">$497/month ($49.70/article)</TableCell>
+                    <TableCell className="text-base">$60 USD</TableCell>
+                    <TableCell className="font-bold text-[#3498DB] text-base">$497 USD/month ($49.70/article)</TableCell>
                     <TableCell className="font-bold text-[#2ECC71] text-base">Save 17%</TableCell>
                   </TableRow>
                   <TableRow className="border-b">
                     <TableCell className="font-medium text-base">Social Posts</TableCell>
-                    <TableCell className="text-base">$15</TableCell>
-                    <TableCell className="font-bold text-[#3498DB] text-base">$300/month (50 posts)</TableCell>
+                    <TableCell className="text-base">$15 USD</TableCell>
+                    <TableCell className="font-bold text-[#3498DB] text-base">$300 USD/month (50 posts)</TableCell>
                     <TableCell className="font-bold text-[#2ECC71] text-base">Save 10%</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell className="font-medium text-base">Product Descriptions</TableCell>
-                    <TableCell className="text-base">$10</TableCell>
-                    <TableCell className="font-bold text-[#3498DB] text-base">$400/month (100 products)</TableCell>
+                    <TableCell className="text-base">$10 USD</TableCell>
+                    <TableCell className="font-bold text-[#3498DB] text-base">$400 USD/month (100 products)</TableCell>
                     <TableCell className="font-bold text-[#2ECC71] text-base">Save 20%</TableCell>
                   </TableRow>
                 </TableBody>
@@ -85,10 +85,10 @@ const Pricing = () => {
 
             <CardHeader className="text-center pt-12 pb-8">
               <CardTitle className="text-2xl font-bold mb-4">
-                🔥 BEST VALUE: 10 SEO Articles = $497/mo
+                🔥 BEST VALUE: 10 SEO Articles = $497 USD/mo
               </CardTitle>
               <CardDescription className="text-lg mb-6 text-[#2ECC71] font-semibold">
-                Save $103 compared to per-article pricing!
+                Save $103 USD compared to per-article pricing!
               </CardDescription>
               
               <Button 
@@ -110,7 +110,7 @@ const Pricing = () => {
         <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-16">
           <Card className="p-6 border border-[#3498DB]/20">
             <h4 className="text-xl font-bold mb-2 text-[#3498DB]">Social Media Package</h4>
-            <p className="text-2xl font-bold mb-4">$300/month</p>
+            <p className="text-2xl font-bold mb-4">$300 USD/month</p>
             <p className="text-muted-foreground mb-4">50 social posts • Save 10%</p>
             <Button 
               className="w-full bg-[#3498DB] hover:bg-[#2980B9] text-white"
@@ -122,7 +122,7 @@ const Pricing = () => {
 
           <Card className="p-6 border border-[#3498DB]/20">
             <h4 className="text-xl font-bold mb-2 text-[#3498DB]">Product Description Package</h4>
-            <p className="text-2xl font-bold mb-4">$400/month</p>
+            <p className="text-2xl font-bold mb-4">$400 USD/month</p>
             <p className="text-muted-foreground mb-4">100 descriptions • Save 20%</p>
             <Button 
               className="w-full bg-[#3498DB] hover:bg-[#2980B9] text-white"
@@ -173,10 +173,10 @@ const Pricing = () => {
           <Card className="p-6 bg-gradient-to-br from-[#FFD700]/10 to-[#FFD700]/5 border-2 border-[#FFD700]/30">
             <div className="text-center">
               <h4 className="text-xl font-bold mb-2 text-foreground">
-                ⚡ YEARLY DEAL: $4,970/year (2 Months FREE)
+                ⚡ YEARLY DEAL: $4,970 USD/year (2 Months FREE)
               </h4>
               <p className="text-sm text-muted-foreground mb-4">
-                Save $994 vs paying monthly → 30-day guarantee
+                Save $994 USD vs paying monthly → 30-day guarantee
               </p>
               <Button 
                 className="w-full font-bold text-black"
