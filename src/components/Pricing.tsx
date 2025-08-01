@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
 import { CheckCircle, Star } from "lucide-react";
 
 const Pricing = () => {
@@ -82,6 +84,60 @@ const Pricing = () => {
                 </TableBody>
               </Table>
             </CardContent>
+          </Card>
+        </div>
+
+        {/* Premium Upgrades Section */}
+        <div className="max-w-4xl mx-auto mb-16">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl md:text-3xl font-bold mb-6 text-foreground">
+              Premium <span className="text-primary">Upgrades</span>
+            </h3>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 mb-8">
+            <Card className="p-6 relative">
+              <div className="absolute top-4 right-4">
+                <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20">
+                  Most Popular
+                </Badge>
+              </div>
+              <div className="flex items-center gap-3 mb-4">
+                <Checkbox id="seo-upgrade" />
+                <label htmlFor="seo-upgrade" className="text-lg font-semibold cursor-pointer">
+                  [🔍] +SEO Optimization ($20/article) → Rank #1 on Google
+                </label>
+              </div>
+            </Card>
+
+            <Card className="p-6">
+              <div className="flex items-center gap-3 mb-4">
+                <Checkbox id="human-edit" />
+                <label htmlFor="human-edit" className="text-lg font-semibold cursor-pointer">
+                  [✏️] +Human Editing ($15/article) → Flawless, natural tone 🇺🇸🇬🇧🇪🇺🇭🇰🇲🇽
+                </label>
+              </div>
+            </Card>
+          </div>
+
+          <Card className="p-6 bg-primary/5 border border-primary/20">
+            <h4 className="font-bold text-lg mb-4">Why upsell? Our AI delivers 80% quality at 50% cost. For mission-critical content, upgrades add:</h4>
+            
+            <div className="space-y-4">
+              <div>
+                <p className="font-semibold text-primary mb-2">+SEO Optimization:</p>
+                <p className="text-sm text-muted-foreground">
+                  SurferSEO-powered, keyword clusters, backlink strategy.
+                </p>
+              </div>
+              
+              <div>
+                <p className="font-semibold text-primary mb-2">+Human Polish:</p>
+                <p className="text-sm text-muted-foreground">
+                  Culture-savvy editors refine tone for your target audience (US/UK/EU/Asia/LATAM).
+                </p>
+              </div>
+            </div>
           </Card>
         </div>
 
