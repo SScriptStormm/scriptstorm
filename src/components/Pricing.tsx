@@ -102,7 +102,7 @@ const Pricing = () => {
                   Most Popular
                 </Badge>
               </div>
-              <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center gap-3 mb-4 mt-8">
                 <Checkbox id="seo-upgrade" />
                 <label htmlFor="seo-upgrade" className="text-lg font-semibold cursor-pointer">
                   [🔍] +SEO Optimization ($20/article) → Rank #1 on Google
