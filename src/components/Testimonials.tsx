@@ -6,7 +6,7 @@ const Testimonials = () => {
     {
       name: "Sarah Chen",
       role: "CMO at CloudTech SaaS",
-      content: "AI Content Agency transformed our content strategy. We went from 10K to 100K monthly organic visitors in just 6 months. Their SEO articles are incredibly well-researched and convert beautifully.",
+      content: "ScriptStorm transformed our content strategy. We went from 10K to 100K monthly organic visitors in just 6 months. Their SEO articles are incredibly well-researched and convert beautifully.",
       rating: 5,
       company: "CloudTech"
     },

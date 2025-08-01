@@ -26,7 +26,7 @@ const Footer = () => {
         {/* Footer Links */}
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div>
-            <h3 className="text-xl font-bold mb-4">AI Content Agency</h3>
+            <h3 className="text-xl font-bold mb-4">ScriptStorm</h3>
             <p className="text-white/70 text-sm leading-relaxed">
               Premium content marketing services for SaaS and eCommerce brands. 
               Delivered fast, optimized for SEO, guaranteed to convert.
@@ -67,7 +67,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-white/20 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-white/60 text-sm">
-            © 2024 AI Content Agency. All rights reserved.
+            © 2024 ScriptStorm. All rights reserved.
           </p>
           <div className="flex gap-6 mt-4 md:mt-0">
             <a href="#" className="text-white/60 hover:text-white text-sm transition-smooth">
