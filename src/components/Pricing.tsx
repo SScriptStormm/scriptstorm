@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { CheckCircle, Star } from "lucide-react";
 
 const Pricing = () => {
@@ -31,6 +32,57 @@ const Pricing = () => {
             Everything you need to scale your content marketing. 
             No hidden fees, no contracts, cancel anytime.
           </p>
+        </div>
+
+        {/* Individual Service Pricing Table */}
+        <div className="max-w-4xl mx-auto mb-16">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl md:text-3xl font-bold mb-4 text-foreground">
+              Individual Service <span className="text-primary">Pricing</span>
+            </h3>
+            <p className="text-muted-foreground">
+              À la carte pricing for individual content pieces
+            </p>
+          </div>
+
+          <Card className="shadow-elegant bg-card">
+            <CardContent className="p-6">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="font-semibold">Service</TableHead>
+                    <TableHead className="font-semibold">Base Price</TableHead>
+                    <TableHead className="font-semibold text-primary">+SEO ($20)</TableHead>
+                    <TableHead className="font-semibold text-primary">+Human Edit ($15)</TableHead>
+                    <TableHead className="font-semibold text-primary">Total Upsell Price</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell className="font-medium">SEO Blog Post</TableCell>
+                    <TableCell>$60</TableCell>
+                    <TableCell className="font-bold text-primary">$80</TableCell>
+                    <TableCell className="font-bold text-primary">$75</TableCell>
+                    <TableCell className="font-bold text-primary">$95 (both)</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">Social Media Post</TableCell>
+                    <TableCell>$15</TableCell>
+                    <TableCell className="font-bold text-primary">$35</TableCell>
+                    <TableCell className="font-bold text-primary">$30</TableCell>
+                    <TableCell className="font-bold text-primary">$50 (both)</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">Product Description</TableCell>
+                    <TableCell>$10</TableCell>
+                    <TableCell className="font-bold text-primary">$30</TableCell>
+                    <TableCell className="font-bold text-primary">$25</TableCell>
+                    <TableCell className="font-bold text-primary">$45 (both)</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
         </div>
 
         <div className="max-w-md mx-auto mt-8">
