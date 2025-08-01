@@ -168,19 +168,22 @@ const Pricing = () => {
           </div>
         </div>
 
-        {/* Annual Plan Option */}
+        {/* Annual Plan CTA */}
         <div className="max-w-md mx-auto mb-12">
-          <Card className="p-6 bg-gradient-to-br from-[#3498DB]/10 to-[#2ECC71]/10 border-2 border-[#3498DB]/30">
+          <Card className="p-6 bg-gradient-to-br from-[#FFD700]/10 to-[#FFD700]/5 border-2 border-[#FFD700]/30">
             <div className="text-center">
-              <h4 className="text-xl font-bold mb-2 flex items-center justify-center gap-2">
-                💰 Annual Plan <Badge className="bg-[#2ECC71] text-white">Get 2 Months Free</Badge>
+              <h4 className="text-xl font-bold mb-2 text-foreground">
+                ⚡ YEARLY DEAL: $4,970/year (2 Months FREE)
               </h4>
-              <p className="text-lg mb-4">Pay yearly and save 20%</p>
+              <p className="text-sm text-muted-foreground mb-4">
+                Save $994 vs paying monthly → 30-day guarantee
+              </p>
               <Button 
-                className="w-full bg-[#3498DB] hover:bg-[#2980B9] text-white font-bold"
+                className="w-full font-bold text-black"
+                style={{ backgroundColor: '#FFD700', borderColor: '#FFD700' }}
                 onClick={() => handleStripeCheckout('Annual Plan')}
               >
-                Switch to Annual Billing
+                Get Annual Deal
               </Button>
             </div>
           </Card>
