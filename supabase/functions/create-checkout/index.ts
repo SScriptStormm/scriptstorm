@@ -41,10 +41,18 @@ serve(async (req) => {
       logStep("Found existing customer", { customerId });
     }
 
-    // Build line items
+    // Create line items using price_data instead of price IDs for now
     const lineItems = [
       {
-        price: "price_1QZWJnH0XahPXnwCg9wBjTKY", // Base plan - replace with your actual price ID
+        price_data: {
+          currency: "usd",
+          product_data: {
+            name: "ScriptStorm Base Plan",
+            description: "10 SEO Articles per month"
+          },
+          unit_amount: 49700, // $497 in cents
+          recurring: { interval: "month" },
+        },
         quantity: 1,
       }
     ];
@@ -52,7 +60,15 @@ serve(async (req) => {
     // Add SEO add-on if selected
     if (selectedAddOns?.seo) {
       lineItems.push({
-        price: "price_1QZWKaH0XahPXnwC4m2vLnPQ", // SEO add-on - replace with your actual price ID
+        price_data: {
+          currency: "usd",
+          product_data: {
+            name: "SEO Optimization Add-on",
+            description: "Professional SEO optimization with SurferSEO integration"
+          },
+          unit_amount: 19700, // $197 in cents
+          recurring: { interval: "month" },
+        },
         quantity: 1,
       });
     }
@@ -60,7 +76,15 @@ serve(async (req) => {
     // Add Editing add-on if selected
     if (selectedAddOns?.editing) {
       lineItems.push({
-        price: "price_1QZWL5H0XahPXnwC9jX8kQmR", // Editing add-on - replace with your actual price ID
+        price_data: {
+          currency: "usd",
+          product_data: {
+            name: "Native-Language Editing Add-on",
+            description: "Human polish for US/UK/EU/Asia markets"
+          },
+          unit_amount: 14700, // $147 in cents
+          recurring: { interval: "month" },
+        },
         quantity: 1,
       });
     }
