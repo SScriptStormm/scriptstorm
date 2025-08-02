@@ -23,13 +23,11 @@ const Hero = () => {
         <div className="max-w-4xl mx-auto">
           {/* Logo */}
           <div className="mb-8">
-            <div className="inline-block bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
-              <img 
-                src={scriptStormLogo} 
-                alt="ScriptStorm Logo" 
-                className="h-16 w-auto mix-blend-multiply brightness-0 invert"
-              />
-            </div>
+            <img 
+              src={scriptStormLogo} 
+              alt="ScriptStorm Logo" 
+              className="h-16 w-auto mx-auto"
+            />
           </div>
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
             ScriptStorm: SEO Content for SaaS Brands—
