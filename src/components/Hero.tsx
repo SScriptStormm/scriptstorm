@@ -21,14 +21,6 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 py-20 text-center text-white">
         <div className="max-w-4xl mx-auto">
-          {/* Logo */}
-          <div className="mb-8">
-            <img 
-              src={scriptStormLogo} 
-              alt="ScriptStorm Logo" 
-              className="h-16 w-auto mx-auto"
-            />
-          </div>
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
             ScriptStorm: SEO Content for SaaS Brands—
             <span className="block text-primary-glow">Delivered in 24 Hours</span>
