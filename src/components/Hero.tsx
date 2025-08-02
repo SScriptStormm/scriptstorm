@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
 import heroImage from "@/assets/hero-image.jpg";
+import scriptStormLogo from "@/assets/scriptstorm-logo.png";
 
 const Hero = () => {
   const handleGetStarted = () => {
@@ -20,6 +21,14 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 py-20 text-center text-white">
         <div className="max-w-4xl mx-auto">
+          {/* Logo */}
+          <div className="mb-8">
+            <img 
+              src={scriptStormLogo} 
+              alt="ScriptStorm Logo" 
+              className="h-20 w-auto mx-auto mb-6"
+            />
+          </div>
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
             ScriptStorm: SEO Content for SaaS Brands—
             <span className="block text-primary-glow">Delivered in 24 Hours</span>
