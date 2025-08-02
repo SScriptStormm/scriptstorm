@@ -29,15 +29,26 @@ serve(async (req) => {
     if (!stripeKey) throw new Error("Stripe secret key not found");
     logStep("Stripe key verified");
 
-    const authHeader = req.headers.get("Authorization");
-    if (!authHeader) throw new Error("No authorization header provided");
+    // Try to get authenticated user, but allow guest checkout
+    let userEmail = "guest@scriptstorm.com"; // Default for guest checkout
+    let userId = null;
 
-    const token = authHeader.replace("Bearer ", "");
-    const { data: userData, error: userError } = await supabaseClient.auth.getUser(token);
-    if (userError) throw new Error(`Authentication error: ${userError.message}`);
-    const user = userData.user;
-    if (!user?.email) throw new Error("User not authenticated or email not available");
-    logStep("User authenticated", { userId: user.id, email: user.email });
+    const authHeader = req.headers.get("Authorization");
+    if (authHeader && authHeader !== `Bearer ${Deno.env.get("SUPABASE_ANON_KEY")}`) {
+      try {
+        const token = authHeader.replace("Bearer ", "");
+        const { data: userData, error: userError } = await supabaseClient.auth.getUser(token);
+        if (!userError && userData.user?.email) {
+          userEmail = userData.user.email;
+          userId = userData.user.id;
+          logStep("User authenticated", { userId, email: userEmail });
+        }
+      } catch (err) {
+        logStep("Auth failed, proceeding as guest", { error: err.message });
+      }
+    } else {
+      logStep("No auth header or anon key, proceeding as guest");
+    }
 
     const { selectedAddOns } = await req.json();
     logStep("Request data", { selectedAddOns });
@@ -45,7 +56,7 @@ serve(async (req) => {
     const stripe = new Stripe(stripeKey, { apiVersion: "2023-10-16" });
 
     // Check for existing customer
-    const customers = await stripe.customers.list({ email: user.email, limit: 1 });
+    const customers = await stripe.customers.list({ email: userEmail, limit: 1 });
     let customerId;
     if (customers.data.length > 0) {
       customerId = customers.data[0].id;
@@ -82,7 +93,7 @@ serve(async (req) => {
     
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
-      customer_email: customerId ? undefined : user.email,
+      customer_email: customerId ? undefined : userEmail,
       line_items: lineItems,
       mode: "subscription",
       payment_method_types: ["card", "alipay", "wechat_pay"],
@@ -90,7 +101,8 @@ serve(async (req) => {
       cancel_url: `${origin}/?canceled=true`,
       billing_address_collection: "required",
       metadata: {
-        user_id: user.id,
+        user_id: userId || "guest",
+        user_email: userEmail,
         seo_addon: selectedAddOns?.seo ? "true" : "false",
         editing_addon: selectedAddOns?.editing ? "true" : "false",
       },
