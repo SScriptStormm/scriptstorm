@@ -21,13 +21,12 @@ const Hero = () => {
       <div className="relative z-10 container mx-auto px-4 py-20 text-center text-white">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            ScriptStorm
-            <span className="block text-primary-glow">That Converts</span>
+            SEO-Optimized Content for SaaS—
+            <span className="block text-primary-glow">Delivered in 24 Hours</span>
           </h1>
           
           <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed">
-            Premium SEO blogs, social media content, and email copy for SaaS & eCommerce brands. 
-            Delivered in 24 hours. SEO-optimized. 100% money-back guarantee.
+            Get 10x More Traffic Without Hiring Writers (50% Cheaper Than Agencies)
           </p>
 
           {/* Key Benefits */}
@@ -52,7 +51,7 @@ const Hero = () => {
               onClick={handleGetStarted}
               className="text-lg px-8 py-4 h-auto"
             >
-              Get Started Today
+              Start Your 7-Day Trial - $0
             </Button>
             <Button 
               variant="ghost-white" 
@@ -63,9 +62,20 @@ const Hero = () => {
             </Button>
           </div>
 
-          {/* Trust Indicators */}
+          {/* Trust Badges */}
           <div className="mt-12 text-white/70">
-            <p className="mb-4">Trusted by 500+ SaaS & eCommerce brands</p>
+            <p className="mb-6 text-sm">Used by</p>
+            <div className="flex justify-center items-center gap-8 mb-6">
+              <div className="bg-white/10 px-6 py-3 rounded-lg backdrop-blur-sm border border-white/20">
+                <span className="text-white font-semibold">Shopify</span>
+              </div>
+              <div className="bg-white/10 px-6 py-3 rounded-lg backdrop-blur-sm border border-white/20">
+                <span className="text-white font-semibold">HubSpot</span>
+              </div>
+              <div className="bg-white/10 px-6 py-3 rounded-lg backdrop-blur-sm border border-white/20">
+                <span className="text-white font-semibold">Mailchimp</span>
+              </div>
+            </div>
             <div className="flex justify-center gap-8 text-sm">
               <span>⭐⭐⭐⭐⭐ 4.9/5 Rating</span>
               <span>🚀 10,000+ Articles Delivered</span>
