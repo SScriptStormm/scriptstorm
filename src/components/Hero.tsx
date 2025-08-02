@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
-import CountdownTimer from "./CountdownTimer";
 import heroImage from "@/assets/hero-image.jpg";
 
 const Hero = () => {
@@ -79,10 +78,6 @@ const Hero = () => {
             </Button>
           </div>
 
-          {/* Countdown Timer */}
-          <div className="mt-8 max-w-md mx-auto">
-            <CountdownTimer />
-          </div>
 
           {/* Trust Indicators */}
           <div className="mt-12 text-white/70">
