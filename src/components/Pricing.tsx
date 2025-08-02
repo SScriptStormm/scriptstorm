@@ -31,7 +31,7 @@ const Pricing = () => {
       const { data, error } = await supabase.functions.invoke('create-checkout', {
         body: { 
           planType, 
-          addOns: {
+          selectedAddOns: {
             seo: seoSelected,
             editing: editingSelected
           }
@@ -226,9 +226,10 @@ const Pricing = () => {
                 Human polish for US/UK/EU/Asia markets 🇺🇸🇬🇧🇪🇺🇭🇰🇲🇽
               </p>
               <div className="ml-8 space-y-1">
-                <div className="text-xs text-muted-foreground">Post-Purchase Benefits:</div>
-                <div className="text-xs text-[#3498DB]">• SEO add-on → SurferSEO API key via email</div>
-                <div className="text-xs text-[#3498DB]">• Editing add-on → Priority Queue placement</div>
+                 <div className="text-xs text-muted-foreground">Post-Purchase Benefits:</div>
+                 <div className="text-xs text-[#3498DB]">• SEO add-on → SurferSEO API key via email</div>
+                 <div className="text-xs text-[#3498DB]">• Editing add-on → Priority Queue placement</div>
+                 <div className="text-xs text-orange-500 mt-2">TEST MODE: Use 4242 4242 4242 4242</div>
               </div>
             </Card>
           </div>
