@@ -22,12 +22,28 @@ const Hero = () => {
       <div className="relative z-10 container mx-auto px-4 py-20 text-center text-white">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            SEO-Optimized Content for SaaS—
+            ScriptStorm: SEO Content for SaaS Brands—
             <span className="block text-primary-glow">Delivered in 24 Hours</span>
           </h1>
+
+          {/* Client Logos */}
+          <div className="mb-8">
+            <p className="text-white/60 text-sm mb-4">Trusted by leading SaaS brands</p>
+            <div className="flex justify-center items-center gap-8">
+              <div className="bg-white/10 px-6 py-3 rounded-lg backdrop-blur-sm border border-white/20">
+                <span className="text-white font-semibold">Shopify</span>
+              </div>
+              <div className="bg-white/10 px-6 py-3 rounded-lg backdrop-blur-sm border border-white/20">
+                <span className="text-white font-semibold">HubSpot</span>
+              </div>
+              <div className="bg-white/10 px-6 py-3 rounded-lg backdrop-blur-sm border border-white/20">
+                <span className="text-white font-semibold">Mailchimp</span>
+              </div>
+            </div>
+          </div>
           
           <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed">
-            Get 10x More Traffic Without Hiring Writers (50% Cheaper Than Agencies)
+            Get 10x More Traffic With Our AI+Human Hybrid Model
           </p>
 
           {/* Key Benefits */}
@@ -52,7 +68,7 @@ const Hero = () => {
               onClick={handleGetStarted}
               className="text-lg px-8 py-4 h-auto"
             >
-              Start Your 7-Day Trial - $0
+              Start Your ScriptStorm Trial
             </Button>
             <Button 
               variant="ghost-white" 
@@ -68,20 +84,8 @@ const Hero = () => {
             <CountdownTimer />
           </div>
 
-          {/* Trust Badges */}
+          {/* Trust Indicators */}
           <div className="mt-12 text-white/70">
-            <p className="mb-6 text-sm">Used by</p>
-            <div className="flex justify-center items-center gap-8 mb-6">
-              <div className="bg-white/10 px-6 py-3 rounded-lg backdrop-blur-sm border border-white/20">
-                <span className="text-white font-semibold">Shopify</span>
-              </div>
-              <div className="bg-white/10 px-6 py-3 rounded-lg backdrop-blur-sm border border-white/20">
-                <span className="text-white font-semibold">HubSpot</span>
-              </div>
-              <div className="bg-white/10 px-6 py-3 rounded-lg backdrop-blur-sm border border-white/20">
-                <span className="text-white font-semibold">Mailchimp</span>
-              </div>
-            </div>
             <div className="flex justify-center gap-8 text-sm">
               <span>⭐⭐⭐⭐⭐ 4.9/5 Rating</span>
               <span>🚀 10,000+ Articles Delivered</span>
