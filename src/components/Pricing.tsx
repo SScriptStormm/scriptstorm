@@ -1,15 +1,60 @@
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
-import { CheckCircle, Star, Crown } from "lucide-react";
+import { CheckCircle, Star, Crown, AlertCircle, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/components/ui/use-toast";
 
 const Pricing = () => {
-  const handleStripeCheckout = (planType: string) => {
-    // This will be replaced with actual Stripe integration
-    console.log(`Starting ${planType} subscription flow...`);
-    alert(`Stripe integration will be set up for ${planType} plan! Please provide your Stripe Secret Key to complete the payment setup.`);
+  const [seoSelected, setSeoSelected] = useState(false);
+  const [editingSelected, setEditingSelected] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const { toast } = useToast();
+
+  const BASE_PRICE = 497;
+  const SEO_PRICE = 197;
+  const EDITING_PRICE = 147;
+  
+  const calculateTotal = () => {
+    return BASE_PRICE + (seoSelected ? SEO_PRICE : 0) + (editingSelected ? EDITING_PRICE : 0);
+  };
+
+  const handleStripeCheckout = async (planType: string) => {
+    setIsLoading(true);
+    setError("");
+    
+    try {
+      const { data, error } = await supabase.functions.invoke('create-checkout', {
+        body: { 
+          planType, 
+          addOns: {
+            seo: seoSelected,
+            editing: editingSelected
+          }
+        }
+      });
+      
+      if (error) throw error;
+      
+      if (data?.url) {
+        // Open Stripe checkout in a new tab
+        window.open(data.url, '_blank');
+      }
+    } catch (err) {
+      console.error('Checkout error:', err);
+      setError("⚠️ Please check card details");
+      toast({
+        title: "Payment Error",
+        description: "There was an issue processing your payment. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -133,7 +178,7 @@ const Pricing = () => {
           </Card>
         </div>
 
-        {/* Upsell Modules */}
+        {/* Interactive Premium Add-Ons */}
         <div className="max-w-4xl mx-auto mb-16">
           <div className="text-center mb-8">
             <h3 className="text-2xl md:text-3xl font-bold mb-6 text-foreground">
@@ -142,9 +187,14 @@ const Pricing = () => {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 mb-8">
-            <Card className="p-6 border border-[#3498DB]/20">
+            <Card className={`p-6 border transition-all duration-200 ${seoSelected ? 'border-[#3498DB] bg-[#3498DB]/5' : 'border-[#3498DB]/20 hover:border-[#3498DB]/40'}`}>
               <div className="flex items-center gap-3 mb-4">
-                <Checkbox id="seo-addon" />
+                <Checkbox 
+                  id="seo-addon" 
+                  checked={seoSelected}
+                  onCheckedChange={(checked) => setSeoSelected(checked as boolean)}
+                  className="data-[state=checked]:bg-[#3498DB] data-[state=checked]:border-[#3498DB]"
+                />
                 <label htmlFor="seo-addon" className="text-lg font-semibold cursor-pointer">
                   + Professional SEO Optimization (<span className="line-through text-muted-foreground">$220</span> $197/month)
                 </label>
@@ -154,9 +204,14 @@ const Pricing = () => {
               </p>
             </Card>
 
-            <Card className="p-6 border border-[#3498DB]/20">
+            <Card className={`p-6 border transition-all duration-200 ${editingSelected ? 'border-[#3498DB] bg-[#3498DB]/5' : 'border-[#3498DB]/20 hover:border-[#3498DB]/40'}`}>
               <div className="flex items-center gap-3 mb-4">
-                <Checkbox id="editing-addon" />
+                <Checkbox 
+                  id="editing-addon" 
+                  checked={editingSelected}
+                  onCheckedChange={(checked) => setEditingSelected(checked as boolean)}
+                  className="data-[state=checked]:bg-[#3498DB] data-[state=checked]:border-[#3498DB]"
+                />
                 <label htmlFor="editing-addon" className="text-lg font-semibold cursor-pointer flex items-center gap-2">
                   + Native-Language Editing (+$147/month)
                   <Badge style={{ backgroundColor: '#00C4CC', color: 'white' }} className="text-xs">
@@ -167,9 +222,62 @@ const Pricing = () => {
                   Save 12%
                 </Badge>
               </div>
-              <p className="text-sm text-muted-foreground ml-8">
+              <p className="text-sm text-muted-foreground ml-8 mb-2">
                 Human polish for US/UK/EU/Asia markets 🇺🇸🇬🇧🇪🇺🇭🇰🇲🇽
               </p>
+              <div className="ml-8 space-y-1">
+                <div className="text-xs text-muted-foreground">Post-Purchase Benefits:</div>
+                <div className="text-xs text-[#3498DB]">• SEO add-on → SurferSEO API key via email</div>
+                <div className="text-xs text-[#3498DB]">• Editing add-on → Priority Queue placement</div>
+              </div>
+            </Card>
+          </div>
+
+          {/* Real-Time Pricing Display */}
+          <div className="sticky bottom-4 md:relative md:bottom-auto">
+            <Card className="p-6 bg-gradient-to-r from-[#3498DB]/10 to-[#2ECC71]/10 border-2 border-[#3498DB]/30 shadow-lg">
+              <div className="text-center">
+                <div className="text-lg text-muted-foreground mb-2">Your monthly total:</div>
+                <div className="text-3xl font-bold text-foreground mb-4">
+                  ${calculateTotal().toLocaleString()}
+                </div>
+                <div className="text-sm text-muted-foreground mb-4 space-y-1">
+                  <div>Base Plan: ${BASE_PRICE}</div>
+                  {seoSelected && <div>+ SEO Optimization: ${SEO_PRICE}</div>}
+                  {editingSelected && <div>+ Native Editing: ${EDITING_PRICE}</div>}
+                </div>
+                
+                {error && (
+                  <div className="flex items-center justify-center gap-2 text-red-500 mb-4">
+                    <AlertCircle className="h-4 w-4" />
+                    <span className="text-sm">{error}</span>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setError("")}
+                      className="ml-2"
+                    >
+                      Try Again
+                    </Button>
+                  </div>
+                )}
+                
+                <Button 
+                  className="w-full text-xl py-6 h-auto bg-[#3498DB] hover:bg-[#2980B9] text-white font-bold disabled:opacity-50"
+                  size="lg" 
+                  onClick={() => handleStripeCheckout('Premium SEO Package')}
+                  disabled={isLoading}
+                >
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Processing...
+                    </>
+                  ) : (
+                    `Subscribe Now - $${calculateTotal()}/month`
+                  )}
+                </Button>
+              </div>
             </Card>
           </div>
         </div>
