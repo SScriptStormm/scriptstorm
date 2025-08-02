@@ -164,11 +164,11 @@ const Pricing = () => {
             </DropdownMenu>
           </div>
 
-          {/* Interactive Premium Add-Ons */}
+          {/* Add-Ons Section */}
           <div className="max-w-4xl mx-auto mb-16">
             <div className="text-center mb-8">
               <h3 className="text-2xl md:text-3xl font-bold mb-6 text-foreground">
-                Premium <span className="text-[#3498DB]">Add-Ons</span>
+                Add-Ons
               </h3>
             </div>
 
@@ -182,9 +182,12 @@ const Pricing = () => {
                     className="data-[state=checked]:bg-[#3498DB] data-[state=checked]:border-[#3498DB]"
                   />
                   <label htmlFor="seo-addon" className="text-lg font-semibold cursor-pointer">
-                    + Professional SEO Optimization (<span className="line-through text-muted-foreground">$220</span> $197/month)
+                    <strong>+SEO Power-Up</strong> ($197)
                   </label>
                 </div>
+                <p className="text-base text-[#2ECC71] font-semibold ml-8 mb-2">
+                  3x More Traffic Guaranteed
+                </p>
                 <p className="text-sm text-muted-foreground ml-8">
                   Keyword research, SurferSEO integration, ranking reports
                 </p>
@@ -199,11 +202,23 @@ const Pricing = () => {
                     className="data-[state=checked]:bg-[#3498DB] data-[state=checked]:border-[#3498DB]"
                   />
                   <label htmlFor="editing-addon" className="text-lg font-semibold cursor-pointer">
-                    + Native-Language Editing (+$147/month)
+                    <strong>+Human Polish</strong> ($147)
                   </label>
                 </div>
-                <p className="text-sm text-muted-foreground ml-8 mb-2">
+                <p className="text-base text-[#2ECC71] font-semibold ml-8 mb-2">
+                  Sound Like a Native Speaker
+                </p>
+                <p className="text-sm text-muted-foreground ml-8">
                   Human polish for US/UK/EU/Asia markets 🇺🇸🇬🇧🇪🇺🇭🇰🇲🇽
+                </p>
+              </Card>
+            </div>
+
+            {/* Bundle Hint */}
+            <div className="text-center mb-8">
+              <Card className="p-4 bg-gradient-to-r from-[#FFD700]/10 to-[#FFD700]/5 border border-[#FFD700]/30 inline-block">
+                <p className="text-lg font-semibold text-foreground">
+                  Get Both → <span className="text-[#3498DB]">Email us for custom pricing</span>
                 </p>
               </Card>
             </div>
