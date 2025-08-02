@@ -229,7 +229,6 @@ const Pricing = () => {
                  <div className="text-xs text-muted-foreground">Post-Purchase Benefits:</div>
                  <div className="text-xs text-[#3498DB]">• SEO add-on → SurferSEO API key via email</div>
                  <div className="text-xs text-[#3498DB]">• Editing add-on → Priority Queue placement</div>
-                 <div className="text-xs text-orange-500 mt-2">TEST MODE: Use 4242 4242 4242 4242</div>
               </div>
             </Card>
           </div>
