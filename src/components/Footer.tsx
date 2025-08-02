@@ -64,6 +64,13 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* Disclaimer */}
+        <div className="text-center py-6 border-t border-white/20">
+          <p className="text-white/60 text-sm italic">
+            * Limited to 20 clients/month for 24-hr delivery
+          </p>
+        </div>
+
         {/* Bottom Bar */}
         <div className="border-t border-white/20 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-white/60 text-sm">
