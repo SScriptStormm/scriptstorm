@@ -80,201 +80,240 @@ const Pricing = () => {
           </div>
 
           {/* Main $497 Plan - Most Popular */}
-          <div className="max-w-md mx-auto mb-12">
-            <Card className="shadow-elegant border-2 border-[#2ECC71]/30 bg-card relative overflow-visible">
-              {/* Most Popular Badge */}
-              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <div className="bg-[#2ECC71] text-white px-6 py-2 rounded-full text-sm font-semibold flex items-center gap-1">
-                  <Crown className="h-4 w-4" />
-                  Most Popular
-                </div>
-              </div>
-
-              <CardHeader className="text-center pt-12 pb-8">
-                <CardTitle className="text-2xl font-bold mb-4">
-                  🔥 10 SEO Articles
-                </CardTitle>
-                
-                {/* Pricing with strikethrough and tooltip */}
-                <div className="flex items-center justify-center gap-2 mb-4">
-                  <span className="text-lg line-through text-muted-foreground">$600</span>
-                  <span className="text-3xl font-bold text-[#2ECC71]">$497</span>
-                  <span className="text-lg text-muted-foreground">/month</span>
-                  <Tooltip>
-                    <TooltipTrigger>
-                      <Info className="h-4 w-4 text-muted-foreground hover:text-foreground cursor-help" />
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>Save $103 vs buying individually</p>
-                    </TooltipContent>
-                  </Tooltip>
+          <div className="max-w-md mx-auto mb-12 relative">
+            <div className="relative group">
+              <div className="absolute inset-0 bg-gradient-cyber opacity-40 rounded-lg blur-lg group-hover:opacity-60 transition-all duration-500" />
+              <Card className="relative bg-black/40 backdrop-blur-md border-3 border-primary-glow/60 shadow-cyber hover:shadow-hologram transition-all duration-500 animate-hologram-flicker overflow-visible">
+                {/* Most Popular Badge */}
+                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
+                  <div className="relative group">
+                    <div className="absolute inset-0 bg-gradient-cyber opacity-50 rounded-full blur-sm" />
+                    <div className="relative bg-primary-glow text-black px-6 py-2 rounded-full text-sm font-bold flex items-center gap-1 font-mono tracking-wider shadow-glow animate-pulse-glow">
+                      <Crown className="h-4 w-4" />
+                      [ MOST POPULAR ]
+                    </div>
+                  </div>
                 </div>
 
-                <CardDescription className="text-lg mb-6 text-[#2ECC71] font-semibold">
-                  Save $103 compared to per-article pricing!
-                </CardDescription>
-                
-                <Button 
-                  className="w-full text-xl py-6 h-auto bg-[#2ECC71] hover:bg-[#27AE60] text-white font-bold"
-                  size="lg" 
-                  onClick={() => handleStripeCheckout('SEO Blog Subscription')}
-                >
-                  Start Your 7-Day Trial - $0
-                </Button>
-                
-                <p className="text-sm text-muted-foreground mt-4">
-                  ✨ 7-day free trial • Cancel anytime • Money-back guarantee
-                </p>
-              </CardHeader>
-            </Card>
+                <CardHeader className="text-center pt-16 pb-8">
+                  <CardTitle className="text-2xl font-bold mb-4 text-white font-mono tracking-wider">
+                    🔥 10 SEO ARTICLES
+                  </CardTitle>
+                  
+                  {/* Pricing with strikethrough and tooltip */}
+                  <div className="flex items-center justify-center gap-2 mb-4">
+                    <span className="text-lg line-through text-white/40 font-mono">$600</span>
+                    <span className="text-4xl font-bold text-primary-glow animate-pulse-glow font-mono">$497</span>
+                    <span className="text-lg text-white/70 font-mono">/month</span>
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <Info className="h-4 w-4 text-white/50 hover:text-primary-glow cursor-help transition-colors duration-300" />
+                      </TooltipTrigger>
+                      <TooltipContent className="bg-black/80 backdrop-blur-md border border-primary-glow/30 text-white font-mono">
+                        <p>[ SAVE $103 vs BUYING INDIVIDUALLY ]</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
+
+                  <CardDescription className="text-lg mb-6 text-primary-glow font-semibold font-mono tracking-wide">
+                    &gt; SAVE $103 COMPARED TO PER-ARTICLE PRICING_
+                  </CardDescription>
+                  
+                  <div className="relative group">
+                    <div className="absolute inset-0 bg-gradient-cyber opacity-40 rounded-lg blur-sm group-hover:opacity-60 transition-all duration-300" />
+                    <Button 
+                      className="relative w-full text-xl py-6 h-auto bg-primary-glow hover:bg-primary text-black hover:text-white font-bold font-mono tracking-wider shadow-cyber hover:shadow-hologram transition-all duration-500 border-2 border-primary-glow/50 hover:border-primary-glow"
+                      size="lg" 
+                      onClick={() => handleStripeCheckout('SEO Blog Subscription')}
+                    >
+                      [ START 7-DAY TRIAL - $0 ]
+                    </Button>
+                  </div>
+                  
+                  <p className="text-sm text-white/60 mt-4 font-mono tracking-wide">
+                    ✨ 7-DAY FREE TRIAL • CANCEL ANYTIME • MONEY-BACK GUARANTEE
+                  </p>
+                </CardHeader>
+              </Card>
+            </div>
           </div>
 
           {/* Other Services Dropdown */}
           <div className="text-center mb-16">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="px-6 py-3 text-lg">
-                  Other Services
-                  <ChevronDown className="ml-2 h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-80 p-4 bg-white border border-gray-200 shadow-lg z-50">
-                <div className="space-y-4">
-                  <div className="p-4 border border-[#3498DB]/20 rounded-lg">
-                    <h4 className="text-lg font-bold mb-2 text-[#3498DB]">Social Media Package</h4>
-                    <p className="text-xl font-bold mb-2">$300/month</p>
-                    <p className="text-sm text-muted-foreground mb-3">50 social posts • Save 10%</p>
-                    <Button 
-                      className="w-full bg-[#3498DB] hover:bg-[#2980B9] text-white"
-                      size="sm"
-                      onClick={() => handleStripeCheckout('Social Media Package')}
-                    >
-                      Start Social Package
-                    </Button>
+            <div className="relative group inline-block">
+              <div className="absolute inset-0 bg-gradient-neural opacity-30 rounded-lg blur-sm group-hover:opacity-50 transition-all duration-300" />
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" className="relative px-6 py-3 text-lg bg-black/40 backdrop-blur-md border-2 border-primary-glow/40 text-white hover:text-primary-glow hover:border-primary-glow/70 font-mono tracking-wider shadow-neural hover:shadow-hologram transition-all duration-300">
+                    [ OTHER SERVICES ]
+                    <ChevronDown className="ml-2 h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-80 p-4 bg-black/90 backdrop-blur-md border border-primary-glow/30 shadow-cyber z-50">
+                  <div className="space-y-4">
+                    <div className="relative group">
+                      <div className="absolute inset-0 bg-gradient-neural opacity-20 rounded-lg blur-sm group-hover:opacity-40 transition-all duration-300" />
+                      <div className="relative p-4 border border-primary-glow/30 rounded-lg bg-black/30 backdrop-blur-sm hover:border-primary-glow/60 transition-all duration-300">
+                        <h4 className="text-lg font-bold mb-2 text-primary-glow font-mono tracking-wide">[ SOCIAL MEDIA PACKAGE ]</h4>
+                        <p className="text-xl font-bold mb-2 text-white font-mono">$300/MONTH</p>
+                        <p className="text-sm text-white/70 mb-3 font-mono">&gt; 50 SOCIAL POSTS • SAVE 10%_</p>
+                        <div className="relative group">
+                          <div className="absolute inset-0 bg-gradient-cyber opacity-30 rounded blur-sm group-hover:opacity-50 transition-all duration-300" />
+                          <Button 
+                            className="relative w-full bg-primary hover:bg-primary-glow text-white hover:text-black font-mono tracking-wider shadow-neural hover:shadow-hologram transition-all duration-300"
+                            size="sm"
+                            onClick={() => handleStripeCheckout('Social Media Package')}
+                          >
+                            [ START SOCIAL PACKAGE ]
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="relative group">
+                      <div className="absolute inset-0 bg-gradient-neural opacity-20 rounded-lg blur-sm group-hover:opacity-40 transition-all duration-300" />
+                      <div className="relative p-4 border border-primary-glow/30 rounded-lg bg-black/30 backdrop-blur-sm hover:border-primary-glow/60 transition-all duration-300">
+                        <h4 className="text-lg font-bold mb-2 text-primary-glow font-mono tracking-wide">[ PRODUCT DESCRIPTION PACKAGE ]</h4>
+                        <p className="text-xl font-bold mb-2 text-white font-mono">$400/MONTH</p>
+                        <p className="text-sm text-white/70 mb-3 font-mono">&gt; 100 DESCRIPTIONS • SAVE 20%_</p>
+                        <div className="relative group">
+                          <div className="absolute inset-0 bg-gradient-cyber opacity-30 rounded blur-sm group-hover:opacity-50 transition-all duration-300" />
+                          <Button 
+                            className="relative w-full bg-primary hover:bg-primary-glow text-white hover:text-black font-mono tracking-wider shadow-neural hover:shadow-hologram transition-all duration-300"
+                            size="sm"
+                            onClick={() => handleStripeCheckout('Product Description Package')}
+                          >
+                            [ START PRODUCT PACKAGE ]
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  
-                  <div className="p-4 border border-[#3498DB]/20 rounded-lg">
-                    <h4 className="text-lg font-bold mb-2 text-[#3498DB]">Product Description Package</h4>
-                    <p className="text-xl font-bold mb-2">$400/month</p>
-                    <p className="text-sm text-muted-foreground mb-3">100 descriptions • Save 20%</p>
-                    <Button 
-                      className="w-full bg-[#3498DB] hover:bg-[#2980B9] text-white"
-                      size="sm"
-                      onClick={() => handleStripeCheckout('Product Description Package')}
-                    >
-                      Start Product Package
-                    </Button>
-                  </div>
-                </div>
-              </DropdownMenuContent>
-            </DropdownMenu>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           </div>
 
           {/* Add-Ons Section */}
           <div className="max-w-4xl mx-auto mb-16">
             <div className="text-center mb-8">
-              <h3 className="text-2xl md:text-3xl font-bold mb-6 text-foreground">
-                Add-Ons
+              <h3 className="text-2xl md:text-3xl font-bold mb-6 text-white font-mono tracking-wider">
+                [ <span className="text-primary-glow animate-pulse-glow">ADD-ONS</span> ]
               </h3>
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <Card className={`p-6 border transition-all duration-200 ${seoSelected ? 'border-[#3498DB] bg-[#3498DB]/5' : 'border-[#3498DB]/20 hover:border-[#3498DB]/40'}`}>
-                <div className="flex items-center gap-3 mb-4">
-                  <Checkbox 
-                    id="seo-addon" 
-                    checked={seoSelected}
-                    onCheckedChange={(checked) => setSeoSelected(checked as boolean)}
-                    className="data-[state=checked]:bg-[#3498DB] data-[state=checked]:border-[#3498DB]"
-                  />
-                  <label htmlFor="seo-addon" className="text-lg font-semibold cursor-pointer">
-                    <strong>+SEO Power-Up</strong> ($197)
-                  </label>
-                </div>
-                <p className="text-base text-[#2ECC71] font-semibold ml-8 mb-2">
-                  3x More Traffic Guaranteed
-                </p>
-                <p className="text-sm text-muted-foreground ml-8">
-                  Keyword research, SurferSEO integration, ranking reports
-                </p>
-              </Card>
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-neural opacity-20 rounded-lg blur-sm group-hover:opacity-40 transition-all duration-300" />
+                <Card className={`relative p-6 border-2 transition-all duration-300 bg-black/40 backdrop-blur-md shadow-neural hover:shadow-hologram ${seoSelected ? 'border-primary-glow bg-primary-glow/10' : 'border-primary-glow/30 hover:border-primary-glow/60'}`}>
+                  <div className="flex items-center gap-3 mb-4">
+                    <Checkbox 
+                      id="seo-addon" 
+                      checked={seoSelected}
+                      onCheckedChange={(checked) => setSeoSelected(checked as boolean)}
+                      className="data-[state=checked]:bg-primary-glow data-[state=checked]:border-primary-glow border-primary-glow/50"
+                    />
+                    <label htmlFor="seo-addon" className="text-lg font-semibold cursor-pointer text-white font-mono tracking-wide">
+                      <strong>[ +SEO POWER-UP ]</strong> <span className="text-primary-glow">($197)</span>
+                    </label>
+                  </div>
+                  <p className="text-base text-primary-glow font-semibold ml-8 mb-2 font-mono tracking-wide">
+                    &gt; 3X MORE TRAFFIC GUARANTEED_
+                  </p>
+                  <p className="text-sm text-white/70 ml-8 font-mono">
+                    [ KEYWORD RESEARCH • SURFERSEO INTEGRATION • RANKING REPORTS ]
+                  </p>
+                </Card>
+              </div>
 
-              <Card className={`p-6 border transition-all duration-200 ${editingSelected ? 'border-[#3498DB] bg-[#3498DB]/5' : 'border-[#3498DB]/20 hover:border-[#3498DB]/40'}`}>
-                <div className="flex items-center gap-3 mb-4">
-                  <Checkbox 
-                    id="editing-addon" 
-                    checked={editingSelected}
-                    onCheckedChange={(checked) => setEditingSelected(checked as boolean)}
-                    className="data-[state=checked]:bg-[#3498DB] data-[state=checked]:border-[#3498DB]"
-                  />
-                  <label htmlFor="editing-addon" className="text-lg font-semibold cursor-pointer">
-                    <strong>+Human Polish</strong> ($147)
-                  </label>
-                </div>
-                <p className="text-base text-[#2ECC71] font-semibold ml-8 mb-2">
-                  Sound Like a Native Speaker
-                </p>
-                <p className="text-sm text-muted-foreground ml-8">
-                  Human polish for US/UK/EU/Asia markets 🇺🇸🇬🇧🇪🇺🇭🇰🇲🇽
-                </p>
-              </Card>
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-neural opacity-20 rounded-lg blur-sm group-hover:opacity-40 transition-all duration-300" />
+                <Card className={`relative p-6 border-2 transition-all duration-300 bg-black/40 backdrop-blur-md shadow-neural hover:shadow-hologram ${editingSelected ? 'border-primary-glow bg-primary-glow/10' : 'border-primary-glow/30 hover:border-primary-glow/60'}`}>
+                  <div className="flex items-center gap-3 mb-4">
+                    <Checkbox 
+                      id="editing-addon" 
+                      checked={editingSelected}
+                      onCheckedChange={(checked) => setEditingSelected(checked as boolean)}
+                      className="data-[state=checked]:bg-primary-glow data-[state=checked]:border-primary-glow border-primary-glow/50"
+                    />
+                    <label htmlFor="editing-addon" className="text-lg font-semibold cursor-pointer text-white font-mono tracking-wide">
+                      <strong>[ +HUMAN POLISH ]</strong> <span className="text-primary-glow">($147)</span>
+                    </label>
+                  </div>
+                  <p className="text-base text-primary-glow font-semibold ml-8 mb-2 font-mono tracking-wide">
+                    &gt; SOUND LIKE A NATIVE SPEAKER_
+                  </p>
+                  <p className="text-sm text-white/70 ml-8 font-mono">
+                    [ HUMAN POLISH FOR US/UK/EU/ASIA MARKETS 🇺🇸🇬🇧🇪🇺🇭🇰🇲🇽 ]
+                  </p>
+                </Card>
+              </div>
             </div>
 
             {/* Bundle Hint */}
             <div className="text-center mb-8">
-              <Card className="p-4 bg-gradient-to-r from-[#FFD700]/10 to-[#FFD700]/5 border border-[#FFD700]/30 inline-block">
-                <p className="text-lg font-semibold text-foreground">
-                  Get Both → <span className="text-[#3498DB]">Email us for custom pricing</span>
-                </p>
-              </Card>
+              <div className="relative group inline-block">
+                <div className="absolute inset-0 bg-gradient-cyber opacity-30 rounded-lg blur-sm group-hover:opacity-50 transition-all duration-300" />
+                <Card className="relative p-4 bg-black/40 backdrop-blur-md border-2 border-primary-glow/40 inline-block shadow-neural hover:shadow-hologram transition-all duration-300">
+                  <p className="text-lg font-semibold text-white font-mono tracking-wide">
+                    [ GET BOTH → <span className="text-primary-glow animate-pulse-glow">EMAIL US FOR CUSTOM PRICING</span> ]
+                  </p>
+                </Card>
+              </div>
             </div>
 
             {/* Real-Time Pricing Display */}
             <div className="sticky bottom-4 md:relative md:bottom-auto">
-              <Card className="p-6 bg-gradient-to-r from-[#3498DB]/10 to-[#2ECC71]/10 border-2 border-[#3498DB]/30 shadow-lg">
-                <div className="text-center">
-                  <div className="text-lg text-muted-foreground mb-2">Your monthly total:</div>
-                  <div className="text-3xl font-bold text-foreground mb-4">
-                    ${calculateTotal().toLocaleString()}
-                  </div>
-                  <div className="text-sm text-muted-foreground mb-4 space-y-1">
-                    <div>Base Plan: ${BASE_PRICE}</div>
-                    {seoSelected && <div>+ SEO Optimization: ${SEO_PRICE}</div>}
-                    {editingSelected && <div>+ Native Editing: ${EDITING_PRICE}</div>}
-                  </div>
-                  
-                  {error && (
-                    <div className="flex items-center justify-center gap-2 text-red-500 mb-4">
-                      <AlertCircle className="h-4 w-4" />
-                      <span className="text-sm">{error}</span>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => setError("")}
-                        className="ml-2"
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-cyber opacity-40 rounded-lg blur-lg group-hover:opacity-60 transition-all duration-500" />
+                <Card className="relative p-6 bg-black/40 backdrop-blur-md border-2 border-primary-glow/50 shadow-cyber hover:shadow-hologram transition-all duration-500 animate-hologram-flicker">
+                  <div className="text-center">
+                    <div className="text-lg text-white/70 mb-2 font-mono tracking-wide">[ YOUR MONTHLY TOTAL ]</div>
+                    <div className="text-4xl font-bold text-primary-glow mb-4 font-mono animate-pulse-glow">
+                      ${calculateTotal().toLocaleString()}
+                    </div>
+                    <div className="text-sm text-white/60 mb-4 space-y-1 font-mono">
+                      <div>&gt; BASE PLAN: ${BASE_PRICE}_</div>
+                      {seoSelected && <div>&gt; + SEO OPTIMIZATION: ${SEO_PRICE}_</div>}
+                      {editingSelected && <div>&gt; + NATIVE EDITING: ${EDITING_PRICE}_</div>}
+                    </div>
+                    
+                    {error && (
+                      <div className="flex items-center justify-center gap-2 text-red-400 mb-4 font-mono">
+                        <AlertCircle className="h-4 w-4" />
+                        <span className="text-sm">[ {error} ]</span>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setError("")}
+                          className="ml-2 bg-black/50 border-red-400/50 text-red-400 hover:text-white hover:border-red-400"
+                        >
+                          [ TRY AGAIN ]
+                        </Button>
+                      </div>
+                    )}
+                    
+                    <div className="relative group">
+                      <div className="absolute inset-0 bg-gradient-cyber opacity-40 rounded-lg blur-sm group-hover:opacity-60 transition-all duration-300" />
+                      <Button 
+                        className="relative w-full text-xl py-6 h-auto bg-primary hover:bg-primary-glow text-white hover:text-black font-bold disabled:opacity-50 font-mono tracking-wider shadow-cyber hover:shadow-hologram transition-all duration-500 border-2 border-primary-glow/50 hover:border-primary-glow"
+                        size="lg" 
+                        onClick={() => handleStripeCheckout('Premium SEO Package')}
+                        disabled={isLoading}
                       >
-                        Try Again
+                        {isLoading ? (
+                          <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            [ PROCESSING... ]
+                          </>
+                        ) : (
+                          `[ SUBSCRIBE NOW - $${calculateTotal()}/MONTH ]`
+                        )}
                       </Button>
                     </div>
-                  )}
-                  
-                  <Button 
-                    className="w-full text-xl py-6 h-auto bg-[#3498DB] hover:bg-[#2980B9] text-white font-bold disabled:opacity-50"
-                    size="lg" 
-                    onClick={() => handleStripeCheckout('Premium SEO Package')}
-                    disabled={isLoading}
-                  >
-                    {isLoading ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Processing...
-                      </>
-                    ) : (
-                      `Subscribe Now - $${calculateTotal()}/month`
-                    )}
-                  </Button>
-                </div>
-              </Card>
+                  </div>
+                </Card>
+              </div>
             </div>
           </div>
 
