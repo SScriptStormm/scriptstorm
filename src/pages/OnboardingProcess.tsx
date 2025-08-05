@@ -352,7 +352,7 @@ const OnboardingProcess = () => {
               </Button>
             </Link>
             <Link to="/why-choose-us">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 px-8 py-4 font-semibold hover:shadow-neural transition-all duration-300">
+              <Button size="lg" variant="outline" className="border-white text-white bg-white/10 backdrop-blur-sm hover:bg-white/20 px-8 py-4 font-semibold hover:shadow-neural transition-all duration-300">
                 Why Choose Us
               </Button>
             </Link>
