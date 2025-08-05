@@ -9,6 +9,8 @@ import ThankYou from "./pages/ThankYou";
 import TermsOfService from "./pages/TermsOfService";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import RefundPolicy from "./pages/RefundPolicy";
+import WhyChooseUs from "./pages/WhyChooseUs";
+import OnboardingProcess from "./pages/OnboardingProcess";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +22,8 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/why-choose-us" element={<WhyChooseUs />} />
+          <Route path="/onboarding-process" element={<OnboardingProcess />} />
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/terms-and-conditions" element={<TermsOfService />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
