@@ -99,7 +99,7 @@ const Hero = () => {
                 onClick={handleGetStarted}
                 className="relative text-lg px-8 py-4 h-auto shadow-cyber hover:shadow-hologram transition-all duration-500 border-2 border-primary-glow/50 hover:border-primary-glow animate-pulse-glow font-mono tracking-wide"
               >
-                START FREE TRIAL
+                GET FREE CONSULTATION
               </Button>
             </div>
             <div className="relative group">
