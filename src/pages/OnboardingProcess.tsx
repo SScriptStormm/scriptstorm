@@ -138,7 +138,6 @@ const OnboardingProcess = () => {
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 h-px w-full bg-gradient-neural animate-scan-line opacity-30" />
           <div className="absolute bottom-0 h-px w-full bg-gradient-cyber animate-scan-line opacity-25" style={{ animationDelay: '2s' }} />
-          <div className="absolute right-0 w-px h-full bg-gradient-neural animate-scan-line opacity-20" style={{ animationDelay: '4s' }} />
         </div>
         
         {/* Particle effect overlay */}
@@ -175,10 +174,7 @@ const OnboardingProcess = () => {
               const Icon = step.icon;
               return (
                 <div key={index} className="relative mb-20 last:mb-0">
-                  {/* Timeline connector */}
-                  {index < steps.length - 1 && (
-                    <div className="absolute left-8 top-24 w-px h-32 bg-gradient-to-b from-[#3498DB] via-[#2ECC71] to-[#9B59B6] hidden md:block opacity-50" />
-                  )}
+                  {/* Timeline connector - removed to prevent text overlap */}
                   
                   <div className="grid md:grid-cols-2 gap-12 items-center">
                     {/* Step Info */}
