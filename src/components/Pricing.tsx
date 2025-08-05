@@ -82,8 +82,9 @@ const Pricing = () => {
           {/* Main $497 Plan - Most Popular */}
           <div className="max-w-md mx-auto mb-12 relative">
             <div className="relative group">
-              <div className="absolute inset-0 bg-gradient-cyber opacity-40 rounded-lg blur-lg group-hover:opacity-60 transition-all duration-500" />
-              <Card className="relative bg-black/40 backdrop-blur-md border-3 border-primary-glow/60 shadow-cyber hover:shadow-hologram transition-all duration-500 animate-hologram-flicker overflow-visible">
+              <div className="absolute inset-0 bg-gradient-cyber opacity-20 rounded-lg blur-xl group-hover:opacity-30 transition-all duration-700" />
+              <div className="absolute inset-0 bg-gradient-neural opacity-10 rounded-lg blur-2xl group-hover:opacity-20 transition-all duration-1000" />
+              <Card className="relative bg-black/20 backdrop-blur-xl border-2 border-primary-glow/40 shadow-neural hover:shadow-cyber transition-all duration-700 hover:bg-black/30 hover:border-primary-glow/60 overflow-visible">
                 {/* Most Popular Badge */}
                 <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
                   <div className="relative group">
