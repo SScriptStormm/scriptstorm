@@ -100,13 +100,8 @@ const FAQ = () => {
               <AccordionItem 
                 key={index} 
                 value={`item-${index}`}
-                className="group relative border-0 bg-card/40 backdrop-blur-md rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-glow hover:bg-card/60 hover:backdrop-blur-lg"
+                className="group relative border border-primary/10 bg-card/40 backdrop-blur-md rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-glow hover:bg-card/60 hover:backdrop-blur-lg hover:border-primary/40"
               >
-                {/* Enhanced gradient border effect */}
-                <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl p-[1px]">
-                  <div className="bg-background/95 backdrop-blur-sm rounded-2xl h-full w-full"></div>
-                </div>
-                
                 {/* Circuit-like corner accents */}
                 <div className="absolute top-0 right-0 w-8 h-8 border-r border-t border-primary/20 rounded-tr-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div className="absolute bottom-0 left-0 w-8 h-8 border-l border-b border-primary/20 rounded-bl-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
