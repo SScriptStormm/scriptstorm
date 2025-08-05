@@ -142,7 +142,7 @@ const FAQ = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                 </svg>
               </div>
-              <p className="text-muted-foreground mb-4 font-medium">Still have questions?</p>
+              <p className="text-foreground mb-6 font-semibold text-lg">Still have questions?</p>
               <a 
                 href="mailto:support@aicontentag.com" 
                 className="inline-flex items-center gap-2 text-primary hover:text-primary-dark font-semibold transition-smooth group/link"
