@@ -77,28 +77,28 @@ const Services = () => {
           {services.map((service, index) => (
             <div key={index} className="relative group">
               {/* Holographic background */}
-              <div className="absolute inset-0 bg-gradient-cyber opacity-20 rounded-lg blur-sm group-hover:blur-none transition-all duration-500" />
-              <div className="absolute inset-0 bg-gradient-neural opacity-10 rounded-lg animate-neural-pulse" />
+              <div className="absolute inset-0 bg-gradient-cyber opacity-10 rounded-lg blur-lg group-hover:opacity-20 transition-all duration-500" />
+              <div className="absolute inset-0 bg-gradient-neural opacity-5 rounded-lg animate-neural-pulse" />
               
-              <Card className="relative shadow-neural hover:shadow-hologram transition-all duration-500 border border-primary-glow/30 hover:border-primary-glow/60 bg-black/30 backdrop-blur-md group-hover:bg-black/40">
+              <Card className="relative shadow-neural hover:shadow-hologram transition-all duration-500 border-2 border-primary-glow/40 hover:border-primary-glow/80 bg-white/95 backdrop-blur-sm group-hover:bg-white">
                 <CardHeader className="text-center">
                   <div className="relative mx-auto mb-4 p-4 bg-gradient-cyber rounded-full w-fit shadow-cyber group-hover:shadow-hologram transition-all duration-500">
-                    <div className="absolute inset-0 bg-primary-glow/20 rounded-full animate-pulse-glow" />
+                    <div className="absolute inset-0 bg-primary-glow/30 rounded-full animate-pulse-glow" />
                     <div className="relative">
                       {service.icon}
                     </div>
                   </div>
-                  <CardTitle className="text-2xl font-bold font-mono tracking-wide text-white group-hover:text-primary-glow transition-all duration-500">
+                  <CardTitle className="text-2xl font-bold font-mono tracking-wide text-foreground group-hover:text-primary transition-all duration-500">
                     {service.title}
                   </CardTitle>
-                  <CardDescription className="text-base leading-relaxed text-white/80">
+                  <CardDescription className="text-base leading-relaxed text-muted-foreground group-hover:text-foreground/80 transition-all duration-300">
                     {service.description}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-3">
                     {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center gap-3 text-sm text-white/70 group-hover:text-white/90 transition-all duration-300">
+                      <li key={idx} className="flex items-center gap-3 text-sm text-muted-foreground group-hover:text-foreground transition-all duration-300">
                         <div className="h-2 w-2 bg-primary-glow rounded-full animate-pulse-glow shadow-cyber" />
                         <span className="font-mono tracking-wide">{feature}</span>
                       </li>
@@ -123,17 +123,17 @@ const Services = () => {
           {guarantees.map((guarantee, index) => (
             <div key={index} className="relative text-center group">
               {/* Holographic background for guarantees */}
-              <div className="absolute inset-0 bg-gradient-cyber opacity-10 rounded-lg blur-sm group-hover:blur-none transition-all duration-500" />
+              <div className="absolute inset-0 bg-gradient-cyber opacity-10 rounded-lg blur-lg group-hover:opacity-20 transition-all duration-500" />
               
-              <div className="relative p-6 bg-black/20 backdrop-blur-sm rounded-lg border border-primary-glow/20 hover:border-primary-glow/40 shadow-neural hover:shadow-cyber transition-all duration-500">
+              <div className="relative p-6 bg-white/95 backdrop-blur-sm rounded-lg border-2 border-primary-glow/40 hover:border-primary-glow/80 shadow-neural hover:shadow-hologram transition-all duration-500">
                 <div className="relative mx-auto mb-4 p-4 bg-gradient-neural rounded-full w-fit shadow-cyber group-hover:shadow-hologram transition-all duration-500">
-                  <div className="absolute inset-0 bg-primary-glow/20 rounded-full animate-pulse-glow" />
+                  <div className="absolute inset-0 bg-primary-glow/30 rounded-full animate-pulse-glow" />
                   <div className="relative">
                     {guarantee.icon}
                   </div>
                 </div>
-                <h4 className="text-xl font-semibold mb-2 font-mono tracking-wide text-white group-hover:text-primary-glow transition-all duration-500">{guarantee.title}</h4>
-                <p className="text-white/70 group-hover:text-white/90 transition-all duration-300">{guarantee.description}</p>
+                <h4 className="text-xl font-semibold mb-2 font-mono tracking-wide text-foreground group-hover:text-primary transition-all duration-500">{guarantee.title}</h4>
+                <p className="text-muted-foreground group-hover:text-foreground/80 transition-all duration-300">{guarantee.description}</p>
               </div>
             </div>
           ))}
