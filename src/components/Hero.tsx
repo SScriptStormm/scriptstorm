@@ -35,16 +35,9 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 py-20 text-center text-white">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold mb-12 leading-tight">
-            <span className="font-mono tracking-wider bg-gradient-cyber bg-clip-text text-transparent animate-hologram-flicker text-6xl md:text-8xl">
-              SCRIPTSTORM.AI
-            </span>
-            <span className="block text-3xl md:text-5xl mt-6 font-mono tracking-widest text-primary-glow animate-pulse-glow">
-              DONE-FOR-YOU SEO CONTENT
-            </span>
-            <span className="block text-xl md:text-3xl mt-4 font-mono tracking-wider text-white/90">
-              DELIVERED IN 24 HOURS
-            </span>
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+            ScriptStorm: Done-For-You SEO Content—
+            <span className="block text-primary-glow">Delivered in 24 Hours</span>
           </h1>
 
           {/* Client Logos - Futuristic */}
@@ -72,8 +65,8 @@ const Hero = () => {
             </div>
           </div>
           
-          <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed font-mono tracking-wide">
-            <span className="text-primary-glow">NEURAL</span> CONTENT CREATION SERVICE — NO TOOLS, NO HASSLE, JUST <span className="text-primary-glow">RESULTS</span>
+          <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed">
+            Professional Content Creation Service - No Tools, No Hassle, Just Results
           </p>
 
           {/* Key Benefits - AI Enhanced */}
