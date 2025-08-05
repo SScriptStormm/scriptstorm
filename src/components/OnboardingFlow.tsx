@@ -194,8 +194,9 @@ const OnboardingFlow = () => {
                 <Button 
                   className="bg-primary hover:bg-primary-dark text-background font-bold px-8 py-3"
                   size="lg"
+                  onClick={() => window.open('mailto:hello@aicontentag.com?subject=Free Consultation Request&body=Hi, I\'d like to start the consultation process and learn more about your content services.', '_blank')}
                 >
-                  Start Your Free Consultation Today
+                  📧 Start Your Free Consultation Today
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </div>
@@ -203,20 +204,20 @@ const OnboardingFlow = () => {
           </Card>
         </div>
 
-        {/* Trust Indicators */}
+        {/* Key Benefits */}
         <div className="text-center">
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             <div className="bg-card/50 backdrop-blur-sm rounded-lg p-6 border border-border/50">
-              <div className="text-2xl font-bold text-primary mb-2">500+</div>
-              <div className="text-muted-foreground">Successful Projects</div>
-            </div>
-            <div className="bg-card/50 backdrop-blur-sm rounded-lg p-6 border border-border/50">
               <div className="text-2xl font-bold text-primary mb-2">24hr</div>
-              <div className="text-muted-foreground">Average Delivery</div>
+              <div className="text-muted-foreground">Consultation Response</div>
             </div>
             <div className="bg-card/50 backdrop-blur-sm rounded-lg p-6 border border-border/50">
-              <div className="text-2xl font-bold text-primary mb-2">98%</div>
-              <div className="text-muted-foreground">Client Satisfaction</div>
+              <div className="text-2xl font-bold text-primary mb-2">5-7</div>
+              <div className="text-muted-foreground">Days to First Content</div>
+            </div>
+            <div className="bg-card/50 backdrop-blur-sm rounded-lg p-6 border border-border/50">
+              <div className="text-2xl font-bold text-primary mb-2">100%</div>
+              <div className="text-muted-foreground">Satisfaction Guarantee</div>
             </div>
           </div>
         </div>

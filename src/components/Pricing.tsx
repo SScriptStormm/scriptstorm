@@ -145,14 +145,14 @@ const Pricing = () => {
                 <Button 
                   className="w-full text-xl py-7 h-auto bg-[#2ECC71] hover:bg-[#27AE60] text-white font-bold shadow-lg border-2 border-[#2ECC71]/20 hover:border-white/30 transition-all duration-300"
                   size="lg" 
-                  onClick={() => handleStripeCheckout('SEO Blog Consultation')}
+                  onClick={() => window.open('mailto:hello@aicontentag.com?subject=Free Consultation Request&body=Hi, I\'d like to schedule a free consultation call to discuss my content needs.', '_blank')}
                 >
-                  🚀 Book Free Consultation - $0
+                  📧 Email for Free Consultation
                 </Button>
                 
                 <div className="mt-4 p-3 bg-muted/50 rounded-lg border border-muted-foreground/20">
                   <p className="text-sm font-semibold text-foreground">
-                    ✨ Free consultation • Custom quote • Satisfaction guarantee
+                    ✨ Free consultation • Custom quote • Email us to get started
                   </p>
                 </div>
               </CardHeader>
@@ -303,19 +303,11 @@ const Pricing = () => {
                   )}
                   
                   <Button 
-                    className="w-full text-xl py-6 h-auto bg-[#3498DB] hover:bg-[#2980B9] text-white font-bold disabled:opacity-50"
+                    className="w-full text-xl py-6 h-auto bg-[#3498DB] hover:bg-[#2980B9] text-white font-bold"
                     size="lg" 
-                    onClick={() => handleStripeCheckout('Custom Quote Request')}
-                    disabled={isLoading}
+                    onClick={() => window.open('mailto:hello@aicontentag.com?subject=Custom Quote Request&body=Hi, I\'d like a custom quote for content services. My estimated monthly total would be $' + calculateTotal() + '.', '_blank')}
                   >
-                    {isLoading ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Processing...
-                      </>
-                    ) : (
-                      `Request Custom Quote - $${calculateTotal()}/month`
-                    )}
+                    📧 Email for Custom Quote - $${calculateTotal()}/month
                   </Button>
                 </div>
               </Card>

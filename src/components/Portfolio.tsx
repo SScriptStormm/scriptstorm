@@ -52,27 +52,26 @@ const Portfolio = () => {
     }
   ];
 
-  const testimonials = [
+  const whyChooseUs = [
     {
-      quote: "The content quality exceeded our expectations. Our organic traffic tripled within 3 months.",
-      author: "Sarah Chen",
-      position: "Marketing Director",
-      company: "TechFlow AI",
-      avatar: "SC"
+      title: "Industry Expertise",
+      description: "Specialized knowledge in SaaS and E-commerce content that converts visitors into customers.",
+      icon: "🎯"
     },
     {
-      quote: "Fast delivery without compromising quality. Our product launch was a massive success.",
-      author: "Mike Rodriguez",
-      position: "E-commerce Manager", 
-      company: "EcoStyle Store",
-      avatar: "MR"
+      title: "Fast Turnaround", 
+      description: "Professional-quality content delivered in 24-72 hours, not weeks.",
+      icon: "⚡"
     },
     {
-      quote: "Professional, strategic content that positioned us as industry leaders. Highly recommended.",
-      author: "David Park",
-      position: "CEO",
-      company: "InvestSmart Pro", 
-      avatar: "DP"
+      title: "SEO-First Approach",
+      description: "Every piece is optimized for search engines using proven SEO strategies and tools.",
+      icon: "📈"
+    },
+    {
+      title: "Satisfaction Guarantee",
+      description: "Unlimited revisions until you're completely happy with the results.",
+      icon: "✅"
     }
   ];
 
@@ -97,15 +96,15 @@ const Portfolio = () => {
         <div className="text-center mb-16">
           <div className="inline-block p-1 rounded-full bg-gradient-primary mb-6 shadow-glow">
             <div className="bg-background rounded-full px-6 py-2">
-              <span className="text-sm font-medium text-primary">Success Stories</span>
+              <span className="text-sm font-medium text-primary">Our Approach</span>
             </div>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground font-mono tracking-wide">
-            Portfolio & <span className="text-primary">Results</span>
+            Why Choose <span className="text-primary">Our Service</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Real results from real clients. See how our done-for-you content services 
-            drive measurable business growth across industries.
+            Professional content creation designed specifically for SaaS and E-commerce businesses 
+            that need to scale their marketing efforts.
           </p>
         </div>
 
@@ -178,37 +177,25 @@ const Portfolio = () => {
           ))}
         </div>
 
-        {/* Testimonials Section */}
+        {/* Why Choose Us Section */}
         <div className="mb-16">
           <div className="text-center mb-12">
             <h3 className="text-3xl font-bold mb-4 text-foreground font-mono tracking-wide">
-              What Our Clients Say
+              Why Choose Our Service
             </h3>
-            <p className="text-muted-foreground">Hear directly from business owners who've seen real results</p>
+            <p className="text-muted-foreground">The benefits of working with content experts who understand your industry</p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {whyChooseUs.map((benefit, index) => (
               <div key={index} className="relative group">
                 <div className="absolute inset-0 bg-gradient-neural opacity-10 rounded-xl blur-lg group-hover:opacity-20 transition-all duration-500" />
                 
-                <Card className="relative p-6 bg-white/95 backdrop-blur-sm border-2 border-primary-glow/40 hover:border-primary-glow/80 shadow-neural hover:shadow-hologram transition-all duration-500">
+                <Card className="relative p-6 bg-white/95 backdrop-blur-sm border-2 border-primary-glow/40 hover:border-primary-glow/80 shadow-neural hover:shadow-hologram transition-all duration-500 text-center h-full">
                   <CardContent className="p-0">
-                    <blockquote className="text-foreground mb-6 leading-relaxed">
-                      "{testimonial.quote}"
-                    </blockquote>
-                    
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center text-background font-bold text-sm">
-                        {testimonial.avatar}
-                      </div>
-                      <div>
-                        <div className="font-semibold text-foreground">{testimonial.author}</div>
-                        <div className="text-sm text-muted-foreground">
-                          {testimonial.position} at {testimonial.company}
-                        </div>
-                      </div>
-                    </div>
+                    <div className="text-4xl mb-4">{benefit.icon}</div>
+                    <h4 className="font-bold text-foreground mb-3 text-lg">{benefit.title}</h4>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{benefit.description}</p>
                   </CardContent>
                 </Card>
               </div>
@@ -229,8 +216,9 @@ const Portfolio = () => {
               <Button 
                 className="bg-primary hover:bg-primary-dark text-background font-bold px-8 py-3"
                 size="lg"
+                onClick={() => window.open('mailto:hello@aicontentag.com?subject=Free Consultation Request&body=Hi, I\'d like to schedule a free consultation to discuss my content needs and see how you can help my business.', '_blank')}
               >
-                Get Your Free Consultation
+                📧 Email for Free Consultation
                 <ArrowUpRight className="ml-2 h-4 w-4" />
               </Button>
             </CardContent>
