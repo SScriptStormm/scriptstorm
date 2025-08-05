@@ -42,27 +42,45 @@ const Services = () => {
   ];
 
   return (
-    <section className="relative py-20 bg-muted/30 overflow-hidden">
+    <section className="relative py-20 bg-gradient-to-br from-white via-white/95 to-muted/50 overflow-hidden">
       {/* AI Neural Network Background */}
-      <div className="absolute inset-0 bg-gradient-mesh opacity-20" />
-      <div className="absolute inset-0 bg-gradient-neural animate-neural-pulse opacity-10" />
+      <div className="absolute inset-0 bg-gradient-mesh opacity-30" />
+      <div className="absolute inset-0 bg-gradient-neural animate-neural-pulse opacity-20" />
+      
+      {/* Grid pattern overlay */}
+      <div className="absolute inset-0" style={{
+        backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--primary-glow) / 0.15) 1px, transparent 0)`,
+        backgroundSize: '50px 50px'
+      }} />
       
       {/* Floating geometric elements */}
-      <div className="absolute top-20 left-10 w-16 h-16 border border-primary-glow/20 rotate-45 animate-float" />
-      <div className="absolute top-40 right-20 w-12 h-12 border border-primary-glow/15 rotate-12 animate-float" style={{ animationDelay: '2s' }} />
-      <div className="absolute bottom-40 left-20 w-10 h-10 border border-primary-glow/25 rotate-45 animate-float" style={{ animationDelay: '4s' }} />
+      <div className="absolute top-20 left-10 w-16 h-16 border-2 border-primary-glow/30 rotate-45 animate-float shadow-cyber" />
+      <div className="absolute top-40 right-20 w-12 h-12 border-2 border-primary-glow/25 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '2s' }} />
+      <div className="absolute bottom-40 left-20 w-10 h-10 border-2 border-primary-glow/35 rotate-45 animate-float shadow-cyber" style={{ animationDelay: '4s' }} />
+      <div className="absolute top-60 right-40 w-8 h-8 border border-primary-glow/20 rotate-90 animate-float" style={{ animationDelay: '1s' }} />
+      <div className="absolute bottom-60 right-10 w-14 h-14 border border-primary-glow/25 rotate-12 animate-float" style={{ animationDelay: '3s' }} />
       
-      {/* Scanning line effect */}
+      {/* Multiple scanning line effects */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 h-px w-full bg-gradient-neural animate-scan-line opacity-20" />
+        <div className="absolute top-0 h-px w-full bg-gradient-neural animate-scan-line opacity-40" />
+        <div className="absolute bottom-0 h-px w-full bg-gradient-cyber animate-scan-line opacity-30" style={{ animationDelay: '2s' }} />
+        <div className="absolute left-0 w-px h-full bg-gradient-neural animate-scan-line opacity-25" style={{ animationDelay: '4s' }} />
+      </div>
+      
+      {/* Particle effect overlay */}
+      <div className="absolute inset-0">
+        <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-primary-glow rounded-full animate-ping opacity-30" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-3/4 right-1/3 w-1 h-1 bg-primary-glow rounded-full animate-ping opacity-40" style={{ animationDelay: '3s' }} />
+        <div className="absolute bottom-1/4 left-1/2 w-1 h-1 bg-primary-glow rounded-full animate-ping opacity-35" style={{ animationDelay: '5s' }} />
       </div>
       
       <div className="relative z-10 container mx-auto px-4">
         {/* Services Header */}
         <div className="text-center mb-16">
           <div className="relative inline-block">
-            <div className="absolute inset-0 bg-gradient-cyber opacity-30 rounded-lg blur-xl" />
-            <h2 className="relative text-4xl md:text-5xl font-bold mb-6 text-foreground font-mono tracking-wide">
+            <div className="absolute inset-0 bg-gradient-cyber opacity-40 rounded-xl blur-xl" />
+            <div className="absolute inset-0 bg-white/20 rounded-lg backdrop-blur-sm" />
+            <h2 className="relative text-4xl md:text-5xl font-bold mb-6 text-foreground font-mono tracking-wide px-8 py-4">
               Content That <span className="text-primary animate-pulse-glow">Converts</span>
             </h2>
           </div>
