@@ -42,60 +42,87 @@ const Services = () => {
   ];
 
   return (
-    <section className="py-20 bg-muted/30">
-      <div className="container mx-auto px-4">
+    <section className="py-20 bg-gradient-dark relative overflow-hidden">
+      {/* AI Background Elements */}
+      <div className="absolute inset-0 bg-gradient-mesh opacity-30" />
+      <div className="absolute top-20 right-10 w-32 h-32 border border-primary-glow/20 rotate-45 animate-float" />
+      <div className="absolute bottom-20 left-10 w-24 h-24 border border-primary-glow/15 rotate-12 animate-float" style={{ animationDelay: '3s' }} />
+      
+      <div className="container mx-auto px-4 relative z-10">
         {/* Services Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
-            Content That <span className="text-primary">Converts</span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white font-mono tracking-wider">
+            <span className="bg-gradient-cyber bg-clip-text text-transparent">NEURAL</span> CONTENT THAT{" "}
+            <span className="text-primary-glow animate-pulse-glow">CONVERTS</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Specialized content services designed specifically for SaaS and eCommerce businesses 
-            that need to scale their content marketing efforts.
+          <p className="text-xl text-white/80 max-w-3xl mx-auto font-mono tracking-wide">
+            &gt; SPECIALIZED AI-POWERED CONTENT SERVICES FOR{" "}
+            <span className="text-primary-glow">SAAS</span> &{" "}
+            <span className="text-primary-glow">ECOMMERCE</span> BUSINESSES_
           </p>
         </div>
 
         {/* Services Grid */}
         <div className="grid md:grid-cols-3 gap-8 mb-20">
           {services.map((service, index) => (
-            <Card key={index} className="shadow-card hover:shadow-elegant transition-smooth border-0 bg-card">
-              <CardHeader className="text-center">
-                <div className="mx-auto mb-4 p-3 bg-primary/10 rounded-full w-fit">
-                  {service.icon}
-                </div>
-                <CardTitle className="text-2xl font-bold">{service.title}</CardTitle>
-                <CardDescription className="text-base leading-relaxed">
-                  {service.description}
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2">
-                  {service.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <div className="h-1.5 w-1.5 bg-primary rounded-full" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
+            <div key={index} className="relative group">
+              <div className="absolute inset-0 bg-gradient-cyber opacity-20 rounded-lg blur-lg group-hover:opacity-40 transition-all duration-500" />
+              <Card className="relative bg-black/40 backdrop-blur-md border-2 border-primary-glow/30 hover:border-primary-glow/60 shadow-neural hover:shadow-cyber transition-all duration-500 animate-hologram-flicker" style={{ animationDelay: `${index * 0.3}s` }}>
+                <CardHeader className="text-center">
+                  <div className="mx-auto mb-4 p-4 bg-gradient-cyber rounded-full w-fit shadow-glow animate-pulse-glow">
+                    <div className="text-primary-glow">
+                      {service.icon}
+                    </div>
+                  </div>
+                  <CardTitle className="text-2xl font-bold text-white font-mono tracking-wide">
+                    {service.title.toUpperCase()}
+                  </CardTitle>
+                  <CardDescription className="text-base leading-relaxed text-white/80 font-mono text-sm">
+                    &gt; {service.description}_
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3">
+                    {service.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-center gap-3 text-sm text-white/70 font-mono">
+                        <div className="h-2 w-2 bg-primary-glow rounded-full animate-pulse-glow" />
+                        [ {feature} ]
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
           ))}
         </div>
 
         {/* Guarantees */}
         <div className="text-center mb-12">
-          <h3 className="text-3xl font-bold mb-2 text-foreground">Our Promise to You</h3>
-          <p className="text-muted-foreground">Why thousands of businesses trust us with their content</p>
+          <h3 className="text-3xl font-bold mb-2 text-white font-mono tracking-wider">
+            &gt; OUR <span className="text-primary-glow">PROMISE</span> TO YOU_
+          </h3>
+          <p className="text-white/70 font-mono tracking-wide">
+            [ WHY THOUSANDS OF BUSINESSES TRUST US WITH THEIR CONTENT ]
+          </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {guarantees.map((guarantee, index) => (
-            <div key={index} className="text-center group">
-              <div className="mx-auto mb-4 p-4 bg-primary/10 rounded-full w-fit group-hover:bg-primary/20 transition-smooth">
-                {guarantee.icon}
+            <div key={index} className="text-center group relative">
+              <div className="absolute inset-0 bg-gradient-neural opacity-20 rounded-lg blur-lg group-hover:opacity-40 transition-all duration-500" />
+              <div className="relative bg-black/30 backdrop-blur-md border border-primary-glow/30 rounded-lg p-6 shadow-neural hover:shadow-hologram transition-all duration-500 hover:border-primary-glow/60">
+                <div className="mx-auto mb-4 p-4 bg-gradient-cyber rounded-full w-fit shadow-glow animate-pulse-glow">
+                  <div className="text-primary-glow">
+                    {guarantee.icon}
+                  </div>
+                </div>
+                <h4 className="text-xl font-semibold mb-2 text-white font-mono tracking-wide">
+                  [ {guarantee.title.toUpperCase()} ]
+                </h4>
+                <p className="text-white/70 font-mono text-sm">
+                  &gt; {guarantee.description}_
+                </p>
               </div>
-              <h4 className="text-xl font-semibold mb-2">{guarantee.title}</h4>
-              <p className="text-muted-foreground">{guarantee.description}</p>
             </div>
           ))}
         </div>

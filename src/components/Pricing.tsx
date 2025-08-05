@@ -61,15 +61,21 @@ const Pricing = () => {
 
   return (
     <TooltipProvider>
-      <section id="pricing" className="py-20 bg-background">
-        <div className="container mx-auto px-4">
+      <section id="pricing" className="py-20 bg-gradient-hero relative overflow-hidden">
+        {/* AI Background Elements */}
+        <div className="absolute inset-0 bg-gradient-mesh opacity-40" />
+        <div className="absolute top-10 left-20 w-28 h-28 border border-primary-glow/20 rotate-45 animate-float" />
+        <div className="absolute bottom-10 right-20 w-20 h-20 border border-primary-glow/15 rotate-12 animate-float" style={{ animationDelay: '2s' }} />
+        
+        <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
-              Simple, Transparent <span className="text-[#3498DB]">Pricing</span>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white font-mono tracking-wider">
+              <span className="bg-gradient-cyber bg-clip-text text-transparent">SIMPLE</span>,{" "}
+              <span className="text-primary-glow animate-pulse-glow">TRANSPARENT</span> PRICING
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Everything you need to scale your content marketing. 
-              No hidden fees, no contracts, cancel anytime.
+            <p className="text-xl text-white/80 max-w-2xl mx-auto font-mono tracking-wide">
+              &gt; EVERYTHING YOU NEED TO SCALE YOUR CONTENT MARKETING_<br/>
+              [ NO HIDDEN FEES • NO CONTRACTS • CANCEL ANYTIME ]
             </p>
           </div>
 
