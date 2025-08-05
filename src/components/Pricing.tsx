@@ -228,11 +228,10 @@ const Pricing = () => {
                       🚀 3x More Traffic Guaranteed
                     </p>
                   </div>
-                  <div className="text-sm text-muted-foreground ml-8 space-y-2 leading-relaxed">
-                    <div>• 2000-5000 words</div>
-                    <div>• Keyword research included</div>
-                    <div>• Meta tags & headers</div>
-                    <div>• Internal linking strategy</div>
+                  <div className="text-sm text-muted-foreground ml-8 font-mono space-y-1">
+                    <div>• Advanced keyword research</div>
+                    <div>• SurferSEO optimization</div>
+                    <div>• Monthly ranking reports</div>
                   </div>
                 </Card>
               </div>
@@ -256,15 +255,10 @@ const Pricing = () => {
                       ✍️ Sound Like a Native Speaker
                     </p>
                   </div>
-                  <div className="text-sm text-muted-foreground ml-8 space-y-2 leading-relaxed">
-                    <div>• Platform-optimized content</div>
-                    <div>• Hashtag research</div>
-                    <div>• Visual content ideas</div>
-                    <div>• Engagement hooks</div>
-                    <div>• Welcome sequences</div>
-                    <div>• Product launches</div>
-                    <div>• Newsletter content</div>
-                    <div>• A/B test variations</div>
+                  <div className="text-sm text-muted-foreground ml-8 font-mono space-y-1">
+                    <div>• Professional human editing</div>
+                    <div>• Native speaker quality</div>
+                    <div>• Multi-region optimization 🇺🇸🇬🇧🇪🇺🇭🇰🇲🇽</div>
                   </div>
                 </Card>
               </div>
