@@ -113,6 +113,17 @@ const Hero = () => {
                 WHY CHOOSE US
               </Button>
             </div>
+            <div className="relative group">
+              <div className="absolute inset-0 bg-gradient-neural rounded-lg blur-lg opacity-30 group-hover:opacity-50 transition-all duration-500" />
+              <Button 
+                variant="ghost-white" 
+                size="lg"
+                onClick={() => window.location.href = '/onboarding-process'}
+                className="relative text-lg px-8 py-4 h-auto bg-black/30 backdrop-blur-md border-2 border-white/30 hover:border-white/60 shadow-neural hover:shadow-hologram transition-all duration-500 font-mono tracking-wide"
+              >
+                OUR PROCESS
+              </Button>
+            </div>
           </div>
 
 
