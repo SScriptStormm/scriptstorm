@@ -112,8 +112,8 @@ const Pricing = () => {
             <Card className="relative shadow-hologram border-2 border-[#2ECC71]/50 hover:border-[#2ECC71]/80 bg-white/95 backdrop-blur-sm overflow-visible transition-all duration-500 hover:shadow-cyber">
               {/* Most Popular Badge */}
               <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <div className="bg-[#2ECC71] text-white px-6 py-2 rounded-full text-sm font-semibold flex items-center gap-1 shadow-cyber border border-[#2ECC71]/50">
-                  <Crown className="h-4 w-4" />
+                <div className="bg-[#2ECC71] text-white px-6 py-3 rounded-full text-base font-bold flex items-center gap-1 shadow-lg border-2 border-white/20">
+                  <Crown className="h-5 w-5" />
                   Most Popular
                 </div>
               </div>
@@ -126,7 +126,7 @@ const Pricing = () => {
                 {/* Pricing with strikethrough and tooltip */}
                 <div className="flex items-center justify-center gap-2 mb-4">
                   <span className="text-lg line-through text-muted-foreground">$600</span>
-                  <span className="text-3xl font-bold text-[#2ECC71]">$497</span>
+                  <span className="text-4xl font-bold text-foreground bg-[#2ECC71]/20 px-3 py-1 rounded-lg border border-[#2ECC71]/30">$497</span>
                   <span className="text-lg text-muted-foreground">/month</span>
                   <Tooltip>
                     <TooltipTrigger>
@@ -138,21 +138,23 @@ const Pricing = () => {
                   </Tooltip>
                 </div>
 
-                <CardDescription className="text-lg mb-6 text-[#2ECC71] font-semibold">
-                  Save $103 compared to per-article pricing!
+                <CardDescription className="text-lg mb-6 text-foreground bg-[#2ECC71]/15 px-4 py-2 rounded-lg border border-[#2ECC71]/30 font-bold">
+                  💰 Save $103 compared to per-article pricing!
                 </CardDescription>
                 
                 <Button 
-                  className="w-full text-xl py-6 h-auto bg-[#2ECC71] hover:bg-[#27AE60] text-white font-bold"
+                  className="w-full text-xl py-7 h-auto bg-[#2ECC71] hover:bg-[#27AE60] text-white font-bold shadow-lg border-2 border-[#2ECC71]/20 hover:border-white/30 transition-all duration-300"
                   size="lg" 
                   onClick={() => handleStripeCheckout('SEO Blog Subscription')}
                 >
-                  Start Your 7-Day Trial - $0
+                  🚀 Start Your 7-Day Trial - $0
                 </Button>
                 
-                <p className="text-sm text-muted-foreground mt-4">
-                  ✨ 7-day free trial • Cancel anytime • Money-back guarantee
-                </p>
+                <div className="mt-4 p-3 bg-muted/50 rounded-lg border border-muted-foreground/20">
+                  <p className="text-sm font-semibold text-foreground">
+                    ✨ 7-day free trial • Cancel anytime • Money-back guarantee
+                  </p>
+                </div>
               </CardHeader>
             </Card>
           </div>
@@ -221,9 +223,11 @@ const Pricing = () => {
                       <strong>+SEO Power-Up</strong> ($197)
                     </label>
                   </div>
-                  <p className="text-base text-[#2ECC71] font-semibold ml-8 mb-2">
-                    3x More Traffic Guaranteed
-                  </p>
+                  <div className="ml-8 mb-3 p-2 bg-[#2ECC71]/10 rounded-lg border border-[#2ECC71]/20">
+                    <p className="text-base text-foreground font-bold">
+                      🚀 3x More Traffic Guaranteed
+                    </p>
+                  </div>
                   <div className="text-sm text-muted-foreground ml-8 font-mono space-y-1">
                     <div>• Advanced keyword research</div>
                     <div>• SurferSEO optimization</div>
@@ -246,9 +250,11 @@ const Pricing = () => {
                       <strong>+Human Polish</strong> ($147)
                     </label>
                   </div>
-                  <p className="text-base text-[#2ECC71] font-semibold ml-8 mb-2">
-                    Sound Like a Native Speaker
-                  </p>
+                  <div className="ml-8 mb-3 p-2 bg-[#2ECC71]/10 rounded-lg border border-[#2ECC71]/20">
+                    <p className="text-base text-foreground font-bold">
+                      ✍️ Sound Like a Native Speaker
+                    </p>
+                  </div>
                   <div className="text-sm text-muted-foreground ml-8 font-mono space-y-1">
                     <div>• Professional human editing</div>
                     <div>• Native speaker quality</div>
