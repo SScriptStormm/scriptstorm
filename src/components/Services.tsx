@@ -77,13 +77,9 @@ const Services = () => {
       <div className="relative z-10 container mx-auto px-4">
         {/* Services Header */}
         <div className="text-center mb-16">
-          <div className="relative inline-block">
-            <div className="absolute inset-0 bg-gradient-cyber opacity-40 rounded-xl blur-xl" />
-            <div className="absolute inset-0 bg-white/20 rounded-lg backdrop-blur-sm" />
-            <h2 className="relative text-4xl md:text-5xl font-bold mb-6 text-foreground font-mono tracking-wide px-8 py-4">
-              Content That <span className="text-primary animate-pulse-glow">Converts</span>
-            </h2>
-          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground font-mono tracking-wide">
+            Content That <span className="text-primary animate-pulse-glow">Converts</span>
+          </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Specialized content services designed specifically for SaaS and eCommerce businesses 
             that need to scale their content marketing efforts.
