@@ -9,28 +9,31 @@ const RefundPolicy = () => {
           </p>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">30-Day Money-Back Guarantee</h2>
+            <h2 className="text-2xl font-semibold mb-4">Satisfaction Guarantee</h2>
             <p className="mb-4">
-              We offer a 30-day money-back guarantee on all our services. If you're not completely 
-              satisfied with your purchase, you can request a full refund within 30 days of your order.
+              We stand behind our custom content creation services with a satisfaction guarantee. 
+              If we fail to deliver content that meets the agreed specifications or timeline, 
+              you may be eligible for a refund as outlined below.
             </p>
           </section>
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">Refund Eligibility</h2>
-            <p className="mb-4">To be eligible for a refund, you must:</p>
+            <p className="mb-4">Refunds may be considered in the following situations:</p>
             <ul className="list-disc pl-6 mb-4">
-              <li>Request the refund within 30 days of purchase</li>
-              <li>Provide a valid reason for the refund request</li>
-              <li>Have made a good faith effort to work with our team to resolve any issues</li>
+              <li>Content was not delivered within the agreed timeframe (except for force majeure events)</li>
+              <li>Delivered content significantly deviates from the agreed project specifications</li>
+              <li>Project cancellation before work has commenced (full refund)</li>
+              <li>Mutual agreement to terminate the project after consultation</li>
             </ul>
           </section>
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">How to Request a Refund</h2>
             <p className="mb-4">
-              To request a refund, please contact our support team with your order details 
-              and reason for the refund request. We will review your request within 2-3 business days.
+              To request a refund, please contact our team within 14 days of project completion 
+              with your project details and specific concerns. We will work with you to resolve 
+              any issues before processing refund requests, as we are committed to client satisfaction.
             </p>
           </section>
 
@@ -45,20 +48,22 @@ const RefundPolicy = () => {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">Partial Work Completed</h2>
             <p className="mb-4">
-              If work has already been completed on your project, we may offer a partial refund 
-              based on the amount of work completed and delivered.
+              For projects where work has been partially completed, refunds will be calculated 
+              based on the percentage of work delivered and the value provided. We will work 
+              with you to find a fair resolution that reflects the work completed.
             </p>
           </section>
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">Non-Refundable Items</h2>
             <p className="mb-4">
-              The following items are non-refundable:
+              The following situations are typically not eligible for refunds:
             </p>
             <ul className="list-disc pl-6 mb-4">
-              <li>Third-party costs (hosting, domains, licenses)</li>
-              <li>Work completed and delivered beyond the refund period</li>
-              <li>Custom work that has been fully delivered and approved</li>
+              <li>Change of mind after content has been delivered and approved</li>
+              <li>Content that meets specifications but doesn't achieve desired business results</li>
+              <li>Custom work that has been fully completed according to agreed specifications</li>
+              <li>Projects where significant revisions have been provided and accepted</li>
             </ul>
           </section>
 

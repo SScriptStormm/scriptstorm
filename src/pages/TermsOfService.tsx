@@ -16,9 +16,10 @@ const TermsOfService = () => {
           <section>
             <h2 className="text-2xl font-semibold mb-4 text-foreground">2. Description of Service</h2>
             <p>
-              ScriptStorm provides SEO content creation services for SaaS brands, delivering high-quality 
-              content within 24 hours. Our services include but are not limited to blog posts, landing page copy, 
-              and marketing materials optimized for search engines.
+              ScriptStorm provides custom content creation services for businesses, delivering personalized 
+              content solutions including blog posts, marketing copy, social media content, and email campaigns. 
+              Each project is tailored to your specific brand requirements with professional consultation and 
+              24-hour delivery commitment.
             </p>
           </section>
 
@@ -36,16 +37,18 @@ const TermsOfService = () => {
           <section>
             <h2 className="text-2xl font-semibold mb-4 text-foreground">4. Payment Terms</h2>
             <p>
-              Payment is required before work begins on your project. We accept major credit cards and 
-              process payments through secure payment processors. All prices are in USD unless otherwise specified.
+              Payment terms are established during project consultation and outlined in your custom quote. 
+              Payment is typically required before work begins. We accept major credit cards and process 
+              payments through secure payment processors. All prices are in USD unless otherwise specified.
             </p>
           </section>
 
           <section>
             <h2 className="text-2xl font-semibold mb-4 text-foreground">5. Delivery and Revisions</h2>
             <p>
-              We commit to delivering content within 24 hours of order confirmation. Minor revisions 
-              may be requested within 7 days of delivery. Major changes may incur additional charges.
+              Delivery timelines are specified during project consultation, with our standard commitment being 
+              24-hour delivery for most content projects. Two rounds of minor revisions are included within 7 days 
+              of delivery. Additional revisions or major changes may incur additional charges as outlined in your project agreement.
             </p>
           </section>
 
