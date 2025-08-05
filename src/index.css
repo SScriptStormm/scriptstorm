@@ -40,19 +40,28 @@ All colors MUST be HSL.
     --input: 220 13% 91%;
     --ring: 221 83% 53%;
 
-    /* Professional gradients */
+    /* AI Futuristic gradients */
     --gradient-primary: linear-gradient(135deg, hsl(221 83% 53%), hsl(221 83% 65%));
     --gradient-dark: linear-gradient(135deg, hsl(220 15% 5%), hsl(220 15% 15%));
     --gradient-hero: linear-gradient(135deg, hsl(221 83% 53%) 0%, hsl(220 15% 5%) 100%);
+    --gradient-cyber: linear-gradient(45deg, hsl(221 83% 53%), hsl(221 83% 75%), hsl(221 83% 45%));
+    --gradient-mesh: radial-gradient(circle at 20% 50%, hsl(221 83% 53% / 0.12) 0%, transparent 50%), 
+                     radial-gradient(circle at 80% 20%, hsl(221 83% 65% / 0.12) 0%, transparent 50%),
+                     radial-gradient(circle at 40% 80%, hsl(221 83% 45% / 0.12) 0%, transparent 50%);
+    --gradient-neural: linear-gradient(90deg, transparent 0%, hsl(221 83% 53% / 0.1) 50%, transparent 100%);
     
-    /* Professional shadows */
+    /* AI Futuristic shadows & glows */
     --shadow-elegant: 0 10px 30px -10px hsl(221 83% 53% / 0.3);
     --shadow-glow: 0 0 40px hsl(221 83% 65% / 0.4);
     --shadow-card: 0 4px 20px hsl(220 15% 5% / 0.1);
+    --shadow-cyber: 0 0 60px hsl(221 83% 53% / 0.2), 0 0 120px hsl(221 83% 65% / 0.1);
+    --shadow-neural: inset 0 1px 0 hsl(221 83% 65% / 0.1), 0 1px 3px hsl(220 15% 5% / 0.2);
+    --shadow-hologram: 0 0 30px hsl(221 83% 53% / 0.3), inset 0 1px 0 hsl(221 83% 65% / 0.2);
     
-    /* Animations */
+    /* AI Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-cyber: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
     --radius: 0.5rem;
 

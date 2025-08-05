@@ -68,16 +68,23 @@ export default {
 			backgroundImage: {
 				'gradient-primary': 'var(--gradient-primary)',
 				'gradient-dark': 'var(--gradient-dark)',
-				'gradient-hero': 'var(--gradient-hero)'
+				'gradient-hero': 'var(--gradient-hero)',
+				'gradient-cyber': 'var(--gradient-cyber)',
+				'gradient-mesh': 'var(--gradient-mesh)',
+				'gradient-neural': 'var(--gradient-neural)'
 			},
 			boxShadow: {
 				'elegant': 'var(--shadow-elegant)',
 				'glow': 'var(--shadow-glow)',
-				'card': 'var(--shadow-card)'
+				'card': 'var(--shadow-card)',
+				'cyber': 'var(--shadow-cyber)',
+				'neural': 'var(--shadow-neural)',
+				'hologram': 'var(--shadow-hologram)'
 			},
 			transitionTimingFunction: {
 				'smooth': 'var(--transition-smooth)',
-				'bounce': 'var(--transition-bounce)'
+				'bounce': 'var(--transition-bounce)',
+				'cyber': 'var(--transition-cyber)'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -100,11 +107,62 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'pulse-glow': {
+					'0%, 100%': {
+						boxShadow: '0 0 20px hsl(221 83% 53% / 0.3)'
+					},
+					'50%': {
+						boxShadow: '0 0 40px hsl(221 83% 53% / 0.6), 0 0 60px hsl(221 83% 65% / 0.3)'
+					}
+				},
+				'float': {
+					'0%, 100%': {
+						transform: 'translateY(0px)'
+					},
+					'50%': {
+						transform: 'translateY(-10px)'
+					}
+				},
+				'scan-line': {
+					'0%': {
+						transform: 'translateX(-100%)'
+					},
+					'100%': {
+						transform: 'translateX(100%)'
+					}
+				},
+				'neural-pulse': {
+					'0%, 100%': {
+						opacity: '0.1'
+					},
+					'50%': {
+						opacity: '0.3'
+					}
+				},
+				'hologram-flicker': {
+					'0%, 100%': {
+						opacity: '1'
+					},
+					'10%': {
+						opacity: '0.8'
+					},
+					'20%': {
+						opacity: '1'
+					},
+					'30%': {
+						opacity: '0.9'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
+				'float': 'float 6s ease-in-out infinite',
+				'scan-line': 'scan-line 2s linear infinite',
+				'neural-pulse': 'neural-pulse 4s ease-in-out infinite',
+				'hologram-flicker': 'hologram-flicker 8s ease-in-out infinite'
 			}
 		}
 	},
