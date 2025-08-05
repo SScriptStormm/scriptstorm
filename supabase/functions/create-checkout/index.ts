@@ -23,8 +23,8 @@ serve(async (req) => {
     if (!stripeKey) throw new Error("Stripe secret key not found");
     logStep("Stripe key verified");
 
-    const { selectedAddOns } = await req.json();
-    logStep("Request data", { selectedAddOns });
+    const { selectedAddOns, packageType = "starter" } = await req.json();
+    logStep("Request data", { selectedAddOns, packageType });
 
     // Use guest email for all checkouts since no auth is required
     const userEmail = "guest@scriptstorm.com";
@@ -41,16 +41,24 @@ serve(async (req) => {
       logStep("Found existing customer", { customerId });
     }
 
-    // Create line items using price_data instead of price IDs for now
+    // Create line items based on package type
+    const packagePricing = {
+      starter: { amount: 29700, name: "ScriptStorm Starter Package", description: "5 SEO Articles monthly" },
+      growth: { amount: 59700, name: "ScriptStorm Growth Package", description: "10 SEO Articles monthly" },
+      enterprise: { amount: 99700, name: "ScriptStorm Enterprise Package", description: "20+ Articles monthly" }
+    };
+
+    const selectedPackage = packagePricing[packageType] || packagePricing.starter;
+    
     const lineItems = [
       {
         price_data: {
           currency: "usd",
           product_data: {
-            name: "ScriptStorm Base Plan",
-            description: "10 SEO Articles per month"
+            name: selectedPackage.name,
+            description: selectedPackage.description
           },
-          unit_amount: 49700, // $497 in cents
+          unit_amount: selectedPackage.amount,
           recurring: { interval: "month" },
         },
         quantity: 1,
@@ -105,6 +113,7 @@ serve(async (req) => {
       metadata: {
         user_id: userId,
         user_email: userEmail,
+        package_type: packageType,
         seo_addon: selectedAddOns?.seo ? "true" : "false",
         editing_addon: selectedAddOns?.editing ? "true" : "false",
       },

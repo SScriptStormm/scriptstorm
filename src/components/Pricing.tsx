@@ -72,7 +72,7 @@ const Pricing = () => {
               <CardTitle className="text-xl font-bold mb-2">
                 🚀 Starter Package
               </CardTitle>
-              <div className="text-3xl font-bold text-foreground mb-2">From $297</div>
+              <div className="text-3xl font-bold text-foreground mb-2">$297 <span className="text-lg text-muted-foreground">USD</span></div>
               <CardDescription className="text-base">Perfect for small businesses</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -117,7 +117,7 @@ const Pricing = () => {
               <CardTitle className="text-xl font-bold mb-2">
                 🔥 Growth Package
               </CardTitle>
-              <div className="text-3xl font-bold text-foreground mb-2">From $597</div>
+              <div className="text-3xl font-bold text-foreground mb-2">$597 <span className="text-lg text-muted-foreground">USD</span></div>
               <CardDescription className="text-base">Best value for growing companies</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -207,7 +207,7 @@ const Pricing = () => {
             <Card className="p-6 border-2 border-[#E67E22]/40 hover:border-[#E67E22]/70 bg-white/95 backdrop-blur-sm transition-all duration-500 shadow-neural hover:shadow-cyber">
               <div className="text-center">
                 <h4 className="text-lg font-bold mb-2 text-[#E67E22]">Social Media Package</h4>
-                <p className="text-2xl font-bold mb-2">From $297/month</p>
+                <p className="text-2xl font-bold mb-2">$297 <span className="text-sm text-muted-foreground">USD/month</span></p>
                 <p className="text-sm text-muted-foreground mb-4">30 posts • Captions • Hashtags</p>
                 <Button 
                   onClick={handleContactClick}
@@ -221,7 +221,7 @@ const Pricing = () => {
             <Card className="p-6 border-2 border-[#E74C3C]/40 hover:border-[#E74C3C]/70 bg-white/95 backdrop-blur-sm transition-all duration-500 shadow-neural hover:shadow-cyber">
               <div className="text-center">
                 <h4 className="text-lg font-bold mb-2 text-[#E74C3C]">Product Descriptions</h4>
-                <p className="text-2xl font-bold mb-2">From $5/each</p>
+                <p className="text-2xl font-bold mb-2">$5 <span className="text-sm text-muted-foreground">USD/each</span></p>
                 <p className="text-sm text-muted-foreground mb-4">SEO-optimized • Converting copy</p>
                 <Button 
                   onClick={handleContactClick}
