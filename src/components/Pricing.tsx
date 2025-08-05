@@ -145,14 +145,14 @@ const Pricing = () => {
                 <Button 
                   className="w-full text-xl py-7 h-auto bg-[#2ECC71] hover:bg-[#27AE60] text-white font-bold shadow-lg border-2 border-[#2ECC71]/20 hover:border-white/30 transition-all duration-300"
                   size="lg" 
-                  onClick={() => handleStripeCheckout('SEO Blog Subscription')}
+                  onClick={() => handleStripeCheckout('SEO Blog Consultation')}
                 >
-                  🚀 Start Your 7-Day Trial - $0
+                  🚀 Book Free Consultation - $0
                 </Button>
                 
                 <div className="mt-4 p-3 bg-muted/50 rounded-lg border border-muted-foreground/20">
                   <p className="text-sm font-semibold text-foreground">
-                    ✨ 7-day free trial • Cancel anytime • Money-back guarantee
+                    ✨ Free consultation • Custom quote • Satisfaction guarantee
                   </p>
                 </div>
               </CardHeader>
@@ -305,7 +305,7 @@ const Pricing = () => {
                   <Button 
                     className="w-full text-xl py-6 h-auto bg-[#3498DB] hover:bg-[#2980B9] text-white font-bold disabled:opacity-50"
                     size="lg" 
-                    onClick={() => handleStripeCheckout('Premium SEO Package')}
+                    onClick={() => handleStripeCheckout('Custom Quote Request')}
                     disabled={isLoading}
                   >
                     {isLoading ? (
@@ -314,7 +314,7 @@ const Pricing = () => {
                         Processing...
                       </>
                     ) : (
-                      `Subscribe Now - $${calculateTotal()}/month`
+                      `Request Custom Quote - $${calculateTotal()}/month`
                     )}
                   </Button>
                 </div>

@@ -78,12 +78,36 @@ const Services = () => {
         {/* Services Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground font-mono tracking-wide">
-            Content That <span className="text-primary">Converts</span>
+            Done-For-You Content That <span className="text-primary">Converts</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Specialized content services designed specifically for SaaS and eCommerce businesses 
-            that need to scale their content marketing efforts.
+          <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed mb-8">
+            Stop wasting time with DIY content tools that produce generic results. Our expert team delivers 
+            high-converting, SEO-optimized content that drives real business growth - no learning curve required.
           </p>
+          
+          {/* Done-for-you vs DIY comparison */}
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
+            <div className="bg-red-50 border-2 border-red-200 rounded-lg p-6">
+              <h3 className="text-xl font-bold text-red-600 mb-4">❌ DIY Tools & Templates</h3>
+              <ul className="text-left space-y-2 text-red-700">
+                <li>• Hours of research and writing</li>
+                <li>• Generic, templated content</li>
+                <li>• No SEO expertise</li>
+                <li>• Inconsistent quality</li>
+                <li>• Time away from your business</li>
+              </ul>
+            </div>
+            <div className="bg-green-50 border-2 border-green-200 rounded-lg p-6">
+              <h3 className="text-xl font-bold text-green-600 mb-4">✅ Our Done-For-You Service</h3>
+              <ul className="text-left space-y-2 text-green-700">
+                <li>• 24-hour expert delivery</li>
+                <li>• Custom, brand-specific content</li>
+                <li>• Professional SEO optimization</li>
+                <li>• Guaranteed quality & results</li>
+                <li>• Focus on growing your business</li>
+              </ul>
+            </div>
+          </div>
         </div>
 
         {/* Services Grid */}
