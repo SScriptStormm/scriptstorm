@@ -35,15 +35,15 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 py-20 text-center text-white">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            <span className="font-mono tracking-wider bg-gradient-cyber bg-clip-text text-transparent animate-hologram-flicker">
+          <h1 className="text-5xl md:text-7xl font-bold mb-12 leading-tight">
+            <span className="font-mono tracking-wider bg-gradient-cyber bg-clip-text text-transparent animate-hologram-flicker text-6xl md:text-8xl">
               SCRIPTSTORM.AI
             </span>
-            <span className="block text-2xl md:text-4xl mt-4 font-mono tracking-widest text-primary-glow animate-pulse-glow">
-              [ DONE-FOR-YOU SEO CONTENT ]
+            <span className="block text-3xl md:text-5xl mt-6 font-mono tracking-widest text-primary-glow animate-pulse-glow">
+              DONE-FOR-YOU SEO CONTENT
             </span>
-            <span className="block text-lg md:text-2xl mt-2 font-mono tracking-wider text-white/80">
-              &gt; DELIVERED IN 24 HOURS_
+            <span className="block text-xl md:text-3xl mt-4 font-mono tracking-wider text-white/90">
+              DELIVERED IN 24 HOURS
             </span>
           </h1>
 
