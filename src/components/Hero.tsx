@@ -22,7 +22,7 @@ const Hero = () => {
       <div className="relative z-10 container mx-auto px-4 py-20 text-center text-white">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            ScriptStorm: SEO Content for SaaS Brands—
+            ScriptStorm: Done-For-You SEO Content—
             <span className="block text-primary-glow">Delivered in 24 Hours</span>
           </h1>
 
@@ -43,7 +43,7 @@ const Hero = () => {
           </div>
           
           <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed">
-            Get 10x More Traffic With Our AI+Human Hybrid Model
+            Professional Content Creation Service - No Tools, No Hassle, Just Results
           </p>
 
           {/* Key Benefits */}
@@ -68,14 +68,14 @@ const Hero = () => {
               onClick={handleGetStarted}
               className="text-lg px-8 py-4 h-auto"
             >
-              Start Your ScriptStorm Trial
+              Get Your Free Consultation
             </Button>
             <Button 
               variant="ghost-white" 
               size="lg"
               className="text-lg px-8 py-4 h-auto"
             >
-              View Samples
+              View Our Work
             </Button>
           </div>
 
