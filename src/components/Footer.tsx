@@ -8,11 +8,11 @@ const Footer = () => {
         {/* CTA Section */}
         <div className="text-center mb-12 pb-12 border-b border-white/20">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Ready to Scale Your Content Marketing?
+            Ready to Transform Your Content Marketing?
           </h2>
           <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
             Join hundreds of successful brands. Get premium content that converts. 
-            Start your 7-day free trial today.
+            Schedule your free consultation today.
           </p>
           <Button 
             variant="hero" 
@@ -20,7 +20,7 @@ const Footer = () => {
             onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
             className="text-lg px-8 py-4 h-auto"
           >
-            Start Free Trial
+            Get Free Consultation
           </Button>
         </div>
 
