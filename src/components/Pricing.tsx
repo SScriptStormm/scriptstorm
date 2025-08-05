@@ -61,10 +61,41 @@ const Pricing = () => {
 
   return (
     <TooltipProvider>
-      <section id="pricing" className="py-20 bg-background">
-        <div className="container mx-auto px-4">
+      <section id="pricing" className="relative py-20 bg-gradient-to-br from-background via-background/95 to-muted/50 overflow-hidden">
+        {/* AI Neural Network Background */}
+        <div className="absolute inset-0 bg-gradient-mesh opacity-25" />
+        <div className="absolute inset-0 bg-gradient-neural animate-neural-pulse opacity-15" />
+        
+        {/* Grid pattern overlay */}
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--primary-glow) / 0.1) 1px, transparent 0)`,
+          backgroundSize: '60px 60px'
+        }} />
+        
+        {/* Floating geometric elements */}
+        <div className="absolute top-20 left-10 w-20 h-20 border-2 border-primary-glow/25 rotate-45 animate-float shadow-cyber" />
+        <div className="absolute top-40 right-20 w-16 h-16 border-2 border-primary-glow/20 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '2s' }} />
+        <div className="absolute bottom-40 left-20 w-12 h-12 border-2 border-primary-glow/30 rotate-45 animate-float shadow-cyber" style={{ animationDelay: '4s' }} />
+        <div className="absolute top-60 right-40 w-10 h-10 border border-primary-glow/15 rotate-90 animate-float" style={{ animationDelay: '1s' }} />
+        <div className="absolute bottom-60 right-10 w-18 h-18 border border-primary-glow/20 rotate-12 animate-float" style={{ animationDelay: '3s' }} />
+        
+        {/* Multiple scanning line effects */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 h-px w-full bg-gradient-neural animate-scan-line opacity-30" />
+          <div className="absolute bottom-0 h-px w-full bg-gradient-cyber animate-scan-line opacity-25" style={{ animationDelay: '2s' }} />
+          <div className="absolute right-0 w-px h-full bg-gradient-neural animate-scan-line opacity-20" style={{ animationDelay: '4s' }} />
+        </div>
+        
+        {/* Particle effect overlay */}
+        <div className="absolute inset-0">
+          <div className="absolute top-1/3 left-1/4 w-1 h-1 bg-primary-glow rounded-full animate-ping opacity-25" style={{ animationDelay: '1s' }} />
+          <div className="absolute top-2/3 right-1/3 w-1 h-1 bg-primary-glow rounded-full animate-ping opacity-30" style={{ animationDelay: '3s' }} />
+          <div className="absolute bottom-1/3 left-1/2 w-1 h-1 bg-primary-glow rounded-full animate-ping opacity-25" style={{ animationDelay: '5s' }} />
+        </div>
+        
+        <div className="relative z-10 container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground font-mono tracking-wide">
               Simple, Transparent <span className="text-[#3498DB]">Pricing</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -74,11 +105,14 @@ const Pricing = () => {
           </div>
 
           {/* Main $497 Plan - Most Popular */}
-          <div className="max-w-md mx-auto mb-12">
-            <Card className="shadow-elegant border-2 border-[#2ECC71]/30 bg-card relative overflow-visible">
+          <div className="max-w-md mx-auto mb-12 relative">
+            {/* Holographic background for main card */}
+            <div className="absolute inset-0 bg-gradient-cyber opacity-15 rounded-lg blur-lg animate-neural-pulse" />
+            
+            <Card className="relative shadow-hologram border-2 border-[#2ECC71]/50 hover:border-[#2ECC71]/80 bg-white/95 backdrop-blur-sm overflow-visible transition-all duration-500 hover:shadow-cyber">
               {/* Most Popular Badge */}
               <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <div className="bg-[#2ECC71] text-white px-6 py-2 rounded-full text-sm font-semibold flex items-center gap-1">
+                <div className="bg-[#2ECC71] text-white px-6 py-2 rounded-full text-sm font-semibold flex items-center gap-1 shadow-cyber border border-[#2ECC71]/50">
                   <Crown className="h-4 w-4" />
                   Most Popular
                 </div>
@@ -173,45 +207,51 @@ const Pricing = () => {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <Card className={`p-6 border transition-all duration-200 ${seoSelected ? 'border-[#3498DB] bg-[#3498DB]/5' : 'border-[#3498DB]/20 hover:border-[#3498DB]/40'}`}>
-                <div className="flex items-center gap-3 mb-4">
-                  <Checkbox 
-                    id="seo-addon" 
-                    checked={seoSelected}
-                    onCheckedChange={(checked) => setSeoSelected(checked as boolean)}
-                    className="data-[state=checked]:bg-[#3498DB] data-[state=checked]:border-[#3498DB]"
-                  />
-                  <label htmlFor="seo-addon" className="text-lg font-semibold cursor-pointer">
-                    <strong>+SEO Power-Up</strong> ($197)
-                  </label>
-                </div>
-                <p className="text-base text-[#2ECC71] font-semibold ml-8 mb-2">
-                  3x More Traffic Guaranteed
-                </p>
-                <p className="text-sm text-muted-foreground ml-8">
-                  Keyword research, SurferSEO integration, ranking reports
-                </p>
-              </Card>
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-cyber opacity-10 rounded-lg blur-sm group-hover:opacity-20 transition-all duration-500" />
+                <Card className={`relative p-6 border-2 transition-all duration-500 shadow-neural hover:shadow-cyber bg-white/95 backdrop-blur-sm ${seoSelected ? 'border-[#3498DB]/80 bg-[#3498DB]/10 shadow-hologram' : 'border-[#3498DB]/40 hover:border-[#3498DB]/70'}`}>
+                  <div className="flex items-center gap-3 mb-4">
+                    <Checkbox 
+                      id="seo-addon" 
+                      checked={seoSelected}
+                      onCheckedChange={(checked) => setSeoSelected(checked as boolean)}
+                      className="data-[state=checked]:bg-[#3498DB] data-[state=checked]:border-[#3498DB]"
+                    />
+                    <label htmlFor="seo-addon" className="text-lg font-semibold cursor-pointer font-mono tracking-wide">
+                      <strong>+SEO Power-Up</strong> ($197)
+                    </label>
+                  </div>
+                  <p className="text-base text-[#2ECC71] font-semibold ml-8 mb-2">
+                    3x More Traffic Guaranteed
+                  </p>
+                  <p className="text-sm text-muted-foreground ml-8 font-mono">
+                    Keyword research, SurferSEO integration, ranking reports
+                  </p>
+                </Card>
+              </div>
 
-              <Card className={`p-6 border transition-all duration-200 ${editingSelected ? 'border-[#3498DB] bg-[#3498DB]/5' : 'border-[#3498DB]/20 hover:border-[#3498DB]/40'}`}>
-                <div className="flex items-center gap-3 mb-4">
-                  <Checkbox 
-                    id="editing-addon" 
-                    checked={editingSelected}
-                    onCheckedChange={(checked) => setEditingSelected(checked as boolean)}
-                    className="data-[state=checked]:bg-[#3498DB] data-[state=checked]:border-[#3498DB]"
-                  />
-                  <label htmlFor="editing-addon" className="text-lg font-semibold cursor-pointer">
-                    <strong>+Human Polish</strong> ($147)
-                  </label>
-                </div>
-                <p className="text-base text-[#2ECC71] font-semibold ml-8 mb-2">
-                  Sound Like a Native Speaker
-                </p>
-                <p className="text-sm text-muted-foreground ml-8">
-                  Human polish for US/UK/EU/Asia markets 🇺🇸🇬🇧🇪🇺🇭🇰🇲🇽
-                </p>
-              </Card>
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-neural opacity-10 rounded-lg blur-sm group-hover:opacity-20 transition-all duration-500" />
+                <Card className={`relative p-6 border-2 transition-all duration-500 shadow-neural hover:shadow-cyber bg-white/95 backdrop-blur-sm ${editingSelected ? 'border-[#3498DB]/80 bg-[#3498DB]/10 shadow-hologram' : 'border-[#3498DB]/40 hover:border-[#3498DB]/70'}`}>
+                  <div className="flex items-center gap-3 mb-4">
+                    <Checkbox 
+                      id="editing-addon" 
+                      checked={editingSelected}
+                      onCheckedChange={(checked) => setEditingSelected(checked as boolean)}
+                      className="data-[state=checked]:bg-[#3498DB] data-[state=checked]:border-[#3498DB]"
+                    />
+                    <label htmlFor="editing-addon" className="text-lg font-semibold cursor-pointer font-mono tracking-wide">
+                      <strong>+Human Polish</strong> ($147)
+                    </label>
+                  </div>
+                  <p className="text-base text-[#2ECC71] font-semibold ml-8 mb-2">
+                    Sound Like a Native Speaker
+                  </p>
+                  <p className="text-sm text-muted-foreground ml-8 font-mono">
+                    Human polish for US/UK/EU/Asia markets 🇺🇸🇬🇧🇪🇺🇭🇰🇲🇽
+                  </p>
+                </Card>
+              </div>
             </div>
 
             {/* Bundle Hint */}
