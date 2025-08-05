@@ -78,7 +78,7 @@ const Services = () => {
         {/* Services Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground font-mono tracking-wide">
-            Content That <span className="text-primary" style={{ textShadow: '0 0 20px hsl(221 83% 53% / 0.6), 0 0 40px hsl(221 83% 65% / 0.4)' }}>Converts</span>
+            Content That <span className="text-primary animate-text-glow">Converts</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Specialized content services designed specifically for SaaS and eCommerce businesses 

@@ -116,6 +116,14 @@ export default {
 						boxShadow: '0 0 40px hsl(221 83% 53% / 0.6), 0 0 60px hsl(221 83% 65% / 0.3)'
 					}
 				},
+				'text-glow': {
+					'0%, 100%': {
+						textShadow: '0 0 20px hsl(221 83% 53% / 0.6), 0 0 30px hsl(221 83% 65% / 0.4)'
+					},
+					'50%': {
+						textShadow: '0 0 30px hsl(221 83% 53% / 0.8), 0 0 40px hsl(221 83% 65% / 0.6), 0 0 50px hsl(221 83% 75% / 0.4)'
+					}
+				},
 				'float': {
 					'0%, 100%': {
 						transform: 'translateY(0px)'
@@ -159,6 +167,7 @@ export default {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
+				'text-glow': 'text-glow 3s ease-in-out infinite',
 				'float': 'float 6s ease-in-out infinite',
 				'scan-line': 'scan-line 2s linear infinite',
 				'neural-pulse': 'neural-pulse 4s ease-in-out infinite',
