@@ -145,14 +145,14 @@ const Pricing = () => {
                 <Button 
                   className="w-full text-xl py-7 h-auto bg-[#2ECC71] hover:bg-[#27AE60] text-white font-bold shadow-lg border-2 border-[#2ECC71]/20 hover:border-white/30 transition-all duration-300"
                   size="lg" 
-                  onClick={() => window.open('mailto:hello@aicontentag.com?subject=Free Consultation Request&body=Hi, I\'d like to schedule a free consultation call to discuss my content needs.', '_blank')}
+                  onClick={() => handleStripeCheckout('SEO Blog Subscription')}
                 >
-                  📧 Email for Free Consultation
+                  🚀 Start Your 7-Day Trial - $0
                 </Button>
                 
                 <div className="mt-4 p-3 bg-muted/50 rounded-lg border border-muted-foreground/20">
                   <p className="text-sm font-semibold text-foreground">
-                    ✨ Free consultation • Custom quote • Email us to get started
+                    ✨ 7-day free trial • Cancel anytime • Money-back guarantee
                   </p>
                 </div>
               </CardHeader>
@@ -303,11 +303,19 @@ const Pricing = () => {
                   )}
                   
                   <Button 
-                    className="w-full text-xl py-6 h-auto bg-[#3498DB] hover:bg-[#2980B9] text-white font-bold"
+                    className="w-full text-xl py-6 h-auto bg-[#3498DB] hover:bg-[#2980B9] text-white font-bold disabled:opacity-50"
                     size="lg" 
-                    onClick={() => window.open('mailto:hello@aicontentag.com?subject=Custom Quote Request&body=Hi, I\'d like a custom quote for content services. My estimated monthly total would be $' + calculateTotal() + '.', '_blank')}
+                    onClick={() => handleStripeCheckout('Premium SEO Package')}
+                    disabled={isLoading}
                   >
-                    📧 Email for Custom Quote - $${calculateTotal()}/month
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Processing...
+                      </>
+                    ) : (
+                      `Subscribe Now - $${calculateTotal()}/month`
+                    )}
                   </Button>
                 </div>
               </Card>
