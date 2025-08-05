@@ -224,9 +224,11 @@ const Pricing = () => {
                   <p className="text-base text-[#2ECC71] font-semibold ml-8 mb-2">
                     3x More Traffic Guaranteed
                   </p>
-                  <p className="text-sm text-muted-foreground ml-8 font-mono">
-                    Keyword research, SurferSEO integration, ranking reports
-                  </p>
+                  <div className="text-sm text-muted-foreground ml-8 font-mono space-y-1">
+                    <div>• Advanced keyword research</div>
+                    <div>• SurferSEO optimization</div>
+                    <div>• Monthly ranking reports</div>
+                  </div>
                 </Card>
               </div>
 
@@ -247,9 +249,11 @@ const Pricing = () => {
                   <p className="text-base text-[#2ECC71] font-semibold ml-8 mb-2">
                     Sound Like a Native Speaker
                   </p>
-                  <p className="text-sm text-muted-foreground ml-8 font-mono">
-                    Human polish for US/UK/EU/Asia markets 🇺🇸🇬🇧🇪🇺🇭🇰🇲🇽
-                  </p>
+                  <div className="text-sm text-muted-foreground ml-8 font-mono space-y-1">
+                    <div>• Professional human editing</div>
+                    <div>• Native speaker quality</div>
+                    <div>• Multi-region optimization 🇺🇸🇬🇧🇪🇺🇭🇰🇲🇽</div>
+                  </div>
                 </Card>
               </div>
             </div>
