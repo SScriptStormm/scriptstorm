@@ -131,12 +131,25 @@ All colors MUST be HSL.
   }
 }
 
-/* Hide Lovable branding */
-header img[src*='lovable'], .lovable-logo { 
+/* Hide ALL Lovable branding */
+header img[src*='lovable'], 
+.lovable-logo, 
+[data-lovable], 
+[class*='lovable'], 
+.lovable-brand-text, 
+[class*='powered-by'], 
+footer span:contains('Swift'),
+[title*='Lovable'],
+[alt*='Lovable'],
+img[src*='lovable'],
+*[href*='lovable'],
+*:contains('Lovable'),
+*:contains('lovable'),
+*:contains('swift-content-engine'),
+*:contains('Swift Content Engine') { 
   display: none !important; 
-}
-
-/* Hide "Swift Content Engine" text */
-.lovable-brand-text, [class*='powered-by'], footer span:contains('Swift') { 
-  display: none !important; 
+  visibility: hidden !important;
+  opacity: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
 }
