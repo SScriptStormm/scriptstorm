@@ -104,6 +104,7 @@ const Pricing = () => {
               >
                 Get Custom Quote
               </Button>
+              <p className="mt-2 text-xs text-muted-foreground italic">Friction-free workflow: All communication happens over email so you can focus on growth—no meetings, no delays.</p>
             </CardContent>
           </Card>
 
@@ -153,6 +154,7 @@ const Pricing = () => {
               >
                 Get Custom Quote
               </Button>
+              <p className="mt-2 text-xs text-muted-foreground italic">Friction-free workflow: All communication happens over email so you can focus on growth—no meetings, no delays.</p>
             </CardContent>
           </Card>
 
@@ -163,37 +165,69 @@ const Pricing = () => {
                 ⚡ Enterprise Packages
               </CardTitle>
               <CardDescription className="text-base">For large-scale content needs</CardDescription>
+              <p className="mt-2 text-xs text-muted-foreground italic">Friction-free workflow: All communication happens over email so you can focus on growth—no meetings, no delays.</p>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="space-y-3">
-                <div className="p-3 border border-[#9B59B6]/30 rounded-lg">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="font-semibold text-sm">20 AI articles</span>
-                    <span className="text-lg font-bold text-[#9B59B6]">$1,497/month</span>
+              <div className="space-y-4">
+                {/* Starter Enterprise */}
+                <div className="p-4 border border-[#9B59B6]/30 rounded-lg">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-semibold text-sm">Starter Enterprise — 20 articles</span>
+                    <span className="text-lg font-bold text-[#9B59B6]">$1,297/month</span>
                   </div>
-                  <div className="text-xs text-muted-foreground">Priority 12-hour delivery • 2 revision rounds</div>
+                  <div className="text-xs text-muted-foreground space-y-1">
+                    <div><strong>For:</strong> Startups needing SEO content at scale</div>
+                    <div className="mt-2 font-semibold">Includes:</div>
+                    <ul className="list-disc pl-5 space-y-1">
+                      <li>20 x <strong>high-quality AI articles</strong> (2,000+ words)</li>
+                      <li><strong>SaaS-optimized structures</strong> (how-to’s, comparisons, guides)</li>
+                      <li><strong>3 strategic keyword clusters</strong></li>
+                      <li><strong>48-hour standard delivery</strong></li>
+                      <li><strong>1 revision round per article</strong></li>
+                      <li>✉️ <strong>Email-only workflow</strong></li>
+                      <li className="text-[#E67E22] font-medium">✸ Limited capacity (max 10 clients/month)</li>
+                    </ul>
+                  </div>
                 </div>
-                
-                <div className="p-3 border border-[#9B59B6]/30 rounded-lg bg-[#9B59B6]/5">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="font-semibold text-sm">30 AI articles</span>
-                    <div className="text-right">
-                      <span className="text-lg font-bold text-[#9B59B6]">$2,097/month</span>
-                      <div className="text-xs text-[#2ECC71] font-medium">Save 5%</div>
-                    </div>
+
+                {/* Growth Tier */}
+                <div className="p-4 border border-[#9B59B6]/30 rounded-lg bg-[#9B59B6]/5">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-semibold text-sm">Growth Tier — 30 articles <span className="ml-2 text-[#2ECC71] font-bold">⭐ BEST VALUE</span></span>
+                    <span className="text-lg font-bold text-[#9B59B6]">$1,797/month</span>
                   </div>
-                  <div className="text-xs text-muted-foreground">Priority 12-hour delivery • 3 revision rounds</div>
+                  <div className="text-xs text-muted-foreground space-y-1">
+                    <div><strong>For:</strong> Scaling SaaS/eCommerce brands</div>
+                    <div className="mt-2 font-semibold">Includes everything in Starter, PLUS:</div>
+                    <ul className="list-disc pl-5 space-y-1">
+                      <li><strong>10 extra articles</strong> (30 total → $59.90/article)</li>
+                      <li><strong>24-hour priority delivery</strong></li>
+                      <li><strong>Competitor content analysis</strong> (identify gaps)</li>
+                      <li><strong>2 revision rounds per article</strong></li>
+                      <li className="text-[#2ECC71] font-medium">✸ <strong>Free</strong> $297 social media add-on (limited-time)</li>
+                      <li>✉️ <strong>Email-only workflow</strong></li>
+                    </ul>
+                  </div>
                 </div>
-                
-                <div className="p-3 border border-[#9B59B6]/30 rounded-lg bg-[#9B59B6]/10">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="font-semibold text-sm">50 AI articles</span>
-                    <div className="text-right">
-                      <span className="text-lg font-bold text-[#9B59B6]">$3,497/month</span>
-                      <div className="text-xs text-[#2ECC71] font-medium">Save 10%</div>
-                    </div>
+
+                {/* Authority Tier */}
+                <div className="p-4 border border-[#9B59B6]/30 rounded-lg bg-[#9B59B6]/10">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-semibold text-sm">Authority Tier — 50 articles</span>
+                    <span className="text-lg font-bold text-[#9B59B6]">$2,997/month</span>
                   </div>
-                  <div className="text-xs text-muted-foreground">Priority 6-hour delivery • Unlimited revisions</div>
+                  <div className="text-xs text-muted-foreground space-y-1">
+                    <div><strong>For:</strong> Established brands dominating search</div>
+                    <div className="mt-2 font-semibold">Includes everything in Growth Tier, PLUS:</div>
+                    <ul className="list-disc pl-5 space-y-1">
+                      <li><strong>20 extra articles</strong> (50 total → $59.94/article)</li>
+                      <li><strong>12-hour rush delivery</strong> (for urgent needs)</li>
+                      <li><strong>Unlimited revisions</strong></li>
+                      <li><strong>Dedicated strategist</strong> (email support)</li>
+                      <li><strong>Monthly performance report</strong> (traffic/ranking insights)</li>
+                      <li>✉️ <strong>Email-only workflow</strong></li>
+                    </ul>
+                  </div>
                 </div>
               </div>
               
@@ -214,6 +248,40 @@ const Pricing = () => {
               >
                 Get Custom Quote
               </Button>
+              <p className="mt-2 text-xs text-muted-foreground italic">Friction-free workflow: All communication happens over email so you can focus on growth—no meetings, no delays.</p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Comparison: Conversion Booster */}
+        <div className="max-w-4xl mx-auto mb-16">
+          <Card className="p-6 border-2 border-[#3498DB]/30 bg-white/95 backdrop-blur-sm shadow-neural">
+            <CardHeader>
+              <CardTitle className="text-xl">Conversion Booster: Quick Comparison</CardTitle>
+              <CardDescription>Pick the speed, support, and revision level that fit your goals</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div role="table" className="grid grid-cols-4 gap-4 text-sm">
+                <div className="font-semibold">Feature</div>
+                <div className="font-semibold">20 Articles</div>
+                <div className="font-semibold">30 Articles</div>
+                <div className="font-semibold">50 Articles</div>
+
+                <div className="border-t pt-3 text-muted-foreground">Speed</div>
+                <div className="border-t pt-3">48-hour</div>
+                <div className="border-t pt-3">24-hour</div>
+                <div className="border-t pt-3">12-hour</div>
+
+                <div className="border-t pt-3 text-muted-foreground">Revisions</div>
+                <div className="border-t pt-3">1</div>
+                <div className="border-t pt-3">2</div>
+                <div className="border-t pt-3">Unlimited</div>
+
+                <div className="border-t pt-3 text-muted-foreground">Support</div>
+                <div className="border-t pt-3">✉️ Email</div>
+                <div className="border-t pt-3">✉️ Email + Gap Analysis</div>
+                <div className="border-t pt-3">✉️ VIP Email + Analytics</div>
+              </div>
             </CardContent>
           </Card>
         </div>
@@ -283,7 +351,10 @@ const Pricing = () => {
             </Button>
           </div>
           
-          <p className="text-sm text-muted-foreground mt-4">
+          <p className="text-xs text-muted-foreground mt-4 italic">
+            Friction-free workflow: All communication happens over email so you can focus on growth—no meetings, no delays.
+          </p>
+          <p className="text-sm text-muted-foreground mt-2">
             💬 Response within 24 hours • 📋 Custom proposal • ✅ No obligation
           </p>
         </div>

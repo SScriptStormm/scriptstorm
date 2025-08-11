@@ -20,7 +20,7 @@ const FAQ = () => {
     },
     {
       question: "What industries do you specialize in?",
-      answer: "We focus specifically on SaaS and eCommerce businesses. Our writers have deep expertise in these industries and understand the unique challenges and opportunities in B2B and B2C marketing."
+      answer: "We focus specifically on SaaS and eCommerce businesses. Our AI automation is tuned for these industries and understands the unique challenges and opportunities in B2B and B2C marketing."
     },
     {
       question: "How do I get started?",
@@ -29,6 +29,10 @@ const FAQ = () => {
     {
       question: "Can I cancel my subscription anytime?",
       answer: "Yes, you can cancel your subscription at any time with no penalties or hidden fees. You'll continue to receive service through the end of your current billing period."
+    },
+    {
+      question: "Do you offer strategy calls?",
+      answer: "Our process is optimized for async communication. You’ll get detailed briefs, drafts, and revisions via email—faster than scheduling calls!"
     },
     {
       question: "Do you offer custom packages?",
