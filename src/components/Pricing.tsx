@@ -64,7 +64,7 @@ const Pricing = () => {
             No tools to learn, no hassle - just high-quality content delivered.
           </p>
           <p className="text-sm text-muted-foreground italic">
-            ⚡ All content is AI-generated with advanced automation systems
+            ⚡ Powered by our proprietary AI content engine—optimized for rankings and conversions. No tools to learn, just results.
           </p>
         </div>
 
@@ -156,38 +156,58 @@ const Pricing = () => {
             </CardContent>
           </Card>
 
-          {/* Enterprise Package */}
+          {/* Enterprise Packages */}
           <Card className="relative shadow-neural border-2 border-[#9B59B6]/40 hover:border-[#9B59B6]/70 bg-white/95 backdrop-blur-sm transition-all duration-500 hover:shadow-cyber">
             <CardHeader className="text-center">
               <CardTitle className="text-xl font-bold mb-2">
-                ⚡ Enterprise Package
+                ⚡ Enterprise Packages
               </CardTitle>
-              <div className="text-3xl font-bold text-foreground mb-2">Custom</div>
               <CardDescription className="text-base">For large-scale content needs</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
-                  <span className="text-sm">20+ AI articles monthly</span>
+              <div className="space-y-3">
+                <div className="p-3 border border-[#9B59B6]/30 rounded-lg">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="font-semibold text-sm">20 AI articles</span>
+                    <span className="text-lg font-bold text-[#9B59B6]">$1,497/month</span>
+                  </div>
+                  <div className="text-xs text-muted-foreground">Priority 12-hour delivery • 2 revision rounds</div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
-                  <span className="text-sm">Dedicated content manager</span>
+                
+                <div className="p-3 border border-[#9B59B6]/30 rounded-lg bg-[#9B59B6]/5">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="font-semibold text-sm">30 AI articles</span>
+                    <div className="text-right">
+                      <span className="text-lg font-bold text-[#9B59B6]">$2,097/month</span>
+                      <div className="text-xs text-[#2ECC71] font-medium">Save 5%</div>
+                    </div>
+                  </div>
+                  <div className="text-xs text-muted-foreground">Priority 12-hour delivery • 3 revision rounds</div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
-                  <span className="text-sm">Priority 12-hour delivery</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
-                  <span className="text-sm">Unlimited revisions</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
-                  <span className="text-sm">Performance reporting</span>
+                
+                <div className="p-3 border border-[#9B59B6]/30 rounded-lg bg-[#9B59B6]/10">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="font-semibold text-sm">50 AI articles</span>
+                    <div className="text-right">
+                      <span className="text-lg font-bold text-[#9B59B6]">$3,497/month</span>
+                      <div className="text-xs text-[#2ECC71] font-medium">Save 10%</div>
+                    </div>
+                  </div>
+                  <div className="text-xs text-muted-foreground">Priority 6-hour delivery • Unlimited revisions</div>
                 </div>
               </div>
+              
+              <div className="pt-2 space-y-2 text-xs">
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-3 w-3 text-[#2ECC71]" />
+                  <span>Dedicated content manager</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-3 w-3 text-[#2ECC71]" />
+                  <span>Performance reporting</span>
+                </div>
+              </div>
+              
               <Button 
                 onClick={handleContactClick}
                 className="w-full bg-[#9B59B6] hover:bg-[#8E44AD] text-white font-semibold"
@@ -287,7 +307,7 @@ const Pricing = () => {
                 </div>
                 <div className="flex items-center gap-2 justify-center">
                   <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
-                  <span>Money-Back Guarantee</span>
+                  <span>100% Satisfaction Guarantee: Get a full refund or free rewrite if we miss the mark.</span>
                 </div>
                 <div className="flex items-center gap-2 justify-center">
                   <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
