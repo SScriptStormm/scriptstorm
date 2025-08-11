@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Clock, Award, Shield, Users, Target, Zap, Star } from "lucide-react";
@@ -60,7 +61,7 @@ const WhyChooseUs = () => {
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
             While others offer tools that require your time and expertise, we deliver 
-            professional content that drives results—without any effort on your part.
+            professional AI-generated content that drives results—without any effort on your part.
           </p>
         </div>
       </section>
@@ -123,11 +124,11 @@ const WhyChooseUs = () => {
                   <div className="space-y-3">
                     <div className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-[#2ECC71] mt-0.5" />
-                      <span className="text-sm">Professional content delivered in 24 hours</span>
+                      <span className="text-sm">Professional AI content delivered in 24 hours</span>
                     </div>
                     <div className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-[#2ECC71] mt-0.5" />
-                      <span className="text-sm">Human-written, engaging, conversion-focused</span>
+                      <span className="text-sm">AI-generated, engaging, conversion-focused</span>
                     </div>
                     <div className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-[#2ECC71] mt-0.5" />
@@ -161,15 +162,15 @@ const WhyChooseUs = () => {
                 <Clock className="h-12 w-12 text-[#3498DB] mx-auto mb-4" />
                 <h3 className="text-xl font-bold mb-3">Lightning Fast Delivery</h3>
                 <p className="text-muted-foreground">
-                  Get professional content in 24 hours, not 24 days. We understand that time is money in business.
+                  Get professional AI content in 24 hours, not 24 days. We understand that time is money in business.
                 </p>
               </Card>
 
               <Card className="relative text-center p-6 border-2 border-[#2ECC71]/40 hover:border-[#2ECC71]/70 bg-white/95 backdrop-blur-sm transition-all duration-500 shadow-neural hover:shadow-cyber">
                 <Award className="h-12 w-12 text-[#2ECC71] mx-auto mb-4" />
-                <h3 className="text-xl font-bold mb-3">Expert Team</h3>
+                <h3 className="text-xl font-bold mb-3">AI Automation Expert</h3>
                 <p className="text-muted-foreground">
-                  Our writers specialize in SaaS and eCommerce content, with proven track records of driving conversions.
+                  Advanced AI automation systems specialized in SaaS and eCommerce content, with proven track records of driving conversions.
                 </p>
               </Card>
 
@@ -193,7 +194,7 @@ const WhyChooseUs = () => {
                 <Target className="h-12 w-12 text-[#E74C3C] mx-auto mb-4" />
                 <h3 className="text-xl font-bold mb-3">Results-Driven</h3>
                 <p className="text-muted-foreground">
-                  Every piece is crafted to drive traffic, engage readers, and convert visitors into customers.
+                  Every AI-generated piece is crafted to drive traffic, engage readers, and convert visitors into customers.
                 </p>
               </Card>
 
@@ -221,7 +222,7 @@ const WhyChooseUs = () => {
               </div>
               <blockquote className="text-xl italic text-center mb-6 font-medium">
                 "We tried Jasper and Copy.ai for months, spending hours editing generic content. 
-                ScriptStorm delivered better results in 24 hours than we achieved in 6 months of DIY attempts. 
+                ScriptStorm's AI automation delivered better results in 24 hours than we achieved in 6 months of DIY attempts. 
                 It's not even close."
               </blockquote>
               <div className="text-center">
@@ -240,7 +241,7 @@ const WhyChooseUs = () => {
                 Ready to See the <span className="text-[#3498DB]">Difference</span>?
               </h2>
               <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Stop wasting time with DIY tools. Get professional content that actually converts.
+                Stop wasting time with DIY tools. Get professional AI content that actually converts.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/#pricing">

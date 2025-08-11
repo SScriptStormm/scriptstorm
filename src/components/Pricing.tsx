@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -58,9 +59,12 @@ const Pricing = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground font-mono tracking-wide">
             Done-For-You <span className="text-[#3498DB]">Content Services</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Professional content creation that drives results. 
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-4">
+            Professional AI-generated content that drives results. 
             No tools to learn, no hassle - just high-quality content delivered.
+          </p>
+          <p className="text-sm text-muted-foreground italic">
+            ⚡ All content is AI-generated with advanced automation systems
           </p>
         </div>
 
@@ -72,14 +76,14 @@ const Pricing = () => {
               <CardTitle className="text-xl font-bold mb-2">
                 🚀 Starter Package
               </CardTitle>
-              <div className="text-3xl font-bold text-foreground mb-2">$297 <span className="text-lg text-muted-foreground">USD</span></div>
+              <div className="text-3xl font-bold text-foreground mb-2">$297<span className="text-lg text-muted-foreground">/month</span></div>
               <CardDescription className="text-base">Perfect for small businesses</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
-                  <span className="text-sm">5 SEO-optimized articles</span>
+                  <span className="text-sm">5 AI-generated SEO articles</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
@@ -117,14 +121,14 @@ const Pricing = () => {
               <CardTitle className="text-xl font-bold mb-2">
                 🔥 Growth Package
               </CardTitle>
-              <div className="text-3xl font-bold text-foreground mb-2">$597 <span className="text-lg text-muted-foreground">USD</span></div>
+              <div className="text-3xl font-bold text-foreground mb-2">$597<span className="text-lg text-muted-foreground">/month</span></div>
               <CardDescription className="text-base">Best value for growing companies</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
-                  <span className="text-sm">10 SEO-optimized articles</span>
+                  <span className="text-sm">10 AI-generated SEO articles</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
@@ -165,7 +169,7 @@ const Pricing = () => {
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
-                  <span className="text-sm">20+ articles monthly</span>
+                  <span className="text-sm">20+ AI articles monthly</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
@@ -200,15 +204,15 @@ const Pricing = () => {
             <h3 className="text-2xl md:text-3xl font-bold mb-4 text-foreground">
               Additional Services
             </h3>
-            <p className="text-muted-foreground">Extend your content marketing with these specialized services</p>
+            <p className="text-muted-foreground">Extend your content marketing with these specialized AI services</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
             <Card className="p-6 border-2 border-[#E67E22]/40 hover:border-[#E67E22]/70 bg-white/95 backdrop-blur-sm transition-all duration-500 shadow-neural hover:shadow-cyber">
               <div className="text-center">
-                <h4 className="text-lg font-bold mb-2 text-[#E67E22]">Social Media Package</h4>
-                <p className="text-2xl font-bold mb-2">$297 <span className="text-sm text-muted-foreground">USD/month</span></p>
-                <p className="text-sm text-muted-foreground mb-4">30 posts • Captions • Hashtags</p>
+                <h4 className="text-lg font-bold mb-2 text-[#E67E22]">AI Social Media Package</h4>
+                <p className="text-2xl font-bold mb-2">$297<span className="text-sm text-muted-foreground">/month</span></p>
+                <p className="text-sm text-muted-foreground mb-4">30 AI posts • Captions • Hashtags</p>
                 <Button 
                   onClick={handleContactClick}
                   className="w-full bg-[#E67E22] hover:bg-[#D35400] text-white"
@@ -220,8 +224,8 @@ const Pricing = () => {
             
             <Card className="p-6 border-2 border-[#E74C3C]/40 hover:border-[#E74C3C]/70 bg-white/95 backdrop-blur-sm transition-all duration-500 shadow-neural hover:shadow-cyber">
               <div className="text-center">
-                <h4 className="text-lg font-bold mb-2 text-[#E74C3C]">Product Descriptions</h4>
-                <p className="text-2xl font-bold mb-2">$5 <span className="text-sm text-muted-foreground">USD/each</span></p>
+                <h4 className="text-lg font-bold mb-2 text-[#E74C3C]">AI Product Descriptions</h4>
+                <p className="text-2xl font-bold mb-2">$5<span className="text-sm text-muted-foreground">/each</span></p>
                 <p className="text-sm text-muted-foreground mb-4">SEO-optimized • Converting copy</p>
                 <Button 
                   onClick={handleContactClick}
@@ -279,7 +283,7 @@ const Pricing = () => {
               <div className="grid md:grid-cols-3 gap-4 text-sm">
                 <div className="flex items-center gap-2 justify-center">
                   <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
-                  <span>100% Original Content</span>
+                  <span>100% Original AI Content</span>
                 </div>
                 <div className="flex items-center gap-2 justify-center">
                   <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
