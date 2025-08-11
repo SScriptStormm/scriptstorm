@@ -130,3 +130,13 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+/* Hide Lovable branding */
+header img[src*='lovable'], .lovable-logo { 
+  display: none !important; 
+}
+
+/* Hide "Swift Content Engine" text */
+.lovable-brand-text, [class*='powered-by'], footer span:contains('Swift') { 
+  display: none !important; 
+}
