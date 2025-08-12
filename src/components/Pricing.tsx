@@ -8,6 +8,8 @@ import ContactForm from "./ContactForm";
 
 const Pricing = () => {
   const [showContactForm, setShowContactForm] = useState(false);
+  const [selectedEnterprise, setSelectedEnterprise] = useState<'starter' | 'growth' | 'authority' | null>('growth');
+  const [expandedTier, setExpandedTier] = useState<'starter' | 'growth' | 'authority' | null>(null);
 
   const handleContactClick = () => {
     setShowContactForm(true);
@@ -168,69 +170,137 @@ const Pricing = () => {
               <p className="mt-2 text-xs text-muted-foreground italic">Friction-free workflow: All communication happens over email so you can focus on growth—no meetings, no delays.</p>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {/* Starter Enterprise */}
-                <div className="p-4 border border-[#9B59B6]/30 rounded-lg">
-                  <div className="flex items-center justify-between mb-2">
+                <div
+                  role="radio"
+                  aria-checked={selectedEnterprise === 'starter'}
+                  tabIndex={0}
+                  onClick={() => { setSelectedEnterprise('starter'); }}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedEnterprise('starter'); } }}
+                  className={`p-4 rounded-lg cursor-pointer transition-all border ${selectedEnterprise === 'starter' ? 'ring-2 ring-primary bg-primary/5 shadow-cyber animate-scale-in border-primary/40' : 'border-muted-foreground/20 hover-scale'}`}
+                >
+                  <div className="flex items-center justify-between">
                     <span className="font-semibold text-sm">Starter Enterprise — 20 articles</span>
-                    <span className="text-lg font-bold text-[#9B59B6]">$1,297/month</span>
+                    <span className="text-lg font-bold text-primary">$1,297/month</span>
                   </div>
-                  <div className="text-xs text-muted-foreground space-y-1">
-                    <div><strong>For:</strong> Startups needing SEO content at scale</div>
-                    <div className="mt-2 font-semibold">Includes:</div>
-                    <ul className="list-disc pl-5 space-y-1">
-                      <li>20 x <strong>high-quality AI articles</strong> (2,000+ words)</li>
-                      <li><strong>SaaS-optimized structures</strong> (how-to’s, comparisons, guides)</li>
-                      <li><strong>3 strategic keyword clusters</strong></li>
-                      <li><strong>48-hour standard delivery</strong></li>
-                      <li><strong>1 revision round per article</strong></li>
-                      <li>✉️ <strong>Email-only workflow</strong></li>
-                      <li className="text-[#E67E22] font-medium">✸ Limited capacity (max 10 clients/month)</li>
-                    </ul>
+                  <div className="mt-2">
+                    <Button variant="outline" size="sm" onClick={(e) => { e.stopPropagation(); setExpandedTier(expandedTier === 'starter' ? null : 'starter'); }}>
+                      {expandedTier === 'starter' ? 'Hide details' : 'View details'}
+                    </Button>
                   </div>
+                  {expandedTier === 'starter' && (
+                    <div className="mt-3 text-xs text-muted-foreground space-y-2 animate-fade-in">
+                      <div><strong>For:</strong> Startups needing SEO content at scale</div>
+                      <div className="mt-1 font-semibold">Includes:</div>
+                      <ul className="list-disc pl-5 space-y-1">
+                        <li>20 x <strong>high-quality AI articles</strong> (2,000+ words)</li>
+                        <li><strong>SaaS-optimized structures</strong> (how-to’s, comparisons, guides)</li>
+                        <li><strong>3 strategic keyword clusters</strong></li>
+                        <li><strong>48-hour standard delivery</strong></li>
+                        <li><strong>1 revision round per article</strong></li>
+                        <li>✉️ <strong>Email-only workflow</strong></li>
+                        <li className="text-[#E67E22] font-medium">✸ Limited capacity (max 10 clients/month)</li>
+                      </ul>
+                    </div>
+                  )}
                 </div>
 
                 {/* Growth Tier */}
-                <div className="p-4 border border-[#9B59B6]/30 rounded-lg bg-[#9B59B6]/5">
-                  <div className="flex items-center justify-between mb-2">
+                <div
+                  role="radio"
+                  aria-checked={selectedEnterprise === 'growth'}
+                  tabIndex={0}
+                  onClick={() => { setSelectedEnterprise('growth'); }}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedEnterprise('growth'); } }}
+                  className={`p-4 rounded-lg cursor-pointer transition-all border ${selectedEnterprise === 'growth' ? 'ring-2 ring-primary bg-primary/5 shadow-cyber animate-scale-in border-primary/40' : 'border-muted-foreground/20 hover-scale'} bg-muted/30`}
+                >
+                  <div className="flex items-center justify-between">
                     <span className="font-semibold text-sm">Growth Tier — 30 articles <span className="ml-2 text-[#2ECC71] font-bold">⭐ BEST VALUE</span></span>
-                    <span className="text-lg font-bold text-[#9B59B6]">$1,797/month</span>
+                    <span className="text-lg font-bold text-primary">$1,797/month</span>
                   </div>
-                  <div className="text-xs text-muted-foreground space-y-1">
-                    <div><strong>For:</strong> Scaling SaaS/eCommerce brands</div>
-                    <div className="mt-2 font-semibold">Includes everything in Starter, PLUS:</div>
-                    <ul className="list-disc pl-5 space-y-1">
-                      <li><strong>10 extra articles</strong> (30 total → $59.90/article)</li>
-                      <li><strong>24-hour priority delivery</strong></li>
-                      <li><strong>Competitor content analysis</strong> (identify gaps)</li>
-                      <li><strong>2 revision rounds per article</strong></li>
-                      <li className="text-[#2ECC71] font-medium">✸ <strong>Free</strong> $297 social media add-on (limited-time)</li>
-                      <li>✉️ <strong>Email-only workflow</strong></li>
-                    </ul>
+                  <div className="mt-2">
+                    <Button variant="outline" size="sm" onClick={(e) => { e.stopPropagation(); setExpandedTier(expandedTier === 'growth' ? null : 'growth'); }}>
+                      {expandedTier === 'growth' ? 'Hide details' : 'View details'}
+                    </Button>
                   </div>
+                  {expandedTier === 'growth' && (
+                    <div className="mt-3 text-xs text-muted-foreground space-y-2 animate-fade-in">
+                      <div><strong>For:</strong> Scaling SaaS/eCommerce brands</div>
+                      <div className="mt-1 font-semibold">Includes everything in Starter, PLUS:</div>
+                      <ul className="list-disc pl-5 space-y-1">
+                        <li><strong>10 extra articles</strong> (30 total → $59.90/article)</li>
+                        <li><strong>24-hour priority delivery</strong></li>
+                        <li><strong>Competitor content analysis</strong> (identify gaps)</li>
+                        <li><strong>2 revision rounds per article</strong></li>
+                        <li className="text-[#2ECC71] font-medium">✸ <strong>Free</strong> $297 social media add-on (limited-time)</li>
+                        <li>✉️ <strong>Email-only workflow</strong></li>
+                      </ul>
+                    </div>
+                  )}
                 </div>
 
                 {/* Authority Tier */}
-                <div className="p-4 border border-[#9B59B6]/30 rounded-lg bg-[#9B59B6]/10">
-                  <div className="flex items-center justify-between mb-2">
+                <div
+                  role="radio"
+                  aria-checked={selectedEnterprise === 'authority'}
+                  tabIndex={0}
+                  onClick={() => { setSelectedEnterprise('authority'); }}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedEnterprise('authority'); } }}
+                  className={`p-4 rounded-lg cursor-pointer transition-all border ${selectedEnterprise === 'authority' ? 'ring-2 ring-primary bg-primary/5 shadow-cyber animate-scale-in border-primary/40' : 'border-muted-foreground/20 hover-scale'} bg-muted/20`}
+                >
+                  <div className="flex items-center justify-between">
                     <span className="font-semibold text-sm">Authority Tier — 50 articles</span>
-                    <span className="text-lg font-bold text-[#9B59B6]">$2,997/month</span>
+                    <span className="text-lg font-bold text-primary">$2,997/month</span>
                   </div>
-                  <div className="text-xs text-muted-foreground space-y-1">
-                    <div><strong>For:</strong> Established brands dominating search</div>
-                    <div className="mt-2 font-semibold">Includes everything in Growth Tier, PLUS:</div>
-                    <ul className="list-disc pl-5 space-y-1">
-                      <li><strong>20 extra articles</strong> (50 total → $59.94/article)</li>
-                      <li><strong>12-hour rush delivery</strong> (for urgent needs)</li>
-                      <li><strong>Unlimited revisions</strong></li>
-                      <li><strong>Dedicated strategist</strong> (email support)</li>
-                      <li><strong>Monthly performance report</strong> (traffic/ranking insights)</li>
-                      <li>✉️ <strong>Email-only workflow</strong></li>
-                    </ul>
+                  <div className="mt-2">
+                    <Button variant="outline" size="sm" onClick={(e) => { e.stopPropagation(); setExpandedTier(expandedTier === 'authority' ? null : 'authority'); }}>
+                      {expandedTier === 'authority' ? 'Hide details' : 'View details'}
+                    </Button>
                   </div>
+                  {expandedTier === 'authority' && (
+                    <div className="mt-3 text-xs text-muted-foreground space-y-2 animate-fade-in">
+                      <div><strong>For:</strong> Established brands dominating search</div>
+                      <div className="mt-1 font-semibold">Includes everything in Growth Tier, PLUS:</div>
+                      <ul className="list-disc pl-5 space-y-1">
+                        <li><strong>20 extra articles</strong> (50 total → $59.94/article)</li>
+                        <li><strong>12-hour rush delivery</strong> (for urgent needs)</li>
+                        <li><strong>Unlimited revisions</strong></li>
+                        <li><strong>Dedicated strategist</strong> (email support)</li>
+                        <li><strong>Monthly performance report</strong> (traffic/ranking insights)</li>
+                        <li>✉️ <strong>Email-only workflow</strong></li>
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </div>
-              
+
+              {/* Quick Comparison (Enterprise) */}
+              <div className="mt-2">
+                <h5 className="text-sm font-semibold mb-2">Quick Comparison</h5>
+                <div role="table" className="grid grid-cols-4 gap-3 text-xs">
+                  <div className="font-semibold">Feature</div>
+                  <div className="font-semibold">20 Articles</div>
+                  <div className="font-semibold">30 Articles</div>
+                  <div className="font-semibold">50 Articles</div>
+
+                  <div className="border-t pt-2 text-muted-foreground">Speed</div>
+                  <div className="border-t pt-2">48-hour</div>
+                  <div className="border-t pt-2">24-hour</div>
+                  <div className="border-t pt-2">12-hour</div>
+
+                  <div className="border-t pt-2 text-muted-foreground">Revisions</div>
+                  <div className="border-t pt-2">1</div>
+                  <div className="border-t pt-2">2</div>
+                  <div className="border-t pt-2">Unlimited</div>
+
+                  <div className="border-t pt-2 text-muted-foreground">Support</div>
+                  <div className="border-t pt-2">✉️ Email</div>
+                  <div className="border-t pt-2">✉️ Email + Gap Analysis</div>
+                  <div className="border-t pt-2">✉️ VIP Email + Analytics</div>
+                </div>
+              </div>
+
               <div className="pt-2 space-y-2 text-xs">
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-3 w-3 text-[#2ECC71]" />
@@ -250,41 +320,10 @@ const Pricing = () => {
               </Button>
               <p className="mt-2 text-xs text-muted-foreground italic">Friction-free workflow: All communication happens over email so you can focus on growth—no meetings, no delays.</p>
             </CardContent>
+
           </Card>
         </div>
 
-        {/* Comparison: Conversion Booster */}
-        <div className="max-w-4xl mx-auto mb-16">
-          <Card className="p-6 border-2 border-[#3498DB]/30 bg-white/95 backdrop-blur-sm shadow-neural">
-            <CardHeader>
-              <CardTitle className="text-xl">Conversion Booster: Quick Comparison</CardTitle>
-              <CardDescription>Pick the speed, support, and revision level that fit your goals</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div role="table" className="grid grid-cols-4 gap-4 text-sm">
-                <div className="font-semibold">Feature</div>
-                <div className="font-semibold">20 Articles</div>
-                <div className="font-semibold">30 Articles</div>
-                <div className="font-semibold">50 Articles</div>
-
-                <div className="border-t pt-3 text-muted-foreground">Speed</div>
-                <div className="border-t pt-3">48-hour</div>
-                <div className="border-t pt-3">24-hour</div>
-                <div className="border-t pt-3">12-hour</div>
-
-                <div className="border-t pt-3 text-muted-foreground">Revisions</div>
-                <div className="border-t pt-3">1</div>
-                <div className="border-t pt-3">2</div>
-                <div className="border-t pt-3">Unlimited</div>
-
-                <div className="border-t pt-3 text-muted-foreground">Support</div>
-                <div className="border-t pt-3">✉️ Email</div>
-                <div className="border-t pt-3">✉️ Email + Gap Analysis</div>
-                <div className="border-t pt-3">✉️ VIP Email + Analytics</div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
 
         {/* Additional Services */}
         <div className="max-w-4xl mx-auto mb-16">
