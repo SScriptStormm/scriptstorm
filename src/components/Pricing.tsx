@@ -278,7 +278,7 @@ const Pricing = () => {
                     <span className="font-semibold text-sm">Authority Tier — 50 articles</span>
                     <div className="flex items-center gap-2">
                       <span className="text-lg font-bold text-primary">$2,997/month</span>
-                      <Badge variant="secondary">Early adopter pricing</Badge>
+                      <span className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 text-primary px-2.5 py-0.5 text-[11px] font-medium tracking-wide">Early adopter pricing</span>
                     </div>
                   </div>
                   <div className="mt-2">
