@@ -203,7 +203,7 @@ const Pricing = () => {
                   tabIndex={0}
                   onClick={() => { setSelectedEnterprise('starter'); }}
                   onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedEnterprise('starter'); } }}
-                  className={`p-4 rounded-lg cursor-pointer transition-all border ${selectedEnterprise === 'starter' ? 'ring-2 ring-primary bg-primary/5 shadow-cyber animate-enter border-primary/40' : 'border-muted-foreground/20 hover-scale'}`
+                  className={`p-4 rounded-lg cursor-pointer transition-all border ${selectedEnterprise === 'starter' ? 'ring-2 ring-primary bg-primary/5 shadow-cyber animate-enter border-primary/40' : 'border-muted-foreground/20 hover-scale'}`}
                 >
                   <div className="flex items-center justify-between">
                     <span className="font-semibold text-sm">Starter Enterprise — 20 articles</span>
