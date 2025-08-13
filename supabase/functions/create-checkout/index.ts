@@ -45,7 +45,9 @@ serve(async (req) => {
     const packagePricing = {
       starter: { amount: 29700, name: "ScriptStorm Starter Package", description: "5 SEO Articles monthly" },
       growth: { amount: 59700, name: "ScriptStorm Growth Package", description: "10 SEO Articles monthly" },
-      enterprise: { amount: 99700, name: "ScriptStorm Enterprise Package", description: "20+ Articles monthly" }
+      "starter-enterprise": { amount: 129700, name: "ScriptStorm Starter Enterprise", description: "Premium enterprise features" },
+      "growth-tier": { amount: 179700, name: "ScriptStorm Growth Tier", description: "Advanced growth enterprise features" },
+      "authority-tier": { amount: 299700, name: "ScriptStorm Authority Tier", description: "Full authority enterprise package" }
     };
 
     const selectedPackage = packagePricing[packageType] || packagePricing.starter;
