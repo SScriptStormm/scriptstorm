@@ -19,7 +19,7 @@ serve(async (req) => {
   try {
     logStep("Function started");
 
-    const stripeKey = Deno.env.get("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");
+    const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
     if (!stripeKey) throw new Error("Stripe secret key not found");
     logStep("Stripe key verified");
 
