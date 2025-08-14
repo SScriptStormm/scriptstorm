@@ -118,10 +118,10 @@ const Hero = () => {
               <Button 
                 variant="ghost-white" 
                 size="lg"
-                onClick={() => window.location.href = '/onboarding-process'}
+                onClick={() => window.location.href = '/auth'}
                 className="relative text-lg px-8 py-4 h-auto bg-black/30 backdrop-blur-md border-2 border-white/30 hover:border-white/60 shadow-neural hover:shadow-hologram transition-all duration-500 font-mono tracking-wide"
               >
-                OUR PROCESS
+                CLIENT LOGIN
               </Button>
             </div>
           </div>

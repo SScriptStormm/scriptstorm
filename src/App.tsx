@@ -11,6 +11,9 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import RefundPolicy from "./pages/RefundPolicy";
 import WhyChooseUs from "./pages/WhyChooseUs";
 import OnboardingProcess from "./pages/OnboardingProcess";
+import Auth from "./pages/Auth";
+import Dashboard from "./pages/Dashboard";
+import AuthGuard from "./components/AuthGuard";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +25,8 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/auth" element={<AuthGuard requireAuth={false}><Auth /></AuthGuard>} />
+          <Route path="/dashboard" element={<AuthGuard><Dashboard /></AuthGuard>} />
           <Route path="/why-choose-us" element={<WhyChooseUs />} />
           <Route path="/onboarding-process" element={<OnboardingProcess />} />
           <Route path="/thank-you" element={<ThankYou />} />
