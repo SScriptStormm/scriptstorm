@@ -8,11 +8,12 @@ import ContactForm from "./ContactForm";
 
 const Pricing = () => {
   const [showContactForm, setShowContactForm] = useState(false);
-  const [selectedEnterprise, setSelectedEnterprise] = useState<'starter' | 'growth' | 'authority' | null>('growth');
+  const [selectedEnterprise, setSelectedEnterprise] = useState<'starter' | 'growth' | 'authority' | null>('starter');
   const [expandedTier, setExpandedTier] = useState<'starter' | 'growth' | 'authority' | null>(null);
   const [showStarterDetails, setShowStarterDetails] = useState(false);
   const [showGrowthDetails, setShowGrowthDetails] = useState(false);
   const [showEnterpriseComparison, setShowEnterpriseComparison] = useState(false);
+  const [showMoreEnterprise, setShowMoreEnterprise] = useState(false);
 
   const handleContactClick = () => {
     setShowContactForm(true);
@@ -76,286 +77,313 @@ const Pricing = () => {
         {/* Service Packages */}
         <div className="grid md:grid-cols-3 gap-8 mb-16">
           {/* Starter Package */}
-          <Card className="relative shadow-neural border-2 border-[#3498DB]/40 hover:border-[#3498DB]/70 bg-white/95 backdrop-blur-sm transition-all duration-500 hover:shadow-cyber">
-            <CardHeader className="text-center">
-              <CardTitle className="text-xl font-bold mb-2">
-                🚀 Starter Package
+          <Card className="relative shadow-neural border-2 border-[#3498DB]/40 hover:border-[#3498DB]/80 bg-gradient-to-br from-white/95 to-[#3498DB]/5 backdrop-blur-sm transition-all duration-500 hover:shadow-[0_0_30px_rgba(52,152,219,0.3)] hover:scale-105">
+            <div className="absolute top-4 right-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-[#3498DB] to-[#2980B9] rounded-full flex items-center justify-center shadow-lg">
+                <span className="text-white text-xl">🚀</span>
+              </div>
+            </div>
+            <CardHeader className="text-center pb-4">
+              <CardTitle className="text-2xl font-bold text-[#3498DB] mb-2">
+                Starter Package
               </CardTitle>
-              <div className="text-3xl font-bold text-foreground mb-2">$297<span className="text-lg text-muted-foreground">/month</span></div>
-              <CardDescription className="text-base">Perfect for small businesses</CardDescription>
+              <div className="text-4xl font-bold text-foreground mb-2">$297<span className="text-lg text-muted-foreground">/month</span></div>
+              <CardDescription className="text-base font-medium">Perfect for small businesses</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setShowStarterDetails((v) => !v)}
-                >
-                  {showStarterDetails ? 'Hide details' : 'View details'}
-                </Button>
-                {showStarterDetails && (
-                  <div className="mt-2 space-y-2 animate-fade-in">
-                    <div className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
-                      <span className="text-sm">5 AI-generated SEO articles</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
-                      <span className="text-sm">Keyword research included</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
-                      <span className="text-sm">48-hour delivery</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
-                      <span className="text-sm">1 revision round</span>
-                    </div>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
                   </div>
-                )}
+                  <span className="text-sm font-medium">5 AI-generated SEO articles</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">Keyword research included</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">48-hour delivery</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">1 revision round</span>
+                </div>
               </div>
               <Button 
                 onClick={handleContactClick}
-                className="w-full bg-[#3498DB] hover:bg-[#2980B9] text-white font-semibold"
+                className="w-full bg-gradient-to-r from-[#3498DB] to-[#2980B9] hover:from-[#2980B9] hover:to-[#1F618D] text-white font-bold py-3 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
               >
                 Get Custom Quote
               </Button>
-              <p className="mt-2 text-xs text-muted-foreground italic">Friction-free workflow: All communication happens over email so you can focus on growth—no meetings, no delays.</p>
+              <p className="text-xs text-muted-foreground italic text-center">Email-only workflow • No meetings • No delays</p>
             </CardContent>
           </Card>
 
           {/* Growth Package - Most Popular */}
-          <Card className="relative shadow-hologram border-2 border-[#2ECC71]/50 hover:border-[#2ECC71]/80 bg-white/95 backdrop-blur-sm transition-all duration-500 hover:shadow-cyber overflow-visible">
+          <Card className="relative shadow-hologram border-2 border-[#2ECC71]/50 hover:border-[#2ECC71]/80 bg-gradient-to-br from-white/95 to-[#2ECC71]/5 backdrop-blur-sm transition-all duration-500 hover:shadow-[0_0_30px_rgba(46,204,113,0.4)] hover:scale-105 overflow-visible">
             {/* Most Popular Badge */}
-            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              <div className="bg-[#2ECC71] text-white px-6 py-3 rounded-full text-sm font-bold flex items-center gap-1 shadow-lg border-2 border-white/20">
+            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+              <div className="bg-gradient-to-r from-[#2ECC71] to-[#27AE60] text-white px-6 py-3 rounded-full text-sm font-bold flex items-center gap-2 shadow-xl border-2 border-white/20 animate-pulse">
                 <Crown className="h-4 w-4" />
                 Most Popular
               </div>
             </div>
+            <div className="absolute top-4 right-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-[#2ECC71] to-[#27AE60] rounded-full flex items-center justify-center shadow-lg">
+                <span className="text-white text-xl">🔥</span>
+              </div>
+            </div>
 
-            <CardHeader className="text-center pt-12">
-              <CardTitle className="text-xl font-bold mb-2">
-                🔥 Growth Package
+            <CardHeader className="text-center pt-12 pb-4">
+              <CardTitle className="text-2xl font-bold text-[#2ECC71] mb-2">
+                Growth Package
               </CardTitle>
-              <div className="text-3xl font-bold text-foreground mb-2">$597<span className="text-lg text-muted-foreground">/month</span></div>
-              <CardDescription className="text-base">Best value for growing companies</CardDescription>
+              <div className="text-4xl font-bold text-foreground mb-2">$597<span className="text-lg text-muted-foreground">/month</span></div>
+              <CardDescription className="text-base font-medium">Best value for growing companies</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setShowGrowthDetails((v) => !v)}
-                >
-                  {showGrowthDetails ? 'Hide details' : 'View details'}
-                </Button>
-                {showGrowthDetails && (
-                  <div className="mt-2 space-y-2 animate-fade-in">
-                    <div className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
-                      <span className="text-sm">10 AI-generated SEO articles</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
-                      <span className="text-sm">Advanced keyword research</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
-                      <span className="text-sm">24-hour delivery</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
-                      <span className="text-sm">2 revision rounds</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
-                      <span className="text-sm">Content calendar included</span>
-                    </div>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
                   </div>
-                )}
+                  <span className="text-sm font-medium">10 AI-generated SEO articles</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">Advanced keyword research</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">24-hour delivery</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">2 revision rounds</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">Content calendar included</span>
+                </div>
               </div>
               <Button 
                 onClick={handleContactClick}
-                className="w-full bg-[#2ECC71] hover:bg-[#27AE60] text-white font-semibold"
+                className="w-full bg-gradient-to-r from-[#2ECC71] to-[#27AE60] hover:from-[#27AE60] hover:to-[#229954] text-white font-bold py-3 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
               >
                 Get Custom Quote
               </Button>
-              <p className="mt-2 text-xs text-muted-foreground italic">Friction-free workflow: All communication happens over email so you can focus on growth—no meetings, no delays.</p>
+              <p className="text-xs text-muted-foreground italic text-center">Email-only workflow • No meetings • No delays</p>
             </CardContent>
           </Card>
 
           {/* Enterprise Packages */}
-          <Card className="relative shadow-neural border-2 border-[#9B59B6]/40 hover:border-[#9B59B6]/70 bg-white/95 backdrop-blur-sm transition-all duration-500 hover:shadow-cyber">
-            <CardHeader className="text-center">
-              <CardTitle className="text-xl font-bold mb-2">
-                ⚡ Enterprise Packages
+          <Card className="relative shadow-neural border-2 border-[#9B59B6]/40 hover:border-[#9B59B6]/80 bg-gradient-to-br from-white/95 to-[#9B59B6]/5 backdrop-blur-sm transition-all duration-500 hover:shadow-[0_0_30px_rgba(155,89,182,0.3)] hover:scale-105">
+            <div className="absolute top-4 right-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-[#9B59B6] to-[#8E44AD] rounded-full flex items-center justify-center shadow-lg">
+                <span className="text-white text-xl">⚡</span>
+              </div>
+            </div>
+            <CardHeader className="text-center pb-4">
+              <CardTitle className="text-2xl font-bold text-[#9B59B6] mb-2">
+                Enterprise Packages
               </CardTitle>
-              <CardDescription className="text-base">For large-scale content needs</CardDescription>
-              <p className="mt-2 text-xs text-muted-foreground italic">Friction-free workflow: All communication happens over email so you can focus on growth—no meetings, no delays.</p>
+              <CardDescription className="text-base font-medium">For large-scale content needs</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="space-y-3">
-                {/* Starter Enterprise */}
-                <div
-                  role="radio"
-                  aria-checked={selectedEnterprise === 'starter'}
-                  tabIndex={0}
-                  onClick={() => { setSelectedEnterprise('starter'); }}
-                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedEnterprise('starter'); } }}
-                  className={`p-4 rounded-lg cursor-pointer transition-all border ${selectedEnterprise === 'starter' ? 'ring-2 ring-primary bg-primary/5 shadow-cyber animate-enter border-primary/40' : 'border-muted-foreground/20 hover-scale'}`}
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="font-semibold text-sm">Starter Enterprise — 20 articles</span>
-                    <span className="text-lg font-bold text-primary">$1,297/month</span>
-                  </div>
-                  <div className="mt-2">
-                    <Button variant="outline" size="sm" onClick={(e) => { e.stopPropagation(); setExpandedTier(expandedTier === 'starter' ? null : 'starter'); }}>
-                      {expandedTier === 'starter' ? 'Hide details' : 'View details'}
-                    </Button>
-                  </div>
-                  {expandedTier === 'starter' && (
-                    <div className="mt-3 text-xs text-muted-foreground space-y-2 animate-fade-in">
-                      <div><strong>For:</strong> Startups needing SEO content at scale</div>
-                      <div className="mt-1 font-semibold">Includes:</div>
-                      <ul className="list-disc pl-5 space-y-1">
-                        <li>20 x <strong>high-quality AI articles</strong> (2,000+ words)</li>
-                        <li><strong>SaaS-optimized structures</strong> (how-to’s, comparisons, guides)</li>
-                        <li><strong>3 strategic keyword clusters</strong></li>
-                        <li><strong>48-hour standard delivery</strong></li>
-                        <li><strong>1 revision round per article</strong></li>
-                        <li>✉️ <strong>Email-only workflow</strong></li>
-                        <li className="text-[#E67E22] font-medium">✸ Limited capacity (max 10 clients/month)</li>
-                      </ul>
-                    </div>
-                  )}
+              {/* Starter Enterprise - Always Visible */}
+              <div
+                role="radio"
+                aria-checked={selectedEnterprise === 'starter'}
+                tabIndex={0}
+                onClick={() => { setSelectedEnterprise('starter'); }}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedEnterprise('starter'); } }}
+                className={`p-4 rounded-xl cursor-pointer transition-all border-2 ${selectedEnterprise === 'starter' ? 'ring-2 ring-[#9B59B6] bg-[#9B59B6]/10 shadow-lg border-[#9B59B6]/60' : 'border-[#9B59B6]/30 hover:border-[#9B59B6]/50 hover:bg-[#9B59B6]/5'} bg-gradient-to-r from-white/80 to-[#9B59B6]/10`}
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <span className="font-bold text-base text-[#9B59B6]">Starter Enterprise</span>
+                  <span className="text-xl font-bold text-[#9B59B6]">$1,297</span>
                 </div>
-
-                {/* Growth Tier */}
-                <div
-                  role="radio"
-                  aria-checked={selectedEnterprise === 'growth'}
-                  tabIndex={0}
-                  onClick={() => { setSelectedEnterprise('growth'); }}
-                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedEnterprise('growth'); } }}
-                  className={`p-4 rounded-lg cursor-pointer transition-all border ${selectedEnterprise === 'growth' ? 'ring-2 ring-primary bg-primary/5 shadow-cyber animate-enter border-primary/40' : 'border-muted-foreground/20 hover-scale'} bg-muted/30`}
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="font-semibold text-sm">Growth Tier — 30 articles <span className="ml-2 text-[#2ECC71] font-bold">⭐ BEST VALUE</span></span>
-                    <span className="text-lg font-bold text-primary">$1,797/month</span>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-muted-foreground font-medium">20 articles per month</span>
+                  <span className="text-xs text-muted-foreground">/month</span>
+                </div>
+                {expandedTier === 'starter' && (
+                  <div className="mt-4 pt-4 border-t border-[#9B59B6]/20 text-sm text-muted-foreground space-y-2 animate-fade-in">
+                    <div className="grid grid-cols-2 gap-2">
+                      <div>• 48-hour delivery</div>
+                      <div>• 1 revision round</div>
+                      <div>• Keyword research</div>
+                      <div>• Email workflow</div>
+                    </div>
                   </div>
-                  <div className="mt-2">
-                    <Button variant="outline" size="sm" onClick={(e) => { e.stopPropagation(); setExpandedTier(expandedTier === 'growth' ? null : 'growth'); }}>
+                )}
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={(e) => { e.stopPropagation(); setExpandedTier(expandedTier === 'starter' ? null : 'starter'); }}
+                  className="mt-3 text-[#9B59B6] hover:bg-[#9B59B6]/10"
+                >
+                  {expandedTier === 'starter' ? 'Hide details' : 'View details'}
+                </Button>
+              </div>
+
+              {/* See More Button */}
+              {!showMoreEnterprise && (
+                <Button 
+                  variant="outline" 
+                  onClick={() => setShowMoreEnterprise(true)}
+                  className="w-full border-[#9B59B6]/40 text-[#9B59B6] hover:bg-[#9B59B6]/10 hover:border-[#9B59B6]/60"
+                >
+                  See More Enterprise Options
+                </Button>
+              )}
+
+              {/* Additional Enterprise Tiers - Hidden by default */}
+              {showMoreEnterprise && (
+                <div className="space-y-3 animate-fade-in">
+                  {/* Growth Tier */}
+                  <div
+                    role="radio"
+                    aria-checked={selectedEnterprise === 'growth'}
+                    tabIndex={0}
+                    onClick={() => { setSelectedEnterprise('growth'); }}
+                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedEnterprise('growth'); } }}
+                    className={`p-4 rounded-xl cursor-pointer transition-all border-2 ${selectedEnterprise === 'growth' ? 'ring-2 ring-[#9B59B6] bg-[#9B59B6]/10 shadow-lg border-[#9B59B6]/60' : 'border-[#9B59B6]/30 hover:border-[#9B59B6]/50 hover:bg-[#9B59B6]/5'} bg-gradient-to-r from-white/80 to-[#2ECC71]/10`}
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold text-base text-[#9B59B6]">Growth Tier</span>
+                        <Badge className="bg-[#2ECC71] text-white text-xs">BEST VALUE</Badge>
+                      </div>
+                      <span className="text-xl font-bold text-[#9B59B6]">$1,797</span>
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-muted-foreground font-medium">30 articles per month</span>
+                      <span className="text-xs text-muted-foreground">/month</span>
+                    </div>
+                    {expandedTier === 'growth' && (
+                      <div className="mt-4 pt-4 border-t border-[#9B59B6]/20 text-sm text-muted-foreground space-y-2 animate-fade-in">
+                        <div className="grid grid-cols-2 gap-2">
+                          <div>• 24-hour delivery</div>
+                          <div>• 2 revision rounds</div>
+                          <div>• Competitor analysis</div>
+                          <div>• Free social add-on</div>
+                        </div>
+                      </div>
+                    )}
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      onClick={(e) => { e.stopPropagation(); setExpandedTier(expandedTier === 'growth' ? null : 'growth'); }}
+                      className="mt-3 text-[#9B59B6] hover:bg-[#9B59B6]/10"
+                    >
                       {expandedTier === 'growth' ? 'Hide details' : 'View details'}
                     </Button>
                   </div>
-                  {expandedTier === 'growth' && (
-                    <div className="mt-3 text-xs text-muted-foreground space-y-2 animate-fade-in">
-                      <div><strong>For:</strong> Scaling SaaS/eCommerce brands</div>
-                      <div className="mt-1 font-semibold">Includes everything in Starter, PLUS:</div>
-                      <ul className="list-disc pl-5 space-y-1">
-                        <li><strong>10 extra AI articles</strong> (30 total → $59.90/article)</li>
-                        <li><strong>24-hour priority delivery</strong></li>
-                        <li><strong>Competitor content analysis</strong> (identify gaps)</li>
-                        <li><strong>2 revision rounds per article</strong></li>
-                        <li className="text-[#2ECC71] font-medium">✸ <strong>Free</strong> $297 social media add-on (limited-time)</li>
-                        <li>✉️ <strong>Email-only workflow</strong></li>
-                      </ul>
-                    </div>
-                  )}
-                </div>
 
-                {/* Authority Tier */}
-                <div
-                  role="radio"
-                  aria-checked={selectedEnterprise === 'authority'}
-                  tabIndex={0}
-                  onClick={() => { setSelectedEnterprise('authority'); }}
-                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedEnterprise('authority'); } }}
-                  className={`p-4 rounded-lg cursor-pointer transition-all border ${selectedEnterprise === 'authority' ? 'ring-2 ring-primary bg-primary/5 shadow-cyber animate-enter border-primary/40' : 'border-muted-foreground/20 hover-scale'} bg-muted/20`}
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="font-semibold text-sm">Authority Tier — 50 articles</span>
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg font-bold text-primary">$2,997/month</span>
-                      <span className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 text-primary px-2.5 py-0.5 text-[11px] font-medium tracking-wide">Early adopter pricing</span>
+                  {/* Authority Tier */}
+                  <div
+                    role="radio"
+                    aria-checked={selectedEnterprise === 'authority'}
+                    tabIndex={0}
+                    onClick={() => { setSelectedEnterprise('authority'); }}
+                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedEnterprise('authority'); } }}
+                    className={`p-4 rounded-xl cursor-pointer transition-all border-2 ${selectedEnterprise === 'authority' ? 'ring-2 ring-[#9B59B6] bg-[#9B59B6]/10 shadow-lg border-[#9B59B6]/60' : 'border-[#9B59B6]/30 hover:border-[#9B59B6]/50 hover:bg-[#9B59B6]/5'} bg-gradient-to-r from-white/80 to-[#E67E22]/10`}
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="font-bold text-base text-[#9B59B6]">Authority Tier</span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xl font-bold text-[#9B59B6]">$2,997</span>
+                        <Badge variant="outline" className="border-[#E67E22] text-[#E67E22] text-xs">Early Adopter</Badge>
+                      </div>
                     </div>
-                  </div>
-                  <div className="mt-2">
-                    <Button variant="outline" size="sm" onClick={(e) => { e.stopPropagation(); setExpandedTier(expandedTier === 'authority' ? null : 'authority'); }}>
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-muted-foreground font-medium">50 articles per month</span>
+                      <span className="text-xs text-muted-foreground">/month</span>
+                    </div>
+                    {expandedTier === 'authority' && (
+                      <div className="mt-4 pt-4 border-t border-[#9B59B6]/20 text-sm text-muted-foreground space-y-2 animate-fade-in">
+                        <div className="grid grid-cols-2 gap-2">
+                          <div>• 12-hour delivery</div>
+                          <div>• Unlimited revisions</div>
+                          <div>• Dedicated strategist</div>
+                          <div>• Performance reports</div>
+                        </div>
+                      </div>
+                    )}
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      onClick={(e) => { e.stopPropagation(); setExpandedTier(expandedTier === 'authority' ? null : 'authority'); }}
+                      className="mt-3 text-[#9B59B6] hover:bg-[#9B59B6]/10"
+                    >
                       {expandedTier === 'authority' ? 'Hide details' : 'View details'}
                     </Button>
                   </div>
-                  {expandedTier === 'authority' && (
-                    <div className="mt-3 text-xs text-muted-foreground space-y-2 animate-fade-in">
-                      <div><strong>For:</strong> Established brands dominating search</div>
-                      <div className="mt-1 font-semibold">Includes everything in Growth Tier, PLUS:</div>
-                      <ul className="list-disc pl-5 space-y-1">
-                        <li><strong>20 extra AI articles</strong> (50 total → $59.94/article)</li>
-                        <li><strong>12-hour rush delivery</strong> (for urgent needs)</li>
-                        <li><strong>Unlimited revisions</strong></li>
-                        <li><strong>Dedicated strategist</strong> (email support)</li>
-                        <li><strong>Monthly performance report</strong> (traffic/ranking insights)</li>
-                        <li>✉️ <strong>Email-only workflow</strong></li>
-                      </ul>
+
+                  {/* View Comparison Button */}
+                  <Button 
+                    variant="outline" 
+                    onClick={() => setShowEnterpriseComparison((v) => !v)}
+                    className="w-full border-[#9B59B6]/40 text-[#9B59B6] hover:bg-[#9B59B6]/10 hover:border-[#9B59B6]/60"
+                  >
+                    {showEnterpriseComparison ? 'Hide Comparison' : 'View Comparison'}
+                  </Button>
+
+                  {/* Enterprise Comparison Table */}
+                  {showEnterpriseComparison && (
+                    <div className="mt-4 p-4 bg-[#9B59B6]/5 rounded-xl animate-fade-in">
+                      <h5 className="text-sm font-bold mb-3 text-[#9B59B6]">Enterprise Comparison</h5>
+                      <div className="grid grid-cols-4 gap-2 text-xs">
+                        <div className="font-semibold text-[#9B59B6]">Feature</div>
+                        <div className="font-semibold text-center">Starter</div>
+                        <div className="font-semibold text-center">Growth</div>
+                        <div className="font-semibold text-center">Authority</div>
+                        
+                        <div className="py-2 text-muted-foreground">Articles</div>
+                        <div className="py-2 text-center">20</div>
+                        <div className="py-2 text-center">30</div>
+                        <div className="py-2 text-center">50</div>
+                        
+                        <div className="py-2 text-muted-foreground">Delivery</div>
+                        <div className="py-2 text-center">48h</div>
+                        <div className="py-2 text-center">24h</div>
+                        <div className="py-2 text-center">12h</div>
+                        
+                        <div className="py-2 text-muted-foreground">Revisions</div>
+                        <div className="py-2 text-center">1</div>
+                        <div className="py-2 text-center">2</div>
+                        <div className="py-2 text-center">Unlimited</div>
+                      </div>
                     </div>
                   )}
                 </div>
-              </div>
-
-              {/* Quick Comparison (Enterprise) */}
-              <div className="mt-2 flex justify-end">
-                <Button variant="outline" size="sm" onClick={() => setShowEnterpriseComparison((v) => !v)}>
-                  {showEnterpriseComparison ? 'Hide comparison' : 'View comparison'}
-                </Button>
-              </div>
-              {showEnterpriseComparison && (
-                <div className="mt-2">
-                  <h5 className="text-sm font-semibold mb-2">Quick Comparison</h5>
-                  <div role="table" className="grid grid-cols-4 gap-3 text-xs">
-                    <div className="font-semibold">Feature</div>
-                    <div className="font-semibold">20 Articles</div>
-                    <div className="font-semibold">30 Articles</div>
-                    <div className="font-semibold">50 Articles</div>
-
-                    <div className="border-t pt-2 text-muted-foreground">Speed</div>
-                    <div className="border-t pt-2">48-hour</div>
-                    <div className="border-t pt-2">24-hour</div>
-                    <div className="border-t pt-2">12-hour</div>
-
-                    <div className="border-t pt-2 text-muted-foreground">Revisions</div>
-                    <div className="border-t pt-2">1</div>
-                    <div className="border-t pt-2">2</div>
-                    <div className="border-t pt-2">Unlimited</div>
-
-                    <div className="border-t pt-2 text-muted-foreground">Support</div>
-                    <div className="border-t pt-2">✉️ Email</div>
-                    <div className="border-t pt-2">✉️ Email + Gap Analysis</div>
-                    <div className="border-t pt-2">✉️ VIP Email + Analytics</div>
-                  </div>
-                </div>
               )}
 
-              <div className="pt-2 space-y-2 text-xs">
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-3 w-3 text-[#2ECC71]" />
-                  <span>Dedicated content manager</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-3 w-3 text-[#2ECC71]" />
-                  <span>Performance reporting</span>
-                </div>
-              </div>
-              
               <Button 
                 onClick={handleContactClick}
-                className="w-full bg-[#9B59B6] hover:bg-[#8E44AD] text-white font-semibold"
+                className="w-full bg-gradient-to-r from-[#9B59B6] to-[#8E44AD] hover:from-[#8E44AD] hover:to-[#7D3C98] text-white font-bold py-3 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
               >
                 Get Custom Quote
               </Button>
-              <p className="mt-2 text-xs text-muted-foreground italic">Friction-free workflow: All communication happens over email so you can focus on growth—no meetings, no delays.</p>
+              <p className="text-xs text-muted-foreground italic text-center">Email-only workflow • No meetings • No delays</p>
             </CardContent>
-
           </Card>
         </div>
 
