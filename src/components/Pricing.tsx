@@ -337,6 +337,15 @@ const Pricing = () => {
                     </Button>
                   </div>
 
+                  {/* See Less Button */}
+                  <Button 
+                    variant="outline" 
+                    onClick={() => setShowMoreEnterprise(false)}
+                    className="w-full border-[#9B59B6]/40 text-[#9B59B6] hover:bg-[#9B59B6]/10 hover:border-[#9B59B6]/60"
+                  >
+                    See Less Enterprise Options
+                  </Button>
+
                   {/* View Comparison Button */}
                   <Button 
                     variant="outline" 
@@ -349,27 +358,37 @@ const Pricing = () => {
                   {/* Enterprise Comparison Table */}
                   {showEnterpriseComparison && (
                     <div className="mt-4 p-4 bg-[#9B59B6]/5 rounded-xl animate-fade-in">
-                      <h5 className="text-sm font-bold mb-3 text-[#9B59B6]">Enterprise Comparison</h5>
+                      <h5 className="text-sm font-bold mb-3 text-[#9B59B6]">📊 Enterprise Comparison</h5>
                       <div className="grid grid-cols-4 gap-2 text-xs">
                         <div className="font-semibold text-[#9B59B6]">Feature</div>
                         <div className="font-semibold text-center">Starter</div>
                         <div className="font-semibold text-center">Growth</div>
                         <div className="font-semibold text-center">Authority</div>
                         
-                        <div className="py-2 text-muted-foreground">Articles</div>
+                        <div className="py-2 text-muted-foreground">📝 Articles</div>
                         <div className="py-2 text-center">20</div>
                         <div className="py-2 text-center">30</div>
                         <div className="py-2 text-center">50</div>
                         
-                        <div className="py-2 text-muted-foreground">Delivery</div>
+                        <div className="py-2 text-muted-foreground">🚀 Delivery</div>
                         <div className="py-2 text-center">48h</div>
                         <div className="py-2 text-center">24h</div>
                         <div className="py-2 text-center">12h</div>
                         
-                        <div className="py-2 text-muted-foreground">Revisions</div>
+                        <div className="py-2 text-muted-foreground">✏️ Revisions</div>
                         <div className="py-2 text-center">1</div>
                         <div className="py-2 text-center">2</div>
-                        <div className="py-2 text-center">Unlimited</div>
+                        <div className="py-2 text-center">♾️</div>
+                        
+                        <div className="py-2 text-muted-foreground">🎯 Research</div>
+                        <div className="py-2 text-center">Basic</div>
+                        <div className="py-2 text-center">Advanced</div>
+                        <div className="py-2 text-center">Expert</div>
+                        
+                        <div className="py-2 text-muted-foreground">👤 Support</div>
+                        <div className="py-2 text-center">Email</div>
+                        <div className="py-2 text-center">Priority</div>
+                        <div className="py-2 text-center">Dedicated</div>
                       </div>
                     </div>
                   )}
