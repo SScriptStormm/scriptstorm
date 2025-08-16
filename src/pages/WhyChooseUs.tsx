@@ -221,13 +221,12 @@ const WhyChooseUs = () => {
                 ))}
               </div>
               <blockquote className="text-xl italic text-center mb-6 font-medium">
-                "We tried Jasper and Copy.ai for months, spending hours editing generic content. 
-                ScriptStorm's AI automation delivered better results in 24 hours than we achieved in 6 months of DIY attempts. 
-                It's not even close."
+                "ScriptStorm's approach to AI content automation represents the future of content marketing. 
+                Their friction-free email workflow eliminates the typical delays and complexity of traditional content agencies."
               </blockquote>
               <div className="text-center">
-                <p className="font-semibold text-lg">Sarah Chen</p>
-                <p className="text-muted-foreground">Marketing Director, TechFlow SaaS</p>
+                <p className="font-semibold text-lg">Coming Soon</p>
+                <p className="text-muted-foreground">Real client testimonials after launch</p>
               </div>
             </Card>
           </div>

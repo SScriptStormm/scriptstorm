@@ -4,15 +4,6 @@ import { Star, Play } from "lucide-react";
 const Testimonials = () => {
   const videoTestimonials = [
     {
-      name: "Sarah Chen",
-      role: "CMO at CloudTech SaaS", 
-      company: "CloudTech",
-      quote: "ScriptStorm helped us grow from 10K to 100K monthly visitors in 6 months",
-      trafficFrom: "10K",
-      trafficTo: "100K",
-      videoPlaceholder: "sarah-testimonial.mp4"
-    },
-    {
       name: "Marcus Rodriguez",
       role: "Founder at EcomGrow",
       company: "EcomGrow", 
@@ -33,13 +24,6 @@ const Testimonials = () => {
   ];
 
   const testimonials = [
-    {
-      name: "Sarah Chen",
-      role: "CMO at CloudTech SaaS",
-      content: "ScriptStorm transformed our content strategy. We went from 10K to 100K monthly organic visitors in just 6 months. Their SEO articles are incredibly well-researched and convert beautifully.",
-      rating: 5,
-      company: "CloudTech"
-    },
     {
       name: "Marcus Rodriguez", 
       role: "Founder at EcomGrow",

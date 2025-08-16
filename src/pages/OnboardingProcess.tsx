@@ -20,11 +20,11 @@ const OnboardingProcess = () => {
   const steps = [
     {
       number: "01",
-      title: "Discovery Call",
-      duration: "15-30 minutes",
+      title: "Email Consultation",
+      duration: "Within 24 hours",
       icon: MessageSquare,
       color: "#3498DB",
-      description: "We learn about your business, target audience, and content goals.",
+      description: "We learn about your business, target audience, and content goals via email.",
       details: [
         "Understand your brand voice and style",
         "Identify your target keywords and topics",
@@ -295,7 +295,7 @@ const OnboardingProcess = () => {
             <Card className="p-6 border-2 border-primary-glow/30 bg-white/95 backdrop-blur-sm shadow-neural hover:shadow-cyber transition-all duration-300">
               <h3 className="text-lg font-bold mb-3 text-[#2ECC71]">How do you ensure the content matches my brand?</h3>
               <p className="text-muted-foreground">
-                During our discovery call, we deep-dive into your brand voice, style, and preferences. 
+                During our email consultation, we deep-dive into your brand voice, style, and preferences. 
                 We also review your existing content to ensure perfect consistency.
               </p>
             </Card>
