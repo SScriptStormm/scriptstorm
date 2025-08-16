@@ -150,9 +150,9 @@ const Testimonials = () => {
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 text-center">
           {[
-            { number: "500+", label: "Happy Clients" },
-            { number: "10,000+", label: "Articles Delivered" },
-            { number: "4.9/5", label: "Average Rating" },
+            { number: "Coming", label: "Soon Launch" },
+            { number: "AI-Powered", label: "Automation" },
+            { number: "100%", label: "Satisfaction Goal" },
             { number: "24hrs", label: "Delivery Time" }
           ].map((stat, index) => (
             <div key={index}>

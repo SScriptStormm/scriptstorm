@@ -131,12 +131,12 @@ const Hero = () => {
           <div className="mt-16 text-white/70">
             <div className="flex justify-center gap-8 text-sm font-mono tracking-widest">
               <div className="flex items-center gap-2 px-4 py-2 bg-black/20 rounded-lg border border-primary-glow/20 backdrop-blur-sm">
-                <span className="text-primary-glow">★★★★★</span>
-                <span>4.9/5 RATING</span>
+                <span className="text-primary-glow">🚀</span>
+                <span>LAUNCHING SOON</span>
               </div>
               <div className="flex items-center gap-2 px-4 py-2 bg-black/20 rounded-lg border border-primary-glow/20 backdrop-blur-sm">
-                <span className="text-primary-glow">█</span>
-                <span>10,000+ DELIVERED</span>
+                <span className="text-primary-glow">🤖</span>
+                <span>AI-POWERED AUTOMATION</span>
               </div>
               <div className="flex items-center gap-2 px-4 py-2 bg-black/20 rounded-lg border border-primary-glow/20 backdrop-blur-sm">
                 <span className="text-primary-glow">▲</span>
