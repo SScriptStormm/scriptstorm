@@ -24,68 +24,68 @@ const OnboardingProcess = () => {
       duration: "Within 24 hours",
       icon: MessageSquare,
       color: "#3498DB",
-      description: "We learn about your business, target audience, and content goals via email.",
+      description: "Our AI system learns about your business, target audience, and content goals via email.",
       details: [
-        "Understand your brand voice and style",
-        "Identify your target keywords and topics",
-        "Set expectations and delivery timeline",
-        "Answer any questions you have"
+        "AI analyzes your brand voice and style",
+        "Automated keyword and topic identification",
+        "Automated delivery timeline setup",
+        "Instant responses to your questions"
       ]
     },
     {
       number: "02",
-      title: "Research & Planning",
+      title: "AI Research & Planning",
       duration: "2-4 hours",
       icon: Search,
       color: "#2ECC71",
-      description: "Our team conducts deep research and creates your content strategy.",
+      description: "Our AI system conducts deep research and creates your content strategy automatically.",
       details: [
-        "Comprehensive keyword research",
-        "Competitor content analysis",
-        "Content outline and structure planning",
-        "SEO optimization strategy"
+        "AI-powered comprehensive keyword research",
+        "Automated competitor content analysis",
+        "AI-generated content outline and structure",
+        "Intelligent SEO optimization strategy"
       ]
     },
     {
       number: "03",
-      title: "Content Creation",
+      title: "AI Content Generation",
       duration: "12-18 hours",
       icon: PenTool,
       color: "#9B59B6",
-      description: "Expert writers craft your content with precision and expertise.",
+      description: "Advanced AI creates your content with precision and expertise automatically.",
       details: [
-        "Professional writing by industry experts",
-        "SEO optimization throughout",
-        "Brand voice consistency",
-        "Internal quality review"
+        "AI-generated content by industry-specific models",
+        "Automated SEO optimization throughout",
+        "AI brand voice consistency matching",
+        "Built-in quality assurance algorithms"
       ]
     },
     {
       number: "04",
-      title: "Review & Delivery",
+      title: "AI Review & Delivery",
       duration: "2-4 hours",
       icon: CheckCircle,
       color: "#E67E22",
-      description: "Final review, polishing, and delivery of your completed content.",
+      description: "Automated final review, polishing, and delivery of your completed content.",
       details: [
-        "Final quality assurance check",
-        "SEO optimization verification",
-        "Formatted for easy publishing",
-        "Delivered via your preferred method"
+        "AI-powered final quality assurance check",
+        "Automated SEO optimization verification",
+        "Auto-formatted for easy publishing",
+        "Instant delivery via your preferred method"
       ]
     },
     {
       number: "05",
-      title: "Launch Support",
+      title: "AI-Powered Support",
       duration: "Ongoing",
       icon: Rocket,
       color: "#E74C3C",
-      description: "We help you publish and provide ongoing support for best results.",
+      description: "Automated publishing guidance and AI-driven ongoing support for best results.",
       details: [
-        "Publishing guidance and tips",
-        "Performance monitoring advice",
-        "Revision support if needed",
-        "Strategy recommendations for future content"
+        "AI-generated publishing guidance and tips",
+        "Automated performance monitoring insights",
+        "AI-assisted revision support if needed",
+        "AI strategy recommendations for future content"
       ]
     }
   ];
@@ -149,10 +149,10 @@ const OnboardingProcess = () => {
         
         <div className="container mx-auto px-4 text-center relative z-10">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-foreground font-mono tracking-wide">
-            How We Onboard <span className="text-[#3498DB]">New Clients</span>
+            How Our <span className="text-[#3498DB]">AI Process</span> Works
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            A transparent, proven process that takes you from inquiry to published content in just 24 hours.
+            A fully automated AI process that takes you from inquiry to published content in just 24 hours.
           </p>
           <Badge className="bg-[#2ECC71] text-white px-6 py-3 text-lg font-semibold shadow-cyber">
             <Clock className="h-5 w-5 mr-2" />
@@ -245,30 +245,30 @@ const OnboardingProcess = () => {
         
         <div className="container mx-auto px-4 relative z-10">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-mono">
-            Why Our <span className="text-[#3498DB]">Process Works</span>
+            Why Our <span className="text-[#3498DB]">AI Process</span> Works
           </h2>
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <Card className="relative text-center p-8 border-2 border-[#3498DB]/40 hover:border-[#3498DB]/70 bg-white/95 backdrop-blur-sm transition-all duration-500 shadow-neural hover:shadow-cyber">
               <Users className="h-16 w-16 text-[#3498DB] mx-auto mb-6" />
-              <h3 className="text-xl font-bold mb-4">Personal Attention</h3>
+              <h3 className="text-xl font-bold mb-4">AI-Powered Precision</h3>
               <p className="text-muted-foreground">
-                Every client gets dedicated attention from our expert team, not automated responses.
+                Advanced AI algorithms ensure consistent, high-quality output without human error or delays.
               </p>
             </Card>
 
             <Card className="relative text-center p-8 border-2 border-[#2ECC71]/40 hover:border-[#2ECC71]/70 bg-white/95 backdrop-blur-sm transition-all duration-500 shadow-neural hover:shadow-cyber">
               <Target className="h-16 w-16 text-[#2ECC71] mx-auto mb-6" />
-              <h3 className="text-xl font-bold mb-4">Results-Focused</h3>
+              <h3 className="text-xl font-bold mb-4">Data-Driven Results</h3>
               <p className="text-muted-foreground">
-                We optimize every step for maximum impact on your business goals and conversions.
+                AI optimization based on millions of data points ensures maximum impact on your business goals and conversions.
               </p>
             </Card>
 
             <Card className="relative text-center p-8 border-2 border-[#9B59B6]/40 hover:border-[#9B59B6]/70 bg-white/95 backdrop-blur-sm transition-all duration-500 shadow-neural hover:shadow-cyber">
               <Zap className="h-16 w-16 text-[#9B59B6] mx-auto mb-6" />
-              <h3 className="text-xl font-bold mb-4">Lightning Fast</h3>
+              <h3 className="text-xl font-bold mb-4">Lightning Fast AI</h3>
               <p className="text-muted-foreground">
-                Our streamlined process delivers professional results in a fraction of typical timeframes.
+                Fully automated AI process delivers professional results in a fraction of typical timeframes with zero delays.
               </p>
             </Card>
           </div>
@@ -281,38 +281,38 @@ const OnboardingProcess = () => {
         
         <div className="container mx-auto px-4 relative z-10">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-mono">
-            Common <span className="text-[#3498DB]">Questions</span> About Our Process
+            Common <span className="text-[#3498DB]">Questions</span> About Our AI Process
           </h2>
           <div className="max-w-4xl mx-auto space-y-6">
             <Card className="p-6 border-2 border-primary-glow/30 bg-white/95 backdrop-blur-sm shadow-neural hover:shadow-cyber transition-all duration-300">
               <h3 className="text-lg font-bold mb-3 text-[#3498DB]">What if I need revisions?</h3>
               <p className="text-muted-foreground">
-                We include revision rounds in all packages. Most clients are thrilled with the first draft, 
-                but we're happy to make adjustments to ensure 100% satisfaction.
+                Our AI includes revision capabilities in all packages. Most clients are thrilled with the first AI-generated draft, 
+                but our system can make adjustments to ensure 100% satisfaction.
               </p>
             </Card>
 
             <Card className="p-6 border-2 border-primary-glow/30 bg-white/95 backdrop-blur-sm shadow-neural hover:shadow-cyber transition-all duration-300">
-              <h3 className="text-lg font-bold mb-3 text-[#2ECC71]">How do you ensure the content matches my brand?</h3>
+              <h3 className="text-lg font-bold mb-3 text-[#2ECC71]">How does AI ensure the content matches my brand?</h3>
               <p className="text-muted-foreground">
-                During our email consultation, we deep-dive into your brand voice, style, and preferences. 
-                We also review your existing content to ensure perfect consistency.
+                During email consultation, our AI analyzes your brand voice, style, and preferences. 
+                The system also reviews your existing content to ensure perfect AI-generated consistency.
               </p>
             </Card>
 
             <Card className="p-6 border-2 border-primary-glow/30 bg-white/95 backdrop-blur-sm shadow-neural hover:shadow-cyber transition-all duration-300">
-              <h3 className="text-lg font-bold mb-3 text-[#9B59B6]">What if I'm not satisfied with the final content?</h3>
+              <h3 className="text-lg font-bold mb-3 text-[#9B59B6]">What if I'm not satisfied with the AI-generated content?</h3>
               <p className="text-muted-foreground">
-                We offer a 100% money-back guarantee. If you're not completely satisfied after revisions, 
+                We offer a 100% money-back guarantee. If you're not completely satisfied after AI revisions, 
                 we'll provide a full refund. Your success is our top priority.
               </p>
             </Card>
 
             <Card className="p-6 border-2 border-primary-glow/30 bg-white/95 backdrop-blur-sm shadow-neural hover:shadow-cyber transition-all duration-300">
-              <h3 className="text-lg font-bold mb-3 text-[#E67E22]">Can you handle urgent requests?</h3>
+              <h3 className="text-lg font-bold mb-3 text-[#E67E22]">Can your AI handle urgent requests?</h3>
               <p className="text-muted-foreground">
-                Yes! Our standard turnaround is 24-48 hours, but we can accommodate rush orders for urgent needs. 
-                Contact us to discuss expedited delivery options.
+                Yes! Our AI standard turnaround is 24-48 hours, but the automated system can accommodate rush orders for urgent needs. 
+                Contact us to discuss expedited AI delivery options.
               </p>
             </Card>
           </div>
@@ -341,9 +341,9 @@ const OnboardingProcess = () => {
               <Star key={i} className="h-8 w-8 text-[#F39C12] fill-current mx-1" />
             ))}
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 font-mono">Ready to Get Started?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 font-mono">Ready to Experience AI Content?</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
-            Join hundreds of satisfied clients who've transformed their content marketing with our proven process.
+            Join businesses transforming their content marketing with our fully automated AI process.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/#pricing">
