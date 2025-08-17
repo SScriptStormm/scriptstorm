@@ -54,8 +54,7 @@ const OnboardingProcess = () => {
       details: [
         "Conversion-focused content tailored to your brand",
         "SEO-optimized structure with headers/keywords",
-        "Multiple drafts to ensure quality foundations",
-        "(Gemini 1.5 generates drafts + basic SEO)"
+        "Multiple drafts to ensure quality foundations"
       ]
     },
     {
