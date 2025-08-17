@@ -87,7 +87,7 @@ const Pricing = () => {
               <CardTitle className="text-2xl font-bold text-[#3498DB] mb-2">
                 Starter Package
               </CardTitle>
-              <div className="text-4xl font-bold text-foreground mb-2">$297<span className="text-lg text-muted-foreground">/month</span></div>
+              <div className="text-4xl font-bold text-foreground mb-2">$297<span className="text-lg text-muted-foreground">/month USD</span></div>
               <CardDescription className="text-base font-medium">Perfect for small businesses</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -146,7 +146,7 @@ const Pricing = () => {
               <CardTitle className="text-2xl font-bold text-[#2ECC71] mb-2">
                 Growth Package
               </CardTitle>
-              <div className="text-4xl font-bold text-foreground mb-2">$597<span className="text-lg text-muted-foreground">/month</span></div>
+              <div className="text-4xl font-bold text-foreground mb-2">$597<span className="text-lg text-muted-foreground">/month USD</span></div>
               <CardDescription className="text-base font-medium">Best value for growing companies</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -221,7 +221,7 @@ const Pricing = () => {
                 </div>
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-muted-foreground font-medium">20 articles per month</span>
-                  <span className="text-xs text-muted-foreground">/month</span>
+                  <span className="text-xs text-muted-foreground">/month USD</span>
                 </div>
                 {expandedTier === 'starter' && (
                   <div className="mt-4 pt-4 border-t border-[#9B59B6]/20 text-sm text-muted-foreground space-y-2 animate-fade-in">
@@ -275,7 +275,7 @@ const Pricing = () => {
                     </div>
                     <div className="flex items-center justify-between text-sm">
                       <span className="text-muted-foreground font-medium">30 articles per month</span>
-                      <span className="text-xs text-muted-foreground">/month</span>
+                      <span className="text-xs text-muted-foreground">/month USD</span>
                     </div>
                     {expandedTier === 'growth' && (
                       <div className="mt-4 pt-4 border-t border-[#9B59B6]/20 text-sm text-muted-foreground space-y-2 animate-fade-in">
@@ -315,7 +315,7 @@ const Pricing = () => {
                     </div>
                     <div className="flex items-center justify-between text-sm">
                       <span className="text-muted-foreground font-medium">50 articles per month</span>
-                      <span className="text-xs text-muted-foreground">/month</span>
+                      <span className="text-xs text-muted-foreground">/month USD</span>
                     </div>
                     {expandedTier === 'authority' && (
                       <div className="mt-4 pt-4 border-t border-[#9B59B6]/20 text-sm text-muted-foreground space-y-2 animate-fade-in">
