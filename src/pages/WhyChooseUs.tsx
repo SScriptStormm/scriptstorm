@@ -80,36 +80,36 @@ const WhyChooseUs = () => {
               Done-For-You vs <span className="text-[#E74C3C]">DIY Tools</span>
             </h2>
             <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-              {/* DIY Tools */}
+              {/* The Old Way */}
               <Card className="border-2 border-[#E74C3C]/40 bg-white/95 backdrop-blur-sm shadow-neural hover:shadow-cyber transition-all duration-500">
                 <CardHeader className="text-center">
-                  <CardTitle className="text-2xl text-[#E74C3C] font-mono">❌ DIY Tools (Jasper, Copy.ai, etc.)</CardTitle>
+                  <CardTitle className="text-2xl text-[#E74C3C] font-mono">❌ The Old Way (Freelancers, Agencies, or In-House)</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-3">
                     <div className="flex items-start gap-3">
                       <span className="text-[#E74C3C] mt-1">•</span>
-                      <span className="text-sm">Requires hours of prompting and editing</span>
+                      <span className="text-sm"><strong>Slow:</strong> Weeks of back-and-forth revisions</span>
                     </div>
                     <div className="flex items-start gap-3">
                       <span className="text-[#E74C3C] mt-1">•</span>
-                      <span className="text-sm">Generic, robotic-sounding content</span>
+                      <span className="text-sm"><strong>Expensive:</strong> $100-$500/article for quality</span>
                     </div>
                     <div className="flex items-start gap-3">
                       <span className="text-[#E74C3C] mt-1">•</span>
-                      <span className="text-sm">No SEO strategy or keyword research</span>
+                      <span className="text-sm"><strong>Unpredictable:</strong> Varies by writer's skill</span>
                     </div>
                     <div className="flex items-start gap-3">
                       <span className="text-[#E74C3C] mt-1">•</span>
-                      <span className="text-sm">Monthly subscription costs add up</span>
+                      <span className="text-sm"><strong>Hard to Scale:</strong> Need to hire more writers = more $$$</span>
                     </div>
                     <div className="flex items-start gap-3">
                       <span className="text-[#E74C3C] mt-1">•</span>
-                      <span className="text-sm">Steep learning curve to get good results</span>
+                      <span className="text-sm">Endless project management and coordination</span>
                     </div>
                     <div className="flex items-start gap-3">
                       <span className="text-[#E74C3C] mt-1">•</span>
-                      <span className="text-sm">No guarantees on quality or results</span>
+                      <span className="text-sm">No guarantees on delivery times or quality</span>
                     </div>
                   </div>
                 </CardContent>

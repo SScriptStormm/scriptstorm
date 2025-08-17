@@ -66,24 +66,24 @@ const OnboardingProcess = () => {
       duration: "2-4 hours",
       icon: CheckCircle,
       color: "#E67E22",
-      description: "Automated final review, polishing, and delivery of your completed content.",
+      description: "Automated final review, polishing, and delivery of your completed content with dashboard access.",
       details: [
         "AI-powered final quality assurance check",
         "Automated SEO optimization verification",
         "Auto-formatted for easy publishing",
-        "Instant delivery via your preferred method"
+        "Instant delivery via your ScriptStorm dashboard"
       ]
     },
     {
       number: "05",
-      title: "AI-Powered Support",
+      title: "Dashboard & Ongoing Support",
       duration: "Ongoing",
       icon: Rocket,
       color: "#E74C3C",
-      description: "Automated publishing guidance and AI-driven ongoing support for best results.",
+      description: "Access your personalized dashboard to track progress and receive AI-driven ongoing support.",
       details: [
-        "AI-generated publishing guidance and tips",
-        "Automated performance monitoring insights",
+        "Full dashboard access to track all your articles",
+        "Real-time status updates and progress monitoring",
         "AI-assisted revision support if needed",
         "AI strategy recommendations for future content"
       ]
