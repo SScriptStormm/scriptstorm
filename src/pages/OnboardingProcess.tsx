@@ -24,68 +24,64 @@ const OnboardingProcess = () => {
       duration: "Within 24 hours",
       icon: MessageSquare,
       color: "#3498DB",
-      description: "Our AI system learns about your business, target audience, and content goals via email.",
+      description: "Our AI instantly analyzes your email to:",
       details: [
-        "AI analyzes your brand voice and style",
-        "Automated keyword and topic identification",
-        "Automated delivery timeline setup",
-        "Instant responses to your questions"
+        "Extract your brand voice and style guidelines",
+        "Identify core content goals and audience needs",
+        "Set up your automated delivery timeline"
       ]
     },
     {
       number: "02",
-      title: "AI Research & Planning",
+      title: "AI Research & Strategy",
       duration: "2-4 hours",
       icon: Search,
       color: "#2ECC71",
-      description: "Our AI system conducts deep research and creates your content strategy automatically.",
+      description: "Our system autonomously:",
       details: [
-        "AI-powered comprehensive keyword research",
-        "Automated competitor content analysis",
-        "AI-generated content outline and structure",
-        "Intelligent SEO optimization strategy"
+        "Conducts data-driven keyword research",
+        "Generates SEO-optimized content outlines",
+        "Maps high-impact topics to your business goals"
       ]
     },
     {
       number: "03",
-      title: "AI Content Generation",
+      title: "AI Content Creation",
       duration: "12-18 hours",
       icon: PenTool,
       color: "#9B59B6",
-      description: "Advanced AI creates your content with precision and expertise automatically.",
+      description: "Industry-trained AI drafts:",
       details: [
-        "AI-generated content by industry-specific models",
-        "Automated SEO optimization throughout",
-        "AI brand voice consistency matching",
-        "Built-in quality assurance algorithms"
+        "Conversion-focused content tailored to your brand",
+        "SEO-optimized structure with headers/keywords",
+        "Multiple drafts to ensure quality foundations",
+        "(Gemini 1.5 generates drafts + basic SEO)"
       ]
     },
     {
       number: "04",
-      title: "AI Review & Delivery",
+      title: "AI Quality Control & Delivery",
       duration: "2-4 hours",
       icon: CheckCircle,
       color: "#E67E22",
-      description: "Automated final review, polishing, and delivery of your completed content with dashboard access.",
+      description: "Every piece undergoes:",
       details: [
-        "AI-powered final quality assurance check",
-        "Automated SEO optimization verification",
-        "Auto-formatted for easy publishing",
-        "Instant delivery via your ScriptStorm dashboard"
+        "Plagiarism and AI-detection screening",
+        "SEO scoring and readability checks",
+        "Instant delivery to your client dashboard"
       ]
     },
     {
       number: "05",
-      title: "Dashboard & Ongoing Support",
+      title: "Dashboard & Support",
       duration: "Ongoing",
       icon: Rocket,
       color: "#E74C3C",
-      description: "Access your personalized dashboard to track progress and receive AI-driven ongoing support.",
+      description: "Track all content in real-time:",
       details: [
-        "Full dashboard access to track all your articles",
-        "Real-time status updates and progress monitoring",
-        "AI-assisted revision support if needed",
-        "AI strategy recommendations for future content"
+        "Track all content in real-time",
+        "Request revisions via email (24-hour turnaround)",
+        "Download ready-to-publish files in one click"
       ]
     }
   ];
@@ -149,10 +145,10 @@ const OnboardingProcess = () => {
         
         <div className="container mx-auto px-4 text-center relative z-10">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-foreground font-mono tracking-wide">
-            How Our <span className="text-[#3498DB]">AI Process</span> Works
+            🚀 How Our <span className="text-[#3498DB]">AI Process</span> Works
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            A fully automated AI process that takes you from inquiry to published content in just 24 hours.
+            A fully automated system delivering publish-ready content in 24 hours—powered by enterprise-grade AI.
           </p>
           <Badge className="bg-[#2ECC71] text-white px-6 py-3 text-lg font-semibold shadow-cyber">
             <Clock className="h-5 w-5 mr-2" />
