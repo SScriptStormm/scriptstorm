@@ -19,6 +19,7 @@ const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -82,6 +83,40 @@ const Auth = () => {
     }
   };
 
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) {
+      toast({
+        title: "Email Required",
+        description: "Please enter your email address to reset your password.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/auth`,
+      });
+      if (error) throw error;
+      
+      toast({
+        title: "Password Reset Sent",
+        description: "Check your email for password reset instructions.",
+      });
+      setShowForgotPassword(false);
+    } catch (error: any) {
+      toast({
+        title: "Reset Error",
+        description: error.message,
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-hero flex items-center justify-center p-4 relative overflow-hidden">
       {/* AI Neural Network Background */}
@@ -118,14 +153,14 @@ const Auth = () => {
           <CardHeader className="relative text-center space-y-2">
             <CardTitle className="text-2xl text-white font-mono tracking-wide flex items-center justify-center gap-2">
               <Zap className="h-6 w-6 text-primary-glow animate-pulse" />
-              {isLogin ? "SYSTEM LOGIN" : "CREATE ACCOUNT"}
+              {showForgotPassword ? "RESET PASSWORD" : isLogin ? "SYSTEM LOGIN" : "CREATE ACCOUNT"}
             </CardTitle>
             <p className="text-white/70 text-sm font-mono">
-              {isLogin ? "Access your content dashboard" : "Join the ScriptStorm network"}
+              {showForgotPassword ? "Enter your email to reset password" : isLogin ? "Access your content dashboard" : "Join the ScriptStorm network"}
             </p>
           </CardHeader>
           <CardContent className="relative space-y-6">
-            <form onSubmit={handleAuth} className="space-y-4">
+            <form onSubmit={showForgotPassword ? handleForgotPassword : handleAuth} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="email" className="text-white font-mono tracking-wide text-sm">
                   EMAIL ADDRESS
@@ -144,30 +179,32 @@ const Auth = () => {
                 </div>
               </div>
               
-              <div className="space-y-2">
-                <Label htmlFor="password" className="text-white font-mono tracking-wide text-sm">
-                  PASSWORD
-                </Label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-primary-glow/60" />
-                  <Input
-                    id="password"
-                    type={showPassword ? "text" : "password"}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    className="pl-10 pr-10 bg-black/40 border-primary-glow/30 text-white placeholder:text-white/50 focus:border-primary-glow focus:ring-primary-glow/20 font-mono"
-                    placeholder="••••••••"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-primary-glow/60 hover:text-primary-glow transition-colors"
-                  >
-                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                  </button>
+              {!showForgotPassword && (
+                <div className="space-y-2">
+                  <Label htmlFor="password" className="text-white font-mono tracking-wide text-sm">
+                    PASSWORD
+                  </Label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-primary-glow/60" />
+                    <Input
+                      id="password"
+                      type={showPassword ? "text" : "password"}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      className="pl-10 pr-10 bg-black/40 border-primary-glow/30 text-white placeholder:text-white/50 focus:border-primary-glow focus:ring-primary-glow/20 font-mono"
+                      placeholder="••••••••"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-primary-glow/60 hover:text-primary-glow transition-colors"
+                    >
+                      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    </button>
+                  </div>
                 </div>
-              </div>
+              )}
 
               <div className="relative group">
                 <div className="absolute inset-0 bg-gradient-cyber rounded-lg blur-lg opacity-40 group-hover:opacity-70 transition-all duration-500" />
@@ -183,21 +220,46 @@ const Auth = () => {
                     </div>
                   ) : (
                     <div className="flex items-center gap-2">
-                      {isLogin ? <LogIn className="h-4 w-4" /> : <UserPlus className="h-4 w-4" />}
-                      {isLogin ? "ACCESS DASHBOARD" : "CREATE ACCOUNT"}
+                      {showForgotPassword ? <Mail className="h-4 w-4" /> : isLogin ? <LogIn className="h-4 w-4" /> : <UserPlus className="h-4 w-4" />}
+                      {showForgotPassword ? "SEND RESET EMAIL" : isLogin ? "ACCESS DASHBOARD" : "CREATE ACCOUNT"}
                     </div>
                   )}
                 </Button>
               </div>
             </form>
 
-            <div className="text-center">
-              <button
-                onClick={() => setIsLogin(!isLogin)}
-                className="text-primary-glow hover:text-primary-glow/80 font-mono text-sm tracking-wide transition-colors duration-300 border-b border-primary-glow/30 hover:border-primary-glow/60"
-              >
-                {isLogin ? "Need an account? Create one" : "Already have an account? Sign in"}
-              </button>
+            <div className="text-center space-y-3">
+              {!showForgotPassword && (
+                <button
+                  onClick={() => setIsLogin(!isLogin)}
+                  className="text-primary-glow hover:text-primary-glow/80 font-mono text-sm tracking-wide transition-colors duration-300 border-b border-primary-glow/30 hover:border-primary-glow/60"
+                >
+                  {isLogin ? "Need an account? Create one" : "Already have an account? Sign in"}
+                </button>
+              )}
+              
+              {isLogin && !showForgotPassword && (
+                <div>
+                  <button
+                    onClick={() => setShowForgotPassword(true)}
+                    className="text-primary-glow/70 hover:text-primary-glow font-mono text-xs tracking-wide transition-colors duration-300"
+                  >
+                    Forgot your password?
+                  </button>
+                </div>
+              )}
+              
+              {showForgotPassword && (
+                <button
+                  onClick={() => {
+                    setShowForgotPassword(false);
+                    setIsLogin(true);
+                  }}
+                  className="text-primary-glow hover:text-primary-glow/80 font-mono text-sm tracking-wide transition-colors duration-300 border-b border-primary-glow/30 hover:border-primary-glow/60"
+                >
+                  Back to login
+                </button>
+              )}
             </div>
 
             <div className="text-center text-white/60 text-xs font-mono tracking-wide">
