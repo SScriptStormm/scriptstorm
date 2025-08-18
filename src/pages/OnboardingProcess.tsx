@@ -282,8 +282,7 @@ const OnboardingProcess = () => {
             <Card className="p-6 border-2 border-primary-glow/30 bg-white/95 backdrop-blur-sm shadow-neural hover:shadow-cyber transition-all duration-300">
               <h3 className="text-lg font-bold mb-3 text-[#3498DB]">What if I need revisions?</h3>
               <p className="text-muted-foreground">
-                Our AI includes revision capabilities in all packages. Most clients are thrilled with the first AI-generated draft, 
-                but our system can make adjustments to ensure 100% satisfaction.
+                We offer free revisions on all content. Simply reply to your delivery email—our team will refine and return updated drafts within 24 hours to ensure your satisfaction.
               </p>
             </Card>
 
