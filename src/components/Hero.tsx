@@ -41,25 +41,25 @@ const Hero = () => {
           </h1>
 
           {/* Client Logos - Futuristic */}
-          <div className="mb-8">
+          <div className="mb-8 px-4 sm:px-0">
             <p className="text-white/60 text-sm mb-4 font-mono tracking-wide">TRUSTED BY LEADING SAAS BRANDS</p>
-            <div className="flex justify-center items-center gap-8">
+            <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-4 md:gap-8">
               <div className="relative group">
                 <div className="absolute inset-0 bg-gradient-cyber opacity-20 rounded-lg blur-sm group-hover:blur-none transition-all duration-500" />
-                <div className="relative bg-black/30 px-6 py-3 rounded-lg backdrop-blur-md border border-primary-glow/30 shadow-neural hover:shadow-hologram transition-all duration-500 hover:border-primary-glow/60">
-                  <span className="text-white font-semibold font-mono tracking-wider">SHOPIFY</span>
+                <div className="relative bg-black/30 px-3 sm:px-6 py-3 rounded-lg backdrop-blur-md border border-primary-glow/30 shadow-neural hover:shadow-hologram transition-all duration-500 hover:border-primary-glow/60">
+                  <span className="text-white font-semibold font-mono tracking-wider text-xs sm:text-sm">SHOPIFY</span>
                 </div>
               </div>
               <div className="relative group">
                 <div className="absolute inset-0 bg-gradient-cyber opacity-20 rounded-lg blur-sm group-hover:blur-none transition-all duration-500" />
-                <div className="relative bg-black/30 px-6 py-3 rounded-lg backdrop-blur-md border border-primary-glow/30 shadow-neural hover:shadow-hologram transition-all duration-500 hover:border-primary-glow/60">
-                  <span className="text-white font-semibold font-mono tracking-wider">HUBSPOT</span>
+                <div className="relative bg-black/30 px-3 sm:px-6 py-3 rounded-lg backdrop-blur-md border border-primary-glow/30 shadow-neural hover:shadow-hologram transition-all duration-500 hover:border-primary-glow/60">
+                  <span className="text-white font-semibold font-mono tracking-wider text-xs sm:text-sm">HUBSPOT</span>
                 </div>
               </div>
               <div className="relative group">
                 <div className="absolute inset-0 bg-gradient-cyber opacity-20 rounded-lg blur-sm group-hover:blur-none transition-all duration-500" />
-                <div className="relative bg-black/30 px-6 py-3 rounded-lg backdrop-blur-md border border-primary-glow/30 shadow-neural hover:shadow-hologram transition-all duration-500 hover:border-primary-glow/60">
-                  <span className="text-white font-semibold font-mono tracking-wider">MAILCHIMP</span>
+                <div className="relative bg-black/30 px-3 sm:px-6 py-3 rounded-lg backdrop-blur-md border border-primary-glow/30 shadow-neural hover:shadow-hologram transition-all duration-500 hover:border-primary-glow/60">
+                  <span className="text-white font-semibold font-mono tracking-wider text-xs sm:text-sm">MAILCHIMP</span>
                 </div>
               </div>
             </div>
@@ -70,7 +70,7 @@ const Hero = () => {
           </p>
 
           {/* Key Benefits - AI Enhanced */}
-          <div className="flex flex-wrap justify-center gap-6 mb-10">
+          <div className="flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-6 mb-10 px-4 sm:px-0">
             {[
               "24-Hour Delivery",
               "SEO Optimized",
@@ -80,11 +80,11 @@ const Hero = () => {
               <div key={benefit} className="relative group">
                 <div className="absolute inset-0 bg-gradient-cyber opacity-30 rounded-full blur-sm group-hover:blur-none transition-all duration-300" />
                 <div 
-                  className="relative flex items-center gap-2 bg-black/40 px-6 py-3 rounded-full backdrop-blur-md border border-primary-glow/40 shadow-neural hover:shadow-cyber transition-all duration-300 hover:border-primary-glow/70 animate-hologram-flicker"
+                  className="relative flex items-center gap-2 bg-black/40 px-3 sm:px-4 md:px-6 py-2 sm:py-3 rounded-full backdrop-blur-md border border-primary-glow/40 shadow-neural hover:shadow-cyber transition-all duration-300 hover:border-primary-glow/70 animate-hologram-flicker"
                   style={{ animationDelay: `${index * 0.5}s` }}
                 >
-                  <CheckCircle className="h-5 w-5 text-primary-glow animate-pulse-glow" />
-                  <span className="font-medium font-mono tracking-wide text-sm">{benefit}</span>
+                  <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-primary-glow animate-pulse-glow" />
+                  <span className="font-medium font-mono tracking-wide text-xs sm:text-sm">{benefit}</span>
                 </div>
               </div>
             ))}
@@ -128,19 +128,20 @@ const Hero = () => {
 
 
           {/* Trust Indicators - AI Enhanced */}
-          <div className="mt-16 text-white/70">
-            <div className="flex justify-center gap-8 text-sm font-mono tracking-widest">
-              <div className="flex items-center gap-2 px-4 py-2 bg-black/20 rounded-lg border border-primary-glow/20 backdrop-blur-sm">
+          <div className="mt-16 text-white/70 px-4 sm:px-0">
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-4 md:gap-8 text-xs sm:text-sm font-mono tracking-widest">
+              <div className="flex items-center gap-2 px-2 sm:px-3 md:px-4 py-2 bg-black/20 rounded-lg border border-primary-glow/20 backdrop-blur-sm">
                 <span className="text-primary-glow">🚀</span>
-                <span>LAUNCHING SOON</span>
+                <span className="whitespace-nowrap">LAUNCHING SOON</span>
               </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-black/20 rounded-lg border border-primary-glow/20 backdrop-blur-sm">
+              <div className="flex items-center gap-2 px-2 sm:px-3 md:px-4 py-2 bg-black/20 rounded-lg border border-primary-glow/20 backdrop-blur-sm">
                 <span className="text-primary-glow">🤖</span>
-                <span>AI-POWERED AUTOMATION</span>
+                <span className="whitespace-nowrap hidden sm:inline">AI-POWERED AUTOMATION</span>
+                <span className="whitespace-nowrap sm:hidden">AI-POWERED</span>
               </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-black/20 rounded-lg border border-primary-glow/20 backdrop-blur-sm">
+              <div className="flex items-center gap-2 px-2 sm:px-3 md:px-4 py-2 bg-black/20 rounded-lg border border-primary-glow/20 backdrop-blur-sm">
                 <span className="text-primary-glow">▲</span>
-                <span>24HR TURNAROUND</span>
+                <span className="whitespace-nowrap">24HR TURNAROUND</span>
               </div>
             </div>
           </div>
