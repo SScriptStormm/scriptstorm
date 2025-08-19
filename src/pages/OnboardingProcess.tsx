@@ -28,7 +28,7 @@ const OnboardingProcess = () => {
       details: [
         "Extract your brand voice and style guidelines",
         "Identify core content goals and audience needs",
-        "Set up your automated delivery timeline"
+        "24-hour countdown begins after your content approval"
       ]
     },
     {
