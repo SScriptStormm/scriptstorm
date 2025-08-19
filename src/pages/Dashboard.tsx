@@ -268,58 +268,66 @@ const Dashboard = () => {
           </CardContent>
         </Card>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card className="bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-neural hover:shadow-cyber transition-all duration-500">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-white/70 text-sm font-mono tracking-wide">TOTAL ARTICLES</p>
-                  <p className="text-3xl font-bold text-white font-mono">{totalArticles}</p>
-                </div>
-                <FileText className="h-8 w-8 text-primary-glow animate-pulse" />
+        {/* Live Content Pipeline */}
+        <Card className="mb-8 bg-black/30 backdrop-blur-xl border-green-500/30 shadow-cyber">
+          <div className="absolute inset-0 bg-gradient-cyber opacity-5 rounded-lg" />
+          <CardHeader className="relative">
+            <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
+              🟢 LIVE CONTENT PIPELINE
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="relative space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="p-4 bg-black/20 rounded-lg border border-green-500/20">
+                <p className="text-green-400 font-mono text-sm mb-2">• Active:</p>
+                <p className="text-white font-mono text-lg">[{totalArticles}] AI-generated pieces</p>
               </div>
-            </CardContent>
-          </Card>
+              <div className="p-4 bg-black/20 rounded-lg border border-green-500/20">
+                <p className="text-green-400 font-mono text-sm mb-2">• Next Delivery:</p>
+                <p className="text-white font-mono text-lg">[24h timer starts on approval]</p>
+              </div>
+              <div className="p-4 bg-black/20 rounded-lg border border-green-500/20">
+                <p className="text-green-400 font-mono text-sm mb-2">• Quality:</p>
+                <p className="text-white font-mono text-lg">[✅ AUTO-VERIFIED]</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
-          <Card className="bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-neural hover:shadow-cyber transition-all duration-500">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-white/70 text-sm font-mono tracking-wide">COMPLETED</p>
-                  <p className="text-3xl font-bold text-white font-mono">{completedArticles}</p>
+        {/* Workflow Visualization */}
+        {articles.length > 0 && (
+          <Card className="mb-8 bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber">
+            <CardHeader>
+              <CardTitle className="text-white font-mono tracking-wide">
+                WORKFLOW VISUALIZATION
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {articles.slice(0, 3).map((article, index) => (
+                <div key={article.id} className="flex items-center gap-4 p-3 bg-black/20 rounded-lg border border-primary-glow/20">
+                  {article.status === 'completed' && (
+                    <>
+                      <span className="text-green-400 text-lg">🟢</span>
+                      <span className="text-white font-mono">[{article.title}] - AI DRAFT READY</span>
+                    </>
+                  )}
+                  {article.status === 'in_progress' && (
+                    <>
+                      <span className="text-yellow-400 text-lg">🟡</span>
+                      <span className="text-white font-mono">[{article.title}] - AI RESEARCHING</span>
+                    </>
+                  )}
+                  {article.status === 'pending' && (
+                    <>
+                      <span className="text-red-400 text-lg">🔴</span>
+                      <span className="text-white font-mono">[UPGRADE TO JUMP QUEUE]</span>
+                    </>
+                  )}
                 </div>
-                <CheckCircle className="h-8 w-8 text-green-400 animate-pulse" />
-              </div>
+              ))}
             </CardContent>
           </Card>
-
-          <Card className="bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-neural hover:shadow-cyber transition-all duration-500">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-white/70 text-sm font-mono tracking-wide">AVG. WORDS</p>
-                  <p className="text-3xl font-bold text-white font-mono">{averageWordCount}</p>
-                </div>
-                <BarChart3 className="h-8 w-8 text-primary-glow animate-pulse" />
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-neural hover:shadow-cyber transition-all duration-500">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-white/70 text-sm font-mono tracking-wide">SUCCESS RATE</p>
-                  <p className="text-3xl font-bold text-white font-mono">
-                    {totalArticles > 0 ? Math.round((completedArticles / totalArticles) * 100) : 0}%
-                  </p>
-                </div>
-                <Target className="h-8 w-8 text-primary-glow animate-pulse" />
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        )}
 
         {/* Progress Overview */}
         {totalArticles > 0 && (
@@ -358,9 +366,9 @@ const Dashboard = () => {
           <CardContent>
             {articles.length === 0 ? (
               <div className="text-center py-12">
-                <FileText className="h-16 w-16 text-primary-glow/50 mx-auto mb-4" />
-                <p className="text-white/70 font-mono tracking-wide">
-                  No articles found. Contact support to get started.
+                <Zap className="h-16 w-16 text-primary-glow/50 mx-auto mb-4 animate-pulse" />
+                <p className="text-white font-mono tracking-wide text-xl">
+                  AI PRODUCTION READY - AWAITING YOUR REQUEST
                 </p>
               </div>
             ) : (
