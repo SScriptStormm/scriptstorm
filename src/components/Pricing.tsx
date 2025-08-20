@@ -43,6 +43,8 @@ const Pricing = () => {
 
       if (error) throw error;
 
+      console.log('Checkout response:', data);
+
       if (data?.url) {
         // Show urgency message before redirect
         toast({
