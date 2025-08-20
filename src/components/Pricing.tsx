@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Star, Crown, Mail, Phone, Calendar } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import ContactForm from "./ContactForm";
 
 const Pricing = () => {
@@ -14,6 +16,8 @@ const Pricing = () => {
   const [showGrowthDetails, setShowGrowthDetails] = useState(false);
   const [showEnterpriseComparison, setShowEnterpriseComparison] = useState(false);
   const [showMoreEnterprise, setShowMoreEnterprise] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
 
   const handleContactClick = () => {
     setShowContactForm(true);
@@ -25,6 +29,43 @@ const Pricing = () => {
 
   const handleEmailClick = () => {
     window.location.href = 'mailto:hello@scriptstorm.io?subject=Content%20Services%20Inquiry';
+  };
+
+  const handleCheckout = async (packageType: string, selectedAddOns = {}) => {
+    if (isLoading) return;
+    
+    setIsLoading(true);
+    
+    try {
+      const { data, error } = await supabase.functions.invoke('create-checkout', {
+        body: { packageType, selectedAddOns }
+      });
+
+      if (error) throw error;
+
+      if (data?.url) {
+        // Show urgency message before redirect
+        toast({
+          title: "🚀 Redirecting to Checkout",
+          description: "Complete your order in the next 10 minutes to lock in 24-hour delivery for your first draft!",
+          duration: 3000,
+        });
+        
+        // Open checkout in new tab after short delay
+        setTimeout(() => {
+          window.open(data.url, '_blank');
+        }, 1000);
+      }
+    } catch (error) {
+      console.error('Checkout error:', error);
+      toast({
+        title: "Error",
+        description: "Unable to start checkout. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -118,10 +159,11 @@ const Pricing = () => {
                 </div>
               </div>
               <Button 
-                onClick={handleContactClick}
-                className="w-full bg-gradient-to-r from-[#3498DB] to-[#2980B9] hover:from-[#2980B9] hover:to-[#1F618D] text-white font-bold py-3 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+                onClick={() => handleCheckout('starter')}
+                disabled={isLoading}
+                className="w-full bg-gradient-to-r from-[#3498DB] to-[#2980B9] hover:from-[#2980B9] hover:to-[#1F618D] text-white font-bold py-3 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Get Custom Quote
+                {isLoading ? "Processing..." : "🚀 Start My 24-Hour Draft"}
               </Button>
               <p className="text-xs text-muted-foreground italic text-center">Email-only workflow • No meetings • No delays</p>
             </CardContent>
@@ -183,10 +225,11 @@ const Pricing = () => {
                 </div>
               </div>
               <Button 
-                onClick={handleContactClick}
-                className="w-full bg-gradient-to-r from-[#2ECC71] to-[#27AE60] hover:from-[#27AE60] hover:to-[#229954] text-white font-bold py-3 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+                onClick={() => handleCheckout('growth')}
+                disabled={isLoading}
+                className="w-full bg-gradient-to-r from-[#2ECC71] to-[#27AE60] hover:from-[#27AE60] hover:to-[#229954] text-white font-bold py-3 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Get Custom Quote
+                {isLoading ? "Processing..." : "👉 Get Started Now"}
               </Button>
               <p className="text-xs text-muted-foreground italic text-center">Email-only workflow • No meetings • No delays</p>
             </CardContent>
@@ -396,10 +439,18 @@ const Pricing = () => {
               )}
 
               <Button 
-                onClick={handleContactClick}
-                className="w-full bg-gradient-to-r from-[#9B59B6] to-[#8E44AD] hover:from-[#8E44AD] hover:to-[#7D3C98] text-white font-bold py-3 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+                onClick={() => {
+                  const packageMap = {
+                    'starter': 'starter-enterprise',
+                    'growth': 'growth-tier', 
+                    'authority': 'authority-tier'
+                  };
+                  handleCheckout(packageMap[selectedEnterprise] || 'starter-enterprise');
+                }}
+                disabled={isLoading}
+                className="w-full bg-gradient-to-r from-[#9B59B6] to-[#8E44AD] hover:from-[#8E44AD] hover:to-[#7D3C98] text-white font-bold py-3 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Get Custom Quote
+                {isLoading ? "Processing..." : "🚀 Start My 24-Hour Draft"}
               </Button>
               <p className="text-xs text-muted-foreground italic text-center">Email-only workflow • No meetings • No delays</p>
             </CardContent>
@@ -423,10 +474,11 @@ const Pricing = () => {
                 <p className="text-2xl font-bold mb-2">$297<span className="text-sm text-muted-foreground">/month</span></p>
                 <p className="text-sm text-muted-foreground mb-4">30 AI posts • Captions • Hashtags</p>
                 <Button 
-                  onClick={handleContactClick}
-                  className="w-full bg-[#E67E22] hover:bg-[#D35400] text-white"
+                  onClick={() => handleCheckout('starter', { seo: true })}
+                  disabled={isLoading}
+                  className="w-full bg-[#E67E22] hover:bg-[#D35400] text-white disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Get Quote
+                  {isLoading ? "Processing..." : "👉 Get Started Now"}
                 </Button>
               </div>
             </Card>
@@ -437,10 +489,11 @@ const Pricing = () => {
                 <p className="text-2xl font-bold mb-2">$5<span className="text-sm text-muted-foreground">/each</span></p>
                 <p className="text-sm text-muted-foreground mb-4">SEO-optimized • Converting copy</p>
                 <Button 
-                  onClick={handleContactClick}
-                  className="w-full bg-[#E74C3C] hover:bg-[#C0392B] text-white"
+                  onClick={() => handleCheckout('starter', { editing: true })}
+                  disabled={isLoading}
+                  className="w-full bg-[#E74C3C] hover:bg-[#C0392B] text-white disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Get Quote
+                  {isLoading ? "Processing..." : "👉 Get Started Now"}
                 </Button>
               </div>
             </Card>
@@ -453,12 +506,13 @@ const Pricing = () => {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-lg mx-auto">
             <Button 
-              onClick={handleContactClick}
-              className="flex items-center gap-2 bg-[#3498DB] hover:bg-[#2980B9] text-white px-6 py-3 text-lg"
+              onClick={() => handleCheckout('growth')}
+              disabled={isLoading}
+              className="flex items-center gap-2 bg-[#3498DB] hover:bg-[#2980B9] text-white px-6 py-3 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
               size="lg"
             >
               <Mail className="h-5 w-5" />
-              Get Free Consultation
+              {isLoading ? "Processing..." : "🚀 Start My 24-Hour Draft"}
             </Button>
             
             <Button 
