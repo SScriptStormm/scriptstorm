@@ -132,7 +132,7 @@ const Hero = () => {
             <div className="flex flex-wrap justify-center gap-2 sm:gap-4 md:gap-8 text-xs sm:text-sm font-mono tracking-widest">
               <div className="flex items-center gap-2 px-2 sm:px-3 md:px-4 py-2 bg-black/20 rounded-lg border border-primary-glow/20 backdrop-blur-sm">
                 <span className="text-primary-glow">🚀</span>
-                <span className="whitespace-nowrap">LAUNCHING SOON</span>
+                <span className="whitespace-nowrap">READY TO DEPLOY</span>
               </div>
               <div className="flex items-center gap-2 px-2 sm:px-3 md:px-4 py-2 bg-black/20 rounded-lg border border-primary-glow/20 backdrop-blur-sm">
                 <span className="text-primary-glow">🤖</span>
