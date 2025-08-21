@@ -43,8 +43,6 @@ const Pricing = () => {
 
       if (error) throw error;
 
-      console.log('Checkout response:', data);
-
       if (data?.url) {
         // Show urgency message before redirect
         toast({
@@ -151,7 +149,7 @@ const Pricing = () => {
                   <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
                     <CheckCircle className="h-4 w-4 text-white" />
                   </div>
-                  <span className="text-sm font-medium">48-hour delivery</span>
+                  <span className="text-sm font-medium">24-hour delivery</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
@@ -231,7 +229,7 @@ const Pricing = () => {
                 disabled={isLoading}
                 className="w-full bg-gradient-to-r from-[#2ECC71] to-[#27AE60] hover:from-[#27AE60] hover:to-[#229954] text-white font-bold py-3 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isLoading ? "Processing..." : "👉 Get Started Now"}
+                {isLoading ? "Processing..." : "🚀 Start My 24-Hour Draft"}
               </Button>
               <p className="text-xs text-muted-foreground italic text-center">Email-only workflow • No meetings • No delays</p>
             </CardContent>
@@ -271,7 +269,7 @@ const Pricing = () => {
                 {expandedTier === 'starter' && (
                   <div className="mt-4 pt-4 border-t border-[#9B59B6]/20 text-sm text-muted-foreground space-y-2 animate-fade-in">
                     <div className="grid grid-cols-2 gap-2">
-                      <div>• 48-hour delivery</div>
+                      <div>• 24-hour delivery</div>
                       <div>• 1 revision round</div>
                       <div>• Keyword research</div>
                       <div>• Email workflow</div>
@@ -416,7 +414,7 @@ const Pricing = () => {
                         <div className="py-2 text-center">50</div>
                         
                         <div className="py-2 text-muted-foreground">🚀 Delivery</div>
-                        <div className="py-2 text-center">48h</div>
+                        <div className="py-2 text-center">24h</div>
                         <div className="py-2 text-center">24h</div>
                         <div className="py-2 text-center">12h</div>
                         
@@ -480,7 +478,7 @@ const Pricing = () => {
                   disabled={isLoading}
                   className="w-full bg-[#E67E22] hover:bg-[#D35400] text-white disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {isLoading ? "Processing..." : "👉 Get Started Now"}
+                  {isLoading ? "Processing..." : "🚀 Start My 24-Hour Draft"}
                 </Button>
               </div>
             </Card>
@@ -495,7 +493,7 @@ const Pricing = () => {
                   disabled={isLoading}
                   className="w-full bg-[#E74C3C] hover:bg-[#C0392B] text-white disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {isLoading ? "Processing..." : "👉 Get Started Now"}
+                  {isLoading ? "Processing..." : "🚀 Start My 24-Hour Draft"}
                 </Button>
               </div>
             </Card>
