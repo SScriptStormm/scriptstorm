@@ -40,30 +40,6 @@ const Hero = () => {
             <span className="block text-primary-glow">Delivered in 24 Hours</span>
           </h1>
 
-          {/* Client Logos - Futuristic */}
-          <div className="mb-8 px-4 sm:px-0">
-            <p className="text-white/60 text-sm mb-4 font-mono tracking-wide">TRUSTED BY LEADING SAAS BRANDS</p>
-            <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-4 md:gap-8">
-              <div className="relative group">
-                <div className="absolute inset-0 bg-gradient-cyber opacity-20 rounded-lg blur-sm group-hover:blur-none transition-all duration-500" />
-                <div className="relative bg-black/30 px-3 sm:px-6 py-3 rounded-lg backdrop-blur-md border border-primary-glow/30 shadow-neural hover:shadow-hologram transition-all duration-500 hover:border-primary-glow/60">
-                  <span className="text-white font-semibold font-mono tracking-wider text-xs sm:text-sm">SHOPIFY</span>
-                </div>
-              </div>
-              <div className="relative group">
-                <div className="absolute inset-0 bg-gradient-cyber opacity-20 rounded-lg blur-sm group-hover:blur-none transition-all duration-500" />
-                <div className="relative bg-black/30 px-3 sm:px-6 py-3 rounded-lg backdrop-blur-md border border-primary-glow/30 shadow-neural hover:shadow-hologram transition-all duration-500 hover:border-primary-glow/60">
-                  <span className="text-white font-semibold font-mono tracking-wider text-xs sm:text-sm">HUBSPOT</span>
-                </div>
-              </div>
-              <div className="relative group">
-                <div className="absolute inset-0 bg-gradient-cyber opacity-20 rounded-lg blur-sm group-hover:blur-none transition-all duration-500" />
-                <div className="relative bg-black/30 px-3 sm:px-6 py-3 rounded-lg backdrop-blur-md border border-primary-glow/30 shadow-neural hover:shadow-hologram transition-all duration-500 hover:border-primary-glow/60">
-                  <span className="text-white font-semibold font-mono tracking-wider text-xs sm:text-sm">MAILCHIMP</span>
-                </div>
-              </div>
-            </div>
-          </div>
           
           <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed">
             Professional Content Creation Service - No Tools, No Hassle, Just Results
@@ -99,7 +75,7 @@ const Hero = () => {
                 onClick={handleGetStarted}
                 className="relative text-lg px-8 py-4 h-auto shadow-cyber hover:shadow-hologram transition-all duration-500 border-2 border-primary-glow/50 hover:border-primary-glow animate-pulse-glow font-mono tracking-wide"
               >
-                GET FREE CONSULTATION
+                🚀 START YOUR FIRST DRAFT
               </Button>
             </div>
             <div className="relative group">
@@ -132,7 +108,7 @@ const Hero = () => {
             <div className="flex flex-wrap justify-center gap-2 sm:gap-4 md:gap-8 text-xs sm:text-sm font-mono tracking-widest">
               <div className="flex items-center gap-2 px-2 sm:px-3 md:px-4 py-2 bg-black/20 rounded-lg border border-primary-glow/20 backdrop-blur-sm">
                 <span className="text-primary-glow">🚀</span>
-                <span className="whitespace-nowrap">READY TO DEPLOY</span>
+                <span className="whitespace-nowrap">STOP WAITING. START PUBLISHING.</span>
               </div>
               <div className="flex items-center gap-2 px-2 sm:px-3 md:px-4 py-2 bg-black/20 rounded-lg border border-primary-glow/20 backdrop-blur-sm">
                 <span className="text-primary-glow">🤖</span>
