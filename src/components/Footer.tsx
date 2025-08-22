@@ -37,27 +37,27 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Services</h4>
             <ul className="space-y-2 text-sm text-white/70">
-              <li><a href="#" className="hover:text-white transition-smooth">SEO Blog Articles</a></li>
-              <li><a href="#" className="hover:text-white transition-smooth">Social Media Content</a></li>
-              <li><a href="#" className="hover:text-white transition-smooth">Email Copy</a></li>
-              <li><a href="#" className="hover:text-white transition-smooth">Content Strategy</a></li>
+              <li><a href="/#services" className="hover:text-white transition-smooth">SEO Blog Articles</a></li>
+              <li><a href="/#services" className="hover:text-white transition-smooth">Social Media Content</a></li>
+              <li><a href="/#services" className="hover:text-white transition-smooth">Email Copy</a></li>
+              <li><a href="/#services" className="hover:text-white transition-smooth">Content Strategy</a></li>
             </ul>
           </div>
           
           <div>
             <h4 className="font-semibold mb-4">Company</h4>
             <ul className="space-y-2 text-sm text-white/70">
-              <li><a href="#" className="hover:text-white transition-smooth">About Us</a></li>
-              <li><a href="#" className="hover:text-white transition-smooth">Our Process</a></li>
+              <li><Link to="/about-us" className="hover:text-white transition-smooth">About Us</Link></li>
+              <li><Link to="/onboarding-process" className="hover:text-white transition-smooth">Our Process</Link></li>
               <li><a href="#" className="hover:text-white transition-smooth">Case Studies</a></li>
-              <li><a href="#" className="hover:text-white transition-smooth">Contact</a></li>
+              <li><Link to="/contact" className="hover:text-white transition-smooth">Contact</Link></li>
             </ul>
           </div>
           
           <div>
             <h4 className="font-semibold mb-4">Support</h4>
             <ul className="space-y-2 text-sm text-white/70">
-              <li><a href="#" className="hover:text-white transition-smooth">Help Center</a></li>
+              <li><Link to="/help-center" className="hover:text-white transition-smooth">Help Center</Link></li>
               <li><Link to="/privacy-policy" className="hover:text-white transition-smooth">Privacy Policy</Link></li>
               <li><Link to="/terms-and-conditions" className="hover:text-white transition-smooth">Terms of Service</Link></li>
               <li><Link to="/refund-policy" className="hover:text-white transition-smooth">Refund Policy</Link></li>

@@ -14,6 +14,9 @@ import OnboardingProcess from "./pages/OnboardingProcess";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import AuthGuard from "./components/AuthGuard";
+import Contact from "./pages/Contact";
+import HelpCenter from "./pages/HelpCenter";
+import AboutUs from "./pages/AboutUs";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +32,9 @@ const App = () => (
           <Route path="/dashboard" element={<AuthGuard><Dashboard /></AuthGuard>} />
           <Route path="/why-choose-us" element={<WhyChooseUs />} />
           <Route path="/onboarding-process" element={<OnboardingProcess />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/help-center" element={<HelpCenter />} />
+          <Route path="/about-us" element={<AboutUs />} />
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/terms-and-conditions" element={<TermsOfService />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
