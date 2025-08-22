@@ -77,7 +77,7 @@ const WhyChooseUs = () => {
           {/* Comparison Section */}
           <div className="mb-20">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-mono">
-              ScriptStorm vs <span className="text-[#E74C3C]">The Old Way</span>
+              <span className="text-primary">ScriptStorm</span> vs <span className="text-[#E74C3C]">The Old Way</span>
             </h2>
             <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
               {/* The Old Way */}
@@ -118,7 +118,7 @@ const WhyChooseUs = () => {
               {/* ScriptStorm */}
               <Card className="border-2 border-[#2ECC71]/50 bg-white/95 backdrop-blur-sm shadow-hologram hover:shadow-cyber transition-all duration-500">
                 <CardHeader className="text-center">
-                  <CardTitle className="text-2xl text-[#2ECC71] font-mono">✅ ScriptStorm Done-For-You</CardTitle>
+                  <CardTitle className="text-2xl text-[#2ECC71] font-mono">✅ ScriptStorm</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-3">
