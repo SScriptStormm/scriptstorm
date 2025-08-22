@@ -77,7 +77,7 @@ const WhyChooseUs = () => {
           {/* Comparison Section */}
           <div className="mb-20">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-mono">
-              Done-For-You vs <span className="text-[#E74C3C]">DIY Tools</span>
+              ScriptStorm vs <span className="text-[#E74C3C]">The Old Way</span>
             </h2>
             <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
               {/* The Old Way */}
