@@ -473,42 +473,66 @@ const Pricing = () => {
         </div>
 
 
-        {/* Additional Services */}
+        {/* Add-On Services */}
         <div className="max-w-4xl mx-auto mb-16">
           <div className="text-center mb-8">
             <h3 className="text-2xl md:text-3xl font-bold mb-4 text-foreground">
-              Additional Services
+              Add-On Services
             </h3>
-            <p className="text-muted-foreground">Extend your content marketing with these specialized AI services</p>
+            <p className="text-muted-foreground">Upgrade your plan with these premium add-ons</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
             <Card className="p-6 border-2 border-[#E67E22]/40 hover:border-[#E67E22]/70 bg-white/95 backdrop-blur-sm transition-all duration-500 shadow-neural hover:shadow-cyber">
               <div className="text-center">
-                <h4 className="text-lg font-bold mb-2 text-[#E67E22]">AI Social Media Package</h4>
-                <p className="text-2xl font-bold mb-2">$297<span className="text-sm text-muted-foreground">/month</span></p>
-                <p className="text-sm text-muted-foreground mb-4">30 AI posts • Captions • Hashtags</p>
-                <Button 
-                  onClick={() => handleCheckout('social-media')}
-                  disabled={loadingStates['social-media']}
-                  className="w-full bg-[#E67E22] hover:bg-[#D35400] text-white disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {loadingStates['social-media'] ? "Processing..." : "🚀 Start My 24-Hour Draft"}
-                </Button>
+                <h4 className="text-lg font-bold mb-2 text-[#E67E22]">AI Social Media Add-On</h4>
+                <p className="text-sm text-muted-foreground mb-4">Upgrade your plan with done-for-you social content:</p>
+                <div className="space-y-2 mb-4">
+                  <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
+                    <span className="text-sm">Starter Plan:</span>
+                    <span className="font-bold">+$197/mo (30 posts)</span>
+                  </div>
+                  <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
+                    <span className="text-sm">Growth Plan:</span>
+                    <span className="font-bold">+$297/mo (50 posts)</span>
+                  </div>
+                  <div className="flex justify-between items-center p-2 bg-green-50 rounded">
+                    <span className="text-sm">Enterprise Plan:</span>
+                    <span className="font-bold text-green-600">100 posts INCLUDED</span>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <Button 
+                    onClick={() => handleCheckout('social-media-starter-addon')}
+                    disabled={loadingStates['social-media-starter-addon']}
+                    className="w-full bg-[#E67E22] hover:bg-[#D35400] text-white disabled:opacity-50 disabled:cursor-not-allowed mb-2"
+                  >
+                    {loadingStates['social-media-starter-addon'] ? "Processing..." : "Add to Starter (+$197/mo)"}
+                  </Button>
+                  <Button 
+                    onClick={() => handleCheckout('social-media-growth-addon')}
+                    disabled={loadingStates['social-media-growth-addon']}
+                    className="w-full bg-[#E67E22] hover:bg-[#D35400] text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {loadingStates['social-media-growth-addon'] ? "Processing..." : "Add to Growth (+$297/mo)"}
+                  </Button>
+                </div>
               </div>
             </Card>
             
             <Card className="p-6 border-2 border-[#E74C3C]/40 hover:border-[#E74C3C]/70 bg-white/95 backdrop-blur-sm transition-all duration-500 shadow-neural hover:shadow-cyber">
               <div className="text-center">
                 <h4 className="text-lg font-bold mb-2 text-[#E74C3C]">AI Product Descriptions</h4>
-                <p className="text-2xl font-bold mb-2">$5<span className="text-sm text-muted-foreground">/each</span></p>
-                <p className="text-sm text-muted-foreground mb-4">SEO-optimized • Converting copy</p>
+                <p className="text-sm text-muted-foreground mb-4">Bulk product description packages available.</p>
+                <div className="mb-4">
+                  <p className="text-sm">• Need 20+ descriptions? Contact us for volume pricing.</p>
+                  <p className="text-sm">• SEO-optimized • Converting copy</p>
+                </div>
                 <Button 
-                  onClick={() => handleCheckout('product-descriptions')}
-                  disabled={loadingStates['product-descriptions']}
-                  className="w-full bg-[#E74C3C] hover:bg-[#C0392B] text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                  onClick={handleContactClick}
+                  className="w-full bg-[#E74C3C] hover:bg-[#C0392B] text-white"
                 >
-                  {loadingStates['product-descriptions'] ? "Processing..." : "🚀 Start My 24-Hour Draft"}
+                  Request a Quote
                 </Button>
               </div>
             </Card>
