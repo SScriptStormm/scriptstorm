@@ -157,6 +157,18 @@ const Pricing = () => {
                   </div>
                   <span className="text-sm font-medium">1 revision round</span>
                 </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">30 social media posts</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">10 product descriptions</span>
+                </div>
               </div>
               <Button 
                 onClick={() => handleCheckout('starter')}
@@ -223,6 +235,18 @@ const Pricing = () => {
                   </div>
                   <span className="text-sm font-medium">Content calendar included</span>
                 </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">50 social media posts</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">20 product descriptions</span>
+                </div>
               </div>
               <Button 
                 onClick={() => handleCheckout('growth')}
@@ -263,7 +287,7 @@ const Pricing = () => {
                   <span className="text-xl font-bold text-[#9B59B6]">$1,297</span>
                 </div>
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground font-medium">20 articles per month</span>
+                  <span className="text-muted-foreground font-medium">20 articles + 100 social posts + unlimited product descriptions</span>
                   <span className="text-xs text-muted-foreground"> USD/month</span>
                 </div>
                 {expandedTier === 'starter' && (
@@ -473,65 +497,6 @@ const Pricing = () => {
         </div>
 
 
-        {/* Add-On Services */}
-        <div className="max-w-4xl mx-auto mb-16">
-          <div className="text-center mb-8">
-            <h3 className="text-2xl md:text-3xl font-bold mb-4 text-foreground">
-              Add-On Services
-            </h3>
-            <p className="text-muted-foreground">Extend your content engine with premium services.</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            <Card className="p-6 border-2 border-[#E67E22]/40 hover:border-[#E67E22]/70 bg-white/95 backdrop-blur-sm transition-all duration-500 shadow-neural hover:shadow-cyber">
-              <div className="text-center">
-                <div className="text-4xl mb-4">🤖</div>
-                <h4 className="text-xl font-bold mb-3 text-[#E67E22]">AI Social Media Content</h4>
-                <p className="text-muted-foreground mb-4">Done-for-you posts, captions, and hashtags for all platforms.</p>
-                <div className="space-y-2 mb-6 text-sm">
-                  <div className="flex items-center gap-2">
-                    <span>•</span>
-                    <span>Add to any plan: <strong>+$197/month</strong> (30 posts)</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span>•</span>
-                    <span>Enterprise Plans: <strong className="text-[#2ECC71]">100+ posts included</strong> at no extra cost</span>
-                  </div>
-                </div>
-                <Button 
-                  onClick={handleContactClick}
-                  className="w-full bg-[#E67E22] hover:bg-[#D35400] text-white font-semibold py-3"
-                >
-                  Add Social to My Plan
-                </Button>
-              </div>
-            </Card>
-            
-            <Card className="p-6 border-2 border-[#E74C3C]/40 hover:border-[#E74C3C]/70 bg-white/95 backdrop-blur-sm transition-all duration-500 shadow-neural hover:shadow-cyber">
-              <div className="text-center">
-                <div className="text-4xl mb-4">📝</div>
-                <h4 className="text-xl font-bold mb-3 text-[#E74C3C]">AI Product Descriptions</h4>
-                <p className="text-muted-foreground mb-4">SEO-optimized, converting copy for your product pages.</p>
-                <div className="space-y-2 mb-6 text-sm">
-                  <div className="flex items-center gap-2">
-                    <span>•</span>
-                    <span>Pricing: <strong>$5/description</strong> (discounts for 20+ units)</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span>•</span>
-                    <span>Perfect for e-commerce stores launching new products</span>
-                  </div>
-                </div>
-                <Button 
-                  onClick={handleContactClick}
-                  className="w-full bg-[#E74C3C] hover:bg-[#C0392B] text-white font-semibold py-3"
-                >
-                  Request a Custom Quote
-                </Button>
-              </div>
-            </Card>
-          </div>
-        </div>
 
         {/* Contact Options */}
         <div className="text-center mb-16">
