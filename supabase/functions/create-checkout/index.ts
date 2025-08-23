@@ -45,9 +45,9 @@ serve(async (req) => {
     const packagePricing = {
       starter: { amount: 29700, name: "ScriptStorm Starter Package", description: "5 SEO Articles monthly" },
       growth: { amount: 59700, name: "ScriptStorm Growth Package", description: "10 SEO Articles monthly" },
-      "starter-enterprise": { amount: 129700, name: "ScriptStorm Starter Enterprise", description: "Premium enterprise features" },
-      "growth-tier": { amount: 179700, name: "ScriptStorm Growth Tier", description: "Advanced growth enterprise features" },
-      "authority-tier": { amount: 299700, name: "ScriptStorm Authority Tier", description: "Full authority enterprise package" },
+      "starter-enterprise": { amount: 129700, name: "ScriptStorm Starter Enterprise", description: "20+ SEO Articles monthly with 100 social posts included" },
+      "growth-tier": { amount: 179700, name: "ScriptStorm Growth Tier", description: "30+ SEO Articles monthly with advanced features" },
+      "authority-tier": { amount: 299700, name: "ScriptStorm Authority Tier", description: "50+ SEO Articles monthly with premium support" },
       "social-media-starter-addon": { amount: 19700, name: "Social Media Add-On for Starter", description: "30 AI social media posts monthly" },
       "social-media-growth-addon": { amount: 29700, name: "Social Media Add-On for Growth", description: "50 AI social media posts monthly" }
     };
