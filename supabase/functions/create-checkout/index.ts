@@ -43,17 +43,15 @@ serve(async (req) => {
 
     // Create line items based on package type
     const packagePricing = {
-      starter: { amount: 29700, name: "ScriptStorm Starter Package", description: "5 SEO Articles monthly" },
-      growth: { amount: 59700, name: "ScriptStorm Growth Package", description: "10 SEO Articles monthly" },
-      "starter-enterprise": { amount: 129700, name: "ScriptStorm Starter Enterprise", description: "20+ SEO Articles monthly with 100 social posts included" },
-      "growth-tier": { amount: 179700, name: "ScriptStorm Growth Tier", description: "30+ SEO Articles monthly with advanced features" },
-      "authority-tier": { amount: 299700, name: "ScriptStorm Authority Tier", description: "50+ SEO Articles monthly with premium support" },
-      "social-media-starter-addon": { amount: 19700, name: "Social Media Add-On for Starter", description: "30 AI social media posts monthly" },
-      "social-media-growth-addon": { amount: 29700, name: "Social Media Add-On for Growth", description: "50 AI social media posts monthly" }
+      starter: { amount: 29700, name: "ScriptStorm Starter Package", description: "5 SEO Articles + 15 Social Posts + 5 Product Descriptions monthly" },
+      growth: { amount: 59700, name: "ScriptStorm Growth Package", description: "10 SEO Articles + 30 Social Posts + 10 Product Descriptions monthly" },
+      "starter-enterprise": { amount: 129700, name: "ScriptStorm Starter Enterprise", description: "20 SEO Articles + 60 Social Posts + 20 Product Descriptions monthly" },
+      "growth-enterprise": { amount: 179700, name: "ScriptStorm Growth Enterprise", description: "30 SEO Articles + 90 Social Posts + 30 Product Descriptions monthly" },
+      "authority-enterprise": { amount: 299700, name: "ScriptStorm Authority Enterprise", description: "50 SEO Articles + 150 Social Posts + Unlimited Product Descriptions monthly" }
     };
 
+    // Remove add-on handling since all packages are now all-inclusive
     const selectedPackage = packagePricing[packageType] || packagePricing.starter;
-    
     const lineItems = [
       {
         price_data: {
@@ -68,38 +66,6 @@ serve(async (req) => {
         quantity: 1,
       }
     ];
-
-    // Add SEO add-on if selected
-    if (selectedAddOns?.seo) {
-      lineItems.push({
-        price_data: {
-          currency: "usd",
-          product_data: {
-            name: "SEO Optimization Add-on",
-            description: "Professional SEO optimization with SurferSEO integration"
-          },
-          unit_amount: 19700, // $197 in cents
-          recurring: { interval: "month" },
-        },
-        quantity: 1,
-      });
-    }
-
-    // Add Editing add-on if selected
-    if (selectedAddOns?.editing) {
-      lineItems.push({
-        price_data: {
-          currency: "usd",
-          product_data: {
-            name: "Native-Language Editing Add-on",
-            description: "Human polish for US/UK/EU/Asia markets"
-          },
-          unit_amount: 14700, // $147 in cents
-          recurring: { interval: "month" },
-        },
-        quantity: 1,
-      });
-    }
 
     logStep("Line items prepared", { lineItems });
 
@@ -117,9 +83,7 @@ serve(async (req) => {
       metadata: {
         user_id: userId,
         user_email: userEmail,
-        package_type: packageType,
-        seo_addon: selectedAddOns?.seo ? "true" : "false",
-        editing_addon: selectedAddOns?.editing ? "true" : "false",
+        package_type: packageType
       },
     });
 

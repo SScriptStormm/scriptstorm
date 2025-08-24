@@ -157,18 +157,18 @@ const Pricing = () => {
                   </div>
                   <span className="text-sm font-medium">1 revision round</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
-                    <CheckCircle className="h-4 w-4 text-white" />
-                  </div>
-                  <span className="text-sm font-medium">30 social media posts</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
-                    <CheckCircle className="h-4 w-4 text-white" />
-                  </div>
-                  <span className="text-sm font-medium">10 product descriptions</span>
-                </div>
+                 <div className="flex items-center gap-3">
+                   <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
+                     <CheckCircle className="h-4 w-4 text-white" />
+                   </div>
+                   <span className="text-sm font-medium">15 social media posts</span>
+                 </div>
+                 <div className="flex items-center gap-3">
+                   <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
+                     <CheckCircle className="h-4 w-4 text-white" />
+                   </div>
+                   <span className="text-sm font-medium">5 product descriptions</span>
+                 </div>
               </div>
               <Button 
                 onClick={() => handleCheckout('starter')}
@@ -235,18 +235,18 @@ const Pricing = () => {
                   </div>
                   <span className="text-sm font-medium">Content calendar included</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
-                    <CheckCircle className="h-4 w-4 text-white" />
-                  </div>
-                  <span className="text-sm font-medium">50 social media posts</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
-                    <CheckCircle className="h-4 w-4 text-white" />
-                  </div>
-                  <span className="text-sm font-medium">20 product descriptions</span>
-                </div>
+                 <div className="flex items-center gap-3">
+                   <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
+                     <CheckCircle className="h-4 w-4 text-white" />
+                   </div>
+                   <span className="text-sm font-medium">30 social media posts</span>
+                 </div>
+                 <div className="flex items-center gap-3">
+                   <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
+                     <CheckCircle className="h-4 w-4 text-white" />
+                   </div>
+                   <span className="text-sm font-medium">10 product descriptions</span>
+                 </div>
               </div>
               <Button 
                 onClick={() => handleCheckout('growth')}
@@ -286,10 +286,10 @@ const Pricing = () => {
                   <span className="font-bold text-base text-[#9B59B6]">Starter Enterprise</span>
                   <span className="text-xl font-bold text-[#9B59B6]">$1,297</span>
                 </div>
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground font-medium">20 articles + 100 social posts + unlimited product descriptions</span>
-                  <span className="text-xs text-muted-foreground"> USD/month</span>
-                </div>
+                 <div className="flex items-center justify-between text-sm">
+                   <span className="text-muted-foreground font-medium">20 articles + 60 social posts + 20 product descriptions</span>
+                   <span className="text-xs text-muted-foreground"> USD/month</span>
+                 </div>
                 {expandedTier === 'starter' && (
                   <div className="mt-4 pt-4 border-t border-[#9B59B6]/20 text-sm text-muted-foreground space-y-2 animate-fade-in">
                     <div className="grid grid-cols-2 gap-2">
@@ -335,15 +335,15 @@ const Pricing = () => {
                   >
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
-                        <span className="font-bold text-base text-[#9B59B6]">Growth Tier</span>
+                        <span className="font-bold text-base text-[#9B59B6]">Growth Enterprise</span>
                         <Badge className="bg-[#2ECC71] text-white text-xs">BEST VALUE</Badge>
                       </div>
                       <span className="text-xl font-bold text-[#9B59B6]">$1,797</span>
                     </div>
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-muted-foreground font-medium">30 articles per month</span>
-                      <span className="text-xs text-muted-foreground"> USD/month</span>
-                    </div>
+                     <div className="flex items-center justify-between text-sm">
+                       <span className="text-muted-foreground font-medium">30 articles + 90 social posts + 30 product descriptions</span>
+                       <span className="text-xs text-muted-foreground"> USD/month</span>
+                     </div>
                     {expandedTier === 'growth' && (
                       <div className="mt-4 pt-4 border-t border-[#9B59B6]/20 text-sm text-muted-foreground space-y-2 animate-fade-in">
                         <div className="grid grid-cols-2 gap-2">
@@ -374,16 +374,19 @@ const Pricing = () => {
                     className={`p-4 rounded-xl cursor-pointer transition-all border-2 ${selectedEnterprise === 'authority' ? 'ring-2 ring-[#9B59B6] bg-[#9B59B6]/10 shadow-lg border-[#9B59B6]/60' : 'border-[#9B59B6]/30 hover:border-[#9B59B6]/50 hover:bg-[#9B59B6]/5'} bg-gradient-to-r from-white/80 to-[#E67E22]/10`}
                   >
                     <div className="flex items-center justify-between mb-2">
-                      <span className="font-bold text-base text-[#9B59B6]">Authority Tier</span>
+                      <span className="font-bold text-base text-[#9B59B6]">Authority Enterprise</span>
                       <div className="flex flex-col items-end gap-1">
                         <Badge variant="outline" className="border-[#E67E22] text-[#E67E22] text-xs">Early Adopter</Badge>
                         <span className="text-xl font-bold text-[#9B59B6]">$2,997</span>
                       </div>
                     </div>
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-muted-foreground font-medium">50 articles per month</span>
-                      <span className="text-xs text-muted-foreground"> USD/month</span>
-                    </div>
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-muted-foreground font-medium">50 articles + 150 social posts + unlimited descriptions*</span>
+                        <span className="text-xs text-muted-foreground"> USD/month</span>
+                      </div>
+                      <p className="text-xs text-muted-foreground italic mt-2">
+                        *Unlimited under fair use policy. Volume must align with business needs.
+                      </p>
                     {expandedTier === 'authority' && (
                       <div className="mt-4 pt-4 border-t border-[#9B59B6]/20 text-sm text-muted-foreground space-y-2 animate-fade-in">
                         <div className="grid grid-cols-2 gap-2">
@@ -466,8 +469,8 @@ const Pricing = () => {
                 onClick={() => {
                   const packageMap = {
                     'starter': 'starter-enterprise',
-                    'growth': 'growth-tier', 
-                    'authority': 'authority-tier'
+                    'growth': 'growth-enterprise', 
+                    'authority': 'authority-enterprise'
                   };
                   const packageName = packageMap[selectedEnterprise] || 'starter-enterprise';
                   handleCheckout(packageName);
@@ -475,8 +478,8 @@ const Pricing = () => {
                 disabled={loadingStates[(() => {
                   const packageMap = {
                     'starter': 'starter-enterprise',
-                    'growth': 'growth-tier', 
-                    'authority': 'authority-tier'
+                    'growth': 'growth-enterprise', 
+                    'authority': 'authority-enterprise'
                   };
                   return packageMap[selectedEnterprise] || 'starter-enterprise';
                 })()]}
@@ -485,8 +488,8 @@ const Pricing = () => {
                 {loadingStates[(() => {
                   const packageMap = {
                     'starter': 'starter-enterprise',
-                    'growth': 'growth-tier', 
-                    'authority': 'authority-tier'
+                    'growth': 'growth-enterprise', 
+                    'authority': 'authority-enterprise'
                   };
                   return packageMap[selectedEnterprise] || 'starter-enterprise';
                 })()] ? "Processing..." : "🚀 Start My 24-Hour Draft"}
