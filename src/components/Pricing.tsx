@@ -286,10 +286,12 @@ const Pricing = () => {
                   <span className="font-bold text-base text-[#9B59B6]">Starter Enterprise</span>
                   <span className="text-xl font-bold text-[#9B59B6]">$1,297</span>
                 </div>
-                 <div className="flex items-center justify-between text-sm">
-                   <span className="text-muted-foreground font-medium">20 AI-generated SEO articles + 60 social posts + 20 product descriptions</span>
-                   <span className="text-xs text-muted-foreground"> USD/month</span>
+                 <div className="text-sm space-y-1 mb-2">
+                   <div className="text-muted-foreground font-medium">• 20 AI-generated SEO articles</div>
+                   <div className="text-muted-foreground font-medium">• 60 social media posts</div>
+                   <div className="text-muted-foreground font-medium">• 20 product descriptions</div>
                  </div>
+                 <div className="text-xs text-muted-foreground text-right">USD/month</div>
                 {expandedTier === 'starter' && (
                   <div className="mt-4 pt-4 border-t border-[#9B59B6]/20 text-sm text-muted-foreground space-y-2 animate-fade-in">
                     <div className="grid grid-cols-2 gap-2">
@@ -340,10 +342,12 @@ const Pricing = () => {
                       </div>
                       <span className="text-xl font-bold text-[#9B59B6]">$1,797</span>
                     </div>
-                     <div className="flex items-center justify-between text-sm">
-                       <span className="text-muted-foreground font-medium">30 AI-generated SEO articles + 90 social posts + 30 product descriptions</span>
-                       <span className="text-xs text-muted-foreground"> USD/month</span>
+                     <div className="text-sm space-y-1 mb-2">
+                       <div className="text-muted-foreground font-medium">• 30 AI-generated SEO articles</div>
+                       <div className="text-muted-foreground font-medium">• 90 social media posts</div>
+                       <div className="text-muted-foreground font-medium">• 30 product descriptions</div>
                      </div>
+                     <div className="text-xs text-muted-foreground text-right">USD/month</div>
                     {expandedTier === 'growth' && (
                       <div className="mt-4 pt-4 border-t border-[#9B59B6]/20 text-sm text-muted-foreground space-y-2 animate-fade-in">
                         <div className="grid grid-cols-2 gap-2">
@@ -380,10 +384,12 @@ const Pricing = () => {
                         <span className="text-xl font-bold text-[#9B59B6]">$2,997</span>
                       </div>
                     </div>
-                      <div className="flex items-center justify-between text-sm">
-                        <span className="text-muted-foreground font-medium">50 AI-generated SEO articles + 150 social posts + unlimited descriptions*</span>
-                        <span className="text-xs text-muted-foreground"> USD/month</span>
+                      <div className="text-sm space-y-1 mb-2">
+                        <div className="text-muted-foreground font-medium">• 50 AI-generated SEO articles</div>
+                        <div className="text-muted-foreground font-medium">• 150 social media posts</div>
+                        <div className="text-muted-foreground font-medium">• Unlimited product descriptions*</div>
                       </div>
+                      <div className="text-xs text-muted-foreground text-right">USD/month</div>
                       <p className="text-xs text-muted-foreground italic mt-2">
                         *Unlimited under fair use policy. Volume must align with business needs.
                       </p>
