@@ -287,7 +287,7 @@ const Pricing = () => {
                   <span className="text-xl font-bold text-[#9B59B6]">$1,297</span>
                 </div>
                  <div className="flex items-center justify-between text-sm">
-                   <span className="text-muted-foreground font-medium">20 articles + 60 social posts + 20 product descriptions</span>
+                   <span className="text-muted-foreground font-medium">20 AI-generated SEO articles + 60 social posts + 20 product descriptions</span>
                    <span className="text-xs text-muted-foreground"> USD/month</span>
                  </div>
                 {expandedTier === 'starter' && (
@@ -341,7 +341,7 @@ const Pricing = () => {
                       <span className="text-xl font-bold text-[#9B59B6]">$1,797</span>
                     </div>
                      <div className="flex items-center justify-between text-sm">
-                       <span className="text-muted-foreground font-medium">30 articles + 90 social posts + 30 product descriptions</span>
+                       <span className="text-muted-foreground font-medium">30 AI-generated SEO articles + 90 social posts + 30 product descriptions</span>
                        <span className="text-xs text-muted-foreground"> USD/month</span>
                      </div>
                     {expandedTier === 'growth' && (
@@ -381,7 +381,7 @@ const Pricing = () => {
                       </div>
                     </div>
                       <div className="flex items-center justify-between text-sm">
-                        <span className="text-muted-foreground font-medium">50 articles + 150 social posts + unlimited descriptions*</span>
+                        <span className="text-muted-foreground font-medium">50 AI-generated SEO articles + 150 social posts + unlimited descriptions*</span>
                         <span className="text-xs text-muted-foreground"> USD/month</span>
                       </div>
                       <p className="text-xs text-muted-foreground italic mt-2">
