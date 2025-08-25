@@ -114,9 +114,9 @@ const Pricing = () => {
         </div>
 
         {/* Service Packages */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
+        <div className="grid md:grid-cols-3 gap-8 mb-16 items-start">
           {/* Starter Package */}
-          <Card className="relative shadow-neural border-2 border-[#3498DB]/40 hover:border-[#3498DB]/80 bg-gradient-to-br from-white/95 to-[#3498DB]/5 backdrop-blur-sm transition-all duration-500 hover:shadow-[0_0_30px_rgba(52,152,219,0.3)] hover:scale-105">
+          <Card className="relative shadow-neural border-2 border-[#3498DB]/40 hover:border-[#3498DB]/80 bg-gradient-to-br from-white/95 to-[#3498DB]/5 backdrop-blur-sm transition-all duration-500 hover:shadow-[0_0_30px_rgba(52,152,219,0.3)] hover:scale-105 h-fit">
             <div className="absolute top-4 right-4">
               <div className="w-12 h-12 bg-gradient-to-br from-[#3498DB] to-[#2980B9] rounded-full flex items-center justify-center shadow-lg">
                 <span className="text-white text-xl">🚀</span>
@@ -180,7 +180,7 @@ const Pricing = () => {
           </Card>
 
           {/* Growth Package - Most Popular */}
-          <Card className="relative shadow-hologram border-2 border-[#2ECC71]/50 hover:border-[#2ECC71]/80 bg-gradient-to-br from-white/95 to-[#2ECC71]/5 backdrop-blur-sm transition-all duration-500 hover:shadow-[0_0_30px_rgba(46,204,113,0.4)] hover:scale-105 overflow-visible">
+          <Card className="relative shadow-hologram border-2 border-[#2ECC71]/50 hover:border-[#2ECC71]/80 bg-gradient-to-br from-white/95 to-[#2ECC71]/5 backdrop-blur-sm transition-all duration-500 hover:shadow-[0_0_30px_rgba(46,204,113,0.4)] hover:scale-105 overflow-visible h-fit">
             {/* Most Popular Badge */}
             <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
               <div className="bg-gradient-to-r from-[#2ECC71] to-[#27AE60] text-white px-6 py-3 rounded-full text-sm font-bold flex items-center gap-2 shadow-xl border-2 border-white/20 animate-pulse">
