@@ -11,7 +11,7 @@ import ContactForm from "./ContactForm";
 const Pricing = () => {
   const [showContactForm, setShowContactForm] = useState(false);
   const [selectedEnterprise, setSelectedEnterprise] = useState<'starter' | 'growth' | 'authority' | null>('starter');
-  const [expandedTier, setExpandedTier] = useState<'starter' | 'growth' | 'authority' | null>(null);
+  const [expandedTier, setExpandedTier] = useState<'enterprise-starter' | 'enterprise-growth' | 'enterprise-authority' | null>(null);
   const [showStarterDetails, setShowStarterDetails] = useState(false);
   const [showGrowthDetails, setShowGrowthDetails] = useState(false);
   const [showEnterpriseComparison, setShowEnterpriseComparison] = useState(false);
@@ -294,7 +294,7 @@ const Pricing = () => {
                    <div className="text-muted-foreground font-medium">• 60 social media posts</div>
                    <div className="text-muted-foreground font-medium">• 20 product descriptions</div>
                  </div>
-                {expandedTier === 'starter' && (
+                {expandedTier === 'enterprise-starter' && (
                   <div className="mt-4 pt-4 border-t border-[#9B59B6]/20 text-sm text-muted-foreground space-y-2 animate-fade-in">
                     <div className="grid grid-cols-2 gap-2">
                       <div>• 24-hour delivery</div>
@@ -307,10 +307,10 @@ const Pricing = () => {
                 <Button 
                   variant="ghost" 
                   size="sm" 
-                  onClick={(e) => { e.stopPropagation(); setExpandedTier(expandedTier === 'starter' ? null : 'starter'); }}
+                  onClick={(e) => { e.stopPropagation(); setExpandedTier(expandedTier === 'enterprise-starter' ? null : 'enterprise-starter'); }}
                   className="mt-3 text-[#9B59B6] hover:bg-[#9B59B6]/10"
                 >
-                  {expandedTier === 'starter' ? 'Hide details' : 'View details'}
+                  {expandedTier === 'enterprise-starter' ? 'Hide details' : 'View details'}
                 </Button>
               </div>
 
@@ -352,7 +352,7 @@ const Pricing = () => {
                        <div className="text-muted-foreground font-medium">• 90 social media posts</div>
                        <div className="text-muted-foreground font-medium">• 30 product descriptions</div>
                      </div>
-                    {expandedTier === 'growth' && (
+                    {expandedTier === 'enterprise-growth' && (
                       <div className="mt-4 pt-4 border-t border-[#9B59B6]/20 text-sm text-muted-foreground space-y-2 animate-fade-in">
                         <div className="grid grid-cols-2 gap-2">
                           <div>• 24-hour delivery</div>
@@ -365,10 +365,10 @@ const Pricing = () => {
                     <Button 
                       variant="ghost" 
                       size="sm" 
-                      onClick={(e) => { e.stopPropagation(); setExpandedTier(expandedTier === 'growth' ? null : 'growth'); }}
+                      onClick={(e) => { e.stopPropagation(); setExpandedTier(expandedTier === 'enterprise-growth' ? null : 'enterprise-growth'); }}
                       className="mt-3 text-[#9B59B6] hover:bg-[#9B59B6]/10"
                     >
-                      {expandedTier === 'growth' ? 'Hide details' : 'View details'}
+                      {expandedTier === 'enterprise-growth' ? 'Hide details' : 'View details'}
                     </Button>
                   </div>
 
@@ -397,7 +397,7 @@ const Pricing = () => {
                       <p className="text-xs text-muted-foreground italic mt-2">
                         *Unlimited under fair use policy. Volume must align with business needs.
                       </p>
-                    {expandedTier === 'authority' && (
+                    {expandedTier === 'enterprise-authority' && (
                       <div className="mt-4 pt-4 border-t border-[#9B59B6]/20 text-sm text-muted-foreground space-y-2 animate-fade-in">
                         <div className="grid grid-cols-2 gap-2">
                           <div>• 12-hour delivery</div>
@@ -410,10 +410,10 @@ const Pricing = () => {
                     <Button 
                       variant="ghost" 
                       size="sm" 
-                      onClick={(e) => { e.stopPropagation(); setExpandedTier(expandedTier === 'authority' ? null : 'authority'); }}
+                      onClick={(e) => { e.stopPropagation(); setExpandedTier(expandedTier === 'enterprise-authority' ? null : 'enterprise-authority'); }}
                       className="mt-3 text-[#9B59B6] hover:bg-[#9B59B6]/10"
                     >
-                      {expandedTier === 'authority' ? 'Hide details' : 'View details'}
+                      {expandedTier === 'enterprise-authority' ? 'Hide details' : 'View details'}
                     </Button>
                   </div>
 
