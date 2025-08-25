@@ -12,8 +12,6 @@ const Pricing = () => {
   const [showContactForm, setShowContactForm] = useState(false);
   const [selectedEnterprise, setSelectedEnterprise] = useState<'starter' | 'growth' | 'authority' | null>('starter');
   const [expandedTier, setExpandedTier] = useState<'enterprise-starter' | 'enterprise-growth' | 'enterprise-authority' | null>(null);
-  const [showStarterDetails, setShowStarterDetails] = useState(false);
-  const [showGrowthDetails, setShowGrowthDetails] = useState(false);
   const [showEnterpriseComparison, setShowEnterpriseComparison] = useState(false);
   const [showMoreEnterprise, setShowMoreEnterprise] = useState(false);
   const [loadingStates, setLoadingStates] = useState<{[key: string]: boolean}>({});
@@ -318,7 +316,10 @@ const Pricing = () => {
               {!showMoreEnterprise && (
                 <Button 
                   variant="outline" 
-                  onClick={() => setShowMoreEnterprise(true)}
+                  onClick={() => {
+                    console.log('Clicking See More Enterprise Options');
+                    setShowMoreEnterprise(true);
+                  }}
                   className="w-full border-[#9B59B6]/40 text-[#9B59B6] hover:bg-[#9B59B6]/10 hover:border-[#9B59B6]/60"
                 >
                   See More Enterprise Options
