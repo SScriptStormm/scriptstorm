@@ -182,7 +182,7 @@ const Pricing = () => {
           {/* Growth Package - Most Popular */}
           <Card className="relative shadow-hologram border-2 border-[#2ECC71]/50 hover:border-[#2ECC71]/80 bg-gradient-to-br from-white/95 to-[#2ECC71]/5 backdrop-blur-sm transition-all duration-500 hover:shadow-[0_0_30px_rgba(46,204,113,0.4)] hover:scale-105 overflow-visible h-fit">
             {/* Most Popular Badge */}
-            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+            <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-10">
               <div className="bg-gradient-to-r from-[#2ECC71] to-[#27AE60] text-white px-6 py-3 rounded-full text-sm font-bold flex items-center gap-2 shadow-xl border-2 border-white/20 animate-pulse">
                 <Crown className="h-4 w-4" />
                 Most Popular
@@ -194,7 +194,7 @@ const Pricing = () => {
               </div>
             </div>
 
-            <CardHeader className="text-center pt-12 pb-4">
+            <CardHeader className="text-center pt-8 pb-4">
               <CardTitle className="text-2xl font-bold text-[#2ECC71] mb-2">
                 Growth Package
               </CardTitle>
