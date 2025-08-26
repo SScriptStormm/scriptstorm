@@ -281,7 +281,7 @@ const Pricing = () => {
                 className={`p-4 rounded-xl cursor-pointer transition-all border-2 ${selectedEnterprise === 'starter' ? 'ring-2 ring-[#9B59B6] bg-[#9B59B6]/10 shadow-lg border-[#9B59B6]/60' : 'border-[#9B59B6]/30 hover:border-[#9B59B6]/50 hover:bg-[#9B59B6]/5'} bg-gradient-to-r from-white/80 to-[#9B59B6]/10`}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="font-bold text-base text-[#9B59B6]">Starter Enterprise</span>
+                  <span className="font-bold text-base text-[#9B59B6]">Scale</span>
                   <div className="text-right">
                     <div className="text-xl font-bold text-[#9B59B6]">$1,297</div>
                     <div className="text-xs text-muted-foreground">USD/month</div>
@@ -340,7 +340,7 @@ const Pricing = () => {
                   >
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
-                        <span className="font-bold text-base text-[#9B59B6]">Growth Enterprise</span>
+                        <span className="font-bold text-base text-[#9B59B6]">Authority</span>
                         <Badge className="bg-[#2ECC71] text-white text-xs">BEST VALUE</Badge>
                       </div>
                       <div className="text-right">
@@ -383,7 +383,7 @@ const Pricing = () => {
                     className={`p-4 rounded-xl cursor-pointer transition-all border-2 ${selectedEnterprise === 'authority' ? 'ring-2 ring-[#9B59B6] bg-[#9B59B6]/10 shadow-lg border-[#9B59B6]/60' : 'border-[#9B59B6]/30 hover:border-[#9B59B6]/50 hover:bg-[#9B59B6]/5'} bg-gradient-to-r from-white/80 to-[#E67E22]/10`}
                   >
                     <div className="flex items-center justify-between mb-2">
-                      <span className="font-bold text-base text-[#9B59B6]">Authority Enterprise</span>
+                      <span className="font-bold text-base text-[#9B59B6]">Dominance</span>
                       <div className="flex flex-col items-end gap-1">
                         <Badge variant="outline" className="border-[#E67E22] text-[#E67E22] text-xs">Early Adopter</Badge>
                         <div className="text-xl font-bold text-[#9B59B6]">$2,997</div>
@@ -442,9 +442,9 @@ const Pricing = () => {
                       <h5 className="text-sm font-bold mb-3 text-[#9B59B6]">📊 Enterprise Comparison</h5>
                       <div className="grid grid-cols-4 gap-2 text-xs">
                         <div className="font-semibold text-[#9B59B6]">Feature</div>
-                        <div className="font-semibold text-center">Starter</div>
-                        <div className="font-semibold text-center">Growth</div>
+                        <div className="font-semibold text-center">Scale</div>
                         <div className="font-semibold text-center">Authority</div>
+                        <div className="font-semibold text-center">Dominance</div>
                         
                         <div className="py-2 text-muted-foreground">📝 Articles</div>
                         <div className="py-2 text-center">20</div>
