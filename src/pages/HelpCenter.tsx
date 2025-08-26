@@ -93,12 +93,12 @@ const HelpCenter = () => {
   })).filter(category => category.questions.length > 0);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-secondary">
+    <div className="min-h-screen bg-gradient-hero">
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-black/20 backdrop-blur-md border-b border-white/10">
+      <nav className="sticky top-0 z-50 bg-secondary/95 backdrop-blur-md border-b border-primary/20">
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
-            <Link to="/" className="flex items-center gap-2 text-white hover:text-primary-glow transition-colors">
+            <Link to="/" className="flex items-center gap-2 text-primary-glow hover:text-primary transition-colors">
               <ArrowLeft className="h-4 w-4" />
               <span className="font-mono tracking-wide">Back to ScriptStorm</span>
             </Link>
@@ -109,21 +109,21 @@ const HelpCenter = () => {
       {/* Hero Section */}
       <section className="py-16">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-foreground">
             Help Center
           </h1>
-          <p className="text-xl text-white/80 max-w-2xl mx-auto mb-8">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
             Find answers to common questions about ScriptStorm's content creation services
           </p>
           
           {/* Search */}
           <div className="max-w-2xl mx-auto relative">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/50 h-5 w-5" />
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
             <Input
               placeholder="Search for help articles..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="bg-black/20 border-white/20 text-white placeholder:text-white/50 pl-12 py-6 text-lg"
+              className="bg-secondary/50 border-primary/30 text-foreground placeholder:text-muted-foreground pl-12 py-6 text-lg"
             />
           </div>
         </div>
@@ -133,33 +133,33 @@ const HelpCenter = () => {
       <section className="py-8">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <Card className="bg-black/20 border-white/10 backdrop-blur-md text-center">
+            <Card className="bg-secondary/90 border-primary/30 shadow-glow text-center">
               <CardContent className="p-6">
                 <div className="flex items-center justify-center gap-2 mb-2">
                   <Clock className="h-5 w-5 text-primary-glow" />
                   <Badge variant="outline" className="border-primary-glow/50 text-primary-glow">24 HOURS</Badge>
                 </div>
-                <p className="text-white/70 text-sm">Average Response Time</p>
+                <p className="text-muted-foreground text-sm">Average Response Time</p>
               </CardContent>
             </Card>
 
-            <Card className="bg-black/20 border-white/10 backdrop-blur-md text-center">
+            <Card className="bg-secondary/90 border-primary/30 shadow-glow text-center">
               <CardContent className="p-6">
                 <div className="flex items-center justify-center gap-2 mb-2">
                   <Users className="h-5 w-5 text-primary-glow" />
                   <Badge variant="outline" className="border-primary-glow/50 text-primary-glow">500+</Badge>
                 </div>
-                <p className="text-white/70 text-sm">Happy Clients Served</p>
+                <p className="text-muted-foreground text-sm">Happy Clients Served</p>
               </CardContent>
             </Card>
 
-            <Card className="bg-black/20 border-white/10 backdrop-blur-md text-center">
+            <Card className="bg-secondary/90 border-primary/30 shadow-glow text-center">
               <CardContent className="p-6">
                 <div className="flex items-center justify-center gap-2 mb-2">
                   <Shield className="h-5 w-5 text-primary-glow" />
                   <Badge variant="outline" className="border-primary-glow/50 text-primary-glow">100%</Badge>
                 </div>
-                <p className="text-white/70 text-sm">Satisfaction Guarantee</p>
+                <p className="text-muted-foreground text-sm">Satisfaction Guarantee</p>
               </CardContent>
             </Card>
           </div>
@@ -176,35 +176,35 @@ const HelpCenter = () => {
                   <div className="p-2 bg-primary/20 rounded-lg">
                     {category.icon}
                   </div>
-                  <h2 className="text-2xl font-bold text-white">{category.category}</h2>
+                  <h2 className="text-2xl font-bold text-foreground">{category.category}</h2>
                 </div>
                 
-                <div className="space-y-4">
-                  {category.questions.map((item, itemIndex) => (
-                    <Card key={itemIndex} className="bg-black/20 border-white/10 backdrop-blur-md">
-                      <CardHeader>
-                        <CardTitle className="text-white text-lg">{item.q}</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-white/80 leading-relaxed">{item.a}</p>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
+                  <div className="space-y-4">
+                    {category.questions.map((item, itemIndex) => (
+                      <Card key={itemIndex} className="bg-secondary/90 border-primary/30 shadow-glow">
+                        <CardHeader>
+                          <CardTitle className="text-foreground text-lg">{item.q}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-muted-foreground leading-relaxed">{item.a}</p>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
               </div>
             ))}
           </div>
 
           {/* Contact Support */}
           <div className="max-w-2xl mx-auto mt-16">
-            <Card className="bg-black/20 border-white/10 backdrop-blur-md text-center">
+            <Card className="bg-secondary/90 border-primary/30 shadow-glow text-center">
               <CardContent className="p-8">
-                <h3 className="text-2xl font-bold text-white mb-4">Still need help?</h3>
-                <p className="text-white/70 mb-6">
+                <h3 className="text-2xl font-bold text-foreground mb-4">Still need help?</h3>
+                <p className="text-muted-foreground mb-6">
                   Can't find the answer you're looking for? Our support team is here to help.
                 </p>
                 <Link to="/contact" className="inline-block">
-                  <button className="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+                  <button className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-lg font-semibold transition-colors shadow-glow">
                     Contact Support
                   </button>
                 </Link>

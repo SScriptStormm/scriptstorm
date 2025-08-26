@@ -48,12 +48,12 @@ const AboutUs = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-secondary">
+    <div className="min-h-screen bg-gradient-hero">
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-black/20 backdrop-blur-md border-b border-white/10">
+      <nav className="sticky top-0 z-50 bg-secondary/95 backdrop-blur-md border-b border-primary/20">
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
-            <Link to="/" className="flex items-center gap-2 text-white hover:text-primary-glow transition-colors">
+            <Link to="/" className="flex items-center gap-2 text-primary-glow hover:text-primary transition-colors">
               <ArrowLeft className="h-4 w-4" />
               <span className="font-mono tracking-wide">Back to ScriptStorm</span>
             </Link>
@@ -67,11 +67,11 @@ const AboutUs = () => {
           <Badge className="mb-4 bg-primary/20 text-primary-glow border-primary-glow/50">
             ABOUT SCRIPTSTORM
           </Badge>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-foreground">
             We're Redefining
             <span className="block text-primary-glow">Content Creation</span>
           </h1>
-          <p className="text-xl text-white/80 max-w-3xl mx-auto mb-8">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
             ScriptStorm combines the power of AI with human expertise to deliver premium content that converts. 
             We're not just another content agency—we're your strategic partner in growth.
           </p>
@@ -83,15 +83,15 @@ const AboutUs = () => {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-6 max-w-6xl mx-auto">
             {stats.map((stat, index) => (
-              <Card key={index} className="bg-black/20 border-white/10 backdrop-blur-md text-center">
+              <Card key={index} className="bg-secondary/90 border-primary/30 shadow-glow text-center">
                 <CardContent className="p-6">
                   <div className="flex justify-center mb-4">
                     <div className="p-3 bg-primary/20 rounded-lg text-primary-glow">
                       {stat.icon}
                     </div>
                   </div>
-                  <h3 className="text-3xl font-bold text-white mb-2">{stat.value}</h3>
-                  <p className="text-white/70 text-sm">{stat.label}</p>
+                  <h3 className="text-3xl font-bold text-foreground mb-2">{stat.value}</h3>
+                  <p className="text-muted-foreground text-sm">{stat.label}</p>
                 </CardContent>
               </Card>
             ))}
@@ -103,19 +103,19 @@ const AboutUs = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">Our Mission</h2>
-            <p className="text-xl text-white/80 leading-relaxed mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-8">Our Mission</h2>
+            <p className="text-xl text-muted-foreground leading-relaxed mb-12">
               We believe every brand deserves content that converts. Traditional content creation is slow, expensive, 
               and often inconsistent. That's why we built ScriptStorm—to democratize access to premium content 
               through the perfect blend of AI efficiency and human creativity.
             </p>
             
-            <Card className="bg-black/20 border-white/10 backdrop-blur-md">
+            <Card className="bg-secondary/90 border-primary/30 shadow-glow">
               <CardContent className="p-8">
-                <blockquote className="text-2xl text-white/90 font-light italic mb-6">
+                <blockquote className="text-2xl text-foreground font-light italic mb-6">
                   "Content is the atomic particle of all digital marketing. We're here to make sure yours converts."
                 </blockquote>
-                <cite className="text-white/70">— ScriptStorm Founding Team</cite>
+                <cite className="text-muted-foreground">— ScriptStorm Founding Team</cite>
               </CardContent>
             </Card>
           </div>
@@ -125,72 +125,72 @@ const AboutUs = () => {
       {/* Values Section */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">Our Values</h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              {values.map((value, index) => (
-                <Card key={index} className="bg-black/20 border-white/10 backdrop-blur-md">
-                  <CardContent className="p-8 text-center">
-                    <div className="flex justify-center mb-6">
-                      <div className="p-4 bg-primary/20 rounded-lg text-primary-glow">
-                        {value.icon}
-                      </div>
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-12">Our Values</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {values.map((value, index) => (
+              <Card key={index} className="bg-secondary/90 border-primary/30 shadow-glow">
+                <CardContent className="p-8 text-center">
+                  <div className="flex justify-center mb-6">
+                    <div className="p-4 bg-primary/20 rounded-lg text-primary-glow">
+                      {value.icon}
                     </div>
-                    <h3 className="text-xl font-bold text-white mb-4">{value.title}</h3>
-                    <p className="text-white/70 leading-relaxed">{value.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                  </div>
+                  <h3 className="text-xl font-bold text-foreground mb-4">{value.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{value.description}</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
+        </div>
         </div>
       </section>
 
       {/* Team Section */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">Meet Our Experts</h2>
-            <div className="space-y-6">
-              {team.map((member, index) => (
-                <Card key={index} className="bg-black/20 border-white/10 backdrop-blur-md">
-                  <CardContent className="p-6">
-                    <div className="flex flex-col md:flex-row md:items-center gap-4">
-                      <div className="flex-1">
-                        <h3 className="text-xl font-bold text-white mb-2">{member.name}</h3>
-                        <Badge className="mb-3 bg-primary/20 text-primary-glow border-primary-glow/50">
-                          {member.role}
-                        </Badge>
-                        <p className="text-white/70">{member.expertise}</p>
-                      </div>
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-12">Meet Our Experts</h2>
+          <div className="space-y-6">
+            {team.map((member, index) => (
+              <Card key={index} className="bg-secondary/90 border-primary/30 shadow-glow">
+                <CardContent className="p-6">
+                  <div className="flex flex-col md:flex-row md:items-center gap-4">
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-foreground mb-2">{member.name}</h3>
+                      <Badge className="mb-3 bg-primary/20 text-primary-glow border-primary-glow/50">
+                        {member.role}
+                      </Badge>
+                      <p className="text-muted-foreground">{member.expertise}</p>
                     </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
+        </div>
         </div>
       </section>
 
       {/* CTA Section */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <Card className="bg-black/20 border-white/10 backdrop-blur-md max-w-4xl mx-auto">
+          <Card className="bg-secondary/90 border-primary/30 shadow-glow max-w-4xl mx-auto">
             <CardContent className="p-12 text-center">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
                 Ready to Work With Us?
               </h2>
-              <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
+              <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
                 Join hundreds of successful brands who trust ScriptStorm with their content strategy.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/contact">
-                  <button className="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-lg font-semibold transition-colors">
+                  <button className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-lg font-semibold transition-colors shadow-glow">
                     Get Started Today
                   </button>
                 </Link>
                 <Link to="/onboarding-process">
-                  <button className="border border-white/20 text-white hover:bg-white/5 px-8 py-4 rounded-lg font-semibold transition-colors">
+                  <button className="border border-primary/30 text-foreground hover:bg-primary/10 px-8 py-4 rounded-lg font-semibold transition-colors">
                     Learn Our Process
                   </button>
                 </Link>
