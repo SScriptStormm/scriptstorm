@@ -294,11 +294,11 @@ const Pricing = () => {
                  </div>
                 {expandedTier === 'enterprise-starter' && (
                   <div className="mt-4 pt-4 border-t border-[#9B59B6]/20 text-sm text-muted-foreground space-y-2 animate-fade-in">
-                    <div className="grid grid-cols-2 gap-2">
-                      <div>• 24-hour delivery</div>
-                      <div>• 1 revision round</div>
-                      <div>• Keyword research</div>
-                      <div>• Email workflow</div>
+                    <div className="space-y-2">
+                      <div>• <strong>24-Hour Delivery:</strong> Get your content fast, without ever missing a beat.</div>
+                      <div>• <strong>1 Revision Round:</strong> Perfect your content with a round of tweaks.</div>
+                      <div>• <strong>Basic Keyword Research:</strong> We handle the initial research to target the right terms.</div>
+                      <div>• <strong>Email Support:</strong> Get your questions answered directly via email.</div>
                     </div>
                   </div>
                 )}
@@ -355,11 +355,11 @@ const Pricing = () => {
                      </div>
                     {expandedTier === 'enterprise-growth' && (
                       <div className="mt-4 pt-4 border-t border-[#9B59B6]/20 text-sm text-muted-foreground space-y-2 animate-fade-in">
-                        <div className="grid grid-cols-2 gap-2">
-                          <div>• 24-hour delivery</div>
-                          <div>• 2 revision rounds</div>
-                          <div>• Competitor analysis</div>
-                          <div>• Free social add-on</div>
+                        <div className="space-y-2">
+                          <div>• <strong>24-Hour Delivery:</strong> Reliable, rapid turnaround for all your content.</div>
+                          <div>• <strong>2 Revision Rounds:</strong> Extra flexibility to ensure every piece is perfect for your brand.</div>
+                          <div>• <strong>Advanced Keyword & Competitor Analysis:</strong> We find gaps in your competitors' strategies to give you an edge.</div>
+                          <div>• <strong>Priority Support:</strong> Jump the queue with faster response times.</div>
                         </div>
                       </div>
                     )}
@@ -400,11 +400,12 @@ const Pricing = () => {
                       </p>
                     {expandedTier === 'enterprise-authority' && (
                       <div className="mt-4 pt-4 border-t border-[#9B59B6]/20 text-sm text-muted-foreground space-y-2 animate-fade-in">
-                        <div className="grid grid-cols-2 gap-2">
-                          <div>• 12-hour delivery</div>
-                          <div>• Unlimited revisions</div>
-                          <div>• Dedicated strategist</div>
-                          <div>• Performance reports</div>
+                        <div className="space-y-2">
+                          <div>• <strong>12-Hour Delivery:</strong> The fastest content delivery on the market. For leaders who move first.</div>
+                          <div>• <strong>Unlimited Revisions (Fair Use):</strong> We don't stop until it's flawless. Total creative freedom.</div>
+                          <div>• <strong>Expert Strategic Planning:</strong> A dedicated strategist aligns your content with your business goals.</div>
+                          <div>• <strong>Performance Analytics Reports:</strong> Track ROI and content performance with clear, actionable data.</div>
+                          <div>• <strong>Dedicated Account Manager:</strong> Your single point of contact for strategy and execution.</div>
                         </div>
                       </div>
                     )}
