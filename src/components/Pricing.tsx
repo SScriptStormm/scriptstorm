@@ -288,9 +288,9 @@ const Pricing = () => {
                   </div>
                 </div>
                  <div className="text-sm space-y-1 mb-2">
-                   <div className="text-muted-foreground font-medium">• 20 AI-generated SEO articles</div>
-                   <div className="text-muted-foreground font-medium">• 60 social media posts</div>
-                   <div className="text-muted-foreground font-medium">• 20 product descriptions</div>
+                   <div className="text-muted-foreground font-medium">• 25 AI-generated SEO articles</div>
+                   <div className="text-muted-foreground font-medium">• 75 social media posts</div>
+                   <div className="text-muted-foreground font-medium">• 25 product descriptions</div>
                  </div>
                 {expandedTier === 'enterprise-starter' && (
                   <div className="mt-4 pt-4 border-t border-[#9B59B6]/20 text-sm text-muted-foreground space-y-2 animate-fade-in">
@@ -447,7 +447,7 @@ const Pricing = () => {
                         <div className="font-semibold text-center">Dominance</div>
                         
                         <div className="py-2 text-muted-foreground">📝 Articles</div>
-                        <div className="py-2 text-center">20</div>
+                        <div className="py-2 text-center">25</div>
                         <div className="py-2 text-center">30</div>
                         <div className="py-2 text-center">50</div>
                         
@@ -459,7 +459,7 @@ const Pricing = () => {
                         <div className="py-2 text-muted-foreground">✏️ Revisions</div>
                         <div className="py-2 text-center">1</div>
                         <div className="py-2 text-center">2</div>
-                        <div className="py-2 text-center">♾️</div>
+                        <div className="py-2 text-center">Unlimited (Fair Use)</div>
                         
                         <div className="py-2 text-muted-foreground">🎯 Research</div>
                         <div className="py-2 text-center">Basic</div>
