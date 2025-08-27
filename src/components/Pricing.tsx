@@ -569,7 +569,7 @@ const Pricing = () => {
                 </div>
                 <div className="flex items-center gap-2 justify-center">
                   <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
-                  <span>On-Time Delivery</span>
+                  <span>Guaranteed On-Time Delivery: Your content is always delivered in 24 hours (or 12 hours for Dominance), guaranteed.</span>
                 </div>
               </div>
             </div>
