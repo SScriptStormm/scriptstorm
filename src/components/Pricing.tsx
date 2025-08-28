@@ -105,11 +105,10 @@ const Pricing = () => {
             Done-For-You <span className="text-[#3498DB]">Content Services</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-4">
-            Professional AI-generated content that drives results. 
-            No tools to learn, no hassle - just high-quality content delivered.
+            Professional AI-powered content that drives results. No tools to learn, no hassle - just high-quality, SEO-optimized content delivered by a seamless automation engine.
           </p>
           <p className="text-sm text-muted-foreground italic">
-            ⚡ Powered by our proprietary AI content engine—optimized for rankings and conversions. No tools to learn, just results.
+            ⚡ Powered by a sophisticated AI workflow—orchestrated for rankings and structured for conversions.
           </p>
         </div>
 
@@ -127,7 +126,7 @@ const Pricing = () => {
                 Starter Package
               </CardTitle>
               <div className="text-4xl font-bold text-foreground mb-2">$297<span className="text-lg text-muted-foreground"> USD/month</span></div>
-              <CardDescription className="text-base font-medium">Perfect for small businesses</CardDescription>
+              <CardDescription className="text-base font-medium">Perfect for small businesses and testing the service.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-3">
@@ -141,19 +140,31 @@ const Pricing = () => {
                   <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
                     <CheckCircle className="h-4 w-4 text-white" />
                   </div>
-                  <span className="text-sm font-medium">Keyword research included</span>
+                  <span className="text-sm font-medium">24-hour orchestrated delivery</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
                     <CheckCircle className="h-4 w-4 text-white" />
                   </div>
-                  <span className="text-sm font-medium">24-hour delivery</span>
+                  <span className="text-sm font-medium">1 round of AI-assisted revisions</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
                     <CheckCircle className="h-4 w-4 text-white" />
                   </div>
-                  <span className="text-sm font-medium">1 revision round</span>
+                  <span className="text-sm font-medium">Standard Keyword Research</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">Plagiarism & AI Scan Guarantee</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">Streamlined onboarding</span>
                 </div>
                  <div className="flex items-center gap-3">
                    <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
@@ -199,7 +210,7 @@ const Pricing = () => {
                 Growth Package
               </CardTitle>
               <div className="text-4xl font-bold text-foreground mb-2">$597<span className="text-lg text-muted-foreground"> USD/month</span></div>
-              <CardDescription className="text-base font-medium">Best value for growing companies</CardDescription>
+              <CardDescription className="text-base font-medium">Best value for established companies.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-3">
@@ -213,25 +224,37 @@ const Pricing = () => {
                   <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
                     <CheckCircle className="h-4 w-4 text-white" />
                   </div>
-                  <span className="text-sm font-medium">Advanced keyword research</span>
+                  <span className="text-sm font-medium">24-hour orchestrated delivery</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
                     <CheckCircle className="h-4 w-4 text-white" />
                   </div>
-                  <span className="text-sm font-medium">24-hour delivery</span>
+                  <span className="text-sm font-medium">2 rounds of AI-assisted revisions</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
                     <CheckCircle className="h-4 w-4 text-white" />
                   </div>
-                  <span className="text-sm font-medium">2 revision rounds</span>
+                  <span className="text-sm font-medium">Advanced Keyword Research</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
                     <CheckCircle className="h-4 w-4 text-white" />
                   </div>
-                  <span className="text-sm font-medium">Content calendar included</span>
+                  <span className="text-sm font-medium">AI-Generated Content Calendar</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">Plagiarism & AI Scan Guarantee</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">Streamlined onboarding & support</span>
                 </div>
                  <div className="flex items-center gap-3">
                    <div className="w-6 h-6 bg-[#2ECC71] rounded-full flex items-center justify-center">
@@ -268,7 +291,7 @@ const Pricing = () => {
               <CardTitle className="text-2xl font-bold text-[#9B59B6] mb-2">
                 Enterprise Packages
               </CardTitle>
-              <CardDescription className="text-base font-medium">For large-scale content needs</CardDescription>
+              <CardDescription className="text-base font-medium">For large-scale, professionally managed content pipelines.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               {/* Starter Enterprise - Always Visible */}
@@ -289,17 +312,22 @@ const Pricing = () => {
                 </div>
                  <div className="text-sm space-y-1 mb-2">
                    <div className="text-muted-foreground font-medium">• 25 AI-generated SEO articles</div>
-                   <div className="text-muted-foreground font-medium">• 75 social media posts</div>
-                   <div className="text-muted-foreground font-medium">• 25 product descriptions</div>
+                   <div className="text-muted-foreground font-medium">• 75 AI-generated social media posts</div>
+                   <div className="text-muted-foreground font-medium">• 25 AI-generated product descriptions</div>
+                   <div className="text-muted-foreground font-medium">• 24-Hour Orchestrated Delivery</div>
+                   <div className="text-muted-foreground font-medium">• 2 Rounds of AI-Assisted Revisions</div>
+                   <div className="text-muted-foreground font-medium">• Advanced Keyword & Competitor Analysis</div>
+                   <div className="text-muted-foreground font-medium">• Plagiarism & AI Scan Guarantee</div>
+                   <div className="text-muted-foreground font-medium">• Powered Support Portal</div>
                  </div>
                 {expandedTier === 'enterprise-starter' && (
                   <div className="mt-4 pt-4 border-t border-[#9B59B6]/20 text-sm text-muted-foreground space-y-2 animate-fade-in">
-                    <div className="space-y-2">
-                      <div>• <strong>24-Hour Delivery:</strong> Get your content fast, without ever missing a beat.</div>
-                      <div>• <strong>1 Revision Round:</strong> Perfect your content with a round of tweaks.</div>
-                      <div>• <strong>Basic Keyword Research:</strong> We handle the initial research to target the right terms.</div>
-                      <div>• <strong>Email Support:</strong> Get your questions answered directly via email.</div>
-                    </div>
+                     <div className="space-y-2">
+                       <div>• <strong>24-Hour Delivery:</strong> Get your content fast, without ever missing a beat.</div>
+                       <div>• <strong>2 Revision Rounds:</strong> Perfect your content with flexibility for tweaks.</div>
+                       <div>• <strong>Advanced Keyword Research:</strong> We handle comprehensive research to target the right terms.</div>
+                       <div>• <strong>Powered Support Portal:</strong> Get your questions answered efficiently via our support system.</div>
+                     </div>
                   </div>
                 )}
                 <Button 
@@ -348,19 +376,25 @@ const Pricing = () => {
                         <div className="text-xs text-muted-foreground">USD/month</div>
                       </div>
                     </div>
-                     <div className="text-sm space-y-1 mb-2">
+                      <div className="text-sm space-y-1 mb-2">
                        <div className="text-muted-foreground font-medium">• 30 AI-generated SEO articles</div>
-                       <div className="text-muted-foreground font-medium">• 90 social media posts</div>
-                       <div className="text-muted-foreground font-medium">• 30 product descriptions</div>
+                       <div className="text-muted-foreground font-medium">• 90 AI-generated social media posts</div>
+                       <div className="text-muted-foreground font-medium">• 30 AI-generated product descriptions</div>
+                       <div className="text-muted-foreground font-medium">• 24-Hour Orchestrated Delivery</div>
+                       <div className="text-muted-foreground font-medium">• 3 Rounds of AI-Assisted Revisions</div>
+                       <div className="text-muted-foreground font-medium">• Strategic Keyword & Topic Mapping</div>
+                       <div className="text-muted-foreground font-medium">• Competitor Gap Analysis</div>
+                       <div className="text-muted-foreground font-medium">• Plagiarism & AI Scan Guarantee</div>
+                       <div className="text-muted-foreground font-medium">• Priority Support Portal (Faster, tracked responses)</div>
                      </div>
                     {expandedTier === 'enterprise-growth' && (
                       <div className="mt-4 pt-4 border-t border-[#9B59B6]/20 text-sm text-muted-foreground space-y-2 animate-fade-in">
-                        <div className="space-y-2">
-                          <div>• <strong>24-Hour Delivery:</strong> Reliable, rapid turnaround for all your content.</div>
-                          <div>• <strong>2 Revision Rounds:</strong> Extra flexibility to ensure every piece is perfect for your brand.</div>
-                          <div>• <strong>Advanced Keyword & Competitor Analysis:</strong> We find gaps in your competitors' strategies to give you an edge.</div>
-                          <div>• <strong>Priority Support:</strong> Jump the queue with faster response times.</div>
-                        </div>
+                         <div className="space-y-2">
+                           <div>• <strong>24-Hour Delivery:</strong> Reliable, rapid turnaround for all your content.</div>
+                           <div>• <strong>3 Revision Rounds:</strong> Extra flexibility to ensure every piece is perfect for your brand.</div>
+                           <div>• <strong>Strategic Keyword & Topic Mapping:</strong> We find gaps in your competitors' strategies to give you an edge.</div>
+                           <div>• <strong>Priority Support Portal:</strong> Jump the queue with faster, tracked response times.</div>
+                         </div>
                       </div>
                     )}
                     <Button 
@@ -390,11 +424,20 @@ const Pricing = () => {
                         <div className="text-xs text-muted-foreground">USD/month</div>
                       </div>
                     </div>
-                      <div className="text-sm space-y-1 mb-2">
-                        <div className="text-muted-foreground font-medium">• 50 AI-generated SEO articles</div>
-                        <div className="text-muted-foreground font-medium">• 150 social media posts</div>
-                        <div className="text-muted-foreground font-medium">• Unlimited product descriptions*</div>
-                      </div>
+                       <div className="text-sm space-y-1 mb-2">
+                         <div className="text-muted-foreground font-medium">• 50 AI-generated SEO articles</div>
+                         <div className="text-muted-foreground font-medium">• 150 AI-generated social media posts</div>
+                         <div className="text-muted-foreground font-medium">• Unlimited product descriptions* (*Fair Use policy applies)</div>
+                         <div className="text-muted-foreground font-medium">• 12-Hour Orchestrated Delivery</div>
+                         <div className="text-muted-foreground font-medium">• Unlimited AI-Assisted Revisions (Fair Use policy applies)</div>
+                         <div className="text-muted-foreground font-medium">• Enterprise Keyword Intelligence</div>
+                         <div className="text-muted-foreground font-medium">• AI-Driven Performance Dashboard</div>
+                         <div className="text-muted-foreground font-medium">• Competitor Gap Analysis</div>
+                         <div className="text-muted-foreground font-medium">• Plagiarism & AI Scan Guarantee</div>
+                         <div className="text-muted-foreground font-medium">• Market Dominance Roadmap</div>
+                         <div className="text-muted-foreground font-medium">• Priority Support Portal (Faster, tracked responses)</div>
+                         <div className="text-muted-foreground font-medium">• Dedicated Client Workspace (Centralized requests & history)</div>
+                       </div>
                       <p className="text-xs text-muted-foreground italic mt-2">
                         *Unlimited under fair use policy. Volume must align with business needs.
                       </p>
