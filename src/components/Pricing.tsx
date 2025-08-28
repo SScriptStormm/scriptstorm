@@ -318,7 +318,7 @@ const Pricing = () => {
                    <div className="text-muted-foreground font-medium">• 2 Rounds of AI-Assisted Revisions</div>
                    <div className="text-muted-foreground font-medium">• Advanced Keyword & Competitor Analysis</div>
                    <div className="text-muted-foreground font-medium">• Plagiarism & AI Scan Guarantee</div>
-                   <div className="text-muted-foreground font-medium">• Powered Support Portal</div>
+                   <div className="text-muted-foreground font-medium">• Standard Support Portal</div>
                  </div>
                 {expandedTier === 'enterprise-starter' && (
                   <div className="mt-4 pt-4 border-t border-[#9B59B6]/20 text-sm text-muted-foreground space-y-2 animate-fade-in">
@@ -326,7 +326,7 @@ const Pricing = () => {
                        <div>• <strong>24-Hour Delivery:</strong> Get your content fast, without ever missing a beat.</div>
                        <div>• <strong>2 Revision Rounds:</strong> Perfect your content with flexibility for tweaks.</div>
                        <div>• <strong>Advanced Keyword Research:</strong> We handle comprehensive research to target the right terms.</div>
-                       <div>• <strong>Powered Support Portal:</strong> Get your questions answered efficiently via our support system.</div>
+                       <div>• <strong>Standard Support Portal:</strong> Get your questions answered efficiently via our support system.</div>
                      </div>
                   </div>
                 )}
@@ -432,7 +432,6 @@ const Pricing = () => {
                          <div className="text-muted-foreground font-medium">• Unlimited AI-Assisted Revisions (Fair Use policy applies)</div>
                          <div className="text-muted-foreground font-medium">• Enterprise Keyword Intelligence</div>
                          <div className="text-muted-foreground font-medium">• AI-Driven Performance Dashboard</div>
-                         <div className="text-muted-foreground font-medium">• Competitor Gap Analysis</div>
                          <div className="text-muted-foreground font-medium">• Plagiarism & AI Scan Guarantee</div>
                          <div className="text-muted-foreground font-medium">• Market Dominance Roadmap</div>
                          <div className="text-muted-foreground font-medium">• Priority Support Portal (Faster, tracked responses)</div>
@@ -501,13 +500,13 @@ const Pricing = () => {
                         <div className="py-2 text-center">12h</div>
                         
                         <div className="py-2 text-muted-foreground">✏️ Revisions</div>
-                        <div className="py-2 text-center">1</div>
-                        <div className="py-2 text-center">2</div>
+                         <div className="py-2 text-center">2</div>
+                         <div className="py-2 text-center">3</div>
                         <div className="py-2 text-center">Unlimited (Fair Use)</div>
                         
                         <div className="py-2 text-muted-foreground">🎯 Research</div>
-                        <div className="py-2 text-center">Basic</div>
-                        <div className="py-2 text-center">Advanced</div>
+                         <div className="py-2 text-center">Advanced</div>
+                         <div className="py-2 text-center">Strategic</div>
                         <div className="py-2 text-center">Expert</div>
                         
                         <div className="py-2 text-muted-foreground">👤 Support</div>
