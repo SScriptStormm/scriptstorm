@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,10 +9,7 @@ import ContactForm from "./ContactForm";
 
 const Pricing = () => {
   const [showContactForm, setShowContactForm] = useState(false);
-  const [selectedEnterprise, setSelectedEnterprise] = useState<'starter' | 'growth' | 'authority' | null>('starter');
-  const [expandedTier, setExpandedTier] = useState<'enterprise-starter' | 'enterprise-growth' | 'enterprise-authority' | null>(null);
-  const [showEnterpriseComparison, setShowEnterpriseComparison] = useState(false);
-  const [showMoreEnterprise, setShowMoreEnterprise] = useState(false);
+  const [expandedTier, setExpandedTier] = useState<string | null>(null);
   const [loadingStates, setLoadingStates] = useState<{[key: string]: boolean}>({});
   const { toast } = useToast();
 
@@ -113,7 +109,7 @@ const Pricing = () => {
         </div>
 
         {/* Service Packages */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16 items-start">
+        <div className="grid md:grid-cols-2 gap-8 mb-16 items-start">
           {/* Starter Package */}
           <Card className="relative shadow-neural border-2 border-[#3498DB]/40 hover:border-[#3498DB]/80 bg-gradient-to-br from-white/95 to-[#3498DB]/5 backdrop-blur-sm transition-all duration-500 hover:shadow-[0_0_30px_rgba(52,152,219,0.3)] hover:scale-105 h-fit">
             <div className="absolute top-4 right-4">
@@ -279,345 +275,417 @@ const Pricing = () => {
               <p className="text-xs text-muted-foreground italic text-center">Email-only workflow • No meetings • No delays</p>
             </CardContent>
           </Card>
+        </div>
 
-          {/* Enterprise Packages */}
+        {/* Enterprise Packages Header */}
+        <div className="text-center mb-12">
+          <h3 className="text-3xl md:text-4xl font-bold text-[#9B59B6] mb-4">
+            ⚡ Enterprise Packages
+          </h3>
+          <p className="text-lg text-muted-foreground">
+            For large-scale, professionally managed content pipelines.
+          </p>
+        </div>
+
+        {/* Enterprise Packages Grid */}
+        <div className="grid md:grid-cols-3 gap-8 mb-16">
+          {/* Scale Package */}
           <Card className="relative shadow-neural border-2 border-[#9B59B6]/40 hover:border-[#9B59B6]/80 bg-gradient-to-br from-white/95 to-[#9B59B6]/5 backdrop-blur-sm transition-all duration-500 hover:shadow-[0_0_30px_rgba(155,89,182,0.3)] hover:scale-105">
-            <div className="absolute top-4 right-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-[#9B59B6] to-[#8E44AD] rounded-full flex items-center justify-center shadow-lg">
-                <span className="text-white text-xl">⚡</span>
-              </div>
-            </div>
             <CardHeader className="text-center pb-4">
               <CardTitle className="text-2xl font-bold text-[#9B59B6] mb-2">
-                Enterprise Packages
+                Scale
               </CardTitle>
-              <CardDescription className="text-base font-medium">For large-scale, professionally managed content pipelines.</CardDescription>
+              <div className="text-4xl font-bold text-foreground mb-2">$1,297<span className="text-lg text-muted-foreground"> USD/month</span></div>
             </CardHeader>
             <CardContent className="space-y-4">
-              {/* Starter Enterprise - Always Visible */}
-              <div
-                role="radio"
-                aria-checked={selectedEnterprise === 'starter'}
-                tabIndex={0}
-                onClick={() => { setSelectedEnterprise('starter'); }}
-                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedEnterprise('starter'); } }}
-                className={`p-4 rounded-xl cursor-pointer transition-all border-2 ${selectedEnterprise === 'starter' ? 'ring-2 ring-[#9B59B6] bg-[#9B59B6]/10 shadow-lg border-[#9B59B6]/60' : 'border-[#9B59B6]/30 hover:border-[#9B59B6]/50 hover:bg-[#9B59B6]/5'} bg-gradient-to-r from-white/80 to-[#9B59B6]/10`}
-              >
-                <div className="flex items-center justify-between mb-2">
-                  <span className="font-bold text-base text-[#9B59B6]">Scale</span>
-                  <div className="text-right">
-                    <div className="text-xl font-bold text-[#9B59B6]">$1,297</div>
-                    <div className="text-xs text-muted-foreground">USD/month</div>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#9B59B6] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
                   </div>
+                  <span className="text-sm font-medium">25 AI-generated SEO articles</span>
                 </div>
-                 <div className="text-sm space-y-1 mb-2">
-                   <div className="text-muted-foreground font-medium">• 25 AI-generated SEO articles</div>
-                   <div className="text-muted-foreground font-medium">• 75 AI-generated social media posts</div>
-                   <div className="text-muted-foreground font-medium">• 25 AI-generated product descriptions</div>
-                   <div className="text-muted-foreground font-medium">• 24-Hour Orchestrated Delivery</div>
-                   <div className="text-muted-foreground font-medium">• 2 Rounds of AI-Assisted Revisions</div>
-                   <div className="text-muted-foreground font-medium">• Advanced Keyword & Competitor Analysis</div>
-                   <div className="text-muted-foreground font-medium">• Plagiarism & AI Scan Guarantee</div>
-                   <div className="text-muted-foreground font-medium">• Standard Support Portal</div>
-                 </div>
-                {expandedTier === 'enterprise-starter' && (
-                  <div className="mt-4 pt-4 border-t border-[#9B59B6]/20 text-sm text-muted-foreground space-y-2 animate-fade-in">
-                     <div className="space-y-2">
-                       <div>• <strong>24-Hour Delivery:</strong> Get your content fast, without ever missing a beat.</div>
-                       <div>• <strong>2 Revision Rounds:</strong> Perfect your content with flexibility for tweaks.</div>
-                       <div>• <strong>Advanced Keyword Research:</strong> We handle comprehensive research to target the right terms.</div>
-                       <div>• <strong>Standard Support Portal:</strong> Get your questions answered efficiently via our support system.</div>
-                     </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#9B59B6] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
                   </div>
-                )}
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  onClick={(e) => { e.stopPropagation(); setExpandedTier(expandedTier === 'enterprise-starter' ? null : 'enterprise-starter'); }}
-                  className="mt-3 text-[#9B59B6] hover:bg-[#9B59B6]/10"
-                >
-                  {expandedTier === 'enterprise-starter' ? 'Hide details' : 'View details'}
-                </Button>
+                  <span className="text-sm font-medium">75 AI-generated social media posts</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#9B59B6] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">25 AI-generated product descriptions</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#9B59B6] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">24-Hour Orchestrated Delivery</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#9B59B6] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">2 Rounds of AI-Assisted Revisions</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#9B59B6] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">Advanced Keyword & Competitor Analysis</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#9B59B6] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">Plagiarism & AI Scan Guarantee</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#9B59B6] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">Standard Support Portal</span>
+                </div>
               </div>
+              
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={() => setExpandedTier(expandedTier === 'scale' ? null : 'scale')}
+                className="mt-3 text-[#9B59B6] hover:bg-[#9B59B6]/10"
+              >
+                {expandedTier === 'scale' ? 'Hide details' : 'View details'}
+              </Button>
 
-              {/* See More Button */}
-              {!showMoreEnterprise && (
-                <Button 
-                  variant="outline" 
-                  onClick={() => {
-                    console.log('Clicking See More Enterprise Options');
-                    setShowMoreEnterprise(true);
-                  }}
-                  className="w-full border-[#9B59B6]/40 text-[#9B59B6] hover:bg-[#9B59B6]/10 hover:border-[#9B59B6]/60"
-                >
-                  See More Enterprise Options
-                </Button>
-              )}
-
-              {/* Additional Enterprise Tiers - Hidden by default */}
-              {showMoreEnterprise && (
-                <div className="space-y-3 animate-fade-in">
-                  {/* Growth Tier */}
-                  <div
-                    role="radio"
-                    aria-checked={selectedEnterprise === 'growth'}
-                    tabIndex={0}
-                    onClick={() => { setSelectedEnterprise('growth'); }}
-                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedEnterprise('growth'); } }}
-                    className={`p-4 rounded-xl cursor-pointer transition-all border-2 ${selectedEnterprise === 'growth' ? 'ring-2 ring-[#9B59B6] bg-[#9B59B6]/10 shadow-lg border-[#9B59B6]/60' : 'border-[#9B59B6]/30 hover:border-[#9B59B6]/50 hover:bg-[#9B59B6]/5'} bg-gradient-to-r from-white/80 to-[#2ECC71]/10`}
-                  >
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-2">
-                        <span className="font-bold text-base text-[#9B59B6]">Authority</span>
-                        <Badge className="bg-[#2ECC71] text-white text-xs">BEST VALUE</Badge>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-xl font-bold text-[#9B59B6]">$1,797</div>
-                        <div className="text-xs text-muted-foreground">USD/month</div>
-                      </div>
-                    </div>
-                      <div className="text-sm space-y-1 mb-2">
-                       <div className="text-muted-foreground font-medium">• 30 AI-generated SEO articles</div>
-                       <div className="text-muted-foreground font-medium">• 90 AI-generated social media posts</div>
-                       <div className="text-muted-foreground font-medium">• 30 AI-generated product descriptions</div>
-                       <div className="text-muted-foreground font-medium">• 24-Hour Orchestrated Delivery</div>
-                       <div className="text-muted-foreground font-medium">• 3 Rounds of AI-Assisted Revisions</div>
-                       <div className="text-muted-foreground font-medium">• Strategic Keyword & Topic Mapping</div>
-                       <div className="text-muted-foreground font-medium">• Competitor Gap Analysis</div>
-                       <div className="text-muted-foreground font-medium">• Plagiarism & AI Scan Guarantee</div>
-                       <div className="text-muted-foreground font-medium">• Priority Support Portal (Faster, tracked responses)</div>
-                     </div>
-                    {expandedTier === 'enterprise-growth' && (
-                      <div className="mt-4 pt-4 border-t border-[#9B59B6]/20 text-sm text-muted-foreground space-y-2 animate-fade-in">
-                         <div className="space-y-2">
-                           <div>• <strong>24-Hour Delivery:</strong> Reliable, rapid turnaround for all your content.</div>
-                           <div>• <strong>3 Revision Rounds:</strong> Extra flexibility to ensure every piece is perfect for your brand.</div>
-                           <div>• <strong>Strategic Keyword & Topic Mapping:</strong> We find gaps in your competitors' strategies to give you an edge.</div>
-                           <div>• <strong>Priority Support Portal:</strong> Jump the queue with faster, tracked response times.</div>
-                         </div>
-                      </div>
-                    )}
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
-                      onClick={(e) => { e.stopPropagation(); setExpandedTier(expandedTier === 'enterprise-growth' ? null : 'enterprise-growth'); }}
-                      className="mt-3 text-[#9B59B6] hover:bg-[#9B59B6]/10"
-                    >
-                      {expandedTier === 'enterprise-growth' ? 'Hide details' : 'View details'}
-                    </Button>
+              {expandedTier === 'scale' && (
+                <div className="mt-4 pt-4 border-t border-[#9B59B6]/20 text-sm text-muted-foreground space-y-2 animate-fade-in">
+                  <div className="space-y-2">
+                    <div>• <strong>24-Hour Orchestrated Delivery:</strong> Our automated workflow ensures your content is researched, written, checked, and delivered in a seamless 24-hour cycle.</div>
+                    <div>• <strong>2 Rounds of AI-Assisted Revisions:</strong> Provide feedback, and we'll expertly guide the AI to refine the content for perfect brand alignment.</div>
+                    <div>• <strong>Advanced Keyword & Competitor Analysis:</strong> We use Frase.io to analyze competitors and identify the exact topics you need to rank higher.</div>
+                    <div>• <strong>Standard Support Portal:</strong> Submit requests through your Gumloop portal for organized, efficient, and tracked responses.</div>
                   </div>
-
-                  {/* Authority Tier */}
-                  <div
-                    role="radio"
-                    aria-checked={selectedEnterprise === 'authority'}
-                    tabIndex={0}
-                    onClick={() => { setSelectedEnterprise('authority'); }}
-                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedEnterprise('authority'); } }}
-                    className={`p-4 rounded-xl cursor-pointer transition-all border-2 ${selectedEnterprise === 'authority' ? 'ring-2 ring-[#9B59B6] bg-[#9B59B6]/10 shadow-lg border-[#9B59B6]/60' : 'border-[#9B59B6]/30 hover:border-[#9B59B6]/50 hover:bg-[#9B59B6]/5'} bg-gradient-to-r from-white/80 to-[#E67E22]/10`}
-                  >
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="font-bold text-base text-[#9B59B6]">Dominance</span>
-                      <div className="flex flex-col items-end gap-1">
-                        <Badge variant="outline" className="border-[#E67E22] text-[#E67E22] text-xs">Early Adopter</Badge>
-                        <div className="text-xl font-bold text-[#9B59B6]">$2,997</div>
-                        <div className="text-xs text-muted-foreground">USD/month</div>
-                      </div>
-                    </div>
-                       <div className="text-sm space-y-1 mb-2">
-                         <div className="text-muted-foreground font-medium">• 50 AI-generated SEO articles</div>
-                         <div className="text-muted-foreground font-medium">• 150 AI-generated social media posts</div>
-                         <div className="text-muted-foreground font-medium">• Unlimited product descriptions* (*Fair Use policy applies)</div>
-                         <div className="text-muted-foreground font-medium">• 12-Hour Orchestrated Delivery</div>
-                         <div className="text-muted-foreground font-medium">• Unlimited AI-Assisted Revisions (Fair Use policy applies)</div>
-                         <div className="text-muted-foreground font-medium">• Enterprise Keyword Intelligence</div>
-                         <div className="text-muted-foreground font-medium">• AI-Driven Performance Dashboard</div>
-                         <div className="text-muted-foreground font-medium">• Plagiarism & AI Scan Guarantee</div>
-                         <div className="text-muted-foreground font-medium">• Market Dominance Roadmap</div>
-                         <div className="text-muted-foreground font-medium">• Priority Support Portal (Faster, tracked responses)</div>
-                         <div className="text-muted-foreground font-medium">• Dedicated Client Workspace (Centralized requests & history)</div>
-                       </div>
-                      <p className="text-xs text-muted-foreground italic mt-2">
-                        *Unlimited under fair use policy. Volume must align with business needs.
-                      </p>
-                    {expandedTier === 'enterprise-authority' && (
-                      <div className="mt-4 pt-4 border-t border-[#9B59B6]/20 text-sm text-muted-foreground space-y-2 animate-fade-in">
-                        <div className="space-y-2">
-                          <div>• <strong>12-Hour Delivery:</strong> The fastest content delivery on the market. For leaders who move first.</div>
-                          <div>• <strong>Unlimited Revisions (Fair Use):</strong> We don't stop until it's flawless. Total creative freedom.</div>
-                          <div>• <strong>Expert Strategic Planning:</strong> A dedicated strategist aligns your content with your business goals.</div>
-                          <div>• <strong>Performance Analytics Reports:</strong> Track ROI and content performance with clear, actionable data.</div>
-                          <div>• <strong>Dedicated Account Manager:</strong> Your single point of contact for strategy and execution.</div>
-                        </div>
-                      </div>
-                    )}
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
-                      onClick={(e) => { e.stopPropagation(); setExpandedTier(expandedTier === 'enterprise-authority' ? null : 'enterprise-authority'); }}
-                      className="mt-3 text-[#9B59B6] hover:bg-[#9B59B6]/10"
-                    >
-                      {expandedTier === 'enterprise-authority' ? 'Hide details' : 'View details'}
-                    </Button>
-                  </div>
-
-                  {/* See Less Button */}
-                  <Button 
-                    variant="outline" 
-                    onClick={() => setShowMoreEnterprise(false)}
-                    className="w-full border-[#9B59B6]/40 text-[#9B59B6] hover:bg-[#9B59B6]/10 hover:border-[#9B59B6]/60"
-                  >
-                    See Less Enterprise Options
-                  </Button>
-
-                  {/* View Comparison Button */}
-                  <Button 
-                    variant="outline" 
-                    onClick={() => setShowEnterpriseComparison((v) => !v)}
-                    className="w-full border-[#9B59B6]/40 text-[#9B59B6] hover:bg-[#9B59B6]/10 hover:border-[#9B59B6]/60"
-                  >
-                    {showEnterpriseComparison ? 'Hide Comparison' : 'View Comparison'}
-                  </Button>
-
-                  {/* Enterprise Comparison Table */}
-                  {showEnterpriseComparison && (
-                    <div className="mt-4 p-4 bg-[#9B59B6]/5 rounded-xl animate-fade-in">
-                      <h5 className="text-sm font-bold mb-3 text-[#9B59B6]">📊 Enterprise Comparison</h5>
-                      <div className="grid grid-cols-4 gap-2 text-xs">
-                        <div className="font-semibold text-[#9B59B6]">Feature</div>
-                        <div className="font-semibold text-center">Scale</div>
-                        <div className="font-semibold text-center">Authority</div>
-                        <div className="font-semibold text-center">Dominance</div>
-                        
-                        <div className="py-2 text-muted-foreground">📝 Articles</div>
-                        <div className="py-2 text-center">25</div>
-                        <div className="py-2 text-center">30</div>
-                        <div className="py-2 text-center">50</div>
-                        
-                        <div className="py-2 text-muted-foreground">🚀 Delivery</div>
-                        <div className="py-2 text-center">24h</div>
-                        <div className="py-2 text-center">24h</div>
-                        <div className="py-2 text-center">12h</div>
-                        
-                        <div className="py-2 text-muted-foreground">✏️ Revisions</div>
-                         <div className="py-2 text-center">2</div>
-                         <div className="py-2 text-center">3</div>
-                        <div className="py-2 text-center">Unlimited (Fair Use)</div>
-                        
-                        <div className="py-2 text-muted-foreground">🎯 Research</div>
-                         <div className="py-2 text-center">Advanced</div>
-                         <div className="py-2 text-center">Strategic</div>
-                        <div className="py-2 text-center">Expert</div>
-                        
-                        <div className="py-2 text-muted-foreground">👤 Support</div>
-                        <div className="py-2 text-center">Email</div>
-                        <div className="py-2 text-center">Priority</div>
-                        <div className="py-2 text-center">Dedicated</div>
-                      </div>
-                    </div>
-                  )}
                 </div>
               )}
 
               <Button 
-                onClick={() => {
-                  const packageMap = {
-                    'starter': 'starter-enterprise',
-                    'growth': 'growth-enterprise', 
-                    'authority': 'authority-enterprise'
-                  };
-                  const packageName = packageMap[selectedEnterprise] || 'starter-enterprise';
-                  handleCheckout(packageName);
-                }}
-                disabled={loadingStates[(() => {
-                  const packageMap = {
-                    'starter': 'starter-enterprise',
-                    'growth': 'growth-enterprise', 
-                    'authority': 'authority-enterprise'
-                  };
-                  return packageMap[selectedEnterprise] || 'starter-enterprise';
-                })()]}
+                onClick={() => handleCheckout('scale-enterprise')}
+                disabled={loadingStates['scale-enterprise']}
                 className="w-full bg-gradient-to-r from-[#9B59B6] to-[#8E44AD] hover:from-[#8E44AD] hover:to-[#7D3C98] text-white font-bold py-3 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {loadingStates[(() => {
-                  const packageMap = {
-                    'starter': 'starter-enterprise',
-                    'growth': 'growth-enterprise', 
-                    'authority': 'authority-enterprise'
-                  };
-                  return packageMap[selectedEnterprise] || 'starter-enterprise';
-                })()] ? "Processing..." : "🚀 Start My 24-Hour Draft"}
+                {loadingStates['scale-enterprise'] ? "Processing..." : "🚀 Start My 24-Hour Draft"}
               </Button>
-              <p className="text-xs text-muted-foreground italic text-center">Email-only workflow • No meetings • No delays</p>
+            </CardContent>
+          </Card>
+
+          {/* Authority Package */}
+          <Card className="relative shadow-hologram border-2 border-[#E91E63]/50 hover:border-[#E91E63]/80 bg-gradient-to-br from-white/95 to-[#E91E63]/5 backdrop-blur-sm transition-all duration-500 hover:shadow-[0_0_30px_rgba(233,30,99,0.4)] hover:scale-105 overflow-visible">
+            {/* Best Value Badge */}
+            <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-10">
+              <div className="bg-gradient-to-r from-[#E91E63] to-[#C2185B] text-white px-6 py-3 rounded-full text-sm font-bold flex items-center gap-2 shadow-xl border-2 border-white/20 animate-pulse">
+                <Star className="h-4 w-4" />
+                BEST VALUE
+              </div>
+            </div>
+            
+            <CardHeader className="text-center pt-8 pb-4">
+              <CardTitle className="text-2xl font-bold text-[#E91E63] mb-2">
+                Authority
+              </CardTitle>
+              <div className="text-4xl font-bold text-foreground mb-2">$1,797<span className="text-lg text-muted-foreground"> USD/month</span></div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#E91E63] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">30 AI-generated SEO articles</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#E91E63] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">90 AI-generated social media posts</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#E91E63] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">30 AI-generated product descriptions</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#E91E63] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">24-Hour Orchestrated Delivery</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#E91E63] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">3 Rounds of AI-Assisted Revisions</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#E91E63] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">Strategic Keyword & Topic Mapping</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#E91E63] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">Competitor Gap Analysis</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#E91E63] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">Plagiarism & AI Scan Guarantee</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#E91E63] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">Priority Support Portal</span>
+                </div>
+              </div>
+              
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={() => setExpandedTier(expandedTier === 'authority' ? null : 'authority')}
+                className="mt-3 text-[#E91E63] hover:bg-[#E91E63]/10"
+              >
+                {expandedTier === 'authority' ? 'Hide details' : 'View details'}
+              </Button>
+
+              {expandedTier === 'authority' && (
+                <div className="mt-4 pt-4 border-t border-[#E91E63]/20 text-sm text-muted-foreground space-y-2 animate-fade-in">
+                  <div className="space-y-2">
+                    <div>• <strong>24-Hour Orchestrated Delivery:</strong> Experience the reliability of our automated system, delivering strategic content without missing a deadline.</div>
+                    <div>• <strong>3 Rounds of AI-Assisted Revisions:</strong> Enjoy greater flexibility to perfect tone, structure, and messaging with a seamless feedback process.</div>
+                    <div>• <strong>Competitor Gap Analysis:</strong> We provide an actionable report on specific weaknesses in your competitors' strategies, giving you a roadmap to outrank them.</div>
+                    <div>• <strong>Priority Support Portal:</strong> Get faster, prioritized responses within your portal, ensuring your high-volume needs are met promptly.</div>
+                  </div>
+                </div>
+              )}
+
+              <Button 
+                onClick={() => handleCheckout('authority-enterprise')}
+                disabled={loadingStates['authority-enterprise']}
+                className="w-full bg-gradient-to-r from-[#E91E63] to-[#C2185B] hover:from-[#C2185B] hover:to-[#AD1457] text-white font-bold py-3 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {loadingStates['authority-enterprise'] ? "Processing..." : "🚀 Start My 24-Hour Draft"}
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* Dominance Package */}
+          <Card className="relative shadow-neural border-2 border-[#FF9800]/40 hover:border-[#FF9800]/80 bg-gradient-to-br from-white/95 to-[#FF9800]/5 backdrop-blur-sm transition-all duration-500 hover:shadow-[0_0_30px_rgba(255,152,0,0.3)] hover:scale-105 overflow-visible">
+            {/* Early Adopter Badge */}
+            <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-10">
+              <div className="bg-gradient-to-r from-[#FF9800] to-[#F57C00] text-white px-6 py-3 rounded-full text-sm font-bold shadow-xl border-2 border-white/20">
+                Early Adopter
+              </div>
+            </div>
+            
+            <CardHeader className="text-center pt-8 pb-4">
+              <CardTitle className="text-2xl font-bold text-[#FF9800] mb-2">
+                Dominance
+              </CardTitle>
+              <div className="text-4xl font-bold text-foreground mb-2">$2,997<span className="text-lg text-muted-foreground"> USD/month</span></div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#FF9800] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">50 AI-generated SEO articles</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#FF9800] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">150 AI-generated social media posts</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#FF9800] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">Unlimited product descriptions*</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#FF9800] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">12-Hour Orchestrated Delivery</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#FF9800] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">Unlimited AI-Assisted Revisions*</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#FF9800] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">Enterprise Keyword Intelligence</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#FF9800] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">AI-Driven Performance Dashboard</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#FF9800] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">Plagiarism & AI Scan Guarantee</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#FF9800] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">Market Dominance Roadmap</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#FF9800] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">Priority Support Portal</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-[#FF9800] rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">Dedicated Client Workspace</span>
+                </div>
+              </div>
+              
+              <p className="text-xs text-muted-foreground italic">
+                *Fair Use policy applies
+              </p>
+              
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={() => setExpandedTier(expandedTier === 'dominance' ? null : 'dominance')}
+                className="mt-3 text-[#FF9800] hover:bg-[#FF9800]/10"
+              >
+                {expandedTier === 'dominance' ? 'Hide details' : 'View details'}
+              </Button>
+
+              {expandedTier === 'dominance' && (
+                <div className="mt-4 pt-4 border-t border-[#FF9800]/20 text-sm text-muted-foreground space-y-2 animate-fade-in">
+                  <div className="space-y-2">
+                    <div>• <strong>12-Hour Orchestrated Delivery:</strong> Your content is prioritized through our automated system for the fastest possible turnaround, giving you a competitive edge.</div>
+                    <div>• <strong>Unlimited AI-Assisted Revisions:</strong> We work with you iteratively within our AI-driven workflow to achieve perfection, ensuring 100% on-brand results.</div>
+                    <div>• <strong>Market Dominance Roadmap:</strong> A comprehensive, data-backed content strategy built from competitor analysis, designed to establish you as the undisputed authority.</div>
+                    <div>• <strong>AI-Driven Performance Dashboard:</strong> Get clear, actionable insights and performance reports based on your content's impact.</div>
+                    <div>• <strong>Dedicated Client Workspace:</strong> Your centralized hub for all content requests, assets, and history—a single source of truth for your strategy.</div>
+                    <div>• <strong>Priority Support Portal:</strong> Your requests are fast-tracked, guaranteeing the rapid response time a venture of your scale requires.</div>
+                  </div>
+                </div>
+              )}
+
+              <Button 
+                onClick={() => handleCheckout('dominance-enterprise')}
+                disabled={loadingStates['dominance-enterprise']}
+                className="w-full bg-gradient-to-r from-[#FF9800] to-[#F57C00] hover:from-[#F57C00] hover:to-[#E65100] text-white font-bold py-3 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {loadingStates['dominance-enterprise'] ? "Processing..." : "🚀 Start My 24-Hour Draft"}
+              </Button>
             </CardContent>
           </Card>
         </div>
 
+        {/* Enterprise Comparison Chart */}
+        <div className="mb-16 p-8 bg-gradient-to-r from-white/80 to-[#9B59B6]/5 rounded-2xl border-2 border-[#9B59B6]/20">
+          <h4 className="text-2xl font-bold text-[#9B59B6] mb-6 text-center">📊 Enterprise Comparison</h4>
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-[#9B59B6]/20">
+                  <th className="text-left py-4 px-4 font-bold text-[#9B59B6]">Feature</th>
+                  <th className="text-center py-4 px-4 font-bold">Scale</th>
+                  <th className="text-center py-4 px-4 font-bold">Authority</th>
+                  <th className="text-center py-4 px-4 font-bold">Dominance</th>
+                </tr>
+              </thead>
+              <tbody className="text-sm">
+                <tr className="border-b border-[#9B59B6]/10">
+                  <td className="py-3 px-4 text-muted-foreground">📝 Articles</td>
+                  <td className="py-3 px-4 text-center">25</td>
+                  <td className="py-3 px-4 text-center">30</td>
+                  <td className="py-3 px-4 text-center">50</td>
+                </tr>
+                <tr className="border-b border-[#9B59B6]/10">
+                  <td className="py-3 px-4 text-muted-foreground">🚀 Delivery</td>
+                  <td className="py-3 px-4 text-center">24h</td>
+                  <td className="py-3 px-4 text-center">24h</td>
+                  <td className="py-3 px-4 text-center">12h</td>
+                </tr>
+                <tr className="border-b border-[#9B59B6]/10">
+                  <td className="py-3 px-4 text-muted-foreground">✏️ Revisions</td>
+                  <td className="py-3 px-4 text-center">2</td>
+                  <td className="py-3 px-4 text-center">3</td>
+                  <td className="py-3 px-4 text-center">Unlimited (Fair Use)</td>
+                </tr>
+                <tr className="border-b border-[#9B59B6]/10">
+                  <td className="py-3 px-4 text-muted-foreground">🎯 Research</td>
+                  <td className="py-3 px-4 text-center">Advanced</td>
+                  <td className="py-3 px-4 text-center">Strategic</td>
+                  <td className="py-3 px-4 text-center">Expert</td>
+                </tr>
+                <tr>
+                  <td className="py-3 px-4 text-muted-foreground">👤 Support</td>
+                  <td className="py-3 px-4 text-center">Standard</td>
+                  <td className="py-3 px-4 text-center">Priority</td>
+                  <td className="py-3 px-4 text-center">Priority + Dedicated Workspace</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-
-        {/* Contact Options */}
-        <div className="text-center mb-16">
-          <h3 className="text-2xl font-bold mb-8 text-foreground">Ready to Get Started?</h3>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-lg mx-auto">
+        {/* Final CTA Section */}
+        <div className="text-center bg-gradient-to-r from-[#9B59B6]/10 to-[#E91E63]/10 rounded-2xl p-8 border-2 border-[#9B59B6]/20">
+          <h4 className="text-2xl font-bold mb-4 text-foreground">Ready to Get Started?</h4>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
             <Button 
-              onClick={() => handleCheckout('growth')}
-              disabled={loadingStates['growth']}
-              className="flex items-center gap-2 bg-[#3498DB] hover:bg-[#2980B9] text-white px-6 py-3 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
-              size="lg"
+              onClick={() => handleCheckout('starter')}
+              className="bg-gradient-to-r from-[#9B59B6] to-[#E91E63] hover:from-[#E91E63] hover:to-[#9B59B6] text-white font-bold py-3 px-8 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
             >
-              <Mail className="h-5 w-5" />
-              {loadingStates['growth'] ? "Processing..." : "🚀 Start My 24-Hour Draft"}
+              🚀 Start My 24-Hour Draft
             </Button>
-            
             <Button 
+              variant="outline" 
               onClick={handleEmailClick}
-              variant="outline"
-              className="flex items-center gap-2 border-[#3498DB]/50 hover:border-[#3498DB] px-6 py-3 text-lg"
-              size="lg"
+              className="border-[#9B59B6] text-[#9B59B6] hover:bg-[#9B59B6]/10"
             >
-              <Phone className="h-5 w-5" />
               Email Us Directly
             </Button>
           </div>
-          
-          <p className="text-xs text-muted-foreground mt-4 italic">
+          <p className="text-sm text-muted-foreground italic">
             Friction-free workflow: All communication happens over email so you can focus on growth—no meetings, no delays.
           </p>
-          <p className="text-sm text-muted-foreground mt-2">
+          <p className="text-xs text-muted-foreground mt-2">
             💬 Response within 24 hours • 📋 Custom proposal • ✅ No obligation
           </p>
         </div>
 
-        {/* Contact Form */}
+        {/* Contact Form Modal */}
         {showContactForm && (
-          <div id="contact-form" className="mb-16">
+          <div className="mt-20">
             <ContactForm />
           </div>
         )}
-
-        {/* Guarantees */}
-        <div className="max-w-3xl mx-auto">
-          <Card className="p-6 bg-gradient-to-r from-[#2ECC71]/10 to-[#3498DB]/10 border-2 border-[#2ECC71]/30">
-            <div className="text-center">
-              <h4 className="text-xl font-bold mb-4 text-foreground">Our Guarantees</h4>
-              <div className="grid md:grid-cols-3 gap-4 text-sm">
-                <div className="flex items-center gap-2 justify-center">
-                  <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
-                  <span>100% Original AI Content</span>
-                </div>
-                <div className="flex items-center gap-2 justify-center">
-                  <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
-                  <span>100% Satisfaction Guarantee: Get a full refund or free rewrite if we miss the mark.</span>
-                </div>
-                <div className="flex items-center gap-2 justify-center">
-                  <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
-                  <span>Guaranteed On-Time Delivery: Your content is always delivered in 24 hours (or 12 hours for Dominance), guaranteed.</span>
-                </div>
-              </div>
-            </div>
-          </Card>
-        </div>
       </div>
     </section>
   );
