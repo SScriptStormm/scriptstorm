@@ -48,9 +48,9 @@ const Contact = () => {
             Let's Create Something
             <span className="block text-primary-glow">Amazing Together</span>
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-            Ready to transform your content strategy? Get in touch and let's discuss how ScriptStorm can help your brand succeed.
-          </p>
+              <p className="text-muted-foreground">
+                Ready to transform your content marketing with AI-powered automation? Get in touch and let's discuss how ScriptStorm can help your brand succeed.
+              </p>
         </div>
       </section>
 
@@ -162,8 +162,8 @@ const Contact = () => {
                         <MessageSquare className="h-6 w-6 text-primary-glow" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-foreground">Free Consultation</h3>
-                        <p className="text-muted-foreground">30-minute strategy call</p>
+                        <h3 className="font-semibold text-foreground">Email-Only Workflow</h3>
+                        <p className="text-muted-foreground">No meetings, no delays</p>
                       </div>
                     </div>
                   </CardContent>

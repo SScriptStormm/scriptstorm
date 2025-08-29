@@ -11,16 +11,16 @@ const PrivacyPolicy = () => {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">Information We Collect</h2>
             <p className="mb-4">
-              We collect information you provide directly to us when you request content creation services, 
-              contact us for consultations, or communicate with us during project delivery.
+              We collect information you provide directly to us when you subscribe to our AI content generation services, 
+              communicate with us during content delivery, or interact with our automated workflow systems.
             </p>
           </section>
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">How We Use Your Information</h2>
             <p className="mb-4">
-              We use the information we collect to deliver custom content creation services, 
-              communicate about your projects, process payments, and provide ongoing support.
+              We use the information we collect to deliver AI-generated content services through our monthly subscriptions, 
+              communicate about your content deliveries, process monthly payments, and provide ongoing support.
             </p>
           </section>
 

@@ -12,7 +12,7 @@ const FAQ = () => {
     },
     {
       question: "Can I request revisions?",
-      answer: "Absolutely! We offer unlimited revisions until you're completely satisfied. Our goal is to deliver content that exceeds your expectations and drives real results for your business."
+      answer: "Yes! Each package includes AI-assisted revisions: Starter (1 round), Growth (2 rounds), Scale (2 rounds), Authority (3 rounds), Dominance (unlimited with Fair Use policy). All revisions delivered within 24 hours."
     },
     {
       question: "Do you guarantee results?",
@@ -24,7 +24,7 @@ const FAQ = () => {
     },
     {
       question: "How do I get started?",
-      answer: "Simply choose your subscription plan, provide your content requirements, and we'll assign a dedicated account manager to your project. You'll receive your first piece of content within 24 hours."
+      answer: "Choose your monthly subscription plan, submit your content requirements via our email workflow, and receive your first AI-generated content within 24 hours. No meetings, no delays."
     },
     {
       question: "Can I cancel my subscription anytime?",

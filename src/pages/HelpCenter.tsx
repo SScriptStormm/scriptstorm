@@ -19,11 +19,11 @@ const HelpCenter = () => {
         },
         {
           q: "What if I need revisions?",
-          a: "All packages include unlimited revisions within 7 days. We'll keep refining until you're 100% satisfied with the content quality."
+          a: "Each package includes AI-assisted revisions: Starter (1 round), Growth (2 rounds), Scale (2 rounds), Authority (3 rounds), Dominance (unlimited). Revisions delivered within 24 hours."
         },
         {
           q: "What types of content do you create?",
-          a: "We specialize in SEO blog articles, social media content, email copy, and comprehensive content strategies for SaaS and eCommerce brands."
+          a: "We create AI-generated SEO articles, social media posts, and product descriptions specifically optimized for SaaS and eCommerce brands."
         }
       ]
     },

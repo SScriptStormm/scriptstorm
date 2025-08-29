@@ -136,7 +136,7 @@ const WhyChooseUs = () => {
                     </div>
                     <div className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-[#2ECC71] mt-0.5" />
-                      <span className="text-sm">Pay-per-project pricing, no ongoing costs</span>
+                      <span className="text-sm">Transparent monthly subscriptions, starting at $297</span>
                     </div>
                     <div className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-[#2ECC71] mt-0.5" />
@@ -144,7 +144,7 @@ const WhyChooseUs = () => {
                     </div>
                     <div className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-[#2ECC71] mt-0.5" />
-                      <span className="text-sm">100% satisfaction and money-back guarantee</span>
+                      <span className="text-sm">AI-assisted revisions included (1-3 rounds per package)</span>
                     </div>
                   </div>
                 </CardContent>
@@ -184,9 +184,9 @@ const WhyChooseUs = () => {
 
               <Card className="relative text-center p-6 border-2 border-[#E67E22]/40 hover:border-[#E67E22]/70 bg-white/95 backdrop-blur-sm transition-all duration-500 shadow-neural hover:shadow-cyber">
                 <Users className="h-12 w-12 text-[#E67E22] mx-auto mb-4" />
-                <h3 className="text-xl font-bold mb-3">Dedicated Support</h3>
+                <h3 className="text-xl font-bold mb-3">Email-Only Workflow</h3>
                 <p className="text-muted-foreground">
-                  Direct access to your content manager. No chatbots, no tickets—just real human support when you need it.
+                  Streamlined email communication. No meetings, no delays—just efficient content delivery through your portal.
                 </p>
               </Card>
 

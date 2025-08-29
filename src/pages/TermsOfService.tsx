@@ -16,10 +16,9 @@ const TermsOfService = () => {
           <section>
             <h2 className="text-2xl font-semibold mb-4 text-foreground">2. Description of Service</h2>
             <p>
-              ScriptStorm provides custom content creation services for businesses, delivering personalized 
-              content solutions including blog posts, marketing copy, social media content, and email campaigns. 
-              Each project is tailored to your specific brand requirements with professional consultation and 
-              24-hour delivery commitment.
+              ScriptStorm provides AI-powered content generation services through monthly subscriptions, delivering 
+              SEO articles, social media posts, and product descriptions optimized for SaaS and eCommerce businesses. 
+              Each subscription includes 24-hour orchestrated delivery and AI-assisted revisions.
             </p>
           </section>
 
@@ -37,18 +36,18 @@ const TermsOfService = () => {
           <section>
             <h2 className="text-2xl font-semibold mb-4 text-foreground">4. Payment Terms</h2>
             <p>
-              Payment terms are established during project consultation and outlined in your custom quote. 
-              Payment is typically required before work begins. We accept major credit cards and process 
-              payments through secure payment processors. All prices are in USD unless otherwise specified.
+              Payment is processed monthly for subscription plans. We accept major credit cards and process 
+              payments through secure payment processors. All prices are in USD. Monthly subscriptions renew 
+              automatically unless cancelled before the next billing cycle.
             </p>
           </section>
 
           <section>
             <h2 className="text-2xl font-semibold mb-4 text-foreground">5. Delivery and Revisions</h2>
             <p>
-              Delivery timelines are specified during project consultation, with our standard commitment being 
-              24-hour delivery for most content projects. Two rounds of minor revisions are included within 7 days 
-              of delivery. Additional revisions or major changes may incur additional charges as outlined in your project agreement.
+              Content is delivered within 24 hours through our orchestrated AI workflow. Each subscription plan 
+              includes specific revision rounds: Starter (1), Growth (2), Scale (2), Authority (3), Dominance (unlimited with Fair Use). 
+              Revisions are completed within 24 hours of request.
             </p>
           </section>
 

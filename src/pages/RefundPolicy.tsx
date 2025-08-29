@@ -11,8 +11,8 @@ const RefundPolicy = () => {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">Satisfaction Guarantee</h2>
             <p className="mb-4">
-              We stand behind our custom content creation services with a satisfaction guarantee. 
-              If we fail to deliver content that meets the agreed specifications or timeline, 
+              We stand behind our AI-powered content generation services with a satisfaction guarantee. 
+              If we fail to deliver content that meets the agreed specifications or timeline within your subscription plan, 
               you may be eligible for a refund as outlined below.
             </p>
           </section>
@@ -31,8 +31,8 @@ const RefundPolicy = () => {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">How to Request a Refund</h2>
             <p className="mb-4">
-              To request a refund, please contact our team within 14 days of project completion 
-              with your project details and specific concerns. We will work with you to resolve 
+              To request a refund, please contact our team within 14 days of content delivery 
+              with your subscription details and specific concerns. We will work with you to resolve 
               any issues before processing refund requests, as we are committed to client satisfaction.
             </p>
           </section>
@@ -48,9 +48,9 @@ const RefundPolicy = () => {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">Partial Work Completed</h2>
             <p className="mb-4">
-              For projects where work has been partially completed, refunds will be calculated 
-              based on the percentage of work delivered and the value provided. We will work 
-              with you to find a fair resolution that reflects the work completed.
+              For subscriptions where content has been partially delivered, refunds will be calculated 
+              based on the percentage of monthly content delivered and the value provided. We will work 
+              with you to find a fair resolution that reflects the content completed.
             </p>
           </section>
 

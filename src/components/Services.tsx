@@ -17,9 +17,9 @@ const Services = () => {
     },
     {
       icon: <Mail className="h-8 w-8 text-primary" />,
-      title: "Email Copy",
-      description: "High-converting email sequences, newsletters, and campaigns that nurture leads and boost sales.",
-      features: ["Welcome sequences", "Product launches", "Newsletter content", "A/B test variations"]
+      title: "Product Descriptions",
+      description: "Compelling, conversion-focused product descriptions that highlight benefits and drive sales for eCommerce.",
+      features: ["Keyword-optimized copy", "Benefit-focused messaging", "Multiple variations", "Brand voice consistency"]
     }
   ];
 
@@ -81,8 +81,8 @@ const Services = () => {
             Content That <span className="text-primary">Converts</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Specialized content services designed specifically for SaaS and eCommerce businesses 
-            that need to scale their content marketing efforts.
+            AI-powered content generation delivered through our orchestrated automation workflow—
+            no tools to learn, no hassle, just results.
           </p>
         </div>
 

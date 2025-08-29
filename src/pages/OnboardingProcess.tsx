@@ -282,7 +282,7 @@ const OnboardingProcess = () => {
             <Card className="p-6 border-2 border-primary-glow/30 bg-white/95 backdrop-blur-sm shadow-neural hover:shadow-cyber transition-all duration-300">
               <h3 className="text-lg font-bold mb-3 text-[#3498DB]">What if I need revisions?</h3>
               <p className="text-muted-foreground">
-                We offer free revisions on all content. Simply reply to your delivery email—our team will refine and return updated drafts within 24 hours to ensure your satisfaction.
+                We offer AI-assisted revisions based on your plan: Starter (1 round), Growth (2 rounds), Scale (2 rounds), Authority (3 rounds), Dominance (unlimited with Fair Use). Simply reply to your delivery email—our team will refine and return updated drafts within 24 hours to ensure your satisfaction.
               </p>
             </Card>
 
@@ -297,7 +297,7 @@ const OnboardingProcess = () => {
             <Card className="p-6 border-2 border-primary-glow/30 bg-white/95 backdrop-blur-sm shadow-neural hover:shadow-cyber transition-all duration-300">
               <h3 className="text-lg font-bold mb-3 text-[#9B59B6]">What if I'm not satisfied with the AI-generated content?</h3>
               <p className="text-muted-foreground">
-                We offer a 100% money-back guarantee. If you're not completely satisfied after AI revisions, 
+                We offer a 100% money-back guarantee. If you're not completely satisfied after using your included AI-assisted revisions, 
                 we'll provide a full refund. Your success is our top priority.
               </p>
             </Card>
