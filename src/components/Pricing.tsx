@@ -120,7 +120,7 @@ const Pricing = () => {
         '2 Rounds of AI-Assisted Revisions',
         'Advanced Keyword & Competitor Analysis',
         'Plagiarism & AI Scan Guarantee',
-        'Standard Support Portal'
+        'Efficient Support Portal'
       ]
     },
     {
@@ -162,13 +162,29 @@ const Pricing = () => {
         'Priority Support Portal',
         'Dedicated Client Workspace'
       ],
-      note: '*Fair Use policy applies'
+      note: '*Fair Use policy applies',
+      details: 'Unlimited revisions within the scope of the project and brand guidelines.'
     }
   ];
 
   return (
-    <section id="pricing" className="py-20 bg-gradient-to-br from-background via-background/95 to-muted/30">
-      <div className="container mx-auto px-4">
+    <section id="pricing" className="relative py-20 bg-gradient-to-br from-white via-white/95 to-muted/50 overflow-hidden">
+      {/* AI Neural Network Background */}
+      <div className="absolute inset-0 bg-gradient-mesh opacity-30" />
+      <div className="absolute inset-0 bg-gradient-neural animate-neural-pulse opacity-20" />
+      
+      {/* Grid pattern overlay */}
+      <div className="absolute inset-0" style={{
+        backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--primary-glow) / 0.15) 1px, transparent 0)`,
+        backgroundSize: '50px 50px'
+      }} />
+      
+      {/* Floating geometric elements */}
+      <div className="absolute top-20 left-10 w-16 h-16 border-2 border-primary-glow/30 rotate-45 animate-float shadow-cyber" />
+      <div className="absolute top-40 right-20 w-12 h-12 border-2 border-primary-glow/25 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '2s' }} />
+      <div className="absolute bottom-40 left-20 w-10 h-10 border-2 border-primary-glow/35 rotate-45 animate-float shadow-cyber" style={{ animationDelay: '4s' }} />
+      
+      <div className="relative z-10 container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
@@ -188,7 +204,7 @@ const Pricing = () => {
             <Card key={pkg.id} className={`relative border-2 hover:scale-105 transition-all duration-300 ${
               pkg.popular ? 'shadow-lg' : ''
             }`} style={{
-              borderColor: pkg.popular ? pkg.color : 'hsl(var(--border))'
+              borderColor: pkg.color
             }}>
               {pkg.popular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
@@ -322,6 +338,10 @@ const Pricing = () => {
                   <p className="text-xs text-muted-foreground italic">{pkg.note}</p>
                 )}
 
+                {pkg.details && expandedTier === pkg.id && (
+                  <p className="text-xs text-muted-foreground bg-muted/30 p-2 rounded">{pkg.details}</p>
+                )}
+
                 {pkg.features.length > 5 && (
                   <Button 
                     variant="ghost" 
@@ -390,7 +410,7 @@ const Pricing = () => {
                 </tr>
                 <tr>
                   <td className="py-2 px-2">👤 Support</td>
-                  <td className="py-2 px-2 text-center">Standard</td>
+                  <td className="py-2 px-2 text-center">Efficient</td>
                   <td className="py-2 px-2 text-center">Priority</td>
                   <td className="py-2 px-2 text-center">Priority + Workspace</td>
                 </tr>
