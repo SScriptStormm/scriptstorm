@@ -186,11 +186,13 @@ const Pricing = () => {
         <div className="grid md:grid-cols-2 gap-8 mb-20 max-w-4xl mx-auto">
           {packages.map((pkg) => (
             <Card key={pkg.id} className={`relative border-2 hover:scale-105 transition-all duration-300 ${
-              pkg.popular ? 'border-primary/50 shadow-lg' : 'border-border'
-            }`}>
+              pkg.popular ? 'shadow-lg' : ''
+            }`} style={{
+              borderColor: pkg.popular ? pkg.color : 'hsl(var(--border))'
+            }}>
               {pkg.popular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <Badge className="bg-primary text-primary-foreground px-4 py-2 text-sm font-bold">
+                  <Badge className="px-4 py-2 text-sm font-bold text-white" style={{ backgroundColor: pkg.color }}>
                     <Crown className="h-4 w-4 mr-1" />
                     Most Popular
                   </Badge>
@@ -260,7 +262,9 @@ const Pricing = () => {
 
         <div className="grid md:grid-cols-3 gap-6 mb-16 max-w-6xl mx-auto">
           {enterprisePackages.map((pkg) => (
-            <Card key={pkg.id} className="relative border-2 hover:scale-105 transition-all duration-300">
+            <Card key={pkg.id} className="relative border-2 hover:scale-105 transition-all duration-300" style={{
+              borderColor: pkg.color + '40' // Add transparency for subtle effect
+            }}>
               {pkg.badge && (
                 <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                   <Badge 
