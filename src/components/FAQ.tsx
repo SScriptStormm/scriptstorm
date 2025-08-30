@@ -4,39 +4,39 @@ const FAQ = () => {
   const faqs = [
     {
       question: "How does the 24-hour delivery work?",
-      answer: "Once you submit your content brief, our AI-powered team gets to work immediately. Most articles are delivered within 24 hours, and rush orders can be completed in as little as 6 hours for an additional fee."
+      answer: "The moment you submit your request, our proprietary automation system is triggered. Your content is generated, optimized for SEO, and rigorously checked for quality and originality, ensuring your first draft is in your inbox within 24 hours."
     },
     {
       question: "What makes your content SEO-optimized?",
-      answer: "Every piece includes comprehensive keyword research, proper header structure, meta descriptions, internal linking opportunities, and is written to match search intent. We use advanced SEO tools to ensure maximum search visibility."
+      answer: "Every piece of content is built on a foundation of comprehensive keyword research and competitive analysis. We ensure proper semantic structure, header tags, and meta descriptions, and we write to match user search intent—all designed to maximize your search visibility and ranking potential."
     },
     {
       question: "Can I request revisions?",
-      answer: "Yes! Each package includes AI-assisted revisions: Starter (1 round), Growth (2 rounds), Scale (2 rounds), Authority (3 rounds), Dominance (unlimited with Fair Use policy). All revisions delivered within 24 hours."
+      answer: "Absolutely. We offer AI-assisted revisions to ensure the content perfectly aligns with your brand and goals. The number of revision rounds scales with your plan: Starter (1 round), Growth (2 rounds), Scale (2 rounds), Authority (3 rounds), and Dominance (unlimited, under our Fair Use policy). Revised content is typically returned to you in a matter of hours."
     },
     {
       question: "Do you guarantee results?",
-      answer: "Yes! We offer a 100% money-back guarantee. If you're not satisfied with our work within the first 30 days, we'll refund your entire payment. We're confident in the quality of our content."
+      answer: "We guarantee our service. If a piece of content doesn't meet the quality standards we promise, we'll rewrite it. If we're unable to meet your needs consistently, we'll work with you to find a solution, which may include a prorated refund. We stand firmly behind the value we deliver."
     },
     {
       question: "What industries do you specialize in?",
-      answer: "We focus specifically on SaaS and eCommerce businesses. Our AI automation is tuned for these industries and understands the unique challenges and opportunities in B2B and B2C marketing."
+      answer: "Our system is specifically calibrated for the SaaS and eCommerce sectors. We understand the unique marketing challenges, audience demographics, and conversion goals of these B2B and B2C businesses, allowing us to generate highly relevant and effective content."
     },
     {
       question: "How do I get started?",
-      answer: "Choose your monthly subscription plan, submit your content requirements via our email workflow, and receive your first AI-generated content within 24 hours. No meetings, no delays."
+      answer: "Simply select your subscription plan and click \"Start My 24-Hour Draft.\" You'll be guided through our streamlined, email-only onboarding process to submit your first content brief. There are no meetings to book and no delays—you can start within minutes."
     },
     {
       question: "Can I cancel my subscription anytime?",
-      answer: "Yes, you can cancel your subscription at any time with no penalties or hidden fees. You'll continue to receive service through the end of your current billing period."
+      answer: "Yes. You can cancel your subscription at any time without facing penalties or hidden fees. Your service will remain active until the end of your current billing cycle."
     },
     {
       question: "Do you offer strategy calls?",
-      answer: "Our process is optimized for async communication. You’ll get detailed briefs, drafts, and revisions via email—faster than scheduling calls!"
+      answer: "To maintain our lightning-fast delivery and keep costs low, our entire process is designed for efficient asynchronous communication via email and your client portal. This method ensures all instructions and feedback are documented clearly, leading to better results faster than traditional calls."
     },
     {
       question: "Do you offer custom packages?",
-      answer: "Yes! For enterprise clients or businesses with unique needs, we offer custom packages. Contact our sales team to discuss your specific requirements and get a tailored quote."
+      answer: "Yes. For businesses with needs that extend beyond our published Dominance package, we offer fully custom solutions. Contact us directly to discuss your requirements, and we'll prepare a tailored proposal."
     }
   ];
 
