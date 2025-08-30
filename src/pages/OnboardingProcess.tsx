@@ -76,11 +76,11 @@ const OnboardingProcess = () => {
       duration: "Ongoing",
       icon: Rocket,
       color: "#E74C3C",
-      description: "Track all content in real-time:",
+      description: "Your content, managed in one place:",
       details: [
-        "Track all content in real-time",
-        "Request revisions via email (24-hour turnaround)",
-        "Download ready-to-publish files in one click"
+        "Real-Time Tracking: See the status of every request in your dedicated client dashboard",
+        "Streamlined Revisions: Submit revision requests directly through your dashboard for lightning-fast, AI-assisted tweaks",
+        "Instant Access: Download all approved, ready-to-publish files with one click"
       ]
     }
   ];
@@ -282,31 +282,28 @@ const OnboardingProcess = () => {
             <Card className="p-6 border-2 border-primary-glow/30 bg-white/95 backdrop-blur-sm shadow-neural hover:shadow-cyber transition-all duration-300">
               <h3 className="text-lg font-bold mb-3 text-[#3498DB]">What if I need revisions?</h3>
               <p className="text-muted-foreground">
-                We offer AI-assisted revisions based on your plan: Starter (1 round), Growth (2 rounds), Scale (2 rounds), Authority (3 rounds), Dominance (unlimited with Fair Use). Simply reply to your delivery email—our team will refine and return updated drafts within 24 hours to ensure your satisfaction.
+                We offer AI-assisted revisions based on your plan: Starter (1 round), Growth (2 rounds), Scale (2 rounds), Authority (3 rounds), Dominance (unlimited, under our Fair Use policy). Simply submit your request through your client dashboard—our system will process and deliver the refined content within a few hours.
               </p>
             </Card>
 
             <Card className="p-6 border-2 border-primary-glow/30 bg-white/95 backdrop-blur-sm shadow-neural hover:shadow-cyber transition-all duration-300">
               <h3 className="text-lg font-bold mb-3 text-[#2ECC71]">How does AI ensure the content matches my brand?</h3>
               <p className="text-muted-foreground">
-                During email consultation, our AI analyzes your brand voice, style, and preferences. 
-                The system also reviews your existing content to ensure perfect AI-generated consistency.
+                During the initial email intake, our AI analyzes your brand voice, style, and any existing content you provide. This allows it to generate new content that maintains perfect consistency with your established tone and guidelines.
               </p>
             </Card>
 
             <Card className="p-6 border-2 border-primary-glow/30 bg-white/95 backdrop-blur-sm shadow-neural hover:shadow-cyber transition-all duration-300">
               <h3 className="text-lg font-bold mb-3 text-[#9B59B6]">What if I'm not satisfied with the AI-generated content?</h3>
               <p className="text-muted-foreground">
-                We offer a 100% money-back guarantee. If you're not completely satisfied after using your included AI-assisted revisions, 
-                we'll provide a full refund. Your success is our top priority.
+                We offer a 100% satisfaction guarantee. If a piece of content doesn't meet your expectations after using your included revisions, we'll rewrite it or provide a prorated refund. We are confident in the quality our automated system delivers.
               </p>
             </Card>
 
             <Card className="p-6 border-2 border-primary-glow/30 bg-white/95 backdrop-blur-sm shadow-neural hover:shadow-cyber transition-all duration-300">
               <h3 className="text-lg font-bold mb-3 text-[#E67E22]">Can your AI handle urgent requests?</h3>
               <p className="text-muted-foreground">
-                Yes! Our AI standard turnaround is 24-48 hours, but the automated system can accommodate rush orders for urgent needs. 
-                Contact us to discuss expedited AI delivery options.
+                Our standard automated turnaround is a guaranteed 24 hours. For clients needing even faster delivery, our Dominance package includes a guaranteed 12-hour turnaround for all content.
               </p>
             </Card>
           </div>
