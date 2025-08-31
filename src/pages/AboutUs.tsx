@@ -45,12 +45,12 @@ const AboutUs = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-hero">
+    <div className="min-h-screen bg-background">
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-secondary/95 backdrop-blur-md border-b border-primary/20">
+      <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-primary/20 shadow-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
-            <Link to="/" className="flex items-center gap-2 text-primary-glow hover:text-primary transition-colors">
+            <Link to="/" className="flex items-center gap-2 text-primary hover:text-primary-glow transition-colors">
               <ArrowLeft className="h-4 w-4" />
               <span className="font-mono tracking-wide">Back to ScriptStorm</span>
             </Link>
@@ -59,35 +59,37 @@ const AboutUs = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="py-16">
+      <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-primary-glow/5">
         <div className="container mx-auto px-4 text-center">
-          <Badge className="mb-4 bg-primary/20 text-primary-glow border-primary-glow/50">
+          <Badge className="mb-6 bg-primary text-white border-0 px-4 py-2 text-sm font-medium">
             ABOUT SCRIPTSTORM
           </Badge>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-foreground">
+          <h1 className="text-5xl md:text-7xl font-bold mb-8 text-foreground leading-tight">
             We're Automating
-            <span className="block text-primary-glow">Content Creation</span>
+            <span className="block text-primary bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
+              Content Creation
+            </span>
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
+          <p className="text-xl text-muted-foreground max-w-4xl mx-auto mb-12 leading-relaxed">
             ScriptStorm is a powerful, AI-driven content engine. We deliver high-quality, SEO-optimized content in record time—without the traditional agency overhead. Our fully automated system is built for founders and marketers who value speed, consistency, and results.
           </p>
         </div>
       </section>
 
       {/* Stats Section */}
-      <section className="py-16">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
             {stats.map((stat, index) => (
-              <Card key={index} className="bg-secondary/90 border-primary/30 shadow-glow text-center">
-                <CardContent className="p-6">
-                  <div className="flex justify-center mb-4">
-                    <div className="p-3 bg-primary/20 rounded-lg text-primary-glow">
+              <Card key={index} className="bg-white border-2 border-gray-100 hover:border-primary/30 shadow-lg hover:shadow-xl transition-all duration-300 text-center group">
+                <CardContent className="p-8">
+                  <div className="flex justify-center mb-6">
+                    <div className="p-4 bg-primary/10 rounded-xl text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
                       {stat.icon}
                     </div>
                   </div>
-                  <h3 className="text-3xl font-bold text-foreground mb-2">{stat.value}</h3>
-                  <p className="text-muted-foreground text-sm">{stat.label}</p>
+                  <h3 className="text-4xl font-bold text-foreground mb-3">{stat.value}</h3>
+                  <p className="text-muted-foreground font-medium">{stat.label}</p>
                 </CardContent>
               </Card>
             ))}
@@ -96,20 +98,20 @@ const AboutUs = () => {
       </section>
 
       {/* Mission Section */}
-      <section className="py-16">
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-primary/5">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-8">Our Mission</h2>
-            <p className="text-xl text-muted-foreground leading-relaxed mb-12">
+          <div className="max-w-5xl mx-auto text-center">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-12">Our Mission</h2>
+            <p className="text-2xl text-muted-foreground leading-relaxed mb-16 font-light">
               We believe that scaling content shouldn't be a slow, expensive, or unpredictable process. Traditional agencies are bogged down by human bottlenecks. That's why we built ScriptStorm—a seamless automated system that delivers publish-ready content at the push of a button, making consistent, high-quality content accessible for every growing business.
             </p>
             
-            <Card className="bg-secondary/90 border-primary/30 shadow-glow">
-              <CardContent className="p-8">
-                <blockquote className="text-2xl text-foreground font-light italic mb-6">
+            <Card className="bg-white border-2 border-primary/20 shadow-2xl">
+              <CardContent className="p-12">
+                <blockquote className="text-3xl text-foreground font-light italic mb-8 leading-relaxed">
                   "Leveraging AI isn't about replacing creativity; it's about eliminating friction. We've built the system we wished existed."
                 </blockquote>
-                <cite className="text-muted-foreground">— The ScriptStorm Founder</cite>
+                <cite className="text-primary font-semibold text-lg">— The ScriptStorm Founder</cite>
               </CardContent>
             </Card>
           </div>
@@ -117,74 +119,74 @@ const AboutUs = () => {
       </section>
 
       {/* Values Section */}
-      <section className="py-16">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-12">Our Values</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {values.map((value, index) => (
-              <Card key={index} className="bg-secondary/90 border-primary/30 shadow-glow">
-                <CardContent className="p-8 text-center">
-                  <div className="flex justify-center mb-6">
-                    <div className="p-4 bg-primary/20 rounded-lg text-primary-glow">
-                      {value.icon}
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground text-center mb-16">Our Values</h2>
+            <div className="grid md:grid-cols-3 gap-10">
+              {values.map((value, index) => (
+                <Card key={index} className="bg-white border-2 border-gray-100 hover:border-primary/30 shadow-lg hover:shadow-xl transition-all duration-300 group">
+                  <CardContent className="p-10 text-center">
+                    <div className="flex justify-center mb-8">
+                      <div className="p-6 bg-primary/10 rounded-2xl text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                        {value.icon}
+                      </div>
                     </div>
-                  </div>
-                  <h3 className="text-xl font-bold text-foreground mb-4">{value.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{value.description}</p>
-                </CardContent>
-              </Card>
-            ))}
+                    <h3 className="text-2xl font-bold text-foreground mb-6">{value.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed text-lg">{value.description}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
-        </div>
         </div>
       </section>
 
       {/* Our Difference Section */}
-      <section className="py-16">
+      <section className="py-20 bg-gradient-to-br from-primary/5 to-primary-glow/5">
         <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-6">Our Difference: The Engine, Not Just The Writers</h2>
-          <p className="text-xl text-muted-foreground text-center mb-12">
-            ScriptStorm isn't a team of freelance writers. It's a sophisticated AI assembly line fine-tuned for marketing content. While others rely on inconsistent human output, we offer:
-          </p>
-          <div className="space-y-6">
-            {differences.map((difference, index) => (
-              <Card key={index} className="bg-secondary/90 border-primary/30 shadow-glow">
-                <CardContent className="p-6">
-                  <div className="flex flex-col md:flex-row md:items-center gap-4">
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-foreground mb-2">{difference.title}</h3>
-                      <p className="text-muted-foreground">{difference.description}</p>
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground text-center mb-8">Our Difference: The Engine, Not Just The Writers</h2>
+            <p className="text-xl text-muted-foreground text-center mb-16 leading-relaxed">
+              ScriptStorm isn't a team of freelance writers. It's a sophisticated AI assembly line fine-tuned for marketing content. While others rely on inconsistent human output, we offer:
+            </p>
+            <div className="space-y-8">
+              {differences.map((difference, index) => (
+                <Card key={index} className="bg-white border-2 border-gray-100 hover:border-primary/30 shadow-lg hover:shadow-xl transition-all duration-300">
+                  <CardContent className="p-8">
+                    <div className="flex flex-col md:flex-row md:items-center gap-6">
+                      <div className="flex-1">
+                        <h3 className="text-2xl font-bold text-foreground mb-4">{difference.title}</h3>
+                        <p className="text-muted-foreground text-lg leading-relaxed">{difference.description}</p>
+                      </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
-        </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-16">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <Card className="bg-secondary/90 border-primary/30 shadow-glow max-w-4xl mx-auto">
-            <CardContent className="p-12 text-center">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+          <Card className="bg-gradient-to-br from-primary to-primary-glow shadow-2xl max-w-4xl mx-auto">
+            <CardContent className="p-16 text-center">
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
                 Ready to Experience the Difference?
               </h2>
-              <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+              <p className="text-xl text-white/90 mb-12 max-w-2xl mx-auto leading-relaxed">
                 Join the forward-thinking brands that are leveraging AI to outpace their competition.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <Link to="/contact">
-                  <button className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-lg font-semibold transition-colors shadow-glow">
+                  <button className="bg-white text-primary hover:bg-gray-50 px-10 py-5 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-xl">
                     Get Started Today
                   </button>
                 </Link>
                 <Link to="/onboarding-process">
-                  <button className="border border-primary/30 text-foreground hover:bg-primary/10 px-8 py-4 rounded-lg font-semibold transition-colors">
+                  <button className="border-2 border-white text-white hover:bg-white hover:text-primary px-10 py-5 rounded-xl font-bold text-lg transition-all duration-300">
                     Learn Our Process
                   </button>
                 </Link>
