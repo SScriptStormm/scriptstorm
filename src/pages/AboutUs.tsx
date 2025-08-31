@@ -1,49 +1,46 @@
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Target, Zap, Award, Users, TrendingUp, Clock } from "lucide-react";
+import { ArrowLeft, Target, Zap, Award, Database, Clock, CheckCircle } from "lucide-react";
 
 const AboutUs = () => {
   const stats = [
-    { label: "Content Pieces Delivered", value: "10,000+", icon: <TrendingUp className="h-6 w-6" /> },
-    { label: "Happy Clients", value: "500+", icon: <Users className="h-6 w-6" /> },
-    { label: "Average Delivery Time", value: "18 Hours", icon: <Clock className="h-6 w-6" /> },
-    { label: "Client Retention Rate", value: "94%", icon: <Award className="h-6 w-6" /> }
+    { label: "Articles of AI Training Data", value: "10,000+", icon: <Database className="h-6 w-6" /> },
+    { label: "Hours of Process Automation", value: "500+", icon: <Clock className="h-6 w-6" /> },
+    { label: "Average System Processing Time", value: "~18 Hours", icon: <Clock className="h-6 w-6" /> },
+    { label: "Focus on Client Results", value: "100%", icon: <Target className="h-6 w-6" /> }
   ];
 
   const values = [
     {
       icon: <Zap className="h-8 w-8" />,
-      title: "Speed & Efficiency",
-      description: "We believe great content shouldn't take weeks. Our AI-powered workflow delivers professional results in 24 hours or less."
+      title: "Speed & Automation",
+      description: "We reject drawn-out processes. Our AI-powered workflow is engineered for one thing: delivering professional results in 24 hours or less, every time."
     },
     {
       icon: <Target className="h-8 w-8" />,
-      title: "Results-Driven",
-      description: "Every piece of content is crafted with conversion in mind. We focus on content that drives traffic, engagement, and sales."
+      title: "Results-Driven Content",
+      description: "Every piece of content is engineered for performance. From keyword research to structure, our system is optimized to drive traffic, engagement, and conversions."
     },
     {
-      icon: <Award className="h-8 w-8" />,
-      title: "Quality First",
-      description: "We never compromise on quality. Every deliverable goes through our rigorous quality assurance process before reaching you."
+      icon: <CheckCircle className="h-8 w-8" />,
+      title: "Guaranteed Quality",
+      description: "We don't compromise. Every piece of content must pass our rigorous automated checks for originality, SEO, and readability before it ever reaches you."
     }
   ];
 
-  const team = [
+  const differences = [
     {
-      name: "Sarah Chen",
-      role: "Content Strategy Lead",
-      expertise: "10+ years in SaaS content marketing, formerly at HubSpot and Shopify"
+      title: "Unmatched Consistency",
+      description: "Our AI produces on-brand content every time."
     },
     {
-      name: "Marcus Rodriguez",
-      role: "SEO Specialist",
-      expertise: "Expert in technical SEO and content optimization, helped 200+ brands rank #1"
+      title: "Transparent Pricing", 
+      description: "No bloated retainers, just predictable monthly plans."
     },
     {
-      name: "Emily Watson",
-      role: "AI Operations Director",
-      expertise: "Machine learning engineer specializing in natural language processing"
+      title: "Scalability",
+      description: "Ramp your content volume up or down instantly, without meetings or headaches."
     }
   ];
 
@@ -68,12 +65,11 @@ const AboutUs = () => {
             ABOUT SCRIPTSTORM
           </Badge>
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-foreground">
-            We're Redefining
+            We're Automating
             <span className="block text-primary-glow">Content Creation</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            ScriptStorm combines the power of AI with human expertise to deliver premium content that converts. 
-            We're not just another content agency—we're your strategic partner in growth.
+            ScriptStorm is a powerful, AI-driven content engine. We deliver high-quality, SEO-optimized content in record time—without the traditional agency overhead. Our fully automated system is built for founders and marketers who value speed, consistency, and results.
           </p>
         </div>
       </section>
@@ -105,17 +101,15 @@ const AboutUs = () => {
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-8">Our Mission</h2>
             <p className="text-xl text-muted-foreground leading-relaxed mb-12">
-              We believe every brand deserves content that converts. Traditional content creation is slow, expensive, 
-              and often inconsistent. That's why we built ScriptStorm—to democratize access to premium content 
-              through the perfect blend of AI efficiency and human creativity.
+              We believe that scaling content shouldn't be a slow, expensive, or unpredictable process. Traditional agencies are bogged down by human bottlenecks. That's why we built ScriptStorm—a seamless automated system that delivers publish-ready content at the push of a button, making consistent, high-quality content accessible for every growing business.
             </p>
             
             <Card className="bg-secondary/90 border-primary/30 shadow-glow">
               <CardContent className="p-8">
                 <blockquote className="text-2xl text-foreground font-light italic mb-6">
-                  "Content is the atomic particle of all digital marketing. We're here to make sure yours converts."
+                  "Leveraging AI isn't about replacing creativity; it's about eliminating friction. We've built the system we wished existed."
                 </blockquote>
-                <cite className="text-muted-foreground">— ScriptStorm Founding Team</cite>
+                <cite className="text-muted-foreground">— The ScriptStorm Founder</cite>
               </CardContent>
             </Card>
           </div>
@@ -146,22 +140,22 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* Team Section */}
+      {/* Our Difference Section */}
       <section className="py-16">
         <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-12">Meet Our Experts</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-6">Our Difference: The Engine, Not Just The Writers</h2>
+          <p className="text-xl text-muted-foreground text-center mb-12">
+            ScriptStorm isn't a team of freelance writers. It's a sophisticated AI assembly line fine-tuned for marketing content. While others rely on inconsistent human output, we offer:
+          </p>
           <div className="space-y-6">
-            {team.map((member, index) => (
+            {differences.map((difference, index) => (
               <Card key={index} className="bg-secondary/90 border-primary/30 shadow-glow">
                 <CardContent className="p-6">
                   <div className="flex flex-col md:flex-row md:items-center gap-4">
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold text-foreground mb-2">{member.name}</h3>
-                      <Badge className="mb-3 bg-primary/20 text-primary-glow border-primary-glow/50">
-                        {member.role}
-                      </Badge>
-                      <p className="text-muted-foreground">{member.expertise}</p>
+                      <h3 className="text-xl font-bold text-foreground mb-2">{difference.title}</h3>
+                      <p className="text-muted-foreground">{difference.description}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -178,10 +172,10 @@ const AboutUs = () => {
           <Card className="bg-secondary/90 border-primary/30 shadow-glow max-w-4xl mx-auto">
             <CardContent className="p-12 text-center">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                Ready to Work With Us?
+                Ready to Experience the Difference?
               </h2>
               <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Join hundreds of successful brands who trust ScriptStorm with their content strategy.
+                Join the forward-thinking brands that are leveraging AI to outpace their competition.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/contact">
