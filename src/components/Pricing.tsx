@@ -313,9 +313,9 @@ const Pricing = () => {
                 backgroundSize: '20px 20px'
               }} />
               {pkg.badge && (
-                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-20">
                   <Badge 
-                    className="px-4 py-2 text-sm font-bold text-white"
+                    className="px-4 py-2 text-sm font-bold text-white shadow-lg"
                     style={{ backgroundColor: pkg.color }}
                   >
                     {pkg.badge === 'BEST VALUE' ? <Star className="h-4 w-4 mr-1" /> : null}
@@ -324,7 +324,7 @@ const Pricing = () => {
                 </div>
               )}
               
-              <CardHeader className={`text-center ${pkg.badge ? 'pt-8' : 'pt-6'}`}>
+              <CardHeader className={`text-center ${pkg.badge ? 'pt-8' : 'pt-6'} relative z-10`}>
                 <CardTitle className="text-2xl font-bold mb-2" style={{ color: pkg.color }}>
                   {pkg.name}
                 </CardTitle>
@@ -334,7 +334,7 @@ const Pricing = () => {
                 </div>
               </CardHeader>
               
-              <CardContent className="space-y-6">
+              <CardContent className="space-y-6 relative z-10">
                 <div className="space-y-2">
                   {pkg.features.slice(0, 5).map((feature, index) => (
                     <div key={index} className="flex items-center gap-2">
@@ -378,8 +378,8 @@ const Pricing = () => {
                     variant="ghost" 
                     size="sm" 
                     onClick={() => setExpandedTier(expandedTier === pkg.id ? null : pkg.id)}
-                    className="text-xs w-full"
-                    style={{ color: pkg.color }}
+                    className="text-xs w-full relative z-20 hover:bg-opacity-10"
+                    style={{ color: pkg.color, backgroundColor: 'transparent' }}
                   >
                     {expandedTier === pkg.id ? 'Show Less' : `Show All ${pkg.features.length} Features`}
                   </Button>
