@@ -287,22 +287,41 @@ const Pricing = () => {
 
         <div className="grid md:grid-cols-3 gap-6 mb-16 max-w-6xl mx-auto">
           {enterprisePackages.map((pkg) => (
-            <Card key={pkg.id} className="relative border-2 hover:scale-105 transition-all duration-300 shadow-elegant" style={{
-              borderColor: pkg.color + '40',
+            <Card key={pkg.id} className="relative border-2 hover:scale-105 transition-all duration-300 shadow-elegant overflow-visible" style={{
+              borderColor: pkg.color + '60',
               background: `linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--background) / 0.95) 50%, hsl(var(--background)) 100%)`,
               backdropFilter: 'blur(8px)'
             }}>
-              {/* Prestigious corner decorations */}
-              <div className="absolute -top-2 -left-2 w-8 h-8 border-l-2 border-t-2 border-primary-glow/50 rounded-tl-lg" />
-              <div className="absolute -top-2 -right-2 w-8 h-8 border-r-2 border-t-2 border-primary-glow/50 rounded-tr-lg" />
-              <div className="absolute -bottom-2 -left-2 w-8 h-8 border-l-2 border-b-2 border-primary-glow/50 rounded-bl-lg" />
-              <div className="absolute -bottom-2 -right-2 w-8 h-8 border-r-2 border-b-2 border-primary-glow/50 rounded-br-lg" />
+              {/* Elegant corner decorations with package-specific colors */}
+              <div className="absolute -top-3 -left-3 w-12 h-12 border-l-2 border-t-2 rounded-tl-lg" style={{ borderColor: pkg.color + '80' }} />
+              <div className="absolute -top-3 -right-3 w-12 h-12 border-r-2 border-t-2 rounded-tr-lg" style={{ borderColor: pkg.color + '80' }} />
+              <div className="absolute -bottom-3 -left-3 w-12 h-12 border-l-2 border-b-2 rounded-bl-lg" style={{ borderColor: pkg.color + '80' }} />
+              <div className="absolute -bottom-3 -right-3 w-12 h-12 border-r-2 border-b-2 rounded-br-lg" style={{ borderColor: pkg.color + '80' }} />
               
-              {/* Premium accent lines */}
-              <div className="absolute top-0 left-1/4 right-1/4 h-1 bg-gradient-to-r from-transparent via-primary-glow/60 to-transparent" />
-              <div className="absolute bottom-0 left-1/4 right-1/4 h-1 bg-gradient-to-r from-transparent via-primary-glow/60 to-transparent" />
-              <div className="absolute left-0 top-1/4 bottom-1/4 w-1 bg-gradient-to-b from-transparent via-primary-glow/60 to-transparent" />
-              <div className="absolute right-0 top-1/4 bottom-1/4 w-1 bg-gradient-to-b from-transparent via-primary-glow/60 to-transparent" />
+              {/* Ornate vine-like decorative lines */}
+              <div className="absolute -top-1 left-1/4 right-1/4 h-0.5" style={{ background: `linear-gradient(90deg, transparent, ${pkg.color}80, ${pkg.color}, ${pkg.color}80, transparent)` }} />
+              <div className="absolute -bottom-1 left-1/4 right-1/4 h-0.5" style={{ background: `linear-gradient(90deg, transparent, ${pkg.color}80, ${pkg.color}, ${pkg.color}80, transparent)` }} />
+              <div className="absolute -left-1 top-1/4 bottom-1/4 w-0.5" style={{ background: `linear-gradient(180deg, transparent, ${pkg.color}80, ${pkg.color}, ${pkg.color}80, transparent)` }} />
+              <div className="absolute -right-1 top-1/4 bottom-1/4 w-0.5" style={{ background: `linear-gradient(180deg, transparent, ${pkg.color}80, ${pkg.color}, ${pkg.color}80, transparent)` }} />
+              
+              {/* Additional ornate corner flourishes */}
+              <div className="absolute -top-2 left-8 w-6 h-1 rounded-full" style={{ backgroundColor: pkg.color + '60' }} />
+              <div className="absolute -top-2 right-8 w-6 h-1 rounded-full" style={{ backgroundColor: pkg.color + '60' }} />
+              <div className="absolute -bottom-2 left-8 w-6 h-1 rounded-full" style={{ backgroundColor: pkg.color + '60' }} />
+              <div className="absolute -bottom-2 right-8 w-6 h-1 rounded-full" style={{ backgroundColor: pkg.color + '60' }} />
+              <div className="absolute -left-2 top-8 w-1 h-6 rounded-full" style={{ backgroundColor: pkg.color + '60' }} />
+              <div className="absolute -right-2 top-8 w-1 h-6 rounded-full" style={{ backgroundColor: pkg.color + '60' }} />
+              <div className="absolute -left-2 bottom-8 w-1 h-6 rounded-full" style={{ backgroundColor: pkg.color + '60' }} />
+              <div className="absolute -right-2 bottom-8 w-1 h-6 rounded-full" style={{ backgroundColor: pkg.color + '60' }} />
+              
+              {/* Diagonal accent lines */}
+              <div className="absolute -top-4 -left-4 w-8 h-0.5 rotate-45 rounded-full" style={{ backgroundColor: pkg.color + '70' }} />
+              <div className="absolute -top-4 -right-4 w-8 h-0.5 -rotate-45 rounded-full" style={{ backgroundColor: pkg.color + '70' }} />
+              <div className="absolute -bottom-4 -left-4 w-8 h-0.5 -rotate-45 rounded-full" style={{ backgroundColor: pkg.color + '70' }} />
+              <div className="absolute -bottom-4 -right-4 w-8 h-0.5 rotate-45 rounded-full" style={{ backgroundColor: pkg.color + '70' }} />
+              
+              {/* Inner glow effect */}
+              <div className="absolute inset-2 rounded-lg border border-opacity-30 pointer-events-none" style={{ borderColor: pkg.color + '30' }} />
               {pkg.badge && (
                 <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                   <Badge 
