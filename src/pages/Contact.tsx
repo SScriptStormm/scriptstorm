@@ -28,7 +28,13 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-hero">
+    <div className="min-h-screen bg-background">
+      {/* Background Elements */}
+      <div className="fixed inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-mesh opacity-30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
+      </div>
+
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-secondary/95 backdrop-blur-md border-b border-primary/20">
         <div className="container mx-auto px-4 py-4">
@@ -45,12 +51,12 @@ const Contact = () => {
       <section className="py-16">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-foreground">
-            Let's Create Something
-            <span className="block text-primary-glow">Amazing Together</span>
+            Have Questions Before
+            <span className="block text-primary-glow">You Start?</span>
           </h1>
-              <p className="text-muted-foreground">
-                Ready to transform your content marketing with AI-powered automation? Get in touch and let's discuss how ScriptStorm can help your brand succeed.
-              </p>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            Ready to elevate your content game? We're here to answer your questions.
+          </p>
         </div>
       </section>
 
@@ -60,10 +66,10 @@ const Contact = () => {
           <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
             
             {/* Contact Form */}
-            <Card className="bg-secondary/90 border-primary/30 shadow-glow">
+            <Card className="bg-card/80 backdrop-blur-sm border-2 border-primary/20 shadow-xl">
               <CardHeader>
-                <CardTitle className="text-2xl text-foreground">Send us a message</CardTitle>
-                <p className="text-muted-foreground">We'll get back to you within 24 hours</p>
+                <CardTitle className="text-2xl text-foreground">Have Questions Before You Start?</CardTitle>
+                <p className="text-muted-foreground">Send us a message. We'll get back to you within 24 hours.</p>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -75,7 +81,7 @@ const Contact = () => {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="bg-card/50 border-primary/30 text-foreground placeholder:text-muted-foreground"
+                        className="bg-background/50 border-primary/30 text-foreground placeholder:text-muted-foreground"
                       />
                     </div>
                     <div>
@@ -86,7 +92,7 @@ const Contact = () => {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="bg-card/50 border-primary/30 text-foreground placeholder:text-muted-foreground"
+                        className="bg-background/50 border-primary/30 text-foreground placeholder:text-muted-foreground"
                       />
                     </div>
                   </div>
@@ -96,7 +102,7 @@ const Contact = () => {
                       placeholder="Company Name"
                       value={formData.company}
                       onChange={handleChange}
-                      className="bg-card/50 border-primary/30 text-foreground placeholder:text-muted-foreground"
+                      className="bg-background/50 border-primary/30 text-foreground placeholder:text-muted-foreground"
                     />
                   </div>
                   <div>
@@ -107,7 +113,7 @@ const Contact = () => {
                       onChange={handleChange}
                       rows={5}
                       required
-                      className="bg-card/50 border-primary/30 text-foreground placeholder:text-muted-foreground resize-none"
+                      className="bg-background/50 border-primary/30 text-foreground placeholder:text-muted-foreground resize-none"
                     />
                   </div>
                   <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-glow">
@@ -122,12 +128,12 @@ const Contact = () => {
               <div>
                 <h2 className="text-3xl font-bold text-foreground mb-6">Get In Touch</h2>
                 <p className="text-muted-foreground text-lg mb-8">
-                  Ready to elevate your content game? We're here to help you create content that converts.
+                  Ready to elevate your content game? We're here to answer your questions.
                 </p>
               </div>
 
               <div className="space-y-6">
-                <Card className="bg-secondary/90 border-primary/30 shadow-glow">
+                <Card className="bg-card/80 backdrop-blur-sm border-2 border-primary/20 shadow-xl">
                   <CardContent className="p-6">
                     <div className="flex items-center gap-4">
                       <div className="p-3 bg-primary/20 rounded-lg">
@@ -135,13 +141,13 @@ const Contact = () => {
                       </div>
                       <div>
                         <h3 className="font-semibold text-foreground">Email Us</h3>
-                        <p className="text-muted-foreground">hello@scriptstorm.com</p>
+                        <p className="text-muted-foreground">hello@scriptstorm.org</p>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card className="bg-secondary/90 border-primary/30 shadow-glow">
+                <Card className="bg-card/80 backdrop-blur-sm border-2 border-primary/20 shadow-xl">
                   <CardContent className="p-6">
                     <div className="flex items-center gap-4">
                       <div className="p-3 bg-primary/20 rounded-lg">
@@ -155,7 +161,7 @@ const Contact = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="bg-secondary/90 border-primary/30 shadow-glow">
+                <Card className="bg-card/80 backdrop-blur-sm border-2 border-primary/20 shadow-xl">
                   <CardContent className="p-6">
                     <div className="flex items-center gap-4">
                       <div className="p-3 bg-primary/20 rounded-lg">
