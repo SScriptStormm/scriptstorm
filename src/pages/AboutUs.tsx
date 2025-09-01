@@ -59,7 +59,37 @@ const AboutUs = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-primary-glow/5">
+      <section className="relative py-20 bg-gradient-to-br from-white via-white/95 to-muted/50 overflow-hidden">
+        {/* AI Neural Network Background */}
+        <div className="absolute inset-0 bg-gradient-mesh opacity-30" />
+        <div className="absolute inset-0 bg-gradient-neural animate-neural-pulse opacity-20" />
+        
+        {/* Grid pattern overlay */}
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--primary-glow) / 0.15) 1px, transparent 0)`,
+          backgroundSize: '50px 50px'
+        }} />
+        
+        {/* Floating geometric elements */}
+        <div className="absolute top-20 left-10 w-16 h-16 border-2 border-primary-glow/30 rotate-45 animate-float shadow-cyber" />
+        <div className="absolute top-40 right-20 w-12 h-12 border-2 border-primary-glow/25 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '2s' }} />
+        <div className="absolute bottom-40 left-20 w-10 h-10 border-2 border-primary-glow/35 rotate-45 animate-float shadow-cyber" style={{ animationDelay: '4s' }} />
+        
+        {/* Multiple scanning line effects */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 h-px w-full bg-gradient-neural animate-scan-line opacity-40" />
+          <div className="absolute bottom-0 h-px w-full bg-gradient-cyber animate-scan-line opacity-30" style={{ animationDelay: '2s' }} />
+          <div className="absolute left-0 w-px h-full bg-gradient-neural animate-scan-line opacity-25" style={{ animationDelay: '4s' }} />
+        </div>
+        
+        {/* Particle effect overlay */}
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-primary-glow rounded-full animate-ping opacity-30" style={{ animationDelay: '1s' }} />
+          <div className="absolute top-3/4 right-1/3 w-1 h-1 bg-primary-glow rounded-full animate-ping opacity-40" style={{ animationDelay: '3s' }} />
+          <div className="absolute bottom-1/4 left-1/2 w-1 h-1 bg-primary-glow rounded-full animate-ping opacity-35" style={{ animationDelay: '5s' }} />
+        </div>
+        
+        <div className="relative z-10">
         <div className="container mx-auto px-4 text-center">
           <Badge className="mb-6 bg-primary text-white border-0 px-4 py-2 text-sm font-medium">
             ABOUT SCRIPTSTORM
@@ -73,6 +103,7 @@ const AboutUs = () => {
           <p className="text-xl text-muted-foreground max-w-4xl mx-auto mb-12 leading-relaxed">
             ScriptStorm is a powerful, AI-driven content engine. We deliver high-quality, SEO-optimized content in record time—without the traditional agency overhead. Our fully automated system is built for founders and marketers who value speed, consistency, and results.
           </p>
+        </div>
         </div>
       </section>
 

@@ -30,9 +30,18 @@ const Pricing = () => {
     
     setLoadingStates(prev => ({ ...prev, [packageType]: true }));
     
+    // Map enterprise package IDs to backend expected format
+    const packageMap = {
+      'scale': 'starter-enterprise',
+      'authority': 'growth-enterprise', 
+      'dominance': 'authority-enterprise'
+    };
+    
+    const backendPackageType = packageMap[packageType] || packageType;
+    
     try {
       const { data, error } = await supabase.functions.invoke('create-checkout', {
-        body: { packageType, selectedAddOns }
+        body: { packageType: backendPackageType, selectedAddOns }
       });
 
       if (error) throw error;
