@@ -287,33 +287,14 @@ const Pricing = () => {
 
         <div className="grid md:grid-cols-3 gap-6 mb-16 max-w-6xl mx-auto">
           {enterprisePackages.map((pkg) => (
-            <Card key={pkg.id} className="relative border-0 hover:scale-105 transition-all duration-500 group overflow-hidden" style={{
+            <Card key={pkg.id} className="relative border-0 hover:scale-105 transition-all duration-500 group" style={{
               background: `linear-gradient(135deg, ${pkg.color}08 0%, ${pkg.color}15 30%, ${pkg.color}08 100%)`,
               boxShadow: `0 20px 40px -10px ${pkg.color}30, 0 0 30px ${pkg.color}20, inset 0 1px 0 ${pkg.color}40`,
               border: `2px solid ${pkg.color}40`
             }}>
-              {/* Premium glow effect */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg" style={{
-                background: `linear-gradient(135deg, ${pkg.color}10, ${pkg.color}05)`,
-                boxShadow: `inset 0 0 20px ${pkg.color}20`
-              }} />
-              
-              {/* Elegant top accent */}
-              <div className="absolute top-0 left-0 right-0 h-1 rounded-t-lg" style={{
-                background: `linear-gradient(90deg, transparent 0%, ${pkg.color}80 20%, ${pkg.color} 50%, ${pkg.color}80 80%, transparent 100%)`
-              }} />
-              
-              {/* Subtle corner highlights */}
-              <div className="absolute top-2 left-2 w-8 h-8 rounded-full opacity-20" style={{ background: `radial-gradient(circle, ${pkg.color}60, transparent)` }} />
-              <div className="absolute top-2 right-2 w-8 h-8 rounded-full opacity-20" style={{ background: `radial-gradient(circle, ${pkg.color}60, transparent)` }} />
-              
-              {/* Premium texture overlay */}
-              <div className="absolute inset-0 opacity-10" style={{
-                backgroundImage: `radial-gradient(circle at 2px 2px, ${pkg.color}40 1px, transparent 0)`,
-                backgroundSize: '20px 20px'
-              }} />
+              {/* Badge positioned outside card to avoid overlay interference */}
               {pkg.badge && (
-                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-20">
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-50">
                   <Badge 
                     className="px-4 py-2 text-sm font-bold text-white shadow-lg"
                     style={{ backgroundColor: pkg.color }}
@@ -324,7 +305,28 @@ const Pricing = () => {
                 </div>
               )}
               
-              <CardHeader className={`text-center ${pkg.badge ? 'pt-8' : 'pt-6'} relative z-10`}>
+              {/* Premium glow effect with lower z-index */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg z-0" style={{
+                background: `linear-gradient(135deg, ${pkg.color}10, ${pkg.color}05)`,
+                boxShadow: `inset 0 0 20px ${pkg.color}20`
+              }} />
+              
+              {/* Elegant top accent with lower z-index */}
+              <div className="absolute top-0 left-0 right-0 h-1 rounded-t-lg z-10" style={{
+                background: `linear-gradient(90deg, transparent 0%, ${pkg.color}80 20%, ${pkg.color} 50%, ${pkg.color}80 80%, transparent 100%)`
+              }} />
+              
+              {/* Subtle corner highlights with lower z-index */}
+              <div className="absolute top-2 left-2 w-8 h-8 rounded-full opacity-20 z-0" style={{ background: `radial-gradient(circle, ${pkg.color}60, transparent)` }} />
+              <div className="absolute top-2 right-2 w-8 h-8 rounded-full opacity-20 z-0" style={{ background: `radial-gradient(circle, ${pkg.color}60, transparent)` }} />
+              
+              {/* Premium texture overlay with lowest z-index */}
+              <div className="absolute inset-0 opacity-10 z-0" style={{
+                backgroundImage: `radial-gradient(circle at 2px 2px, ${pkg.color}40 1px, transparent 0)`,
+                backgroundSize: '20px 20px'
+              }} />
+              
+              <CardHeader className={`text-center ${pkg.badge ? 'pt-10' : 'pt-6'} relative z-20`}>
                 <CardTitle className="text-2xl font-bold mb-2" style={{ color: pkg.color }}>
                   {pkg.name}
                 </CardTitle>
@@ -334,7 +336,7 @@ const Pricing = () => {
                 </div>
               </CardHeader>
               
-              <CardContent className="space-y-6 relative z-10">
+              <CardContent className="space-y-6 relative z-20">
                 <div className="space-y-2">
                   {pkg.features.slice(0, 5).map((feature, index) => (
                     <div key={index} className="flex items-center gap-2">
