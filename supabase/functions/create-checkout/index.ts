@@ -43,11 +43,11 @@ serve(async (req) => {
 
     // Create line items based on package type
     const packagePricing = {
-      starter: { amount: 29700, name: "ScriptStorm Starter Package", description: "5 SEO Articles + 15 Social Posts + 5 Product Descriptions monthly" },
-      growth: { amount: 59700, name: "ScriptStorm Growth Package", description: "10 SEO Articles + 30 Social Posts + 10 Product Descriptions monthly" },
-      "starter-enterprise": { amount: 129700, name: "ScriptStorm Scale", description: "20 SEO Articles + 60 Social Posts + 20 Product Descriptions monthly" },
-      "growth-enterprise": { amount: 179700, name: "ScriptStorm Authority", description: "30 SEO Articles + 90 Social Posts + 30 Product Descriptions monthly" },
-      "authority-enterprise": { amount: 299700, name: "ScriptStorm Dominance", description: "50 SEO Articles + 150 Social Posts + Unlimited Product Descriptions monthly" }
+      starter: { amount: 29700, name: "ScriptStorm Starter Package - $297 USD", description: "5 SEO Articles + 15 Social Posts + 5 Product Descriptions monthly" },
+      growth: { amount: 59700, name: "ScriptStorm Growth Package - $597 USD", description: "10 SEO Articles + 30 Social Posts + 10 Product Descriptions monthly" },
+      "starter-enterprise": { amount: 129700, name: "ScriptStorm Scale - $1,297 USD", description: "20 SEO Articles + 60 Social Posts + 20 Product Descriptions monthly" },
+      "growth-enterprise": { amount: 179700, name: "ScriptStorm Authority - $1,797 USD", description: "30 SEO Articles + 90 Social Posts + 30 Product Descriptions monthly" },
+      "authority-enterprise": { amount: 299700, name: "ScriptStorm Dominance - $2,997 USD", description: "50 SEO Articles + 150 Social Posts + Unlimited Product Descriptions monthly" }
     };
 
     // Remove add-on handling since all packages are now all-inclusive
