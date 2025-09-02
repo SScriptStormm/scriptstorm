@@ -54,10 +54,18 @@ const Pricing = () => {
           duration: 3000,
         });
         
-        // Open checkout in new tab after short delay
-        setTimeout(() => {
-          window.open(data.url, '_blank');
-        }, 1000);
+        // Detect mobile devices and handle redirect appropriately
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        if (isMobile) {
+          // On mobile, redirect in same tab immediately to avoid popup blockers
+          window.location.href = data.url;
+        } else {
+          // On desktop, open in new tab with short delay
+          setTimeout(() => {
+            window.open(data.url, '_blank');
+          }, 1000);
+        }
       }
     } catch (error) {
       console.error('Checkout error:', error);
