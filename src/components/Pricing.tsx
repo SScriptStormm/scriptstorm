@@ -54,11 +54,12 @@ const Pricing = () => {
           duration: 3000,
         });
         
-        // Detect mobile devices and handle redirect appropriately
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        // Detect mobile devices and tablets and handle redirect appropriately
+        const isMobileOrTablet = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|tablet|ipad/i.test(navigator.userAgent) 
+          || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1); // Detect iPad Pro on iOS 13+
         
-        if (isMobile) {
-          // On mobile, redirect in same tab immediately to avoid popup blockers
+        if (isMobileOrTablet) {
+          // On mobile/tablet, redirect in same tab immediately to avoid popup blockers
           window.location.href = data.url;
         } else {
           // On desktop, open in new tab with short delay
