@@ -11,8 +11,8 @@ const Footer = () => {
             Ready to Transform Your Content Marketing?
           </h2>
           <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-            Join hundreds of successful brands. Get premium content that converts. 
-            Schedule your free consultation today.
+            Stop the endless wait for quality content. Get premium, AI-powered content that converts—delivered in 24 hours.
+            Start Your First Draft
           </p>
           <Button 
             variant="hero" 
@@ -20,7 +20,7 @@ const Footer = () => {
             onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
             className="text-lg px-8 py-4 h-auto"
           >
-            Get Free Consultation
+            🚀 Start My 24-Hour Draft
           </Button>
         </div>
 
