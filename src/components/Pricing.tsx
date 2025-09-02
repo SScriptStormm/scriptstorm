@@ -240,7 +240,8 @@ const Pricing = () => {
                 </CardTitle>
                 <div className="mb-4">
                   <span className="text-4xl font-bold text-foreground">{pkg.price}</span>
-                  <span className="text-muted-foreground ml-2 font-semibold">{pkg.period}</span>
+                  <span className="text-lg font-semibold text-foreground ml-1">USD</span>
+                  <span className="text-muted-foreground ml-2 font-semibold">/ month</span>
                 </div>
                 <CardDescription className="text-base">{pkg.description}</CardDescription>
               </CardHeader>
@@ -341,7 +342,8 @@ const Pricing = () => {
                 </CardTitle>
                 <div className="mb-4">
                   <span className="text-4xl font-bold text-foreground">{pkg.price}</span>
-                  <span className="text-muted-foreground ml-2 font-semibold">{pkg.period}</span>
+                  <span className="text-lg font-semibold text-foreground ml-1">USD</span>
+                  <span className="text-muted-foreground ml-2 font-semibold">/ month</span>
                 </div>
               </CardHeader>
               
