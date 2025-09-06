@@ -9,7 +9,7 @@ import ContactForm from "./ContactForm";
 
 const Pricing = () => {
   const [showContactForm, setShowContactForm] = useState(false);
-  const [expandedTiers, setExpandedTiers] = useState<{[key: string]: boolean}>({});
+  const [expandedPackages, setExpandedPackages] = useState<{[key: string]: boolean}>({});
   const [loadingStates, setLoadingStates] = useState<{[key: string]: boolean}>({});
   const { toast } = useToast();
 
@@ -78,6 +78,13 @@ const Pricing = () => {
     } finally {
       setLoadingStates(prev => ({ ...prev, [packageType]: false }));
     }
+  };
+
+  const togglePackageExpansion = (packageId: string) => {
+    setExpandedPackages(prev => ({
+      ...prev,
+      [packageId]: !prev[packageId]
+    }));
   };
 
   const packages = [
@@ -361,7 +368,7 @@ const Pricing = () => {
                     </div>
                   ))}
                   
-                  {expandedTiers[pkg.id] && (
+                  {expandedPackages[pkg.id] && (
                     <div className="space-y-2 pt-2 border-t border-border">
                       {pkg.features.slice(5).map((feature, index) => (
                         <div key={index + 5} className="flex items-center gap-2">
@@ -382,7 +389,7 @@ const Pricing = () => {
                   <p className="text-xs text-muted-foreground italic">{pkg.note}</p>
                 )}
 
-                {pkg.details && expandedTiers[pkg.id] && (
+                {pkg.details && expandedPackages[pkg.id] && (
                   <p className="text-xs text-muted-foreground bg-muted/30 p-2 rounded">{pkg.details}</p>
                 )}
 
@@ -390,19 +397,11 @@ const Pricing = () => {
                   <Button 
                     variant="ghost" 
                     size="sm" 
-                    onClick={() => {
-                      console.log('Clicking expand for package:', pkg.id);
-                      console.log('Current expandedTiers state:', expandedTiers);
-                      setExpandedTiers(prev => {
-                        const newState = { ...prev, [pkg.id]: !prev[pkg.id] };
-                        console.log('New expandedTiers state:', newState);
-                        return newState;
-                      });
-                    }}
+                    onClick={() => togglePackageExpansion(pkg.id)}
                     className="text-xs w-full relative z-20 hover:bg-opacity-10"
                     style={{ color: pkg.color, backgroundColor: 'transparent' }}
                   >
-                    {expandedTiers[pkg.id] ? 'Show Less' : `Show All ${pkg.features.length} Features`}
+                    {expandedPackages[pkg.id] ? 'Show Less' : `Show All ${pkg.features.length} Features`}
                   </Button>
                 )}
                 
