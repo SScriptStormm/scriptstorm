@@ -357,7 +357,7 @@ const Pricing = () => {
               <CardContent className="space-y-6 relative z-20">
                 <div className="space-y-2">
                   {pkg.features.slice(0, 5).map((feature, index) => (
-                    <div key={index} className="flex items-center gap-2">
+                    <div key={`${pkg.id}-basic-${index}`} className="flex items-center gap-2">
                       <div 
                         className="w-4 h-4 rounded-full flex items-center justify-center"
                         style={{ backgroundColor: pkg.color }}
@@ -368,10 +368,10 @@ const Pricing = () => {
                     </div>
                   ))}
                   
-                  {expandedPackages[pkg.id] && (
+                  {expandedPackages[pkg.id] === true && pkg.features.length > 5 && (
                     <div className="space-y-2 pt-2 border-t border-border">
                       {pkg.features.slice(5).map((feature, index) => (
-                        <div key={`${pkg.id}-feature-${index + 5}`} className="flex items-center gap-2">
+                        <div key={`${pkg.id}-expanded-${index}`} className="flex items-center gap-2">
                           <div 
                             className="w-4 h-4 rounded-full flex items-center justify-center"
                             style={{ backgroundColor: pkg.color }}
