@@ -81,10 +81,16 @@ const Pricing = () => {
   };
 
   const togglePackageExpansion = (packageId: string) => {
-    setExpandedPackages(prev => ({
-      ...prev,
-      [packageId]: !prev[packageId]
-    }));
+    console.log('Toggling package:', packageId);
+    console.log('Current state before toggle:', expandedPackages);
+    setExpandedPackages(prev => {
+      const newState = {
+        ...prev,
+        [packageId]: !prev[packageId]
+      };
+      console.log('New state after toggle:', newState);
+      return newState;
+    });
   };
 
   const packages = [
