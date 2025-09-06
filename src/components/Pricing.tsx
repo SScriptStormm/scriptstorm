@@ -390,7 +390,15 @@ const Pricing = () => {
                   <Button 
                     variant="ghost" 
                     size="sm" 
-                    onClick={() => setExpandedTiers(prev => ({ ...prev, [pkg.id]: !prev[pkg.id] }))}
+                    onClick={() => {
+                      console.log('Clicking expand for package:', pkg.id);
+                      console.log('Current expandedTiers state:', expandedTiers);
+                      setExpandedTiers(prev => {
+                        const newState = { ...prev, [pkg.id]: !prev[pkg.id] };
+                        console.log('New expandedTiers state:', newState);
+                        return newState;
+                      });
+                    }}
                     className="text-xs w-full relative z-20 hover:bg-opacity-10"
                     style={{ color: pkg.color, backgroundColor: 'transparent' }}
                   >
