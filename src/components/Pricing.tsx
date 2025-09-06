@@ -368,12 +368,15 @@ const Pricing = () => {
                     </div>
                   ))}
                   
-                  {(() => {
-                    const isExpanded = expandedPackages[pkg.id] === true;
-                    console.log(`Rendering ${pkg.id}: expandedPackages[${pkg.id}] = ${expandedPackages[pkg.id]}, showing expanded: ${isExpanded}`);
-                    return isExpanded && pkg.features.length > 5;
-                  })() && (
-                    <div className="space-y-2 pt-2 border-t border-border">
+                  <div 
+                    className={`space-y-2 pt-2 border-t border-border transition-all duration-300 ${
+                      expandedPackages[pkg.id] === true ? 'block' : 'hidden'
+                    }`}
+                    style={{ 
+                      display: expandedPackages[pkg.id] === true ? 'block' : 'none',
+                      opacity: expandedPackages[pkg.id] === true ? 1 : 0
+                    }}
+                  >
                       {pkg.features.slice(5).map((feature, index) => (
                         <div key={`${pkg.id}-expanded-${index}`} className="flex items-center gap-2">
                           <div 
@@ -386,7 +389,6 @@ const Pricing = () => {
                         </div>
                       ))}
                     </div>
-                  )}
                 </div>
 
                 {pkg.note && (
@@ -401,12 +403,7 @@ const Pricing = () => {
                   <Button 
                     variant="ghost" 
                     size="sm" 
-                  onClick={() => {
-                    console.log('Button clicked for package ID:', pkg.id);
-                    console.log('Current expandedPackages state:', expandedPackages);
-                    console.log('Package IDs in enterprisePackages:', enterprisePackages.map(p => p.id));
-                    togglePackageExpansion(pkg.id);
-                  }}
+                  onClick={() => togglePackageExpansion(pkg.id)}
                     className="text-xs w-full relative z-20 hover:bg-opacity-10"
                     style={{ color: pkg.color, backgroundColor: 'transparent' }}
                   >
