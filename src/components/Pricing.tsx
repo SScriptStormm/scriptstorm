@@ -303,7 +303,9 @@ const Pricing = () => {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 mb-16 max-w-6xl mx-auto">
-          {enterprisePackages.map((pkg) => (
+          {enterprisePackages.map((pkg) => {
+            console.log(`Rendering enterprise package: ${pkg.id}`);
+            return (
             <Card key={pkg.id} className="relative border-0 hover:scale-105 transition-all duration-500 group" style={{
               background: `linear-gradient(135deg, ${pkg.color}08 0%, ${pkg.color}15 30%, ${pkg.color}08 100%)`,
               boxShadow: `0 20px 40px -10px ${pkg.color}30, 0 0 30px ${pkg.color}20, inset 0 1px 0 ${pkg.color}40`,
@@ -368,7 +370,11 @@ const Pricing = () => {
                     </div>
                   ))}
                   
-                  {expandedPackages[pkg.id] && (
+                  {(() => {
+                    const isExpanded = expandedPackages[pkg.id];
+                    console.log(`Package ${pkg.id} - expanded state: ${isExpanded}, will render: ${isExpanded ? 'YES' : 'NO'}`);
+                    return isExpanded;
+                  })() && (
                     <div className="space-y-2 pt-2 border-t border-border">
                       {pkg.features.slice(5).map((feature, index) => (
                         <div key={index + 5} className="flex items-center gap-2">
@@ -418,7 +424,8 @@ const Pricing = () => {
                 </Button>
               </CardContent>
             </Card>
-          ))}
+            );
+          })}
         </div>
 
         {/* Simple Comparison Table */}
