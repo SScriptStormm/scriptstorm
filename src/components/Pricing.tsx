@@ -303,9 +303,7 @@ const Pricing = () => {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 mb-16 max-w-6xl mx-auto">
-          {enterprisePackages.map((pkg) => {
-            console.log(`Rendering enterprise package: ${pkg.id}`);
-            return (
+          {enterprisePackages.map((pkg) => (
             <Card key={pkg.id} className="relative border-0 hover:scale-105 transition-all duration-500 group" style={{
               background: `linear-gradient(135deg, ${pkg.color}08 0%, ${pkg.color}15 30%, ${pkg.color}08 100%)`,
               boxShadow: `0 20px 40px -10px ${pkg.color}30, 0 0 30px ${pkg.color}20, inset 0 1px 0 ${pkg.color}40`,
@@ -370,14 +368,10 @@ const Pricing = () => {
                     </div>
                   ))}
                   
-                  {(() => {
-                    const isExpanded = expandedPackages[pkg.id];
-                    console.log(`Package ${pkg.id} - expanded state: ${isExpanded}, will render: ${isExpanded ? 'YES' : 'NO'}`);
-                    return isExpanded;
-                  })() && (
+                  {expandedPackages[pkg.id] && (
                     <div className="space-y-2 pt-2 border-t border-border">
                       {pkg.features.slice(5).map((feature, index) => (
-                        <div key={index + 5} className="flex items-center gap-2">
+                        <div key={`${pkg.id}-feature-${index + 5}`} className="flex items-center gap-2">
                           <div 
                             className="w-4 h-4 rounded-full flex items-center justify-center"
                             style={{ backgroundColor: pkg.color }}
@@ -424,8 +418,7 @@ const Pricing = () => {
                 </Button>
               </CardContent>
             </Card>
-            );
-          })}
+          ))}
         </div>
 
         {/* Simple Comparison Table */}
