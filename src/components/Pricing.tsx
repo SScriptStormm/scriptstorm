@@ -9,7 +9,7 @@ import ContactForm from "./ContactForm";
 
 const Pricing = () => {
   const [showContactForm, setShowContactForm] = useState(false);
-  const [expandedTier, setExpandedTier] = useState<string | null>(null);
+  const [expandedTiers, setExpandedTiers] = useState<{[key: string]: boolean}>({});
   const [loadingStates, setLoadingStates] = useState<{[key: string]: boolean}>({});
   const { toast } = useToast();
 
@@ -361,7 +361,7 @@ const Pricing = () => {
                     </div>
                   ))}
                   
-                  {expandedTier === pkg.id && (
+                  {expandedTiers[pkg.id] && (
                     <div className="space-y-2 pt-2 border-t border-border">
                       {pkg.features.slice(5).map((feature, index) => (
                         <div key={index + 5} className="flex items-center gap-2">
@@ -382,7 +382,7 @@ const Pricing = () => {
                   <p className="text-xs text-muted-foreground italic">{pkg.note}</p>
                 )}
 
-                {pkg.details && expandedTier === pkg.id && (
+                {pkg.details && expandedTiers[pkg.id] && (
                   <p className="text-xs text-muted-foreground bg-muted/30 p-2 rounded">{pkg.details}</p>
                 )}
 
@@ -390,11 +390,11 @@ const Pricing = () => {
                   <Button 
                     variant="ghost" 
                     size="sm" 
-                    onClick={() => setExpandedTier(expandedTier === pkg.id ? null : pkg.id)}
+                    onClick={() => setExpandedTiers(prev => ({ ...prev, [pkg.id]: !prev[pkg.id] }))}
                     className="text-xs w-full relative z-20 hover:bg-opacity-10"
                     style={{ color: pkg.color, backgroundColor: 'transparent' }}
                   >
-                    {expandedTier === pkg.id ? 'Show Less' : `Show All ${pkg.features.length} Features`}
+                    {expandedTiers[pkg.id] ? 'Show Less' : `Show All ${pkg.features.length} Features`}
                   </Button>
                 )}
                 
