@@ -82,13 +82,13 @@ const Pricing = () => {
 
   const togglePackageExpansion = (packageId: string) => {
     console.log('Toggling package:', packageId);
-    console.log('Current state before toggle:', expandedPackages);
+    console.log('Current state before toggle:', JSON.stringify(expandedPackages));
     setExpandedPackages(prev => {
       const newState = {
         ...prev,
         [packageId]: !prev[packageId]
       };
-      console.log('New state after toggle:', newState);
+      console.log('New state after toggle:', JSON.stringify(newState));
       return newState;
     });
   };
@@ -374,7 +374,10 @@ const Pricing = () => {
                     </div>
                   ))}
                   
-                  {expandedPackages[pkg.id] && (
+                  {(() => {
+                    console.log(`Checking expansion for ${pkg.id}: ${expandedPackages[pkg.id]}`);
+                    return expandedPackages[pkg.id];
+                  })() && (
                     <div className="space-y-2 pt-2 border-t border-border">
                       {pkg.features.slice(5).map((feature, index) => (
                         <div key={index + 5} className="flex items-center gap-2">
