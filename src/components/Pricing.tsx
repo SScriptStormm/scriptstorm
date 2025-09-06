@@ -368,7 +368,11 @@ const Pricing = () => {
                     </div>
                   ))}
                   
-                  {expandedPackages[pkg.id] === true && pkg.features.length > 5 && (
+                  {(() => {
+                    const isExpanded = expandedPackages[pkg.id] === true;
+                    console.log(`Rendering ${pkg.id}: expandedPackages[${pkg.id}] = ${expandedPackages[pkg.id]}, showing expanded: ${isExpanded}`);
+                    return isExpanded && pkg.features.length > 5;
+                  })() && (
                     <div className="space-y-2 pt-2 border-t border-border">
                       {pkg.features.slice(5).map((feature, index) => (
                         <div key={`${pkg.id}-expanded-${index}`} className="flex items-center gap-2">
@@ -397,7 +401,12 @@ const Pricing = () => {
                   <Button 
                     variant="ghost" 
                     size="sm" 
-                    onClick={() => togglePackageExpansion(pkg.id)}
+                  onClick={() => {
+                    console.log('Button clicked for package ID:', pkg.id);
+                    console.log('Current expandedPackages state:', expandedPackages);
+                    console.log('Package IDs in enterprisePackages:', enterprisePackages.map(p => p.id));
+                    togglePackageExpansion(pkg.id);
+                  }}
                     className="text-xs w-full relative z-20 hover:bg-opacity-10"
                     style={{ color: pkg.color, backgroundColor: 'transparent' }}
                   >
