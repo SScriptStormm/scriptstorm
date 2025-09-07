@@ -246,7 +246,7 @@ const HelpCenter = () => {
               <p className="text-xl text-white/90 mb-12 max-w-2xl mx-auto leading-relaxed">
                 Can't find the answer you're looking for? Our support system is here for you.
               </p>
-              <Link to="/contact">
+              <Link to="/support">
                 <button className="bg-white text-primary hover:bg-gray-50 px-10 py-5 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-xl">
                   Contact Support
                 </button>
