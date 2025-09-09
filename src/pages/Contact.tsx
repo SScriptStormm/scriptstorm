@@ -28,66 +28,21 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* Futuristic Multi-Layer Background */}
-      <div className="fixed inset-0 -z-10">
-        {/* Base gradient with multiple colors */}
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-primary/5 to-secondary/10" />
-        
-        {/* Animated mesh gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-mesh opacity-40 animate-pulse" />
-        
-        {/* Neural network animation */}
-        <div className="absolute inset-0 bg-gradient-neural animate-neural-pulse opacity-25" />
-        
-        {/* Dynamic scanning lines */}
-        <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-primary-glow to-transparent animate-bounce opacity-60" style={{ animationDelay: '0s', animationDuration: '4s' }} />
-          <div className="absolute top-32 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-accent to-transparent animate-bounce opacity-40" style={{ animationDelay: '1s', animationDuration: '6s' }} />
-          <div className="absolute bottom-32 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-primary-glow to-transparent animate-bounce opacity-50" style={{ animationDelay: '2s', animationDuration: '5s' }} />
-        </div>
-        
-        {/* Enhanced grid pattern with multiple layers */}
-        <div className="absolute inset-0" style={{
-          backgroundImage: `
-            radial-gradient(circle at 1px 1px, hsl(var(--primary-glow) / 0.2) 1px, transparent 0),
-            radial-gradient(circle at 25px 25px, hsl(var(--accent) / 0.1) 1px, transparent 0)
-          `,
-          backgroundSize: '50px 50px, 100px 100px'
-        }} />
-        
-        {/* Animated particle dots */}
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-1/4 w-1 h-1 bg-primary-glow rounded-full animate-ping opacity-75" style={{ animationDelay: '0s' }} />
-          <div className="absolute top-40 right-1/3 w-1 h-1 bg-accent rounded-full animate-ping opacity-60" style={{ animationDelay: '1s' }} />
-          <div className="absolute bottom-32 left-1/3 w-1 h-1 bg-primary-glow rounded-full animate-ping opacity-80" style={{ animationDelay: '2s' }} />
-          <div className="absolute top-60 left-2/3 w-1 h-1 bg-accent rounded-full animate-ping opacity-65" style={{ animationDelay: '3s' }} />
-          <div className="absolute bottom-20 right-1/4 w-1 h-1 bg-primary-glow rounded-full animate-ping opacity-70" style={{ animationDelay: '4s' }} />
-        </div>
-        
-        {/* Complex floating geometric elements */}
-        <div className="absolute top-16 left-8 w-20 h-20 border-2 border-primary-glow/40 rotate-45 animate-float shadow-cyber backdrop-blur-sm" style={{ background: 'linear-gradient(135deg, hsl(var(--primary-glow) / 0.1), transparent)' }} />
-        <div className="absolute top-32 right-16 w-16 h-16 border-2 border-accent/30 rotate-12 animate-float shadow-cyber backdrop-blur-sm" style={{ animationDelay: '1s', background: 'linear-gradient(45deg, hsl(var(--accent) / 0.1), transparent)' }} />
-        <div className="absolute bottom-40 left-16 w-12 h-12 border-2 border-primary-glow/50 rotate-45 animate-float shadow-cyber backdrop-blur-sm" style={{ animationDelay: '2s', background: 'radial-gradient(circle, hsl(var(--primary-glow) / 0.15), transparent)' }} />
-        <div className="absolute top-1/3 right-8 w-10 h-10 border-2 border-accent/25 rotate-45 animate-float shadow-cyber backdrop-blur-sm" style={{ animationDelay: '3s' }} />
-        <div className="absolute bottom-16 right-32 w-18 h-18 border-2 border-primary-glow/35 rotate-12 animate-float shadow-cyber backdrop-blur-sm" style={{ animationDelay: '4s' }} />
-        <div className="absolute top-48 left-1/3 w-8 h-8 border border-accent/40 rounded-full animate-float shadow-cyber" style={{ animationDelay: '0.5s' }} />
-        <div className="absolute bottom-64 right-1/3 w-6 h-6 border border-primary-glow/30 rounded-full animate-float shadow-cyber" style={{ animationDelay: '2.5s' }} />
-        
-        {/* Hexagonal patterns */}
-        <div className="absolute top-24 right-24 w-12 h-12 border border-primary-glow/20 rotate-30 animate-float" style={{ 
-          clipPath: 'polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%)',
-          animationDelay: '1.5s'
-        }} />
-        <div className="absolute bottom-48 left-32 w-10 h-10 border border-accent/25 rotate-45 animate-float" style={{ 
-          clipPath: 'polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%)',
-          animationDelay: '3.5s'
-        }} />
-        
-        {/* Glowing orbs */}
-        <div className="absolute top-72 left-24 w-4 h-4 bg-primary-glow/20 rounded-full blur-sm animate-pulse" style={{ animationDelay: '0s' }} />
-        <div className="absolute bottom-24 right-48 w-3 h-3 bg-accent/30 rounded-full blur-sm animate-pulse" style={{ animationDelay: '2s' }} />
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-white via-white/95 to-muted/50 relative overflow-hidden">
+      {/* AI Neural Network Background - Same as Pricing */}
+      <div className="absolute inset-0 bg-gradient-mesh opacity-30" />
+      <div className="absolute inset-0 bg-gradient-neural animate-neural-pulse opacity-20" />
+      
+      {/* Grid pattern overlay */}
+      <div className="absolute inset-0" style={{
+        backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--primary-glow) / 0.15) 1px, transparent 0)`,
+        backgroundSize: '50px 50px'
+      }} />
+      
+      {/* Floating geometric elements */}
+      <div className="absolute top-20 left-10 w-16 h-16 border-2 border-primary-glow/30 rotate-45 animate-float shadow-cyber" />
+      <div className="absolute top-40 right-20 w-12 h-12 border-2 border-primary-glow/25 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '2s' }} />
+      <div className="absolute bottom-40 left-20 w-10 h-10 border-2 border-primary-glow/35 rotate-45 animate-float shadow-cyber" style={{ animationDelay: '4s' }} />
 
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-secondary/95 backdrop-blur-md border-b border-primary/20">
