@@ -38,7 +38,4 @@ double_confirm_changes = true
 enable_confirmations = false
 
 [functions.create-checkout]
-verify_jwt = true
-
-[functions.submit-contact]
 verify_jwt = false

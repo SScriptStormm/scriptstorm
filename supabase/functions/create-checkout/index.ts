@@ -1,6 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import Stripe from "https://esm.sh/stripe@14.21.0";
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -20,34 +19,6 @@ serve(async (req) => {
   try {
     logStep("Function started");
 
-    // Create Supabase client using the anon key for user authentication
-    const supabaseClient = createClient(
-      Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_ANON_KEY") ?? ""
-    );
-
-    // Retrieve authenticated user - REQUIRED for security
-    const authHeader = req.headers.get("Authorization");
-    logStep("Auth header received", { hasHeader: !!authHeader });
-    
-    if (!authHeader) {
-      throw new Error("Authentication required. Please log in to create a checkout session.");
-    }
-    
-    const token = authHeader.replace("Bearer ", "");
-    logStep("Extracted token", { tokenLength: token.length, tokenStart: token.substring(0, 20) + "..." });
-    
-    const { data, error: authError } = await supabaseClient.auth.getUser(token);
-    logStep("Auth check result", { hasUser: !!data.user, error: authError?.message });
-    
-    if (authError || !data.user?.email) {
-      logStep("Authentication failed", { error: authError?.message, hasUser: !!data.user, hasEmail: !!data.user?.email });
-      throw new Error("Invalid authentication. Please log in again.");
-    }
-    
-    const user = data.user;
-    logStep("User authenticated", { userId: user.id, email: user.email });
-
     const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
     if (!stripeKey) throw new Error("Stripe secret key not found");
     logStep("Stripe key verified");
@@ -55,10 +26,10 @@ serve(async (req) => {
     const { selectedAddOns, packageType = "starter" } = await req.json();
     logStep("Request data", { selectedAddOns, packageType });
 
-    // Use authenticated user's email instead of guest checkout
-    const userEmail = user.email;
-    const userId = user.id;
-    logStep("Using authenticated user", { email: userEmail, userId });
+    // Use guest email for all checkouts since no auth is required
+    const userEmail = "guest@scriptstorm.com";
+    const userId = "guest";
+    logStep("Using guest checkout", { email: userEmail });
 
     const stripe = new Stripe(stripeKey, { apiVersion: "2023-10-16" });
 

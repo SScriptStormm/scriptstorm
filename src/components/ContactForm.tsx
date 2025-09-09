@@ -7,7 +7,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
 import { Mail, Phone, MessageSquare, CheckCircle } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 
 const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -16,61 +15,26 @@ const ContactForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
-    const formData = new FormData(e.currentTarget);
-    const data = {
-      name: formData.get('name') as string,
-      email: formData.get('email') as string,
-      company: formData.get('company') as string,
-      service: formData.get('service') as string,
-      project_details: formData.get('message') as string,
-    };
-
-    // Basic validation
-    if (!data.name?.trim() || !data.email?.trim()) {
-      toast({
-        title: "Validation Error",
-        description: "Please fill in all required fields.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(data.email)) {
-      toast({
-        title: "Invalid Email",
-        description: "Please enter a valid email address.",
-        variant: "destructive",
-      });
-      return;
-    }
-
     setIsSubmitting(true);
 
-    try {
-      const { data: result, error } = await supabase.functions.invoke('submit-contact', {
-        body: data
-      });
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      company: formData.get('company'),
+      service: formData.get('service'),
+      message: formData.get('message'),
+    };
 
-      if (error) throw error;
-
+    // Simulate form submission (replace with actual submission logic)
+    setTimeout(() => {
+      setIsSubmitting(false);
       setIsSubmitted(true);
       toast({
         title: "Message Sent!",
         description: "We'll get back to you within 24 hours.",
       });
-    } catch (error: any) {
-      console.error('Contact form submission error:', error);
-      toast({
-        title: "Submission Failed",
-        description: error.message || "Failed to send message. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+    }, 1000);
   };
 
   if (isSubmitted) {

@@ -1,87 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, Star, Crown, Mail, Phone, Calendar, LogIn } from "lucide-react";
+import { CheckCircle, Star, Crown, Mail, Phone, Calendar } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { User } from "@supabase/supabase-js";
 import ContactForm from "./ContactForm";
 
 const Pricing = () => {
   const [showContactForm, setShowContactForm] = useState(false);
   const [expandedPackages, setExpandedPackages] = useState<{[key: string]: boolean}>({});
   const [loadingStates, setLoadingStates] = useState<{[key: string]: boolean}>({});
-  const [user, setUser] = useState<User | null>(null);
-  const [authLoading, setAuthLoading] = useState(true);
   const { toast } = useToast();
-
-  useEffect(() => {
-    // Check current session and validate it
-    const initializeAuth = async () => {
-      try {
-        const { data: { session }, error } = await supabase.auth.getSession();
-        
-        if (error) {
-          console.error('Session initialization error:', error);
-          setUser(null);
-          setAuthLoading(false);
-          return;
-        }
-        
-        if (session?.user) {
-          // Validate the session by making a test call
-          const { error: validationError } = await supabase.auth.getUser();
-          if (validationError) {
-            console.error('Session validation failed:', validationError);
-            // Clear invalid session
-            await supabase.auth.signOut();
-            setUser(null);
-          } else {
-            setUser(session.user);
-          }
-        } else {
-          setUser(null);
-        }
-      } catch (error) {
-        console.error('Auth initialization error:', error);
-        setUser(null);
-      } finally {
-        setAuthLoading(false);
-      }
-    };
-
-    initializeAuth();
-
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        console.log('Auth state change:', event, session?.user?.email);
-        
-        if (event === 'SIGNED_OUT' || !session) {
-          setUser(null);
-        } else if (session?.user) {
-          // Validate new session
-          try {
-            const { error: validationError } = await supabase.auth.getUser();
-            if (validationError) {
-              console.error('New session validation failed:', validationError);
-              await supabase.auth.signOut();
-              setUser(null);
-            } else {
-              setUser(session.user);
-            }
-          } catch (error) {
-            console.error('Session validation error:', error);
-            setUser(null);
-          }
-        }
-        setAuthLoading(false);
-      }
-    );
-
-    return () => subscription.unsubscribe();
-  }, []);
 
   const handleContactClick = () => {
     setShowContactForm(true);
@@ -97,19 +27,6 @@ const Pricing = () => {
 
   const handleCheckout = async (packageType: string, selectedAddOns = {}) => {
     if (loadingStates[packageType]) return;
-
-    // Check if user is authenticated
-    if (!user) {
-      toast({
-        title: "Login Required",
-        description: "Please log in to continue with your purchase.",
-        duration: 4000,
-      });
-      // Store the package they wanted to purchase for after login
-      sessionStorage.setItem('pendingCheckout', JSON.stringify({ packageType, selectedAddOns }));
-      window.location.href = '/auth';
-      return;
-    }
     
     setLoadingStates(prev => ({ ...prev, [packageType]: true }));
     
@@ -123,41 +40,13 @@ const Pricing = () => {
     const backendPackageType = packageMap[packageType] || packageType;
     
     try {
-      // Get the current session and validate it properly
-      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-      
-      if (sessionError) {
-        console.error('Session error:', sessionError);
-        throw new Error("Session error. Please log in again.");
-      }
-      
-      if (!session?.access_token || !session?.user?.id) {
-        console.error('Invalid session - missing access_token or user ID');
-        throw new Error("Invalid session. Please log in again.");
-      }
-
-      // Validate the token by making a test call
-      const { error: tokenValidationError } = await supabase.auth.getUser();
-      if (tokenValidationError) {
-        console.error('Token validation failed:', tokenValidationError);
-        throw new Error("Your session has expired. Please log in again.");
-      }
-
-      console.log('Making checkout request with user:', session.user.email);
-      
       const { data, error } = await supabase.functions.invoke('create-checkout', {
-        body: { packageType: backendPackageType, selectedAddOns },
-        headers: {
-          Authorization: `Bearer ${session.access_token}`
-        }
+        body: { packageType: backendPackageType, selectedAddOns }
       });
 
       if (error) throw error;
 
       if (data?.url) {
-        // Clear any pending checkout since we're proceeding
-        sessionStorage.removeItem('pendingCheckout');
-        
         // Show urgency message before redirect
         toast({
           title: "🚀 Redirecting to Checkout",
@@ -180,59 +69,16 @@ const Pricing = () => {
         }
       }
     } catch (error) {
-      console.error('Checkout error details:', error);
-      
-      // More specific error handling for different types of auth errors
-      if (error?.message?.includes("authentication") || 
-          error?.message?.includes("Invalid authentication") ||
-          error?.message?.includes("session") ||
-          error?.message?.includes("expired") ||
-          error?.message?.includes("invalid claim") ||
-          error?.message?.includes("bad_jwt")) {
-        
-        toast({
-          title: "Session Expired",
-          description: "Your login has expired. Redirecting to login page...",
-          variant: "destructive",
-        });
-        
-        // Clear the corrupted session and force re-login
-        await supabase.auth.signOut();
-        // Small delay before redirect to show the toast
-        setTimeout(() => {
-          window.location.href = '/auth';
-        }, 2000);
-      } else {
-        toast({
-          title: "Checkout Error",
-          description: error?.message || "Unable to start checkout. Please try again.",
-          variant: "destructive",
-        });
-      }
+      console.error('Checkout error:', error);
+      toast({
+        title: "Error",
+        description: "Unable to start checkout. Please try again.",
+        variant: "destructive",
+      });
     } finally {
       setLoadingStates(prev => ({ ...prev, [packageType]: false }));
     }
   };
-
-  // Handle pending checkout after login
-  useEffect(() => {
-    if (user && !authLoading) {
-      const pendingCheckout = sessionStorage.getItem('pendingCheckout');
-      if (pendingCheckout) {
-        try {
-          const { packageType, selectedAddOns } = JSON.parse(pendingCheckout);
-          sessionStorage.removeItem('pendingCheckout');
-          // Small delay to ensure everything is loaded
-          setTimeout(() => {
-            handleCheckout(packageType, selectedAddOns);
-          }, 1000);
-        } catch (error) {
-          console.error('Error processing pending checkout:', error);
-          sessionStorage.removeItem('pendingCheckout');
-        }
-      }
-    }
-  }, [user, authLoading]);
 
   const togglePackageExpansion = (packageId: string) => {
     setExpandedPackages(prev => ({
@@ -428,23 +274,14 @@ const Pricing = () => {
                 
                 <Button 
                   onClick={() => handleCheckout(pkg.id)}
-                  disabled={loadingStates[pkg.id] || authLoading}
-                  className="w-full font-bold py-3 transition-all duration-300 flex items-center justify-center gap-2"
+                  disabled={loadingStates[pkg.id]}
+                  className="w-full font-bold py-3 transition-all duration-300"
                   style={{ 
                     background: `linear-gradient(135deg, ${pkg.color}, ${pkg.color}dd)`,
                     color: 'white'
                   }}
                 >
-                  {loadingStates[pkg.id] ? (
-                    "Processing..."
-                  ) : !user ? (
-                    <>
-                      <LogIn className="h-4 w-4" />
-                      Login & Start My Draft
-                    </>
-                  ) : (
-                    "🚀 Start My 24-Hour Draft"
-                  )}
+                  {loadingStates[pkg.id] ? "Processing..." : "🚀 Start My 24-Hour Draft"}
                 </Button>
                 
                 <p className="text-xs text-muted-foreground text-center italic">
@@ -570,23 +407,14 @@ const Pricing = () => {
                 
                 <Button 
                   onClick={() => handleCheckout(pkg.id)}
-                  disabled={loadingStates[pkg.id] || authLoading}
-                  className="w-full font-bold py-3 transition-all duration-300 flex items-center justify-center gap-2"
+                  disabled={loadingStates[pkg.id]}
+                  className="w-full font-bold py-3 transition-all duration-300"
                   style={{ 
                     background: `linear-gradient(135deg, ${pkg.color}, ${pkg.color}dd)`,
                     color: 'white'
                   }}
                 >
-                  {loadingStates[pkg.id] ? (
-                    "Processing..."
-                  ) : !user ? (
-                    <>
-                      <LogIn className="h-4 w-4" />
-                      Login & Start My Draft
-                    </>
-                  ) : (
-                    "🚀 Start My 24-Hour Draft"
-                  )}
+                  {loadingStates[pkg.id] ? "Processing..." : "🚀 Start My 24-Hour Draft"}
                 </Button>
               </CardContent>
             </Card>

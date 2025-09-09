@@ -13,7 +13,6 @@ import WhyChooseUs from "./pages/WhyChooseUs";
 import OnboardingProcess from "./pages/OnboardingProcess";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
-import Admin from "./pages/Admin";
 import AuthGuard from "./components/AuthGuard";
 import Contact from "./pages/Contact";
 import Support from "./pages/Support";
@@ -32,7 +31,6 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/auth" element={<AuthGuard requireAuth={false}><Auth /></AuthGuard>} />
           <Route path="/dashboard" element={<AuthGuard><Dashboard /></AuthGuard>} />
-          <Route path="/admin" element={<AuthGuard><Admin /></AuthGuard>} />
           <Route path="/why-choose-us" element={<WhyChooseUs />} />
           <Route path="/onboarding-process" element={<OnboardingProcess />} />
               <Route path="/contact" element={<Contact />} />
