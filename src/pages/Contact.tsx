@@ -28,12 +28,11 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden">
-      {/* Enhanced Background Elements */}
+    <div className="min-h-screen bg-gradient-to-br from-white via-white/95 to-muted/50 relative overflow-hidden">
+      {/* AI Neural Network Background - Same as Pricing */}
       <div className="fixed inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-mesh opacity-30" />
         <div className="absolute inset-0 bg-gradient-neural animate-neural-pulse opacity-20" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
         
         {/* Grid pattern overlay */}
         <div className="absolute inset-0" style={{
