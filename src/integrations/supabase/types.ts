@@ -158,6 +158,33 @@ export type Database = {
         }
         Relationships: []
       }
+      subscription_rate_limits: {
+        Row: {
+          check_count: number | null
+          daily_reset: string
+          last_check: string
+          last_update: string
+          update_count: number | null
+          user_id: string
+        }
+        Insert: {
+          check_count?: number | null
+          daily_reset?: string
+          last_check?: string
+          last_update?: string
+          update_count?: number | null
+          user_id: string
+        }
+        Update: {
+          check_count?: number | null
+          daily_reset?: string
+          last_check?: string
+          last_update?: string
+          update_count?: number | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -187,6 +214,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      check_subscription_rate_limit: {
+        Args: { operation: string; target_user_id: string }
+        Returns: boolean
+      }
       current_user_is_admin: {
         Args: Record<PropertyKey, never>
         Returns: boolean

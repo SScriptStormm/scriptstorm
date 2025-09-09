@@ -118,18 +118,31 @@ serve(async (req) => {
       user_agent: req.headers.get('user-agent') || 'unknown'
     };
 
-    // Create Supabase client using service role key
+    // Create Supabase client using service role key with custom claims
     const supabase = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '',
-      { auth: { persistSession: false } }
+      { 
+        auth: { persistSession: false },
+        global: {
+          headers: {
+            'X-Function-Name': 'submit-contact'
+          }
+        }
+      }
     );
 
-    // Insert contact submission into database
-    const { data, error } = await supabase
-      .from('contact_submissions')
-      .insert([sanitizedData])
-      .select();
+    // Insert contact submission into database with secure context
+    // Using raw SQL to bypass RLS temporarily for this secure edge function
+    const { data, error } = await supabase.rpc('insert_contact_submission', {
+      p_name: sanitizedData.name,
+      p_email: sanitizedData.email,
+      p_company: sanitizedData.company,
+      p_service: sanitizedData.service,
+      p_project_details: sanitizedData.project_details,
+      p_ip_address: sanitizedData.ip_address,
+      p_user_agent: sanitizedData.user_agent
+    });
 
     if (error) {
       console.error('Database error:', error);
@@ -141,7 +154,7 @@ serve(async (req) => {
       });
     }
 
-    console.log('Contact form submitted successfully:', data[0]?.id);
+    console.log('Contact form submitted successfully');
 
     return new Response(JSON.stringify({ 
       success: true,
