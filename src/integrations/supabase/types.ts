@@ -95,6 +95,33 @@ export type Database = {
         }
         Relationships: []
       }
+      edge_function_tokens: {
+        Row: {
+          active: boolean | null
+          created_at: string
+          function_name: string
+          id: string
+          last_used: string | null
+          token_hash: string
+        }
+        Insert: {
+          active?: boolean | null
+          created_at?: string
+          function_name: string
+          id?: string
+          last_used?: string | null
+          token_hash: string
+        }
+        Update: {
+          active?: boolean | null
+          created_at?: string
+          function_name?: string
+          id?: string
+          last_used?: string | null
+          token_hash?: string
+        }
+        Relationships: []
+      }
       subscribers: {
         Row: {
           created_at: string
@@ -166,6 +193,10 @@ export type Database = {
       }
       is_admin: {
         Args: { _user_id?: string }
+        Returns: boolean
+      }
+      validate_edge_function_request: {
+        Args: { func_name: string; provided_token: string }
         Returns: boolean
       }
     }
