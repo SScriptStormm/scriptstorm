@@ -34,11 +34,16 @@ const Contact = () => {
         <div className="absolute inset-0 bg-gradient-mesh opacity-30" />
         <div className="absolute inset-0 bg-gradient-neural animate-neural-pulse opacity-20" />
         
-        {/* Grid pattern overlay */}
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--primary-glow) / 0.15) 1px, transparent 0)`,
-          backgroundSize: '50px 50px'
-        }} />
+      {/* Grid pattern overlay */}
+      <div className="absolute inset-0" style={{
+        backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--primary-glow) / 0.15) 1px, transparent 0)`,
+        backgroundSize: '50px 50px'
+      }} />
+      
+      {/* Floating geometric elements */}
+      <div className="absolute top-20 left-10 w-16 h-16 border-2 border-primary-glow/30 rotate-45 animate-float shadow-cyber" />
+      <div className="absolute top-40 right-20 w-12 h-12 border-2 border-primary-glow/25 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '2s' }} />
+      <div className="absolute bottom-40 left-20 w-10 h-10 border-2 border-primary-glow/35 rotate-45 animate-float shadow-cyber" style={{ animationDelay: '4s' }} />
         
         {/* Floating geometric elements */}
         <div className="absolute top-20 left-10 w-16 h-16 border-2 border-primary-glow/30 rotate-45 animate-float shadow-cyber" />
