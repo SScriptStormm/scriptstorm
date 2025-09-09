@@ -74,8 +74,20 @@ const Pricing = () => {
     const backendPackageType = packageMap[packageType] || packageType;
     
     try {
+      // Get the current session to ensure we have a valid token
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (!session?.access_token) {
+        throw new Error("No valid session found. Please log in again.");
+      }
+
+      console.log('Making checkout request with user:', session.user.email);
+      
       const { data, error } = await supabase.functions.invoke('create-checkout', {
-        body: { packageType: backendPackageType, selectedAddOns }
+        body: { packageType: backendPackageType, selectedAddOns },
+        headers: {
+          Authorization: `Bearer ${session.access_token}`
+        }
       });
 
       if (error) throw error;
@@ -106,12 +118,25 @@ const Pricing = () => {
         }
       }
     } catch (error) {
-      console.error('Checkout error:', error);
-      toast({
-        title: "Error",
-        description: "Unable to start checkout. Please try again.",
-        variant: "destructive",
-      });
+      console.error('Checkout error details:', error);
+      
+      // More specific error handling
+      if (error?.message?.includes("authentication") || error?.message?.includes("Invalid authentication")) {
+        toast({
+          title: "Authentication Error",
+          description: "Your session has expired. Please log in again.",
+          variant: "destructive",
+        });
+        // Force re-login
+        await supabase.auth.signOut();
+        window.location.href = '/auth';
+      } else {
+        toast({
+          title: "Checkout Error",
+          description: error?.message || "Unable to start checkout. Please try again.",
+          variant: "destructive",
+        });
+      }
     } finally {
       setLoadingStates(prev => ({ ...prev, [packageType]: false }));
     }

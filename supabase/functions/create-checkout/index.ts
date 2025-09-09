@@ -28,14 +28,20 @@ serve(async (req) => {
 
     // Retrieve authenticated user - REQUIRED for security
     const authHeader = req.headers.get("Authorization");
+    logStep("Auth header received", { hasHeader: !!authHeader });
+    
     if (!authHeader) {
       throw new Error("Authentication required. Please log in to create a checkout session.");
     }
     
     const token = authHeader.replace("Bearer ", "");
+    logStep("Extracted token", { tokenLength: token.length, tokenStart: token.substring(0, 20) + "..." });
+    
     const { data, error: authError } = await supabaseClient.auth.getUser(token);
+    logStep("Auth check result", { hasUser: !!data.user, error: authError?.message });
     
     if (authError || !data.user?.email) {
+      logStep("Authentication failed", { error: authError?.message, hasUser: !!data.user, hasEmail: !!data.user?.email });
       throw new Error("Invalid authentication. Please log in again.");
     }
     
