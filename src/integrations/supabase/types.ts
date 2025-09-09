@@ -222,6 +222,18 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: boolean
       }
+      insert_contact_submission: {
+        Args: {
+          p_company?: string
+          p_email: string
+          p_ip_address?: string
+          p_name: string
+          p_project_details?: string
+          p_service?: string
+          p_user_agent?: string
+        }
+        Returns: string
+      }
       is_admin: {
         Args: { _user_id?: string }
         Returns: boolean
