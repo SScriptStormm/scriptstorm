@@ -17,16 +17,65 @@ const Pricing = () => {
   const { toast } = useToast();
 
   useEffect(() => {
-    // Check current session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-      setAuthLoading(false);
-    });
+    // Check current session and validate it
+    const initializeAuth = async () => {
+      try {
+        const { data: { session }, error } = await supabase.auth.getSession();
+        
+        if (error) {
+          console.error('Session initialization error:', error);
+          setUser(null);
+          setAuthLoading(false);
+          return;
+        }
+        
+        if (session?.user) {
+          // Validate the session by making a test call
+          const { error: validationError } = await supabase.auth.getUser();
+          if (validationError) {
+            console.error('Session validation failed:', validationError);
+            // Clear invalid session
+            await supabase.auth.signOut();
+            setUser(null);
+          } else {
+            setUser(session.user);
+          }
+        } else {
+          setUser(null);
+        }
+      } catch (error) {
+        console.error('Auth initialization error:', error);
+        setUser(null);
+      } finally {
+        setAuthLoading(false);
+      }
+    };
+
+    initializeAuth();
 
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        setUser(session?.user ?? null);
+      async (event, session) => {
+        console.log('Auth state change:', event, session?.user?.email);
+        
+        if (event === 'SIGNED_OUT' || !session) {
+          setUser(null);
+        } else if (session?.user) {
+          // Validate new session
+          try {
+            const { error: validationError } = await supabase.auth.getUser();
+            if (validationError) {
+              console.error('New session validation failed:', validationError);
+              await supabase.auth.signOut();
+              setUser(null);
+            } else {
+              setUser(session.user);
+            }
+          } catch (error) {
+            console.error('Session validation error:', error);
+            setUser(null);
+          }
+        }
         setAuthLoading(false);
       }
     );
@@ -74,11 +123,24 @@ const Pricing = () => {
     const backendPackageType = packageMap[packageType] || packageType;
     
     try {
-      // Get the current session to ensure we have a valid token
-      const { data: { session } } = await supabase.auth.getSession();
+      // Get the current session and validate it properly
+      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
       
-      if (!session?.access_token) {
-        throw new Error("No valid session found. Please log in again.");
+      if (sessionError) {
+        console.error('Session error:', sessionError);
+        throw new Error("Session error. Please log in again.");
+      }
+      
+      if (!session?.access_token || !session?.user?.id) {
+        console.error('Invalid session - missing access_token or user ID');
+        throw new Error("Invalid session. Please log in again.");
+      }
+
+      // Validate the token by making a test call
+      const { error: tokenValidationError } = await supabase.auth.getUser();
+      if (tokenValidationError) {
+        console.error('Token validation failed:', tokenValidationError);
+        throw new Error("Your session has expired. Please log in again.");
       }
 
       console.log('Making checkout request with user:', session.user.email);
@@ -120,16 +182,26 @@ const Pricing = () => {
     } catch (error) {
       console.error('Checkout error details:', error);
       
-      // More specific error handling
-      if (error?.message?.includes("authentication") || error?.message?.includes("Invalid authentication")) {
+      // More specific error handling for different types of auth errors
+      if (error?.message?.includes("authentication") || 
+          error?.message?.includes("Invalid authentication") ||
+          error?.message?.includes("session") ||
+          error?.message?.includes("expired") ||
+          error?.message?.includes("invalid claim") ||
+          error?.message?.includes("bad_jwt")) {
+        
         toast({
-          title: "Authentication Error",
-          description: "Your session has expired. Please log in again.",
+          title: "Session Expired",
+          description: "Your login has expired. Redirecting to login page...",
           variant: "destructive",
         });
-        // Force re-login
+        
+        // Clear the corrupted session and force re-login
         await supabase.auth.signOut();
-        window.location.href = '/auth';
+        // Small delay before redirect to show the toast
+        setTimeout(() => {
+          window.location.href = '/auth';
+        }, 2000);
       } else {
         toast({
           title: "Checkout Error",
