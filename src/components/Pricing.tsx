@@ -1,17 +1,38 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, Star, Crown, Mail, Phone, Calendar } from "lucide-react";
+import { CheckCircle, Star, Crown, Mail, Phone, Calendar, LogIn } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { User } from "@supabase/supabase-js";
 import ContactForm from "./ContactForm";
 
 const Pricing = () => {
   const [showContactForm, setShowContactForm] = useState(false);
   const [expandedPackages, setExpandedPackages] = useState<{[key: string]: boolean}>({});
   const [loadingStates, setLoadingStates] = useState<{[key: string]: boolean}>({});
+  const [user, setUser] = useState<User | null>(null);
+  const [authLoading, setAuthLoading] = useState(true);
   const { toast } = useToast();
+
+  useEffect(() => {
+    // Check current session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+      setAuthLoading(false);
+    });
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        setUser(session?.user ?? null);
+        setAuthLoading(false);
+      }
+    );
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   const handleContactClick = () => {
     setShowContactForm(true);
@@ -27,6 +48,19 @@ const Pricing = () => {
 
   const handleCheckout = async (packageType: string, selectedAddOns = {}) => {
     if (loadingStates[packageType]) return;
+
+    // Check if user is authenticated
+    if (!user) {
+      toast({
+        title: "Login Required",
+        description: "Please log in to continue with your purchase.",
+        duration: 4000,
+      });
+      // Store the package they wanted to purchase for after login
+      sessionStorage.setItem('pendingCheckout', JSON.stringify({ packageType, selectedAddOns }));
+      window.location.href = '/auth';
+      return;
+    }
     
     setLoadingStates(prev => ({ ...prev, [packageType]: true }));
     
@@ -47,6 +81,9 @@ const Pricing = () => {
       if (error) throw error;
 
       if (data?.url) {
+        // Clear any pending checkout since we're proceeding
+        sessionStorage.removeItem('pendingCheckout');
+        
         // Show urgency message before redirect
         toast({
           title: "🚀 Redirecting to Checkout",
@@ -79,6 +116,26 @@ const Pricing = () => {
       setLoadingStates(prev => ({ ...prev, [packageType]: false }));
     }
   };
+
+  // Handle pending checkout after login
+  useEffect(() => {
+    if (user && !authLoading) {
+      const pendingCheckout = sessionStorage.getItem('pendingCheckout');
+      if (pendingCheckout) {
+        try {
+          const { packageType, selectedAddOns } = JSON.parse(pendingCheckout);
+          sessionStorage.removeItem('pendingCheckout');
+          // Small delay to ensure everything is loaded
+          setTimeout(() => {
+            handleCheckout(packageType, selectedAddOns);
+          }, 1000);
+        } catch (error) {
+          console.error('Error processing pending checkout:', error);
+          sessionStorage.removeItem('pendingCheckout');
+        }
+      }
+    }
+  }, [user, authLoading]);
 
   const togglePackageExpansion = (packageId: string) => {
     setExpandedPackages(prev => ({
@@ -274,14 +331,23 @@ const Pricing = () => {
                 
                 <Button 
                   onClick={() => handleCheckout(pkg.id)}
-                  disabled={loadingStates[pkg.id]}
-                  className="w-full font-bold py-3 transition-all duration-300"
+                  disabled={loadingStates[pkg.id] || authLoading}
+                  className="w-full font-bold py-3 transition-all duration-300 flex items-center justify-center gap-2"
                   style={{ 
                     background: `linear-gradient(135deg, ${pkg.color}, ${pkg.color}dd)`,
                     color: 'white'
                   }}
                 >
-                  {loadingStates[pkg.id] ? "Processing..." : "🚀 Start My 24-Hour Draft"}
+                  {loadingStates[pkg.id] ? (
+                    "Processing..."
+                  ) : !user ? (
+                    <>
+                      <LogIn className="h-4 w-4" />
+                      Login & Start My Draft
+                    </>
+                  ) : (
+                    "🚀 Start My 24-Hour Draft"
+                  )}
                 </Button>
                 
                 <p className="text-xs text-muted-foreground text-center italic">
@@ -407,14 +473,23 @@ const Pricing = () => {
                 
                 <Button 
                   onClick={() => handleCheckout(pkg.id)}
-                  disabled={loadingStates[pkg.id]}
-                  className="w-full font-bold py-3 transition-all duration-300"
+                  disabled={loadingStates[pkg.id] || authLoading}
+                  className="w-full font-bold py-3 transition-all duration-300 flex items-center justify-center gap-2"
                   style={{ 
                     background: `linear-gradient(135deg, ${pkg.color}, ${pkg.color}dd)`,
                     color: 'white'
                   }}
                 >
-                  {loadingStates[pkg.id] ? "Processing..." : "🚀 Start My 24-Hour Draft"}
+                  {loadingStates[pkg.id] ? (
+                    "Processing..."
+                  ) : !user ? (
+                    <>
+                      <LogIn className="h-4 w-4" />
+                      Login & Start My Draft
+                    </>
+                  ) : (
+                    "🚀 Start My 24-Hour Draft"
+                  )}
                 </Button>
               </CardContent>
             </Card>
