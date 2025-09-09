@@ -214,6 +214,24 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      admin_get_contact_submissions: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          company: string
+          created_at: string
+          email: string
+          id: string
+          ip_address: string
+          name: string
+          processed: boolean
+          project_details: string
+          service: string
+        }[]
+      }
+      admin_update_contact_submission: {
+        Args: { mark_processed: boolean; submission_id: string }
+        Returns: boolean
+      }
       check_subscription_rate_limit: {
         Args: { operation: string; target_user_id: string }
         Returns: boolean

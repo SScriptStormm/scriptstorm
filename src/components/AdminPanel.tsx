@@ -91,16 +91,14 @@ const AdminPanel = () => {
 
   const fetchContactSubmissions = async () => {
     try {
-      const { data, error } = await supabase
-        .from('contact_submissions')
-        .select('*')
-        .order('created_at', { ascending: false });
+      // Use the secure admin function instead of direct query
+      const { data, error } = await supabase.rpc('admin_get_contact_submissions');
 
       if (error) {
         console.error('Error fetching contact submissions:', error);
         toast({
           title: "Error",
-          description: "Failed to fetch contact submissions.",
+          description: "Failed to fetch contact submissions. Admin access required.",
           variant: "destructive",
         });
       } else {
@@ -113,15 +111,16 @@ const AdminPanel = () => {
 
   const markAsProcessed = async (submissionId: string) => {
     try {
-      const { error } = await supabase
-        .from('contact_submissions')
-        .update({ processed: true })
-        .eq('id', submissionId);
+      // Use the secure admin function instead of direct update
+      const { data, error } = await supabase.rpc('admin_update_contact_submission', {
+        submission_id: submissionId,
+        mark_processed: true
+      });
 
       if (error) {
         toast({
           title: "Error",
-          description: "Failed to update submission status.",
+          description: "Failed to update submission status. Admin access required.",
           variant: "destructive",
         });
       } else {
