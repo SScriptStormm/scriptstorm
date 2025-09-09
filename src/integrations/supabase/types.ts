@@ -240,6 +240,20 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: boolean
       }
+      get_contact_submissions_admin: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          company: string
+          created_at: string
+          email: string
+          id: string
+          ip_address: string
+          name: string
+          processed: boolean
+          project_details: string
+          service: string
+        }[]
+      }
       insert_contact_submission: {
         Args: {
           p_company?: string
@@ -254,6 +268,10 @@ export type Database = {
       }
       is_admin: {
         Args: { _user_id?: string }
+        Returns: boolean
+      }
+      update_contact_submission_admin: {
+        Args: { p_id: string; p_processed: boolean }
         Returns: boolean
       }
       validate_edge_function_request: {

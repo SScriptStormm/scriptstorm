@@ -92,7 +92,7 @@ const AdminPanel = () => {
   const fetchContactSubmissions = async () => {
     try {
       // Use the secure admin function instead of direct query
-      const { data, error } = await supabase.rpc('admin_get_contact_submissions');
+      const { data, error } = await supabase.rpc('get_contact_submissions_admin');
 
       if (error) {
         console.error('Error fetching contact submissions:', error);
@@ -112,9 +112,9 @@ const AdminPanel = () => {
   const markAsProcessed = async (submissionId: string) => {
     try {
       // Use the secure admin function instead of direct update
-      const { data, error } = await supabase.rpc('admin_update_contact_submission', {
-        submission_id: submissionId,
-        mark_processed: true
+      const { data, error } = await supabase.rpc('update_contact_submission_admin', {
+        p_id: submissionId,
+        p_processed: true
       });
 
       if (error) {
