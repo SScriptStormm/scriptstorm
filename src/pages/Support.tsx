@@ -64,7 +64,7 @@ const Support = () => {
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-foreground">
             ScriptStorm Customer
-            <span className="block text-primary-glow animate-pulse">Support</span>
+            <span className="block text-primary-glow">Support</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             For help with your active account, revisions, technical issues, or billing.
