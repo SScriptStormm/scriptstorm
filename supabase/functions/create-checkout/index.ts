@@ -41,7 +41,7 @@ serve(async (req) => {
       logStep("Found existing customer", { customerId });
     }
 
-    // Create line items based on package type
+    // Package pricing with updated Scale description
     const packagePricing = {
       starter: { amount: 29700, name: "ScriptStorm Starter Package - $297 USD", description: "5 SEO Articles + 15 Social Posts + 5 Product Descriptions monthly" },
       growth: { amount: 59700, name: "ScriptStorm Growth Package - $597 USD", description: "10 SEO Articles + 30 Social Posts + 10 Product Descriptions monthly" },
