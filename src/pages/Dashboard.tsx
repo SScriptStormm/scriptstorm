@@ -182,7 +182,11 @@ const Dashboard = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <img src={scriptStormLogo} alt="ScriptStorm" className="w-10 h-10" />
+              <img 
+                src={scriptStormLogo} 
+                alt="ScriptStorm" 
+                className="w-16 h-16 rounded-xl bg-white/95 p-2 shadow-cyber border border-primary-glow/30 hover:border-primary-glow/60 transition-all duration-300"
+              />
               <div>
                 <h1 className="text-2xl font-bold text-white font-mono tracking-wide">
                   SCRIPTSTORM
