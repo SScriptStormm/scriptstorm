@@ -18,6 +18,7 @@ import Contact from "./pages/Contact";
 import Support from "./pages/Support";
 import HelpCenter from "./pages/HelpCenter";
 import AboutUs from "./pages/AboutUs";
+import ConstructionBanner from "./components/ConstructionBanner";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <ConstructionBanner />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
