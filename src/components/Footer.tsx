@@ -75,7 +75,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-white/20 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-white/60 text-sm">
-            © 2024 ScriptStorm. All rights reserved.
+            © 2025 ScriptStorm. All rights reserved.
           </p>
           <div className="flex gap-6 mt-4 md:mt-0">
             <a href="#" className="text-white/60 hover:text-white text-sm transition-smooth">
