@@ -98,7 +98,7 @@ const Pricing = () => {
       color: '#3498DB',
       features: [
         { text: '5 AI-generated SEO articles', highlight: true },
-        '24-hour orchestrated delivery',
+        '24-hour Orchestrated delivery',
         '1 round of AI-assisted revisions',
         'Standard Keyword Research',
         'Plagiarism & AI Scan Guarantee',
@@ -118,7 +118,7 @@ const Pricing = () => {
       popular: true,
       features: [
         { text: '10 AI-generated SEO articles', highlight: true },
-        '24-hour orchestrated delivery',
+        '24-hour Orchestrated delivery',
         '2 rounds of AI-assisted revisions',
         'Advanced Keyword Research',
         'AI-Generated Content Calendar',
@@ -414,7 +414,7 @@ const Pricing = () => {
                     color: 'white'
                   }}
                 >
-                  {loadingStates[pkg.id] ? "Processing..." : "🚀 Start My 24-Hour Draft"}
+                  {loadingStates[pkg.id] ? "Processing..." : pkg.id === 'dominance' ? "🚀 Start My 12-Hour Draft" : "🚀 Start My 24-Hour Draft"}
                 </Button>
               </CardContent>
             </Card>
