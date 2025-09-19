@@ -245,7 +245,7 @@ const WhyChooseUs = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/#pricing">
                   <Button size="lg" className="bg-[#3498DB] hover:bg-[#2980B9] text-white px-8 py-4 shadow-cyber hover:shadow-hologram transition-all duration-300">
-                    Get Free Consultation
+                    Start your First Draft
                   </Button>
                 </Link>
                 <Link to="/onboarding-process">

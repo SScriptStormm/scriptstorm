@@ -339,7 +339,7 @@ const OnboardingProcess = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/#pricing">
               <Button size="lg" variant="secondary" className="bg-white text-[#3498DB] hover:bg-white/90 px-8 py-4 font-semibold shadow-cyber hover:shadow-hologram transition-all duration-300">
-                Get Free Consultation
+                Start your First Draft
               </Button>
             </Link>
             <Link to="/why-choose-us">
