@@ -47,10 +47,11 @@ const Pricing = () => {
       if (error) throw error;
 
       if (data?.url) {
-        // Show urgency message before redirect
+        // Show urgency message before redirect with package-specific delivery time
+        const deliveryTime = backendPackageType === 'authority-enterprise' ? '12-hour' : '24-hour';
         toast({
           title: "🚀 Redirecting to Checkout",
-          description: "Complete your order in the next 10 minutes to lock in 24-hour delivery for your first draft!",
+          description: `Complete your order in the next 10 minutes to lock in ${deliveryTime} delivery for your first draft!`,
           duration: 3000,
         });
         
