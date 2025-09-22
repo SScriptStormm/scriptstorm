@@ -6,6 +6,7 @@ import { CheckCircle, Star, Crown, Mail, Phone, Calendar } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import ContactForm from "./ContactForm";
+import EnterprisePackageCard from "./EnterprisePackageCard";
 
 const Pricing = () => {
   const [showContactForm, setShowContactForm] = useState(false);
@@ -305,6 +306,14 @@ const Pricing = () => {
 
         <div className="grid md:grid-cols-3 gap-6 mb-16 max-w-6xl mx-auto">
           {enterprisePackages.map((pkg) => (
+            <EnterprisePackageCard
+              key={pkg.id}
+              pkg={pkg}
+              onCheckout={handleCheckout}
+              loadingStates={loadingStates}
+            />
+          ))}
+        </div>
             <Card key={pkg.id} className="relative border-0 hover:scale-105 transition-all duration-500 group" style={{
               background: `linear-gradient(135deg, ${pkg.color}08 0%, ${pkg.color}15 30%, ${pkg.color}08 100%)`,
               boxShadow: `0 20px 40px -10px ${pkg.color}30, 0 0 30px ${pkg.color}20, inset 0 1px 0 ${pkg.color}40`,
