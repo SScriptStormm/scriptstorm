@@ -82,15 +82,10 @@ const Pricing = () => {
   };
 
   const togglePackageExpansion = (packageId: string) => {
-    console.log('Before toggle - packageId:', packageId, 'expandedPackages:', expandedPackages);
-    setExpandedPackages(prev => {
-      const newState = {
-        ...prev,
-        [packageId]: !prev[packageId]
-      };
-      console.log('After toggle - newState:', newState);
-      return newState;
-    });
+    setExpandedPackages(prev => ({
+      ...prev,
+      [packageId]: !prev[packageId]
+    }));
   };
 
   const packages = [
@@ -362,26 +357,42 @@ const Pricing = () => {
               
               <CardContent className="space-y-6 relative z-20">
                 <div className="space-y-2">
-                  {pkg.features.map((feature, index) => {
-                    const isVisible = index < 5 || (expandedPackages[pkg.id] === true);
-                    
-                    if (!isVisible) return null;
-                    
-                    return (
+                  {/* Always show first 5 features */}
+                  {pkg.features.slice(0, 5).map((feature, index) => (
+                    <div 
+                      key={`${pkg.id}-base-${index}`} 
+                      className="flex items-center gap-2"
+                    >
                       <div 
-                        key={`${pkg.id}-${index}-${feature.substring(0, 10)}`} 
-                        className="flex items-center gap-2"
+                        className="w-4 h-4 rounded-full flex items-center justify-center"
+                        style={{ backgroundColor: pkg.color }}
                       >
-                        <div 
-                          className="w-4 h-4 rounded-full flex items-center justify-center"
-                          style={{ backgroundColor: pkg.color }}
-                        >
-                          <CheckCircle className="h-2.5 w-2.5 text-white" />
-                        </div>
-                        <span className="text-sm">{feature}</span>
+                        <CheckCircle className="h-2.5 w-2.5 text-white" />
                       </div>
-                    );
-                  })}
+                      <span className="text-sm">{feature}</span>
+                    </div>
+                  ))}
+                  
+                  {/* Only show additional features when THIS package is expanded */}
+                  {expandedPackages[pkg.id] && pkg.features.length > 5 && (
+                    <>
+                      <div className="pt-2 border-t border-border" />
+                      {pkg.features.slice(5).map((feature, index) => (
+                        <div 
+                          key={`${pkg.id}-expanded-${index}`} 
+                          className="flex items-center gap-2"
+                        >
+                          <div 
+                            className="w-4 h-4 rounded-full flex items-center justify-center"
+                            style={{ backgroundColor: pkg.color }}
+                          >
+                            <CheckCircle className="h-2.5 w-2.5 text-white" />
+                          </div>
+                          <span className="text-sm">{feature}</span>
+                        </div>
+                      ))}
+                    </>
+                  )}
                 </div>
 
                 {pkg.note && (
@@ -396,12 +407,7 @@ const Pricing = () => {
                   <Button 
                     variant="ghost" 
                     size="sm" 
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      console.log('Toggling package:', pkg.id, 'Current state:', expandedPackages[pkg.id]);
-                      togglePackageExpansion(pkg.id);
-                    }}
+                    onClick={() => togglePackageExpansion(pkg.id)}
                     className="text-xs w-full relative z-20 hover:bg-opacity-10"
                     style={{ color: pkg.color, backgroundColor: 'transparent' }}
                   >
