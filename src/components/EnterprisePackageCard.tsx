@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -25,7 +25,14 @@ interface EnterprisePackageCardProps {
 const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates }: EnterprisePackageCardProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const toggleExpansion = () => {
+  useEffect(() => {
+    console.log(`${pkg.id} isExpanded state changed:`, isExpanded);
+  }, [isExpanded, pkg.id]);
+
+  const toggleExpansion = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log(`Toggling expansion for ${pkg.id}:`, !isExpanded);
     setIsExpanded(prev => !prev);
   };
 
@@ -144,6 +151,8 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates }: EnterprisePac
             onClick={toggleExpansion}
             className="text-xs w-full relative hover:bg-opacity-10"
             style={{ color: pkg.color, backgroundColor: 'transparent' }}
+            onMouseDown={(e) => e.stopPropagation()}
+            onMouseUp={(e) => e.stopPropagation()}
           >
             {isExpanded ? 'Show Less' : `Show All ${pkg.features.length} Features`}
           </Button>
