@@ -49,27 +49,36 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates }: EnterprisePac
       )}
       
       {/* Premium glow effect with lower z-index */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg z-0" style={{
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg pointer-events-none" style={{
         background: `linear-gradient(135deg, ${pkg.color}10, ${pkg.color}05)`,
-        boxShadow: `inset 0 0 20px ${pkg.color}20`
+        boxShadow: `inset 0 0 20px ${pkg.color}20`,
+        zIndex: -1
       }} />
       
       {/* Elegant top accent with lower z-index */}
-      <div className="absolute top-0 left-0 right-0 h-1 rounded-t-lg z-10" style={{
-        background: `linear-gradient(90deg, transparent 0%, ${pkg.color}80 20%, ${pkg.color} 50%, ${pkg.color}80 80%, transparent 100%)`
+      <div className="absolute top-0 left-0 right-0 h-1 rounded-t-lg pointer-events-none" style={{
+        background: `linear-gradient(90deg, transparent 0%, ${pkg.color}80 20%, ${pkg.color} 50%, ${pkg.color}80 80%, transparent 100%)`,
+        zIndex: -1
       }} />
       
       {/* Subtle corner highlights with lower z-index */}
-      <div className="absolute top-2 left-2 w-8 h-8 rounded-full opacity-20 z-0" style={{ background: `radial-gradient(circle, ${pkg.color}60, transparent)` }} />
-      <div className="absolute top-2 right-2 w-8 h-8 rounded-full opacity-20 z-0" style={{ background: `radial-gradient(circle, ${pkg.color}60, transparent)` }} />
-      
-      {/* Premium texture overlay with lowest z-index */}
-      <div className="absolute inset-0 opacity-10 z-0" style={{
-        backgroundImage: `radial-gradient(circle at 2px 2px, ${pkg.color}40 1px, transparent 0)`,
-        backgroundSize: '20px 20px'
+      <div className="absolute top-2 left-2 w-8 h-8 rounded-full opacity-20 pointer-events-none" style={{ 
+        background: `radial-gradient(circle, ${pkg.color}60, transparent)`,
+        zIndex: -1
+      }} />
+      <div className="absolute top-2 right-2 w-8 h-8 rounded-full opacity-20 pointer-events-none" style={{ 
+        background: `radial-gradient(circle, ${pkg.color}60, transparent)`,
+        zIndex: -1
       }} />
       
-      <CardHeader className={`text-center ${pkg.badge ? 'pt-10' : 'pt-6'} relative z-20`}>
+      {/* Premium texture overlay with lowest z-index */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none" style={{
+        backgroundImage: `radial-gradient(circle at 2px 2px, ${pkg.color}40 1px, transparent 0)`,
+        backgroundSize: '20px 20px',
+        zIndex: -2
+      }} />
+      
+      <CardHeader className={`text-center ${pkg.badge ? 'pt-10' : 'pt-6'} relative`}>
         <CardTitle className="text-2xl font-bold mb-2" style={{ color: pkg.color }}>
           {pkg.name}
         </CardTitle>
@@ -80,7 +89,7 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates }: EnterprisePac
         </div>
       </CardHeader>
       
-      <CardContent className="space-y-6 relative z-20">
+      <CardContent className="space-y-6 relative">
         <div className="space-y-2">
           {/* Always show first 5 features */}
           {pkg.features.slice(0, 5).map((feature, index) => (
@@ -133,7 +142,7 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates }: EnterprisePac
             variant="ghost" 
             size="sm" 
             onClick={toggleExpansion}
-            className="text-xs w-full relative z-20 hover:bg-opacity-10"
+            className="text-xs w-full relative hover:bg-opacity-10"
             style={{ color: pkg.color, backgroundColor: 'transparent' }}
           >
             {isExpanded ? 'Show Less' : `Show All ${pkg.features.length} Features`}
