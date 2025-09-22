@@ -357,19 +357,10 @@ const Pricing = () => {
               
               <CardContent className="space-y-6 relative z-20">
                 <div className="space-y-2">
-                  {pkg.features.map((feature, index) => (
+                  {pkg.features.slice(0, 5).map((feature, index) => (
                     <div 
                       key={`${pkg.id}-feature-${index}`} 
-                      className={`flex items-center gap-2 ${
-                        index >= 5 ? 
-                          (expandedPackages[pkg.id] ? 'block' : 'hidden') : 
-                          'block'
-                      }`}
-                      style={{
-                        display: index >= 5 ? 
-                          (expandedPackages[pkg.id] ? 'flex' : 'none') : 
-                          'flex'
-                      }}
+                      className="flex items-center gap-2"
                     >
                       <div 
                         className="w-4 h-4 rounded-full flex items-center justify-center"
@@ -381,8 +372,24 @@ const Pricing = () => {
                     </div>
                   ))}
                   
-                  {pkg.features.length > 5 && expandedPackages[pkg.id] && (
-                    <div className="pt-2 border-t border-border" />
+                  {expandedPackages[pkg.id] && pkg.features.length > 5 && (
+                    <>
+                      <div className="pt-2 border-t border-border" />
+                      {pkg.features.slice(5).map((feature, index) => (
+                        <div 
+                          key={`${pkg.id}-extra-feature-${index}`} 
+                          className="flex items-center gap-2"
+                        >
+                          <div 
+                            className="w-4 h-4 rounded-full flex items-center justify-center"
+                            style={{ backgroundColor: pkg.color }}
+                          >
+                            <CheckCircle className="h-2.5 w-2.5 text-white" />
+                          </div>
+                          <span className="text-sm">{feature}</span>
+                        </div>
+                      ))}
+                    </>
                   )}
                 </div>
 
