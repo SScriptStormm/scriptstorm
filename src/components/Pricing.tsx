@@ -364,7 +364,8 @@ const Pricing = () => {
                     color: 'white'
                   }}
                 >
-                  {loadingStates[pkg.id] ? "Processing..." : "🚀 Start My 24-Hour Draft"}
+                  {loadingStates[pkg.id] ? "Processing..." : 
+                    isAnnual ? "Start Saving & Get My 24-Hour Draft" : "🚀 Start My 24-Hour Draft"}
                 </Button>
                 
                 <p className="text-xs text-muted-foreground text-center italic">

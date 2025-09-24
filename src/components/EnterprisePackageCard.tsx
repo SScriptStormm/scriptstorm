@@ -189,7 +189,7 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
           }}
         >
           {loadingStates[pkg.id] ? "Processing..." : 
-            isAnnual ? `🚀 Start Annual Plan` : 
+            isAnnual ? (pkg.id === 'dominance' ? "Start Saving & Get My 12-Hour Draft" : "Start Saving & Get My 24-Hour Draft") : 
             pkg.id === 'dominance' ? "🚀 Start My 12-Hour Draft" : "🚀 Start My 24-Hour Draft"
           }
         </Button>
