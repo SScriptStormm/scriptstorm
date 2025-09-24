@@ -104,6 +104,9 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
         </div>
         {isAnnual && (
           <div className="mb-4 p-3 bg-green-50 dark:bg-green-950 rounded-lg border border-green-200 dark:border-green-800">
+            <p className="text-lg text-green-700 dark:text-green-300 font-bold mb-1">
+              🎉 Get 2 Months Free!
+            </p>
             <p className="text-sm text-green-700 dark:text-green-300 font-semibold">
               Equivalent to {pkg.annual.monthlyEquivalent}/month
             </p>
