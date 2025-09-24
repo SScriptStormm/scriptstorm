@@ -7,8 +7,16 @@ import { CheckCircle, Star } from "lucide-react";
 interface EnterprisePackage {
   id: string;
   name: string;
-  price: string;
-  period: string;
+  monthly: {
+    price: string;
+    period: string;
+  };
+  annual: {
+    price: string;
+    period: string;
+    monthlyEquivalent: string;
+    savings: string;
+  };
   color: string;
   badge?: string;
   features: string[];
@@ -20,9 +28,10 @@ interface EnterprisePackageCardProps {
   pkg: EnterprisePackage;
   onCheckout: (packageId: string) => void;
   loadingStates: {[key: string]: boolean};
+  isAnnual: boolean;
 }
 
-const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates }: EnterprisePackageCardProps) => {
+const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: EnterprisePackageCardProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleExpansion = (e: React.MouseEvent) => {
@@ -85,10 +94,24 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates }: EnterprisePac
           {pkg.name}
         </CardTitle>
         <div className="mb-4">
-          <span className="text-4xl font-bold text-foreground">{pkg.price}</span>
+          <span className="text-4xl font-bold text-foreground">
+            {isAnnual ? pkg.annual.price : pkg.monthly.price}
+          </span>
           <span className="text-lg font-semibold text-foreground ml-1">USD</span>
-          <span className="text-muted-foreground ml-2 font-semibold">/ month</span>
+          <span className="text-muted-foreground ml-2 font-semibold">
+            {isAnnual ? '/ year' : '/ month'}
+          </span>
         </div>
+        {isAnnual && (
+          <div className="mb-4 p-3 bg-green-50 dark:bg-green-950 rounded-lg border border-green-200 dark:border-green-800">
+            <p className="text-sm text-green-700 dark:text-green-300 font-semibold">
+              Equivalent to {pkg.annual.monthlyEquivalent}/month
+            </p>
+            <p className="text-xs text-green-600 dark:text-green-400">
+              💰 Save {pkg.annual.savings} annually
+            </p>
+          </div>
+        )}
       </CardHeader>
       
       <CardContent className="space-y-6 relative">
@@ -163,6 +186,7 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates }: EnterprisePac
           }}
         >
           {loadingStates[pkg.id] ? "Processing..." : 
+            isAnnual ? `🚀 Start Annual Plan` : 
             pkg.id === 'dominance' ? "🚀 Start My 12-Hour Draft" : "🚀 Start My 24-Hour Draft"
           }
         </Button>

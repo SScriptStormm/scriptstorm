@@ -11,6 +11,7 @@ import EnterprisePackageCard from "./EnterprisePackageCard";
 const Pricing = () => {
   const [showContactForm, setShowContactForm] = useState(false);
   const [loadingStates, setLoadingStates] = useState<{[key: string]: boolean}>({});
+  const [isAnnual, setIsAnnual] = useState(false);
   const { toast } = useToast();
 
   const handleContactClick = () => {
@@ -38,10 +39,15 @@ const Pricing = () => {
     };
     
     const backendPackageType = packageMap[packageType] || packageType;
+    const billingType = isAnnual ? 'annual' : 'monthly';
     
     try {
       const { data, error } = await supabase.functions.invoke('create-checkout', {
-        body: { packageType: backendPackageType, selectedAddOns }
+        body: { 
+          packageType: backendPackageType, 
+          selectedAddOns,
+          billing: billingType
+        }
       });
 
       if (error) throw error;
@@ -49,9 +55,10 @@ const Pricing = () => {
       if (data?.url) {
         // Show urgency message before redirect with package-specific delivery time
         const deliveryTime = backendPackageType === 'authority-enterprise' ? '12-hour' : '24-hour';
+        const billingMessage = isAnnual ? 'your annual subscription' : 'your monthly plan';
         toast({
           title: "🚀 Redirecting to Checkout",
-          description: `Complete your order in the next 10 minutes to lock in ${deliveryTime} delivery for your first draft!`,
+          description: `Complete ${billingMessage} in the next 10 minutes to lock in ${deliveryTime} delivery for your first draft!`,
           duration: 3000,
         });
         
@@ -85,8 +92,16 @@ const Pricing = () => {
     {
       id: 'starter',
       name: 'Starter Package',
-      price: '$297',
-      period: 'USD / month',
+      monthly: {
+        price: '$297',
+        period: 'USD / month'
+      },
+      annual: {
+        price: '$2,851',
+        period: 'USD / year',
+        monthlyEquivalent: '$238',
+        savings: '$714'
+      },
       description: 'Perfect for small businesses and testing the service.',
       icon: '🚀',
       color: '#3498DB',
@@ -104,8 +119,16 @@ const Pricing = () => {
     {
       id: 'growth',
       name: 'Growth Package',
-      price: '$597',
-      period: 'USD / month',
+      monthly: {
+        price: '$597',
+        period: 'USD / month'
+      },
+      annual: {
+        price: '$5,731',
+        period: 'USD / year',
+        monthlyEquivalent: '$478',
+        savings: '$1,433'
+      },
       description: 'Best value for established companies.',
       icon: '🔥',
       color: '#2ECC71',
@@ -128,8 +151,16 @@ const Pricing = () => {
     {
       id: 'scale',
       name: 'Scale',
-      price: '$1,297',
-      period: 'USD / month',
+      monthly: {
+        price: '$1,297',
+        period: 'USD / month'
+      },
+      annual: {
+        price: '$12,451',
+        period: 'USD / year',
+        monthlyEquivalent: '$1,038',
+        savings: '$3,113'
+      },
       color: '#9B59B6',
       features: [
         '25 AI-generated SEO articles',
@@ -145,8 +176,16 @@ const Pricing = () => {
     {
       id: 'authority',
       name: 'Authority',
-      price: '$1,797',
-      period: 'USD / month',
+      monthly: {
+        price: '$1,797',
+        period: 'USD / month'
+      },
+      annual: {
+        price: '$17,251',
+        period: 'USD / year',
+        monthlyEquivalent: '$1,438',
+        savings: '$4,313'
+      },
       color: '#E74C3C',
       badge: 'BEST VALUE',
       features: [
@@ -164,8 +203,16 @@ const Pricing = () => {
     {
       id: 'dominance',
       name: 'Dominance',
-      price: '$2,997',
-      period: 'USD / month',
+      monthly: {
+        price: '$2,997',
+        period: 'USD / month'
+      },
+      annual: {
+        price: '$28,771',
+        period: 'USD / year',
+        monthlyEquivalent: '$2,398',
+        savings: '$7,193'
+      },
       color: '#F39C12',
       badge: 'Early Adopter',
       features: [
@@ -212,9 +259,34 @@ const Pricing = () => {
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-4">
             Professional AI-powered content that drives results. No tools to learn, no hassle - just high-quality, SEO-optimized content delivered by a seamless automation engine.
           </p>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground mb-8">
             ⚡ Powered by a sophisticated AI workflow—orchestrated for rankings and structured for conversions.
           </p>
+          
+          {/* Billing Toggle */}
+          <div className="flex items-center justify-center gap-4 p-1 bg-muted/30 rounded-xl border w-fit mx-auto mb-8">
+            <button
+              onClick={() => setIsAnnual(false)}
+              className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
+                !isAnnual 
+                  ? 'bg-primary text-primary-foreground shadow-md' 
+                  : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              Monthly Billing
+            </button>
+            <button
+              onClick={() => setIsAnnual(true)}
+              className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center gap-2 ${
+                isAnnual 
+                  ? 'bg-primary text-primary-foreground shadow-md' 
+                  : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              Annual Billing
+              <Badge className="bg-green-600 text-white text-xs">Save 20%</Badge>
+            </button>
+          </div>
         </div>
 
         {/* Main Packages */}
@@ -240,10 +312,24 @@ const Pricing = () => {
                   {pkg.name}
                 </CardTitle>
                 <div className="mb-4">
-                  <span className="text-4xl font-bold text-foreground">{pkg.price}</span>
+                  <span className="text-4xl font-bold text-foreground">
+                    {isAnnual ? pkg.annual.price : pkg.monthly.price}
+                  </span>
                   <span className="text-lg font-semibold text-foreground ml-1">USD</span>
-                  <span className="text-muted-foreground ml-2 font-semibold">/ month</span>
+                  <span className="text-muted-foreground ml-2 font-semibold">
+                    {isAnnual ? '/ year' : '/ month'}
+                  </span>
                 </div>
+                {isAnnual && (
+                  <div className="mb-4 p-3 bg-green-50 dark:bg-green-950 rounded-lg border border-green-200 dark:border-green-800">
+                    <p className="text-sm text-green-700 dark:text-green-300 font-semibold">
+                      Equivalent to {pkg.annual.monthlyEquivalent}/month
+                    </p>
+                    <p className="text-xs text-green-600 dark:text-green-400">
+                      💰 Save {pkg.annual.savings} annually
+                    </p>
+                  </div>
+                )}
                 <CardDescription className="text-base">{pkg.description}</CardDescription>
               </CardHeader>
               
@@ -303,6 +389,7 @@ const Pricing = () => {
               pkg={pkg}
               onCheckout={handleCheckout}
               loadingStates={loadingStates}
+              isAnnual={isAnnual}
             />
           ))}
         </div>
