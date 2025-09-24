@@ -23,8 +23,8 @@ serve(async (req) => {
     if (!stripeKey) throw new Error("Stripe secret key not found");
     logStep("Stripe key verified");
 
-    const { selectedAddOns, packageType = "starter" } = await req.json();
-    logStep("Request data", { selectedAddOns, packageType });
+    const { selectedAddOns, packageType = "starter", billing = "monthly" } = await req.json();
+    logStep("Request data", { selectedAddOns, packageType, billing });
 
     // Use guest email for all checkouts since no auth is required
     const userEmail = "guest@scriptstorm.com";
@@ -41,17 +41,37 @@ serve(async (req) => {
       logStep("Found existing customer", { customerId });
     }
 
-    // Package pricing with updated Scale description
+    // Package pricing for both monthly and annual billing
     const packagePricing = {
-      starter: { amount: 29700, name: "ScriptStorm Starter Package - $297 USD", description: "5 SEO Articles + 15 Social Posts + 5 Product Descriptions monthly" },
-      growth: { amount: 59700, name: "ScriptStorm Growth Package - $597 USD", description: "10 SEO Articles + 30 Social Posts + 10 Product Descriptions monthly" },
-      "starter-enterprise": { amount: 129700, name: "ScriptStorm Scale - $1,297 USD", description: "25 SEO Articles + 75 Social Posts + 25 Product Descriptions monthly" },
-      "growth-enterprise": { amount: 179700, name: "ScriptStorm Authority - $1,797 USD", description: "30 SEO Articles + 90 Social Posts + 30 Product Descriptions monthly" },
-      "authority-enterprise": { amount: 299700, name: "ScriptStorm Dominance - $2,997 USD", description: "50 SEO Articles + 150 Social Posts + Unlimited Product Descriptions monthly" }
+      starter: { 
+        monthly: { amount: 29700, name: "ScriptStorm Starter Package - $297 USD", description: "5 SEO Articles + 15 Social Posts + 5 Product Descriptions monthly" },
+        annual: { amount: 285000, name: "ScriptStorm Starter Package - $2,850 USD/year (Get 2 Months Free!)", description: "5 SEO Articles + 15 Social Posts + 5 Product Descriptions monthly - Annual Plan" }
+      },
+      growth: { 
+        monthly: { amount: 59700, name: "ScriptStorm Growth Package - $597 USD", description: "10 SEO Articles + 30 Social Posts + 10 Product Descriptions monthly" },
+        annual: { amount: 573000, name: "ScriptStorm Growth Package - $5,730 USD/year (Get 2 Months Free!)", description: "10 SEO Articles + 30 Social Posts + 10 Product Descriptions monthly - Annual Plan" }
+      },
+      "starter-enterprise": { 
+        monthly: { amount: 129700, name: "ScriptStorm Scale - $1,297 USD", description: "25 SEO Articles + 75 Social Posts + 25 Product Descriptions monthly" },
+        annual: { amount: 1245000, name: "ScriptStorm Scale - $12,450 USD/year (Get 2 Months Free!)", description: "25 SEO Articles + 75 Social Posts + 25 Product Descriptions monthly - Annual Plan" }
+      },
+      "growth-enterprise": { 
+        monthly: { amount: 179700, name: "ScriptStorm Authority - $1,797 USD", description: "30 SEO Articles + 90 Social Posts + 30 Product Descriptions monthly" },
+        annual: { amount: 1725000, name: "ScriptStorm Authority - $17,250 USD/year (Get 2 Months Free!)", description: "30 SEO Articles + 90 Social Posts + 30 Product Descriptions monthly - Annual Plan" }
+      },
+      "authority-enterprise": { 
+        monthly: { amount: 299700, name: "ScriptStorm Dominance - $2,997 USD", description: "50 SEO Articles + 150 Social Posts + Unlimited Product Descriptions monthly" },
+        annual: { amount: 2877000, name: "ScriptStorm Dominance - $28,770 USD/year (Get 2 Months Free!)", description: "50 SEO Articles + 150 Social Posts + Unlimited Product Descriptions monthly - Annual Plan" }
+      }
     };
 
-    // Remove add-on handling since all packages are now all-inclusive
-    const selectedPackage = packagePricing[packageType] || packagePricing.starter;
+    // Get the correct package and billing type
+    const packageData = packagePricing[packageType] || packagePricing.starter;
+    const selectedPackage = billing === "annual" ? packageData.annual : packageData.monthly;
+    const recurringInterval = billing === "annual" ? "year" : "month";
+    
+    logStep("Package selected", { packageType, billing, selectedPackage, recurringInterval });
+
     const lineItems = [
       {
         price_data: {
@@ -61,7 +81,7 @@ serve(async (req) => {
             description: selectedPackage.description
           },
           unit_amount: selectedPackage.amount,
-          recurring: { interval: "month" },
+          recurring: { interval: recurringInterval },
         },
         quantity: 1,
       }
