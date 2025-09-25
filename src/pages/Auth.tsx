@@ -153,7 +153,7 @@ const Auth = () => {
           <CardHeader className="relative text-center space-y-2">
             <CardTitle className="text-2xl text-white font-mono tracking-wide flex items-center justify-center gap-2">
               <Zap className="h-6 w-6 text-primary-glow animate-pulse" />
-              {showForgotPassword ? "RESET PASSWORD" : isLogin ? "SYSTEM LOGIN" : "CREATE ACCOUNT"}
+              {showForgotPassword ? "RESET PASSWORD" : isLogin ? "ACCESS YOUR DASHBOARD" : "CREATE ACCOUNT"}
             </CardTitle>
             <p className="text-white/70 text-sm font-mono">
               {showForgotPassword ? "Enter your email to reset password" : isLogin ? "Access your content dashboard" : "Join the ScriptStorm network"}

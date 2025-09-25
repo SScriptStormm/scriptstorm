@@ -233,6 +233,19 @@ const Dashboard = () => {
           </p>
         </div>
 
+        {/* Submit New Brief Button */}
+        <div className="mb-8">
+          <div className="relative group">
+            <div className="absolute inset-0 bg-gradient-cyber rounded-lg blur-lg opacity-40 group-hover:opacity-70 transition-all duration-500" />
+            <Button 
+              className="relative w-full bg-primary hover:bg-primary-glow text-white font-mono tracking-wide border-2 border-primary-glow/50 hover:border-primary-glow shadow-cyber hover:shadow-hologram transition-all duration-500 h-16 text-xl"
+            >
+              <FileText className="h-6 w-6 mr-3" />
+              + SUBMIT NEW CONTENT BRIEF
+            </Button>
+          </div>
+        </div>
+
         {/* Subscription Status */}
         <Card className="mb-8 bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber">
           <div className="absolute inset-0 bg-gradient-cyber opacity-5 rounded-lg" />
@@ -272,27 +285,78 @@ const Dashboard = () => {
           </CardContent>
         </Card>
 
-        {/* Live Content Pipeline */}
+        {/* Content Pipeline Status */}
         <Card className="mb-8 bg-black/30 backdrop-blur-xl border-green-500/30 shadow-cyber">
           <div className="absolute inset-0 bg-gradient-cyber opacity-5 rounded-lg" />
           <CardHeader className="relative">
             <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
-              🟢 LIVE CONTENT PIPELINE
+              <Target className="h-5 w-5 text-green-400" />
+              CONTENT PIPELINE STATUS
             </CardTitle>
           </CardHeader>
           <CardContent className="relative space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="p-4 bg-black/20 rounded-lg border border-green-500/20">
-                <p className="text-green-400 font-mono text-sm mb-2">• Active:</p>
-                <p className="text-white font-mono text-lg">[{totalArticles}] AI-generated pieces</p>
+            {articles.length > 0 ? (
+              <div className="space-y-3">
+                <div className="flex items-center gap-3 p-4 bg-black/20 rounded-lg border border-green-500/20">
+                  <CheckCircle className="h-5 w-5 text-green-400" />
+                  <div>
+                    <p className="text-green-400 font-mono text-sm">✅ Brief Submitted:</p>
+                    <p className="text-white font-mono">{new Date(articles[0]?.created_at).toLocaleDateString()} at {new Date(articles[0]?.created_at).toLocaleTimeString()}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 p-4 bg-black/20 rounded-lg border border-yellow-500/20">
+                  <Clock className="h-5 w-5 text-yellow-400 animate-pulse" />
+                  <div>
+                    <p className="text-yellow-400 font-mono text-sm">🔄 Current Stage:</p>
+                    <p className="text-white font-mono">AI Research & Writing</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 p-4 bg-black/20 rounded-lg border border-blue-500/20">
+                  <AlertCircle className="h-5 w-5 text-blue-400" />
+                  <div>
+                    <p className="text-blue-400 font-mono text-sm">⏱️ Estimated Delivery:</p>
+                    <p className="text-white font-mono">Today, 5:00 PM</p>
+                  </div>
+                </div>
+                <Button 
+                  variant="ghost"
+                  className="w-full text-primary-glow border border-primary-glow/30 hover:border-primary-glow/60 font-mono mt-4"
+                >
+                  VIEW PROGRESS DETAILS
+                </Button>
               </div>
-              <div className="p-4 bg-black/20 rounded-lg border border-green-500/20">
-                <p className="text-green-400 font-mono text-sm mb-2">• Next Delivery:</p>
-                <p className="text-white font-mono text-lg">[24h timer starts on approval]</p>
+            ) : (
+              <div className="text-center py-8">
+                <AlertCircle className="h-12 w-12 text-primary-glow/50 mx-auto mb-3" />
+                <p className="text-white font-mono text-lg mb-2">Ready for Content Production</p>
+                <p className="text-white/70 font-mono text-sm">Submit your first content brief to get started</p>
               </div>
-              <div className="p-4 bg-black/20 rounded-lg border border-green-500/20">
-                <p className="text-green-400 font-mono text-sm mb-2">• Quality:</p>
-                <p className="text-white font-mono text-lg">[✅ AUTO-VERIFIED]</p>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* Monthly Plan Tracker */}
+        <Card className="mb-8 bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
+              <BarChart3 className="h-5 w-5 text-primary-glow" />
+              YOUR PLAN: ENTERPRISE
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-3">
+              <div className="flex justify-between items-center">
+                <span className="text-white/70 font-mono text-sm">Monthly Articles:</span>
+                <span className="text-white font-mono text-lg">{completedArticles} of 8 delivered</span>
+              </div>
+              <Progress 
+                value={(completedArticles / 8) * 100} 
+                className="h-2 bg-black/50"
+              />
+              <div className="text-center">
+                <p className="text-primary-glow font-mono text-sm">
+                  {8 - completedArticles} articles remaining this month
+                </p>
               </div>
             </div>
           </CardContent>
@@ -359,88 +423,105 @@ const Dashboard = () => {
           </Card>
         )}
 
-        {/* Articles List */}
+        {/* Content Projects */}
         <Card className="bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
               <FileText className="h-5 w-5 text-primary-glow" />
-              YOUR ARTICLES
+              YOUR CONTENT PROJECTS
             </CardTitle>
           </CardHeader>
           <CardContent>
             {articles.length === 0 ? (
               <div className="text-center py-12">
-                <Zap className="h-16 w-16 text-primary-glow/50 mx-auto mb-4 animate-pulse" />
-                <p className="text-white font-mono tracking-wide text-xl">
-                  AI PRODUCTION READY - AWAITING YOUR REQUEST
+                <FileText className="h-16 w-16 text-primary-glow/50 mx-auto mb-4" />
+                <p className="text-white font-mono tracking-wide text-xl mb-2">
+                  No Active Projects
+                </p>
+                <p className="text-white/70 font-mono text-sm">
+                  Click "Submit New Content Brief" above to start your first project
                 </p>
               </div>
             ) : (
-              <div className="space-y-4">
-                {articles.map((article) => (
-                  <div 
-                    key={article.id} 
-                    className="p-4 bg-black/20 rounded-lg border border-primary-glow/20 hover:border-primary-glow/40 transition-all duration-300"
-                  >
-                    <div className="flex items-start justify-between mb-3">
-                      <div className="flex-1">
-                        <h3 className="text-white font-semibold mb-2 font-mono tracking-wide">
-                          {article.title}
-                        </h3>
-                        <div className="flex items-center gap-4 text-sm text-white/70 font-mono">
-                          <span>Created: {new Date(article.created_at).toLocaleDateString()}</span>
-                          {article.word_count > 0 && (
-                            <span>{article.word_count} words</span>
-                          )}
-                          {article.delivery_date && (
-                            <span>Due: {new Date(article.delivery_date).toLocaleDateString()}</span>
-                          )}
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Badge className={`${getStatusColor(article.status)} font-mono tracking-wide`}>
-                          {getStatusIcon(article.status)}
-                          {article.status.replace('_', ' ').toUpperCase()}
-                        </Badge>
-                        {article.article_url && (
-                          <Button 
-                            size="sm" 
-                            variant="ghost"
-                            onClick={() => window.open(article.article_url!, '_blank')}
-                            className="text-primary-glow hover:text-primary-glow/80 border border-primary-glow/30 hover:border-primary-glow/60 font-mono"
-                          >
-                            <Eye className="h-4 w-4 mr-1" />
-                            VIEW
-                          </Button>
-                        )}
-                      </div>
-                    </div>
-                    
-                    {article.target_keywords && article.target_keywords.length > 0 && (
-                      <div className="mb-3">
-                        <p className="text-white/50 text-xs font-mono mb-2">TARGET KEYWORDS:</p>
-                        <div className="flex flex-wrap gap-2">
-                          {article.target_keywords.map((keyword, index) => (
-                            <Badge 
-                              key={index} 
-                              variant="outline" 
-                              className="text-xs bg-primary-glow/10 border-primary-glow/30 text-primary-glow font-mono"
-                            >
-                              {keyword}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                    
-                    {article.notes && (
-                      <div className="mt-3 p-3 bg-black/30 rounded border border-primary-glow/20">
-                        <p className="text-white/50 text-xs font-mono mb-1">NOTES:</p>
-                        <p className="text-white/80 text-sm font-mono">{article.notes}</p>
-                      </div>
-                    )}
-                  </div>
-                ))}
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-primary-glow/20 text-left">
+                      <th className="text-white/70 font-mono text-sm pb-3">Topic</th>
+                      <th className="text-white/70 font-mono text-sm pb-3">Status</th>
+                      <th className="text-white/70 font-mono text-sm pb-3">Submitted</th>
+                      <th className="text-white/70 font-mono text-sm pb-3 text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="space-y-3">
+                    {articles.map((article) => (
+                      <tr key={article.id} className="border-b border-primary-glow/10 hover:bg-black/20 transition-colors">
+                        <td className="py-4">
+                          <div>
+                            <h3 className="text-white font-mono tracking-wide font-semibold">
+                              {article.title}
+                            </h3>
+                            {article.word_count > 0 && (
+                              <p className="text-white/50 font-mono text-sm">{article.word_count} words</p>
+                            )}
+                          </div>
+                        </td>
+                        <td className="py-4">
+                          <Badge className={`${getStatusColor(article.status)} font-mono tracking-wide`}>
+                            {getStatusIcon(article.status)}
+                            {article.status === 'completed' ? '✅ Ready' : 
+                             article.status === 'in_progress' ? '🔄 In Progress' : 
+                             '⏳ Pending'}
+                          </Badge>
+                        </td>
+                        <td className="py-4">
+                          <span className="text-white font-mono">
+                            {new Date(article.created_at).toLocaleDateString()}
+                          </span>
+                        </td>
+                        <td className="py-4 text-right">
+                          <div className="flex items-center gap-2 justify-end">
+                            {article.status === 'completed' ? (
+                              <>
+                                <Button 
+                                  size="sm" 
+                                  className="bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono"
+                                  onClick={() => article.article_url && window.open(article.article_url, '_blank')}
+                                >
+                                  Download
+                                </Button>
+                                <Button 
+                                  size="sm" 
+                                  variant="ghost"
+                                  className="text-yellow-400 border border-yellow-500/30 hover:border-yellow-500/60 font-mono"
+                                >
+                                  Revise
+                                </Button>
+                              </>
+                            ) : article.status === 'in_progress' ? (
+                              <Button 
+                                size="sm" 
+                                variant="ghost"
+                                className="text-blue-400 border border-blue-500/30 hover:border-blue-500/60 font-mono"
+                              >
+                                View ETA
+                              </Button>
+                            ) : (
+                              <Button 
+                                size="sm" 
+                                variant="ghost"
+                                className="text-gray-400 border border-gray-500/30 font-mono"
+                                disabled
+                              >
+                                Queued
+                              </Button>
+                            )}
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             )}
           </CardContent>
