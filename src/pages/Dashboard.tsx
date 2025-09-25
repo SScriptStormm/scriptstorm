@@ -324,7 +324,7 @@ const Dashboard = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
               <BarChart3 className="h-5 w-5 text-primary-glow" />
-              YOUR PLAN: ENTERPRISE
+              YOUR PLAN: Dominance
             </CardTitle>
           </CardHeader>
           <CardContent>
