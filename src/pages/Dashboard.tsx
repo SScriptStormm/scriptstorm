@@ -262,7 +262,7 @@ const Dashboard = () => {
                   READY FOR YOUR FIRST BRIEF ✅
                 </Badge>
                 <Badge className="bg-primary-glow/20 text-primary-glow border-primary-glow/30 font-mono tracking-wide">
-                  PLAN: ENTERPRISE
+                  PLAN: DOMINANCE
                 </Badge>
               </div>
             </div>
