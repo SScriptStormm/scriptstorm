@@ -246,42 +246,26 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Subscription Status */}
-        <Card className="mb-8 bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber">
+        {/* Account Status */}
+        <Card className="mb-8 bg-black/30 backdrop-blur-xl border-green-500/30 shadow-cyber">
           <div className="absolute inset-0 bg-gradient-cyber opacity-5 rounded-lg" />
           <CardHeader className="relative">
             <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
-              <CreditCard className="h-5 w-5 text-primary-glow" />
-              SUBSCRIPTION STATUS
+              <CreditCard className="h-5 w-5 text-green-400" />
+              ACCOUNT STATUS
             </CardTitle>
           </CardHeader>
           <CardContent className="relative">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <Badge className={`${subscriber?.subscribed ? 'bg-green-500/20 text-green-400 border-green-500/30' : 'bg-red-500/20 text-red-400 border-red-500/30'} font-mono tracking-wide`}>
-                  {subscriber?.subscribed ? 'ACTIVE' : 'INACTIVE'}
+                <Badge className="bg-green-500/20 text-green-400 border-green-500/30 font-mono tracking-wide">
+                  READY FOR YOUR FIRST BRIEF ✅
                 </Badge>
-                {subscriber?.subscription_tier && (
-                  <Badge className="bg-primary-glow/20 text-primary-glow border-primary-glow/30 font-mono tracking-wide">
-                    {subscriber.subscription_tier.toUpperCase()}
-                  </Badge>
-                )}
-              </div>
-              <div className="text-right">
-                <p className="text-white/70 text-sm font-mono">STATUS</p>
-                <p className="text-white font-mono tracking-wide">
-                  {subscriber?.subscribed ? 'OPERATIONAL' : 'UPGRADE REQUIRED'}
-                </p>
+                <Badge className="bg-primary-glow/20 text-primary-glow border-primary-glow/30 font-mono tracking-wide">
+                  PLAN: ENTERPRISE
+                </Badge>
               </div>
             </div>
-            {subscriber?.subscription_end && (
-              <div className="mt-4 p-4 bg-black/20 rounded-lg border border-primary-glow/20">
-                <p className="text-white/70 text-sm font-mono mb-1">NEXT BILLING CYCLE</p>
-                <p className="text-white font-mono tracking-wide">
-                  {new Date(subscriber.subscription_end).toLocaleDateString()}
-                </p>
-              </div>
-            )}
           </CardContent>
         </Card>
 
