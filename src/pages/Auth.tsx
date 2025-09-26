@@ -138,7 +138,10 @@ const Auth = () => {
           <img 
             src={scriptStormLogo} 
             alt="ScriptStorm" 
-            className="w-24 h-24 mx-auto mb-4 animate-float transition-all duration-500"
+            className="w-24 h-24 mx-auto mb-4 animate-float transition-all duration-500 opacity-80 mix-blend-screen backdrop-blur-sm filter drop-shadow-lg rounded-2xl"
+            style={{ 
+              filter: 'brightness(1.2) contrast(1.1) drop-shadow(0 0 20px rgba(0, 255, 255, 0.3))'
+            }}
           />
           <h1 className="text-4xl font-bold text-white mb-2 animate-text-glow font-mono tracking-wide">
             SCRIPTSTORM
