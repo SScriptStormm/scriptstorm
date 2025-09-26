@@ -135,17 +135,25 @@ const Auth = () => {
 
       <div className="relative z-10 w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="relative w-24 h-24 mx-auto mb-4 animate-float transition-all duration-500 cursor-pointer group hover:scale-110 hover:rotate-1">
-            <div className="absolute inset-0 bg-primary/20 group-hover:bg-primary/40 rounded-2xl blur-md transition-all duration-300"></div>
+          <div 
+            className="relative w-24 h-24 sm:w-28 sm:h-28 mx-auto mb-4 animate-float transition-all duration-500 cursor-pointer group hover:scale-110 hover:rotate-1 motion-reduce:animate-none motion-reduce:hover:scale-105 motion-reduce:hover:rotate-0"
+            style={{ willChange: 'transform' }}
+            role="img"
+            aria-label="ScriptStorm Logo - AI Content Production Platform"
+          >
+            <div className="absolute inset-0 bg-primary/20 group-hover:bg-primary/40 rounded-2xl blur-md transition-all duration-300 motion-reduce:transition-none"></div>
             <img 
               src={scriptStormLogo} 
-              alt="ScriptStorm" 
-              className="relative w-full h-full rounded-2xl shadow-2xl group-hover:shadow-[0_0_40px_rgba(6,182,212,0.6)] transition-all duration-300"
+              alt="ScriptStorm - AI Content Production Platform Logo" 
+              className="relative w-full h-full rounded-2xl shadow-2xl group-hover:shadow-[0_0_40px_rgba(6,182,212,0.6)] transition-all duration-300 motion-reduce:transition-none"
               style={{ 
-                filter: 'drop-shadow(0 0 20px rgba(6, 182, 212, 0.4)) brightness(1.05) contrast(1.3) saturate(1.2) hue-rotate(180deg) invert(0.1) hue-rotate(-180deg)',
+                filter: 'drop-shadow(0 0 20px rgba(6, 182, 212, 0.4)) brightness(1.05) contrast(1.3) saturate(1.2) invert(0.1)',
+                willChange: 'filter, transform'
               }}
+              loading="eager"
+              decoding="async"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-300 motion-reduce:transition-none"></div>
           </div>
           <h1 className="text-4xl font-bold text-white mb-2 animate-text-glow font-mono tracking-wide">
             SCRIPTSTORM
