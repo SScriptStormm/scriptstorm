@@ -142,7 +142,7 @@ const Auth = () => {
               alt="ScriptStorm" 
               className="relative w-full h-full rounded-2xl shadow-2xl group-hover:shadow-[0_0_40px_rgba(6,182,212,0.6)] transition-all duration-300"
               style={{ 
-                filter: 'drop-shadow(0 0 20px rgba(6, 182, 212, 0.4)) brightness(0.98)',
+                filter: 'drop-shadow(0 0 20px rgba(6, 182, 212, 0.4)) brightness(1.05) contrast(1.3) saturate(1.2) hue-rotate(180deg) invert(0.1) hue-rotate(-180deg)',
               }}
             />
             <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
