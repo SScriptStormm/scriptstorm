@@ -452,7 +452,7 @@ const Pricing = () => {
           <h4 className="text-2xl font-bold mb-4">Ready to Get Started?</h4>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
             <Button 
-              onClick={() => handleCheckout('starter')}
+              onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
               className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-8"
             >
               🚀 Start My 24-Hour Draft

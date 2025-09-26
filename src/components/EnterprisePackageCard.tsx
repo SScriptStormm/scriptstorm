@@ -180,16 +180,14 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
         )}
         
         <Button 
-          onClick={() => onCheckout(pkg.id)}
-          disabled={loadingStates[pkg.id]}
+          onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
           className="w-full font-bold py-3 transition-all duration-300"
           style={{ 
             background: `linear-gradient(135deg, ${pkg.color}, ${pkg.color}dd)`,
             color: 'white'
           }}
         >
-          {loadingStates[pkg.id] ? "Processing..." : 
-            isAnnual ? (pkg.id === 'dominance' ? "Start Saving & Get My 12-Hour Draft" : "Start Saving & Get My 24-Hour Draft") : 
+          {isAnnual ? (pkg.id === 'dominance' ? "Start Saving & Get My 12-Hour Draft" : "Start Saving & Get My 24-Hour Draft") : 
             pkg.id === 'dominance' ? "🚀 Start My 12-Hour Draft" : "🚀 Start My 24-Hour Draft"
           }
         </Button>
