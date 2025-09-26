@@ -20,6 +20,8 @@ const Auth = () => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [logoState, setLogoState] = useState<'normal' | 'loading' | 'success' | 'error' | 'clicked'>('normal');
+  const [showRipple, setShowRipple] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -45,6 +47,7 @@ const Auth = () => {
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setLogoState('loading');
 
     try {
       if (isLogin) {
@@ -53,10 +56,13 @@ const Auth = () => {
           password,
         });
         if (error) throw error;
+        setLogoState('success');
         toast({
           title: "Welcome back!",
           description: "Successfully logged in to your dashboard.",
         });
+        // Keep success state for a moment before redirect
+        setTimeout(() => setLogoState('normal'), 1000);
       } else {
         const redirectUrl = `${window.location.origin}/dashboard`;
         const { error } = await supabase.auth.signUp({
@@ -67,17 +73,22 @@ const Auth = () => {
           }
         });
         if (error) throw error;
+        setLogoState('success');
         toast({
           title: "Account created!",
           description: "Check your email to verify your account.",
         });
+        setTimeout(() => setLogoState('normal'), 1000);
       }
     } catch (error: any) {
+      setLogoState('error');
       toast({
         title: "Authentication Error",
         description: error.message,
         variant: "destructive",
       });
+      // Reset error state after animation
+      setTimeout(() => setLogoState('normal'), 1000);
     } finally {
       setLoading(false);
     }
@@ -86,34 +97,67 @@ const Auth = () => {
   const handleForgotPassword = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) {
+      setLogoState('error');
       toast({
         title: "Email Required",
         description: "Please enter your email address to reset your password.",
         variant: "destructive",
       });
+      setTimeout(() => setLogoState('normal'), 1000);
       return;
     }
 
     setLoading(true);
+    setLogoState('loading');
     try {
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: `${window.location.origin}/auth`,
       });
       if (error) throw error;
       
+      setLogoState('success');
       toast({
         title: "Password Reset Sent",
         description: "Check your email for password reset instructions.",
       });
       setShowForgotPassword(false);
+      setTimeout(() => setLogoState('normal'), 1000);
     } catch (error: any) {
+      setLogoState('error');
       toast({
         title: "Reset Error",
         description: error.message,
         variant: "destructive",
       });
+      setTimeout(() => setLogoState('normal'), 1000);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleLogoClick = () => {
+    if (logoState === 'normal' || logoState === 'clicked') {
+      setLogoState('clicked');
+      setShowRipple(true);
+      setTimeout(() => {
+        setShowRipple(false);
+        setLogoState('normal');
+      }, 600);
+    }
+  };
+
+  const getLogoAnimationClass = () => {
+    switch (logoState) {
+      case 'loading':
+        return 'animate-logo-breathe';
+      case 'success':
+        return 'animate-logo-success-spin';
+      case 'error':
+        return 'animate-logo-shake';
+      case 'clicked':
+        return 'animate-pulse';
+      default:
+        return 'animate-float';
     }
   };
 
@@ -135,25 +179,90 @@ const Auth = () => {
 
       <div className="relative z-10 w-full max-w-md">
         <div className="text-center mb-8">
+          {/* Enhanced Logo with Advanced Effects */}
           <div 
-            className="relative w-24 h-24 sm:w-28 sm:h-28 mx-auto mb-4 animate-float transition-all duration-500 cursor-pointer group hover:scale-110 hover:rotate-1 motion-reduce:animate-none motion-reduce:hover:scale-105 motion-reduce:hover:rotate-0"
+            className={`relative w-24 h-24 sm:w-28 sm:h-28 mx-auto mb-4 ${getLogoAnimationClass()} transition-all duration-500 cursor-pointer group hover:scale-110 hover:rotate-1 motion-reduce:animate-none motion-reduce:hover:scale-105 motion-reduce:hover:rotate-0`}
             style={{ willChange: 'transform' }}
             role="img"
             aria-label="ScriptStorm Logo - AI Content Production Platform"
+            onClick={handleLogoClick}
           >
-            <div className="absolute inset-0 bg-primary/20 group-hover:bg-primary/40 rounded-2xl blur-md transition-all duration-300 motion-reduce:transition-none"></div>
+            {/* Neural Network Orbiting Elements */}
+            <div className="absolute inset-0 animate-neural-orbit opacity-60">
+              <div className="absolute w-1 h-1 bg-primary-glow rounded-full blur-sm" />
+            </div>
+            <div className="absolute inset-0 animate-neural-orbit opacity-40" style={{ animationDelay: '2s' }}>
+              <div className="absolute w-1 h-1 bg-primary rounded-full blur-sm" />
+            </div>
+            <div className="absolute inset-0 animate-neural-orbit opacity-30" style={{ animationDelay: '4s' }}>
+              <div className="absolute w-0.5 h-0.5 bg-primary-glow rounded-full" />
+            </div>
+
+            {/* Matrix Rain Effect Behind Logo */}
+            <div className="absolute inset-0 overflow-hidden rounded-2xl opacity-20">
+              <div className="absolute w-0.5 h-4 bg-primary-glow animate-matrix-rain blur-sm" style={{ left: '20%' }} />
+              <div className="absolute w-0.5 h-6 bg-primary animate-matrix-rain-delay-1 blur-sm" style={{ left: '40%' }} />
+              <div className="absolute w-0.5 h-5 bg-primary-glow animate-matrix-rain-delay-2 blur-sm" style={{ left: '60%' }} />
+              <div className="absolute w-0.5 h-4 bg-primary animate-matrix-rain blur-sm" style={{ left: '80%' }} />
+            </div>
+
+            {/* Energy Pulse Rings */}
+            <div className="absolute inset-0 animate-energy-pulse opacity-30">
+              <div className="absolute inset-4 border border-primary-glow rounded-full" />
+            </div>
+            <div className="absolute inset-0 animate-energy-pulse opacity-20" style={{ animationDelay: '1s' }}>
+              <div className="absolute inset-2 border border-primary rounded-full" />
+            </div>
+
+            {/* Main Logo Glow */}
+            <div className={`absolute inset-0 bg-primary/20 ${logoState === 'success' ? 'bg-green-500/30' : logoState === 'error' ? 'bg-red-500/30' : logoState === 'loading' ? 'bg-primary/40' : ''} group-hover:bg-primary/40 rounded-2xl blur-md transition-all duration-300 motion-reduce:transition-none`} />
+            
+            {/* Click Ripple Effect */}
+            {showRipple && (
+              <div className="absolute inset-0 rounded-2xl">
+                <div className="absolute inset-0 bg-primary-glow/30 rounded-2xl animate-logo-click-ripple" />
+              </div>
+            )}
+
+            {/* Holographic Shimmer Overlay */}
+            <div 
+              className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500"
+              style={{
+                background: 'linear-gradient(45deg, transparent 30%, rgba(6, 182, 212, 0.1) 50%, transparent 70%)',
+                backgroundSize: '200% 200%'
+              }}
+            >
+              <div className="w-full h-full animate-holographic-shimmer" />
+            </div>
+
+            {/* Main Logo Image */}
             <img 
               src={scriptStormLogo} 
               alt="ScriptStorm - AI Content Production Platform Logo" 
-              className="relative w-full h-full rounded-2xl shadow-2xl group-hover:shadow-[0_0_40px_rgba(6,182,212,0.6)] transition-all duration-300 motion-reduce:transition-none"
+              className={`relative w-full h-full rounded-2xl shadow-2xl group-hover:shadow-[0_0_40px_rgba(6,182,212,0.6)] transition-all duration-300 motion-reduce:transition-none ${logoState === 'loading' ? 'animate-chromatic-aberration' : ''}`}
               style={{ 
-                filter: 'drop-shadow(0 0 20px rgba(6, 182, 212, 0.4)) brightness(1.05) contrast(1.3) saturate(1.2) invert(0.1)',
+                filter: `drop-shadow(0 0 20px rgba(6, 182, 212, 0.4)) brightness(${logoState === 'success' ? '1.3' : logoState === 'error' ? '0.8' : '1.05'}) contrast(1.3) saturate(${logoState === 'success' ? '1.5' : logoState === 'error' ? '0.8' : '1.2'}) invert(0.1) ${logoState === 'loading' ? 'hue-rotate(10deg)' : ''}`,
                 willChange: 'filter, transform'
               }}
               loading="eager"
               decoding="async"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-300 motion-reduce:transition-none"></div>
+
+            {/* Particle Effects */}
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="absolute w-1 h-1 bg-primary-glow rounded-full animate-particle-float opacity-60 blur-sm" style={{ top: '20%', left: '10%' }} />
+              <div className="absolute w-0.5 h-0.5 bg-primary rounded-full animate-particle-float-delay-1 opacity-40 blur-sm" style={{ top: '60%', right: '15%' }} />
+              <div className="absolute w-1 h-1 bg-primary-glow rounded-full animate-particle-float-delay-2 opacity-50 blur-sm" style={{ bottom: '20%', left: '20%' }} />
+              <div className="absolute w-0.5 h-0.5 bg-primary rounded-full animate-particle-float-delay-3 opacity-30 blur-sm" style={{ top: '40%', right: '10%' }} />
+            </div>
+
+            {/* Enhanced Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-300 motion-reduce:transition-none" />
+            
+            {/* Scanning Line Effect */}
+            <div className="absolute inset-0 overflow-hidden rounded-2xl">
+              <div className="absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-primary-glow to-transparent opacity-40 animate-scan-line" />
+            </div>
           </div>
           <h1 className="text-4xl font-bold text-white mb-2 animate-text-glow font-mono tracking-wide">
             SCRIPTSTORM
