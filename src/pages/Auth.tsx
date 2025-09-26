@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -7,8 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Navigate } from "react-router-dom";
 import { User, Session } from "@supabase/supabase-js";
-import { useEffect } from "react";
-import { Eye, EyeOff, Mail, Lock, UserPlus, LogIn, Zap } from "lucide-react";
+import { Eye, EyeOff, Mail, Lock, UserPlus, LogIn, Zap, Check, X, Shield, AlertCircle } from "lucide-react";
 import scriptStormLogo from "@/assets/scriptstorm-logo.png";
 
 const Auth = () => {
@@ -16,29 +15,128 @@ const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [logoState, setLogoState] = useState<'normal' | 'loading' | 'success' | 'error' | 'clicked'>('normal');
   const [showRipple, setShowRipple] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
+  const [failedAttempts, setFailedAttempts] = useState(0);
+  const [isBlocked, setIsBlocked] = useState(false);
+  
+  // Form validation states
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [emailValid, setEmailValid] = useState(false);
+  const [passwordStrength, setPasswordStrength] = useState({ score: 0, feedback: "" });
+  
   const { toast } = useToast();
+
+  // Email validation
+  const validateEmail = useCallback((email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isValid = emailRegex.test(email);
+    setEmailValid(isValid);
+    setEmailError(isValid || email === "" ? "" : "Please enter a valid email address");
+    return isValid;
+  }, []);
+
+  // Password strength calculation
+  const calculatePasswordStrength = useCallback((password: string) => {
+    if (password.length === 0) {
+      setPasswordStrength({ score: 0, feedback: "" });
+      return;
+    }
+    
+    let score = 0;
+    let feedback = "";
+    
+    if (password.length >= 8) score++;
+    if (password.match(/[a-z]/)) score++;
+    if (password.match(/[A-Z]/)) score++;
+    if (password.match(/[0-9]/)) score++;
+    if (password.match(/[^A-Za-z0-9]/)) score++;
+    
+    switch (score) {
+      case 0-1:
+        feedback = "Very weak";
+        break;
+      case 2:
+        feedback = "Weak";
+        break;
+      case 3:
+        feedback = "Fair";
+        break;
+      case 4:
+        feedback = "Good";
+        break;
+      case 5:
+        feedback = "Strong";
+        break;
+    }
+    
+    setPasswordStrength({ score, feedback });
+  }, []);
+
+  // Debounced validation
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (email) validateEmail(email);
+      if (password && !isLogin) calculatePasswordStrength(password);
+    }, 300);
+    
+    return () => clearTimeout(timeoutId);
+  }, [email, password, isLogin, validateEmail, calculatePasswordStrength]);
+
+  // Rate limiting
+  useEffect(() => {
+    if (failedAttempts >= 5) {
+      setIsBlocked(true);
+      const timer = setTimeout(() => {
+        setIsBlocked(false);
+        setFailedAttempts(0);
+      }, 300000); // 5 minutes
+      return () => clearTimeout(timer);
+    }
+  }, [failedAttempts]);
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
         setSession(session);
         setUser(session?.user ?? null);
+        setInitialLoading(false);
       }
     );
 
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
+      setInitialLoading(false);
     });
 
     return () => subscription.unsubscribe();
   }, []);
+
+  // Auto-focus management
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Enter' && !loading) {
+        const form = document.querySelector('form');
+        if (form) {
+          const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+          if (submitButton && !submitButton.disabled) {
+            submitButton.click();
+          }
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [loading]);
 
   if (user) {
     return <Navigate to="/dashboard" replace />;
@@ -280,9 +378,19 @@ const Auth = () => {
           </CardHeader>
           <CardContent className="relative space-y-6">
             <form onSubmit={showForgotPassword ? handleForgotPassword : handleAuth} className="space-y-4">
+              {/* Rate Limiting Warning */}
+              {isBlocked && (
+                <div className="flex items-center gap-2 p-3 bg-red-500/20 border border-red-500/30 rounded-lg text-red-300 text-sm font-mono">
+                  <Shield className="h-4 w-4" />
+                  <span>Too many failed attempts. Try again in 5 minutes.</span>
+                </div>
+              )}
+              
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-white font-mono tracking-wide text-sm">
+                <Label htmlFor="email" className="text-white font-mono tracking-wide text-sm flex items-center gap-2">
                   EMAIL ADDRESS
+                  {emailValid && <Check className="h-3 w-3 text-green-400" />}
+                  {emailError && <X className="h-3 w-3 text-red-400" />}
                 </Label>
                 <div className="relative">
                   <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-primary-glow/60" />
@@ -292,16 +400,28 @@ const Auth = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="pl-10 bg-black/40 border-primary-glow/30 text-white placeholder:text-white/50 focus:border-primary-glow focus:ring-primary-glow/20 font-mono"
+                    disabled={isBlocked}
+                    className={`pl-10 bg-black/40 border-primary-glow/30 text-white placeholder:text-white/50 focus:border-primary-glow focus:ring-primary-glow/20 font-mono animate-fade-in ${
+                      emailError ? 'border-red-400/50 focus:border-red-400' : 
+                      emailValid ? 'border-green-400/50 focus:border-green-400' : ''
+                    }`}
                     placeholder="user@example.com"
+                    autoFocus
                   />
                 </div>
+                {emailError && (
+                  <p className="text-red-400 text-xs font-mono animate-fade-in flex items-center gap-1">
+                    <AlertCircle className="h-3 w-3" />
+                    {emailError}
+                  </p>
+                )}
               </div>
               
               {!showForgotPassword && (
                 <div className="space-y-2">
-                  <Label htmlFor="password" className="text-white font-mono tracking-wide text-sm">
+                  <Label htmlFor="password" className="text-white font-mono tracking-wide text-sm flex items-center gap-2">
                     PASSWORD
+                    {!isLogin && passwordStrength.score >= 3 && <Check className="h-3 w-3 text-green-400" />}
                   </Label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-primary-glow/60" />
@@ -311,31 +431,98 @@ const Auth = () => {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
-                      className="pl-10 pr-10 bg-black/40 border-primary-glow/30 text-white placeholder:text-white/50 focus:border-primary-glow focus:ring-primary-glow/20 font-mono"
+                      disabled={isBlocked}
+                      className="pl-10 pr-10 bg-black/40 border-primary-glow/30 text-white placeholder:text-white/50 focus:border-primary-glow focus:ring-primary-glow/20 font-mono animate-fade-in"
                       placeholder="••••••••"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
                       className="absolute right-3 top-1/2 transform -translate-y-1/2 text-primary-glow/60 hover:text-primary-glow transition-colors"
+                      disabled={isBlocked}
                     >
                       {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     </button>
                   </div>
+                  
+                  {/* Password Strength Indicator for Sign Up */}
+                  {!isLogin && password && (
+                    <div className="space-y-2 animate-fade-in">
+                      <div className="flex items-center justify-between text-xs font-mono">
+                        <span className="text-white/60">Password Strength:</span>
+                        <span className={`${
+                          passwordStrength.score <= 1 ? 'text-red-400' :
+                          passwordStrength.score <= 2 ? 'text-yellow-400' :
+                          passwordStrength.score <= 3 ? 'text-blue-400' :
+                          'text-green-400'
+                        }`}>
+                          {passwordStrength.feedback}
+                        </span>
+                      </div>
+                      <div className="w-full bg-black/40 rounded-full h-1.5">
+                        <div 
+                          className={`h-1.5 rounded-full transition-all duration-300 ${
+                            passwordStrength.score <= 1 ? 'bg-red-400' :
+                            passwordStrength.score <= 2 ? 'bg-yellow-400' :
+                            passwordStrength.score <= 3 ? 'bg-blue-400' :
+                            'bg-green-400'
+                          }`}
+                          style={{ width: `${(passwordStrength.score / 5) * 100}%` }}
+                        />
+                      </div>
+                      <div className="text-xs text-white/50 font-mono space-y-1">
+                        <p className="flex items-center gap-2">
+                          {password.length >= 8 ? <Check className="h-3 w-3 text-green-400" /> : <X className="h-3 w-3 text-red-400" />}
+                          At least 8 characters
+                        </p>
+                        <p className="flex items-center gap-2">
+                          {password.match(/[A-Z]/) ? <Check className="h-3 w-3 text-green-400" /> : <X className="h-3 w-3 text-red-400" />}
+                          Uppercase letter
+                        </p>
+                        <p className="flex items-center gap-2">
+                          {password.match(/[0-9]/) ? <Check className="h-3 w-3 text-green-400" /> : <X className="h-3 w-3 text-red-400" />}
+                          Number
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Remember Me Checkbox */}
+                  {isLogin && (
+                    <div className="flex items-center space-x-2 animate-fade-in">
+                      <input
+                        type="checkbox"
+                        id="remember"
+                        checked={rememberMe}
+                        onChange={(e) => setRememberMe(e.target.checked)}
+                        className="w-4 h-4 text-primary-glow bg-black/40 border-primary-glow/30 rounded focus:ring-primary-glow/20 focus:ring-2"
+                        disabled={isBlocked}
+                      />
+                      <Label htmlFor="remember" className="text-white/70 text-sm font-mono cursor-pointer">
+                        Remember me for 30 days
+                      </Label>
+                    </div>
+                  )}
                 </div>
               )}
 
+              {/* Enhanced Submit Button */}
               <div className="relative group">
                 <div className="absolute inset-0 bg-gradient-cyber rounded-lg blur-lg opacity-40 group-hover:opacity-70 transition-all duration-500" />
                 <Button
                   type="submit"
-                  disabled={loading}
-                  className="relative w-full bg-primary hover:bg-primary-glow text-white font-mono tracking-wide border-2 border-primary-glow/50 hover:border-primary-glow shadow-cyber hover:shadow-hologram transition-all duration-500 h-12"
+                  disabled={loading || isBlocked || (!emailValid && email !== "")}
+                  className="relative w-full bg-primary hover:bg-primary-glow text-white font-mono tracking-wide border-2 border-primary-glow/50 hover:border-primary-glow shadow-cyber hover:shadow-hologram transition-all duration-500 h-12 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? (
                     <div className="flex items-center gap-2">
                       <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      [AI SYSTEMS INITIALIZING...]
+                      <span className="animate-pulse">[AI SYSTEMS PROCESSING...]</span>
+                    </div>
+                  ) : isBlocked ? (
+                    <div className="flex items-center gap-2">
+                      <Shield className="h-4 w-4" />
+                      SECURITY LOCKDOWN ACTIVE
                     </div>
                   ) : (
                     <div className="flex items-center gap-2">
