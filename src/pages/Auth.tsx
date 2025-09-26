@@ -258,11 +258,6 @@ const Auth = () => {
 
             {/* Enhanced Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-300 motion-reduce:transition-none" />
-            
-            {/* Scanning Line Effect */}
-            <div className="absolute inset-0 overflow-hidden rounded-2xl">
-              <div className="absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-primary-glow to-transparent opacity-40 animate-scan-line" />
-            </div>
           </div>
           <h1 className="text-4xl font-bold text-white mb-2 animate-text-glow font-mono tracking-wide">
             SCRIPTSTORM
