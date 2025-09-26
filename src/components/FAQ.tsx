@@ -1,6 +1,8 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { useNavigate } from "react-router-dom";
 
 const FAQ = () => {
+  const navigate = useNavigate();
   const faqs = [
     {
       question: "How does the 24-hour delivery work?",
@@ -147,15 +149,15 @@ const FAQ = () => {
                 </svg>
               </div>
               <p className="text-foreground mb-6 font-semibold text-lg">Still have questions?</p>
-              <a 
-                href="mailto:support@aicontentag.com" 
-                className="inline-flex items-center gap-2 text-primary hover:text-primary-dark font-semibold transition-smooth group/link"
+              <button 
+                onClick={() => navigate('/support')}
+                className="inline-flex items-center gap-2 text-primary hover:text-primary-dark font-semibold transition-smooth group/link bg-transparent border-none cursor-pointer"
               >
                 Contact our support team 
                 <svg className="w-4 h-4 group-hover/link:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-              </a>
+              </button>
             </div>
           </div>
         </div>
