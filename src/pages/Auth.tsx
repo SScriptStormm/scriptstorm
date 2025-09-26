@@ -140,10 +140,10 @@ const Auth = () => {
             <img 
               src={scriptStormLogo} 
               alt="ScriptStorm" 
-              className="relative w-full h-full opacity-70 mix-blend-overlay backdrop-blur-sm filter rounded-2xl"
+              className="relative w-full h-full opacity-85 mix-blend-overlay backdrop-blur-sm filter rounded-2xl"
               style={{ 
-                filter: 'brightness(1.4) contrast(1.3) saturate(1.2) drop-shadow(0 0 25px rgba(0, 255, 255, 0.4))',
-                maskImage: 'radial-gradient(circle, rgba(255,255,255,1) 60%, rgba(255,255,255,0.3) 100%)'
+                filter: 'sepia(1) hue-rotate(180deg) saturate(2) brightness(1.2) contrast(1.4) drop-shadow(0 0 25px rgba(0, 255, 255, 0.5))',
+                maskImage: 'radial-gradient(circle, rgba(255,255,255,0.9) 70%, rgba(255,255,255,0.2) 100%)'
               }}
             />
           </div>
