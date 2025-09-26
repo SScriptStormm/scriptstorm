@@ -138,7 +138,8 @@ const Auth = () => {
           <img 
             src={scriptStormLogo} 
             alt="ScriptStorm" 
-            className="w-24 h-24 mx-auto mb-4 animate-float transition-all duration-500"
+            className="w-24 h-24 mx-auto mb-4 animate-float transition-all duration-500 object-cover"
+            style={{ clipPath: 'polygon(0% 0%, 95% 0%, 95% 95%, 0% 95%)' }}
           />
           <h1 className="text-4xl font-bold text-white mb-2 animate-text-glow font-mono tracking-wide">
             SCRIPTSTORM
