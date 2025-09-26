@@ -136,14 +136,13 @@ const Auth = () => {
       <div className="relative z-10 w-full max-w-md">
         <div className="text-center mb-8">
           <div className="relative w-24 h-24 mx-auto mb-4 animate-float transition-all duration-500">
-            <div className="absolute inset-0 bg-gradient-neural opacity-60 rounded-2xl blur-sm"></div>
+            <div className="absolute inset-0 bg-primary/20 rounded-2xl blur-md"></div>
             <img 
               src={scriptStormLogo} 
               alt="ScriptStorm" 
-              className="relative w-full h-full opacity-85 mix-blend-overlay backdrop-blur-sm filter rounded-2xl"
+              className="relative w-full h-full rounded-2xl shadow-2xl"
               style={{ 
-                filter: 'sepia(1) hue-rotate(180deg) saturate(2) brightness(1.2) contrast(1.4) drop-shadow(0 0 25px rgba(0, 255, 255, 0.5))',
-                maskImage: 'radial-gradient(circle, rgba(255,255,255,0.9) 70%, rgba(255,255,255,0.2) 100%)'
+                filter: 'drop-shadow(0 0 20px rgba(6, 182, 212, 0.4)) brightness(1.05)',
               }}
             />
           </div>
