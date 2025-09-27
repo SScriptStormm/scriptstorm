@@ -182,7 +182,7 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
         <Button 
           onClick={() => onCheckout(pkg.id)}
           disabled={loadingStates[pkg.id]}
-          className="w-full font-bold py-3 transition-all duration-300"
+          className="w-full font-bold py-3 px-6 transition-all duration-300"
           style={{ 
             background: `linear-gradient(135deg, ${pkg.color}, ${pkg.color}dd)`,
             color: 'white'
