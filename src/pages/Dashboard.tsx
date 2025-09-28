@@ -238,6 +238,7 @@ const Dashboard = () => {
           <div className="relative group">
             <div className="absolute inset-0 bg-gradient-cyber rounded-lg blur-lg opacity-40 group-hover:opacity-70 transition-all duration-500" />
             <Button 
+              onClick={() => window.location.href = '/content-brief'}
               className="relative w-full bg-primary hover:bg-primary-glow text-white font-mono tracking-wide border-2 border-primary-glow/50 hover:border-primary-glow shadow-cyber hover:shadow-hologram transition-all duration-500 h-16 text-xl"
             >
               <FileText className="h-6 w-6 mr-3" />
@@ -331,15 +332,15 @@ const Dashboard = () => {
             <div className="space-y-3">
               <div className="flex justify-between items-center">
                 <span className="text-white/70 font-mono text-sm">Monthly Articles:</span>
-                <span className="text-white font-mono text-lg">{completedArticles} of 8 delivered</span>
+                <span className="text-white font-mono text-lg">{completedArticles} of 50 delivered</span>
               </div>
               <Progress 
-                value={(completedArticles / 8) * 100} 
+                value={(completedArticles / 50) * 100} 
                 className="h-2 bg-black/50"
               />
               <div className="text-center">
                 <p className="text-primary-glow font-mono text-sm">
-                  {8 - completedArticles} articles remaining this month
+                  {50 - completedArticles} articles remaining this month
                 </p>
               </div>
             </div>
