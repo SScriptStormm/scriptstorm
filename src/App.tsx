@@ -20,6 +20,7 @@ import Support from "./pages/Support";
 import HelpCenter from "./pages/HelpCenter";
 import AboutUs from "./pages/AboutUs";
 import ConstructionBanner from "./components/ConstructionBanner";
+import LogoShowcase from "./pages/LogoShowcase";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +42,7 @@ const App = () => (
               <Route path="/support" element={<Support />} />
               <Route path="/help-center" element={<HelpCenter />} />
           <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/logo-showcase" element={<LogoShowcase />} />
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/terms-and-conditions" element={<TermsOfService />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
