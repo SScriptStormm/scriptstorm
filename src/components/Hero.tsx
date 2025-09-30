@@ -35,6 +35,18 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-10 w-full px-4 py-20 text-center text-white">
         <div className="max-w-4xl mx-auto">
+          {/* Logo Integration */}
+          <div className="flex justify-center mb-8">
+            <div className="relative group">
+              <div className="absolute inset-0 bg-primary-glow/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500" />
+              <img 
+                src={scriptStormLogo} 
+                alt="ScriptStorm - AI Content Production Platform" 
+                className="relative w-32 h-32 md:w-40 md:h-40 rounded-2xl shadow-cyber group-hover:shadow-hologram transition-all duration-500 animate-float"
+              />
+            </div>
+          </div>
+
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
             ScriptStorm: Done-For-You SEO Content—
             <span className="block text-primary-glow">Delivered in 24 Hours</span>
