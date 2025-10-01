@@ -5,9 +5,9 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 import { User, Session } from "@supabase/supabase-js";
-import { Eye, EyeOff, Mail, Lock, UserPlus, LogIn, Zap, Check, X, Shield, AlertCircle } from "lucide-react";
+import { Eye, EyeOff, Mail, Lock, UserPlus, LogIn, Zap, Check, X, Shield, AlertCircle, ArrowLeft } from "lucide-react";
 import scriptStormLogo from "@/assets/scriptstorm-logo.png";
 
 const Auth = () => {
@@ -261,6 +261,15 @@ const Auth = () => {
 
   return (
     <div className="min-h-screen bg-gradient-hero flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Back to Home Button */}
+      <Link
+        to="/"
+        className="fixed top-6 right-6 z-50 flex items-center gap-2 text-white/80 hover:text-primary-glow transition-all duration-300 font-mono text-sm group"
+      >
+        <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform duration-300" />
+        <span className="hidden sm:inline">Back to Home</span>
+      </Link>
+
       {/* AI Neural Network Background */}
       <div className="absolute inset-0 bg-gradient-mesh opacity-40" />
       <div className="absolute inset-0 bg-gradient-neural animate-neural-pulse" />
