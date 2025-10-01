@@ -262,13 +262,17 @@ const Auth = () => {
   return (
     <div className="min-h-screen bg-gradient-hero flex items-center justify-center p-4 relative overflow-hidden">
       {/* Back to Home Button */}
-      <Link
-        to="/"
-        className="fixed top-6 right-6 z-50 flex items-center gap-2 text-white/80 hover:text-primary-glow transition-all duration-300 font-mono text-sm group"
+      <Button
+        variant="ghost"
+        size="sm"
+        className="fixed top-6 right-6 z-50 text-white border border-primary-glow/30 hover:border-primary-glow/60 font-mono"
+        asChild
       >
-        <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform duration-300" />
-        <span className="hidden sm:inline">Back to Home</span>
-      </Link>
+        <Link to="/" className="flex items-center gap-2">
+          <ArrowLeft className="h-4 w-4" />
+          <span className="hidden sm:inline">HOME</span>
+        </Link>
+      </Button>
 
       {/* AI Neural Network Background */}
       <div className="absolute inset-0 bg-gradient-mesh opacity-40" />
