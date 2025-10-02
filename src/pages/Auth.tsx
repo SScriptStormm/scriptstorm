@@ -265,7 +265,8 @@ const Auth = () => {
       <Button
         variant="ghost"
         size="sm"
-        className="fixed top-6 right-6 z-[9999] text-white border border-primary-glow/30 hover:border-primary-glow/60 font-mono"
+        className="!fixed top-6 right-6 z-[9999] text-white border border-primary-glow/30 hover:border-primary-glow/60 font-mono"
+        style={{ position: 'fixed', transform: 'none', willChange: 'auto' }}
         asChild
       >
         <Link to="/" className="flex items-center gap-2">
