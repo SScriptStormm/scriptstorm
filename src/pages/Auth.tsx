@@ -260,12 +260,12 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-hero flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Back to Home Button */}
+    <>
+      {/* Back to Home Button - Outside main container for true fixed positioning */}
       <Button
         variant="ghost"
         size="sm"
-        className="fixed top-6 right-6 z-50 text-white border border-primary-glow/30 hover:border-primary-glow/60 font-mono"
+        className="fixed top-6 right-6 z-[9999] text-white border border-primary-glow/30 hover:border-primary-glow/60 font-mono"
         asChild
       >
         <Link to="/" className="flex items-center gap-2">
@@ -273,6 +273,8 @@ const Auth = () => {
           <span className="hidden sm:inline">HOME</span>
         </Link>
       </Button>
+
+      <div className="min-h-screen bg-gradient-hero flex items-center justify-center p-4 relative overflow-hidden">
 
       {/* AI Neural Network Background */}
       <div className="absolute inset-0 bg-gradient-mesh opacity-40" />
@@ -589,6 +591,7 @@ const Auth = () => {
         </Card>
       </div>
     </div>
+    </>
   );
 };
 
