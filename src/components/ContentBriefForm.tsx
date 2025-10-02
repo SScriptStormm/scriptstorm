@@ -11,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { FileText, Send, ArrowLeft } from "lucide-react";
+import { FileText, Send, ArrowLeft, Share2, Package, Briefcase, MessageSquare, Shield, Smile } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const formSchema = z.object({
@@ -174,9 +174,24 @@ export const ContentBriefForm = () => {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent className="bg-black/95 backdrop-blur-xl border-primary-glow/30 text-white z-[100]">
-                            <SelectItem value="blog-article" className="text-white hover:text-primary-glow focus:text-primary-glow">Blog Article</SelectItem>
-                            <SelectItem value="social-media" className="text-white hover:text-primary-glow focus:text-primary-glow">Social Media Posts</SelectItem>
-                            <SelectItem value="product-description" className="text-white hover:text-primary-glow focus:text-primary-glow">Product Description</SelectItem>
+                            <SelectItem value="blog-article" className="text-white hover:text-primary-glow focus:text-primary-glow">
+                              <div className="flex items-center gap-2">
+                                <FileText className="h-4 w-4" />
+                                <span>Blog Article</span>
+                              </div>
+                            </SelectItem>
+                            <SelectItem value="social-media" className="text-white hover:text-primary-glow focus:text-primary-glow">
+                              <div className="flex items-center gap-2">
+                                <Share2 className="h-4 w-4" />
+                                <span>Social Media Posts</span>
+                              </div>
+                            </SelectItem>
+                            <SelectItem value="product-description" className="text-white hover:text-primary-glow focus:text-primary-glow">
+                              <div className="flex items-center gap-2">
+                                <Package className="h-4 w-4" />
+                                <span>Product Description</span>
+                              </div>
+                            </SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage />
@@ -295,10 +310,30 @@ export const ContentBriefForm = () => {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent className="bg-black/95 backdrop-blur-xl border-primary-glow/30 text-white z-[100]">
-                            <SelectItem value="professional" className="text-white hover:text-primary-glow focus:text-primary-glow">Professional</SelectItem>
-                            <SelectItem value="conversational" className="text-white hover:text-primary-glow focus:text-primary-glow">Conversational</SelectItem>
-                            <SelectItem value="authoritative" className="text-white hover:text-primary-glow focus:text-primary-glow">Authoritative</SelectItem>
-                            <SelectItem value="friendly" className="text-white hover:text-primary-glow focus:text-primary-glow">Friendly</SelectItem>
+                            <SelectItem value="professional" className="text-white hover:text-primary-glow focus:text-primary-glow">
+                              <div className="flex items-center gap-2">
+                                <Briefcase className="h-4 w-4" />
+                                <span>Professional</span>
+                              </div>
+                            </SelectItem>
+                            <SelectItem value="conversational" className="text-white hover:text-primary-glow focus:text-primary-glow">
+                              <div className="flex items-center gap-2">
+                                <MessageSquare className="h-4 w-4" />
+                                <span>Conversational</span>
+                              </div>
+                            </SelectItem>
+                            <SelectItem value="authoritative" className="text-white hover:text-primary-glow focus:text-primary-glow">
+                              <div className="flex items-center gap-2">
+                                <Shield className="h-4 w-4" />
+                                <span>Authoritative</span>
+                              </div>
+                            </SelectItem>
+                            <SelectItem value="friendly" className="text-white hover:text-primary-glow focus:text-primary-glow">
+                              <div className="flex items-center gap-2">
+                                <Smile className="h-4 w-4" />
+                                <span>Friendly</span>
+                              </div>
+                            </SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage />
