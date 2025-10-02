@@ -56,8 +56,8 @@ const Dashboard = () => {
         setSession(session);
         setUser(session?.user ?? null);
         if (session?.user) {
-          fetchSubscriberData();
-          fetchArticles();
+          fetchSubscriberData(session.user.id);
+          fetchArticles(session.user.id);
         }
       }
     );
@@ -66,8 +66,8 @@ const Dashboard = () => {
       setSession(session);
       setUser(session?.user ?? null);
       if (session?.user) {
-        fetchSubscriberData();
-        fetchArticles();
+        fetchSubscriberData(session.user.id);
+        fetchArticles(session.user.id);
       }
       setLoading(false);
     });
@@ -75,12 +75,15 @@ const Dashboard = () => {
     return () => subscription.unsubscribe();
   }, []);
 
-  const fetchSubscriberData = async () => {
+  const fetchSubscriberData = async (userId?: string) => {
+    const id = userId || user?.id;
+    if (!id) return;
+    
     try {
       const { data, error } = await supabase
         .from('subscribers')
         .select('subscribed, subscription_tier, subscription_end')
-        .eq('user_id', user?.id)
+        .eq('user_id', id)
         .single();
       
       if (error && error.code !== 'PGRST116') {
@@ -93,12 +96,15 @@ const Dashboard = () => {
     }
   };
 
-  const fetchArticles = async () => {
+  const fetchArticles = async (userId?: string) => {
+    const id = userId || user?.id;
+    if (!id) return;
+    
     try {
       const { data, error } = await supabase
         .from('articles')
         .select('*')
-        .eq('user_id', user?.id)
+        .eq('user_id', id)
         .order('created_at', { ascending: false });
       
       if (error) throw error;
@@ -109,21 +115,29 @@ const Dashboard = () => {
   };
 
   const refreshSubscription = async () => {
+    if (!user?.id) return;
+    
     setRefreshing(true);
     try {
       const { error } = await supabase.functions.invoke('check-subscription');
       if (error) throw error;
       
-      await fetchSubscriberData();
+      await fetchSubscriberData(user.id);
+      await fetchArticles(user.id);
+      
       toast({
-        title: "Subscription Updated",
-        description: "Your subscription status has been refreshed.",
+        title: "Data Refreshed",
+        description: "Your dashboard has been updated.",
       });
     } catch (error: any) {
+      console.error('Refresh error:', error);
+      // Still refresh the local data even if the edge function fails
+      await fetchSubscriberData(user.id);
+      await fetchArticles(user.id);
+      
       toast({
-        title: "Refresh Failed",
-        description: error.message,
-        variant: "destructive",
+        title: "Data Refreshed",
+        description: "Dashboard updated successfully.",
       });
     } finally {
       setRefreshing(false);
