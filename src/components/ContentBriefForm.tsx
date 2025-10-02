@@ -173,10 +173,10 @@ export const ContentBriefForm = () => {
                               <SelectValue placeholder="Select content type" />
                             </SelectTrigger>
                           </FormControl>
-                          <SelectContent className="bg-black/90 border-primary-glow/30">
-                            <SelectItem value="blog-article">Blog Article</SelectItem>
-                            <SelectItem value="social-media">Social Media Posts</SelectItem>
-                            <SelectItem value="product-description">Product Description</SelectItem>
+                          <SelectContent className="bg-black/95 backdrop-blur-xl border-primary-glow/30 text-white z-[100]">
+                            <SelectItem value="blog-article" className="text-white hover:text-primary-glow focus:text-primary-glow">Blog Article</SelectItem>
+                            <SelectItem value="social-media" className="text-white hover:text-primary-glow focus:text-primary-glow">Social Media Posts</SelectItem>
+                            <SelectItem value="product-description" className="text-white hover:text-primary-glow focus:text-primary-glow">Product Description</SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage />
@@ -294,11 +294,11 @@ export const ContentBriefForm = () => {
                               <SelectValue placeholder="Select tone" />
                             </SelectTrigger>
                           </FormControl>
-                          <SelectContent className="bg-black/90 border-primary-glow/30">
-                            <SelectItem value="professional">Professional</SelectItem>
-                            <SelectItem value="conversational">Conversational</SelectItem>
-                            <SelectItem value="authoritative">Authoritative</SelectItem>
-                            <SelectItem value="friendly">Friendly</SelectItem>
+                          <SelectContent className="bg-black/95 backdrop-blur-xl border-primary-glow/30 text-white z-[100]">
+                            <SelectItem value="professional" className="text-white hover:text-primary-glow focus:text-primary-glow">Professional</SelectItem>
+                            <SelectItem value="conversational" className="text-white hover:text-primary-glow focus:text-primary-glow">Conversational</SelectItem>
+                            <SelectItem value="authoritative" className="text-white hover:text-primary-glow focus:text-primary-glow">Authoritative</SelectItem>
+                            <SelectItem value="friendly" className="text-white hover:text-primary-glow focus:text-primary-glow">Friendly</SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage />
