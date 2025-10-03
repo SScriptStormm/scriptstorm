@@ -295,7 +295,7 @@ const Auth = () => {
         <div className="text-center mb-8">
           {/* Enhanced Logo with Advanced Effects */}
           <div 
-            className={`relative w-24 h-24 sm:w-28 sm:h-28 mx-auto mb-4 ${getLogoAnimationClass()} transition-all duration-500 cursor-pointer group hover:scale-110 hover:rotate-1 motion-reduce:animate-none motion-reduce:hover:scale-105 motion-reduce:hover:rotate-0`}
+            className={`relative w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 ${getLogoAnimationClass()} transition-all duration-500 cursor-pointer group hover:scale-110 hover:rotate-1 motion-reduce:animate-none motion-reduce:hover:scale-105 motion-reduce:hover:rotate-0`}
             style={{ willChange: 'transform' }}
             role="img"
             aria-label="ScriptStorm Logo - AI Content Production Platform"
