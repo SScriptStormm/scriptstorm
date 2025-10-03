@@ -147,14 +147,23 @@ const Dashboard = () => {
 
   const handleSignOut = async () => {
     try {
-      await supabase.auth.signOut();
-    } catch (error) {
-      console.error('Sign out error:', error);
-    } finally {
-      // Clear local state and redirect regardless of API success
+      // Clear local state first
       setUser(null);
       setSession(null);
-      window.location.href = '/auth';
+      
+      // Sign out from Supabase
+      await supabase.auth.signOut();
+      
+      // Small delay to let auth state propagate
+      setTimeout(() => {
+        window.location.href = '/auth';
+      }, 100);
+    } catch (error) {
+      console.error('Sign out error:', error);
+      // Force redirect even on error
+      setTimeout(() => {
+        window.location.href = '/auth';
+      }, 100);
     }
   };
 
