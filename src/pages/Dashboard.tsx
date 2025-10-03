@@ -221,7 +221,7 @@ const Dashboard = () => {
                 disabled={refreshing}
                 variant="ghost"
                 size="sm"
-                className="text-white border border-primary-glow/30 hover:border-primary-glow/60 font-mono"
+                className="text-white border border-primary-glow/30 hover:border-primary-glow/60 hover:bg-blue-500/20 hover:text-blue-400 font-mono"
               >
                 <RefreshCw className={`h-4 w-4 mr-2 ${refreshing ? 'animate-spin' : ''}`} />
                 REFRESH
