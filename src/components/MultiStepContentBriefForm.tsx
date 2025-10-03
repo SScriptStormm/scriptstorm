@@ -13,7 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Progress } from "@/components/ui/progress";
 import { Slider } from "@/components/ui/slider";
-import { ChevronLeft, ChevronRight, FileText, Target, Palette, MessageSquare } from "lucide-react";
+import { ChevronLeft, ChevronRight, FileText, Target, Palette, MessageSquare, Zap } from "lucide-react";
 
 const formSchema = z.object({
   title: z.string().min(3, "Title must be at least 3 characters").max(200, "Title must not exceed 200 characters"),
@@ -231,12 +231,24 @@ export function MultiStepContentBriefForm() {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            <SelectItem value="blog_post">Blog Post</SelectItem>
-                            <SelectItem value="article">Article</SelectItem>
-                            <SelectItem value="case_study">Case Study</SelectItem>
-                            <SelectItem value="whitepaper">Whitepaper</SelectItem>
-                            <SelectItem value="guide">Guide</SelectItem>
-                            <SelectItem value="tutorial">Tutorial</SelectItem>
+                            <SelectItem value="blog_article">
+                              <div className="flex items-center gap-2">
+                                <FileText className="h-4 w-4" />
+                                <span>Blog Article</span>
+                              </div>
+                            </SelectItem>
+                            <SelectItem value="social_media">
+                              <div className="flex items-center gap-2">
+                                <Zap className="h-4 w-4" />
+                                <span>Social Media Posts</span>
+                              </div>
+                            </SelectItem>
+                            <SelectItem value="product_description">
+                              <div className="flex items-center gap-2">
+                                <Target className="h-4 w-4" />
+                                <span>Product Description</span>
+                              </div>
+                            </SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage />
