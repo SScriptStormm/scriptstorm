@@ -147,24 +147,14 @@ const Dashboard = () => {
 
   const handleSignOut = async () => {
     try {
-      // Clear local state first
-      setUser(null);
-      setSession(null);
-      
-      // Sign out from Supabase
-      await supabase.auth.signOut();
-      
-      // Small delay to let auth state propagate
-      setTimeout(() => {
-        window.location.href = '/auth';
-      }, 100);
+      // Sign out with global scope to clear all sessions
+      await supabase.auth.signOut({ scope: 'global' });
     } catch (error) {
       console.error('Sign out error:', error);
-      // Force redirect even on error
-      setTimeout(() => {
-        window.location.href = '/auth';
-      }, 100);
     }
+    
+    // Force a complete page reload to /auth to clear all state
+    window.location.replace('/auth');
   };
 
   const getStatusColor = (status: string) => {
