@@ -241,8 +241,7 @@ const Dashboard = () => {
                 className="relative bg-primary/20 backdrop-blur-sm text-primary-glow border-2 border-primary-glow/50 hover:border-primary-glow hover:bg-primary/30 hover:shadow-cyber font-mono text-xs sm:text-sm flex-1 sm:flex-initial transition-all duration-300 disabled:opacity-50"
               >
                 <RefreshCw className={`h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 ${refreshing ? 'animate-spin' : ''}`} />
-                <span className="hidden sm:inline">REFRESH</span>
-                <span className="sm:hidden">↻</span>
+                REFRESH
               </Button>
               <Button
                 onClick={handleSignOut}
@@ -250,8 +249,7 @@ const Dashboard = () => {
                 className="relative bg-red-500/20 backdrop-blur-sm text-red-400 border-2 border-red-500/50 hover:border-red-500 hover:bg-red-500/30 hover:shadow-[0_0_20px_rgba(239,68,68,0.5)] font-mono text-xs sm:text-sm flex-1 sm:flex-initial transition-all duration-300"
               >
                 <LogOut className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                <span className="hidden sm:inline">LOGOUT</span>
-                <span className="sm:hidden">→</span>
+                LOGOUT
               </Button>
             </div>
           </div>
