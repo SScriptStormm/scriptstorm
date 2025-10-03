@@ -216,42 +216,44 @@ const Dashboard = () => {
       
       {/* Header */}
       <header className="relative z-10 border-b border-primary-glow/20 bg-black/20 backdrop-blur-xl">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
+        <div className="container mx-auto px-4 py-3 sm:py-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+            <div className="flex items-center gap-3 sm:gap-4">
               <img 
                 src={scriptStormLogo} 
                 alt="ScriptStorm" 
-                className="w-16 h-16 rounded-xl shadow-cyber border border-primary-glow/30 hover:border-primary-glow/60 transition-all duration-300"
+                className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl shadow-cyber border border-primary-glow/30 hover:border-primary-glow/60 transition-all duration-300"
               />
               <div>
-                <h1 className="text-2xl font-bold text-white font-mono tracking-wide">
+                <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-white font-mono tracking-wide">
                   SCRIPTSTORM
                 </h1>
-                <p className="text-primary-glow/80 text-sm font-mono tracking-widest">
+                <p className="text-primary-glow/80 text-xs sm:text-sm font-mono tracking-widest">
                   CLIENT DASHBOARD
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 sm:gap-4 w-full sm:w-auto">
               <Button
                 onClick={refreshSubscription}
                 disabled={refreshing}
                 variant="ghost"
                 size="sm"
-                className="text-white border border-primary-glow/30 hover:border-primary-glow/60 hover:bg-blue-500/20 hover:text-blue-400 font-mono"
+                className="text-white border border-primary-glow/30 hover:border-primary-glow/60 hover:bg-blue-500/20 hover:text-blue-400 font-mono text-xs sm:text-sm flex-1 sm:flex-initial"
               >
-                <RefreshCw className={`h-4 w-4 mr-2 ${refreshing ? 'animate-spin' : ''}`} />
-                REFRESH
+                <RefreshCw className={`h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 ${refreshing ? 'animate-spin' : ''}`} />
+                <span className="hidden xs:inline">REFRESH</span>
+                <span className="xs:hidden">↻</span>
               </Button>
               <Button
                 onClick={handleSignOut}
                 variant="ghost"
                 size="sm"
-                className="text-white border border-red-500/30 hover:border-red-500/60 hover:bg-red-500/20 hover:text-red-400 font-mono"
+                className="text-white border border-red-500/30 hover:border-red-500/60 hover:bg-red-500/20 hover:text-red-400 font-mono text-xs sm:text-sm flex-1 sm:flex-initial"
               >
-                <LogOut className="h-4 w-4 mr-2" />
-                LOGOUT
+                <LogOut className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                <span className="hidden xs:inline">LOGOUT</span>
+                <span className="xs:hidden">→</span>
               </Button>
             </div>
           </div>
@@ -261,25 +263,26 @@ const Dashboard = () => {
       {/* Main Content */}
       <main className="relative z-10 container mx-auto px-4 py-8">
         {/* Welcome Section */}
-        <div className="mb-8">
-          <h2 className="text-4xl font-bold text-white mb-2 font-mono tracking-wide">
-            Welcome back, <span className="text-primary-glow animate-text-glow">{user?.email}</span>
+        <div className="mb-6 sm:mb-8">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 font-mono tracking-wide break-words">
+            Welcome back, <span className="text-primary-glow animate-text-glow block sm:inline mt-1 sm:mt-0">{user?.email}</span>
           </h2>
-          <p className="text-white/70 font-mono tracking-wide">
+          <p className="text-white/70 font-mono tracking-wide text-sm sm:text-base">
             Your content production command center
           </p>
         </div>
 
         {/* Submit New Brief Button */}
-        <div className="mb-8">
+        <div className="mb-6 sm:mb-8">
           <div className="relative group">
             <div className="absolute inset-0 bg-gradient-cyber rounded-lg blur-lg opacity-40 group-hover:opacity-70 transition-all duration-500" />
             <Button 
               onClick={() => window.location.href = '/content-brief'}
-              className="relative w-full bg-primary hover:bg-primary-glow text-white font-mono tracking-wide border-2 border-primary-glow/50 hover:border-primary-glow shadow-cyber hover:shadow-hologram transition-all duration-500 h-16 text-xl"
+              className="relative w-full bg-primary hover:bg-primary-glow text-white font-mono tracking-wide border-2 border-primary-glow/50 hover:border-primary-glow shadow-cyber hover:shadow-hologram transition-all duration-500 h-12 sm:h-14 md:h-16 text-sm sm:text-base md:text-xl"
             >
-              <FileText className="h-6 w-6 mr-3" />
-              + SUBMIT NEW CONTENT BRIEF
+              <FileText className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 mr-2 sm:mr-3" />
+              <span className="hidden sm:inline">+ SUBMIT NEW CONTENT BRIEF</span>
+              <span className="sm:hidden">+ NEW BRIEF</span>
             </Button>
           </div>
         </div>
@@ -290,24 +293,24 @@ const Dashboard = () => {
           <Card className="bg-black/30 backdrop-blur-xl border-green-500/30 shadow-cyber">
             <div className="absolute inset-0 bg-gradient-cyber opacity-5 rounded-lg" />
             <CardHeader className="relative">
-              <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
-                <CreditCard className="h-5 w-5 text-green-400" />
+              <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide text-base sm:text-lg">
+                <CreditCard className="h-4 w-4 sm:h-5 sm:w-5 text-green-400" />
                 ACCOUNT STATUS
               </CardTitle>
             </CardHeader>
             <CardContent className="relative">
               <div className="space-y-3">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <Badge className="bg-green-500/20 text-green-400 border-green-500/30 font-mono tracking-wide">
+                  <Badge className="bg-green-500/20 text-green-400 border-green-500/30 font-mono tracking-wide text-xs sm:text-sm">
                     READY ✅
                   </Badge>
-                  <Badge className="bg-primary-glow/20 text-primary-glow border-primary-glow/30 font-mono tracking-wide">
+                  <Badge className="bg-primary-glow/20 text-primary-glow border-primary-glow/30 font-mono tracking-wide text-xs sm:text-sm">
                     PLAN: DOMINANCE
                   </Badge>
                 </div>
                 <div className="pt-2">
-                  <p className="text-white/70 font-mono text-sm">Monthly Articles:</p>
-                  <p className="text-white font-mono text-2xl">{completedArticles} / 50</p>
+                  <p className="text-white/70 font-mono text-xs sm:text-sm">Monthly Articles:</p>
+                  <p className="text-white font-mono text-xl sm:text-2xl">{completedArticles} / 50</p>
                   <Progress 
                     value={(completedArticles / 50) * 100} 
                     className="h-2 bg-black/50 mt-2"
@@ -324,15 +327,15 @@ const Dashboard = () => {
           {totalArticles > 0 && (
             <Card className="bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
-                  <TrendingUp className="h-5 w-5 text-primary-glow" />
+                <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide text-base sm:text-lg">
+                  <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-primary-glow" />
                   PRODUCTION STATS
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   <div>
-                    <div className="flex justify-between text-sm font-mono text-white/70 mb-2">
+                    <div className="flex justify-between text-xs sm:text-sm font-mono text-white/70 mb-2">
                       <span>Completion Rate</span>
                       <span>{Math.round((completedArticles / totalArticles) * 100)}%</span>
                     </div>
@@ -341,13 +344,13 @@ const Dashboard = () => {
                       className="h-3 bg-black/50"
                     />
                   </div>
-                  <div className="grid grid-cols-2 gap-4 pt-2">
-                    <div className="text-center p-3 bg-black/20 rounded-lg border border-primary-glow/20">
-                      <p className="text-white font-mono text-2xl">{totalArticles}</p>
+                  <div className="grid grid-cols-2 gap-3 sm:gap-4 pt-2">
+                    <div className="text-center p-2 sm:p-3 bg-black/20 rounded-lg border border-primary-glow/20">
+                      <p className="text-white font-mono text-xl sm:text-2xl">{totalArticles}</p>
                       <p className="text-white/70 font-mono text-xs">Total Briefs</p>
                     </div>
-                    <div className="text-center p-3 bg-black/20 rounded-lg border border-primary-glow/20">
-                      <p className="text-white font-mono text-2xl">{averageWordCount}</p>
+                    <div className="text-center p-2 sm:p-3 bg-black/20 rounded-lg border border-primary-glow/20">
+                      <p className="text-white font-mono text-xl sm:text-2xl">{averageWordCount}</p>
                       <p className="text-white/70 font-mono text-xs">Avg Words</p>
                     </div>
                   </div>
@@ -362,62 +365,62 @@ const Dashboard = () => {
           <Card className="mb-8 bg-black/30 backdrop-blur-xl border-green-500/30 shadow-cyber">
             <div className="absolute inset-0 bg-gradient-cyber opacity-5 rounded-lg" />
             <CardHeader className="relative">
-              <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
-                <Target className="h-5 w-5 text-green-400" />
+              <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide text-base sm:text-lg">
+                <Target className="h-4 w-4 sm:h-5 sm:w-5 text-green-400" />
                 CONTENT PIPELINE
               </CardTitle>
             </CardHeader>
-            <CardContent className="relative space-y-6">
+            <CardContent className="relative space-y-4 sm:space-y-6">
               {/* Latest Project Status */}
               <div className="space-y-3">
-                <h3 className="text-white/70 font-mono text-sm uppercase tracking-wider">Latest Project</h3>
-                <div className="flex items-center gap-3 p-4 bg-black/20 rounded-lg border border-green-500/20">
-                  <CheckCircle className="h-5 w-5 text-green-400" />
-                  <div className="flex-1">
-                    <p className="text-green-400 font-mono text-sm">✅ Brief Submitted</p>
-                    <p className="text-white font-mono">{articles[0]?.title}</p>
+                <h3 className="text-white/70 font-mono text-xs sm:text-sm uppercase tracking-wider">Latest Project</h3>
+                <div className="flex items-start sm:items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-black/20 rounded-lg border border-green-500/20">
+                  <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-400 flex-shrink-0 mt-0.5 sm:mt-0" />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-green-400 font-mono text-xs sm:text-sm">✅ Brief Submitted</p>
+                    <p className="text-white font-mono text-sm sm:text-base break-words">{articles[0]?.title}</p>
                     <p className="text-white/50 font-mono text-xs mt-1">
                       {new Date(articles[0]?.created_at).toLocaleDateString()} at {new Date(articles[0]?.created_at).toLocaleTimeString()}
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center gap-3 p-4 bg-black/20 rounded-lg border border-yellow-500/20">
-                  <Clock className="h-5 w-5 text-yellow-400 animate-pulse" />
+                <div className="flex items-start sm:items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-black/20 rounded-lg border border-yellow-500/20">
+                  <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-400 animate-pulse flex-shrink-0 mt-0.5 sm:mt-0" />
                   <div className="flex-1">
-                    <p className="text-yellow-400 font-mono text-sm">🔄 Current Stage</p>
-                    <p className="text-white font-mono">AI Research & Writing</p>
+                    <p className="text-yellow-400 font-mono text-xs sm:text-sm">🔄 Current Stage</p>
+                    <p className="text-white font-mono text-sm sm:text-base">AI Research & Writing</p>
                   </div>
                 </div>
               </div>
 
               {/* Workflow Progress */}
               <div className="space-y-3">
-                <h3 className="text-white/70 font-mono text-sm uppercase tracking-wider">Recent Projects</h3>
+                <h3 className="text-white/70 font-mono text-xs sm:text-sm uppercase tracking-wider">Recent Projects</h3>
                 {articles.slice(0, 3).map((article) => (
-                  <div key={article.id} className="flex items-center gap-4 p-3 bg-black/20 rounded-lg border border-primary-glow/20">
+                  <div key={article.id} className="flex items-center gap-2 sm:gap-4 p-2 sm:p-3 bg-black/20 rounded-lg border border-primary-glow/20">
                     {article.status === 'completed' && (
                       <>
-                        <span className="text-green-400 text-lg">🟢</span>
-                        <span className="text-white font-mono flex-1 truncate">{article.title}</span>
-                        <Badge className="bg-green-500/20 text-green-400 border-green-500/30 font-mono text-xs">
+                        <span className="text-green-400 text-base sm:text-lg flex-shrink-0">🟢</span>
+                        <span className="text-white font-mono flex-1 truncate text-xs sm:text-sm">{article.title}</span>
+                        <Badge className="bg-green-500/20 text-green-400 border-green-500/30 font-mono text-[10px] sm:text-xs whitespace-nowrap">
                           COMPLETE
                         </Badge>
                       </>
                     )}
                     {article.status === 'in_progress' && (
                       <>
-                        <span className="text-yellow-400 text-lg">🟡</span>
-                        <span className="text-white font-mono flex-1 truncate">{article.title}</span>
-                        <Badge className="bg-yellow-500/20 text-yellow-400 border-yellow-500/30 font-mono text-xs">
+                        <span className="text-yellow-400 text-base sm:text-lg flex-shrink-0">🟡</span>
+                        <span className="text-white font-mono flex-1 truncate text-xs sm:text-sm">{article.title}</span>
+                        <Badge className="bg-yellow-500/20 text-yellow-400 border-yellow-500/30 font-mono text-[10px] sm:text-xs whitespace-nowrap">
                           IN PROGRESS
                         </Badge>
                       </>
                     )}
                     {article.status === 'pending' && (
                       <>
-                        <span className="text-blue-400 text-lg">🔵</span>
-                        <span className="text-white font-mono flex-1 truncate">{article.title}</span>
-                        <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30 font-mono text-xs">
+                        <span className="text-blue-400 text-base sm:text-lg flex-shrink-0">🔵</span>
+                        <span className="text-white font-mono flex-1 truncate text-xs sm:text-sm">{article.title}</span>
+                        <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30 font-mono text-[10px] sm:text-xs whitespace-nowrap">
                           QUEUED
                         </Badge>
                       </>

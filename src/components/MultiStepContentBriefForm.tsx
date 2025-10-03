@@ -164,20 +164,20 @@ export function MultiStepContentBriefForm() {
   return (
     <div className="max-w-4xl mx-auto">
       {/* Progress Bar */}
-      <div className="mb-8">
+      <div className="mb-6 sm:mb-8">
         <div className="flex justify-between mb-4">
           {steps.map((step, index) => {
             const Icon = step.icon;
             return (
               <div key={step.id} className="flex flex-col items-center flex-1">
                 <div 
-                  className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all ${
+                  className={`w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center border-2 transition-all ${
                     currentStep >= step.id 
                       ? 'bg-primary border-primary text-white' 
                       : 'bg-background border-muted text-muted-foreground'
                   }`}
                 >
-                  <Icon className="h-5 w-5" />
+                  <Icon className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5" />
                 </div>
                 <div className="text-center mt-2 hidden md:block">
                   <p className={`text-sm font-medium ${currentStep >= step.id ? 'text-white' : 'text-white/60'}`}>
@@ -518,24 +518,25 @@ export function MultiStepContentBriefForm() {
           </Card>
 
           {/* Navigation Buttons */}
-          <div className="flex justify-between mt-6">
+          <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mt-6">
             <Button
               type="button"
               variant="outline"
               onClick={prevStep}
               disabled={currentStep === 1}
+              className="w-full sm:w-auto order-2 sm:order-1"
             >
               <ChevronLeft className="h-4 w-4 mr-2" />
               Previous
             </Button>
 
             {currentStep < steps.length ? (
-              <Button type="button" onClick={nextStep}>
+              <Button type="button" onClick={nextStep} className="w-full sm:w-auto order-1 sm:order-2">
                 Next
                 <ChevronRight className="h-4 w-4 ml-2" />
               </Button>
             ) : (
-              <Button type="submit" disabled={isSubmitting}>
+              <Button type="submit" disabled={isSubmitting} className="w-full sm:w-auto order-1 sm:order-2">
                 {isSubmitting ? "Submitting..." : "Submit Brief"}
               </Button>
             )}

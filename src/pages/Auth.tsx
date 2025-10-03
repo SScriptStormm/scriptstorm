@@ -265,12 +265,12 @@ const Auth = () => {
       <Button
         variant="ghost"
         size="sm"
-        className="!fixed top-6 right-6 z-[9999] text-white border border-primary-glow/30 hover:border-primary-glow/60 font-mono"
+        className="!fixed top-4 right-4 sm:top-6 sm:right-6 z-[9999] text-white border border-primary-glow/30 hover:border-primary-glow/60 font-mono text-xs sm:text-sm"
         style={{ position: 'fixed', transform: 'none', willChange: 'auto' }}
         asChild
       >
-        <Link to="/" className="flex items-center gap-2">
-          <ArrowLeft className="h-4 w-4" />
+        <Link to="/" className="flex items-center gap-1 sm:gap-2">
+          <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4" />
           <span className="hidden sm:inline">HOME</span>
         </Link>
       </Button>
@@ -373,26 +373,26 @@ const Auth = () => {
             {/* Enhanced Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-300 motion-reduce:transition-none" />
           </div>
-          <h1 className="text-4xl font-bold text-white mb-2 animate-text-glow font-mono tracking-wide">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 animate-text-glow font-mono tracking-wide">
             SCRIPTSTORM
           </h1>
-          <p className="text-primary-glow/80 font-mono tracking-widest text-sm">
+          <p className="text-primary-glow/80 font-mono tracking-widest text-xs sm:text-sm">
             CLIENT DASHBOARD ACCESS
           </p>
         </div>
 
         <Card className="relative bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber hover:shadow-hologram transition-all duration-500">
           <div className="absolute inset-0 bg-gradient-cyber opacity-10 rounded-lg" />
-          <CardHeader className="relative text-center space-y-2">
-            <CardTitle className="text-2xl text-white font-mono tracking-wide flex items-center justify-center gap-2">
-              <Zap className="h-6 w-6 text-primary-glow animate-pulse" />
-              {showForgotPassword ? "RESET PASSWORD" : isLogin ? "ACCESS YOUR DASHBOARD" : "CREATE ACCOUNT"}
+          <CardHeader className="relative text-center space-y-2 px-4 sm:px-6">
+            <CardTitle className="text-lg sm:text-xl md:text-2xl text-white font-mono tracking-wide flex items-center justify-center gap-2 flex-wrap">
+              <Zap className="h-5 w-5 sm:h-6 sm:w-6 text-primary-glow animate-pulse" />
+              <span className="break-words">{showForgotPassword ? "RESET PASSWORD" : isLogin ? "ACCESS YOUR DASHBOARD" : "CREATE ACCOUNT"}</span>
             </CardTitle>
-            <p className="text-white/70 text-sm font-mono">
+            <p className="text-white/70 text-xs sm:text-sm font-mono">
               {showForgotPassword ? "Enter your email to reset password" : isLogin ? "Access your content dashboard" : "Join the ScriptStorm network"}
             </p>
           </CardHeader>
-          <CardContent className="relative space-y-6">
+          <CardContent className="relative space-y-6 px-4 sm:px-6">
             <form onSubmit={showForgotPassword ? handleForgotPassword : handleAuth} className="space-y-4">
               {/* Rate Limiting Warning */}
               {isBlocked && (
