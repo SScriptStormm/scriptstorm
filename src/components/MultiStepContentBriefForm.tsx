@@ -13,7 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Progress } from "@/components/ui/progress";
 import { Slider } from "@/components/ui/slider";
-import { ChevronLeft, ChevronRight, FileText, Target, Palette, MessageSquare, Zap } from "lucide-react";
+import { ChevronLeft, ChevronRight, FileText, Target, Palette, MessageSquare, Zap, Briefcase, Smile, Heart, Shield, MessageCircle, Code } from "lucide-react";
 
 const formSchema = z.object({
   title: z.string().min(3, "Title must be at least 3 characters").max(200, "Title must not exceed 200 characters"),
@@ -375,12 +375,42 @@ export function MultiStepContentBriefForm() {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            <SelectItem value="professional">Professional</SelectItem>
-                            <SelectItem value="casual">Casual</SelectItem>
-                            <SelectItem value="friendly">Friendly</SelectItem>
-                            <SelectItem value="authoritative">Authoritative</SelectItem>
-                            <SelectItem value="conversational">Conversational</SelectItem>
-                            <SelectItem value="technical">Technical</SelectItem>
+                            <SelectItem value="professional">
+                              <div className="flex items-center gap-2">
+                                <Briefcase className="h-4 w-4" />
+                                <span>Professional</span>
+                              </div>
+                            </SelectItem>
+                            <SelectItem value="casual">
+                              <div className="flex items-center gap-2">
+                                <Smile className="h-4 w-4" />
+                                <span>Casual</span>
+                              </div>
+                            </SelectItem>
+                            <SelectItem value="friendly">
+                              <div className="flex items-center gap-2">
+                                <Heart className="h-4 w-4" />
+                                <span>Friendly</span>
+                              </div>
+                            </SelectItem>
+                            <SelectItem value="authoritative">
+                              <div className="flex items-center gap-2">
+                                <Shield className="h-4 w-4" />
+                                <span>Authoritative</span>
+                              </div>
+                            </SelectItem>
+                            <SelectItem value="conversational">
+                              <div className="flex items-center gap-2">
+                                <MessageCircle className="h-4 w-4" />
+                                <span>Conversational</span>
+                              </div>
+                            </SelectItem>
+                            <SelectItem value="technical">
+                              <div className="flex items-center gap-2">
+                                <Code className="h-4 w-4" />
+                                <span>Technical</span>
+                              </div>
+                            </SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage />
