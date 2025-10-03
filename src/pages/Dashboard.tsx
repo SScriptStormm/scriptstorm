@@ -146,7 +146,16 @@ const Dashboard = () => {
   };
 
   const handleSignOut = async () => {
-    await supabase.auth.signOut();
+    try {
+      await supabase.auth.signOut();
+    } catch (error) {
+      console.error('Sign out error:', error);
+    } finally {
+      // Clear local state and redirect regardless of API success
+      setUser(null);
+      setSession(null);
+      window.location.href = '/auth';
+    }
   };
 
   const getStatusColor = (status: string) => {
