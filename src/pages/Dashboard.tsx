@@ -147,6 +147,7 @@ const Dashboard = () => {
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
+    window.location.href = '/auth';
   };
 
   const getStatusColor = (status: string) => {
