@@ -48,6 +48,7 @@ const Dashboard = () => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const [statusFilter, setStatusFilter] = useState<string>('all');
   const { toast } = useToast();
 
   useEffect(() => {
@@ -169,6 +170,10 @@ const Dashboard = () => {
   const completedArticles = articles.filter(a => a.status === 'completed').length;
   const totalArticles = articles.length;
   const averageWordCount = articles.length > 0 ? Math.round(articles.reduce((sum, a) => sum + (a.word_count || 0), 0) / articles.length) : 0;
+  
+  const filteredArticles = statusFilter === 'all' 
+    ? articles 
+    : articles.filter(a => a.status === statusFilter);
 
   if (loading) {
     return (
@@ -261,162 +266,163 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Account Status */}
-        <Card className="mb-8 bg-black/30 backdrop-blur-xl border-green-500/30 shadow-cyber">
-          <div className="absolute inset-0 bg-gradient-cyber opacity-5 rounded-lg" />
-          <CardHeader className="relative">
-            <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
-              <CreditCard className="h-5 w-5 text-green-400" />
-              ACCOUNT STATUS
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="relative">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <Badge className="bg-green-500/20 text-green-400 border-green-500/30 font-mono tracking-wide">
-                  READY FOR YOUR FIRST BRIEF ✅
-                </Badge>
-                <Badge className="bg-primary-glow/20 text-primary-glow border-primary-glow/30 font-mono tracking-wide">
-                  PLAN: DOMINANCE
-                </Badge>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Content Pipeline Status */}
-        <Card className="mb-8 bg-black/30 backdrop-blur-xl border-green-500/30 shadow-cyber">
-          <div className="absolute inset-0 bg-gradient-cyber opacity-5 rounded-lg" />
-          <CardHeader className="relative">
-            <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
-              <Target className="h-5 w-5 text-green-400" />
-              CONTENT PIPELINE STATUS
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="relative space-y-4">
-            {articles.length > 0 ? (
+        {/* 2-Column Grid Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+          {/* Account Status */}
+          <Card className="bg-black/30 backdrop-blur-xl border-green-500/30 shadow-cyber">
+            <div className="absolute inset-0 bg-gradient-cyber opacity-5 rounded-lg" />
+            <CardHeader className="relative">
+              <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
+                <CreditCard className="h-5 w-5 text-green-400" />
+                ACCOUNT STATUS
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="relative">
               <div className="space-y-3">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <Badge className="bg-green-500/20 text-green-400 border-green-500/30 font-mono tracking-wide">
+                    READY ✅
+                  </Badge>
+                  <Badge className="bg-primary-glow/20 text-primary-glow border-primary-glow/30 font-mono tracking-wide">
+                    PLAN: DOMINANCE
+                  </Badge>
+                </div>
+                <div className="pt-2">
+                  <p className="text-white/70 font-mono text-sm">Monthly Articles:</p>
+                  <p className="text-white font-mono text-2xl">{completedArticles} / 50</p>
+                  <Progress 
+                    value={(completedArticles / 50) * 100} 
+                    className="h-2 bg-black/50 mt-2"
+                  />
+                  <p className="text-primary-glow font-mono text-xs mt-2">
+                    {50 - completedArticles} remaining this month
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Production Stats */}
+          {totalArticles > 0 && (
+            <Card className="bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
+                  <TrendingUp className="h-5 w-5 text-primary-glow" />
+                  PRODUCTION STATS
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div>
+                    <div className="flex justify-between text-sm font-mono text-white/70 mb-2">
+                      <span>Completion Rate</span>
+                      <span>{Math.round((completedArticles / totalArticles) * 100)}%</span>
+                    </div>
+                    <Progress 
+                      value={(completedArticles / totalArticles) * 100} 
+                      className="h-3 bg-black/50"
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-4 pt-2">
+                    <div className="text-center p-3 bg-black/20 rounded-lg border border-primary-glow/20">
+                      <p className="text-white font-mono text-2xl">{totalArticles}</p>
+                      <p className="text-white/70 font-mono text-xs">Total Briefs</p>
+                    </div>
+                    <div className="text-center p-3 bg-black/20 rounded-lg border border-primary-glow/20">
+                      <p className="text-white font-mono text-2xl">{averageWordCount}</p>
+                      <p className="text-white/70 font-mono text-xs">Avg Words</p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+        </div>
+
+        {/* Consolidated Pipeline & Workflow */}
+        {articles.length > 0 ? (
+          <Card className="mb-8 bg-black/30 backdrop-blur-xl border-green-500/30 shadow-cyber">
+            <div className="absolute inset-0 bg-gradient-cyber opacity-5 rounded-lg" />
+            <CardHeader className="relative">
+              <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
+                <Target className="h-5 w-5 text-green-400" />
+                CONTENT PIPELINE
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="relative space-y-6">
+              {/* Latest Project Status */}
+              <div className="space-y-3">
+                <h3 className="text-white/70 font-mono text-sm uppercase tracking-wider">Latest Project</h3>
                 <div className="flex items-center gap-3 p-4 bg-black/20 rounded-lg border border-green-500/20">
                   <CheckCircle className="h-5 w-5 text-green-400" />
-                  <div>
-                    <p className="text-green-400 font-mono text-sm">✅ Brief Submitted:</p>
-                    <p className="text-white font-mono">{new Date(articles[0]?.created_at).toLocaleDateString()} at {new Date(articles[0]?.created_at).toLocaleTimeString()}</p>
+                  <div className="flex-1">
+                    <p className="text-green-400 font-mono text-sm">✅ Brief Submitted</p>
+                    <p className="text-white font-mono">{articles[0]?.title}</p>
+                    <p className="text-white/50 font-mono text-xs mt-1">
+                      {new Date(articles[0]?.created_at).toLocaleDateString()} at {new Date(articles[0]?.created_at).toLocaleTimeString()}
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 p-4 bg-black/20 rounded-lg border border-yellow-500/20">
                   <Clock className="h-5 w-5 text-yellow-400 animate-pulse" />
-                  <div>
-                    <p className="text-yellow-400 font-mono text-sm">🔄 Current Stage:</p>
+                  <div className="flex-1">
+                    <p className="text-yellow-400 font-mono text-sm">🔄 Current Stage</p>
                     <p className="text-white font-mono">AI Research & Writing</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-3 p-4 bg-black/20 rounded-lg border border-blue-500/20">
-                  <AlertCircle className="h-5 w-5 text-blue-400" />
-                  <div>
-                    <p className="text-blue-400 font-mono text-sm">⏱️ Estimated Delivery:</p>
-                    <p className="text-white font-mono">Today, 5:00 PM</p>
+              </div>
+
+              {/* Workflow Progress */}
+              <div className="space-y-3">
+                <h3 className="text-white/70 font-mono text-sm uppercase tracking-wider">Recent Projects</h3>
+                {articles.slice(0, 3).map((article) => (
+                  <div key={article.id} className="flex items-center gap-4 p-3 bg-black/20 rounded-lg border border-primary-glow/20">
+                    {article.status === 'completed' && (
+                      <>
+                        <span className="text-green-400 text-lg">🟢</span>
+                        <span className="text-white font-mono flex-1 truncate">{article.title}</span>
+                        <Badge className="bg-green-500/20 text-green-400 border-green-500/30 font-mono text-xs">
+                          COMPLETE
+                        </Badge>
+                      </>
+                    )}
+                    {article.status === 'in_progress' && (
+                      <>
+                        <span className="text-yellow-400 text-lg">🟡</span>
+                        <span className="text-white font-mono flex-1 truncate">{article.title}</span>
+                        <Badge className="bg-yellow-500/20 text-yellow-400 border-yellow-500/30 font-mono text-xs">
+                          IN PROGRESS
+                        </Badge>
+                      </>
+                    )}
+                    {article.status === 'pending' && (
+                      <>
+                        <span className="text-blue-400 text-lg">🔵</span>
+                        <span className="text-white font-mono flex-1 truncate">{article.title}</span>
+                        <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30 font-mono text-xs">
+                          QUEUED
+                        </Badge>
+                      </>
+                    )}
                   </div>
-                </div>
-                <Button 
-                  variant="ghost"
-                  className="w-full text-primary-glow border border-primary-glow/30 hover:border-primary-glow/60 font-mono mt-4"
-                >
-                  VIEW PROGRESS DETAILS
-                </Button>
+                ))}
               </div>
-            ) : (
-              <div className="text-center py-8">
-                <AlertCircle className="h-12 w-12 text-primary-glow/50 mx-auto mb-3" />
-                <p className="text-white font-mono text-lg mb-2">Ready for Content Production</p>
-                <p className="text-white/70 font-mono text-sm">Submit your first content brief to get started</p>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-
-        {/* Monthly Plan Tracker */}
-        <Card className="mb-8 bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
-              <BarChart3 className="h-5 w-5 text-primary-glow" />
-              YOUR PLAN: Dominance
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              <div className="flex justify-between items-center">
-                <span className="text-white/70 font-mono text-sm">Monthly Articles:</span>
-                <span className="text-white font-mono text-lg">{completedArticles} of 50 delivered</span>
-              </div>
-              <Progress 
-                value={(completedArticles / 50) * 100} 
-                className="h-2 bg-black/50"
-              />
-              <div className="text-center">
-                <p className="text-primary-glow font-mono text-sm">
-                  {50 - completedArticles} articles remaining this month
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Workflow Visualization */}
-        {articles.length > 0 && (
-          <Card className="mb-8 bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber">
-            <CardHeader>
-              <CardTitle className="text-white font-mono tracking-wide">
-                WORKFLOW VISUALIZATION
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              {articles.slice(0, 3).map((article, index) => (
-                <div key={article.id} className="flex items-center gap-4 p-3 bg-black/20 rounded-lg border border-primary-glow/20">
-                  {article.status === 'completed' && (
-                    <>
-                      <span className="text-green-400 text-lg">🟢</span>
-                      <span className="text-white font-mono">[{article.title}] - AI DRAFT READY</span>
-                    </>
-                  )}
-                  {article.status === 'in_progress' && (
-                    <>
-                      <span className="text-yellow-400 text-lg">🟡</span>
-                      <span className="text-white font-mono">[{article.title}] - AI RESEARCHING</span>
-                    </>
-                  )}
-                  {article.status === 'pending' && (
-                    <>
-                      <span className="text-red-400 text-lg">🔴</span>
-                      <span className="text-white font-mono">[UPGRADE TO JUMP QUEUE]</span>
-                    </>
-                  )}
-                </div>
-              ))}
             </CardContent>
           </Card>
-        )}
-
-        {/* Progress Overview */}
-        {totalArticles > 0 && (
+        ) : (
           <Card className="mb-8 bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber">
-            <CardHeader>
+            <div className="absolute inset-0 bg-gradient-cyber opacity-5 rounded-lg" />
+            <CardHeader className="relative">
               <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
-                <TrendingUp className="h-5 w-5 text-primary-glow" />
-                PRODUCTION PROGRESS
+                <Target className="h-5 w-5 text-primary-glow" />
+                CONTENT PIPELINE
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div>
-                  <div className="flex justify-between text-sm font-mono text-white/70 mb-2">
-                    <span>Completion Rate</span>
-                    <span>{Math.round((completedArticles / totalArticles) * 100)}%</span>
-                  </div>
-                  <Progress 
-                    value={(completedArticles / totalArticles) * 100} 
-                    className="h-3 bg-black/50"
-                  />
-                </div>
+            <CardContent className="relative">
+              <div className="text-center py-12">
+                <AlertCircle className="h-16 w-16 text-primary-glow/50 mx-auto mb-4" />
+                <p className="text-white font-mono text-xl mb-2">Ready for Content Production</p>
+                <p className="text-white/70 font-mono text-sm">Submit your first content brief to get started</p>
               </div>
             </CardContent>
           </Card>
@@ -425,10 +431,48 @@ const Dashboard = () => {
         {/* Content Projects */}
         <Card className="bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
-              <FileText className="h-5 w-5 text-primary-glow" />
-              YOUR CONTENT PROJECTS
-            </CardTitle>
+            <div className="flex items-center justify-between flex-wrap gap-4">
+              <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
+                <FileText className="h-5 w-5 text-primary-glow" />
+                YOUR CONTENT PROJECTS
+              </CardTitle>
+              {articles.length > 0 && (
+                <div className="flex gap-2">
+                  <Button
+                    size="sm"
+                    variant={statusFilter === 'all' ? 'default' : 'outline'}
+                    onClick={() => setStatusFilter('all')}
+                    className="font-mono text-xs"
+                  >
+                    All ({articles.length})
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant={statusFilter === 'completed' ? 'default' : 'outline'}
+                    onClick={() => setStatusFilter('completed')}
+                    className="font-mono text-xs"
+                  >
+                    Completed ({articles.filter(a => a.status === 'completed').length})
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant={statusFilter === 'in_progress' ? 'default' : 'outline'}
+                    onClick={() => setStatusFilter('in_progress')}
+                    className="font-mono text-xs"
+                  >
+                    In Progress ({articles.filter(a => a.status === 'in_progress').length})
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant={statusFilter === 'pending' ? 'default' : 'outline'}
+                    onClick={() => setStatusFilter('pending')}
+                    className="font-mono text-xs"
+                  >
+                    Pending ({articles.filter(a => a.status === 'pending').length})
+                  </Button>
+                </div>
+              )}
+            </div>
           </CardHeader>
           <CardContent>
             {articles.length === 0 ? (
@@ -439,6 +483,16 @@ const Dashboard = () => {
                 </p>
                 <p className="text-white/70 font-mono text-sm">
                   Click "Submit New Content Brief" above to start your first project
+                </p>
+              </div>
+            ) : filteredArticles.length === 0 ? (
+              <div className="text-center py-12">
+                <AlertCircle className="h-12 w-12 text-primary-glow/50 mx-auto mb-3" />
+                <p className="text-white font-mono text-lg mb-2">
+                  No {statusFilter} projects
+                </p>
+                <p className="text-white/70 font-mono text-sm">
+                  Try selecting a different filter
                 </p>
               </div>
             ) : (
@@ -453,7 +507,7 @@ const Dashboard = () => {
                     </tr>
                   </thead>
                   <tbody className="space-y-3">
-                    {articles.map((article) => (
+                    {filteredArticles.map((article) => (
                       <tr key={article.id} className="border-b border-primary-glow/10 hover:bg-black/20 transition-colors">
                         <td className="py-4">
                           <div>
