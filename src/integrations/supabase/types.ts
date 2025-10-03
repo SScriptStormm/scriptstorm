@@ -10,7 +10,7 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "12.2.12 (cd3cf9e)"
+    PostgrestVersion: "13.0.4"
   }
   public: {
     Tables: {
@@ -56,6 +56,72 @@ export type Database = {
         }
         Relationships: []
       }
+      contact_submissions: {
+        Row: {
+          company: string | null
+          created_at: string
+          email: string
+          id: string
+          ip_address: string | null
+          name: string
+          processed: boolean | null
+          project_details: string | null
+          service: string | null
+          user_agent: string | null
+        }
+        Insert: {
+          company?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          ip_address?: string | null
+          name: string
+          processed?: boolean | null
+          project_details?: string | null
+          service?: string | null
+          user_agent?: string | null
+        }
+        Update: {
+          company?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          ip_address?: string | null
+          name?: string
+          processed?: boolean | null
+          project_details?: string | null
+          service?: string | null
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
+      edge_function_tokens: {
+        Row: {
+          active: boolean | null
+          created_at: string
+          function_name: string
+          id: string
+          last_used: string | null
+          token_hash: string
+        }
+        Insert: {
+          active?: boolean | null
+          created_at?: string
+          function_name: string
+          id?: string
+          last_used?: string | null
+          token_hash: string
+        }
+        Update: {
+          active?: boolean | null
+          created_at?: string
+          function_name?: string
+          id?: string
+          last_used?: string | null
+          token_hash?: string
+        }
+        Relationships: []
+      }
       subscribers: {
         Row: {
           created_at: string
@@ -66,7 +132,7 @@ export type Database = {
           subscription_end: string | null
           subscription_tier: string | null
           updated_at: string
-          user_id: string | null
+          user_id: string
         }
         Insert: {
           created_at?: string
@@ -77,7 +143,7 @@ export type Database = {
           subscription_end?: string | null
           subscription_tier?: string | null
           updated_at?: string
-          user_id?: string | null
+          user_id: string
         }
         Update: {
           created_at?: string
@@ -88,7 +154,58 @@ export type Database = {
           subscription_end?: string | null
           subscription_tier?: string | null
           updated_at?: string
-          user_id?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      subscription_rate_limits: {
+        Row: {
+          check_count: number | null
+          daily_reset: string
+          last_check: string
+          last_update: string
+          update_count: number | null
+          user_id: string
+        }
+        Insert: {
+          check_count?: number | null
+          daily_reset?: string
+          last_check?: string
+          last_update?: string
+          update_count?: number | null
+          user_id: string
+        }
+        Update: {
+          check_count?: number | null
+          daily_reset?: string
+          last_check?: string
+          last_update?: string
+          update_count?: number | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }
@@ -97,10 +214,73 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      admin_get_contact_submissions: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          company: string
+          created_at: string
+          email: string
+          id: string
+          ip_address: string
+          name: string
+          processed: boolean
+          project_details: string
+          service: string
+        }[]
+      }
+      admin_update_contact_submission: {
+        Args: { mark_processed: boolean; submission_id: string }
+        Returns: boolean
+      }
+      check_subscription_rate_limit: {
+        Args: { operation: string; target_user_id: string }
+        Returns: boolean
+      }
+      current_user_is_admin: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
+      get_contact_submissions_admin: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          company: string
+          created_at: string
+          email: string
+          id: string
+          ip_address: string
+          name: string
+          processed: boolean
+          project_details: string
+          service: string
+        }[]
+      }
+      insert_contact_submission: {
+        Args: {
+          p_company?: string
+          p_email: string
+          p_ip_address?: string
+          p_name: string
+          p_project_details?: string
+          p_service?: string
+          p_user_agent?: string
+        }
+        Returns: string
+      }
+      is_admin: {
+        Args: { _user_id?: string }
+        Returns: boolean
+      }
+      update_contact_submission_admin: {
+        Args: { p_id: string; p_processed: boolean }
+        Returns: boolean
+      }
+      validate_edge_function_request: {
+        Args: { func_name: string; provided_token: string }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -227,6 +407,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const
