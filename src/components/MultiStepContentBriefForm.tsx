@@ -180,10 +180,10 @@ export function MultiStepContentBriefForm() {
                   <Icon className="h-5 w-5" />
                 </div>
                 <div className="text-center mt-2 hidden md:block">
-                  <p className={`text-sm font-medium ${currentStep >= step.id ? 'text-primary' : 'text-muted-foreground'}`}>
+                  <p className={`text-sm font-medium ${currentStep >= step.id ? 'text-white' : 'text-white/60'}`}>
                     {step.title}
                   </p>
-                  <p className="text-xs text-muted-foreground">{step.description}</p>
+                  <p className="text-xs text-white/70">{step.description}</p>
                 </div>
               </div>
             );
@@ -194,7 +194,7 @@ export function MultiStepContentBriefForm() {
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <Card className="border-2">
+          <Card className="border-2 bg-card/95 backdrop-blur-sm shadow-glow border-primary/20">
             <CardHeader>
               <CardTitle className="text-2xl">{steps[currentStep - 1].title}</CardTitle>
               <CardDescription>{steps[currentStep - 1].description}</CardDescription>

@@ -7,15 +7,15 @@ const ContentBrief = () => {
     <div className="min-h-screen bg-gradient-hero py-12 px-4">
       <div className="container mx-auto">
         <Breadcrumb className="mb-6">
-          <BreadcrumbList>
+          <BreadcrumbList className="text-white/90">
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link to="/dashboard">Dashboard</Link>
+                <Link to="/dashboard" className="text-white/90 hover:text-white">Dashboard</Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
-            <BreadcrumbSeparator />
+            <BreadcrumbSeparator className="text-white/60" />
             <BreadcrumbItem>
-              <BreadcrumbPage>Submit Content Brief</BreadcrumbPage>
+              <BreadcrumbPage className="text-white">Submit Content Brief</BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
