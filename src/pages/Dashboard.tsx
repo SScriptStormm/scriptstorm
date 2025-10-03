@@ -204,7 +204,7 @@ const Dashboard = () => {
               <img 
                 src={scriptStormLogo} 
                 alt="ScriptStorm" 
-                className="w-16 h-16 rounded-xl bg-white/95 p-2 shadow-cyber border border-primary-glow/30 hover:border-primary-glow/60 transition-all duration-300"
+                className="w-16 h-16 rounded-xl shadow-cyber border border-primary-glow/30 hover:border-primary-glow/60 transition-all duration-300"
               />
               <div>
                 <h1 className="text-2xl font-bold text-white font-mono tracking-wide">
