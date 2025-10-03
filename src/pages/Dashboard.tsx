@@ -146,8 +146,25 @@ const Dashboard = () => {
   };
 
   const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    window.location.replace('/auth');
+    try {
+      // Clear local state immediately
+      setUser(null);
+      setSession(null);
+      
+      // Sign out from Supabase
+      await supabase.auth.signOut();
+      
+      // Clear localStorage manually to ensure no stale session
+      localStorage.removeItem('sb-akqbsuvbammezjyeospk-auth-token');
+      
+      // Force a complete page reload to /auth
+      window.location.replace('/auth');
+    } catch (error) {
+      // Even if signOut fails, still redirect
+      console.error('Logout error:', error);
+      localStorage.clear();
+      window.location.replace('/auth');
+    }
   };
 
   const getStatusColor = (status: string) => {
