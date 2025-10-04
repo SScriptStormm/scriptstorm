@@ -75,8 +75,8 @@ const WhyChooseUs = () => {
         <div className="absolute top-2/3 right-1/3 w-1 h-1 bg-primary-glow rounded-full animate-ping opacity-30" style={{ animationDelay: '3s' }} />
         
         {/* Unified Full-Width Dotted Background for Both Comparison Charts */}
-        <div className="absolute left-0 right-0 top-0 bottom-[350px] bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,hsl(var(--primary-glow)/0.03)_2px,hsl(var(--primary-glow)/0.03)_4px)] pointer-events-none" />
-        <div className="absolute left-0 right-0 top-0 bottom-[350px] bg-[repeating-linear-gradient(90deg,transparent,transparent_2px,hsl(var(--primary-glow)/0.03)_2px,hsl(var(--primary-glow)/0.03)_4px)] pointer-events-none" />
+        <div className="absolute left-0 right-0 top-0 h-[calc(100%-200px)] bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,hsl(var(--primary-glow)/0.03)_2px,hsl(var(--primary-glow)/0.03)_4px)] pointer-events-none" />
+        <div className="absolute left-0 right-0 top-0 h-[calc(100%-200px)] bg-[repeating-linear-gradient(90deg,transparent,transparent_2px,hsl(var(--primary-glow)/0.03)_2px,hsl(var(--primary-glow)/0.03)_4px)] pointer-events-none" />
         
         <div className="container mx-auto px-4 relative z-10">
           {/* ScriptStorm vs Generic AI Comparison */}
