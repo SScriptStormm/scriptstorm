@@ -81,11 +81,11 @@ const WhyChooseUs = () => {
             <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,hsl(var(--primary-glow)/0.03)_2px,hsl(var(--primary-glow)/0.03)_4px)] pointer-events-none" />
             <div className="absolute inset-0 bg-[repeating-linear-gradient(90deg,transparent,transparent_2px,hsl(var(--primary-glow)/0.03)_2px,hsl(var(--primary-glow)/0.03)_4px)] pointer-events-none" />
             
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-mono relative">
-              <span className="text-primary drop-shadow-[0_0_20px_hsl(var(--primary-glow))] animate-pulse">ScriptStorm</span> 
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 font-mono relative">
+              <span className="text-primary drop-shadow-[0_0_30px_hsl(var(--primary-glow))] brightness-110" style={{ animation: 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite' }}>ScriptStorm</span> 
               <span className="text-muted-foreground mx-2">vs</span> 
-              <span className="text-[#F39C12] drop-shadow-[0_0_20px_rgba(243,156,18,0.6)] animate-pulse">Generic AI Assistants</span>
-              <div className="text-lg mt-2 text-muted-foreground">(e.g., ChatGPT)</div>
+              <span className="text-[#F39C12] drop-shadow-[0_0_20px_rgba(243,156,18,0.6)]" style={{ animation: 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite' }}>Generic AI Assistants</span>
+              <div className="text-lg mt-2 text-muted-foreground/90">(e.g., ChatGPT)</div>
             </h2>
             
             <Card className="max-w-6xl mx-auto border-2 border-primary/70 bg-gradient-to-br from-black/5 via-primary/5 to-black/10 backdrop-blur-md shadow-[0_0_50px_-10px_hsl(var(--primary-glow)/0.5),inset_0_0_30px_-10px_hsl(var(--primary-glow)/0.1)] hover:shadow-[0_0_70px_-10px_hsl(var(--primary-glow)/0.7),inset_0_0_40px_-10px_hsl(var(--primary-glow)/0.2)] transition-all duration-500 relative overflow-hidden">
@@ -249,10 +249,10 @@ const WhyChooseUs = () => {
             <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,hsl(var(--primary-glow)/0.03)_2px,hsl(var(--primary-glow)/0.03)_4px)] pointer-events-none" />
             <div className="absolute inset-0 bg-[repeating-linear-gradient(90deg,transparent,transparent_2px,hsl(var(--primary-glow)/0.03)_2px,hsl(var(--primary-glow)/0.03)_4px)] pointer-events-none" />
             
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-mono relative">
-              <span className="text-primary drop-shadow-[0_0_20px_hsl(var(--primary-glow))] animate-pulse">ScriptStorm</span> 
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 font-mono relative">
+              <span className="text-primary drop-shadow-[0_0_30px_hsl(var(--primary-glow))] brightness-110" style={{ animation: 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite' }}>ScriptStorm</span> 
               <span className="text-muted-foreground mx-2">vs</span> 
-              <span className="text-[#E74C3C] drop-shadow-[0_0_20px_rgba(231,76,60,0.6)] animate-pulse">The Old Way</span>
+              <span className="text-[#E74C3C] drop-shadow-[0_0_20px_rgba(231,76,60,0.6)]" style={{ animation: 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite' }}>The Old Way</span>
             </h2>
             <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
               {/* The Old Way */}
