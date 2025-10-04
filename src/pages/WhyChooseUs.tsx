@@ -78,106 +78,110 @@ const WhyChooseUs = () => {
           {/* ScriptStorm vs Generic AI Comparison */}
           <div className="mb-20">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-mono">
-              <span className="text-primary">ScriptStorm</span> vs <span className="text-[#F39C12]">Generic AI Assistants</span> (e.g., ChatGPT)
+              <span className="text-primary drop-shadow-[0_0_15px_hsl(var(--primary-glow))]">ScriptStorm</span> vs <span className="text-[#F39C12] drop-shadow-[0_0_15px_rgba(243,156,18,0.5)]">Generic AI Assistants</span> (e.g., ChatGPT)
             </h2>
-            <Card className="max-w-6xl mx-auto border-2 border-primary/30 bg-white/95 backdrop-blur-sm shadow-neural hover:shadow-cyber transition-all duration-500">
-              <CardContent className="p-6 overflow-x-auto">
+            <Card className="max-w-6xl mx-auto border-2 border-primary/50 bg-gradient-to-br from-white/95 to-primary/5 backdrop-blur-sm shadow-[0_0_30px_-5px_hsl(var(--primary-glow)/0.3)] hover:shadow-[0_0_40px_-5px_hsl(var(--primary-glow)/0.5)] transition-all duration-500">
+              <CardContent className="p-8 overflow-x-auto">
                 <Table>
                   <TableHeader>
-                    <TableRow className="border-b-2 border-primary/20">
-                      <TableHead className="font-bold text-foreground text-base w-1/4">Feature</TableHead>
-                      <TableHead className="font-bold text-[#F39C12] text-base w-3/8 text-center">Generic AI Assistant (e.g., ChatGPT)</TableHead>
-                      <TableHead className="font-bold text-primary text-base w-3/8 text-center">ScriptStorm</TableHead>
+                    <TableRow className="border-b-2 border-primary/30">
+                      <TableHead className="font-bold text-foreground text-lg w-1/4 py-4">Feature</TableHead>
+                      <TableHead className="font-bold text-[#F39C12] text-lg w-3/8 text-center py-4 drop-shadow-[0_0_10px_rgba(243,156,18,0.3)]">
+                        Generic AI Assistant (e.g., ChatGPT)
+                      </TableHead>
+                      <TableHead className="font-bold text-primary text-lg w-3/8 text-center py-4 drop-shadow-[0_0_10px_hsl(var(--primary-glow)/0.5)]">
+                        ScriptStorm
+                      </TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    <TableRow className="hover:bg-muted/30 transition-colors">
-                      <TableCell className="font-semibold">Result</TableCell>
-                      <TableCell className="text-center">
-                        <div className="flex items-center justify-center gap-2">
-                          <X className="h-4 w-4 text-[#E74C3C]" />
+                    <TableRow className="hover:bg-primary/5 transition-colors border-b border-primary/10">
+                      <TableCell className="font-semibold text-base py-5">Result</TableCell>
+                      <TableCell className="text-center py-5">
+                        <div className="flex flex-col items-center justify-center gap-3">
+                          <X className="h-8 w-8 text-[#E74C3C] drop-shadow-[0_0_10px_rgba(231,76,60,0.6)] animate-pulse" strokeWidth={3} />
                           <span className="text-sm">A generic text draft that requires heavy editing</span>
                         </div>
                       </TableCell>
-                      <TableCell className="text-center">
-                        <div className="flex items-center justify-center gap-2">
-                          <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
-                          <span className="text-sm">A finished, polished, and published-ready piece of content</span>
+                      <TableCell className="text-center py-5">
+                        <div className="flex flex-col items-center justify-center gap-3">
+                          <CheckCircle className="h-8 w-8 text-[#2ECC71] drop-shadow-[0_0_15px_rgba(46,204,113,0.7)] animate-pulse" strokeWidth={3} />
+                          <span className="text-sm font-medium">A finished, polished, and published-ready piece of content</span>
                         </div>
                       </TableCell>
                     </TableRow>
-                    <TableRow className="hover:bg-muted/30 transition-colors">
-                      <TableCell className="font-semibold">Process</TableCell>
-                      <TableCell className="text-center">
-                        <div className="flex items-center justify-center gap-2">
-                          <X className="h-4 w-4 text-[#E74C3C]" />
+                    <TableRow className="hover:bg-primary/5 transition-colors border-b border-primary/10">
+                      <TableCell className="font-semibold text-base py-5">Process</TableCell>
+                      <TableCell className="text-center py-5">
+                        <div className="flex flex-col items-center justify-center gap-3">
+                          <X className="h-8 w-8 text-[#E74C3C] drop-shadow-[0_0_10px_rgba(231,76,60,0.6)] animate-pulse" strokeWidth={3} />
                           <span className="text-sm">Manual. You write prompts, edit, fact-check, and optimize</span>
                         </div>
                       </TableCell>
-                      <TableCell className="text-center">
-                        <div className="flex items-center justify-center gap-2">
-                          <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
-                          <span className="text-sm">Fully automated. You submit a brief; we deliver the final product</span>
+                      <TableCell className="text-center py-5">
+                        <div className="flex flex-col items-center justify-center gap-3">
+                          <CheckCircle className="h-8 w-8 text-[#2ECC71] drop-shadow-[0_0_15px_rgba(46,204,113,0.7)] animate-pulse" strokeWidth={3} />
+                          <span className="text-sm font-medium">Fully automated. You submit a brief; we deliver the final product</span>
                         </div>
                       </TableCell>
                     </TableRow>
-                    <TableRow className="hover:bg-muted/30 transition-colors">
-                      <TableCell className="font-semibold">Time Investment</TableCell>
-                      <TableCell className="text-center">
-                        <div className="flex items-center justify-center gap-2">
-                          <X className="h-4 w-4 text-[#E74C3C]" />
+                    <TableRow className="hover:bg-primary/5 transition-colors border-b border-primary/10">
+                      <TableCell className="font-semibold text-base py-5">Time Investment</TableCell>
+                      <TableCell className="text-center py-5">
+                        <div className="flex flex-col items-center justify-center gap-3">
+                          <X className="h-8 w-8 text-[#E74C3C] drop-shadow-[0_0_10px_rgba(231,76,60,0.6)] animate-pulse" strokeWidth={3} />
                           <span className="text-sm">1-2 hours per piece (your time + AI's time)</span>
                         </div>
                       </TableCell>
-                      <TableCell className="text-center">
-                        <div className="flex items-center justify-center gap-2">
-                          <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
-                          <span className="text-sm">Just 5 minutes to submit a brief</span>
+                      <TableCell className="text-center py-5">
+                        <div className="flex flex-col items-center justify-center gap-3">
+                          <CheckCircle className="h-8 w-8 text-[#2ECC71] drop-shadow-[0_0_15px_rgba(46,204,113,0.7)] animate-pulse" strokeWidth={3} />
+                          <span className="text-sm font-medium">Just 5 minutes to submit a brief</span>
                         </div>
                       </TableCell>
                     </TableRow>
-                    <TableRow className="hover:bg-muted/30 transition-colors">
-                      <TableCell className="font-semibold">Required Expertise</TableCell>
-                      <TableCell className="text-center">
-                        <div className="flex items-center justify-center gap-2">
-                          <X className="h-4 w-4 text-[#E74C3C]" />
+                    <TableRow className="hover:bg-primary/5 transition-colors border-b border-primary/10">
+                      <TableCell className="font-semibold text-base py-5">Required Expertise</TableCell>
+                      <TableCell className="text-center py-5">
+                        <div className="flex flex-col items-center justify-center gap-3">
+                          <X className="h-8 w-8 text-[#E74C3C] drop-shadow-[0_0_10px_rgba(231,76,60,0.6)] animate-pulse" strokeWidth={3} />
                           <span className="text-sm">Needs prompt engineering, SEO, and editing skills</span>
                         </div>
                       </TableCell>
-                      <TableCell className="text-center">
-                        <div className="flex items-center justify-center gap-2">
-                          <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
-                          <span className="text-sm">Zero expertise needed. Our system handles everything</span>
+                      <TableCell className="text-center py-5">
+                        <div className="flex flex-col items-center justify-center gap-3">
+                          <CheckCircle className="h-8 w-8 text-[#2ECC71] drop-shadow-[0_0_15px_rgba(46,204,113,0.7)] animate-pulse" strokeWidth={3} />
+                          <span className="text-sm font-medium">Zero expertise needed. Our system handles everything</span>
                         </div>
                       </TableCell>
                     </TableRow>
-                    <TableRow className="hover:bg-muted/30 transition-colors">
-                      <TableCell className="font-semibold">Quality Control</TableCell>
-                      <TableCell className="text-center">
-                        <div className="flex items-center justify-center gap-2">
-                          <X className="h-4 w-4 text-[#E74C3C]" />
+                    <TableRow className="hover:bg-primary/5 transition-colors border-b border-primary/10">
+                      <TableCell className="font-semibold text-base py-5">Quality Control</TableCell>
+                      <TableCell className="text-center py-5">
+                        <div className="flex flex-col items-center justify-center gap-3">
+                          <X className="h-8 w-8 text-[#E74C3C] drop-shadow-[0_0_10px_rgba(231,76,60,0.6)] animate-pulse" strokeWidth={3} />
                           <span className="text-sm">None. You are responsible for final checks</span>
                         </div>
                       </TableCell>
-                      <TableCell className="text-center">
-                        <div className="flex items-center justify-center gap-2">
-                          <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
-                          <span className="text-sm">Built-in verification for plagiarism, AI-detection, and SEO</span>
+                      <TableCell className="text-center py-5">
+                        <div className="flex flex-col items-center justify-center gap-3">
+                          <CheckCircle className="h-8 w-8 text-[#2ECC71] drop-shadow-[0_0_15px_rgba(46,204,113,0.7)] animate-pulse" strokeWidth={3} />
+                          <span className="text-sm font-medium">Built-in verification for plagiarism, AI-detection, and SEO</span>
                         </div>
                       </TableCell>
                     </TableRow>
-                    <TableRow className="hover:bg-muted/30 transition-colors">
-                      <TableCell className="font-semibold">Consistency</TableCell>
-                      <TableCell className="text-center">
-                        <div className="flex items-center justify-center gap-2">
-                          <X className="h-4 w-4 text-[#E74C3C]" />
+                    <TableRow className="hover:bg-primary/5 transition-colors">
+                      <TableCell className="font-semibold text-base py-5">Consistency</TableCell>
+                      <TableCell className="text-center py-5">
+                        <div className="flex flex-col items-center justify-center gap-3">
+                          <X className="h-8 w-8 text-[#E74C3C] drop-shadow-[0_0_10px_rgba(231,76,60,0.6)] animate-pulse" strokeWidth={3} />
                           <span className="text-sm">Unpredictable. Varies with every prompt</span>
                         </div>
                       </TableCell>
-                      <TableCell className="text-center">
-                        <div className="flex items-center justify-center gap-2">
-                          <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
-                          <span className="text-sm">Reliably high-quality every time</span>
+                      <TableCell className="text-center py-5">
+                        <div className="flex flex-col items-center justify-center gap-3">
+                          <CheckCircle className="h-8 w-8 text-[#2ECC71] drop-shadow-[0_0_15px_rgba(46,204,113,0.7)] animate-pulse" strokeWidth={3} />
+                          <span className="text-sm font-medium">Reliably high-quality every time</span>
                         </div>
                       </TableCell>
                     </TableRow>
