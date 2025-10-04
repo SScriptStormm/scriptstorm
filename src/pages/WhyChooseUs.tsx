@@ -143,13 +143,13 @@ const WhyChooseUs = () => {
                       <TableCell className="py-3 md:py-6">
                         <div className="flex items-center gap-2 md:gap-4 px-2 md:px-4">
                           <X className="h-6 w-6 md:h-10 md:w-10 text-[#E74C3C] drop-shadow-[0_0_15px_rgba(231,76,60,0.8)] flex-shrink-0" strokeWidth={3.5} />
-                          <span className="text-xs md:text-sm text-left">Generic draft needs heavy editing</span>
+                          <span className="text-xs md:text-sm text-left">A generic text draft that requires heavy editing</span>
                         </div>
                       </TableCell>
                       <TableCell className="py-3 md:py-6 bg-primary/5">
                         <div className="flex items-center gap-2 md:gap-4 px-2 md:px-4">
                           <CheckCircle className="h-6 w-6 md:h-10 md:w-10 text-[#2ECC71] drop-shadow-[0_0_20px_rgba(46,204,113,0.9)] flex-shrink-0" strokeWidth={3.5} />
-                          <span className="text-xs md:text-sm font-medium text-left">Finished, polished, published-ready content</span>
+                          <span className="text-xs md:text-sm font-medium text-left">A finished, polished, and published-ready piece of content</span>
                         </div>
                       </TableCell>
                     </TableRow>
@@ -162,13 +162,13 @@ const WhyChooseUs = () => {
                       <TableCell className="py-3 md:py-6">
                         <div className="flex items-center gap-2 md:gap-4 px-2 md:px-4">
                           <X className="h-6 w-6 md:h-10 md:w-10 text-[#E74C3C] drop-shadow-[0_0_15px_rgba(231,76,60,0.8)] flex-shrink-0" strokeWidth={3.5} />
-                          <span className="text-xs md:text-sm text-left">Manual work required</span>
+                          <span className="text-xs md:text-sm text-left">Manual. You write prompts, edit, fact-check, and optimize</span>
                         </div>
                       </TableCell>
                       <TableCell className="py-3 md:py-6 bg-primary/5">
                         <div className="flex items-center gap-2 md:gap-4 px-2 md:px-4">
                           <CheckCircle className="h-6 w-6 md:h-10 md:w-10 text-[#2ECC71] drop-shadow-[0_0_20px_rgba(46,204,113,0.9)] flex-shrink-0" strokeWidth={3.5} />
-                          <span className="text-xs md:text-sm font-medium text-left">Fully automated delivery</span>
+                          <span className="text-xs md:text-sm font-medium text-left">Fully automated. You submit a brief; we deliver the final product</span>
                         </div>
                       </TableCell>
                     </TableRow>
@@ -176,18 +176,18 @@ const WhyChooseUs = () => {
                     <TableRow className="hover:bg-primary/10 transition-all duration-300 border-b border-primary/20 group">
                       <TableCell className="font-semibold text-xs md:text-base py-3 md:py-6 font-mono relative">
                         <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 bg-primary group-hover:h-full transition-all duration-300" />
-                        <span className="ml-2">Time</span>
+                        <span className="ml-2">Time Investment</span>
                       </TableCell>
                       <TableCell className="py-3 md:py-6">
                         <div className="flex items-center gap-2 md:gap-4 px-2 md:px-4">
                           <X className="h-6 w-6 md:h-10 md:w-10 text-[#E74C3C] drop-shadow-[0_0_15px_rgba(231,76,60,0.8)] flex-shrink-0" strokeWidth={3.5} />
-                          <span className="text-xs md:text-sm text-left">1-2 hours per piece</span>
+                          <span className="text-xs md:text-sm text-left">1-2 hours per piece (your time + AI's time)</span>
                         </div>
                       </TableCell>
                       <TableCell className="py-3 md:py-6 bg-primary/5">
                         <div className="flex items-center gap-2 md:gap-4 px-2 md:px-4">
                           <CheckCircle className="h-6 w-6 md:h-10 md:w-10 text-[#2ECC71] drop-shadow-[0_0_20px_rgba(46,204,113,0.9)] flex-shrink-0" strokeWidth={3.5} />
-                          <span className="text-xs md:text-sm font-medium text-left">5 minutes to submit brief</span>
+                          <span className="text-xs md:text-sm font-medium text-left">Just 5 minutes to submit a brief</span>
                         </div>
                       </TableCell>
                     </TableRow>
@@ -195,18 +195,18 @@ const WhyChooseUs = () => {
                     <TableRow className="hover:bg-primary/10 transition-all duration-300 border-b border-primary/20 group">
                       <TableCell className="font-semibold text-xs md:text-base py-3 md:py-6 font-mono relative">
                         <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 bg-primary group-hover:h-full transition-all duration-300" />
-                        <span className="ml-2">Expertise</span>
+                        <span className="ml-2">Required Expertise</span>
                       </TableCell>
                       <TableCell className="py-3 md:py-6">
                         <div className="flex items-center gap-2 md:gap-4 px-2 md:px-4">
                           <X className="h-6 w-6 md:h-10 md:w-10 text-[#E74C3C] drop-shadow-[0_0_15px_rgba(231,76,60,0.8)] flex-shrink-0" strokeWidth={3.5} />
-                          <span className="text-xs md:text-sm text-left">Skills required</span>
+                          <span className="text-xs md:text-sm text-left">Needs prompt engineering, SEO, and editing skills</span>
                         </div>
                       </TableCell>
                       <TableCell className="py-3 md:py-6 bg-primary/5">
                         <div className="flex items-center gap-2 md:gap-4 px-2 md:px-4">
                           <CheckCircle className="h-6 w-6 md:h-10 md:w-10 text-[#2ECC71] drop-shadow-[0_0_20px_rgba(46,204,113,0.9)] flex-shrink-0" strokeWidth={3.5} />
-                          <span className="text-xs md:text-sm font-medium text-left">Zero expertise needed</span>
+                          <span className="text-xs md:text-sm font-medium text-left">Zero expertise needed. Our system handles everything</span>
                         </div>
                       </TableCell>
                     </TableRow>
@@ -214,18 +214,18 @@ const WhyChooseUs = () => {
                     <TableRow className="hover:bg-primary/10 transition-all duration-300 border-b border-primary/20 group">
                       <TableCell className="font-semibold text-xs md:text-base py-3 md:py-6 font-mono relative">
                         <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 bg-primary group-hover:h-full transition-all duration-300" />
-                        <span className="ml-2">Quality</span>
+                        <span className="ml-2">Quality Control</span>
                       </TableCell>
                       <TableCell className="py-3 md:py-6">
                         <div className="flex items-center gap-2 md:gap-4 px-2 md:px-4">
                           <X className="h-6 w-6 md:h-10 md:w-10 text-[#E74C3C] drop-shadow-[0_0_15px_rgba(231,76,60,0.8)] flex-shrink-0" strokeWidth={3.5} />
-                          <span className="text-xs md:text-sm text-left">You're responsible</span>
+                          <span className="text-xs md:text-sm text-left">None. You are responsible for final checks</span>
                         </div>
                       </TableCell>
                       <TableCell className="py-3 md:py-6 bg-primary/5">
                         <div className="flex items-center gap-2 md:gap-4 px-2 md:px-4">
                           <CheckCircle className="h-6 w-6 md:h-10 md:w-10 text-[#2ECC71] drop-shadow-[0_0_20px_rgba(46,204,113,0.9)] flex-shrink-0" strokeWidth={3.5} />
-                          <span className="text-xs md:text-sm font-medium text-left">Built-in verification</span>
+                          <span className="text-xs md:text-sm font-medium text-left">Built-in verification for plagiarism, AI-detection, and SEO</span>
                         </div>
                       </TableCell>
                     </TableRow>
@@ -238,13 +238,13 @@ const WhyChooseUs = () => {
                       <TableCell className="py-3 md:py-6">
                         <div className="flex items-center gap-2 md:gap-4 px-2 md:px-4">
                           <X className="h-6 w-6 md:h-10 md:w-10 text-[#E74C3C] drop-shadow-[0_0_15px_rgba(231,76,60,0.8)] flex-shrink-0" strokeWidth={3.5} />
-                          <span className="text-xs md:text-sm text-left">Unpredictable</span>
+                          <span className="text-xs md:text-sm text-left">Unpredictable. Varies with every prompt</span>
                         </div>
                       </TableCell>
                       <TableCell className="py-3 md:py-6 bg-primary/5">
                         <div className="flex items-center gap-2 md:gap-4 px-2 md:px-4">
                           <CheckCircle className="h-6 w-6 md:h-10 md:w-10 text-[#2ECC71] drop-shadow-[0_0_20px_rgba(46,204,113,0.9)] flex-shrink-0" strokeWidth={3.5} />
-                          <span className="text-xs md:text-sm font-medium text-left">Reliably high-quality</span>
+                          <span className="text-xs md:text-sm font-medium text-left">Reliably high-quality every time</span>
                         </div>
                       </TableCell>
                     </TableRow>
