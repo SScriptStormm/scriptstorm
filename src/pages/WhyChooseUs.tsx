@@ -25,16 +25,12 @@ const WhyChooseUs = () => {
               <Link to="/onboarding-process" className="text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">
                 Our Process
               </Link>
-              <Link 
-                to="/" 
-                onClick={(e) => {
-                  e.preventDefault();
-                  window.location.href = "/#pricing";
-                }}
+              <a 
+                href="/#pricing"
                 className="text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
               >
                 Pricing
-              </Link>
+              </a>
             </div>
           </div>
         </div>
