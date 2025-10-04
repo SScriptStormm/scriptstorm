@@ -244,40 +244,58 @@ const WhyChooseUs = () => {
           </div>
 
           {/* Comparison Section */}
-          <div className="mb-20">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-mono">
-              <span className="text-primary">ScriptStorm</span> vs <span className="text-[#E74C3C]">The Old Way</span>
+          <div className="mb-20 relative">
+            {/* Cyber tech background effects */}
+            <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,hsl(var(--primary-glow)/0.03)_2px,hsl(var(--primary-glow)/0.03)_4px)] pointer-events-none" />
+            <div className="absolute inset-0 bg-[repeating-linear-gradient(90deg,transparent,transparent_2px,hsl(var(--primary-glow)/0.03)_2px,hsl(var(--primary-glow)/0.03)_4px)] pointer-events-none" />
+            
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-mono relative">
+              <span className="text-primary drop-shadow-[0_0_20px_hsl(var(--primary-glow))] animate-pulse">ScriptStorm</span> 
+              <span className="text-muted-foreground mx-2">vs</span> 
+              <span className="text-[#E74C3C] drop-shadow-[0_0_20px_rgba(231,76,60,0.6)] animate-pulse">The Old Way</span>
             </h2>
             <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
               {/* The Old Way */}
-              <Card className="border-2 border-[#E74C3C]/40 bg-white/95 backdrop-blur-sm shadow-neural hover:shadow-cyber transition-all duration-500">
-                <CardHeader className="text-center">
-                  <CardTitle className="text-2xl text-[#E74C3C] font-mono">❌ The Old Way (Freelancers, Agencies, or In-House)</CardTitle>
+              <Card className="border-2 border-[#E74C3C]/70 bg-gradient-to-br from-black/5 via-[#E74C3C]/5 to-black/10 backdrop-blur-md shadow-[0_0_50px_-10px_rgba(231,76,60,0.5),inset_0_0_30px_-10px_rgba(231,76,60,0.1)] hover:shadow-[0_0_70px_-10px_rgba(231,76,60,0.7),inset_0_0_40px_-10px_rgba(231,76,60,0.2)] transition-all duration-500 relative overflow-hidden">
+                {/* Animated circuit lines */}
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#E74C3C] to-transparent opacity-50 animate-pulse" />
+                <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#E74C3C] to-transparent opacity-50 animate-pulse" style={{ animationDelay: '1s' }} />
+                
+                {/* Corner accents */}
+                <div className="absolute top-0 left-0 w-20 h-20 border-t-2 border-l-2 border-[#E74C3C] opacity-60" />
+                <div className="absolute top-0 right-0 w-20 h-20 border-t-2 border-r-2 border-[#E74C3C] opacity-60" />
+                <div className="absolute bottom-0 left-0 w-20 h-20 border-b-2 border-l-2 border-[#E74C3C] opacity-60" />
+                <div className="absolute bottom-0 right-0 w-20 h-20 border-b-2 border-r-2 border-[#E74C3C] opacity-60" />
+                
+                <CardHeader className="text-center relative z-10">
+                  <CardTitle className="text-2xl text-[#E74C3C] font-mono drop-shadow-[0_0_15px_rgba(231,76,60,0.5)]">
+                    ❌ The Old Way (Freelancers, Agencies, or In-House)
+                  </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-4 relative z-10">
                   <div className="space-y-3">
-                    <div className="flex items-start gap-3">
-                      <span className="text-[#E74C3C] mt-1">•</span>
+                    <div className="flex items-start gap-3 group hover:translate-x-1 transition-transform duration-200">
+                      <span className="text-[#E74C3C] mt-1 drop-shadow-[0_0_10px_rgba(231,76,60,0.7)]">•</span>
                       <span className="text-sm"><strong>Slow:</strong> Weeks of back-and-forth revisions</span>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <span className="text-[#E74C3C] mt-1">•</span>
+                    <div className="flex items-start gap-3 group hover:translate-x-1 transition-transform duration-200">
+                      <span className="text-[#E74C3C] mt-1 drop-shadow-[0_0_10px_rgba(231,76,60,0.7)]">•</span>
                       <span className="text-sm"><strong>Expensive:</strong> $100-$500/article for quality</span>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <span className="text-[#E74C3C] mt-1">•</span>
+                    <div className="flex items-start gap-3 group hover:translate-x-1 transition-transform duration-200">
+                      <span className="text-[#E74C3C] mt-1 drop-shadow-[0_0_10px_rgba(231,76,60,0.7)]">•</span>
                       <span className="text-sm"><strong>Unpredictable:</strong> Varies by writer's skill</span>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <span className="text-[#E74C3C] mt-1">•</span>
+                    <div className="flex items-start gap-3 group hover:translate-x-1 transition-transform duration-200">
+                      <span className="text-[#E74C3C] mt-1 drop-shadow-[0_0_10px_rgba(231,76,60,0.7)]">•</span>
                       <span className="text-sm"><strong>Hard to Scale:</strong> Need to hire more writers = more $$$</span>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <span className="text-[#E74C3C] mt-1">•</span>
+                    <div className="flex items-start gap-3 group hover:translate-x-1 transition-transform duration-200">
+                      <span className="text-[#E74C3C] mt-1 drop-shadow-[0_0_10px_rgba(231,76,60,0.7)]">•</span>
                       <span className="text-sm">Endless project management and coordination</span>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <span className="text-[#E74C3C] mt-1">•</span>
+                    <div className="flex items-start gap-3 group hover:translate-x-1 transition-transform duration-200">
+                      <span className="text-[#E74C3C] mt-1 drop-shadow-[0_0_10px_rgba(231,76,60,0.7)]">•</span>
                       <span className="text-sm">No guarantees on delivery times or quality</span>
                     </div>
                   </div>
@@ -285,34 +303,46 @@ const WhyChooseUs = () => {
               </Card>
 
               {/* ScriptStorm */}
-              <Card className="border-2 border-[#2ECC71]/50 bg-white/95 backdrop-blur-sm shadow-hologram hover:shadow-cyber transition-all duration-500">
-                <CardHeader className="text-center">
-                  <CardTitle className="text-2xl text-[#2ECC71] font-mono">✅ ScriptStorm</CardTitle>
+              <Card className="border-2 border-[#2ECC71]/70 bg-gradient-to-br from-black/5 via-[#2ECC71]/5 to-black/10 backdrop-blur-md shadow-[0_0_50px_-10px_rgba(46,204,113,0.5),inset_0_0_30px_-10px_rgba(46,204,113,0.1)] hover:shadow-[0_0_70px_-10px_rgba(46,204,113,0.7),inset_0_0_40px_-10px_rgba(46,204,113,0.2)] transition-all duration-500 relative overflow-hidden">
+                {/* Animated circuit lines */}
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#2ECC71] to-transparent opacity-50 animate-pulse" />
+                <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#2ECC71] to-transparent opacity-50 animate-pulse" style={{ animationDelay: '1s' }} />
+                
+                {/* Corner accents */}
+                <div className="absolute top-0 left-0 w-20 h-20 border-t-2 border-l-2 border-[#2ECC71] opacity-60" />
+                <div className="absolute top-0 right-0 w-20 h-20 border-t-2 border-r-2 border-[#2ECC71] opacity-60" />
+                <div className="absolute bottom-0 left-0 w-20 h-20 border-b-2 border-l-2 border-[#2ECC71] opacity-60" />
+                <div className="absolute bottom-0 right-0 w-20 h-20 border-b-2 border-r-2 border-[#2ECC71] opacity-60" />
+                
+                <CardHeader className="text-center relative z-10">
+                  <CardTitle className="text-2xl text-[#2ECC71] font-mono drop-shadow-[0_0_15px_rgba(46,204,113,0.6)]">
+                    ✅ ScriptStorm
+                  </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-4 relative z-10">
                   <div className="space-y-3">
-                    <div className="flex items-start gap-3">
-                      <CheckCircle className="h-5 w-5 text-[#2ECC71] mt-0.5" />
+                    <div className="flex items-start gap-3 group hover:translate-x-1 transition-transform duration-200">
+                      <CheckCircle className="h-6 w-6 text-[#2ECC71] mt-0.5 drop-shadow-[0_0_15px_rgba(46,204,113,0.8)] flex-shrink-0" strokeWidth={3} />
                       <span className="text-sm">Professional AI content delivered in 24 hours</span>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <CheckCircle className="h-5 w-5 text-[#2ECC71] mt-0.5" />
+                    <div className="flex items-start gap-3 group hover:translate-x-1 transition-transform duration-200">
+                      <CheckCircle className="h-6 w-6 text-[#2ECC71] mt-0.5 drop-shadow-[0_0_15px_rgba(46,204,113,0.8)] flex-shrink-0" strokeWidth={3} />
                       <span className="text-sm">AI-generated, engaging, conversion-focused</span>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <CheckCircle className="h-5 w-5 text-[#2ECC71] mt-0.5" />
+                    <div className="flex items-start gap-3 group hover:translate-x-1 transition-transform duration-200">
+                      <CheckCircle className="h-6 w-6 text-[#2ECC71] mt-0.5 drop-shadow-[0_0_15px_rgba(46,204,113,0.8)] flex-shrink-0" strokeWidth={3} />
                       <span className="text-sm">Full SEO optimization and keyword research included</span>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <CheckCircle className="h-5 w-5 text-[#2ECC71] mt-0.5" />
+                    <div className="flex items-start gap-3 group hover:translate-x-1 transition-transform duration-200">
+                      <CheckCircle className="h-6 w-6 text-[#2ECC71] mt-0.5 drop-shadow-[0_0_15px_rgba(46,204,113,0.8)] flex-shrink-0" strokeWidth={3} />
                       <span className="text-sm">Transparent monthly subscriptions, starting at $297</span>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <CheckCircle className="h-5 w-5 text-[#2ECC71] mt-0.5" />
+                    <div className="flex items-start gap-3 group hover:translate-x-1 transition-transform duration-200">
+                      <CheckCircle className="h-6 w-6 text-[#2ECC71] mt-0.5 drop-shadow-[0_0_15px_rgba(46,204,113,0.8)] flex-shrink-0" strokeWidth={3} />
                       <span className="text-sm">Zero effort required from you</span>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <CheckCircle className="h-5 w-5 text-[#2ECC71] mt-0.5" />
+                    <div className="flex items-start gap-3 group hover:translate-x-1 transition-transform duration-200">
+                      <CheckCircle className="h-6 w-6 text-[#2ECC71] mt-0.5 drop-shadow-[0_0_15px_rgba(46,204,113,0.8)] flex-shrink-0" strokeWidth={3} />
                       <span className="text-sm">AI-assisted revisions included (1-3 rounds per package)</span>
                     </div>
                   </div>
