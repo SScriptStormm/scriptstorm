@@ -74,12 +74,13 @@ const WhyChooseUs = () => {
         <div className="absolute top-1/3 left-1/4 w-1 h-1 bg-primary-glow rounded-full animate-ping opacity-25" style={{ animationDelay: '1s' }} />
         <div className="absolute top-2/3 right-1/3 w-1 h-1 bg-primary-glow rounded-full animate-ping opacity-30" style={{ animationDelay: '3s' }} />
         
+        {/* Unified Full-Width Dotted Background - Extends from Hero to Comparison Charts */}
+        <div className="absolute left-1/2 -translate-x-1/2 w-screen -top-16 bottom-20 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,hsl(var(--primary-glow)/0.03)_2px,hsl(var(--primary-glow)/0.03)_4px)] pointer-events-none" />
+        <div className="absolute left-1/2 -translate-x-1/2 w-screen -top-16 bottom-20 bg-[repeating-linear-gradient(90deg,transparent,transparent_2px,hsl(var(--primary-glow)/0.03)_2px,hsl(var(--primary-glow)/0.03)_4px)] pointer-events-none" />
+        
         <div className="container mx-auto px-4 relative z-10">
-          {/* Comparison Charts Container with Dotted Background */}
+          {/* Comparison Charts Container */}
           <div className="relative mb-20">
-            {/* Unified Full-Width Dotted Background for Both Comparison Charts */}
-            <div className="absolute left-1/2 -translate-x-1/2 w-screen top-0 bottom-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,hsl(var(--primary-glow)/0.03)_2px,hsl(var(--primary-glow)/0.03)_4px)] pointer-events-none" />
-            <div className="absolute left-1/2 -translate-x-1/2 w-screen top-0 bottom-0 bg-[repeating-linear-gradient(90deg,transparent,transparent_2px,hsl(var(--primary-glow)/0.03)_2px,hsl(var(--primary-glow)/0.03)_4px)] pointer-events-none" />
           {/* ScriptStorm vs Generic AI Comparison */}
           <div className="mb-20 relative">
             
