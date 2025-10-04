@@ -74,18 +74,19 @@ const WhyChooseUs = () => {
         <div className="absolute top-1/3 left-1/4 w-1 h-1 bg-primary-glow rounded-full animate-ping opacity-25" style={{ animationDelay: '1s' }} />
         <div className="absolute top-2/3 right-1/3 w-1 h-1 bg-primary-glow rounded-full animate-ping opacity-30" style={{ animationDelay: '3s' }} />
         
-        {/* Unified Full-Width Dotted Background for Both Comparison Charts */}
-        <div className="absolute left-0 right-0 top-0 h-[calc(100%-200px)] bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,hsl(var(--primary-glow)/0.03)_2px,hsl(var(--primary-glow)/0.03)_4px)] pointer-events-none" />
-        <div className="absolute left-0 right-0 top-0 h-[calc(100%-200px)] bg-[repeating-linear-gradient(90deg,transparent,transparent_2px,hsl(var(--primary-glow)/0.03)_2px,hsl(var(--primary-glow)/0.03)_4px)] pointer-events-none" />
-        
         <div className="container mx-auto px-4 relative z-10">
+          {/* Comparison Charts Container with Dotted Background */}
+          <div className="relative mb-20">
+            {/* Unified Full-Width Dotted Background for Both Comparison Charts */}
+            <div className="absolute left-1/2 -translate-x-1/2 w-screen top-0 bottom-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,hsl(var(--primary-glow)/0.03)_2px,hsl(var(--primary-glow)/0.03)_4px)] pointer-events-none" />
+            <div className="absolute left-1/2 -translate-x-1/2 w-screen top-0 bottom-0 bg-[repeating-linear-gradient(90deg,transparent,transparent_2px,hsl(var(--primary-glow)/0.03)_2px,hsl(var(--primary-glow)/0.03)_4px)] pointer-events-none" />
           {/* ScriptStorm vs Generic AI Comparison */}
           <div className="mb-20 relative">
             
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 font-mono relative">
-              <span className="text-primary drop-shadow-[0_0_30px_hsl(var(--primary-glow))] brightness-110" style={{ animation: 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite' }}>ScriptStorm</span> 
+              <span className="text-primary drop-shadow-[0_0_30px_hsl(var(--primary-glow))] brightness-110">ScriptStorm</span> 
               <span className="text-muted-foreground mx-2">vs</span> 
-              <span className="text-[#F39C12] drop-shadow-[0_0_20px_rgba(243,156,18,0.6)]" style={{ animation: 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite' }}>Generic AI Assistants</span>
+              <span className="text-[#F39C12] drop-shadow-[0_0_20px_rgba(243,156,18,0.6)]">Generic AI Assistants</span>
               <div className="text-lg mt-2 text-muted-foreground/90">(e.g., ChatGPT)</div>
             </h2>
             
@@ -248,9 +249,9 @@ const WhyChooseUs = () => {
           <div className="mb-20 relative">
             
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 font-mono relative">
-              <span className="text-primary drop-shadow-[0_0_30px_hsl(var(--primary-glow))] brightness-110" style={{ animation: 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite' }}>ScriptStorm</span> 
+              <span className="text-primary drop-shadow-[0_0_30px_hsl(var(--primary-glow))] brightness-110">ScriptStorm</span> 
               <span className="text-muted-foreground mx-2">vs</span> 
-              <span className="text-[#E74C3C] drop-shadow-[0_0_20px_rgba(231,76,60,0.6)]" style={{ animation: 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite' }}>The Old Way</span>
+              <span className="text-[#E74C3C] drop-shadow-[0_0_20px_rgba(231,76,60,0.6)]">The Old Way</span>
             </h2>
             <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
               {/* The Old Way */}
@@ -347,6 +348,7 @@ const WhyChooseUs = () => {
                 </CardContent>
               </Card>
             </div>
+          </div>
           </div>
 
           {/* Key Advantages */}
