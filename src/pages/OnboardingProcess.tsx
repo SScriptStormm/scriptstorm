@@ -104,7 +104,14 @@ const OnboardingProcess = () => {
               <Link to="/onboarding-process" className="text-primary font-medium whitespace-nowrap">
                 Our Process
               </Link>
-              <Link to="/#pricing" className="text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">
+              <Link 
+                to="/#pricing"
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.location.href = "/#pricing";
+                }}
+                className="text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
+              >
                 Pricing
               </Link>
             </div>
