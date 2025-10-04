@@ -90,21 +90,21 @@ const OnboardingProcess = () => {
       {/* Navigation */}
       <nav className="bg-white/95 backdrop-blur-sm border-b border-primary-glow/20 sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link to="/" className="text-2xl font-bold text-primary font-mono">
+          <div className="flex items-center justify-between gap-4">
+            <Link to="/" className="text-xl md:text-2xl font-bold text-primary font-mono flex-shrink-0">
               ScriptStorm
             </Link>
-            <div className="flex items-center gap-6">
-              <Link to="/" className="text-muted-foreground hover:text-primary transition-colors">
+            <div className="flex items-center gap-2 sm:gap-3 md:gap-6 text-xs sm:text-sm md:text-base flex-wrap justify-end">
+              <Link to="/" className="text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">
                 Home
               </Link>
-              <Link to="/why-choose-us" className="text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/why-choose-us" className="text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">
                 Why Choose Us
               </Link>
-              <Link to="/onboarding-process" className="text-primary font-medium">
+              <Link to="/onboarding-process" className="text-primary font-medium whitespace-nowrap">
                 Our Process
               </Link>
-              <Link to="/#pricing" className="text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/#pricing" className="text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">
                 Pricing
               </Link>
             </div>
