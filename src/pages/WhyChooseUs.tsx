@@ -22,7 +22,7 @@ const WhyChooseUs = () => {
               <Link to="/why-choose-us" className="text-primary font-medium">
                 Why Choose Us
               </Link>
-              <Link to="/onboarding-process" className="hidden sm:inline text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/onboarding-process" className="text-muted-foreground hover:text-primary transition-colors">
                 Our Process
               </Link>
               <Link 
@@ -96,8 +96,7 @@ const WhyChooseUs = () => {
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-16 font-mono relative px-4">
               <span className="text-primary drop-shadow-[0_0_30px_hsl(var(--primary-glow))] brightness-110">ScriptStorm</span> 
               <span className="text-muted-foreground mx-1 md:mx-2">vs</span> 
-              <span className="text-[#F39C12] drop-shadow-[0_0_20px_rgba(243,156,18,0.6)]">Generic AI Assistants</span>
-              <div className="text-sm md:text-lg mt-2 text-muted-foreground/90">(e.g., ChatGPT)</div>
+              <span className="text-[#F39C12] drop-shadow-[0_0_20px_rgba(243,156,18,0.6)]">Generic AI Assistants (e.g., ChatGPT)</span>
             </h2>
             
             <Card className="max-w-6xl mx-auto border-2 border-primary/70 bg-gradient-to-br from-black/5 via-primary/5 to-black/10 backdrop-blur-md shadow-[0_0_50px_-10px_hsl(var(--primary-glow)/0.5),inset_0_0_30px_-10px_hsl(var(--primary-glow)/0.1)] hover:shadow-[0_0_70px_-10px_hsl(var(--primary-glow)/0.7),inset_0_0_40px_-10px_hsl(var(--primary-glow)/0.2)] transition-all duration-500 relative overflow-hidden">
@@ -124,13 +123,13 @@ const WhyChooseUs = () => {
                       <TableHead className="font-bold text-[#F39C12] text-xs md:text-lg w-3/8 text-center py-4 md:py-6 font-mono">
                         <div className="drop-shadow-[0_0_15px_rgba(243,156,18,0.5)] border-b-2 border-[#F39C12]/30 pb-2">
                           Generic AI
-                          <div className="text-xs font-normal mt-1 opacity-80 hidden md:block">(e.g., ChatGPT)</div>
+                          <div className="text-xs font-normal mt-1 opacity-80">(e.g., ChatGPT)</div>
                         </div>
                       </TableHead>
                       <TableHead className="font-bold text-primary text-xs md:text-lg w-3/8 text-center py-4 md:py-6 font-mono">
                         <div className="drop-shadow-[0_0_15px_hsl(var(--primary-glow)/0.7)] border-b-2 border-primary/40 pb-2">
                           ScriptStorm
-                          <div className="text-xs font-normal mt-1 opacity-80 hidden md:block">(AI-Powered)</div>
+                          <div className="text-xs font-normal mt-1 opacity-80">(AI-Powered)</div>
                         </div>
                       </TableHead>
                     </TableRow>
