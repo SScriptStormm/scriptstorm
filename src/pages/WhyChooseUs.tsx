@@ -1,8 +1,9 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, Clock, Award, Shield, Users, Target, Zap, Star } from "lucide-react";
+import { CheckCircle, Clock, Award, Shield, Users, Target, Zap, Star, X } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 const WhyChooseUs = () => {
   return (
@@ -74,6 +75,118 @@ const WhyChooseUs = () => {
         <div className="absolute top-2/3 right-1/3 w-1 h-1 bg-primary-glow rounded-full animate-ping opacity-30" style={{ animationDelay: '3s' }} />
         
         <div className="container mx-auto px-4 relative z-10">
+          {/* ScriptStorm vs Generic AI Comparison */}
+          <div className="mb-20">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-mono">
+              <span className="text-primary">ScriptStorm</span> vs <span className="text-[#F39C12]">Generic AI Assistants</span> (e.g., ChatGPT)
+            </h2>
+            <Card className="max-w-6xl mx-auto border-2 border-primary/30 bg-white/95 backdrop-blur-sm shadow-neural hover:shadow-cyber transition-all duration-500">
+              <CardContent className="p-6 overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow className="border-b-2 border-primary/20">
+                      <TableHead className="font-bold text-foreground text-base w-1/4">Feature</TableHead>
+                      <TableHead className="font-bold text-[#F39C12] text-base w-3/8 text-center">Generic AI Assistant (e.g., ChatGPT)</TableHead>
+                      <TableHead className="font-bold text-primary text-base w-3/8 text-center">ScriptStorm</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    <TableRow className="hover:bg-muted/30 transition-colors">
+                      <TableCell className="font-semibold">Result</TableCell>
+                      <TableCell className="text-center">
+                        <div className="flex items-center justify-center gap-2">
+                          <X className="h-4 w-4 text-[#E74C3C]" />
+                          <span className="text-sm">A generic text draft that requires heavy editing</span>
+                        </div>
+                      </TableCell>
+                      <TableCell className="text-center">
+                        <div className="flex items-center justify-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
+                          <span className="text-sm">A finished, polished, and published-ready piece of content</span>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow className="hover:bg-muted/30 transition-colors">
+                      <TableCell className="font-semibold">Process</TableCell>
+                      <TableCell className="text-center">
+                        <div className="flex items-center justify-center gap-2">
+                          <X className="h-4 w-4 text-[#E74C3C]" />
+                          <span className="text-sm">Manual. You write prompts, edit, fact-check, and optimize</span>
+                        </div>
+                      </TableCell>
+                      <TableCell className="text-center">
+                        <div className="flex items-center justify-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
+                          <span className="text-sm">Fully automated. You submit a brief; we deliver the final product</span>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow className="hover:bg-muted/30 transition-colors">
+                      <TableCell className="font-semibold">Time Investment</TableCell>
+                      <TableCell className="text-center">
+                        <div className="flex items-center justify-center gap-2">
+                          <X className="h-4 w-4 text-[#E74C3C]" />
+                          <span className="text-sm">1-2 hours per piece (your time + AI's time)</span>
+                        </div>
+                      </TableCell>
+                      <TableCell className="text-center">
+                        <div className="flex items-center justify-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
+                          <span className="text-sm">Just 5 minutes to submit a brief</span>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow className="hover:bg-muted/30 transition-colors">
+                      <TableCell className="font-semibold">Required Expertise</TableCell>
+                      <TableCell className="text-center">
+                        <div className="flex items-center justify-center gap-2">
+                          <X className="h-4 w-4 text-[#E74C3C]" />
+                          <span className="text-sm">Needs prompt engineering, SEO, and editing skills</span>
+                        </div>
+                      </TableCell>
+                      <TableCell className="text-center">
+                        <div className="flex items-center justify-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
+                          <span className="text-sm">Zero expertise needed. Our system handles everything</span>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow className="hover:bg-muted/30 transition-colors">
+                      <TableCell className="font-semibold">Quality Control</TableCell>
+                      <TableCell className="text-center">
+                        <div className="flex items-center justify-center gap-2">
+                          <X className="h-4 w-4 text-[#E74C3C]" />
+                          <span className="text-sm">None. You are responsible for final checks</span>
+                        </div>
+                      </TableCell>
+                      <TableCell className="text-center">
+                        <div className="flex items-center justify-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
+                          <span className="text-sm">Built-in verification for plagiarism, AI-detection, and SEO</span>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow className="hover:bg-muted/30 transition-colors">
+                      <TableCell className="font-semibold">Consistency</TableCell>
+                      <TableCell className="text-center">
+                        <div className="flex items-center justify-center gap-2">
+                          <X className="h-4 w-4 text-[#E74C3C]" />
+                          <span className="text-sm">Unpredictable. Varies with every prompt</span>
+                        </div>
+                      </TableCell>
+                      <TableCell className="text-center">
+                        <div className="flex items-center justify-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-[#2ECC71]" />
+                          <span className="text-sm">Reliably high-quality every time</span>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
+          </div>
+
           {/* Comparison Section */}
           <div className="mb-20">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-mono">
