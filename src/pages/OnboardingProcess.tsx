@@ -104,22 +104,12 @@ const OnboardingProcess = () => {
               <Link to="/onboarding-process" className="text-primary font-medium whitespace-nowrap">
                 Our Process
               </Link>
-              <Link 
-                to="/"
-                onClick={(e) => {
-                  e.preventDefault();
-                  window.location.href = "/";
-                  setTimeout(() => {
-                    const pricingSection = document.getElementById('pricing');
-                    if (pricingSection) {
-                      pricingSection.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  }, 100);
-                }}
+              <a 
+                href="/#pricing"
                 className="text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
               >
                 Pricing
-              </Link>
+              </a>
             </div>
           </div>
         </div>
