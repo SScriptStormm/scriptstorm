@@ -105,10 +105,16 @@ const OnboardingProcess = () => {
                 Our Process
               </Link>
               <Link 
-                to="/#pricing"
+                to="/"
                 onClick={(e) => {
                   e.preventDefault();
-                  window.location.href = "/#pricing";
+                  window.location.href = "/";
+                  setTimeout(() => {
+                    const pricingSection = document.getElementById('pricing');
+                    if (pricingSection) {
+                      pricingSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }, 100);
                 }}
                 className="text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
               >
