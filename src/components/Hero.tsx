@@ -66,7 +66,7 @@ const Hero = () => {
             ))}
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center px-2">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center px-4 sm:px-6 md:px-2">
             <div className="relative group w-full sm:w-auto">
               <div className="absolute inset-0 bg-gradient-cyber rounded-lg blur-lg opacity-40 group-hover:opacity-70 transition-all duration-500" />
               <Button 
