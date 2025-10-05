@@ -7,6 +7,8 @@ import { useState } from "react";
 
 const HelpCenter = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  
+  console.log("Current search query:", searchQuery);
 
   const faqItems = [
     {
@@ -88,9 +90,13 @@ const HelpCenter = () => {
     questions: category.questions.filter(
       item => 
         item.q.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.a.toLowerCase().includes(searchQuery.toLowerCase())
+        item.a.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        category.category.toLowerCase().includes(searchQuery.toLowerCase())
     )
   })).filter(category => category.questions.length > 0);
+  
+  console.log("Filtered FAQs count:", filteredFAQs.length);
+  console.log("Total questions:", filteredFAQs.reduce((acc, cat) => acc + cat.questions.length, 0));
 
   return (
     <div className="min-h-screen bg-background">
@@ -155,7 +161,10 @@ const HelpCenter = () => {
             <Input
               placeholder="Search for help articles..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => {
+                console.log("Search input changed:", e.target.value);
+                setSearchQuery(e.target.value);
+              }}
               className="bg-white border-2 border-gray-200 focus:border-primary/50 text-foreground placeholder:text-muted-foreground pl-12 py-6 text-lg shadow-lg"
             />
           </div>
