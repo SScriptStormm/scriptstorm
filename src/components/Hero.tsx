@@ -33,20 +33,20 @@ const Hero = () => {
       <div className="absolute inset-0 bg-gradient-hero opacity-85" />
       
       {/* Content */}
-      <div className="relative z-10 w-full px-4 sm:px-6 py-12 sm:py-20 text-center text-white">
+      <div className="relative z-10 w-full px-4 sm:px-8 md:px-12 lg:px-6 py-12 sm:py-20 text-center text-white">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl sm:text-4xl md:text-7xl font-bold mb-4 sm:mb-6 leading-tight">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 leading-tight px-2 sm:px-4">
             ScriptStorm: Done-For-You SEO Content—
             <span className="block text-primary-glow mt-2">Delivered in 24 Hours</span>
           </h1>
 
           
-          <p className="text-base sm:text-xl md:text-2xl mb-6 sm:mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed px-2">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed px-4 sm:px-8 md:px-12 lg:px-4">
             Professional Content Creation Service - No Tools, No Hassle, Just Results
           </p>
 
           {/* Key Benefits - AI Enhanced */}
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-4 md:gap-6 mb-8 sm:mb-10 px-2 sm:px-0">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-4 md:gap-6 mb-8 sm:mb-10 px-4 sm:px-8 md:px-12 lg:px-0">
             {[
               "24-Hour Delivery",
               "SEO Optimized",
