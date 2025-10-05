@@ -33,20 +33,20 @@ const Hero = () => {
       <div className="absolute inset-0 bg-gradient-hero opacity-85" />
       
       {/* Content */}
-      <div className="relative z-10 w-full px-4 py-20 text-center text-white">
+      <div className="relative z-10 w-full px-4 sm:px-6 py-12 sm:py-20 text-center text-white">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-7xl font-bold mb-4 sm:mb-6 leading-tight">
             ScriptStorm: Done-For-You SEO Content—
-            <span className="block text-primary-glow">Delivered in 24 Hours</span>
+            <span className="block text-primary-glow mt-2">Delivered in 24 Hours</span>
           </h1>
 
           
-          <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-xl md:text-2xl mb-6 sm:mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed px-2">
             Professional Content Creation Service - No Tools, No Hassle, Just Results
           </p>
 
           {/* Key Benefits - AI Enhanced */}
-          <div className="flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-6 mb-10 px-4 sm:px-0">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-4 md:gap-6 mb-8 sm:mb-10 px-2 sm:px-0">
             {[
               "24-Hour Delivery",
               "SEO Optimized",
@@ -56,46 +56,46 @@ const Hero = () => {
               <div key={benefit} className="relative group">
                 <div className="absolute inset-0 bg-gradient-cyber opacity-30 rounded-full blur-sm group-hover:blur-none transition-all duration-300" />
                 <div 
-                  className="relative flex items-center gap-2 bg-black/40 px-3 sm:px-4 md:px-6 py-2 sm:py-3 rounded-full backdrop-blur-md border border-primary-glow/40 shadow-neural hover:shadow-cyber transition-all duration-300 hover:border-primary-glow/70 animate-hologram-flicker"
+                  className="relative flex items-center gap-1.5 sm:gap-2 bg-black/40 px-2.5 sm:px-4 md:px-6 py-1.5 sm:py-2 md:py-3 rounded-full backdrop-blur-md border border-primary-glow/40 shadow-neural hover:shadow-cyber transition-all duration-300 hover:border-primary-glow/70 animate-hologram-flicker"
                   style={{ animationDelay: `${index * 0.5}s` }}
                 >
-                  <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-primary-glow animate-pulse-glow" />
-                  <span className="font-medium font-mono tracking-wide text-xs sm:text-sm">{benefit}</span>
+                  <CheckCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5 text-primary-glow animate-pulse-glow flex-shrink-0" />
+                  <span className="font-medium font-mono tracking-wide text-[10px] sm:text-xs md:text-sm whitespace-nowrap">{benefit}</span>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <div className="relative group">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center px-2">
+            <div className="relative group w-full sm:w-auto">
               <div className="absolute inset-0 bg-gradient-cyber rounded-lg blur-lg opacity-40 group-hover:opacity-70 transition-all duration-500" />
               <Button 
                 variant="hero" 
                 size="lg" 
                 onClick={handleGetStarted}
-                className="relative text-lg px-8 py-4 h-auto shadow-cyber hover:shadow-hologram transition-all duration-500 border-2 border-primary-glow/50 hover:border-primary-glow animate-pulse-glow font-mono tracking-wide"
+                className="relative w-full sm:w-auto text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 py-3 sm:py-3.5 md:py-4 h-auto shadow-cyber hover:shadow-hologram transition-all duration-500 border-2 border-primary-glow/50 hover:border-primary-glow animate-pulse-glow font-mono tracking-wide"
               >
                 🚀 START YOUR FIRST DRAFT
               </Button>
             </div>
-            <div className="relative group">
+            <div className="relative group w-full sm:w-auto">
               <div className="absolute inset-0 bg-gradient-neural rounded-lg blur-lg opacity-30 group-hover:opacity-50 transition-all duration-500" />
               <Button 
                 variant="ghost-white" 
                 size="lg"
                 onClick={() => window.location.href = '/why-choose-us'}
-                className="relative text-lg px-8 py-4 h-auto bg-black/30 backdrop-blur-md border-2 border-white/30 hover:border-white/60 shadow-neural hover:shadow-hologram transition-all duration-500 font-mono tracking-wide"
+                className="relative w-full sm:w-auto text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 py-3 sm:py-3.5 md:py-4 h-auto bg-black/30 backdrop-blur-md border-2 border-white/30 hover:border-white/60 shadow-neural hover:shadow-hologram transition-all duration-500 font-mono tracking-wide"
               >
                 WHY CHOOSE US
               </Button>
             </div>
-            <div className="relative group">
+            <div className="relative group w-full sm:w-auto">
               <div className="absolute inset-0 bg-gradient-neural rounded-lg blur-lg opacity-30 group-hover:opacity-50 transition-all duration-500" />
               <Button 
                 variant="ghost-white" 
                 size="lg"
                 onClick={() => window.location.href = '/auth'}
-                className="relative text-lg px-8 py-4 h-auto bg-black/30 backdrop-blur-md border-2 border-white/30 hover:border-white/60 shadow-neural hover:shadow-hologram transition-all duration-500 font-mono tracking-wide"
+                className="relative w-full sm:w-auto text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 py-3 sm:py-3.5 md:py-4 h-auto bg-black/30 backdrop-blur-md border-2 border-white/30 hover:border-white/60 shadow-neural hover:shadow-hologram transition-all duration-500 font-mono tracking-wide"
               >
                 CLIENT LOGIN
               </Button>
@@ -104,19 +104,19 @@ const Hero = () => {
 
 
           {/* Trust Indicators - AI Enhanced */}
-          <div className="mt-16 text-white/70 px-4 sm:px-0">
-            <div className="flex flex-wrap justify-center gap-2 sm:gap-4 md:gap-8 text-xs sm:text-sm font-mono tracking-widest">
-              <div className="flex items-center gap-2 px-2 sm:px-3 md:px-4 py-2 bg-black/20 rounded-lg border border-primary-glow/20 backdrop-blur-sm">
-                <span className="text-primary-glow">🚀</span>
+          <div className="mt-8 sm:mt-12 md:mt-16 text-white/70 px-2 sm:px-4">
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-8 text-[9px] sm:text-xs md:text-sm font-mono tracking-wide sm:tracking-widest">
+              <div className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 bg-black/20 rounded-lg border border-primary-glow/20 backdrop-blur-sm">
+                <span className="text-primary-glow text-xs sm:text-sm">🚀</span>
                 <span className="whitespace-nowrap">STOP WAITING. START PUBLISHING.</span>
               </div>
-              <div className="flex items-center gap-2 px-2 sm:px-3 md:px-4 py-2 bg-black/20 rounded-lg border border-primary-glow/20 backdrop-blur-sm">
-                <span className="text-primary-glow">🤖</span>
+              <div className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 bg-black/20 rounded-lg border border-primary-glow/20 backdrop-blur-sm">
+                <span className="text-primary-glow text-xs sm:text-sm">🤖</span>
                 <span className="whitespace-nowrap hidden sm:inline">AI-POWERED AUTOMATION</span>
                 <span className="whitespace-nowrap sm:hidden">AI-POWERED</span>
               </div>
-              <div className="flex items-center gap-2 px-2 sm:px-3 md:px-4 py-2 bg-black/20 rounded-lg border border-primary-glow/20 backdrop-blur-sm">
-                <span className="text-primary-glow">▲</span>
+              <div className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 bg-black/20 rounded-lg border border-primary-glow/20 backdrop-blur-sm">
+                <span className="text-primary-glow text-xs sm:text-sm">▲</span>
                 <span className="whitespace-nowrap">24HR TURNAROUND</span>
               </div>
             </div>
