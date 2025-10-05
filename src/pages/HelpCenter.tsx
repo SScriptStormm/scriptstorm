@@ -12,6 +12,28 @@ const HelpCenter = () => {
 
   const faqItems = [
     {
+      category: "About ScriptStorm",
+      icon: <Users className="h-5 w-5" />,
+      questions: [
+        {
+          q: "What is ScriptStorm?",
+          a: "ScriptStorm is a fully automated, AI-powered content creation service that delivers high-quality SEO articles, social media posts, and product descriptions within 24 hours. We eliminate meetings, calls, and manual processes to give you fast, reliable content at scale."
+        },
+        {
+          q: "Why choose ScriptStorm over other content services?",
+          a: "Unlike traditional agencies, ScriptStorm offers guaranteed 24-hour delivery with zero meetings or calls required. Our AI-powered system provides consistent quality, transparent pricing with no hidden fees, and unlimited scalability without hiring writers or project managers."
+        },
+        {
+          q: "Who is ScriptStorm for?",
+          a: "ScriptStorm is perfect for SaaS companies, eCommerce brands, digital marketing agencies, and startups that need consistent, SEO-optimized content without the hassle of managing freelancers or agencies."
+        },
+        {
+          q: "What makes ScriptStorm different?",
+          a: "Our fully automated workflow means faster turnaround, lower costs, and more predictable results. We combine advanced AI technology with rigorous quality control systems to ensure every piece meets professional standards."
+        }
+      ]
+    },
+    {
       category: "Getting Started",
       icon: <Zap className="h-5 w-5" />,
       questions: [
@@ -26,6 +48,10 @@ const HelpCenter = () => {
         {
           q: "What types of content do you create?",
           a: "We specialize in AI-generated SEO articles, social media posts, and product descriptions, optimized for SaaS and eCommerce brands."
+        },
+        {
+          q: "How do I get started?",
+          a: "Simply choose your plan, complete the brief onboarding form with your brand information and content requirements, and submit your first content request. Your content will be delivered to your dashboard within 24 hours."
         }
       ]
     },
@@ -66,6 +92,28 @@ const HelpCenter = () => {
       ]
     },
     {
+      category: "Features & Benefits",
+      icon: <CheckCircle className="h-5 w-5" />,
+      questions: [
+        {
+          q: "What are the main benefits of using ScriptStorm?",
+          a: "Key benefits include: guaranteed 24-hour delivery, no meetings or calls required, consistent brand voice across all content, scalable production without hiring, transparent pricing with no hidden fees, and professional SEO optimization built-in."
+        },
+        {
+          q: "Do you offer SEO optimization?",
+          a: "Yes, every piece of content is automatically optimized for SEO. Our AI system performs keyword research, implements proper heading structure, optimizes meta descriptions, and ensures readability scores meet industry standards."
+        },
+        {
+          q: "Can you handle large volume content needs?",
+          a: "Absolutely. Our automated system scales effortlessly. Whether you need 10 articles or 100+ per month, we maintain the same quality and delivery speed across all our plans."
+        },
+        {
+          q: "Is the content original?",
+          a: "Yes, all content is 100% original and passes plagiarism checks. Our AI generates unique content for every request, and our quality control system verifies originality before delivery."
+        }
+      ]
+    },
+    {
       category: "Technical Support",
       icon: <Shield className="h-5 w-5" />,
       questions: [
@@ -80,6 +128,10 @@ const HelpCenter = () => {
         {
           q: "Do you provide content analytics?",
           a: "Our higher-tier plans include high-level performance insights and SEO scoring to help you measure content success."
+        },
+        {
+          q: "What if I have technical issues?",
+          a: "Our support system is available to help with any technical issues. Visit the Support page or email us, and we'll respond promptly to resolve any problems with your dashboard, downloads, or account."
         }
       ]
     }
