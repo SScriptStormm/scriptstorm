@@ -113,7 +113,7 @@ const WhyChooseUs = () => {
                       <TableHead className="font-bold text-foreground text-sm md:text-lg w-1/4 py-4 md:py-6 font-mono">
                         <div className="flex items-center gap-2">
                           <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                          <span className="hidden md:inline">Feature</span>
+                          <span>Feature</span>
                         </div>
                       </TableHead>
                       <TableHead className="font-bold text-[#F39C12] text-xs md:text-lg w-3/8 text-center py-4 md:py-6 font-mono">
