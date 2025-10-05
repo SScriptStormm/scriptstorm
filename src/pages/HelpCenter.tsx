@@ -210,29 +210,59 @@ const HelpCenter = () => {
       <section className="py-20 bg-gradient-to-br from-gray-50 to-primary/5">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto space-y-16">
-            {filteredFAQs.map((category, categoryIndex) => (
-              <div key={categoryIndex}>
-                <div className="flex items-center gap-4 mb-12">
-                  <div className="p-4 bg-primary/10 rounded-xl text-primary">
-                    {category.icon}
+            {searchQuery && filteredFAQs.length === 0 ? (
+              <Card className="bg-white border-2 border-gray-100 shadow-lg p-12 text-center">
+                <p className="text-muted-foreground text-lg">
+                  No help articles found for "<span className="font-semibold text-foreground">{searchQuery}</span>". 
+                  Try different keywords or{" "}
+                  <button 
+                    onClick={() => setSearchQuery("")}
+                    className="text-primary hover:text-primary-glow underline font-medium"
+                  >
+                    clear your search
+                  </button>.
+                </p>
+              </Card>
+            ) : (
+              <>
+                {searchQuery && (
+                  <div className="text-center mb-8">
+                    <p className="text-muted-foreground text-lg">
+                      Found <span className="font-bold text-primary">{filteredFAQs.reduce((acc, cat) => acc + cat.questions.length, 0)}</span> result(s) for "<span className="font-semibold text-foreground">{searchQuery}</span>"
+                      {" "}<button 
+                        onClick={() => setSearchQuery("")}
+                        className="text-primary hover:text-primary-glow underline font-medium ml-2"
+                      >
+                        Clear search
+                      </button>
+                    </p>
                   </div>
-                  <h2 className="text-4xl font-bold text-foreground">{category.category}</h2>
-                </div>
-                
-                <div className="space-y-6">
-                  {category.questions.map((item, itemIndex) => (
-                    <Card key={itemIndex} className="bg-white border-2 border-gray-100 hover:border-primary/30 shadow-lg hover:shadow-xl transition-all duration-300">
-                      <CardHeader>
-                        <CardTitle className="text-foreground text-xl font-bold">{item.q}</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-muted-foreground leading-relaxed text-lg">{item.a}</p>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </div>
-            ))}
+                )}
+                {filteredFAQs.map((category, categoryIndex) => (
+                  <div key={categoryIndex}>
+                    <div className="flex items-center gap-4 mb-12">
+                      <div className="p-4 bg-primary/10 rounded-xl text-primary">
+                        {category.icon}
+                      </div>
+                      <h2 className="text-4xl font-bold text-foreground">{category.category}</h2>
+                    </div>
+                    
+                    <div className="space-y-6">
+                      {category.questions.map((item, itemIndex) => (
+                        <Card key={itemIndex} className="bg-white border-2 border-gray-100 hover:border-primary/30 shadow-lg hover:shadow-xl transition-all duration-300">
+                          <CardHeader>
+                            <CardTitle className="text-foreground text-xl font-bold">{item.q}</CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <p className="text-muted-foreground leading-relaxed text-lg">{item.a}</p>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </>
+            )}
           </div>
         </div>
       </section>
