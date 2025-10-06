@@ -457,7 +457,7 @@ const Auth = () => {
                       className="absolute right-3 top-1/2 transform -translate-y-1/2 text-primary-glow/60 hover:text-primary-glow transition-colors"
                       disabled={isBlocked}
                     >
-                      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      {showPassword ? <Eye className="h-4 w-4" /> : <EyeOff className="h-4 w-4" />}
                     </button>
                   </div>
                   
