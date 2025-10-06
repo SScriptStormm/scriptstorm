@@ -186,6 +186,22 @@ const Contact = () => {
               </div>
             </div>
           </div>
+
+          {/* Existing Client Note */}
+          <div className="max-w-6xl mx-auto mt-12">
+            <Card className="bg-card/80 backdrop-blur-sm border-l-4 border-primary shadow-xl">
+              <CardContent className="p-6">
+                <h3 className="font-semibold text-foreground mb-2">Already a ScriptStorm client?</h3>
+                <p className="text-muted-foreground">
+                  For faster help with your account, active projects, or revisions, please visit our dedicated{" "}
+                  <Link to="/support" className="text-primary-glow hover:text-primary font-semibold transition-colors">
+                    Customer Support
+                  </Link>{" "}
+                  page.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </section>
     </div>
