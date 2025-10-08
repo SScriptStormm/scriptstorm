@@ -10,7 +10,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-hero overflow-hidden">
+    <section className="relative min-h-screen xl:min-h-[110vh] 2xl:min-h-[115vh] flex items-center justify-center bg-gradient-hero overflow-hidden">
       {/* AI Neural Network Background */}
       <div className="absolute inset-0 bg-gradient-mesh opacity-60" />
       <div className="absolute inset-0 bg-gradient-neural animate-neural-pulse" />
@@ -33,7 +33,7 @@ const Hero = () => {
       <div className="absolute inset-0 bg-gradient-hero opacity-85" />
       
       {/* Content */}
-      <div className="relative z-10 w-full px-6 sm:px-8 md:px-12 lg:px-6 py-12 sm:py-16 md:py-20 text-center text-white">
+      <div className="relative z-10 w-full px-6 sm:px-8 md:px-12 lg:px-6 py-12 sm:py-16 md:py-20 xl:py-24 2xl:py-28 text-center text-white">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-4 sm:mb-5 md:mb-6 leading-tight">
             ScriptStorm: Done-For-You SEO Content—
