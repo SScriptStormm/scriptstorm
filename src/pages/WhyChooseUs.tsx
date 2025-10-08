@@ -358,7 +358,7 @@ const WhyChooseUs = () => {
           </div>
 
           {/* Key Advantages */}
-          <div className="mb-20">
+          <div className="mt-24 mb-20">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-12 font-mono px-4">
               Our Key <span className="text-[#3498DB]">Advantages</span>
             </h2>
