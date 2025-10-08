@@ -73,7 +73,7 @@ const RefundPolicy = () => {
               If you have any questions about our refund policy or need to request a refund, 
               please contact us at:
             </p>
-            <p className="mb-2">Email: refunds@scriptstorm.com</p>
+            <p className="mb-2">Email: billing@scriptstorm.org</p>
             <p className="mb-2">Phone: (555) 123-4567</p>
             <p className="mb-2">Address: 123 Business Ave, Suite 100, City, State 12345</p>
           </section>
