@@ -35,18 +35,18 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-10 w-full px-6 sm:px-8 md:px-12 lg:px-6 py-12 sm:py-16 md:py-20 xl:py-24 2xl:py-28 text-center text-white">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-4 sm:mb-5 md:mb-6 leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold mb-4 sm:mb-5 md:mb-6 xl:mb-8 leading-tight">
             ScriptStorm: Done-For-You SEO Content—
-            <span className="block text-primary-glow mt-2">Delivered in 24 Hours</span>
+            <span className="block text-primary-glow mt-2 xl:mt-3">Delivered in 24 Hours</span>
           </h1>
 
           
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-7 md:mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl mb-6 sm:mb-7 md:mb-8 xl:mb-10 text-white/90 max-w-3xl xl:max-w-4xl mx-auto leading-relaxed">
             Professional Content Creation Service - No Tools, No Hassle, Just Results
           </p>
 
           {/* Key Benefits - AI Enhanced */}
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 lg:gap-6 mb-8 sm:mb-9 md:mb-10">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 lg:gap-6 xl:gap-8 mb-8 sm:mb-9 md:mb-10 xl:mb-12">
             {[
               "24-Hour Delivery",
               "SEO Optimized",
@@ -56,24 +56,24 @@ const Hero = () => {
               <div key={benefit} className="relative group">
                 <div className="absolute inset-0 bg-gradient-cyber opacity-30 rounded-full blur-sm group-hover:blur-none transition-all duration-300" />
                 <div 
-                  className="relative flex items-center gap-1.5 sm:gap-2 bg-black/40 px-3 sm:px-4 md:px-5 lg:px-6 py-2 sm:py-2 md:py-2.5 lg:py-3 rounded-full backdrop-blur-md border border-primary-glow/40 shadow-neural hover:shadow-cyber transition-all duration-300 hover:border-primary-glow/70 animate-hologram-flicker"
+                  className="relative flex items-center gap-1.5 sm:gap-2 xl:gap-3 bg-black/40 px-3 sm:px-4 md:px-5 lg:px-6 xl:px-8 py-2 sm:py-2 md:py-2.5 lg:py-3 xl:py-4 rounded-full backdrop-blur-md border border-primary-glow/40 shadow-neural hover:shadow-cyber transition-all duration-300 hover:border-primary-glow/70 animate-hologram-flicker"
                   style={{ animationDelay: `${index * 0.5}s` }}
                 >
-                  <CheckCircle className="h-4 w-4 sm:h-4 sm:w-4 md:h-5 md:w-5 text-primary-glow animate-pulse-glow flex-shrink-0" />
-                  <span className="font-medium font-mono tracking-wide text-xs sm:text-xs md:text-sm whitespace-nowrap">{benefit}</span>
+                  <CheckCircle className="h-4 w-4 sm:h-4 sm:w-4 md:h-5 md:w-5 xl:h-6 xl:w-6 text-primary-glow animate-pulse-glow flex-shrink-0" />
+                  <span className="font-medium font-mono tracking-wide text-xs sm:text-xs md:text-sm xl:text-base whitespace-nowrap">{benefit}</span>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-4 lg:gap-6 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-4 lg:gap-6 xl:gap-8 justify-center">
             <div className="relative group w-full sm:w-auto">
               <div className="absolute inset-0 bg-gradient-cyber rounded-lg blur-lg opacity-40 group-hover:opacity-70 transition-all duration-500" />
               <Button 
                 variant="hero" 
                 size="lg" 
                 onClick={handleGetStarted}
-                className="relative w-full sm:w-auto text-sm sm:text-base md:text-base lg:text-lg px-6 sm:px-6 md:px-7 lg:px-8 py-3 sm:py-3.5 md:py-3.5 lg:py-4 h-auto shadow-cyber hover:shadow-hologram transition-all duration-500 border-2 border-primary-glow/50 hover:border-primary-glow animate-pulse-glow font-mono tracking-wide"
+                className="relative w-full sm:w-auto text-sm sm:text-base md:text-base lg:text-lg xl:text-xl px-6 sm:px-6 md:px-7 lg:px-8 xl:px-10 py-3 sm:py-3.5 md:py-3.5 lg:py-4 xl:py-5 h-auto shadow-cyber hover:shadow-hologram transition-all duration-500 border-2 border-primary-glow/50 hover:border-primary-glow animate-pulse-glow font-mono tracking-wide"
               >
                 🚀 START YOUR FIRST DRAFT
               </Button>
@@ -84,7 +84,7 @@ const Hero = () => {
                 variant="ghost-white" 
                 size="lg"
                 onClick={() => window.location.href = '/why-choose-us'}
-                className="relative w-full sm:w-auto text-sm sm:text-base md:text-base lg:text-lg px-6 sm:px-6 md:px-7 lg:px-8 py-3 sm:py-3.5 md:py-3.5 lg:py-4 h-auto bg-black/30 backdrop-blur-md border-2 border-white/30 hover:border-white/60 shadow-neural hover:shadow-hologram transition-all duration-500 font-mono tracking-wide"
+                className="relative w-full sm:w-auto text-sm sm:text-base md:text-base lg:text-lg xl:text-xl px-6 sm:px-6 md:px-7 lg:px-8 xl:px-10 py-3 sm:py-3.5 md:py-3.5 lg:py-4 xl:py-5 h-auto bg-black/30 backdrop-blur-md border-2 border-white/30 hover:border-white/60 shadow-neural hover:shadow-hologram transition-all duration-500 font-mono tracking-wide"
               >
                 WHY CHOOSE US
               </Button>
@@ -95,7 +95,7 @@ const Hero = () => {
                 variant="ghost-white" 
                 size="lg"
                 onClick={() => window.location.href = '/auth'}
-                className="relative w-full sm:w-auto text-sm sm:text-base md:text-base lg:text-lg px-6 sm:px-6 md:px-7 lg:px-8 py-3 sm:py-3.5 md:py-3.5 lg:py-4 h-auto bg-black/30 backdrop-blur-md border-2 border-white/30 hover:border-white/60 shadow-neural hover:shadow-hologram transition-all duration-500 font-mono tracking-wide"
+                className="relative w-full sm:w-auto text-sm sm:text-base md:text-base lg:text-lg xl:text-xl px-6 sm:px-6 md:px-7 lg:px-8 xl:px-10 py-3 sm:py-3.5 md:py-3.5 lg:py-4 xl:py-5 h-auto bg-black/30 backdrop-blur-md border-2 border-white/30 hover:border-white/60 shadow-neural hover:shadow-hologram transition-all duration-500 font-mono tracking-wide"
               >
                 CLIENT LOGIN
               </Button>
@@ -104,19 +104,19 @@ const Hero = () => {
 
 
           {/* Trust Indicators - AI Enhanced */}
-          <div className="mt-8 sm:mt-12 md:mt-16 text-white/70 px-2 sm:px-4">
-            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-8 text-[9px] sm:text-xs md:text-sm font-mono tracking-wide sm:tracking-widest">
-              <div className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 bg-black/20 rounded-lg border border-primary-glow/20 backdrop-blur-sm">
-                <span className="text-primary-glow text-xs sm:text-sm">🚀</span>
+          <div className="mt-8 sm:mt-12 md:mt-16 xl:mt-20 text-white/70 px-2 sm:px-4">
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-8 xl:gap-10 text-[9px] sm:text-xs md:text-sm xl:text-base font-mono tracking-wide sm:tracking-widest">
+              <div className="flex items-center gap-1 sm:gap-2 xl:gap-3 px-2 sm:px-3 md:px-4 xl:px-6 py-1.5 sm:py-2 xl:py-3 bg-black/20 rounded-lg border border-primary-glow/20 backdrop-blur-sm">
+                <span className="text-primary-glow text-xs sm:text-sm xl:text-lg">🚀</span>
                 <span className="whitespace-nowrap">STOP WAITING. START PUBLISHING.</span>
               </div>
-              <div className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 bg-black/20 rounded-lg border border-primary-glow/20 backdrop-blur-sm">
-                <span className="text-primary-glow text-xs sm:text-sm">🤖</span>
+              <div className="flex items-center gap-1 sm:gap-2 xl:gap-3 px-2 sm:px-3 md:px-4 xl:px-6 py-1.5 sm:py-2 xl:py-3 bg-black/20 rounded-lg border border-primary-glow/20 backdrop-blur-sm">
+                <span className="text-primary-glow text-xs sm:text-sm xl:text-lg">🤖</span>
                 <span className="whitespace-nowrap hidden sm:inline">AI-POWERED AUTOMATION</span>
                 <span className="whitespace-nowrap sm:hidden">AI-POWERED</span>
               </div>
-              <div className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 bg-black/20 rounded-lg border border-primary-glow/20 backdrop-blur-sm">
-                <span className="text-primary-glow text-xs sm:text-sm">▲</span>
+              <div className="flex items-center gap-1 sm:gap-2 xl:gap-3 px-2 sm:px-3 md:px-4 xl:px-6 py-1.5 sm:py-2 xl:py-3 bg-black/20 rounded-lg border border-primary-glow/20 backdrop-blur-sm">
+                <span className="text-primary-glow text-xs sm:text-sm xl:text-lg">▲</span>
                 <span className="whitespace-nowrap">24HR TURNAROUND</span>
               </div>
             </div>
