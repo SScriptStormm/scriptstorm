@@ -27,7 +27,7 @@ serve(async (req) => {
     logStep("Request data", { selectedAddOns, packageType, billing });
 
     // Use guest email for all checkouts since no auth is required
-    const userEmail = "guest@scriptstorm.com";
+    const userEmail = "billing@scriptstorm.org";
     const userId = "guest";
     logStep("Using guest checkout", { email: userEmail });
 
