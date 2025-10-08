@@ -59,7 +59,7 @@ const Hero = () => {
                   className="relative flex items-center gap-1.5 sm:gap-2 xl:gap-2.5 bg-black/40 px-3 sm:px-4 md:px-5 lg:px-6 xl:px-7 py-2 sm:py-2 md:py-2.5 lg:py-3 xl:py-3.5 rounded-full backdrop-blur-md border border-primary-glow/40 shadow-neural hover:shadow-cyber transition-all duration-300 hover:border-primary-glow/70 animate-hologram-flicker"
                   style={{ animationDelay: `${index * 0.5}s` }}
                 >
-                  <CheckCircle className="h-4 w-4 sm:h-4 sm:w-4 md:h-5 md:w-5 xl:h-5 xl:w-5 text-primary-glow flex-shrink-0" fill="currentColor" strokeWidth={0} />
+                  <CheckCircle className="h-4 w-4 sm:h-4 sm:w-4 md:h-5 md:w-5 xl:h-5 xl:w-5 text-primary-glow flex-shrink-0" fill="none" />
                   <span className="font-medium font-mono tracking-wide text-xs sm:text-xs md:text-sm xl:text-sm whitespace-nowrap">{benefit}</span>
                 </div>
               </div>
