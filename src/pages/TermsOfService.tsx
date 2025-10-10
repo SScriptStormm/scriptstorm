@@ -129,7 +129,7 @@ const TermsOfService = () => {
           <section>
             <h2 className="text-2xl font-semibold mb-4 text-foreground">11. Contact Information</h2>
             <p>
-              For questions regarding these Terms of Service, please contact us at support@scriptstorm.com
+              For questions regarding these Terms of Service, please contact us at hello@scriptstorm.org
             </p>
           </section>
 
