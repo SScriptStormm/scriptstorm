@@ -35,14 +35,13 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-10 w-full px-6 sm:px-8 md:px-12 lg:px-6 py-12 sm:py-16 md:py-20 text-center text-white">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-7xl font-bold mb-4 sm:mb-5 md:mb-6 xl:mb-7 leading-tight">
-            ScriptStorm: Done-For-You SEO Content—
-            <span className="block text-primary-glow mt-2">Delivered in 24 Hours</span>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-5 md:mb-6 xl:mb-7 leading-tight">
+            ScriptStorm: <span className="text-primary-glow">Your Hands-Free Content Engine</span>
           </h1>
 
           
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-2xl mb-6 sm:mb-7 md:mb-8 xl:mb-9 text-white/90 max-w-3xl mx-auto leading-relaxed">
-            Professional Content Creation Service - No Tools, No Hassle, Just Results
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl mb-6 sm:mb-7 md:mb-8 xl:mb-9 text-white/90 max-w-4xl mx-auto leading-relaxed">
+            Get Scalable, SEO-Optimized Articles from Our Automated Team. No Hiring, No Management. Just Consistent Output That Ranks.
           </p>
 
           {/* Key Benefits - AI Enhanced */}
