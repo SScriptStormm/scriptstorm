@@ -361,19 +361,24 @@ const Pricing = () => {
                   </p>
                 </div>
                 <div className="space-y-3">
-                  {(isAnnual ? pkg.annualFeatures : pkg.features).map((feature, index) => (
-                    <div key={index} className="flex items-start gap-3">
-                      <div 
-                        className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
-                        style={{ backgroundColor: pkg.color }}
-                      >
-                        <CheckCircle className="h-3 w-3 text-white" />
+                  {(isAnnual ? pkg.annualFeatures : pkg.features).map((feature, index) => {
+                    const [title, ...rest] = feature.split(':');
+                    const description = rest.join(':');
+                    
+                    return (
+                      <div key={index} className="flex items-start gap-3">
+                        <div 
+                          className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                          style={{ backgroundColor: pkg.color }}
+                        >
+                          <CheckCircle className="h-3 w-3 text-white" />
+                        </div>
+                        <span className="text-sm leading-relaxed">
+                          <strong>{title}</strong>{description ? `:${description}` : ''}
+                        </span>
                       </div>
-                      <span className="text-sm leading-relaxed">
-                        {feature}
-                      </span>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
                 
                 <Button 
