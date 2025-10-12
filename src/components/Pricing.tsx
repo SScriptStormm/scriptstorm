@@ -171,7 +171,7 @@ const Pricing = () => {
   const enterprisePackages = [
     {
       id: 'scale',
-      name: 'Scale',
+      name: 'SCALE',
       monthly: {
         price: '$1,297',
         period: 'USD / month'
@@ -182,21 +182,23 @@ const Pricing = () => {
         monthlyEquivalent: '$1,038',
         savings: '$3,114'
       },
-      color: '#9B59B6',
+      color: '#8B5CF6',
       features: [
-        '25 Market-Dominating Blog Articles (2,000-3,000 words each)',
-        '75 Strategic Social Media Posts',
-        '25 High-Conversion Product/Service Pages',
-        '24-Hour Orchestrated Delivery',
+        '25 Market-Dominating Blog Articles (2,000-3,000 words each): High-velocity, in-depth content designed to secure top search rankings and establish undeniable market presence.',
+        '75 Strategic Social Media Posts: A multi-channel campaign to amplify your content, engage your entire market, and drive qualified leads at scale.',
+        '25 High-Conversion Product/Service Pages: Persuasive, SEO-optimized copy to transform your key offerings into your top sales performers.',
+        '24-Hour Orchestrated Delivery: A relentless, daily content production cycle that keeps you constantly ahead of the competition.',
         '2 Rounds of Priority AI-Assisted Revisions: Refine content to perfection with our dedicated revision process.',
-        'Advanced Keyword & Competitor Annihilation',
-        'Plagiarism & AI Scan Guarantee',
-        'Efficient Support Portal'
-      ]
+        'Advanced Keyword & Competitor Annihilation: We don\'t just analyze competitors; we identify and exploit their weaknesses to steal their market share.',
+        'Plagiarism & AI Scan Guarantee: Enterprise-grade originality and quality assurance.',
+        'Efficient Support Portal: Streamlined communication for seamless project management.'
+      ],
+      note: 'Fully Automated Workflow • No Meetings • No Delays',
+      details: 'For established businesses ready to dominate their niche and outpace competitors with relentless, high-volume content.'
     },
     {
       id: 'authority',
-      name: 'Authority',
+      name: 'AUTHORITY',
       monthly: {
         price: '$1,797',
         period: 'USD / month'
@@ -207,23 +209,25 @@ const Pricing = () => {
         monthlyEquivalent: '$1,438',
         savings: '$4,314'
       },
-      color: '#E74C3C',
+      color: '#EC4899',
       badge: 'BEST VALUE',
       features: [
-        '30 Industry-Leading Blog Articles (2,500-4,000 words each)',
-        '90 Targeted Social Media Campaign Posts',
-        '30 Premium Product/Service Descriptions',
-        '24-Hour Orchestrated Delivery',
+        '30 Industry-Leading Blog Articles (2,500-4,000 words each): Definitive, data-driven reports and pillar content that becomes the primary resource in your field.',
+        '90 Targeted Social Media Campaign Posts: Sophisticated campaigns designed to build a loyal community around your brand and establish a feedback loop with your audience.',
+        '30 Premium Product/Service Descriptions: Complete, feature-to-benefit storytelling that justifies premium pricing and closes high-value deals.',
+        '24-Hour Orchestrated Delivery: A relentless, daily content production cycle that keeps you constantly ahead of the competition.',
         '3 Rounds of Priority AI-Assisted Revisions: Enhanced revision cycles for complex, enterprise-level content.',
-        'Strategic Keyword & Topic Mapping',
-        'Competitor Gap Exploitation',
-        'Plagiarism & AI Scan Guarantee',
-        'Priority Support Portal'
-      ]
+        'Strategic Keyword & Topic Mapping: We map the entire competitive landscape to own the conversation around your core offerings.',
+        'Competitor Gap Exploitation: In-depth analysis that reveals and attacks the content voids in your competitors\' strategies.',
+        'Plagiarism & AI Scan Guarantee: Enterprise-grade originality and quality assurance.',
+        'Priority Support Portal: Faster response times and dedicated handling for mission-critical projects.'
+      ],
+      note: 'Fully Automated Workflow • No Meetings • No Delays',
+      details: 'For industry players who need to become the undisputed thought leader and control the market narrative.'
     },
     {
       id: 'dominance',
-      name: 'Dominance',
+      name: 'DOMINANCE',
       monthly: {
         price: '$2,997',
         period: 'USD / month'
@@ -234,22 +238,20 @@ const Pricing = () => {
         monthlyEquivalent: '$2,398',
         savings: '$7,194'
       },
-      color: '#F39C12',
-      badge: 'Early Adopter',
+      color: '#F59E0B',
       features: [
-        '50 Unbeatable Cornerstone Assets (3,000-5,000+ words each)',
-        '150 Viral-Ready Social Media Posts',
-        'Unlimited Product Descriptions* (*Fair Use policy applies)',
-        '12-Hour Lightning Delivery',
-        'Unlimited AI-Assisted Revisions: Perfection, on demand. (Within project scope & brand guidelines)',
-        'Enterprise Keyword Intelligence',
-        'AI-Driven Performance Dashboard',
-        'Market Dominance Roadmap',
-        'Priority Support Portal',
-        'Dedicated Client Workspace'
+        '50 Unbeatable Cornerstone Assets (3,000-5,000+ words each): A relentless firehose of flagship content that makes your brand synonymous with the industry itself.',
+        '150 Viral-Ready Social Media Posts: A constant, high-impact social presence engineered for maximum shareability and brand recall.',
+        'Unlimited Product Descriptions*: Blanket your entire catalog with conversion-optimized copy.',
+        '12-Hour Lightning Delivery: The fastest content turnaround on the market, giving you an insurmountable speed advantage.',
+        'Unlimited AI-Assisted Revisions*: Perfection, on demand.',
+        'Enterprise Keyword Intelligence: Proprietary insights that uncover untapped market opportunities and predict trends.',
+        'AI-Driven Performance Dashboard: Real-time analytics on content performance, competitor movement, and ROI.',
+        'Market Dominance Roadmap: A strategic, quarterly plan to systematically dismantle competitor positions and cement your #1 status.',
+        'Priority Support Portal & Dedicated Client Workspace: A white-glove experience for your enterprise team.'
       ],
-      note: '*Fair Use policy applies',
-      details: 'Unlimited revisions within the scope of the project and brand guidelines.'
+      note: '*Fair Use policy applies. Unlimited revisions within the scope of the project and brand guidelines.',
+      details: 'The ultimate content weapon for enterprises that accept nothing less than total market leadership.'
     }
   ];
 
