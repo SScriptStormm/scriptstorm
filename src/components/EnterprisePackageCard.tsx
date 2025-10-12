@@ -103,11 +103,11 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
           </span>
         </div>
         {isAnnual && (
-          <div className="mb-4 p-3 bg-green-50 dark:bg-green-950 rounded-lg border-2 border-green-400 dark:border-green-600 shadow-lg">
-            <p className="text-lg text-green-700 dark:text-green-300 font-bold mb-1">
+          <div className="mb-4 p-4 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900 dark:to-emerald-900 rounded-lg border-3 border-green-500 dark:border-green-400 shadow-xl ring-2 ring-green-300 dark:ring-green-600">
+            <p className="text-lg text-green-800 dark:text-green-200 font-extrabold mb-1">
               🎉 Get 2 Months Free & Save {pkg.annual.savings}
             </p>
-            <p className="text-sm text-green-700 dark:text-green-300 font-semibold">
+            <p className="text-sm text-green-700 dark:text-green-300 font-bold">
               Equivalent to {pkg.annual.monthlyEquivalent}/month
             </p>
           </div>
@@ -117,39 +117,65 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
       <CardContent className="space-y-6 relative">
         <div className="space-y-2">
           {/* Always show first 5 features */}
-          {pkg.features.slice(0, 5).map((feature, index) => (
-            <div 
-              key={`${pkg.id}-base-${index}`} 
-              className="flex items-center gap-2"
-            >
+          {pkg.features.slice(0, 5).map((feature, index) => {
+            const [boldPart, ...restParts] = feature.split(':');
+            const restText = restParts.join(':');
+            
+            return (
               <div 
-                className="w-4 h-4 rounded-full flex items-center justify-center"
-                style={{ backgroundColor: pkg.color }}
+                key={`${pkg.id}-base-${index}`} 
+                className="flex items-center gap-2"
               >
-                <CheckCircle className="h-2.5 w-2.5 text-white" />
+                <div 
+                  className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0"
+                  style={{ backgroundColor: pkg.color }}
+                >
+                  <CheckCircle className="h-2.5 w-2.5 text-white" />
+                </div>
+                <span className="text-sm">
+                  {restText ? (
+                    <>
+                      <strong>{boldPart}</strong>:{restText}
+                    </>
+                  ) : (
+                    boldPart
+                  )}
+                </span>
               </div>
-              <span className="text-sm">{feature}</span>
-            </div>
-          ))}
+            );
+          })}
           
           {/* Only show additional features when THIS specific package is expanded */}
           {isExpanded && pkg.features.length > 5 && (
             <>
               <div className="pt-2 border-t border-border" />
-              {pkg.features.slice(5).map((feature, index) => (
-                <div 
-                  key={`${pkg.id}-expanded-${index + 5}`} 
-                  className="flex items-center gap-2"
-                >
+              {pkg.features.slice(5).map((feature, index) => {
+                const [boldPart, ...restParts] = feature.split(':');
+                const restText = restParts.join(':');
+                
+                return (
                   <div 
-                    className="w-4 h-4 rounded-full flex items-center justify-center"
-                    style={{ backgroundColor: pkg.color }}
+                    key={`${pkg.id}-expanded-${index + 5}`} 
+                    className="flex items-center gap-2"
                   >
-                    <CheckCircle className="h-2.5 w-2.5 text-white" />
+                    <div 
+                      className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0"
+                      style={{ backgroundColor: pkg.color }}
+                    >
+                      <CheckCircle className="h-2.5 w-2.5 text-white" />
+                    </div>
+                    <span className="text-sm">
+                      {restText ? (
+                        <>
+                          <strong>{boldPart}</strong>:{restText}
+                        </>
+                      ) : (
+                        boldPart
+                      )}
+                    </span>
                   </div>
-                  <span className="text-sm">{feature}</span>
-                </div>
-              ))}
+                );
+              })}
             </>
           )}
         </div>

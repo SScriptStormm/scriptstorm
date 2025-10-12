@@ -177,19 +177,19 @@ const Pricing = () => {
         period: 'USD / month'
       },
       annual: {
-        price: '$12,451',
+        price: '$12,450',
         period: 'USD / year',
         monthlyEquivalent: '$1,038',
-        savings: '$3,113'
+        savings: '$3,114'
       },
       color: '#9B59B6',
       features: [
-        '25 AI-generated SEO articles',
-        '75 social media posts',
-        '25 product descriptions',
+        '25 Market-Dominating Blog Articles (2,000-3,000 words each)',
+        '75 Strategic Social Media Posts',
+        '25 High-Conversion Product/Service Pages',
         '24-Hour Orchestrated Delivery',
-        '2 Rounds of AI-Assisted Revisions',
-        'Advanced Keyword & Competitor Analysis',
+        '2 Rounds of Priority AI-Assisted Revisions: Refine content to perfection with our dedicated revision process.',
+        'Advanced Keyword & Competitor Annihilation',
         'Plagiarism & AI Scan Guarantee',
         'Efficient Support Portal'
       ]
@@ -202,21 +202,21 @@ const Pricing = () => {
         period: 'USD / month'
       },
       annual: {
-        price: '$17,251',
+        price: '$17,250',
         period: 'USD / year',
         monthlyEquivalent: '$1,438',
-        savings: '$4,313'
+        savings: '$4,314'
       },
       color: '#E74C3C',
       badge: 'BEST VALUE',
       features: [
-        '30 AI-generated SEO articles',
-        '90 social media posts',
-        '30 product descriptions',
+        '30 Industry-Leading Blog Articles (2,500-4,000 words each)',
+        '90 Targeted Social Media Campaign Posts',
+        '30 Premium Product/Service Descriptions',
         '24-Hour Orchestrated Delivery',
-        '3 Rounds of AI-Assisted Revisions',
+        '3 Rounds of Priority AI-Assisted Revisions: Enhanced revision cycles for complex, enterprise-level content.',
         'Strategic Keyword & Topic Mapping',
-        'Competitor Gap Analysis',
+        'Competitor Gap Exploitation',
         'Plagiarism & AI Scan Guarantee',
         'Priority Support Portal'
       ]
@@ -229,22 +229,21 @@ const Pricing = () => {
         period: 'USD / month'
       },
       annual: {
-        price: '$28,771',
+        price: '$28,770',
         period: 'USD / year',
         monthlyEquivalent: '$2,398',
-        savings: '$7,193'
+        savings: '$7,194'
       },
       color: '#F39C12',
       badge: 'Early Adopter',
       features: [
-        '50 AI-generated SEO articles',
-        '150 social media posts',
-        'Unlimited product descriptions*',
-        '12-Hour Orchestrated Delivery',
-        'Unlimited AI-Assisted Revisions*',
+        '50 Unbeatable Cornerstone Assets (3,000-5,000+ words each)',
+        '150 Viral-Ready Social Media Posts',
+        'Unlimited Product Descriptions* (*Fair Use policy applies)',
+        '12-Hour Lightning Delivery',
+        'Unlimited AI-Assisted Revisions: Perfection, on demand. (Within project scope & brand guidelines)',
         'Enterprise Keyword Intelligence',
         'AI-Driven Performance Dashboard',
-        'Plagiarism & AI Scan Guarantee',
         'Market Dominance Roadmap',
         'Priority Support Portal',
         'Dedicated Client Workspace'
