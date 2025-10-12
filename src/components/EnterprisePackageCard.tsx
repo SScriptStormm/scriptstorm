@@ -103,15 +103,12 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
           </span>
         </div>
         {isAnnual && (
-          <div className="mb-4 p-3 bg-green-50 dark:bg-green-950 rounded-lg border border-green-200 dark:border-green-800">
+          <div className="mb-4 p-3 bg-green-50 dark:bg-green-950 rounded-lg border-2 border-green-400 dark:border-green-600 shadow-lg">
             <p className="text-lg text-green-700 dark:text-green-300 font-bold mb-1">
-              🎉 Get 2 Months Free!
+              🎉 Get 2 Months Free & Save {pkg.annual.savings}
             </p>
             <p className="text-sm text-green-700 dark:text-green-300 font-semibold">
               Equivalent to {pkg.annual.monthlyEquivalent}/month
-            </p>
-            <p className="text-xs text-green-600 dark:text-green-400">
-              💰 Save {pkg.annual.savings} annually
             </p>
           </div>
         )}
@@ -189,14 +186,14 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
           }}
         >
           {loadingStates[pkg.id] ? "Processing..." : 
-            (isAnnual ? (pkg.id === 'dominance' ? "Start Saving & Get My 12-Hour Draft" : "Start Saving & Get My 24-Hour Draft") : 
+            (isAnnual ? (pkg.id === 'dominance' ? "💎 Start Saving & Get My 12-Hour Draft" : "💎 Start Saving & Get My 24-Hour Draft") : 
               pkg.id === 'dominance' ? "🚀 Start My 12-Hour Draft" : "🚀 Start My 24-Hour Draft"
             )
           }
         </Button>
         
         <p className="text-xs text-muted-foreground text-center italic">
-          Email-only workflow • No meetings • No delays
+          Fully Automated Workflow • No Meetings • No Delays
         </p>
       </CardContent>
     </Card>
