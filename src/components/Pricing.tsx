@@ -209,7 +209,7 @@ const Pricing = () => {
         monthlyEquivalent: '$1,438',
         savings: '$4,314'
       },
-      color: '#EC4899',
+      color: '#E74C3C',
       badge: 'BEST VALUE',
       features: [
         '30 Industry-Leading Blog Articles (2,500-4,000 words each): Definitive, data-driven reports and pillar content that becomes the primary resource in your field.',
