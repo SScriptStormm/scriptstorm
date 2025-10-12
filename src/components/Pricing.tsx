@@ -193,6 +193,16 @@ const Pricing = () => {
         'Plagiarism & AI Scan Guarantee: Enterprise-grade originality and quality assurance.',
         'Efficient Support Portal: Streamlined communication for seamless project management.'
       ],
+      annualFeatures: [
+        '300 Market-Dominating Blog Articles (2,000-3,000 words each): An unstoppable, year-long content assault to secure top search rankings and establish undeniable market presence.',
+        '900 Strategic Social Media Posts: A continuous, multi-channel campaign to own the conversation in your market.',
+        '300 High-Conversion Product/Service Pages: A completely optimized sales engine for your entire offerings.',
+        '24-Hour Orchestrated Delivery',
+        '24 Rounds of Priority AI-Assisted Revisions (2 per month)',
+        'Advanced Keyword & Competitor Annihilation',
+        'Plagiarism & AI Scan Guarantee',
+        'Efficient Support Portal'
+      ],
       note: 'Fully Automated Workflow • No Meetings • No Delays',
       details: 'For established businesses ready to dominate their niche and outpace competitors with relentless, high-volume content.'
     },
@@ -222,6 +232,17 @@ const Pricing = () => {
         'Plagiarism & AI Scan Guarantee: Enterprise-grade originality and quality assurance.',
         'Priority Support Portal: Faster response times and dedicated handling for mission-critical projects.'
       ],
+      annualFeatures: [
+        '360 Industry-Leading Blog Articles (2,500-4,000 words each): A year\'s worth of definitive, data-driven reports that make your brand the primary resource in your field.',
+        '1,080 Targeted Social Media Campaign Posts: A non-stop, sophisticated community-building and engagement machine.',
+        '360 Premium Product/Service Descriptions: Complete storytelling for your entire portfolio, justifying premium pricing.',
+        '24-Hour Orchestrated Delivery',
+        '36 Rounds of Priority AI-Assisted Revisions (3 per month)',
+        'Strategic Keyword & Topic Mapping',
+        'Competitor Gap Exploitation',
+        'Plagiarism & AI Scan Guarantee',
+        'Priority Support Portal'
+      ],
       note: 'Fully Automated Workflow • No Meetings • No Delays',
       details: 'For industry players who need to become the undisputed thought leader and control the market narrative.'
     },
@@ -249,6 +270,17 @@ const Pricing = () => {
         'AI-Driven Performance Dashboard: Real-time analytics on content performance, competitor movement, and ROI.',
         'Market Dominance Roadmap: A strategic, quarterly plan to systematically dismantle competitor positions and cement your #1 status.',
         'Priority Support Portal & Dedicated Client Workspace: A white-glove experience for your enterprise team.'
+      ],
+      annualFeatures: [
+        '600 Unbeatable Cornerstone Assets (3,000-5,000+ words each): An annual arsenal of flagship content that makes your brand synonymous with the industry itself.',
+        '1,800 Viral-Ready Social Media Posts: A constant, high-impact social presence engineered for maximum shareability.',
+        'Unlimited Product Descriptions*',
+        '12-Hour Lightning Delivery',
+        'Unlimited AI-Assisted Revisions*',
+        'Enterprise Keyword Intelligence',
+        'AI-Driven Performance Dashboard',
+        'Market Dominance Roadmap (Quarterly)',
+        'Priority Support Portal & Dedicated Client Workspace'
       ],
       note: '*Fair Use policy applies. Unlimited revisions within the scope of the project and brand guidelines.',
       details: 'The ultimate content weapon for enterprises that accept nothing less than total market leadership.'

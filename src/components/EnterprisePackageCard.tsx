@@ -20,6 +20,7 @@ interface EnterprisePackage {
   color: string;
   badge?: string;
   features: string[];
+  annualFeatures?: string[];
   note?: string;
   details?: string;
 }
@@ -116,68 +117,77 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
       
       <CardContent className="space-y-6 relative">
         <div className="space-y-2">
-          {/* Always show first 5 features */}
-          {pkg.features.slice(0, 5).map((feature, index) => {
-            const [boldPart, ...restParts] = feature.split(':');
-            const restText = restParts.join(':');
+          {/* Get the correct feature list based on billing type */}
+          {(() => {
+            const displayFeatures = isAnnual && pkg.annualFeatures ? pkg.annualFeatures : pkg.features;
             
             return (
-              <div 
-                key={`${pkg.id}-base-${index}`} 
-                className="flex items-center gap-2"
-              >
-                <div 
-                  className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0"
-                  style={{ backgroundColor: pkg.color }}
-                >
-                  <CheckCircle className="h-2.5 w-2.5 text-white" />
-                </div>
-                <span className="text-sm">
-                  {restText ? (
-                    <>
-                      <strong>{boldPart}</strong>:{restText}
-                    </>
-                  ) : (
-                    boldPart
-                  )}
-                </span>
-              </div>
-            );
-          })}
-          
-          {/* Only show additional features when THIS specific package is expanded */}
-          {isExpanded && pkg.features.length > 5 && (
-            <>
-              <div className="pt-2 border-t border-border" />
-              {pkg.features.slice(5).map((feature, index) => {
-                const [boldPart, ...restParts] = feature.split(':');
-                const restText = restParts.join(':');
-                
-                return (
-                  <div 
-                    key={`${pkg.id}-expanded-${index + 5}`} 
-                    className="flex items-center gap-2"
-                  >
+              <>
+                {/* Always show first 5 features */}
+                {displayFeatures.slice(0, 5).map((feature, index) => {
+                  const [boldPart, ...restParts] = feature.split(':');
+                  const restText = restParts.join(':');
+                  
+                  return (
                     <div 
-                      className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0"
-                      style={{ backgroundColor: pkg.color }}
+                      key={`${pkg.id}-base-${index}`} 
+                      className="flex items-center gap-2"
                     >
-                      <CheckCircle className="h-2.5 w-2.5 text-white" />
+                      <div 
+                        className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0"
+                        style={{ backgroundColor: pkg.color }}
+                      >
+                        <CheckCircle className="h-2.5 w-2.5 text-white" />
+                      </div>
+                      <span className="text-sm">
+                        {restText ? (
+                          <>
+                            <strong>{boldPart}</strong>:{restText}
+                          </>
+                        ) : (
+                          boldPart
+                        )}
+                      </span>
                     </div>
-                    <span className="text-sm">
-                      {restText ? (
-                        <>
-                          <strong>{boldPart}</strong>:{restText}
-                        </>
-                      ) : (
-                        boldPart
-                      )}
-                    </span>
-                  </div>
-                );
-              })}
-            </>
-          )}
+                  );
+                })}
+                
+                {/* Only show additional features when THIS specific package is expanded */}
+                {isExpanded && displayFeatures.length > 5 && (
+                  <>
+                    <div className="pt-2 border-t border-border" />
+                    {displayFeatures.slice(5).map((feature, index) => {
+                      const [boldPart, ...restParts] = feature.split(':');
+                      const restText = restParts.join(':');
+                      
+                      return (
+                        <div 
+                          key={`${pkg.id}-expanded-${index + 5}`} 
+                          className="flex items-center gap-2"
+                        >
+                          <div 
+                            className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0"
+                            style={{ backgroundColor: pkg.color }}
+                          >
+                            <CheckCircle className="h-2.5 w-2.5 text-white" />
+                          </div>
+                          <span className="text-sm">
+                            {restText ? (
+                              <>
+                                <strong>{boldPart}</strong>:{restText}
+                              </>
+                            ) : (
+                              boldPart
+                            )}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </>
+                )}
+              </>
+            );
+          })()}
         </div>
 
         {pkg.note && (
@@ -188,19 +198,22 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
           <p className="text-xs text-muted-foreground bg-muted/30 p-2 rounded">{pkg.details}</p>
         )}
 
-        {pkg.features.length > 5 && (
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            onClick={toggleExpansion}
-            className="text-xs w-full relative hover:bg-opacity-10"
-            style={{ color: pkg.color, backgroundColor: 'transparent' }}
-            onMouseDown={(e) => e.stopPropagation()}
-            onMouseUp={(e) => e.stopPropagation()}
-          >
-            {isExpanded ? 'Show Less' : `Show All ${pkg.features.length} Features`}
-          </Button>
-        )}
+        {(() => {
+          const displayFeatures = isAnnual && pkg.annualFeatures ? pkg.annualFeatures : pkg.features;
+          return displayFeatures.length > 5 && (
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              onClick={toggleExpansion}
+              className="text-xs w-full relative hover:bg-opacity-10"
+              style={{ color: pkg.color, backgroundColor: 'transparent' }}
+              onMouseDown={(e) => e.stopPropagation()}
+              onMouseUp={(e) => e.stopPropagation()}
+            >
+              {isExpanded ? 'Show Less' : `Show All ${displayFeatures.length} Features`}
+            </Button>
+          );
+        })()}
         
         <Button 
           onClick={() => onCheckout(pkg.id)}
