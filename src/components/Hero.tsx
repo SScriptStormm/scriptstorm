@@ -33,7 +33,7 @@ const Hero = () => {
       <div className="absolute inset-0 bg-gradient-hero opacity-85" />
       
       {/* Content */}
-      <div className="relative z-10 w-full px-6 sm:px-8 md:px-12 lg:px-6 py-12 sm:py-16 md:py-20 text-center text-white">
+      <div className="relative z-10 w-full px-6 sm:px-8 md:px-12 lg:px-6 pt-6 sm:pt-12 md:pt-16 pb-12 sm:pb-16 md:pb-20 text-center text-white">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-5 md:mb-6 xl:mb-7 leading-tight">
             ScriptStorm: <span className="text-primary-glow">Your Hands-Free Content Engine</span>
