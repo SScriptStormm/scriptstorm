@@ -374,8 +374,8 @@ const Pricing = () => {
                     {isAnnual ? '/ year' : '/ month'}
                   </span>
                 </div>
-                <div className={`mb-4 min-h-[88px] flex items-center justify-center ${isAnnual ? '' : 'opacity-0 pointer-events-none'}`}>
-                  <div className="p-4 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900 dark:to-emerald-900 rounded-lg border-3 border-green-500 dark:border-green-400 shadow-xl ring-2 ring-green-300 dark:ring-green-600 w-full">
+                {isAnnual && (
+                  <div className="mb-4 p-4 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900 dark:to-emerald-900 rounded-lg border-3 border-green-500 dark:border-green-400 shadow-xl ring-2 ring-green-300 dark:ring-green-600">
                     <p className="text-lg text-green-800 dark:text-green-200 font-extrabold mb-1">
                       🎉 Get 2 Months Free & Save {pkg.annual.savings}
                     </p>
@@ -383,7 +383,7 @@ const Pricing = () => {
                       Equivalent to {pkg.annual.monthlyEquivalent}/month
                     </p>
                   </div>
-                </div>
+                )}
                 <CardDescription className="text-base">{isAnnual ? pkg.annualDescription : pkg.monthlyDescription}</CardDescription>
               </CardHeader>
               
