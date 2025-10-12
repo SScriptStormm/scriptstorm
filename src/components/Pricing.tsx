@@ -342,11 +342,11 @@ const Pricing = () => {
                   </span>
                 </div>
                 {isAnnual && (
-                  <div className="mb-4 p-3 bg-green-50 dark:bg-green-950 rounded-lg border-2 border-green-400 dark:border-green-600 shadow-lg">
-                    <p className="text-lg text-green-700 dark:text-green-300 font-bold mb-1">
+                  <div className="mb-4 p-4 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900 dark:to-emerald-900 rounded-lg border-3 border-green-500 dark:border-green-400 shadow-xl ring-2 ring-green-300 dark:ring-green-600">
+                    <p className="text-lg text-green-800 dark:text-green-200 font-extrabold mb-1">
                       🎉 Get 2 Months Free & Save {pkg.annual.savings}
                     </p>
-                    <p className="text-sm text-green-700 dark:text-green-300 font-semibold">
+                    <p className="text-sm text-green-700 dark:text-green-300 font-bold">
                       Equivalent to {pkg.annual.monthlyEquivalent}/month
                     </p>
                   </div>
