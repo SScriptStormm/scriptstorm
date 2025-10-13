@@ -7,11 +7,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Navigate, Link } from "react-router-dom";
 import { User, Session } from "@supabase/supabase-js";
-import { Eye, EyeOff, Mail, Lock, UserPlus, LogIn, Zap, Check, X, Shield, AlertCircle, ArrowLeft } from "lucide-react";
+import { Eye, EyeOff, Mail, Lock, LogIn, Zap, Check, X, Shield, AlertCircle, ArrowLeft } from "lucide-react";
 import scriptStormLogo from "@/assets/scriptstorm-logo.png";
 
 const Auth = () => {
-  const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -22,15 +21,12 @@ const Auth = () => {
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [logoState, setLogoState] = useState<'normal' | 'loading' | 'success' | 'error' | 'clicked'>('normal');
   const [showRipple, setShowRipple] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
   const [failedAttempts, setFailedAttempts] = useState(0);
   const [isBlocked, setIsBlocked] = useState(false);
   
   // Form validation states
   const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
   const [emailValid, setEmailValid] = useState(false);
-  const [passwordStrength, setPasswordStrength] = useState({ score: 0, feedback: "" });
   
   const { toast } = useToast();
 
@@ -43,52 +39,14 @@ const Auth = () => {
     return isValid;
   }, []);
 
-  // Password strength calculation
-  const calculatePasswordStrength = useCallback((password: string) => {
-    if (password.length === 0) {
-      setPasswordStrength({ score: 0, feedback: "" });
-      return;
-    }
-    
-    let score = 0;
-    let feedback = "";
-    
-    if (password.length >= 8) score++;
-    if (password.match(/[a-z]/)) score++;
-    if (password.match(/[A-Z]/)) score++;
-    if (password.match(/[0-9]/)) score++;
-    if (password.match(/[^A-Za-z0-9]/)) score++;
-    
-    switch (score) {
-      case 0-1:
-        feedback = "Very weak";
-        break;
-      case 2:
-        feedback = "Weak";
-        break;
-      case 3:
-        feedback = "Fair";
-        break;
-      case 4:
-        feedback = "Good";
-        break;
-      case 5:
-        feedback = "Strong";
-        break;
-    }
-    
-    setPasswordStrength({ score, feedback });
-  }, []);
-
   // Debounced validation
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       if (email) validateEmail(email);
-      if (password && !isLogin) calculatePasswordStrength(password);
     }, 300);
     
     return () => clearTimeout(timeoutId);
-  }, [email, password, isLogin, validateEmail, calculatePasswordStrength]);
+  }, [email, validateEmail]);
 
   // Rate limiting
   useEffect(() => {
@@ -148,40 +106,23 @@ const Auth = () => {
     setLogoState('loading');
 
     try {
-      if (isLogin) {
-        const { error } = await supabase.auth.signInWithPassword({
-          email,
-          password,
-        });
-        if (error) throw error;
-        setLogoState('success');
-        toast({
-          title: "Welcome back!",
-          description: "Successfully logged in to your dashboard.",
-        });
-        // Keep success state for a moment before redirect
-        setTimeout(() => setLogoState('normal'), 1000);
-      } else {
-        const redirectUrl = `${window.location.origin}/dashboard`;
-        const { error } = await supabase.auth.signUp({
-          email,
-          password,
-          options: {
-            emailRedirectTo: redirectUrl
-          }
-        });
-        if (error) throw error;
-        setLogoState('success');
-        toast({
-          title: "Account created!",
-          description: "Check your email to verify your account.",
-        });
-        setTimeout(() => setLogoState('normal'), 1000);
-      }
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      if (error) throw error;
+      setLogoState('success');
+      toast({
+        title: "Welcome back!",
+        description: "Successfully logged in to your dashboard.",
+      });
+      // Keep success state for a moment before redirect
+      setTimeout(() => setLogoState('normal'), 1000);
     } catch (error: any) {
       setLogoState('error');
+      setFailedAttempts(prev => prev + 1);
       toast({
-        title: "Authentication Error",
+        title: "Login Failed",
         description: error.message,
         variant: "destructive",
       });
@@ -386,10 +327,10 @@ const Auth = () => {
           <CardHeader className="relative text-center space-y-2 px-4 sm:px-6">
             <CardTitle className="text-lg sm:text-xl md:text-2xl text-white font-mono tracking-wide flex items-center justify-center gap-2 flex-wrap">
               <Zap className="h-5 w-5 sm:h-6 sm:w-6 text-primary-glow animate-pulse" />
-              <span className="break-words">{showForgotPassword ? "RESET PASSWORD" : isLogin ? "ACCESS YOUR DASHBOARD" : "CREATE ACCOUNT"}</span>
+              <span className="break-words">{showForgotPassword ? "RESET PASSWORD" : "CLIENT DASHBOARD ACCESS"}</span>
             </CardTitle>
             <p className="text-white/70 text-xs sm:text-sm font-mono">
-              {showForgotPassword ? "Enter your email to reset password" : isLogin ? "Access your content dashboard" : "Join the ScriptStorm network"}
+              {showForgotPassword ? "Enter your email to reset password" : "Sign in to access your content dashboard"}
             </p>
           </CardHeader>
           <CardContent className="relative space-y-6 px-4 sm:px-6">
@@ -437,7 +378,6 @@ const Auth = () => {
                 <div className="space-y-2">
                   <Label htmlFor="password" className="text-white font-mono tracking-wide text-sm flex items-center gap-2">
                     PASSWORD
-                    {!isLogin && passwordStrength.score >= 3 && <Check className="h-3 w-3 text-green-400" />}
                   </Label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-primary-glow/60" />
@@ -460,65 +400,6 @@ const Auth = () => {
                       {showPassword ? <Eye className="h-4 w-4" /> : <EyeOff className="h-4 w-4" />}
                     </button>
                   </div>
-                  
-                  {/* Password Strength Indicator for Sign Up */}
-                  {!isLogin && password && (
-                    <div className="space-y-2 animate-fade-in">
-                      <div className="flex items-center justify-between text-xs font-mono">
-                        <span className="text-white/60">Password Strength:</span>
-                        <span className={`${
-                          passwordStrength.score <= 1 ? 'text-red-400' :
-                          passwordStrength.score <= 2 ? 'text-yellow-400' :
-                          passwordStrength.score <= 3 ? 'text-blue-400' :
-                          'text-green-400'
-                        }`}>
-                          {passwordStrength.feedback}
-                        </span>
-                      </div>
-                      <div className="w-full bg-black/40 rounded-full h-1.5">
-                        <div 
-                          className={`h-1.5 rounded-full transition-all duration-300 ${
-                            passwordStrength.score <= 1 ? 'bg-red-400' :
-                            passwordStrength.score <= 2 ? 'bg-yellow-400' :
-                            passwordStrength.score <= 3 ? 'bg-blue-400' :
-                            'bg-green-400'
-                          }`}
-                          style={{ width: `${(passwordStrength.score / 5) * 100}%` }}
-                        />
-                      </div>
-                      <div className="text-xs text-white/50 font-mono space-y-1">
-                        <p className="flex items-center gap-2">
-                          {password.length >= 8 ? <Check className="h-3 w-3 text-green-400" /> : <X className="h-3 w-3 text-red-400" />}
-                          At least 8 characters
-                        </p>
-                        <p className="flex items-center gap-2">
-                          {password.match(/[A-Z]/) ? <Check className="h-3 w-3 text-green-400" /> : <X className="h-3 w-3 text-red-400" />}
-                          Uppercase letter
-                        </p>
-                        <p className="flex items-center gap-2">
-                          {password.match(/[0-9]/) ? <Check className="h-3 w-3 text-green-400" /> : <X className="h-3 w-3 text-red-400" />}
-                          Number
-                        </p>
-                      </div>
-                    </div>
-                  )}
-                  
-                  {/* Remember Me Checkbox */}
-                  {isLogin && (
-                    <div className="flex items-center space-x-2 animate-fade-in">
-                      <input
-                        type="checkbox"
-                        id="remember"
-                        checked={rememberMe}
-                        onChange={(e) => setRememberMe(e.target.checked)}
-                        className="w-4 h-4 text-primary-glow bg-black/40 border-primary-glow/30 rounded focus:ring-primary-glow/20 focus:ring-2"
-                        disabled={isBlocked}
-                      />
-                      <Label htmlFor="remember" className="text-white/70 text-sm font-mono cursor-pointer">
-                        Remember me for 30 days
-                      </Label>
-                    </div>
-                  )}
                 </div>
               )}
 
@@ -542,8 +423,8 @@ const Auth = () => {
                     </div>
                   ) : (
                     <div className="flex items-center gap-2">
-                      {showForgotPassword ? <Mail className="h-4 w-4" /> : isLogin ? <LogIn className="h-4 w-4" /> : <UserPlus className="h-4 w-4" />}
-                      {showForgotPassword ? "SEND RESET EMAIL" : isLogin ? "ACCESS DASHBOARD" : "CREATE ACCOUNT"}
+                      {showForgotPassword ? <Mail className="h-4 w-4" /> : <LogIn className="h-4 w-4" />}
+                      {showForgotPassword ? "SEND RESET EMAIL" : "ACCESS DASHBOARD"}
                     </div>
                   )}
                 </Button>
@@ -552,31 +433,33 @@ const Auth = () => {
 
             <div className="text-center space-y-3">
               {!showForgotPassword && (
-                <button
-                  onClick={() => setIsLogin(!isLogin)}
-                  className="text-primary-glow hover:text-primary-glow/80 font-mono text-sm tracking-wide transition-colors duration-300 border-b border-primary-glow/30 hover:border-primary-glow/60"
-                >
-                  {isLogin ? "Need an account? Create one" : "Already have an account? Sign in"}
-                </button>
-              )}
-              
-              {isLogin && !showForgotPassword && (
-                <div>
-                  <button
-                    onClick={() => setShowForgotPassword(true)}
-                    className="text-primary-glow/70 hover:text-primary-glow font-mono text-xs tracking-wide transition-colors duration-300"
-                  >
-                    Forgot your password?
-                  </button>
-                </div>
+                <>
+                  <div>
+                    <button
+                      onClick={() => setShowForgotPassword(true)}
+                      className="text-primary-glow/70 hover:text-primary-glow font-mono text-xs tracking-wide transition-colors duration-300"
+                    >
+                      Forgot your password?
+                    </button>
+                  </div>
+                  
+                  {/* New Account Info */}
+                  <div className="pt-4 border-t border-primary-glow/20">
+                    <p className="text-white/70 text-xs font-mono mb-2">Don't have an account yet?</p>
+                    <Link 
+                      to="/#pricing" 
+                      className="text-primary-glow hover:text-primary-glow/80 font-mono text-sm tracking-wide transition-colors duration-300 border-b border-primary-glow/30 hover:border-primary-glow/60 inline-block"
+                    >
+                      View Our Packages →
+                    </Link>
+                    <p className="text-white/50 text-xs font-mono mt-2">Accounts are created automatically when you purchase</p>
+                  </div>
+                </>
               )}
               
               {showForgotPassword && (
                 <button
-                  onClick={() => {
-                    setShowForgotPassword(false);
-                    setIsLogin(true);
-                  }}
+                  onClick={() => setShowForgotPassword(false)}
                   className="text-primary-glow hover:text-primary-glow/80 font-mono text-sm tracking-wide transition-colors duration-300 border-b border-primary-glow/30 hover:border-primary-glow/60"
                 >
                   Back to login
