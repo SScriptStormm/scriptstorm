@@ -427,7 +427,7 @@ const Pricing = () => {
                     isAnnual ? "💎 Start Saving & Get My 24-Hour Draft" : "🚀 Start My 24-Hour Draft"}
                 </Button>
                 
-                <p className="text-xs text-muted-foreground text-center italic">
+                <p className="text-xs text-muted-foreground text-center italic -mb-2">
                   Fully Automated Workflow • No Meetings • No Delays
                 </p>
               </CardContent>
