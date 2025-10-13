@@ -387,7 +387,7 @@ const Pricing = () => {
                 <CardDescription className="text-base">{isAnnual ? pkg.annualDescription : pkg.monthlyDescription}</CardDescription>
               </CardHeader>
               
-              <CardContent className="space-y-6">
+              <CardContent className="space-y-6 pb-4">
                 <div className="mb-3">
                   <p className="font-semibold text-foreground text-sm mb-2">
                     {isAnnual ? pkg.annualSectionHeader : pkg.sectionHeader}
@@ -427,7 +427,7 @@ const Pricing = () => {
                     isAnnual ? "💎 Start Saving & Get My 24-Hour Draft" : "🚀 Start My 24-Hour Draft"}
                 </Button>
                 
-                <p className="text-xs text-muted-foreground text-center italic -mb-2">
+                <p className="text-xs text-muted-foreground text-center italic mt-2">
                   Fully Automated Workflow • No Meetings • No Delays
                 </p>
               </CardContent>
