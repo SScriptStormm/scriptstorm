@@ -6,38 +6,53 @@ const Services = () => {
     {
       icon: <FileText className="h-8 w-8 text-primary" />,
       title: "SEO Blog Articles",
-      description: "Long-form, keyword-optimized blog posts that rank on Google and drive organic traffic to your SaaS or eCommerce site.",
-      features: ["2000-5000 words", "Keyword research included", "Meta tags & headers", "Internal linking strategy"]
+      description: "Long-form, keyword-optimized content designed to rank on Google and drive targeted organic traffic.",
+      features: [
+        "Tiered Word Counts (as shown above)",
+        "Strategic Keyword Research & Mapping",
+        "Meta Tags & SEO Headers",
+        "Internal Linking Strategy"
+      ]
     },
     {
       icon: <Share2 className="h-8 w-8 text-primary" />,
       title: "Social Media Content",
-      description: "Engaging posts for LinkedIn, Twitter, Facebook, and Instagram that build your brand and drive conversions.",
-      features: ["Platform-optimized content", "Hashtag research", "Visual content ideas", "Engagement hooks"]
+      description: "Engaging, platform-specific posts that build your community and drive traffic back to your site.",
+      features: [
+        "Platform-Optimized Copy (LinkedIn, Twitter, Instagram)",
+        "Hashtag Research",
+        "Visual Content Ideas",
+        "Built-in Engagement Hooks"
+      ]
     },
     {
       icon: <Mail className="h-8 w-8 text-primary" />,
       title: "Product Descriptions",
-      description: "Compelling, conversion-focused product descriptions that highlight benefits and drive sales for eCommerce.",
-      features: ["Keyword-optimized copy", "Benefit-focused messaging", "Multiple variations", "Brand voice consistency"]
+      description: "Compelling, conversion-focused copy that highlights benefits and drives sales.",
+      features: [
+        "Keyword-Optimized & Scannable",
+        "Benefit-Focused Messaging",
+        "Multiple Length Variations",
+        "Strict Brand Voice Consistency"
+      ]
     }
   ];
 
   const guarantees = [
     {
       icon: <Zap className="h-8 w-8 text-primary" />,
-      title: "24-Hour Delivery",
-      description: "Fast turnaround without compromising quality. Get your content when you need it."
+      title: "24-Hour Orchestrated Delivery",
+      description: "Get market-ready content delivered on a relentless production cycle. (*12-hour for Dominance*)"
     },
     {
       icon: <Target className="h-8 w-8 text-primary" />,
-      title: "SEO Optimized",
-      description: "Every piece is researched, keyword-optimized, and designed to rank on search engines."
+      title: "SEO-Optimized to Dominate",
+      description: "Every piece is backed by advanced research and crafted to win search rankings."
     },
     {
       icon: <Shield className="h-8 w-8 text-primary" />,
       title: "Money-Back Guarantee",
-      description: "Not satisfied? Get a full refund. We're confident you'll love our work."
+      description: "We're confident you'll love our work. Not satisfied? Get a full refund."
     }
   ];
 
@@ -81,9 +96,60 @@ const Services = () => {
             Content That <span className="text-primary">Converts</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            AI-powered content generation delivered through our orchestrated automation workflow—
-            no tools to learn, no hassle, just results.
+            AI-powered content generation delivered through our orchestrated automation workflow—no tools to learn, no hassle, just results.
           </p>
+        </div>
+
+        {/* Strategic Content Scaling Section */}
+        <div className="mb-20 max-w-5xl mx-auto">
+          <div className="text-center mb-10">
+            <h3 className="text-3xl font-bold mb-4 text-foreground font-mono tracking-wide">
+              Strategic Content Scaling
+            </h3>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              We deliver content engineered for impact, not just word count. Our tiered system ensures every piece is perfectly scoped for its purpose, from driving traffic to dominating your niche.
+            </p>
+          </div>
+
+          {/* Pricing Table */}
+          <div className="relative group">
+            <div className="absolute inset-0 bg-gradient-cyber opacity-10 rounded-lg blur-lg group-hover:opacity-20 transition-all duration-500" />
+            <div className="relative overflow-x-auto bg-white/95 backdrop-blur-sm rounded-lg border-2 border-primary-glow/40 shadow-neural">
+              <table className="w-full">
+                <thead className="bg-gradient-cyber border-b-2 border-primary-glow/40">
+                  <tr>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-foreground font-mono">Package Tier</th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-foreground font-mono">SEO Article Word Count</th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-foreground font-mono">Ideal For</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-primary-glow/20">
+                  <tr className="hover:bg-primary-glow/5 transition-colors">
+                    <td className="px-6 py-4 text-sm font-medium text-foreground">🚀 Starter & Growth</td>
+                    <td className="px-6 py-4 text-sm text-muted-foreground">1,500 - 2,000 words</td>
+                    <td className="px-6 py-4 text-sm text-muted-foreground">Building a consistent traffic foundation with high-quality, standard SEO articles.</td>
+                  </tr>
+                  <tr className="hover:bg-primary-glow/5 transition-colors">
+                    <td className="px-6 py-4 text-sm font-medium text-foreground">🔥 Scale & Authority</td>
+                    <td className="px-6 py-4 text-sm text-muted-foreground">2,000 - 3,000 words</td>
+                    <td className="px-6 py-4 text-sm text-muted-foreground">Establishing authority with comprehensive, pillar content that crushes competitors.</td>
+                  </tr>
+                  <tr className="hover:bg-primary-glow/5 transition-colors">
+                    <td className="px-6 py-4 text-sm font-medium text-foreground">💎 Dominance</td>
+                    <td className="px-6 py-4 text-sm text-muted-foreground">2,000 - 5,000+ words</td>
+                    <td className="px-6 py-4 text-sm text-muted-foreground">Total market leadership with in-depth, cornerstone assets and reports.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        {/* Our Core Content Services Header */}
+        <div className="text-center mb-12">
+          <h3 className="text-3xl font-bold mb-2 text-foreground font-mono tracking-wide">
+            Our Core Content Services
+          </h3>
         </div>
 
         {/* Services Grid */}
@@ -130,7 +196,7 @@ const Services = () => {
             <div className="absolute inset-0 bg-gradient-neural opacity-20 rounded-lg blur-lg" />
             <h3 className="relative text-3xl font-bold mb-2 text-foreground font-mono tracking-wide">Our Promise to You</h3>
           </div>
-          <p className="text-muted-foreground">Why thousands of businesses trust us with their content</p>
+          <p className="text-muted-foreground">Built for Results: The Modern Content Solution.</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
