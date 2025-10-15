@@ -311,10 +311,10 @@ const Pricing = () => {
             Done-For-You <span className="text-primary">Content Services</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-4">
-            Professional AI-powered content that drives results. No tools to learn, no hassle - just high-quality, SEO-optimized content delivered by a seamless automation engine.
+            Professional, automated content that drives results. No tools to learn, no hassle - just high-quality, SEO-optimized content delivered by a seamless automation engine.
           </p>
           <p className="text-muted-foreground mb-8">
-            ⚡ Powered by a sophisticated AI workflow—orchestrated for rankings and structured for conversions.
+            ⚡ Powered by a sophisticated, automated workflow—orchestrated for rankings and structured for conversions.
           </p>
           
           {/* Billing Toggle */}
