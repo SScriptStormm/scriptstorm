@@ -134,7 +134,7 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
                       className="flex items-start gap-2"
                     >
                       <div 
-                        className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0"
+                        className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
                         style={{ backgroundColor: pkg.color }}
                       >
                         <CheckCircle className="h-2.5 w-2.5 text-white" />
@@ -166,7 +166,7 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
                           className="flex items-start gap-2"
                         >
                           <div 
-                            className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0"
+                            className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
                             style={{ backgroundColor: pkg.color }}
                           >
                             <CheckCircle className="h-2.5 w-2.5 text-white" />
