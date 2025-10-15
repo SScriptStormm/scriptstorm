@@ -2,7 +2,11 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, Star } from "lucide-react";
+import { 
+  CheckCircle, Star, FileText, Share2, Package, Clock, 
+  RefreshCw, Search, Shield, Headphones, TrendingUp, 
+  BarChart3, Map, Infinity
+} from "lucide-react";
 
 interface EnterprisePackage {
   id: string;
@@ -31,6 +35,62 @@ interface EnterprisePackageCardProps {
   loadingStates: {[key: string]: boolean};
   isAnnual: boolean;
 }
+
+const getFeatureIcon = (feature: string) => {
+  const lowerFeature = feature.toLowerCase();
+  
+  // Articles/Blog Content
+  if (lowerFeature.includes('blog articles') || lowerFeature.includes('assets') || lowerFeature.includes('content pieces')) {
+    return <FileText className="h-3 w-3 text-white" />;
+  }
+  // Social Media
+  if (lowerFeature.includes('social media')) {
+    return <Share2 className="h-3 w-3 text-white" />;
+  }
+  // Product Descriptions
+  if (lowerFeature.includes('product') || lowerFeature.includes('service pages')) {
+    return <Package className="h-3 w-3 text-white" />;
+  }
+  // Delivery Time
+  if (lowerFeature.includes('delivery') || lowerFeature.includes('hour') || lowerFeature.includes('turnaround')) {
+    return <Clock className="h-3 w-3 text-white" />;
+  }
+  // Revisions
+  if (lowerFeature.includes('revision')) {
+    return <RefreshCw className="h-3 w-3 text-white" />;
+  }
+  // Keyword Research
+  if (lowerFeature.includes('keyword') || lowerFeature.includes('competitor')) {
+    return <Search className="h-3 w-3 text-white" />;
+  }
+  // Guarantees
+  if (lowerFeature.includes('guarantee') || lowerFeature.includes('plagiarism') || lowerFeature.includes('scan')) {
+    return <Shield className="h-3 w-3 text-white" />;
+  }
+  // Support
+  if (lowerFeature.includes('support') || lowerFeature.includes('portal') || lowerFeature.includes('manager')) {
+    return <Headphones className="h-3 w-3 text-white" />;
+  }
+  // Performance/Dashboard
+  if (lowerFeature.includes('dashboard') || lowerFeature.includes('performance') || lowerFeature.includes('analytics')) {
+    return <BarChart3 className="h-3 w-3 text-white" />;
+  }
+  // Strategy/Roadmap
+  if (lowerFeature.includes('roadmap') || lowerFeature.includes('mapping') || lowerFeature.includes('strategy')) {
+    return <Map className="h-3 w-3 text-white" />;
+  }
+  // Enterprise Intelligence
+  if (lowerFeature.includes('intelligence') || lowerFeature.includes('insights') || lowerFeature.includes('optimization')) {
+    return <TrendingUp className="h-3 w-3 text-white" />;
+  }
+  // Unlimited features
+  if (lowerFeature.includes('unlimited') || lowerFeature.includes('white-glove')) {
+    return <Infinity className="h-3 w-3 text-white" />;
+  }
+  
+  // Default fallback
+  return <CheckCircle className="h-2.5 w-2.5 text-white" />;
+};
 
 const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: EnterprisePackageCardProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -137,7 +197,7 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
                         className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
                         style={{ backgroundColor: pkg.color }}
                       >
-                        <CheckCircle className="h-2.5 w-2.5 text-white" />
+                        {getFeatureIcon(feature)}
                       </div>
                       <span className="text-sm">
                         {restText ? (
@@ -169,7 +229,7 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
                             className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
                             style={{ backgroundColor: pkg.color }}
                           >
-                            <CheckCircle className="h-2.5 w-2.5 text-white" />
+                            {getFeatureIcon(feature)}
                           </div>
                           <span className="text-sm">
                             {restText ? (
