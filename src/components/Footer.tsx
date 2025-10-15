@@ -11,7 +11,7 @@ const Footer = () => {
             Ready to Transform Your Content Marketing?
           </h2>
           <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-            Stop the endless wait for quality content. Get premium, AI-powered content that converts—delivered in 24 hours.
+            Stop the endless wait for quality content. Get premium, automated content that converts—delivered in 24 hours.
             Start Your First Draft
           </p>
           <Button 
