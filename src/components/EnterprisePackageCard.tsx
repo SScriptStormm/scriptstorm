@@ -131,7 +131,7 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
                   return (
                     <div 
                       key={`${pkg.id}-base-${index}`} 
-                      className="flex items-center gap-2"
+                      className="flex items-start gap-2"
                     >
                       <div 
                         className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0"
@@ -163,7 +163,7 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
                       return (
                         <div 
                           key={`${pkg.id}-expanded-${index + 5}`} 
-                          className="flex items-center gap-2"
+                          className="flex items-start gap-2"
                         >
                           <div 
                             className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0"
