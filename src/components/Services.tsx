@@ -96,7 +96,7 @@ const Services = () => {
             Content That <span className="text-primary">Converts</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            AI-powered content generation delivered through our orchestrated automation workflow—no tools to learn, no hassle, just results.
+            Expert content generation delivered through our orchestrated automation workflow—no tools to learn, no hassle, just results.
           </p>
         </div>
 
