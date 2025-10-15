@@ -2,11 +2,50 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, Star, Crown, Mail, Phone, Calendar } from "lucide-react";
+import { 
+  CheckCircle, Star, Crown, Mail, Phone, Calendar,
+  FileText, Share2, Package, Clock, RefreshCw, Search, Shield, Headphones
+} from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import ContactForm from "./ContactForm";
 import EnterprisePackageCard from "./EnterprisePackageCard";
+
+const getFeatureIcon = (feature: string) => {
+  const lowerFeature = feature.toLowerCase();
+  
+  // Articles/Blog Content
+  if (lowerFeature.includes('blog articles') || lowerFeature.includes('foundational') || lowerFeature.includes('authority-building')) {
+    return <FileText className="h-3 w-3 text-white" />;
+  }
+  // Social Media
+  if (lowerFeature.includes('social media')) {
+    return <Share2 className="h-3 w-3 text-white" />;
+  }
+  // Product Descriptions
+  if (lowerFeature.includes('product') || lowerFeature.includes('descriptions')) {
+    return <Package className="h-3 w-3 text-white" />;
+  }
+  // Revisions
+  if (lowerFeature.includes('revision')) {
+    return <RefreshCw className="h-3 w-3 text-white" />;
+  }
+  // Keyword Research
+  if (lowerFeature.includes('keyword') || lowerFeature.includes('competitor')) {
+    return <Search className="h-3 w-3 text-white" />;
+  }
+  // Guarantees
+  if (lowerFeature.includes('guarantee') || lowerFeature.includes('plagiarism') || lowerFeature.includes('scan')) {
+    return <Shield className="h-3 w-3 text-white" />;
+  }
+  // Calendar
+  if (lowerFeature.includes('calendar') || lowerFeature.includes('automated')) {
+    return <Calendar className="h-3 w-3 text-white" />;
+  }
+  
+  // Default fallback
+  return <CheckCircle className="h-3 w-3 text-white" />;
+};
 
 const Pricing = () => {
   const [showContactForm, setShowContactForm] = useState(false);
@@ -404,7 +443,7 @@ const Pricing = () => {
                           className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
                           style={{ backgroundColor: pkg.color }}
                         >
-                          <CheckCircle className="h-3 w-3 text-white" />
+                          {getFeatureIcon(feature)}
                         </div>
                         <span className="text-sm leading-relaxed">
                           <strong>{title}</strong>{description ? `:${description}` : ''}
