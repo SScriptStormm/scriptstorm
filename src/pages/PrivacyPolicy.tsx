@@ -102,7 +102,6 @@ const PrivacyPolicy = () => {
               If you have any questions about this privacy policy, please contact us at:
             </p>
             <p className="mb-2">Email: hello@scriptstorm.org</p>
-            <p className="mb-2">Address: 123 Business Ave, Suite 100, City, State 12345</p>
           </section>
         </div>
           </div>

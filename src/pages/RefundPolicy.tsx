@@ -50,7 +50,7 @@ const RefundPolicy = () => {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">Refund Eligibility</h2>
+            <h2 className="text-2xl font-semibold mb-4">Monthly Plan Refund Eligibility</h2>
             <p className="mb-4">Refunds may be considered in the following situations:</p>
             <ul className="list-disc pl-6 mb-4">
               <li>Content was not delivered within the agreed timeframe (except for force majeure events)</li>
@@ -58,6 +58,14 @@ const RefundPolicy = () => {
               <li>Project cancellation before work has commenced (full refund)</li>
               <li>Mutual agreement to terminate the project after consultation</li>
             </ul>
+          </section>
+
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-4">Annual Plan Refund Policy</h2>
+            <p className="mb-4">
+              Annual plans are eligible for a prorated refund, minus the value of any content already delivered, 
+              within the first 30 days of the subscription. After 30 days, annual plans are non-refundable.
+            </p>
           </section>
 
           <section className="mb-8">
@@ -106,8 +114,6 @@ const RefundPolicy = () => {
               please contact us at:
             </p>
             <p className="mb-2">Email: billing@scriptstorm.org</p>
-            <p className="mb-2">Phone: (555) 123-4567</p>
-            <p className="mb-2">Address: 123 Business Ave, Suite 100, City, State 12345</p>
           </section>
         </div>
           </div>
