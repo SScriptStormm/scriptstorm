@@ -113,7 +113,7 @@ const Pricing = () => {
         '5 Foundational Blog Articles (1,500-2,000 words each): Deeply-researched, SEO-optimized content designed to attract organic traffic and establish your expertise.',
         '15 Ready-to-Post Social Media Captions: Engaging posts tailored for LinkedIn, Twitter, or Instagram to drive discussion and promote your new articles.',
         '5 Persuasive Product Descriptions: Compelling copy that highlights benefits and drives conversions for your key offerings.',
-        "Dedicated Revision Rounds: We fine-tune the content until you're 100% satisfied.",
+        "1 Dedicated Revision Round: We fine-tune your content to ensure it meets your expectations.",
         'Plagiarism & AI Scan Guarantee: Every piece is guaranteed to be original and pass the latest AI detection benchmarks.',
         'Standard Keyword Research: We target relevant keywords to ensure your content gets found.'
       ],
@@ -152,7 +152,7 @@ const Pricing = () => {
         'Automated Content Calendar: A strategic, monthly plan that aligns all content with your business goals for maximum impact.',
         '30 High-Engagement Social Media Posts: A multi-platform mix of posts designed to build community and consistently drive traffic back to your site.',
         "10 High-Converting Product/Service Descriptions: Persuasive copy that speaks directly to your customer's pain points and boosts sales.",
-        'Priority Revision Rounds: Get your content perfected faster with prioritized revisions.',
+        '2 Priority Revision Rounds: Get your content perfected faster with our prioritized revision process.',
         "Advanced Keyword & Competitor Research: We don't just find keywords; we find gaps in your competitors' strategies to help you win.",
         'Plagiarism & AI Scan Guarantee: Our highest standard of originality and quality assurance.'
       ],
