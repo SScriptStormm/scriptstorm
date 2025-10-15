@@ -113,7 +113,7 @@ const Pricing = () => {
         '5 Foundational Blog Articles (1,500-2,000 words each): Deeply-researched, SEO-optimized content designed to attract organic traffic and establish your expertise.',
         '15 Ready-to-Post Social Media Captions: Engaging posts tailored for LinkedIn, Twitter, or Instagram to drive discussion and promote your new articles.',
         '5 Persuasive Product Descriptions: Compelling copy that highlights benefits and drives conversions for your key offerings.',
-        "Dedicated AI-Assisted Revision Rounds: We fine-tune the content until you're 100% satisfied.",
+        "Dedicated Revision Rounds: We fine-tune the content until you're 100% satisfied.",
         'Plagiarism & AI Scan Guarantee: Every piece is guaranteed to be original and pass the latest AI detection benchmarks.',
         'Standard Keyword Research: We target relevant keywords to ensure your content gets found.'
       ],
@@ -121,7 +121,7 @@ const Pricing = () => {
         "60 Foundational Blog Articles (1,500-2,000 words each): A year's worth of SEO-optimized content to steadily build your organic traffic and establish your brand's voice.",
         '180 Ready-to-Post Social Media Captions: Consistent, daily engagement across platforms to grow your audience and promote your latest insights.',
         '60 Persuasive Product Descriptions: Convert browsing into sales with compelling copy for your key products or services, refreshed throughout the year.',
-        "Dedicated AI-Assisted Revision Rounds: We fine-tune every piece until you're 100% satisfied.",
+        "Dedicated Revision Rounds: We fine-tune every piece until you're 100% satisfied.",
         'Plagiarism & AI Scan Guarantee: Every piece is guaranteed original and human-like.',
         'Standard Keyword Research: We target relevant, attainable keywords to ensure your content gets found.'
       ]
@@ -149,19 +149,19 @@ const Pricing = () => {
       annualSectionHeader: 'Your Annual Content Dominance System Includes:',
       features: [
         '10 Authority-Building Blog Articles (1,800-2,500 words each): Comprehensive, data-driven content that positions you as a thought leader and crushes the competition.',
-        'AI-Generated Content Calendar: A strategic, monthly plan that aligns all content with your business goals for maximum impact.',
+        'Automated Content Calendar: A strategic, monthly plan that aligns all content with your business goals for maximum impact.',
         '30 High-Engagement Social Media Posts: A multi-platform mix of posts designed to build community and consistently drive traffic back to your site.',
         "10 High-Converting Product/Service Descriptions: Persuasive copy that speaks directly to your customer's pain points and boosts sales.",
-        'Priority AI-Assisted Revision Rounds: Get your content perfected faster with prioritized revisions.',
+        'Priority Revision Rounds: Get your content perfected faster with prioritized revisions.',
         "Advanced Keyword & Competitor Research: We don't just find keywords; we find gaps in your competitors' strategies to help you win.",
         'Plagiarism & AI Scan Guarantee: Our highest standard of originality and quality assurance.'
       ],
       annualFeatures: [
         '120 Authority-Building Blog Articles (1,800-2,500 words each): A powerful stream of in-depth, data-driven content that positions you as the undisputed thought leader in your space.',
-        '12 AI-Generated Strategic Content Calendars: A full year of planned, strategic publishing that aligns every piece of content with your core business goals.',
+        '12 Automated Strategic Content Calendars: A full year of planned, strategic publishing that aligns every piece of content with your core business goals.',
         '360 High-Engagement Social Media Posts: A constant drumbeat of community-building and traffic-driving content across all major platforms.',
         '120 High-Converting Product/Service Descriptions: A complete library of sales-driven copy that systematically addresses customer pain points and boosts conversion rates.',
-        'Priority AI-Assisted Revision Rounds: Get your content perfected faster with prioritized revisions.',
+        'Priority Revision Rounds: Get your content perfected faster with prioritized revisions.',
         "Advanced Keyword & Competitor Research: We perform deep analysis to find and exploit gaps in your competitors' content, ensuring you win the search rankings.",
         'Plagiarism & AI Scan Guarantee: Our highest standard of originality and quality assurance.'
       ]
