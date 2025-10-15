@@ -148,7 +148,7 @@ const Pricing = () => {
       sectionHeader: 'Your Scalable Content Dominance System Includes:',
       annualSectionHeader: 'Your Annual Content Dominance System Includes:',
       features: [
-        '10 Authority-Building Blog Articles (1,800-2,500 words each): Comprehensive, data-driven content that positions you as a thought leader and crushes the competition.',
+        '10 Authority-Building Blog Articles (1,500-2,000 words each): Comprehensive, data-driven content that positions you as a thought leader and crushes the competition.',
         'Automated Content Calendar: A strategic, monthly plan that aligns all content with your business goals for maximum impact.',
         '30 High-Engagement Social Media Posts: A multi-platform mix of posts designed to build community and consistently drive traffic back to your site.',
         "10 High-Converting Product/Service Descriptions: Persuasive copy that speaks directly to your customer's pain points and boosts sales.",
@@ -157,7 +157,7 @@ const Pricing = () => {
         'Plagiarism & AI Scan Guarantee: Our highest standard of originality and quality assurance.'
       ],
       annualFeatures: [
-        '120 Authority-Building Blog Articles (1,800-2,500 words each): A powerful stream of in-depth, data-driven content that positions you as the undisputed thought leader in your space.',
+        '120 Authority-Building Blog Articles (1,500-2,000 words each): A powerful stream of in-depth, data-driven content that positions you as the undisputed thought leader in your space.',
         '12 Automated Strategic Content Calendars: A full year of planned, strategic publishing that aligns every piece of content with your core business goals.',
         '360 High-Engagement Social Media Posts: A constant drumbeat of community-building and traffic-driving content across all major platforms.',
         '120 High-Converting Product/Service Descriptions: A complete library of sales-driven copy that systematically addresses customer pain points and boosts conversion rates.',
@@ -222,7 +222,7 @@ const Pricing = () => {
       color: '#E74C3C',
       badge: 'BEST VALUE',
       features: [
-        '30 Industry-Leading Blog Articles (2,500-4,000 words each): Definitive, data-driven reports and pillar content that becomes the primary resource in your field.',
+        '30 Industry-Leading Blog Articles (2,000-3,000 words each): Definitive, data-driven reports and pillar content that becomes the primary resource in your field.',
         '90 Targeted Social Media Campaign Posts: Sophisticated campaigns designed to build a loyal community around your brand and establish a feedback loop with your audience.',
         '30 Premium Product/Service Descriptions: Complete, feature-to-benefit storytelling that justifies premium pricing and closes high-value deals.',
         '24-Hour Orchestrated Delivery: A relentless, daily content production cycle that keeps you constantly ahead of the competition.',
@@ -233,7 +233,7 @@ const Pricing = () => {
         'Priority Support Portal: Faster response times and dedicated handling for mission-critical projects.'
       ],
       annualFeatures: [
-        '360 Industry-Leading Blog Articles (2,500-4,000 words each): A year\'s worth of definitive, data-driven reports that make your brand the primary resource in your field.',
+        '360 Industry-Leading Blog Articles (2,000-3,000 words each): A year\'s worth of definitive, data-driven reports that make your brand the primary resource in your field.',
         '1,080 Targeted Social Media Campaign Posts: A non-stop, sophisticated community-building and engagement machine.',
         '360 Premium Product/Service Descriptions: Complete storytelling for your entire portfolio, justifying premium pricing.',
         '24-Hour Orchestrated Delivery: A relentless, daily content production cycle that keeps you constantly ahead of the competition.',
@@ -261,7 +261,7 @@ const Pricing = () => {
       },
       color: '#F59E0B',
       features: [
-        '50 Unbeatable Cornerstone Assets (3,000-5,000+ words each): A relentless firehose of flagship content that makes your brand synonymous with the industry itself.',
+        '50 Unbeatable Cornerstone Assets (2,000-5,000+ words each): A relentless firehose of flagship content that makes your brand synonymous with the industry itself.',
         '150 Viral-Ready Social Media Posts: A constant, high-impact social presence engineered for maximum shareability and brand recall.',
         'Unlimited Product Descriptions*: Blanket your entire catalog with conversion-optimized copy.',
         '12-Hour Lightning Delivery: The fastest content turnaround on the market, giving you an insurmountable speed advantage.',
@@ -272,7 +272,7 @@ const Pricing = () => {
         'Priority Support Portal & Dedicated Client Workspace: A white-glove experience for your enterprise team.'
       ],
       annualFeatures: [
-        '600 Unbeatable Cornerstone Assets (3,000-5,000+ words each): An annual arsenal of flagship content that makes your brand synonymous with the industry itself.',
+        '600 Unbeatable Cornerstone Assets (2,000-5,000+ words each): An annual arsenal of flagship content that makes your brand synonymous with the industry itself.',
         '1,800 Viral-Ready Social Media Posts: A constant, high-impact social presence engineered for maximum shareability and brand recall.',
         'Unlimited Product Descriptions*: Blanket your entire catalog with conversion-optimized copy.',
         '12-Hour Lightning Delivery: The fastest content turnaround on the market, giving you an insurmountable speed advantage.',
