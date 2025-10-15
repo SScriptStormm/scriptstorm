@@ -111,8 +111,8 @@ const Hero = () => {
               </div>
               <div className="flex items-center gap-1 sm:gap-2 xl:gap-2.5 px-2 sm:px-3 md:px-4 xl:px-5 py-1.5 sm:py-2 xl:py-2.5 bg-black/20 rounded-lg border border-primary-glow/20 backdrop-blur-sm">
                 <span className="text-primary-glow text-xs sm:text-sm xl:text-base">🤖</span>
-                <span className="whitespace-nowrap hidden sm:inline">AI-POWERED AUTOMATION</span>
-                <span className="whitespace-nowrap sm:hidden">AI-POWERED</span>
+                <span className="whitespace-nowrap hidden sm:inline">AUTOMATED WORKFLOW</span>
+                <span className="whitespace-nowrap sm:hidden">AUTOMATED</span>
               </div>
               <div className="flex items-center gap-1 sm:gap-2 xl:gap-2.5 px-2 sm:px-3 md:px-4 xl:px-5 py-1.5 sm:py-2 xl:py-2.5 bg-black/20 rounded-lg border border-primary-glow/20 backdrop-blur-sm">
                 <span className="text-primary-glow text-xs sm:text-sm xl:text-base">▲</span>
