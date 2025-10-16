@@ -383,9 +383,9 @@ const Pricing = () => {
         </div>
 
         {/* Main Packages */}
-        <div className="grid md:grid-cols-2 gap-8 mb-20 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8 mb-20 max-w-4xl mx-auto items-stretch">
           {packages.map((pkg) => (
-            <Card key={pkg.id} className={`relative border-2 hover:scale-105 transition-all duration-300 ${
+            <Card key={pkg.id} className={`relative border-2 hover:scale-105 transition-all duration-300 h-full flex flex-col ${
               pkg.popular ? 'shadow-lg' : ''
             }`} style={{
               borderColor: pkg.color
@@ -426,13 +426,13 @@ const Pricing = () => {
                 <CardDescription className="text-base">{isAnnual ? pkg.annualDescription : pkg.monthlyDescription}</CardDescription>
               </CardHeader>
               
-              <CardContent className="space-y-6 pb-2">
+              <CardContent className="space-y-6 pb-2 flex-1 flex flex-col">
                 <div className="mb-3">
                   <p className="font-semibold text-foreground text-sm mb-2">
                     {isAnnual ? pkg.annualSectionHeader : pkg.sectionHeader}
                   </p>
                 </div>
-                <div className="space-y-3">
+                <div className="space-y-3 flex-1">
                   {(isAnnual ? pkg.annualFeatures : pkg.features).map((feature, index) => {
                     const [title, ...rest] = feature.split(':');
                     const description = rest.join(':');
