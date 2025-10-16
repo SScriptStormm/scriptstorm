@@ -432,7 +432,7 @@ const Pricing = () => {
                     {isAnnual ? pkg.annualSectionHeader : pkg.sectionHeader}
                   </p>
                 </div>
-                <div className="space-y-3 flex-1">
+                <div className={`${pkg.id === 'starter' ? 'space-y-6' : 'space-y-3'} flex-1`}>
                   {(isAnnual ? pkg.annualFeatures : pkg.features).map((feature, index) => {
                     const [title, ...rest] = feature.split(':');
                     const description = rest.join(':');
