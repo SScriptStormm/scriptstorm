@@ -52,7 +52,7 @@ export function MultiStepContentBriefForm() {
       title: "",
       content_type: "",
       target_keywords: "",
-      word_count: 1500,
+      word_count: 2000,
       target_audience: "",
       content_goal: "",
       key_points: "",

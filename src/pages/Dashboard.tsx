@@ -370,21 +370,94 @@ const Dashboard = () => {
               {/* Latest Project Status */}
               <div className="space-y-3">
                 <h3 className="text-white/70 font-mono text-xs sm:text-sm uppercase tracking-wider">Latest Project</h3>
-                <div className="flex items-start sm:items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-black/20 rounded-lg border border-green-500/20">
-                  <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-400 flex-shrink-0 mt-0.5 sm:mt-0" />
-                  <div className="flex-1 min-w-0">
-                    <p className="text-green-400 font-mono text-xs sm:text-sm">✅ Brief Submitted</p>
+                <div className="p-4 sm:p-6 bg-black/20 rounded-lg border border-green-500/20">
+                  <div className="flex items-center justify-between mb-2">
                     <p className="text-white font-mono text-sm sm:text-base break-words">{articles[0]?.title}</p>
-                    <p className="text-white/50 font-mono text-xs mt-1">
-                      {new Date(articles[0]?.created_at).toLocaleDateString()} at {new Date(articles[0]?.created_at).toLocaleTimeString()}
-                    </p>
                   </div>
-                </div>
-                <div className="flex items-start sm:items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-black/20 rounded-lg border border-yellow-500/20">
-                  <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-400 animate-pulse flex-shrink-0 mt-0.5 sm:mt-0" />
-                  <div className="flex-1">
-                    <p className="text-yellow-400 font-mono text-xs sm:text-sm">🔄 Current Stage</p>
-                    <p className="text-white font-mono text-sm sm:text-base">AI Research & Writing</p>
+                  <p className="text-white/50 font-mono text-xs mb-6">
+                    Submitted: {new Date(articles[0]?.created_at).toLocaleDateString()} at {new Date(articles[0]?.created_at).toLocaleTimeString()}
+                  </p>
+                  
+                  {/* Progress Tracker */}
+                  <div className="space-y-4">
+                    {/* Brief Received */}
+                    <div className="flex items-start gap-3">
+                      <div className="flex items-center justify-center w-6 h-6 rounded-full bg-green-500/20 border border-green-500 flex-shrink-0 mt-0.5">
+                        <CheckCircle className="h-4 w-4 text-green-400" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-green-400 font-mono text-xs sm:text-sm font-semibold">✅ Brief Received</p>
+                        <p className="text-white/60 font-mono text-[10px] sm:text-xs mt-0.5">Your brief has been received and queued</p>
+                      </div>
+                    </div>
+                    
+                    {/* Connector Line */}
+                    <div className="ml-3 w-0.5 h-4 bg-yellow-500/30"></div>
+                    
+                    {/* AI Research & Strategy */}
+                    <div className="flex items-start gap-3">
+                      <div className="flex items-center justify-center w-6 h-6 rounded-full bg-yellow-500/20 border border-yellow-500 flex-shrink-0 mt-0.5">
+                        <Clock className="h-4 w-4 text-yellow-400 animate-pulse" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-yellow-400 font-mono text-xs sm:text-sm font-semibold">🔄 AI Research & Strategy</p>
+                        <p className="text-white/60 font-mono text-[10px] sm:text-xs mt-0.5">Analyzing keywords and competitor insights</p>
+                      </div>
+                    </div>
+                    
+                    {/* Connector Line */}
+                    <div className="ml-3 w-0.5 h-4 bg-white/10"></div>
+                    
+                    {/* AI Writing */}
+                    <div className="flex items-start gap-3">
+                      <div className="flex items-center justify-center w-6 h-6 rounded-full bg-white/10 border border-white/30 flex-shrink-0 mt-0.5">
+                        <FileText className="h-4 w-4 text-white/50" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-white/50 font-mono text-xs sm:text-sm font-semibold">✍️ AI Writing</p>
+                        <p className="text-white/40 font-mono text-[10px] sm:text-xs mt-0.5">Content generation in progress</p>
+                      </div>
+                    </div>
+                    
+                    {/* Connector Line */}
+                    <div className="ml-3 w-0.5 h-4 bg-white/10"></div>
+                    
+                    {/* Quality Control */}
+                    <div className="flex items-start gap-3">
+                      <div className="flex items-center justify-center w-6 h-6 rounded-full bg-white/10 border border-white/30 flex-shrink-0 mt-0.5">
+                        <Eye className="h-4 w-4 text-white/50" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-white/50 font-mono text-xs sm:text-sm font-semibold">🔍 Quality Control</p>
+                        <p className="text-white/40 font-mono text-[10px] sm:text-xs mt-0.5">Final review and optimization</p>
+                      </div>
+                    </div>
+                    
+                    {/* Connector Line */}
+                    <div className="ml-3 w-0.5 h-4 bg-white/10"></div>
+                    
+                    {/* Ready for Download */}
+                    <div className="flex items-start gap-3">
+                      <div className="flex items-center justify-center w-6 h-6 rounded-full bg-white/10 border border-white/30 flex-shrink-0 mt-0.5">
+                        <Zap className="h-4 w-4 text-white/50" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-white/50 font-mono text-xs sm:text-sm font-semibold">🚀 Ready for Download</p>
+                        <p className="text-white/40 font-mono text-[10px] sm:text-xs mt-0.5">Your content will be available here</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Progress Bar */}
+                  <div className="mt-6">
+                    <div className="flex justify-between text-xs font-mono text-white/60 mb-2">
+                      <span>Progress</span>
+                      <span>40% Complete</span>
+                    </div>
+                    <Progress value={40} className="h-2 bg-black/50" />
+                    <p className="text-yellow-400 font-mono text-xs mt-2">
+                      ⏱️ Estimated completion: Within 24 hours
+                    </p>
                   </div>
                 </div>
               </div>
