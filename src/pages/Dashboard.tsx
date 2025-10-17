@@ -571,8 +571,11 @@ const Dashboard = () => {
                 <p className="text-white font-mono tracking-wide text-xl mb-2">
                   No Active Projects
                 </p>
-                <p className="text-white/70 font-mono text-sm">
+                <p className="text-white/70 font-mono text-sm mb-3">
                   Click "Submit New Content Brief" above to start your first project
+                </p>
+                <p className="text-primary-glow font-mono text-sm font-semibold">
+                  Your 24-hour clock starts the moment you submit your first brief.
                 </p>
               </div>
             ) : filteredArticles.length === 0 ? (
