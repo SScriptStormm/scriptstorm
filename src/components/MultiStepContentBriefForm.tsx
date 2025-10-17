@@ -18,8 +18,8 @@ import { ChevronLeft, ChevronRight, FileText, Target, Palette, MessageSquare, Za
 // Default word counts for different content types
 const DEFAULT_WORD_COUNTS = {
   blog_article: 2000,
-  social_media: 300,
-  product_description: 200,
+  social_media: 100,
+  product_description: 150,
 };
 
 const formSchema = z.object({
@@ -327,7 +327,7 @@ export function MultiStepContentBriefForm() {
                   {contentType === "social_media" && (
                     <div className="p-4 bg-muted/50 rounded-lg border border-border">
                       <p className="text-sm text-muted-foreground">
-                        <span className="font-semibold text-foreground">Optimal Word Count:</span> 300 words (automatically set for social media content)
+                        <span className="font-semibold text-foreground">Optimal Word Count:</span> 50-120 words (automatically optimized for social media content)
                       </p>
                     </div>
                   )}
@@ -335,7 +335,7 @@ export function MultiStepContentBriefForm() {
                   {contentType === "product_description" && (
                     <div className="p-4 bg-muted/50 rounded-lg border border-border">
                       <p className="text-sm text-muted-foreground">
-                        <span className="font-semibold text-foreground">Optimal Word Count:</span> 200 words (automatically set for product descriptions)
+                        <span className="font-semibold text-foreground">Optimal Word Count:</span> 100-200 words (automatically optimized for product descriptions)
                       </p>
                     </div>
                   )}
