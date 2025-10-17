@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -15,11 +15,18 @@ import { Progress } from "@/components/ui/progress";
 import { Slider } from "@/components/ui/slider";
 import { ChevronLeft, ChevronRight, FileText, Target, Palette, MessageSquare, Zap, Briefcase, Smile, Heart, Shield, MessageCircle, Code } from "lucide-react";
 
+// Default word counts for different content types
+const DEFAULT_WORD_COUNTS = {
+  blog_article: 2000,
+  social_media: 300,
+  product_description: 200,
+};
+
 const formSchema = z.object({
   title: z.string().min(3, "Title must be at least 3 characters").max(200, "Title must not exceed 200 characters"),
   content_type: z.string().min(1, "Please select a content type"),
   target_keywords: z.string().min(1, "Please provide at least one target keyword"),
-  word_count: z.number().min(500, "Minimum word count is 500").max(10000, "Maximum word count is 10,000"),
+  word_count: z.number().min(100, "Minimum word count is 100").max(10000, "Maximum word count is 10,000"),
   target_audience: z.string().min(10, "Please provide target audience details (minimum 10 characters)").max(500, "Target audience description is too long"),
   content_goal: z.string().min(10, "Please describe the content goal (minimum 10 characters)").max(500, "Content goal description is too long"),
   key_points: z.string().min(20, "Please provide key points (minimum 20 characters)"),
@@ -65,12 +72,29 @@ export function MultiStepContentBriefForm() {
     },
   });
 
+  // Watch content_type to update word_count defaults
+  const contentType = form.watch("content_type");
+
+  useEffect(() => {
+    if (contentType && contentType !== "blog_article") {
+      const defaultCount = DEFAULT_WORD_COUNTS[contentType as keyof typeof DEFAULT_WORD_COUNTS];
+      if (defaultCount) {
+        form.setValue("word_count", defaultCount);
+      }
+    }
+  }, [contentType, form]);
+
   const validateStep = async (step: number): Promise<boolean> => {
     let fieldsToValidate: (keyof FormData)[] = [];
     
     switch (step) {
       case 1:
-        fieldsToValidate = ["title", "content_type", "target_keywords", "word_count"];
+        // Only validate word_count for blog articles
+        if (contentType === "blog_article") {
+          fieldsToValidate = ["title", "content_type", "target_keywords", "word_count"];
+        } else {
+          fieldsToValidate = ["title", "content_type", "target_keywords"];
+        }
         break;
       case 2:
         fieldsToValidate = ["target_audience", "content_goal", "key_points"];
@@ -270,31 +294,51 @@ export function MultiStepContentBriefForm() {
                     )}
                   />
 
-                  <FormField
-                    control={form.control}
-                    name="word_count"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Word Count: {field.value} words *</FormLabel>
-                        <FormControl>
-                          <Slider
-                            min={500}
-                            max={10000}
-                            step={100}
-                            value={[field.value]}
-                            onValueChange={(value) => field.onChange(value[0])}
-                            className="py-4"
-                          />
-                        </FormControl>
-                        <div className="flex justify-between text-xs text-muted-foreground">
-                          <span>500</span>
-                          <span>5,000</span>
-                          <span>10,000</span>
-                        </div>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                  {/* Only show word count slider for blog articles */}
+                  {contentType === "blog_article" && (
+                    <FormField
+                      control={form.control}
+                      name="word_count"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Word Count: {field.value} words *</FormLabel>
+                          <FormControl>
+                            <Slider
+                              min={500}
+                              max={10000}
+                              step={100}
+                              value={[field.value]}
+                              onValueChange={(value) => field.onChange(value[0])}
+                              className="py-4"
+                            />
+                          </FormControl>
+                          <div className="flex justify-between text-xs text-muted-foreground">
+                            <span>500</span>
+                            <span>5,000</span>
+                            <span>10,000</span>
+                          </div>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  )}
+
+                  {/* Show info for non-blog content types */}
+                  {contentType === "social_media" && (
+                    <div className="p-4 bg-muted/50 rounded-lg border border-border">
+                      <p className="text-sm text-muted-foreground">
+                        <span className="font-semibold text-foreground">Optimal Word Count:</span> 300 words (automatically set for social media content)
+                      </p>
+                    </div>
+                  )}
+
+                  {contentType === "product_description" && (
+                    <div className="p-4 bg-muted/50 rounded-lg border border-border">
+                      <p className="text-sm text-muted-foreground">
+                        <span className="font-semibold text-foreground">Optimal Word Count:</span> 200 words (automatically set for product descriptions)
+                      </p>
+                    </div>
+                  )}
                 </div>
               )}
 
