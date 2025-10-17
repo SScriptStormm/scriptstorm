@@ -94,9 +94,9 @@ const TermsOfService = () => {
           <section>
             <h2 className="text-2xl font-semibold mb-4 text-foreground">7. Refund Policy</h2>
             <p>
-              Refunds may be issued if we fail to deliver content within the promised timeframe or 
-              if the delivered content significantly deviates from the agreed specifications. 
-              Refund requests must be made within 14 days of delivery.
+              Our refund policy is governed by our complete Refund Policy, located at /refund-policy. 
+              Refund requests must be made within 48 hours of delivery and are subject to the terms 
+              outlined therein. For details on our refund process, please see our Refund Policy.
             </p>
           </section>
 

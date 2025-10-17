@@ -71,7 +71,7 @@ const RefundPolicy = () => {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">How to Request a Refund</h2>
             <p className="mb-4">
-              To request a refund, please contact our team within 14 days of content delivery 
+              To request a refund, please contact our team within 48 hours of delivery 
               with your subscription details and specific concerns. We will work with you to resolve 
               any issues before processing refund requests, as we are committed to client satisfaction.
             </p>
@@ -86,11 +86,11 @@ const RefundPolicy = () => {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">Partial Work Completed</h2>
+            <h2 className="text-2xl font-semibold mb-4">Monthly Plan Sales</h2>
             <p className="mb-4">
-              For subscriptions where content has been partially delivered, refunds will be calculated 
-              based on the percentage of monthly content delivered and the value provided. We will work 
-              with you to find a fair resolution that reflects the content completed.
+              As our service provides immediate access to our automated content generation system, 
+              all monthly sales are final. Refunds are only considered in the event of a consistent 
+              and verifiable failure of our service to deliver content as specified in our Satisfaction Guarantee.
             </p>
           </section>
 
