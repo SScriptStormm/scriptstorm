@@ -466,6 +466,10 @@ const Pricing = () => {
                     isAnnual ? "💎 Start Saving & Get My 24-Hour Draft" : "🚀 Start My 24-Hour Draft"}
                 </Button>
                 
+                <p className="text-sm text-center font-semibold text-foreground mt-2">
+                  👉 Get your first draft in &lt;5 minutes. No calls.
+                </p>
+                
                 <p className="text-xs text-muted-foreground text-center italic mt-1 mb-0">
                   Fully Automated Workflow • No Meetings • No Delays
                 </p>
@@ -555,6 +559,9 @@ const Pricing = () => {
             >
               🚀 Start My 24-Hour Draft
             </Button>
+            <p className="text-sm font-semibold text-foreground">
+              👉 Get your first draft in &lt;5 minutes. No calls.
+            </p>
             <Button 
               variant="outline" 
               onClick={handleEmailClick}

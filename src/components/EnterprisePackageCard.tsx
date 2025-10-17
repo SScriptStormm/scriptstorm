@@ -291,6 +291,10 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
           }
         </Button>
         
+        <p className="text-sm text-center font-semibold text-foreground mt-2">
+          👉 Get your first draft in &lt;5 minutes. No calls.
+        </p>
+        
         <p className="text-xs text-muted-foreground text-center italic">
           Fully Automated Workflow • No Meetings • No Delays
         </p>
