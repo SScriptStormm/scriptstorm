@@ -19,8 +19,13 @@ import {
   CreditCard,
   BarChart3,
   Target,
-  Eye
+  Eye,
+  Download,
+  Edit
 } from "lucide-react";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 import scriptStormLogo from "@/assets/scriptstorm-logo.png";
 
 interface Subscriber {
@@ -39,6 +44,7 @@ interface Article {
   created_at: string;
   article_url: string | null;
   notes: string | null;
+  revisions_remaining?: number;
 }
 
 const Dashboard = () => {
@@ -49,6 +55,10 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [statusFilter, setStatusFilter] = useState<string>('all');
+  const [revisionDialogOpen, setRevisionDialogOpen] = useState(false);
+  const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
+  const [revisionFeedback, setRevisionFeedback] = useState("");
+  const [submittingRevision, setSubmittingRevision] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -192,6 +202,46 @@ const Dashboard = () => {
   const filteredArticles = statusFilter === 'all' 
     ? articles 
     : articles.filter(a => a.status === statusFilter);
+
+  const handleRequestRevision = (article: Article) => {
+    setSelectedArticle(article);
+    setRevisionFeedback("");
+    setRevisionDialogOpen(true);
+  };
+
+  const submitRevisionRequest = async () => {
+    if (!selectedArticle || !revisionFeedback.trim()) {
+      toast({
+        title: "Feedback Required",
+        description: "Please provide feedback for the revision request.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setSubmittingRevision(true);
+    try {
+      // Here you would call your revision request API
+      // For now, we'll just show a success message
+      toast({
+        title: "Revision Requested",
+        description: "Your revision request has been submitted successfully.",
+      });
+      
+      setRevisionDialogOpen(false);
+      setSelectedArticle(null);
+      setRevisionFeedback("");
+    } catch (error) {
+      console.error('Error submitting revision:', error);
+      toast({
+        title: "Error",
+        description: "Failed to submit revision request. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setSubmittingRevision(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -593,9 +643,9 @@ const Dashboard = () => {
                 <table className="w-full">
                   <thead>
                     <tr className="border-b border-primary-glow/20 text-left">
-                      <th className="text-white/70 font-mono text-sm pb-3">Topic</th>
+                      <th className="text-white/70 font-mono text-sm pb-3">Project Title</th>
                       <th className="text-white/70 font-mono text-sm pb-3">Status</th>
-                      <th className="text-white/70 font-mono text-sm pb-3">Submitted</th>
+                      <th className="text-white/70 font-mono text-sm pb-3">Delivered On</th>
                       <th className="text-white/70 font-mono text-sm pb-3 text-right">Actions</th>
                     </tr>
                   </thead>
@@ -622,7 +672,11 @@ const Dashboard = () => {
                         </td>
                         <td className="py-4">
                           <span className="text-white font-mono">
-                            {new Date(article.created_at).toLocaleDateString()}
+                            {article.status === 'completed' && article.delivery_date
+                              ? new Date(article.delivery_date).toLocaleDateString()
+                              : article.status === 'completed'
+                              ? 'Completed'
+                              : '—'}
                           </span>
                         </td>
                         <td className="py-4 text-right">
@@ -634,14 +688,17 @@ const Dashboard = () => {
                                   className="bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono"
                                   onClick={() => article.article_url && window.open(article.article_url, '_blank')}
                                 >
+                                  <Download className="h-4 w-4 mr-1" />
                                   Download
                                 </Button>
                                 <Button 
                                   size="sm" 
                                   variant="ghost"
                                   className="text-yellow-400 border border-yellow-500/30 hover:border-yellow-500/60 font-mono"
+                                  onClick={() => handleRequestRevision(article)}
                                 >
-                                  Revise
+                                  <Edit className="h-4 w-4 mr-1" />
+                                  Request Revision
                                 </Button>
                               </>
                             ) : article.status === 'in_progress' ? (
@@ -673,6 +730,72 @@ const Dashboard = () => {
           </CardContent>
         </Card>
       </main>
+
+      {/* Revision Request Dialog */}
+      <Dialog open={revisionDialogOpen} onOpenChange={setRevisionDialogOpen}>
+        <DialogContent className="bg-black/95 border-primary-glow/30">
+          <DialogHeader>
+            <DialogTitle className="text-white font-mono tracking-wide">
+              Request Revision
+            </DialogTitle>
+            <DialogDescription className="text-white/70 font-mono">
+              Provide feedback for "{selectedArticle?.title}"
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4 py-4">
+            <div className="p-3 bg-primary-glow/10 border border-primary-glow/30 rounded-lg">
+              <p className="text-primary-glow font-mono text-sm">
+                ✅ Revisions Remaining: {selectedArticle?.revisions_remaining ?? 2} / 2
+              </p>
+              <p className="text-white/60 font-mono text-xs mt-1">
+                Each article includes 2 free revisions
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="feedback" className="text-white font-mono">
+                Revision Feedback
+              </Label>
+              <Textarea
+                id="feedback"
+                placeholder="Please describe the changes you'd like to see..."
+                value={revisionFeedback}
+                onChange={(e) => setRevisionFeedback(e.target.value)}
+                className="min-h-[150px] bg-black/50 border-primary-glow/30 text-white font-mono"
+              />
+              <p className="text-white/50 font-mono text-xs">
+                Be specific about what needs to be changed for faster turnaround
+              </p>
+            </div>
+          </div>
+
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={() => setRevisionDialogOpen(false)}
+              className="font-mono"
+              disabled={submittingRevision}
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={submitRevisionRequest}
+              disabled={submittingRevision || !revisionFeedback.trim()}
+              className="bg-primary hover:bg-primary-glow text-white font-mono"
+            >
+              {submittingRevision ? (
+                <>
+                  <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
+                  Submitting...
+                </>
+              ) : (
+                'Submit Revision Request'
+              )}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
