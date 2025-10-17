@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 const Footer = () => {
   return (
@@ -49,7 +50,18 @@ const Footer = () => {
             <ul className="space-y-2 text-sm text-white/70">
               <li><Link to="/about-us" className="hover:text-white transition-smooth">About Us</Link></li>
               <li><Link to="/onboarding-process" className="hover:text-white transition-smooth">Our Process</Link></li>
-              <li><a href="#" className="hover:text-white transition-smooth">Case Studies</a></li>
+              <li>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <span className="text-white/40 cursor-not-allowed">Case Studies</span>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Case Studies Coming Soon - Launching with our first client results!</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </li>
               <li><Link to="/contact" className="hover:text-white transition-smooth">Contact</Link></li>
             </ul>
           </div>
