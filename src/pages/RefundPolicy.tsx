@@ -50,14 +50,12 @@ const RefundPolicy = () => {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">Monthly Plan Refund Eligibility</h2>
-            <p className="mb-4">Refunds may be considered in the following situations:</p>
-            <ul className="list-disc pl-6 mb-4">
-              <li>Content was not delivered within the agreed timeframe (except for force majeure events)</li>
-              <li>Delivered content significantly deviates from the agreed project specifications</li>
-              <li>Project cancellation before work has commenced (full refund)</li>
-              <li>Mutual agreement to terminate the project after consultation</li>
-            </ul>
+            <h2 className="text-2xl font-semibold mb-4">Monthly Plan Policy</h2>
+            <p className="mb-4">
+              As our service provides immediate access to our automated content generation system, 
+              all monthly sales are final. Refunds are only considered in the event of a consistent 
+              and verifiable failure of our service to deliver content as specified in our Satisfaction Guarantee.
+            </p>
           </section>
 
           <section className="mb-8">
@@ -85,14 +83,6 @@ const RefundPolicy = () => {
             </p>
           </section>
 
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">Monthly Plan Sales</h2>
-            <p className="mb-4">
-              As our service provides immediate access to our automated content generation system, 
-              all monthly sales are final. Refunds are only considered in the event of a consistent 
-              and verifiable failure of our service to deliver content as specified in our Satisfaction Guarantee.
-            </p>
-          </section>
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">Non-Refundable Items</h2>
