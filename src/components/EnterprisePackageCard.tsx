@@ -270,7 +270,7 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
               onMouseDown={(e) => e.stopPropagation()}
               onMouseUp={(e) => e.stopPropagation()}
             >
-              {isExpanded ? 'Show Less' : `Show All ${displayFeatures.length} Features`}
+              {isExpanded ? 'Show Less' : 'View Full Feature Breakdown'}
             </Button>
           );
         })()}
