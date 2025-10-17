@@ -140,7 +140,7 @@ const AboutUs = () => {
             <Card className="bg-white border-2 border-primary/20 shadow-2xl">
               <CardContent className="p-12">
                 <blockquote className="text-3xl text-foreground font-light italic mb-8 leading-relaxed">
-                  "Leveraging AI isn't about replacing creativity; it's about eliminating friction. We've built the system we wished existed."
+                  "The traditional content model is broken. You're forced to choose between slow, expensive agencies and the unpredictable rollercoaster of freelancers. We built ScriptStorm to end that compromise. Our automated system is engineered for one thing: to deliver publish-ready, high-performing content with the reliability of clockwork. No excuses, no delays, no surprises."
                 </blockquote>
                 <cite className="text-primary font-semibold text-lg">— The ScriptStorm Founder</cite>
               </CardContent>
