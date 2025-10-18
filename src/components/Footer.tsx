@@ -94,7 +94,7 @@ const Footer = () => {
               LinkedIn
             </a>
             <a href="#" className="text-white/60 hover:text-white text-sm transition-smooth">
-              Twitter
+              X
             </a>
             <a href="#" className="text-white/60 hover:text-white text-sm transition-smooth">
               Email

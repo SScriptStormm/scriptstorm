@@ -150,7 +150,7 @@ const Pricing = () => {
       annualSectionHeader: 'Your Annual Content Foundation Includes:',
       features: [
         '5 Foundational Blog Articles (1,500-2,000 words each): Deeply-researched, SEO-optimized content designed to attract organic traffic and establish your expertise.',
-        '15 Ready-to-Post Social Media Captions: Engaging posts tailored for LinkedIn, Twitter, or Instagram to drive discussion and promote your new articles.',
+        '15 Ready-to-Post Social Media Captions: Engaging posts tailored for LinkedIn, X, or Instagram to drive discussion and promote your new articles.',
         '5 Persuasive Product Descriptions: Compelling copy that highlights benefits and drives conversions for your key offerings.',
         "1 Dedicated Revision Round: We fine-tune your content to ensure it meets your expectations.",
         'Plagiarism & AI Scan Guarantee: Every piece is guaranteed to be original and pass the latest AI detection benchmarks.',
