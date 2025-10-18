@@ -4,11 +4,27 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Target, Zap, Award, Database, Clock, CheckCircle } from "lucide-react";
 
 const AboutUs = () => {
-  const stats = [
-    { label: "Articles of AI Training Data", value: "10,000+", icon: <Database className="h-6 w-6" /> },
-    { label: "Hours of Process Automation", value: "500+", icon: <Clock className="h-6 w-6" /> },
-    { label: "Average System Processing Time", value: "~18 Hours", icon: <Clock className="h-6 w-6" /> },
-    { label: "Focus on Client Results", value: "100%", icon: <Target className="h-6 w-6" /> }
+  const powers = [
+    {
+      icon: <Award className="h-6 w-6" />,
+      title: "Expert-Level AI Training",
+      description: "Our systems are calibrated with industry-leading data to deliver content that sounds like you."
+    },
+    {
+      icon: <Zap className="h-6 w-6" />,
+      title: "Seamless Automation",
+      description: "A refined, multi-step process ensures quality and consistency, every single time."
+    },
+    {
+      icon: <Clock className="h-6 w-6" />,
+      title: "Rapid Turnaround",
+      description: "Get publish-ready content delivered on a predictable schedule, so you can stop waiting and start growing."
+    },
+    {
+      icon: <Target className="h-6 w-6" />,
+      title: "Client-Obsessed Results",
+      description: "Every piece of content has one goal: to drive measurable outcomes for your business."
+    }
   ];
 
   const values = [
@@ -107,20 +123,21 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/* What Powers ScriptStorm Section */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground text-center mb-16">What Powers ScriptStorm</h2>
           <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            {stats.map((stat, index) => (
-              <Card key={index} className="bg-white border-2 border-gray-100 hover:border-primary/30 shadow-lg hover:shadow-xl transition-all duration-300 text-center group">
+            {powers.map((power, index) => (
+              <Card key={index} className="bg-white border-2 border-gray-100 hover:border-primary/30 shadow-lg hover:shadow-xl transition-all duration-300 group">
                 <CardContent className="p-8">
                   <div className="flex justify-center mb-6">
                     <div className="p-4 bg-primary/10 rounded-xl text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                      {stat.icon}
+                      {power.icon}
                     </div>
                   </div>
-                  <h3 className="text-4xl font-bold text-foreground mb-3">{stat.value}</h3>
-                  <p className="text-muted-foreground font-medium">{stat.label}</p>
+                  <h3 className="text-xl font-bold text-foreground mb-4">{power.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{power.description}</p>
                 </CardContent>
               </Card>
             ))}
