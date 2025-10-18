@@ -23,7 +23,7 @@ const AboutUs = () => {
     {
       icon: <Target className="h-6 w-6" />,
       title: "Client-Obsessed Results",
-      description: "Every piece of content has one goal: to drive measurable outcomes for your business."
+      description: "Every piece of content has one goal: to drive measurable growth for your brand."
     }
   ];
 
