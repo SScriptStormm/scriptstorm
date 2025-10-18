@@ -34,7 +34,7 @@ const FAQ = () => {
     },
     {
       question: "Do you offer strategy calls?",
-      answer: "To maintain our lightning-fast delivery and keep costs low, our entire process is designed for efficient asynchronous communication via email and your client portal. This method ensures all instructions and feedback are documented clearly, leading to better results faster than traditional calls."
+      answer: "To maintain our lightning-fast delivery and keep costs low, our entire process is designed for efficient asynchronous communication via email and your client dashboard. This method ensures all instructions and feedback are documented clearly, leading to better results faster than traditional calls."
     },
     {
       question: "Do you offer custom packages?",

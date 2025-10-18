@@ -330,7 +330,7 @@ const Auth = () => {
               <span className="break-words">{showForgotPassword ? "RESET PASSWORD" : "CLIENT DASHBOARD ACCESS"}</span>
             </CardTitle>
             <p className="text-white/70 text-xs sm:text-sm font-mono">
-              {showForgotPassword ? "Enter your email to reset password" : "Sign in to access your content dashboard"}
+              {showForgotPassword ? "Enter your email to reset password" : "Sign in to access your client dashboard"}
             </p>
           </CardHeader>
           <CardContent className="relative space-y-6 px-4 sm:px-6">
