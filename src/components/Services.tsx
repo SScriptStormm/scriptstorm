@@ -19,7 +19,7 @@ const Services = () => {
       title: "Social Media Content",
       description: "Engaging, platform-specific posts that build your community and drive traffic back to your site.",
       features: [
-        "Platform-Optimized Copy (LinkedIn, X, Instagram)",
+        "Platform-Optimized Copy (LinkedIn, X (Twitter), Instagram)",
         "Hashtag Research",
         "Visual Content Ideas",
         "Built-in Engagement Hooks"
