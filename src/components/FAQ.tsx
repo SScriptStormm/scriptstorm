@@ -6,7 +6,7 @@ const FAQ = () => {
   const faqs = [
     {
       question: "How does the 24-hour delivery work?",
-      answer: "The moment you submit your content brief in the dashboard, our proprietary automation system is triggered. Your content is generated, optimized for SEO, and rigorously checked for quality and originality, ensuring your first draft is in your inbox within 24 hours."
+      answer: "The moment you submit your content brief, our proprietary automation system is triggered. Your content is generated, optimized for SEO, and rigorously checked for quality and originality, ensuring your first draft is in your inbox within 24 hours."
     },
     {
       question: "What makes your content SEO-optimized?",
