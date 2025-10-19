@@ -466,7 +466,7 @@ const Pricing = () => {
                     isAnnual ? "💎 Start Saving & Get My 24-Hour Draft" : "🚀 Start My 24-Hour Draft"}
                 </Button>
                 
-                {pkg.id === 'starter' && (
+                {['starter', 'growth', 'scale', 'authority', 'dominance'].includes(pkg.id) && (
                   <a 
                     href="https://docs.google.com/document/d/11oF_e-yAGsdnYLenzUswEZtOaWbIb_04uFQWGuPS4pk/edit?usp=sharing"
                     target="_blank"
