@@ -466,6 +466,17 @@ const Pricing = () => {
                     isAnnual ? "💎 Start Saving & Get My 24-Hour Draft" : "🚀 Start My 24-Hour Draft"}
                 </Button>
                 
+                {pkg.id === 'starter' && (
+                  <a 
+                    href="https://docs.google.com/document/d/11oF_e-yAGsdnYLenzUswEZtOaWbIb_04uFQWGuPS4pk/edit?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-center text-primary hover:underline font-semibold block mt-3"
+                  >
+                    📄 See a Sample Article
+                  </a>
+                )}
+                
                 <p className="text-sm text-center font-semibold text-foreground mt-2">
                   👉 Get your first draft in &lt;5 minutes. No calls.
                 </p>
