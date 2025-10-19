@@ -291,6 +291,16 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
           }
         </Button>
         
+        <a 
+          href="https://docs.google.com/document/d/11oF_e-yAGsdnYLenzUswEZtOaWbIb_04uFQWGuPS4pk/edit?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm text-center block hover:underline transition-all duration-200"
+          style={{ color: pkg.color }}
+        >
+          📄 See a Sample Article
+        </a>
+        
         <p className="text-sm text-center font-semibold text-foreground mt-2">
           👉 Get your first draft in &lt;5 minutes. No calls.
         </p>
