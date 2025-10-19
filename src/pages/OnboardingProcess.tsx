@@ -258,7 +258,7 @@ const OnboardingProcess = () => {
               <Target className="h-16 w-16 text-[#2ECC71] mx-auto mb-6" />
               <h3 className="text-xl font-bold mb-4">Data-Driven Results</h3>
               <p className="text-muted-foreground">
-                AI optimization based on millions of data points ensures maximum impact on your business goals and conversions.
+                Real-time data research combined with AI optimization ensures maximum impact and up-to-date accuracy on your business goals and conversions.
               </p>
             </Card>
 
