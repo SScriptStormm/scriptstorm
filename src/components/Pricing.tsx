@@ -318,7 +318,7 @@ const Pricing = () => {
         'Unlimited White-Glove Revisions*: Perfection, on demand.',
         'Enterprise Keyword Intelligence: Proprietary insights that uncover untapped market opportunities and predict trends.',
         'AI-Driven Performance Dashboard: Real-time analytics on content performance, competitor movement, and ROI.',
-        'Market Dominance Roadmap (Quarterly): A strategic, quarterly plan to systematically dismantle competitor positions and cement your #1 status.',
+        'Market Dominance Roadmap: A strategic, quarterly plan to systematically dismantle competitor positions and cement your #1 status.',
         'Priority Support Portal & Dedicated Client Workspace: A white-glove experience for your enterprise team.'
       ],
       note: '*Fair Use policy applies. Unlimited revisions within the scope of the project and brand guidelines.',
