@@ -6,9 +6,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
   FileText, 
-  Calendar, 
+  Calendar as CalendarIcon, 
   TrendingUp, 
   Clock, 
   CheckCircle, 
@@ -21,12 +22,18 @@ import {
   Target,
   Eye,
   Download,
-  Edit
+  Edit,
+  MessageSquare
 } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import scriptStormLogo from "@/assets/scriptstorm-logo.png";
+import ContentCalendar from "@/components/dashboard/ContentCalendar";
+import ResearchReports from "@/components/dashboard/ResearchReports";
+import PerformanceDashboard from "@/components/dashboard/PerformanceDashboard";
+import PrioritySupport from "@/components/dashboard/PrioritySupport";
+import MarketRoadmap from "@/components/dashboard/MarketRoadmap";
 
 interface Subscriber {
   subscribed: boolean;
@@ -203,6 +210,26 @@ const Dashboard = () => {
     ? articles 
     : articles.filter(a => a.status === statusFilter);
 
+  // Get subscription tier for feature access
+  const tier = subscriber?.subscription_tier?.toLowerCase() || '';
+  const hasGrowth = tier === 'growth';
+  const hasScale = tier === 'scale' || tier === 'authority' || tier === 'dominance';
+  const hasAuthority = tier === 'authority' || tier === 'dominance';
+  const hasDominance = tier === 'dominance';
+
+  // Monthly article limits by tier
+  const getMonthlyLimit = () => {
+    switch(tier) {
+      case 'growth': return 10;
+      case 'scale': return 25;
+      case 'authority': return 40;
+      case 'dominance': return 50;
+      default: return 5; // starter
+    }
+  };
+
+  const monthlyLimit = getMonthlyLimit();
+
   const handleRequestRevision = (article: Article) => {
     setSelectedArticle(article);
     setRevisionFeedback("");
@@ -356,13 +383,13 @@ const Dashboard = () => {
                 </div>
                 <div className="pt-2">
                   <p className="text-white/70 font-mono text-xs sm:text-sm">Monthly Articles:</p>
-                  <p className="text-white font-mono text-xl sm:text-2xl">{completedArticles} / 50</p>
+                  <p className="text-white font-mono text-xl sm:text-2xl">{completedArticles} / {monthlyLimit}</p>
                   <Progress 
-                    value={(completedArticles / 50) * 100} 
+                    value={(completedArticles / monthlyLimit) * 100} 
                     className="h-2 bg-black/50 mt-2"
                   />
                   <p className="text-primary-glow font-mono text-xs mt-2">
-                    {50 - completedArticles} remaining this month
+                    {monthlyLimit - completedArticles} remaining this month
                   </p>
                 </div>
               </div>
@@ -568,8 +595,53 @@ const Dashboard = () => {
           </Card>
         )}
 
-        {/* Content Projects */}
-        <Card className="bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber">
+        {/* Dashboard Features Tabs */}
+        <Tabs defaultValue="projects" className="mb-8">
+          <TabsList className="bg-black/30 border border-primary-glow/30 mb-6">
+            <TabsTrigger value="projects" className="font-mono data-[state=active]:bg-primary-glow/20">
+              <FileText className="h-4 w-4 mr-2" />
+              PROJECTS
+            </TabsTrigger>
+            
+            {hasGrowth && (
+              <TabsTrigger value="calendar" className="font-mono data-[state=active]:bg-primary-glow/20">
+                <CalendarIcon className="h-4 w-4 mr-2" />
+                CALENDAR
+              </TabsTrigger>
+            )}
+            
+            {hasScale && (
+              <TabsTrigger value="reports" className="font-mono data-[state=active]:bg-primary-glow/20">
+                <FileText className="h-4 w-4 mr-2" />
+                RESEARCH
+              </TabsTrigger>
+            )}
+            
+            {hasDominance && (
+              <TabsTrigger value="performance" className="font-mono data-[state=active]:bg-primary-glow/20">
+                <BarChart3 className="h-4 w-4 mr-2" />
+                PERFORMANCE
+              </TabsTrigger>
+            )}
+            
+            {hasAuthority && (
+              <TabsTrigger value="support" className="font-mono data-[state=active]:bg-primary-glow/20">
+                <MessageSquare className="h-4 w-4 mr-2" />
+                SUPPORT
+              </TabsTrigger>
+            )}
+            
+            {hasDominance && (
+              <TabsTrigger value="roadmap" className="font-mono data-[state=active]:bg-primary-glow/20">
+                <Target className="h-4 w-4 mr-2" />
+                ROADMAP
+              </TabsTrigger>
+            )}
+          </TabsList>
+
+          {/* Projects Tab (Default) */}
+          <TabsContent value="projects">
+            <Card className="bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber">
           <CardHeader>
             <div className="flex items-center justify-between flex-wrap gap-4">
               <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
@@ -729,6 +801,43 @@ const Dashboard = () => {
             )}
           </CardContent>
         </Card>
+          </TabsContent>
+
+          {/* Content Calendar Tab (Growth) */}
+          {hasGrowth && (
+            <TabsContent value="calendar">
+              {user?.id && <ContentCalendar userId={user.id} />}
+            </TabsContent>
+          )}
+
+          {/* Research Reports Tab (Scale, Authority, Dominance) */}
+          {hasScale && (
+            <TabsContent value="reports">
+              {user?.id && <ResearchReports userId={user.id} />}
+            </TabsContent>
+          )}
+
+          {/* Performance Dashboard Tab (Dominance) */}
+          {hasDominance && (
+            <TabsContent value="performance">
+              <PerformanceDashboard articles={articles} monthlyLimit={monthlyLimit} />
+            </TabsContent>
+          )}
+
+          {/* Priority Support Tab (Authority, Dominance) */}
+          {hasAuthority && (
+            <TabsContent value="support">
+              <PrioritySupport userEmail={user?.email || ''} />
+            </TabsContent>
+          )}
+
+          {/* Market Roadmap Tab (Dominance) */}
+          {hasDominance && (
+            <TabsContent value="roadmap">
+              {user?.id && <MarketRoadmap userId={user.id} />}
+            </TabsContent>
+          )}
+        </Tabs>
       </main>
 
       {/* Revision Request Dialog */}

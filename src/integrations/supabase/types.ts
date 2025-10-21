@@ -95,6 +95,42 @@ export type Database = {
         }
         Relationships: []
       }
+      content_calendar_events: {
+        Row: {
+          created_at: string
+          description: string | null
+          event_type: string
+          id: string
+          scheduled_date: string
+          status: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          event_type?: string
+          id?: string
+          scheduled_date: string
+          status?: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          event_type?: string
+          id?: string
+          scheduled_date?: string
+          status?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       edge_function_tokens: {
         Row: {
           active: boolean | null
@@ -119,6 +155,81 @@ export type Database = {
           id?: string
           last_used?: string | null
           token_hash?: string
+        }
+        Relationships: []
+      }
+      market_roadmaps: {
+        Row: {
+          created_at: string
+          description: string | null
+          file_name: string | null
+          file_url: string | null
+          id: string
+          quarter: string
+          status: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          file_name?: string | null
+          file_url?: string | null
+          id?: string
+          quarter: string
+          status?: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          file_name?: string | null
+          file_url?: string | null
+          id?: string
+          quarter?: string
+          status?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      research_reports: {
+        Row: {
+          created_at: string
+          description: string | null
+          file_name: string | null
+          file_url: string | null
+          id: string
+          report_type: string
+          title: string
+          uploaded_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          file_name?: string | null
+          file_url?: string | null
+          id?: string
+          report_type: string
+          title: string
+          uploaded_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          file_name?: string | null
+          file_url?: string | null
+          id?: string
+          report_type?: string
+          title?: string
+          uploaded_at?: string
+          user_id?: string
         }
         Relationships: []
       }
