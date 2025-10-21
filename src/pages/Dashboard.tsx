@@ -202,7 +202,19 @@ const Dashboard = () => {
     }
   };
 
+  // Get current month's start date
+  const currentMonthStart = new Date();
+  currentMonthStart.setDate(1);
+  currentMonthStart.setHours(0, 0, 0, 0);
+
+  // Filter articles created this month
+  const articlesThisMonth = articles.filter(a => {
+    const articleDate = new Date(a.created_at);
+    return articleDate >= currentMonthStart;
+  });
+
   const completedArticles = articles.filter(a => a.status === 'completed').length;
+  const completedArticlesThisMonth = articlesThisMonth.length;
   const totalArticles = articles.length;
   const averageWordCount = articles.length > 0 ? Math.round(articles.reduce((sum, a) => sum + (a.word_count || 0), 0) / articles.length) : 0;
   
@@ -378,18 +390,18 @@ const Dashboard = () => {
                     READY ✅
                   </Badge>
                   <Badge className="bg-primary-glow/20 text-primary-glow border-primary-glow/30 font-mono tracking-wide text-xs sm:text-sm">
-                    PLAN: DOMINANCE
+                    PLAN: {(subscriber?.subscription_tier || 'STARTER').toUpperCase()}
                   </Badge>
                 </div>
                 <div className="pt-2">
                   <p className="text-white/70 font-mono text-xs sm:text-sm">Monthly Articles:</p>
-                  <p className="text-white font-mono text-xl sm:text-2xl">{completedArticles} / {monthlyLimit}</p>
+                  <p className="text-white font-mono text-xl sm:text-2xl">{completedArticlesThisMonth} / {monthlyLimit}</p>
                   <Progress 
-                    value={(completedArticles / monthlyLimit) * 100} 
+                    value={(completedArticlesThisMonth / monthlyLimit) * 100} 
                     className="h-2 bg-black/50 mt-2"
                   />
                   <p className="text-primary-glow font-mono text-xs mt-2">
-                    {monthlyLimit - completedArticles} remaining this month
+                    {monthlyLimit - completedArticlesThisMonth} remaining this month
                   </p>
                 </div>
               </div>
