@@ -17,13 +17,23 @@ export type Database = {
       articles: {
         Row: {
           article_url: string | null
+          avoid_topics: string | null
+          brand_voice: string | null
+          content_goal: string | null
+          content_type: string | null
           created_at: string
           delivery_date: string | null
           id: string
+          key_points: string | null
           notes: string | null
+          reference_links: string | null
+          specific_instructions: string | null
           status: string
+          style_preferences: string | null
+          target_audience: string | null
           target_keywords: string[] | null
           title: string
+          tone: string | null
           updated_at: string
           user_id: string
           word_count: number | null
@@ -32,13 +42,23 @@ export type Database = {
         }
         Insert: {
           article_url?: string | null
+          avoid_topics?: string | null
+          brand_voice?: string | null
+          content_goal?: string | null
+          content_type?: string | null
           created_at?: string
           delivery_date?: string | null
           id?: string
+          key_points?: string | null
           notes?: string | null
+          reference_links?: string | null
+          specific_instructions?: string | null
           status?: string
+          style_preferences?: string | null
+          target_audience?: string | null
           target_keywords?: string[] | null
           title: string
+          tone?: string | null
           updated_at?: string
           user_id: string
           word_count?: number | null
@@ -47,13 +67,23 @@ export type Database = {
         }
         Update: {
           article_url?: string | null
+          avoid_topics?: string | null
+          brand_voice?: string | null
+          content_goal?: string | null
+          content_type?: string | null
           created_at?: string
           delivery_date?: string | null
           id?: string
+          key_points?: string | null
           notes?: string | null
+          reference_links?: string | null
+          specific_instructions?: string | null
           status?: string
+          style_preferences?: string | null
+          target_audience?: string | null
           target_keywords?: string[] | null
           title?: string
+          tone?: string | null
           updated_at?: string
           user_id?: string
           word_count?: number | null
