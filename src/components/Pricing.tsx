@@ -189,7 +189,7 @@ const Pricing = () => {
       features: [
         '10 Authority-Building Blog Articles (1,500-2,000 words each): Comprehensive, data-driven content that positions you as a thought leader and crushes the competition.',
         'Automated Content Calendar: A strategic, monthly plan that aligns all content with your business goals for maximum impact.',
-        '30 High-Engagement Social Media Posts: A multi-platform mix of posts designed to build community and consistently drive traffic back to your site.',
+        '30 High-Engagement Social & Video Assets: A multi-platform mix of posts for LinkedIn, X, and Instagram, plus YouTube video script outlines to drive traffic and build authority.',
         "10 High-Converting Product/Service Descriptions: Persuasive copy that speaks directly to your customer's pain points and boosts sales.",
         '2 Priority Revision Rounds: Get your content perfected faster with our prioritized revision process.',
         "Advanced Keyword & Competitor Research: We don't just find keywords; we find gaps in your competitors' strategies to help you win.",
