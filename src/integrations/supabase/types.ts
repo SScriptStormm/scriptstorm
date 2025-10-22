@@ -27,6 +27,8 @@ export type Database = {
           updated_at: string
           user_id: string
           word_count: number | null
+          youtube_script: boolean | null
+          youtube_script_length: number | null
         }
         Insert: {
           article_url?: string | null
@@ -40,6 +42,8 @@ export type Database = {
           updated_at?: string
           user_id: string
           word_count?: number | null
+          youtube_script?: boolean | null
+          youtube_script_length?: number | null
         }
         Update: {
           article_url?: string | null
@@ -53,6 +57,8 @@ export type Database = {
           updated_at?: string
           user_id?: string
           word_count?: number | null
+          youtube_script?: boolean | null
+          youtube_script_length?: number | null
         }
         Relationships: []
       }
