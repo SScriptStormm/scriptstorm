@@ -240,7 +240,24 @@ const Dashboard = () => {
     }
   };
 
+  // Word count ranges by tier
+  const getWordCountRange = () => {
+    switch(tier) {
+      case 'starter':
+      case 'growth':
+        return '1,500 - 2,000';
+      case 'scale':
+      case 'authority':
+        return '2,000 - 3,000';
+      case 'dominance':
+        return '2,000 - 5,000';
+      default:
+        return '1,500 - 2,000';
+    }
+  };
+
   const monthlyLimit = getMonthlyLimit();
+  const wordCountRange = getWordCountRange();
 
   const handleRequestRevision = (article: Article) => {
     setSelectedArticle(article);
@@ -435,8 +452,8 @@ const Dashboard = () => {
                       <p className="text-white/70 font-mono text-xs">Total Briefs</p>
                     </div>
                     <div className="text-center p-2 sm:p-3 bg-black/20 rounded-lg border border-primary-glow/20">
-                      <p className="text-white font-mono text-xl sm:text-2xl">{averageWordCount}</p>
-                      <p className="text-white/70 font-mono text-xs">Avg Words</p>
+                      <p className="text-white font-mono text-lg sm:text-xl">{wordCountRange}</p>
+                      <p className="text-white/70 font-mono text-xs">Words Per Article</p>
                     </div>
                   </div>
                 </div>
