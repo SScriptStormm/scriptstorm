@@ -10,10 +10,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDescription } from "@/components/ui/form";
 import { Progress } from "@/components/ui/progress";
 import { Slider } from "@/components/ui/slider";
-import { ChevronLeft, ChevronRight, FileText, Target, Palette, MessageSquare, Zap, Briefcase, Smile, Heart, Shield, MessageCircle, Code } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
+import { ChevronLeft, ChevronRight, FileText, Target, Palette, MessageSquare, Zap, Briefcase, Smile, Heart, Shield, MessageCircle, Code, Video } from "lucide-react";
 
 // Default word counts for different content types
 const DEFAULT_WORD_COUNTS = {
@@ -36,6 +37,8 @@ const formSchema = z.object({
   specific_instructions: z.string().optional(),
   reference_links: z.string().optional(),
   avoid_topics: z.string().optional(),
+  youtube_script: z.boolean().optional(),
+  youtube_script_length: z.number().optional(),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -50,6 +53,7 @@ const steps = [
 export function MultiStepContentBriefForm() {
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [subscriptionTier, setSubscriptionTier] = useState<string | null>(null);
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -69,11 +73,36 @@ export function MultiStepContentBriefForm() {
       specific_instructions: "",
       reference_links: "",
       avoid_topics: "",
+      youtube_script: false,
+      youtube_script_length: 500,
     },
   });
 
+  // Fetch subscription tier on mount
+  useEffect(() => {
+    const fetchSubscriptionTier = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data } = await supabase
+          .from('subscribers')
+          .select('subscription_tier')
+          .eq('user_id', user.id)
+          .single();
+        
+        setSubscriptionTier(data?.subscription_tier || null);
+      }
+    };
+    
+    fetchSubscriptionTier();
+  }, []);
+
   // Watch content_type to update word_count defaults
   const contentType = form.watch("content_type");
+  const youtubeScript = form.watch("youtube_script");
+  
+  // Check if user has Growth+ tier
+  const tier = subscriptionTier?.toLowerCase() || '';
+  const hasGrowthPlus = ['growth', 'scale', 'authority', 'dominance'].includes(tier);
 
   useEffect(() => {
     if (contentType && contentType !== "blog_article") {
@@ -156,6 +185,8 @@ export function MultiStepContentBriefForm() {
           specific_instructions: data.specific_instructions || null,
           reference_links: data.reference_links || null,
           avoid_topics: data.avoid_topics || null,
+          youtube_script: data.youtube_script || false,
+          youtube_script_length: data.youtube_script_length || null,
           status: 'pending',
         }
       ]);
@@ -325,10 +356,76 @@ export function MultiStepContentBriefForm() {
 
                   {/* Show info for non-blog content types */}
                   {contentType === "social_media" && (
-                    <div className="p-4 bg-muted/50 rounded-lg border border-border">
-                      <p className="text-sm text-muted-foreground">
-                        <span className="font-semibold text-foreground">Optimal Word Count:</span> 50-120 words (automatically optimized for social media content)
-                      </p>
+                    <div className="space-y-4">
+                      <div className="p-4 bg-muted/50 rounded-lg border border-border">
+                        <p className="text-sm text-muted-foreground">
+                          <span className="font-semibold text-foreground">Optimal Word Count:</span> 50-120 words (automatically optimized for social media content)
+                        </p>
+                      </div>
+
+                      {/* YouTube Script Field - Only for Growth+ clients */}
+                      {hasGrowthPlus && (
+                        <div className="p-4 bg-primary/5 rounded-lg border border-primary/20 space-y-4">
+                          <div className="flex items-center gap-2 mb-2">
+                            <Video className="h-5 w-5 text-primary" />
+                            <h3 className="font-semibold text-foreground">YouTube Video Script (Growth+ Feature)</h3>
+                          </div>
+                          
+                          <FormField
+                            control={form.control}
+                            name="youtube_script"
+                            render={({ field }) => (
+                              <FormItem className="flex flex-row items-center justify-between rounded-lg border border-border p-4 bg-background">
+                                <div className="space-y-0.5">
+                                  <FormLabel className="text-base">
+                                    Include YouTube Video Script
+                                  </FormLabel>
+                                  <FormDescription>
+                                    Add a video script outline for YouTube (3-8 minute videos)
+                                  </FormDescription>
+                                </div>
+                                <FormControl>
+                                  <Switch
+                                    checked={field.value}
+                                    onCheckedChange={field.onChange}
+                                  />
+                                </FormControl>
+                              </FormItem>
+                            )}
+                          />
+
+                          {youtubeScript && (
+                            <FormField
+                              control={form.control}
+                              name="youtube_script_length"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>Script Length: {field.value} words</FormLabel>
+                                  <FormControl>
+                                    <Slider
+                                      min={300}
+                                      max={800}
+                                      step={50}
+                                      value={[field.value || 500]}
+                                      onValueChange={(value) => field.onChange(value[0])}
+                                      className="py-4"
+                                    />
+                                  </FormControl>
+                                  <div className="flex justify-between text-xs text-muted-foreground">
+                                    <span>300 words</span>
+                                    <span>550 words</span>
+                                    <span>800 words</span>
+                                  </div>
+                                  <FormDescription>
+                                    Optimal for 3-8 minute videos
+                                  </FormDescription>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                          )}
+                        </div>
+                      )}
                     </div>
                   )}
 
