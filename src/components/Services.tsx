@@ -16,10 +16,11 @@ const Services = () => {
     },
     {
       icon: <Share2 className="h-8 w-8 text-primary" />,
-      title: "Social Media Content",
-      description: "Engaging, platform-specific posts that build your community and drive traffic back to your site.",
+      title: "Social Media & Video Content",
+      description: "Engaging, platform-specific posts and video scripts that build your community and drive traffic.",
       features: [
-        "Platform-Optimized Copy (LinkedIn, X (Twitter), Instagram)",
+        "Platform-Optimized Copy (LinkedIn, X, Instagram, YouTube)",
+        "YouTube Video Script Outlines & Titles",
         "Hashtag Research",
         "Visual Content Ideas",
         "Built-in Engagement Hooks"
