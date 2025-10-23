@@ -104,14 +104,36 @@ export function MultiStepContentBriefForm() {
   const tier = subscriptionTier?.toLowerCase() || '';
   const hasGrowthPlus = ['growth', 'scale', 'authority', 'dominance'].includes(tier);
 
+  // Get word count range based on subscription tier
+  const getWordCountRange = () => {
+    switch(tier) {
+      case 'starter':
+      case 'growth':
+        return { min: 1500, max: 2000, default: 1750, labels: ['1,500', '1,750', '2,000'] };
+      case 'scale':
+      case 'authority':
+        return { min: 2000, max: 3000, default: 2500, labels: ['2,000', '2,500', '3,000'] };
+      case 'dominance':
+        return { min: 2000, max: 5000, default: 3000, labels: ['2,000', '3,500', '5,000'] };
+      default:
+        return { min: 1500, max: 2000, default: 1750, labels: ['1,500', '1,750', '2,000'] };
+    }
+  };
+
+  const wordCountRange = getWordCountRange();
+
   useEffect(() => {
-    if (contentType && contentType !== "blog_article") {
+    if (contentType === "blog_article") {
+      // Set to tier-specific default for blog articles
+      form.setValue("word_count", wordCountRange.default);
+    } else if (contentType) {
+      // Set to content-specific default for other types
       const defaultCount = DEFAULT_WORD_COUNTS[contentType as keyof typeof DEFAULT_WORD_COUNTS];
       if (defaultCount) {
         form.setValue("word_count", defaultCount);
       }
     }
-  }, [contentType, form]);
+  }, [contentType, form, wordCountRange.default]);
 
   const validateStep = async (step: number): Promise<boolean> => {
     let fieldsToValidate: (keyof FormData)[] = [];
@@ -332,21 +354,21 @@ export function MultiStepContentBriefForm() {
                       name="word_count"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Word Count: {field.value} words *</FormLabel>
+                          <FormLabel>Word Count: {field.value?.toLocaleString()} words *</FormLabel>
                           <FormControl>
                             <Slider
-                              min={500}
-                              max={10000}
-                              step={100}
+                              min={wordCountRange.min}
+                              max={wordCountRange.max}
+                              step={50}
                               value={[field.value]}
                               onValueChange={(value) => field.onChange(value[0])}
                               className="py-4"
                             />
                           </FormControl>
                           <div className="flex justify-between text-xs text-muted-foreground">
-                            <span>500</span>
-                            <span>5,000</span>
-                            <span>10,000</span>
+                            <span>{wordCountRange.labels[0]}</span>
+                            <span>{wordCountRange.labels[1]}</span>
+                            <span>{wordCountRange.labels[2]}</span>
                           </div>
                           <FormMessage />
                         </FormItem>
