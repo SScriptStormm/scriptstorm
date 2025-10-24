@@ -292,7 +292,7 @@ const OnboardingProcess = () => {
             <Card className="p-6 border-2 border-primary-glow/30 bg-white/95 backdrop-blur-sm shadow-neural hover:shadow-cyber transition-all duration-300">
               <h3 className="text-lg font-bold mb-3 text-[#2ECC71]">How does AI ensure the content matches my brand?</h3>
               <p className="text-muted-foreground">
-                During the initial email intake, our AI analyzes your brand voice, style, and any existing content you provide. This allows it to generate new content that maintains perfect consistency with your established tone and guidelines.
+                During the initial brief submission, our AI analyzes your brand voice, style, and any existing content you provide in your dashboard. This allows it to generate new content that maintains perfect consistency with your established tone and guidelines.
               </p>
             </Card>
 
