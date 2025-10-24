@@ -20,15 +20,15 @@ const OnboardingProcess = () => {
   const steps = [
     {
       number: "01",
-      title: "Email Consultation",
-      duration: "Within 24 hours",
+      title: "Submit Content Brief (Instantly)",
+      duration: "Instant",
       icon: MessageSquare,
       color: "#3498DB",
-      description: "Our AI instantly analyzes your email to:",
+      description: "You submit your detailed content brief directly through your secure Client Dashboard. The moment you hit 'Submit,' our automated workflow is triggered. The 24-hour countdown officially begins.",
       details: [
-        "Extract your brand voice and style guidelines",
-        "Identify core content goals and audience needs",
-        "24-hour countdown begins after your content approval"
+        "Complete the brief form in your Client Dashboard",
+        "Automated workflow triggers instantly upon submission",
+        "24-hour countdown begins immediately"
       ]
     },
     {
