@@ -563,25 +563,16 @@ const Pricing = () => {
         {/* Final CTA */}
         <div className="text-center bg-gradient-to-r from-primary/10 to-secondary/10 rounded-xl p-8 border">
           <h4 className="text-2xl font-bold mb-4">Ready to Get Started?</h4>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-6">
-            <div className="flex flex-col items-center gap-2">
-              <Button 
-                onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-8"
-              >
-                🚀 Start My 24-Hour Draft
-              </Button>
-              <p className="text-sm font-semibold text-foreground">
-                👉 Get your first draft in &lt;5 minutes. No calls.
-              </p>
-            </div>
+          <div className="flex flex-col items-center gap-2 mb-6">
             <Button 
-              variant="outline" 
-              onClick={handleEmailClick}
-              className="border-primary text-primary hover:bg-primary/10"
+              onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-8"
             >
-              Email Us Directly
+              🚀 Start My 24-Hour Draft
             </Button>
+            <p className="text-sm font-semibold text-foreground">
+              👉 Get your first draft in &lt;5 minutes. No calls.
+            </p>
           </div>
           <p className="text-sm text-muted-foreground italic">
             Friction-free workflow: All communication happens over email so you can focus on growth—no meetings, no delays.
