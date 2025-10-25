@@ -270,7 +270,7 @@ const Auth = () => {
             </div>
 
             {/* Main Logo Glow */}
-            <div className={`absolute inset-0 bg-primary/20 ${logoState === 'success' ? 'bg-green-500/30' : logoState === 'error' ? 'bg-red-500/30' : logoState === 'loading' ? 'bg-primary/40' : ''} group-hover:bg-primary/40 rounded-2xl blur-md transition-all duration-300 motion-reduce:transition-none`} />
+            <div className={`absolute inset-0 ${logoState === 'success' ? 'bg-green-500/30' : logoState === 'error' ? 'bg-red-500/30' : logoState === 'loading' ? 'bg-primary/40' : 'bg-primary/30'} group-hover:bg-primary/40 rounded-2xl blur-md transition-all duration-300 motion-reduce:transition-none`} />
             
             {/* Click Ripple Effect */}
             {showRipple && (
