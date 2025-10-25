@@ -388,7 +388,7 @@ const Auth = () => {
                       onChange={(e) => setPassword(e.target.value)}
                       required
                       disabled={isBlocked}
-                      className="pl-10 pr-10 bg-black/40 border-primary-glow/30 text-white placeholder:text-white/50 focus:border-primary-glow focus:ring-primary-glow/20 font-mono animate-fade-in"
+                      className="pl-10 pr-10 bg-black/40 border-primary-glow/30 text-white placeholder:text-white/50 focus:border-primary-glow focus:ring-primary-glow/20 font-mono animate-fade-in [&::-ms-reveal]:hidden [&::-ms-clear]:hidden [&::-webkit-credentials-auto-fill-button]:hidden"
                       placeholder="••••••••"
                     />
                     <button
