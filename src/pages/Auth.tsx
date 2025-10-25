@@ -294,7 +294,7 @@ const Auth = () => {
             <img 
               src={scriptStormLogo} 
               alt="ScriptStorm - AI Content Production Platform Logo" 
-              className={`relative w-full h-full rounded-2xl shadow-2xl group-hover:shadow-[0_0_40px_rgba(6,182,212,0.6)] transition-all duration-300 motion-reduce:transition-none ${logoState === 'loading' ? 'animate-chromatic-aberration' : ''}`}
+              className={`relative w-full h-full rounded-2xl shadow-[0_0_40px_rgba(6,182,212,0.6)] group-hover:shadow-[0_0_50px_rgba(6,182,212,0.8)] transition-all duration-300 motion-reduce:transition-none ${logoState === 'loading' ? 'animate-chromatic-aberration' : ''}`}
               style={{ 
                 filter: `drop-shadow(0 0 20px rgba(6, 182, 212, 0.4)) brightness(${logoState === 'success' ? '1.3' : logoState === 'error' ? '0.8' : '1.05'}) contrast(1.3) saturate(${logoState === 'success' ? '1.5' : logoState === 'error' ? '0.8' : '1.2'}) invert(0.1) ${logoState === 'loading' ? 'hue-rotate(10deg)' : ''}`,
                 willChange: 'filter, transform'
