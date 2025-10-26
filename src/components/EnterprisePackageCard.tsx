@@ -102,7 +102,7 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
   };
 
   return (
-    <Card className="relative border-0 hover:scale-105 transition-all duration-500 group" style={{
+    <Card className="relative border-0 hover:scale-105 transition-all duration-500 group h-full flex flex-col" style={{
       background: `linear-gradient(135deg, ${pkg.color}08 0%, ${pkg.color}15 30%, ${pkg.color}08 100%)`,
       boxShadow: `0 20px 40px -10px ${pkg.color}30, 0 0 30px ${pkg.color}20, inset 0 1px 0 ${pkg.color}40`,
       border: `2px solid ${pkg.color}40`
@@ -175,7 +175,7 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
         )}
       </CardHeader>
       
-      <CardContent className="space-y-6 relative">
+      <CardContent className="space-y-6 relative flex-1 flex flex-col">
         <div className="space-y-2">
           {/* Get the correct feature list based on billing type */}
           {(() => {
