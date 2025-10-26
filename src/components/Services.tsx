@@ -176,8 +176,8 @@ const Services = () => {
                     {service.description}
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="flex-1">
-                  <ul className="space-y-3">
+                <CardContent className="flex-1 flex flex-col">
+                  <ul className="flex flex-col justify-between h-full gap-3">
                     {service.features.map((feature, idx) => (
                       <li key={idx} className="flex items-center gap-3 text-sm text-muted-foreground group-hover:text-foreground transition-all duration-300">
                         <div className="h-2 w-2 bg-primary-glow rounded-full animate-pulse-glow shadow-cyber" />
