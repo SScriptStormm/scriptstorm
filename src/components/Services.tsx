@@ -11,7 +11,8 @@ const Services = () => {
         "Tiered Word Counts (as shown above)",
         "Strategic Keyword Research & Mapping",
         "Meta Tags & SEO Headers",
-        "Internal Linking Strategy"
+        "Internal Linking Strategy",
+        "Expert Fact-Checking & Citations"
       ]
     },
     {
@@ -34,7 +35,8 @@ const Services = () => {
         "Keyword-Optimized & Scannable",
         "Benefit-Focused Messaging",
         "Multiple Length Variations",
-        "Strict Brand Voice Consistency"
+        "Strict Brand Voice Consistency",
+        "SEO Meta Descriptions Included"
       ]
     }
   ];
