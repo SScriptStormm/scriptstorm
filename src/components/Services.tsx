@@ -156,7 +156,7 @@ const Services = () => {
         {/* Services Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
           {services.map((service, index) => (
-            <div key={index} className="relative group h-full flex flex-col">
+            <div key={index} className="relative group h-full flex flex-col sm:last:col-span-2 sm:last:max-w-md sm:last:mx-auto lg:last:col-span-1 lg:last:max-w-none lg:last:mx-0">
               {/* Holographic background */}
               <div className="absolute inset-0 bg-gradient-cyber opacity-10 rounded-lg blur-lg group-hover:opacity-20 transition-all duration-500" />
               <div className="absolute inset-0 bg-gradient-neural opacity-5 rounded-lg animate-neural-pulse" />
