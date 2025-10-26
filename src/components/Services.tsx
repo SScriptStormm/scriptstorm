@@ -11,8 +11,7 @@ const Services = () => {
         "Tiered Word Counts (as shown above)",
         "Strategic Keyword Research & Mapping",
         "Meta Tags & SEO Headers",
-        "Internal Linking Strategy",
-        "Expert Fact-Checking & Citations"
+        "Internal Linking Strategy"
       ]
     },
     {
@@ -35,8 +34,7 @@ const Services = () => {
         "Keyword-Optimized & Scannable",
         "Benefit-Focused Messaging",
         "Multiple Length Variations",
-        "Strict Brand Voice Consistency",
-        "SEO Meta Descriptions Included"
+        "Strict Brand Voice Consistency"
       ]
     }
   ];
@@ -158,12 +156,12 @@ const Services = () => {
         {/* Services Grid */}
         <div className="grid md:grid-cols-3 gap-8 mb-20">
           {services.map((service, index) => (
-            <div key={index} className="relative group">
+            <div key={index} className="relative group h-full flex flex-col">
               {/* Holographic background */}
               <div className="absolute inset-0 bg-gradient-cyber opacity-10 rounded-lg blur-lg group-hover:opacity-20 transition-all duration-500" />
               <div className="absolute inset-0 bg-gradient-neural opacity-5 rounded-lg animate-neural-pulse" />
               
-              <Card className="relative shadow-neural hover:shadow-hologram transition-all duration-500 border-2 border-primary-glow/40 hover:border-primary-glow/80 bg-white/95 backdrop-blur-sm group-hover:bg-white">
+              <Card className="relative shadow-neural hover:shadow-hologram transition-all duration-500 border-2 border-primary-glow/40 hover:border-primary-glow/80 bg-white/95 backdrop-blur-sm group-hover:bg-white h-full flex flex-col">
                 <CardHeader className="text-center">
                   <div className="relative mx-auto mb-4 p-4 bg-gradient-cyber rounded-full w-fit shadow-cyber group-hover:shadow-hologram transition-all duration-500">
                     <div className="absolute inset-0 bg-primary-glow/30 rounded-full animate-pulse-glow" />
@@ -178,7 +176,7 @@ const Services = () => {
                     {service.description}
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="flex-1">
                   <ul className="space-y-3">
                     {service.features.map((feature, idx) => (
                       <li key={idx} className="flex items-center gap-3 text-sm text-muted-foreground group-hover:text-foreground transition-all duration-300">
