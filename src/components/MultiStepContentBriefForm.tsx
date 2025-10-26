@@ -162,7 +162,8 @@ export function MultiStepContentBriefForm() {
     return result;
   };
 
-  const nextStep = async () => {
+  const nextStep = async (e?: React.MouseEvent<HTMLButtonElement>) => {
+    e?.preventDefault(); // Prevent any form submission
     const isValid = await validateStep(currentStep);
     if (isValid && currentStep < steps.length) {
       setCurrentStep(currentStep + 1);
@@ -176,6 +177,11 @@ export function MultiStepContentBriefForm() {
   };
 
   const onSubmit = async (data: FormData) => {
+    // Prevent submission if not on the final step
+    if (currentStep !== steps.length) {
+      return;
+    }
+    
     setIsSubmitting(true);
     
     try {
