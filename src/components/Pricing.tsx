@@ -499,7 +499,7 @@ const Pricing = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 mb-16 max-w-6xl mx-auto items-start">
+        <div className="grid md:grid-cols-3 gap-6 mb-16 max-w-6xl mx-auto items-stretch">
           {enterprisePackages.map((pkg) => (
             <EnterprisePackageCard
               key={pkg.id}
