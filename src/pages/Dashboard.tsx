@@ -742,10 +742,10 @@ const Dashboard = () => {
             ) : (
               <>
                 {/* Mobile Card Layout */}
-                <div className="block md:hidden space-y-4">
+                <div className="block md:hidden space-y-6">
                   {filteredArticles.map((article) => (
-                    <div key={article.id} className="p-4 bg-black/20 rounded-lg border border-primary-glow/20">
-                      <div className="space-y-3">
+                    <div key={article.id} className="p-6 bg-black/20 rounded-lg border border-primary-glow/20">
+                      <div className="space-y-5">
                         {/* Title and Word Count */}
                         <div>
                           <h3 className="text-white font-mono tracking-wide font-semibold text-sm mb-1">
