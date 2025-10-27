@@ -672,18 +672,18 @@ const Dashboard = () => {
           <TabsContent value="projects">
             <Card className="bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber">
           <CardHeader>
-            <div className="flex items-center justify-between flex-wrap gap-4">
-              <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
-                <FileText className="h-5 w-5 text-primary-glow" />
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+              <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide text-sm sm:text-base">
+                <FileText className="h-4 w-4 sm:h-5 sm:w-5 text-primary-glow" />
                 YOUR CONTENT PROJECTS
               </CardTitle>
               {articles.length > 0 && (
-                <div className="flex gap-2">
+                <div className="flex gap-2 overflow-x-auto pb-2 sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0">
                   <Button
                     size="sm"
                     variant={statusFilter === 'all' ? 'default' : 'outline'}
                     onClick={() => setStatusFilter('all')}
-                    className="font-mono text-xs"
+                    className="font-mono text-xs whitespace-nowrap flex-shrink-0"
                   >
                     All ({articles.length})
                   </Button>
@@ -691,7 +691,7 @@ const Dashboard = () => {
                     size="sm"
                     variant={statusFilter === 'completed' ? 'default' : 'outline'}
                     onClick={() => setStatusFilter('completed')}
-                    className="font-mono text-xs"
+                    className="font-mono text-xs whitespace-nowrap flex-shrink-0"
                   >
                     Completed ({articles.filter(a => a.status === 'completed').length})
                   </Button>
@@ -699,7 +699,7 @@ const Dashboard = () => {
                     size="sm"
                     variant={statusFilter === 'in_progress' ? 'default' : 'outline'}
                     onClick={() => setStatusFilter('in_progress')}
-                    className="font-mono text-xs"
+                    className="font-mono text-xs whitespace-nowrap flex-shrink-0"
                   >
                     In Progress ({articles.filter(a => a.status === 'in_progress').length})
                   </Button>
@@ -707,7 +707,7 @@ const Dashboard = () => {
                     size="sm"
                     variant={statusFilter === 'pending' ? 'default' : 'outline'}
                     onClick={() => setStatusFilter('pending')}
-                    className="font-mono text-xs"
+                    className="font-mono text-xs whitespace-nowrap flex-shrink-0"
                   >
                     Pending ({articles.filter(a => a.status === 'pending').length})
                   </Button>
