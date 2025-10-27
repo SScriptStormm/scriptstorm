@@ -740,93 +740,179 @@ const Dashboard = () => {
                 </p>
               </div>
             ) : (
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b border-primary-glow/20 text-left">
-                      <th className="text-white/70 font-mono text-sm pb-3">Project Title</th>
-                      <th className="text-white/70 font-mono text-sm pb-3">Status</th>
-                      <th className="text-white/70 font-mono text-sm pb-3">Delivered On</th>
-                      <th className="text-white/70 font-mono text-sm pb-3 text-right">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody className="space-y-3">
-                    {filteredArticles.map((article) => (
-                      <tr key={article.id} className="border-b border-primary-glow/10 hover:bg-black/20 transition-colors">
-                        <td className="py-4">
-                          <div>
-                            <h3 className="text-white font-mono tracking-wide font-semibold">
-                              {article.title}
-                            </h3>
-                            {article.word_count > 0 && (
-                              <p className="text-white/50 font-mono text-sm">{article.word_count} words</p>
-                            )}
-                          </div>
-                        </td>
-                        <td className="py-4">
-                          <Badge className={`${getStatusColor(article.status)} font-mono tracking-wide`}>
+              <>
+                {/* Mobile Card Layout */}
+                <div className="block md:hidden space-y-4">
+                  {filteredArticles.map((article) => (
+                    <div key={article.id} className="p-4 bg-black/20 rounded-lg border border-primary-glow/20">
+                      <div className="space-y-3">
+                        {/* Title and Word Count */}
+                        <div>
+                          <h3 className="text-white font-mono tracking-wide font-semibold text-sm mb-1">
+                            {article.title}
+                          </h3>
+                          {article.word_count > 0 && (
+                            <p className="text-white/50 font-mono text-xs">{article.word_count} words</p>
+                          )}
+                        </div>
+                        
+                        {/* Status Badge */}
+                        <div>
+                          <Badge className={`${getStatusColor(article.status)} font-mono tracking-wide text-xs`}>
                             {getStatusIcon(article.status)}
                             {article.status === 'completed' ? '✅ Ready' : 
                              article.status === 'in_progress' ? '🔄 In Progress' : 
                              '⏳ Pending'}
                           </Badge>
-                        </td>
-                        <td className="py-4">
-                          <span className="text-white font-mono">
+                        </div>
+                        
+                        {/* Delivered On */}
+                        <div className="flex items-center justify-between">
+                          <span className="text-white/70 font-mono text-xs">Delivered:</span>
+                          <span className="text-white font-mono text-xs">
                             {article.status === 'completed' && article.delivery_date
                               ? new Date(article.delivery_date).toLocaleDateString()
                               : article.status === 'completed'
                               ? 'Completed'
                               : '—'}
                           </span>
-                        </td>
-                        <td className="py-4 text-right">
-                          <div className="flex items-center gap-2 justify-end">
-                            {article.status === 'completed' ? (
-                              <>
-                                <Button 
-                                  size="sm" 
-                                  className="bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono"
-                                  onClick={() => article.article_url && window.open(article.article_url, '_blank')}
-                                >
-                                  <Download className="h-4 w-4 mr-1" />
-                                  Download
-                                </Button>
+                        </div>
+                        
+                        {/* Actions */}
+                        <div className="flex flex-col gap-2 pt-2">
+                          {article.status === 'completed' ? (
+                            <>
+                              <Button 
+                                size="sm" 
+                                className="w-full bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono text-xs"
+                                onClick={() => article.article_url && window.open(article.article_url, '_blank')}
+                              >
+                                <Download className="h-3 w-3 mr-1" />
+                                Download
+                              </Button>
+                              <Button 
+                                size="sm" 
+                                variant="ghost"
+                                className="w-full text-yellow-400 border border-yellow-500/30 hover:border-yellow-500/60 font-mono text-xs"
+                                onClick={() => handleRequestRevision(article)}
+                              >
+                                <Edit className="h-3 w-3 mr-1" />
+                                Request Revision
+                              </Button>
+                            </>
+                          ) : article.status === 'in_progress' ? (
+                            <Button 
+                              size="sm" 
+                              variant="ghost"
+                              className="w-full text-blue-400 border border-blue-500/30 hover:border-blue-500/60 font-mono text-xs"
+                            >
+                              View ETA
+                            </Button>
+                          ) : (
+                            <Button 
+                              size="sm" 
+                              variant="ghost"
+                              className="w-full text-gray-400 border border-gray-500/30 font-mono text-xs"
+                              disabled
+                            >
+                              Queued
+                            </Button>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                
+                {/* Desktop Table Layout */}
+                <div className="hidden md:block overflow-x-auto">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b border-primary-glow/20 text-left">
+                        <th className="text-white/70 font-mono text-sm pb-3">Project Title</th>
+                        <th className="text-white/70 font-mono text-sm pb-3">Status</th>
+                        <th className="text-white/70 font-mono text-sm pb-3">Delivered On</th>
+                        <th className="text-white/70 font-mono text-sm pb-3 text-right">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody className="space-y-3">
+                      {filteredArticles.map((article) => (
+                        <tr key={article.id} className="border-b border-primary-glow/10 hover:bg-black/20 transition-colors">
+                          <td className="py-4">
+                            <div>
+                              <h3 className="text-white font-mono tracking-wide font-semibold">
+                                {article.title}
+                              </h3>
+                              {article.word_count > 0 && (
+                                <p className="text-white/50 font-mono text-sm">{article.word_count} words</p>
+                              )}
+                            </div>
+                          </td>
+                          <td className="py-4">
+                            <Badge className={`${getStatusColor(article.status)} font-mono tracking-wide`}>
+                              {getStatusIcon(article.status)}
+                              {article.status === 'completed' ? '✅ Ready' : 
+                               article.status === 'in_progress' ? '🔄 In Progress' : 
+                               '⏳ Pending'}
+                            </Badge>
+                          </td>
+                          <td className="py-4">
+                            <span className="text-white font-mono">
+                              {article.status === 'completed' && article.delivery_date
+                                ? new Date(article.delivery_date).toLocaleDateString()
+                                : article.status === 'completed'
+                                ? 'Completed'
+                                : '—'}
+                            </span>
+                          </td>
+                          <td className="py-4 text-right">
+                            <div className="flex items-center gap-2 justify-end">
+                              {article.status === 'completed' ? (
+                                <>
+                                  <Button 
+                                    size="sm" 
+                                    className="bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono"
+                                    onClick={() => article.article_url && window.open(article.article_url, '_blank')}
+                                  >
+                                    <Download className="h-4 w-4 mr-1" />
+                                    Download
+                                  </Button>
+                                  <Button 
+                                    size="sm" 
+                                    variant="ghost"
+                                    className="text-yellow-400 border border-yellow-500/30 hover:border-yellow-500/60 font-mono"
+                                    onClick={() => handleRequestRevision(article)}
+                                  >
+                                    <Edit className="h-4 w-4 mr-1" />
+                                    Request Revision
+                                  </Button>
+                                </>
+                              ) : article.status === 'in_progress' ? (
                                 <Button 
                                   size="sm" 
                                   variant="ghost"
-                                  className="text-yellow-400 border border-yellow-500/30 hover:border-yellow-500/60 font-mono"
-                                  onClick={() => handleRequestRevision(article)}
+                                  className="text-blue-400 border border-blue-500/30 hover:border-blue-500/60 font-mono"
                                 >
-                                  <Edit className="h-4 w-4 mr-1" />
-                                  Request Revision
+                                  View ETA
                                 </Button>
-                              </>
-                            ) : article.status === 'in_progress' ? (
-                              <Button 
-                                size="sm" 
-                                variant="ghost"
-                                className="text-blue-400 border border-blue-500/30 hover:border-blue-500/60 font-mono"
-                              >
-                                View ETA
-                              </Button>
-                            ) : (
-                              <Button 
-                                size="sm" 
-                                variant="ghost"
-                                className="text-gray-400 border border-gray-500/30 font-mono"
-                                disabled
-                              >
-                                Queued
-                              </Button>
-                            )}
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                              ) : (
+                                <Button 
+                                  size="sm" 
+                                  variant="ghost"
+                                  className="text-gray-400 border border-gray-500/30 font-mono"
+                                  disabled
+                                >
+                                  Queued
+                                </Button>
+                              )}
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </>
             )}
           </CardContent>
         </Card>
