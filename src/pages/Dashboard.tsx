@@ -838,26 +838,26 @@ const Dashboard = () => {
                     <tbody className="space-y-3">
                       {filteredArticles.map((article) => (
                         <tr key={article.id} className="border-b border-primary-glow/10 hover:bg-black/20 transition-colors">
-                          <td className="py-4">
+                          <td className="py-4 align-top">
                             <div>
-                              <h3 className="text-white font-mono tracking-wide font-semibold">
+                              <h3 className="text-white font-mono tracking-wide font-semibold text-sm md:text-base">
                                 {article.title}
                               </h3>
                               {article.word_count > 0 && (
-                                <p className="text-white/50 font-mono text-sm">{article.word_count} words</p>
+                                <p className="text-white/50 font-mono text-xs md:text-sm">{article.word_count} words</p>
                               )}
                             </div>
                           </td>
-                          <td className="py-4">
-                            <Badge className={`${getStatusColor(article.status)} font-mono tracking-wide`}>
+                          <td className="py-4 align-top">
+                            <Badge className={`${getStatusColor(article.status)} font-mono tracking-wide text-xs md:text-sm`}>
                               {getStatusIcon(article.status)}
                               {article.status === 'completed' ? '✅ Ready' : 
                                article.status === 'in_progress' ? '🔄 In Progress' : 
                                '⏳ Pending'}
                             </Badge>
                           </td>
-                          <td className="py-4">
-                            <span className="text-white font-mono">
+                          <td className="py-4 align-top">
+                            <span className="text-white font-mono text-sm md:text-base">
                               {article.status === 'completed' && article.delivery_date
                                 ? new Date(article.delivery_date).toLocaleDateString()
                                 : article.status === 'completed'
