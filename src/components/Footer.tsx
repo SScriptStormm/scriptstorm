@@ -52,11 +52,16 @@ const Footer = () => {
               <li><Link to="/onboarding-process" className="hover:text-white transition-smooth">Our Process</Link></li>
               <li>
                 <TooltipProvider>
-                  <Tooltip>
+                  <Tooltip delayDuration={0}>
                     <TooltipTrigger asChild>
-                      <span className="text-white/40 cursor-not-allowed">Case Studies</span>
+                      <button 
+                        className="text-white/40 cursor-help text-left"
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        Case Studies
+                      </button>
                     </TooltipTrigger>
-                    <TooltipContent>
+                    <TooltipContent side="top" className="max-w-xs">
                       <p>Case Studies Coming Soon - Launching with our first client results!</p>
                     </TooltipContent>
                   </Tooltip>

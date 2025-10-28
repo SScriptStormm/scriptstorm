@@ -202,19 +202,15 @@ const Auth = () => {
 
   return (
     <>
-      {/* Back to Home Button - Outside main container for true fixed positioning */}
-      <Button
-        variant="ghost"
-        size="sm"
-        className="!fixed top-4 right-4 sm:top-6 sm:right-6 z-[9999] text-white border border-primary-glow/30 hover:border-primary-glow/60 font-mono text-xs sm:text-sm"
-        style={{ position: 'fixed', transform: 'none', willChange: 'auto' }}
-        asChild
+      {/* Back to Home Button - Fixed positioning for all devices */}
+      <Link 
+        to="/" 
+        className="fixed top-4 right-4 sm:top-6 sm:right-6 z-[9999] flex items-center gap-1 sm:gap-2 px-3 py-2 text-white border border-primary-glow/30 hover:border-primary-glow/60 font-mono text-xs sm:text-sm rounded-md bg-black/20 backdrop-blur-sm transition-colors"
+        style={{ position: 'fixed' }}
       >
-        <Link to="/" className="flex items-center gap-1 sm:gap-2">
-          <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4" />
-          <span className="hidden sm:inline">HOME</span>
-        </Link>
-      </Button>
+        <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4" />
+        <span className="hidden sm:inline">HOME</span>
+      </Link>
 
       <div className="min-h-screen bg-gradient-hero flex items-center justify-center p-4 relative overflow-hidden">
 
