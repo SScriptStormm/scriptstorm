@@ -432,7 +432,7 @@ const Pricing = () => {
                     {isAnnual ? pkg.annualSectionHeader : pkg.sectionHeader}
                   </p>
                 </div>
-                <div className={`${pkg.id === 'starter' && isAnnual ? 'space-y-10' : pkg.id === 'starter' ? 'space-y-6' : 'space-y-3'} flex-1`}>
+                <div className={`${pkg.id === 'starter' && isAnnual ? 'space-y-10 md:space-y-12' : pkg.id === 'starter' ? 'space-y-6 md:space-y-8' : 'space-y-3 md:space-y-5'} flex-1`}>
                   {(isAnnual ? pkg.annualFeatures : pkg.features).map((feature, index) => {
                     const [title, ...rest] = feature.split(':');
                     const description = rest.join(':');
@@ -499,7 +499,7 @@ const Pricing = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 mb-16 max-w-6xl mx-auto items-start">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 lg:gap-8 mb-16 max-w-7xl mx-auto items-start">
           {enterprisePackages.map((pkg) => (
             <EnterprisePackageCard
               key={pkg.id}
