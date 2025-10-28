@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 const Footer = () => {
   return (
@@ -51,21 +51,18 @@ const Footer = () => {
               <li><Link to="/about-us" className="hover:text-white transition-smooth">About Us</Link></li>
               <li><Link to="/onboarding-process" className="hover:text-white transition-smooth">Our Process</Link></li>
               <li>
-                <TooltipProvider>
-                  <Tooltip delayDuration={0}>
-                    <TooltipTrigger asChild>
-                      <button 
-                        className="text-white/40 cursor-help text-left"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        Case Studies
-                      </button>
-                    </TooltipTrigger>
-                    <TooltipContent side="top" className="max-w-xs">
-                      <p>Case Studies Coming Soon - Launching with our first client results!</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <button 
+                      className="text-white/40 hover:text-white/60 transition-colors text-left text-sm"
+                    >
+                      Case Studies
+                    </button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-80 bg-black/95 border-primary-glow/30 text-white backdrop-blur-xl z-[100]">
+                    <p className="text-sm">Case Studies Coming Soon - Launching with our first client results!</p>
+                  </PopoverContent>
+                </Popover>
               </li>
               <li><Link to="/contact" className="hover:text-white transition-smooth">Contact</Link></li>
             </ul>
