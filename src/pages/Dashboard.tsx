@@ -421,6 +421,17 @@ const Dashboard = () => {
                     {monthlyLimit - completedArticlesThisMonth} remaining this month
                   </p>
                 </div>
+                <div className="pt-3">
+                  <Button 
+                    variant="outline"
+                    size="sm"
+                    className="w-full bg-white/5 border-primary-glow/30 text-white hover:bg-white/10 hover:border-primary-glow/50 font-mono text-xs sm:text-sm"
+                    onClick={() => window.open('https://billing.stripe.com/p/login/test_your_link', '_blank')}
+                  >
+                    <CreditCard className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
+                    Manage Subscription
+                  </Button>
+                </div>
               </div>
             </CardContent>
           </Card>
