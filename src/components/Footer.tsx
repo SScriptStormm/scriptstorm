@@ -72,7 +72,6 @@ const Footer = () => {
             <h4 className="font-semibold mb-4">Support</h4>
             <ul className="space-y-2 text-sm text-white/70">
               <li><Link to="/help-center" className="hover:text-white transition-smooth">Help Center</Link></li>
-              <li><Link to="/contact" className="hover:text-white transition-smooth">Contact</Link></li>
               <li>
                 <a 
                   href="https://billing.stripe.com/p/login/test_your_link" 
