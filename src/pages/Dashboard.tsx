@@ -462,7 +462,7 @@ const Dashboard = () => {
                     className="h-2 bg-black/50 mt-2"
                   />
                   <p className="text-primary-glow font-mono text-xs mt-2">
-                    {monthlyLimit - completedArticlesThisMonth} remaining this month
+                    {monthlyLimit - completedArticlesThisMonth} articles remaining this month
                   </p>
                 </div>
                 <div className="pt-3">
