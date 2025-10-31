@@ -215,6 +215,13 @@ const Dashboard = () => {
     }
   };
 
+  // Get subscription tier for feature access (must be declared before use)
+  const tier = subscriber?.subscription_tier?.toLowerCase() || '';
+  const hasGrowth = tier === 'growth';
+  const hasScale = tier === 'scale' || tier === 'authority' || tier === 'dominance';
+  const hasAuthority = tier === 'authority' || tier === 'dominance';
+  const hasDominance = tier === 'dominance';
+
   // Get current month's start date
   const currentMonthStart = new Date();
   currentMonthStart.setDate(1);
@@ -247,13 +254,6 @@ const Dashboard = () => {
   const filteredArticles = statusFilter === 'all' 
     ? articles 
     : articles.filter(a => a.status === statusFilter);
-
-  // Get subscription tier for feature access
-  const tier = subscriber?.subscription_tier?.toLowerCase() || '';
-  const hasGrowth = tier === 'growth';
-  const hasScale = tier === 'scale' || tier === 'authority' || tier === 'dominance';
-  const hasAuthority = tier === 'authority' || tier === 'dominance';
-  const hasDominance = tier === 'dominance';
 
   // Monthly limits by tier
   const getMonthlyLimit = () => {
