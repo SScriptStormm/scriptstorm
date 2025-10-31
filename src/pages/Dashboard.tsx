@@ -241,7 +241,7 @@ const Dashboard = () => {
     a.content_type === 'product_description'
   );
   const socialPostsThisMonth = articlesThisMonth.filter(a => 
-    a.content_type === 'social_media_post' || (tier === 'growth+' && a.youtube_script)
+    a.content_type === 'social_media' || a.content_type === 'social_media_post' || (tier === 'growth+' && a.youtube_script)
   );
 
   const completedArticles = articles.filter(a => a.status === 'completed').length;
