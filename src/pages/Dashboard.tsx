@@ -245,9 +245,9 @@ const Dashboard = () => {
   );
 
   const completedArticles = articles.filter(a => a.status === 'completed').length;
-  const completedArticlesThisMonth = articlesOnlyThisMonth.length;
-  const completedProductDescriptionsThisMonth = productDescriptionsThisMonth.length;
-  const completedSocialPostsThisMonth = socialPostsThisMonth.length;
+  const completedArticlesThisMonth = articlesOnlyThisMonth.filter(a => a.status === 'completed' || a.status === 'in_progress').length;
+  const completedProductDescriptionsThisMonth = productDescriptionsThisMonth.filter(a => a.status === 'completed' || a.status === 'in_progress').length;
+  const completedSocialPostsThisMonth = socialPostsThisMonth.filter(a => a.status === 'completed' || a.status === 'in_progress').length;
   const totalArticles = articles.length;
   const averageWordCount = articles.length > 0 ? Math.round(articles.reduce((sum, a) => sum + (a.word_count || 0), 0) / articles.length) : 0;
   
