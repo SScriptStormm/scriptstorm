@@ -274,7 +274,7 @@ const Dashboard = () => {
       case 'scale': return 50;
       case 'authority': return 80;
       case 'dominance': return 100;
-      default: return 10; // starter
+      default: return 5; // starter
     }
   };
 
