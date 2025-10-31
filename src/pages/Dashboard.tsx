@@ -235,7 +235,7 @@ const Dashboard = () => {
 
   // Filter by content type for this month
   const articlesOnlyThisMonth = articlesThisMonth.filter(a => 
-    !a.content_type || a.content_type === 'article'
+    !a.content_type || a.content_type === 'article' || a.content_type === 'blog_article'
   );
   const productDescriptionsThisMonth = articlesThisMonth.filter(a => 
     a.content_type === 'product_description'
