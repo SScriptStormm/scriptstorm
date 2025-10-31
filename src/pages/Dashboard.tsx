@@ -63,6 +63,8 @@ interface Article {
   article_url: string | null;
   notes: string | null;
   revisions_remaining?: number;
+  content_type?: string;
+  youtube_script?: boolean;
 }
 
 const Dashboard = () => {
@@ -224,8 +226,21 @@ const Dashboard = () => {
     return articleDate >= currentMonthStart;
   });
 
+  // Filter by content type for this month
+  const articlesOnlyThisMonth = articlesThisMonth.filter(a => 
+    !a.content_type || a.content_type === 'article'
+  );
+  const productDescriptionsThisMonth = articlesThisMonth.filter(a => 
+    a.content_type === 'product_description'
+  );
+  const socialPostsThisMonth = articlesThisMonth.filter(a => 
+    a.content_type === 'social_media_post' || (tier === 'growth+' && a.youtube_script)
+  );
+
   const completedArticles = articles.filter(a => a.status === 'completed').length;
-  const completedArticlesThisMonth = articlesThisMonth.length;
+  const completedArticlesThisMonth = articlesOnlyThisMonth.length;
+  const completedProductDescriptionsThisMonth = productDescriptionsThisMonth.length;
+  const completedSocialPostsThisMonth = socialPostsThisMonth.length;
   const totalArticles = articles.length;
   const averageWordCount = articles.length > 0 ? Math.round(articles.reduce((sum, a) => sum + (a.word_count || 0), 0) / articles.length) : 0;
   
@@ -240,14 +255,37 @@ const Dashboard = () => {
   const hasAuthority = tier === 'authority' || tier === 'dominance';
   const hasDominance = tier === 'dominance';
 
-  // Monthly article limits by tier
+  // Monthly limits by tier
   const getMonthlyLimit = () => {
     switch(tier) {
-      case 'growth': return 10;
+      case 'growth':
+      case 'growth+': return 10;
       case 'scale': return 25;
       case 'authority': return 40;
       case 'dominance': return 50;
       default: return 5; // starter
+    }
+  };
+
+  const getProductDescriptionLimit = () => {
+    switch(tier) {
+      case 'growth':
+      case 'growth+': return 20;
+      case 'scale': return 50;
+      case 'authority': return 80;
+      case 'dominance': return 100;
+      default: return 10; // starter
+    }
+  };
+
+  const getSocialPostLimit = () => {
+    switch(tier) {
+      case 'growth':
+      case 'growth+': return 30;
+      case 'scale': return 60;
+      case 'authority': return 100;
+      case 'dominance': return 150;
+      default: return 15; // starter
     }
   };
 
@@ -268,6 +306,8 @@ const Dashboard = () => {
   };
 
   const monthlyLimit = getMonthlyLimit();
+  const productDescriptionLimit = getProductDescriptionLimit();
+  const socialPostLimit = getSocialPostLimit();
   const wordCountRange = getWordCountRange();
 
   const handleRequestRevision = (article: Article) => {
@@ -454,16 +494,46 @@ const Dashboard = () => {
                     PLAN: {(subscriber?.subscription_tier || 'STARTER').toUpperCase()}
                   </Badge>
                 </div>
-                <div className="pt-2">
-                  <p className="text-white/70 font-mono text-xs sm:text-sm">Monthly Articles:</p>
-                  <p className="text-white font-mono text-xl sm:text-2xl">{completedArticlesThisMonth} / {monthlyLimit}</p>
-                  <Progress 
-                    value={(completedArticlesThisMonth / monthlyLimit) * 100} 
-                    className="h-2 bg-black/50 mt-2"
-                  />
-                  <p className="text-primary-glow font-mono text-xs mt-2">
-                    {monthlyLimit - completedArticlesThisMonth} articles remaining this month
-                  </p>
+                <div className="pt-2 space-y-4">
+                  {/* Articles */}
+                  <div>
+                    <p className="text-white/70 font-mono text-xs sm:text-sm">Monthly Articles:</p>
+                    <p className="text-white font-mono text-xl sm:text-2xl">{completedArticlesThisMonth} / {monthlyLimit}</p>
+                    <Progress 
+                      value={(completedArticlesThisMonth / monthlyLimit) * 100} 
+                      className="h-2 bg-black/50 mt-2"
+                    />
+                    <p className="text-primary-glow font-mono text-xs mt-2">
+                      {monthlyLimit - completedArticlesThisMonth} articles remaining this month
+                    </p>
+                  </div>
+                  
+                  {/* Product Descriptions */}
+                  <div>
+                    <p className="text-white/70 font-mono text-xs sm:text-sm">Monthly Product Descriptions:</p>
+                    <p className="text-white font-mono text-xl sm:text-2xl">{completedProductDescriptionsThisMonth} / {productDescriptionLimit}</p>
+                    <Progress 
+                      value={(completedProductDescriptionsThisMonth / productDescriptionLimit) * 100} 
+                      className="h-2 bg-black/50 mt-2"
+                    />
+                    <p className="text-primary-glow font-mono text-xs mt-2">
+                      {productDescriptionLimit - completedProductDescriptionsThisMonth} product descriptions remaining this month
+                    </p>
+                  </div>
+                  
+                  {/* Social Media Posts */}
+                  <div>
+                    <p className="text-white/70 font-mono text-xs sm:text-sm">Monthly Social Media Posts:</p>
+                    <p className="text-white font-mono text-xl sm:text-2xl">{completedSocialPostsThisMonth} / {socialPostLimit}</p>
+                    <Progress 
+                      value={(completedSocialPostsThisMonth / socialPostLimit) * 100} 
+                      className="h-2 bg-black/50 mt-2"
+                    />
+                    <p className="text-primary-glow font-mono text-xs mt-2">
+                      {socialPostLimit - completedSocialPostsThisMonth} social media posts remaining this month
+                      {tier === 'growth+' && <span className="block text-white/50 text-[10px] mt-1">(includes YouTube scripts)</span>}
+                    </p>
+                  </div>
                 </div>
                 <div className="pt-3">
                   <Button 
