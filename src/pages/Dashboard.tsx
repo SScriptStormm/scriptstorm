@@ -65,6 +65,10 @@ interface Article {
   revisions_remaining?: number;
   content_type?: string;
   youtube_script?: boolean;
+  revisions_requested?: number;
+  revisions_allowed?: number;
+  delivery_timeframe?: number;
+  delivery_deadline?: string;
 }
 
 const Dashboard = () => {
@@ -326,23 +330,62 @@ const Dashboard = () => {
       return;
     }
 
+    // Check if user has exceeded revision limit
+    const revisionsUsed = selectedArticle.revisions_requested || 0;
+    const revisionsAllowed = selectedArticle.revisions_allowed || 1;
+    
+    if (revisionsUsed >= revisionsAllowed) {
+      toast({
+        title: "Revision Limit Reached",
+        description: `You've used all ${revisionsAllowed} revision${revisionsAllowed > 1 ? 's' : ''} for this article.`,
+        variant: "destructive",
+      });
+      return;
+    }
+
     setSubmittingRevision(true);
     try {
-      // Here you would call your revision request API
-      // For now, we'll just show a success message
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("Not authenticated");
+
+      // Insert revision request
+      const { error: revisionError } = await supabase
+        .from('content_revisions')
+        .insert({
+          article_id: selectedArticle.id,
+          user_id: user.id,
+          revision_notes: revisionFeedback.trim(),
+          status: 'pending'
+        });
+
+      if (revisionError) throw revisionError;
+
+      // Update article's revision count
+      const { error: updateError } = await supabase
+        .from('articles')
+        .update({ 
+          revisions_requested: revisionsUsed + 1 
+        })
+        .eq('id', selectedArticle.id);
+
+      if (updateError) throw updateError;
+
       toast({
         title: "Revision Requested",
         description: "Your revision request has been submitted successfully.",
       });
       
+      // Refresh articles to show updated revision count
+      await fetchArticles();
+      
       setRevisionDialogOpen(false);
       setSelectedArticle(null);
       setRevisionFeedback("");
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error submitting revision:', error);
       toast({
         title: "Error",
-        description: "Failed to submit revision request. Please try again.",
+        description: error.message || "Failed to submit revision request. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -903,6 +946,20 @@ const Dashboard = () => {
                           </span>
                         </div>
                         
+                        {/* Revisions */}
+                        {article.status === 'completed' && (
+                          <div className="flex items-center justify-between">
+                            <span className="text-white/70 font-mono text-xs">Revisions:</span>
+                            <span className={`font-mono text-xs ${
+                              (article.revisions_requested || 0) >= (article.revisions_allowed || 1)
+                                ? 'text-red-400'
+                                : 'text-white'
+                            }`}>
+                              {article.revisions_requested || 0} / {article.revisions_allowed === 999999 ? '∞' : article.revisions_allowed || 1}
+                            </span>
+                          </div>
+                        )}
+                        
                         {/* Actions */}
                         <div className="flex flex-col gap-2 pt-2">
                           {article.status === 'completed' ? (
@@ -918,11 +975,14 @@ const Dashboard = () => {
                               <Button 
                                 size="sm" 
                                 variant="ghost"
-                                className="w-full text-yellow-400 border border-yellow-500/30 hover:border-yellow-500/60 font-mono text-xs"
+                                className="w-full text-yellow-400 border border-yellow-500/30 hover:border-yellow-500/60 font-mono text-xs disabled:opacity-50 disabled:cursor-not-allowed"
                                 onClick={() => handleRequestRevision(article)}
+                                disabled={(article.revisions_requested || 0) >= (article.revisions_allowed || 1)}
                               >
                                 <Edit className="h-3 w-3 mr-1" />
-                                Request Revision
+                                {(article.revisions_requested || 0) >= (article.revisions_allowed || 1)
+                                  ? 'Revision Limit Reached'
+                                  : 'Request Revision'}
                               </Button>
                             </>
                           ) : article.status === 'in_progress' ? (
@@ -957,6 +1017,7 @@ const Dashboard = () => {
                         <th className="text-white/70 font-mono text-sm pb-3">Project Title</th>
                         <th className="text-white/70 font-mono text-sm pb-3">Status</th>
                         <th className="text-white/70 font-mono text-sm pb-3">Delivered On</th>
+                        <th className="text-white/70 font-mono text-sm pb-3">Revisions</th>
                         <th className="text-white/70 font-mono text-sm pb-3 text-right">Actions</th>
                       </tr>
                     </thead>
@@ -990,6 +1051,19 @@ const Dashboard = () => {
                                 : '—'}
                             </span>
                           </td>
+                          <td className="py-4 align-top">
+                            {article.status === 'completed' ? (
+                              <span className={`font-mono text-xs md:text-sm ${
+                                (article.revisions_requested || 0) >= (article.revisions_allowed || 1)
+                                  ? 'text-red-400'
+                                  : 'text-white'
+                              }`}>
+                                {article.revisions_requested || 0} / {article.revisions_allowed === 999999 ? '∞' : article.revisions_allowed || 1}
+                              </span>
+                            ) : (
+                              <span className="text-white/50 font-mono text-xs">—</span>
+                            )}
+                          </td>
                           <td className="py-4 text-right">
                             <div className="flex items-center gap-2 justify-end">
                               {article.status === 'completed' ? (
@@ -1005,11 +1079,14 @@ const Dashboard = () => {
                                   <Button 
                                     size="sm" 
                                     variant="ghost"
-                                    className="text-yellow-400 border border-yellow-500/30 hover:border-yellow-500/60 font-mono"
+                                    className="text-yellow-400 border border-yellow-500/30 hover:border-yellow-500/60 font-mono disabled:opacity-50 disabled:cursor-not-allowed"
                                     onClick={() => handleRequestRevision(article)}
+                                    disabled={(article.revisions_requested || 0) >= (article.revisions_allowed || 1)}
                                   >
                                     <Edit className="h-4 w-4 mr-1" />
-                                    Request Revision
+                                    {(article.revisions_requested || 0) >= (article.revisions_allowed || 1)
+                                      ? 'Limit Reached'
+                                      : 'Request Revision'}
                                   </Button>
                                 </>
                               ) : article.status === 'in_progress' ? (

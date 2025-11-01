@@ -23,10 +23,14 @@ export type Database = {
           content_type: string | null
           created_at: string
           delivery_date: string | null
+          delivery_deadline: string | null
+          delivery_timeframe: number | null
           id: string
           key_points: string | null
           notes: string | null
           reference_links: string | null
+          revisions_allowed: number | null
+          revisions_requested: number
           specific_instructions: string | null
           status: string
           style_preferences: string | null
@@ -48,10 +52,14 @@ export type Database = {
           content_type?: string | null
           created_at?: string
           delivery_date?: string | null
+          delivery_deadline?: string | null
+          delivery_timeframe?: number | null
           id?: string
           key_points?: string | null
           notes?: string | null
           reference_links?: string | null
+          revisions_allowed?: number | null
+          revisions_requested?: number
           specific_instructions?: string | null
           status?: string
           style_preferences?: string | null
@@ -73,10 +81,14 @@ export type Database = {
           content_type?: string | null
           created_at?: string
           delivery_date?: string | null
+          delivery_deadline?: string | null
+          delivery_timeframe?: number | null
           id?: string
           key_points?: string | null
           notes?: string | null
           reference_links?: string | null
+          revisions_allowed?: number | null
+          revisions_requested?: number
           specific_instructions?: string | null
           status?: string
           style_preferences?: string | null
@@ -166,6 +178,44 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      content_revisions: {
+        Row: {
+          admin_response: string | null
+          article_id: string
+          created_at: string
+          id: string
+          revision_notes: string
+          status: string
+          user_id: string
+        }
+        Insert: {
+          admin_response?: string | null
+          article_id: string
+          created_at?: string
+          id?: string
+          revision_notes: string
+          status?: string
+          user_id: string
+        }
+        Update: {
+          admin_response?: string | null
+          article_id?: string
+          created_at?: string
+          id?: string
+          revision_notes?: string
+          status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "content_revisions_article_id_fkey"
+            columns: ["article_id"]
+            isOneToOne: false
+            referencedRelation: "articles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       edge_function_tokens: {
         Row: {
@@ -362,7 +412,7 @@ export type Database = {
     }
     Functions: {
       admin_get_contact_submissions: {
-        Args: Record<PropertyKey, never>
+        Args: never
         Returns: {
           company: string
           created_at: string
@@ -383,12 +433,9 @@ export type Database = {
         Args: { operation: string; target_user_id: string }
         Returns: boolean
       }
-      current_user_is_admin: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
-      }
+      current_user_is_admin: { Args: never; Returns: boolean }
       get_contact_submissions_admin: {
-        Args: Record<PropertyKey, never>
+        Args: never
         Returns: {
           company: string
           created_at: string
@@ -399,6 +446,13 @@ export type Database = {
           processed: boolean
           project_details: string
           service: string
+        }[]
+      }
+      get_tier_word_count_range: {
+        Args: { p_subscription_tier: string }
+        Returns: {
+          max_words: number
+          min_words: number
         }[]
       }
       insert_contact_submission: {
@@ -413,10 +467,7 @@ export type Database = {
         }
         Returns: string
       }
-      is_admin: {
-        Args: { _user_id?: string }
-        Returns: boolean
-      }
+      is_admin: { Args: { _user_id?: string }; Returns: boolean }
       update_contact_submission_admin: {
         Args: { p_id: string; p_processed: boolean }
         Returns: boolean
