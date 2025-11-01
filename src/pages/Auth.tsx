@@ -201,27 +201,33 @@ const Auth = () => {
   };
 
   return (
-    <div style={{ position: 'relative', minHeight: '100vh' }}>
-      {/* Back to Home Button - iOS Safari compatible */}
-      <Link 
-        to="/" 
-        style={{ 
+    <>
+      {/* Back to Home Button - Positioned at top level for iOS */}
+      <div 
+        style={{
           position: 'fixed',
-          top: '16px',
-          right: '16px',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 0,
           zIndex: 9999,
-          transform: 'translate3d(0, 0, 0)',
-          WebkitTransform: 'translate3d(0, 0, 0)',
-          backfaceVisibility: 'hidden',
-          WebkitBackfaceVisibility: 'hidden',
-          perspective: 1000,
-          WebkitPerspective: 1000
+          pointerEvents: 'none'
         }}
-        className="flex items-center gap-2 px-3 py-2 text-white border border-primary-glow/30 font-mono text-xs rounded-md bg-black"
       >
-        <ArrowLeft className="h-4 w-4" />
-        <span className="hidden sm:inline">HOME</span>
-      </Link>
+        <Link 
+          to="/" 
+          style={{
+            position: 'absolute',
+            top: '16px',
+            right: '16px',
+            pointerEvents: 'auto'
+          }}
+          className="flex items-center gap-2 px-3 py-2 text-white border border-primary-glow/30 font-mono text-xs rounded-md bg-black"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          <span className="hidden sm:inline">HOME</span>
+        </Link>
+      </div>
 
       <div className="min-h-screen bg-gradient-hero flex items-center justify-center py-12 px-4 sm:py-8 sm:px-4 relative">
 
@@ -482,7 +488,7 @@ const Auth = () => {
         </Card>
       </div>
       </div>
-    </div>
+    </>
   );
 };
 
