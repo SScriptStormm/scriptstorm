@@ -201,25 +201,29 @@ const Auth = () => {
   };
 
   return (
-    <>
-      {/* Back to Home Button - Mobile-optimized fixed positioning */}
+    <div style={{ position: 'relative', minHeight: '100vh' }}>
+      {/* Back to Home Button - iOS Safari compatible */}
       <Link 
         to="/" 
-        className="z-[9999] flex items-center gap-1 sm:gap-2 px-3 py-2 text-white border border-primary-glow/30 hover:border-primary-glow/60 font-mono text-xs sm:text-sm rounded-md bg-black/80 sm:backdrop-blur-sm"
         style={{ 
           position: 'fixed',
-          top: '1rem',
-          right: '1rem',
-          willChange: 'transform',
-          transform: 'translateZ(0)',
-          WebkitTransform: 'translateZ(0)',
+          top: '16px',
+          right: '16px',
+          zIndex: 9999,
+          transform: 'translate3d(0, 0, 0)',
+          WebkitTransform: 'translate3d(0, 0, 0)',
+          backfaceVisibility: 'hidden',
+          WebkitBackfaceVisibility: 'hidden',
+          perspective: 1000,
+          WebkitPerspective: 1000
         }}
+        className="flex items-center gap-2 px-3 py-2 text-white border border-primary-glow/30 font-mono text-xs rounded-md bg-black"
       >
-        <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4" />
+        <ArrowLeft className="h-4 w-4" />
         <span className="hidden sm:inline">HOME</span>
       </Link>
 
-      <div className="min-h-screen bg-gradient-hero flex items-center justify-center py-12 px-4 sm:py-8 sm:px-4 relative overflow-hidden">
+      <div className="min-h-screen bg-gradient-hero flex items-center justify-center py-12 px-4 sm:py-8 sm:px-4 relative">
 
       {/* AI Neural Network Background */}
       <div className="absolute inset-0 bg-gradient-mesh opacity-40" />
@@ -477,8 +481,8 @@ const Auth = () => {
           </CardContent>
         </Card>
       </div>
+      </div>
     </div>
-    </>
   );
 };
 
