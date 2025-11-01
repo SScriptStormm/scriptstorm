@@ -7,7 +7,7 @@ const ConstructionBanner = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="bg-yellow-500/90 text-yellow-900 px-4 py-3 relative">
+    <div className="bg-yellow-500/90 text-yellow-900 px-4 py-3 fixed top-0 left-0 right-0 z-[9998]">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center gap-2">
           <AlertTriangle className="h-5 w-5" />

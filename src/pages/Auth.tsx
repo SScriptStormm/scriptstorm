@@ -202,11 +202,18 @@ const Auth = () => {
 
   return (
     <>
-      {/* Back to Home Button - Fixed positioning for all devices */}
+      {/* Back to Home Button - Fixed positioning below construction banner */}
       <Link 
         to="/" 
-        className="fixed top-4 right-4 sm:top-6 sm:right-6 z-[9999] flex items-center gap-1 sm:gap-2 px-3 py-2 text-white border border-primary-glow/30 hover:border-primary-glow/60 font-mono text-xs sm:text-sm rounded-md bg-black/20 backdrop-blur-sm transition-colors transform-none"
-        style={{ position: 'fixed', transform: 'none' }}
+        className="fixed top-[72px] right-4 sm:right-6 z-[9999] flex items-center gap-1 sm:gap-2 px-3 py-2 text-white border border-primary-glow/30 hover:border-primary-glow/60 font-mono text-xs sm:text-sm rounded-md bg-black/20 backdrop-blur-sm transition-colors"
+        style={{ 
+          position: 'fixed',
+          top: '72px',
+          right: '1rem',
+          transform: 'translate3d(0,0,0)',
+          backfaceVisibility: 'hidden',
+          WebkitBackfaceVisibility: 'hidden'
+        }}
       >
         <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4" />
         <span className="hidden sm:inline">HOME</span>
