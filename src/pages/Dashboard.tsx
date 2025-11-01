@@ -261,7 +261,7 @@ const Dashboard = () => {
       case 'growth':
       case 'growth+': return 10;
       case 'scale': return 25;
-      case 'authority': return 40;
+      case 'authority': return 30;
       case 'dominance': return 50;
       default: return 5; // starter
     }
@@ -270,10 +270,10 @@ const Dashboard = () => {
   const getProductDescriptionLimit = () => {
     switch(tier) {
       case 'growth':
-      case 'growth+': return 20;
-      case 'scale': return 50;
-      case 'authority': return 80;
-      case 'dominance': return 100;
+      case 'growth+': return 10;
+      case 'scale': return 25;
+      case 'authority': return 30;
+      case 'dominance': return 999999; // unlimited
       default: return 5; // starter
     }
   };
@@ -282,8 +282,8 @@ const Dashboard = () => {
     switch(tier) {
       case 'growth':
       case 'growth+': return 30;
-      case 'scale': return 60;
-      case 'authority': return 100;
+      case 'scale': return 75;
+      case 'authority': return 90;
       case 'dominance': return 150;
       default: return 15; // starter
     }
