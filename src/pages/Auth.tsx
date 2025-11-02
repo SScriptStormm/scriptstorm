@@ -202,7 +202,7 @@ const Auth = () => {
 
   return (
     <>
-      {/* Back to Home Button - Positioned at top level for iOS */}
+      {/* Back to Home Button - Neon Futuristic Design */}
       <div 
         style={{
           position: 'fixed',
@@ -222,10 +222,24 @@ const Auth = () => {
             right: '16px',
             pointerEvents: 'auto'
           }}
-          className="flex items-center gap-2 px-3 py-2 text-white border border-primary-glow/30 font-mono text-xs rounded-md bg-black"
+          className="group relative flex items-center gap-2 px-4 py-2.5 text-white font-mono text-xs rounded-lg overflow-hidden transition-all duration-300 hover:scale-105"
         >
-          <ArrowLeft className="h-4 w-4" />
-          <span className="hidden sm:inline">HOME</span>
+          {/* Neon glow background */}
+          <div className="absolute inset-0 bg-gradient-cyber opacity-20 group-hover:opacity-40 transition-all duration-300" />
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm border-2 border-primary-glow/50 group-hover:border-primary-glow rounded-lg shadow-cyber group-hover:shadow-hologram transition-all duration-300" />
+          
+          {/* Animated scan line */}
+          <div className="absolute inset-0 overflow-hidden rounded-lg">
+            <div className="absolute top-0 h-px w-full bg-primary-glow/50 animate-scan-line opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          </div>
+          
+          {/* Content */}
+          <ArrowLeft className="relative h-4 w-4 text-primary-glow group-hover:animate-pulse" />
+          <span className="relative text-primary-glow font-bold tracking-wider group-hover:text-white transition-colors duration-300">HOME</span>
+          
+          {/* Corner accents */}
+          <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-primary-glow rounded-tl-lg opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-primary-glow rounded-br-lg opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
         </Link>
       </div>
 
