@@ -207,8 +207,8 @@ const Auth = () => {
         to="/" 
         className="group absolute top-4 right-4 z-[9999] flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all duration-300 hover:scale-105"
       >
-        {/* Lighter background with glow */}
-        <div className="absolute inset-0 bg-primary/20 group-hover:bg-primary/30 backdrop-blur-md border-2 border-primary-glow group-hover:border-white rounded-lg shadow-[0_0_20px_rgba(6,182,212,0.5)] group-hover:shadow-[0_0_30px_rgba(6,182,212,0.8)] transition-all duration-300" />
+        {/* Lighter background */}
+        <div className="absolute inset-0 bg-primary/20 group-hover:bg-primary/30 backdrop-blur-md border-2 border-primary-glow group-hover:border-white rounded-lg transition-all duration-300" />
         
         {/* Content */}
         <ArrowLeft className="relative h-4 w-4 text-white group-hover:text-white animate-pulse" />
