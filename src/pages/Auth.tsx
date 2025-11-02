@@ -201,11 +201,12 @@ const Auth = () => {
   };
 
   return (
-    <>
-      {/* Back to Home Button - Neon Futuristic Design - Fixed Position */}
+    <div className="relative">
+      {/* Back to Home Button - Fixed to Viewport */}
       <Link 
         to="/" 
         className="group fixed top-4 right-4 z-[9999] flex items-center gap-2 px-4 py-2.5 text-white font-mono text-xs rounded-lg overflow-hidden transition-all duration-300 hover:scale-105"
+        style={{ position: 'fixed' }}
       >
         {/* Neon glow background */}
         <div className="absolute inset-0 bg-gradient-cyber opacity-20 group-hover:opacity-40 transition-all duration-300" />
@@ -484,7 +485,7 @@ const Auth = () => {
         </Card>
       </div>
       </div>
-    </>
+    </div>
   );
 };
 
