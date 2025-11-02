@@ -8,7 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Navigate, Link } from "react-router-dom";
 import { User, Session } from "@supabase/supabase-js";
 import { Eye, EyeOff, Mail, Lock, LogIn, Zap, Check, X, Shield, AlertCircle, ArrowLeft } from "lucide-react";
-import scriptStormLogo from "@/assets/scriptstorm-logo.png";
+const scriptStormLogo = "/scriptstorm-logo.png";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
