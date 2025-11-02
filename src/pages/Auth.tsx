@@ -215,7 +215,7 @@ const Auth = () => {
           touchAction: 'manipulation',
           userSelect: 'none'
         }}
-        className="group flex items-center gap-1.5 px-2.5 py-1.5 text-white font-mono text-xs rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-hologram"
+        className="group flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 sm:py-2.5 text-white font-mono text-xs sm:text-sm rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-hologram"
       >
         {/* Neon glow background layers */}
         <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary-glow to-primary opacity-20 group-hover:opacity-40 blur-md transition-all duration-300" />
