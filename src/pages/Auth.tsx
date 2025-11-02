@@ -201,7 +201,7 @@ const Auth = () => {
   };
 
   return (
-    <>
+    <div className="min-h-screen bg-gradient-hero flex items-center justify-center py-12 px-4 sm:py-8 sm:px-4 relative overflow-x-hidden">
       {/* Back to Home Button - Scrolls with page */}
       <Link 
         to="/" 
@@ -214,8 +214,6 @@ const Auth = () => {
         <ArrowLeft className="relative h-4 w-4 text-white group-hover:text-white animate-pulse" />
         <span className="relative text-white font-bold tracking-wider font-mono text-xs">HOME</span>
       </Link>
-
-      <div className="min-h-screen bg-gradient-hero flex items-center justify-center py-12 px-4 sm:py-8 sm:px-4 relative overflow-x-hidden">
 
       {/* AI Neural Network Background */}
       <div className="absolute inset-0 bg-gradient-mesh opacity-40" />
@@ -473,8 +471,7 @@ const Auth = () => {
           </CardContent>
         </Card>
       </div>
-      </div>
-    </>
+    </div>
   );
 };
 
