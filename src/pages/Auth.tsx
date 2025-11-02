@@ -243,19 +243,19 @@ const Auth = () => {
         </div>
       </Link>
 
-      <div className="min-h-screen bg-gradient-hero flex items-center justify-center py-12 px-4 sm:py-8 sm:px-4 relative">
+      <div className="min-h-screen bg-gradient-hero flex items-center justify-center py-12 px-4 sm:py-8 sm:px-4 relative" style={{ touchAction: 'pan-y', overscrollBehavior: 'contain' }}>
 
       {/* AI Neural Network Background */}
-      <div className="absolute inset-0 bg-gradient-mesh opacity-40" />
-      <div className="absolute inset-0 bg-gradient-neural animate-neural-pulse" />
+      <div className="absolute inset-0 bg-gradient-mesh opacity-40 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-neural animate-neural-pulse pointer-events-none" />
       
       {/* Floating elements */}
-      <div className="absolute top-20 left-10 w-20 h-20 border border-primary-glow/20 rotate-45 animate-float" />
-      <div className="absolute top-40 right-20 w-16 h-16 border border-primary-glow/15 rotate-12 animate-float" style={{ animationDelay: '2s' }} />
-      <div className="absolute bottom-40 left-20 w-12 h-12 border border-primary-glow/25 rotate-45 animate-float" style={{ animationDelay: '4s' }} />
+      <div className="absolute top-20 left-10 w-20 h-20 border border-primary-glow/20 rotate-45 animate-float pointer-events-none" />
+      <div className="absolute top-40 right-20 w-16 h-16 border border-primary-glow/15 rotate-12 animate-float pointer-events-none" style={{ animationDelay: '2s' }} />
+      <div className="absolute bottom-40 left-20 w-12 h-12 border border-primary-glow/25 rotate-45 animate-float pointer-events-none" style={{ animationDelay: '4s' }} />
       
       {/* Scanning line effect */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 h-px w-full bg-gradient-neural animate-scan-line opacity-20" />
       </div>
 
