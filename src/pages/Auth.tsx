@@ -206,7 +206,7 @@ const Auth = () => {
       <Link 
         to="/" 
         style={{
-          position: 'fixed',
+          position: 'absolute',
           top: '20px',
           left: '20px',
           zIndex: 1000
