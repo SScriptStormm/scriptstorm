@@ -208,7 +208,7 @@ const Auth = () => {
         style={{
           position: 'absolute',
           top: '20px',
-          left: '20px',
+          right: '20px',
           zIndex: 1000
         }}
         className="group flex items-center gap-2 px-4 py-2.5 text-white font-mono text-sm rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-hologram"
