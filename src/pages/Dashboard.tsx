@@ -497,8 +497,18 @@ const Dashboard = () => {
             Welcome back, <span className="text-primary-glow animate-text-glow block sm:inline mt-1 sm:mt-0">{user?.email}</span>
           </h2>
           <p className="text-white/70 font-mono tracking-wide text-sm sm:text-base">
-            Your content production command center
+            {hasDominance ? 'Your Dedicated Client Workspace' : 'Your content production command center'}
           </p>
+          {hasDominance && (
+            <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-primary-glow/10 border border-primary-glow/30 rounded-lg">
+              <Badge variant="default" className="bg-primary-glow text-black font-bold text-xs">
+                DOMINANCE TIER
+              </Badge>
+              <span className="text-white/90 text-xs sm:text-sm font-mono">
+                Dedicated Project Manager Assigned
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Submit New Brief Button */}
@@ -824,7 +834,10 @@ const Dashboard = () => {
             {hasAuthority && (
               <TabsTrigger value="support" className="font-mono data-[state=active]:bg-primary-glow/20">
                 <MessageSquare className="h-4 w-4 mr-2" />
-                SUPPORT
+                <span>SUPPORT</span>
+                <Badge variant="default" className="ml-2 bg-primary-glow text-black text-[10px] px-1.5 py-0 h-4 font-bold">
+                  PRIORITY
+                </Badge>
               </TabsTrigger>
             )}
             
