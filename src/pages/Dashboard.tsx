@@ -872,7 +872,7 @@ const Dashboard = () => {
                     size="sm"
                     variant={statusFilter === 'completed' ? 'default' : 'outline'}
                     onClick={() => setStatusFilter('completed')}
-                    className="font-mono text-xs whitespace-nowrap flex-shrink-0"
+                    className="font-mono text-xs whitespace-nowrap flex-shrink-0 active:scale-100 touch-manipulation"
                   >
                     Completed ({articles.filter(a => a.status === 'completed').length})
                   </Button>
@@ -880,7 +880,7 @@ const Dashboard = () => {
                     size="sm"
                     variant={statusFilter === 'in_progress' ? 'default' : 'outline'}
                     onClick={() => setStatusFilter('in_progress')}
-                    className="font-mono text-xs whitespace-nowrap flex-shrink-0"
+                    className="font-mono text-xs whitespace-nowrap flex-shrink-0 active:scale-100 touch-manipulation"
                   >
                     In Progress ({articles.filter(a => a.status === 'in_progress').length})
                   </Button>
