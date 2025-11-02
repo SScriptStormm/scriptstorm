@@ -202,34 +202,56 @@ const Auth = () => {
 
   return (
     <div className="relative">
-      {/* Home Button */}
+      {/* Home Button - Futuristic Neon Design */}
       <Link 
         to="/" 
-        className="absolute top-4 right-4 z-50"
+        style={{
+          position: 'fixed',
+          top: '20px',
+          left: '20px',
+          zIndex: 1000
+        }}
+        className="group flex items-center gap-2 px-4 py-2.5 text-white font-mono text-sm rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-hologram"
       >
-        <Button
-          variant="outline"
-          size="sm"
-          className="flex items-center gap-2"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Home
-        </Button>
+        {/* Neon glow background layers */}
+        <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary-glow to-primary opacity-20 group-hover:opacity-40 blur-md transition-all duration-300" />
+        <div className="absolute inset-0 bg-black/70 backdrop-blur-sm border-2 border-primary-glow/40 group-hover:border-primary-glow rounded-lg shadow-[0_0_20px_rgba(6,182,212,0.3)] group-hover:shadow-[0_0_30px_rgba(6,182,212,0.6)] transition-all duration-300" />
+        
+        {/* Animated scan line effect */}
+        <div className="absolute inset-0 overflow-hidden rounded-lg">
+          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary-glow to-transparent animate-scan-line opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        </div>
+        
+        {/* Holographic corner accents */}
+        <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-primary-glow rounded-tl-lg opacity-50 group-hover:opacity-100 transition-all duration-300" />
+        <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-primary-glow rounded-br-lg opacity-50 group-hover:opacity-100 transition-all duration-300" />
+        <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-primary/50 rounded-tr-lg opacity-30 group-hover:opacity-80 transition-all duration-300" />
+        <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-primary/50 rounded-bl-lg opacity-30 group-hover:opacity-80 transition-all duration-300" />
+        
+        {/* Content */}
+        <ArrowLeft className="relative h-4 w-4 text-primary-glow group-hover:text-white group-hover:translate-x-[-2px] transition-all duration-300" />
+        <span className="relative text-primary-glow font-bold tracking-widest group-hover:text-white transition-colors duration-300">HOME</span>
+        
+        {/* Glowing dot indicator */}
+        <div className="relative">
+          <div className="w-1.5 h-1.5 rounded-full bg-primary-glow animate-pulse" />
+          <div className="absolute inset-0 w-1.5 h-1.5 rounded-full bg-primary-glow blur-sm animate-pulse" />
+        </div>
       </Link>
 
-      <div className="min-h-screen bg-gradient-hero flex items-center justify-center py-12 px-4 sm:py-8 sm:px-4 relative" style={{ touchAction: 'pan-y', overscrollBehavior: 'contain' }}>
+      <div className="min-h-screen bg-gradient-hero flex items-center justify-center py-12 px-4 sm:py-8 sm:px-4 relative">
 
       {/* AI Neural Network Background */}
-      <div className="absolute inset-0 bg-gradient-mesh opacity-40 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-neural animate-neural-pulse pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-mesh opacity-40" />
+      <div className="absolute inset-0 bg-gradient-neural animate-neural-pulse" />
       
       {/* Floating elements */}
-      <div className="absolute top-20 left-10 w-20 h-20 border border-primary-glow/20 rotate-45 animate-float pointer-events-none" />
-      <div className="absolute top-40 right-20 w-16 h-16 border border-primary-glow/15 rotate-12 animate-float pointer-events-none" style={{ animationDelay: '2s' }} />
-      <div className="absolute bottom-40 left-20 w-12 h-12 border border-primary-glow/25 rotate-45 animate-float pointer-events-none" style={{ animationDelay: '4s' }} />
+      <div className="absolute top-20 left-10 w-20 h-20 border border-primary-glow/20 rotate-45 animate-float" />
+      <div className="absolute top-40 right-20 w-16 h-16 border border-primary-glow/15 rotate-12 animate-float" style={{ animationDelay: '2s' }} />
+      <div className="absolute bottom-40 left-20 w-12 h-12 border border-primary-glow/25 rotate-45 animate-float" style={{ animationDelay: '4s' }} />
       
       {/* Scanning line effect */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 h-px w-full bg-gradient-neural animate-scan-line opacity-20" />
       </div>
 
