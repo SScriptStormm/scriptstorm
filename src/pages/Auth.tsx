@@ -209,12 +209,12 @@ const Auth = () => {
         to="/" 
         className="group absolute top-4 right-4 z-[9999] flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all duration-300 hover:scale-105"
       >
-        {/* Lighter background */}
-        <div className="absolute inset-0 bg-primary/20 group-hover:bg-primary/30 backdrop-blur-md border-2 border-primary-glow group-hover:border-white rounded-lg transition-all duration-300" />
+        {/* Cyan/Light blue background - contrasts with dark blue page */}
+        <div className="absolute inset-0 bg-cyan-500/30 group-hover:bg-cyan-400/40 backdrop-blur-md border-2 border-cyan-400 group-hover:border-cyan-300 rounded-lg transition-all duration-300" />
         
         {/* Content */}
-        <ArrowLeft className="relative h-4 w-4 text-white group-hover:text-white animate-pulse" />
-        <span className="relative text-white font-bold tracking-wider font-mono text-xs">HOME</span>
+        <ArrowLeft className="relative h-4 w-4 text-white group-hover:text-cyan-100 animate-pulse" />
+        <span className="relative text-white font-bold tracking-wider font-mono text-xs group-hover:text-cyan-100">HOME</span>
       </Link>
 
       {/* AI Neural Network Background */}
