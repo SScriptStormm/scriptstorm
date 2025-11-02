@@ -202,10 +202,10 @@ const Auth = () => {
 
   return (
     <>
-      {/* Back to Home Button - Neon Futuristic Design - Fixed Position */}
+      {/* Back to Home Button - Scrolls with page */}
       <Link 
         to="/" 
-        className="group fixed top-4 right-4 z-[9999] flex items-center gap-2 px-4 py-2.5 text-white font-mono text-xs rounded-lg overflow-hidden transition-all duration-300 hover:scale-105"
+        className="group absolute top-4 right-4 z-[9999] flex items-center gap-2 px-4 py-2.5 text-white font-mono text-xs rounded-lg overflow-hidden transition-all duration-300 hover:scale-105"
       >
         {/* Neon glow background */}
         <div className="absolute inset-0 bg-gradient-cyber opacity-20 group-hover:opacity-40 transition-all duration-300" />
@@ -225,7 +225,7 @@ const Auth = () => {
         <div className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-primary-glow rounded-br-lg opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
       </Link>
 
-      <div className="min-h-screen bg-gradient-hero flex items-center justify-center py-12 px-4 sm:py-8 sm:px-4 relative">
+      <div className="min-h-screen bg-gradient-hero flex items-center justify-center py-12 px-4 sm:py-8 sm:px-4 relative overflow-x-hidden">
 
       {/* AI Neural Network Background */}
       <div className="absolute inset-0 bg-gradient-mesh opacity-40" />
