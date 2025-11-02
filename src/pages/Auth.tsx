@@ -201,7 +201,9 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-hero flex items-center justify-center py-12 px-4 sm:py-8 sm:px-4 relative overflow-x-hidden">
+    <div className="min-h-[100dvh] bg-gradient-hero flex items-center justify-center py-12 px-4 sm:py-8 sm:px-4 relative overflow-hidden overscroll-none">
+      {/* Extended background to prevent blue screen on mobile scroll */}
+      <div className="fixed inset-0 -top-20 -bottom-20 bg-gradient-hero -z-10" />
       {/* Back to Home Button - Scrolls with page */}
       <Link 
         to="/" 
