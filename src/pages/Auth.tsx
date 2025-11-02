@@ -201,36 +201,28 @@ const Auth = () => {
   };
 
   return (
-    <div className="relative">
-      {/* Home Button - Futuristic Neon Design */}
+    <>
+      {/* Back to Home Button - Neon Futuristic Design - Fixed Position */}
       <Link 
         to="/" 
-        className="group fixed top-5 left-5 z-[1000] flex items-center gap-2 px-4 py-2.5 text-white font-mono text-sm rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-hologram"
+        className="group fixed top-4 right-4 z-[9999] flex items-center gap-2 px-4 py-2.5 text-white font-mono text-xs rounded-lg overflow-hidden transition-all duration-300 hover:scale-105"
       >
-        {/* Neon glow background layers */}
-        <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary-glow to-primary opacity-20 group-hover:opacity-40 blur-md transition-all duration-300" />
-        <div className="absolute inset-0 bg-black/70 backdrop-blur-sm border-2 border-primary-glow/40 group-hover:border-primary-glow rounded-lg shadow-[0_0_20px_rgba(6,182,212,0.3)] group-hover:shadow-[0_0_30px_rgba(6,182,212,0.6)] transition-all duration-300" />
+        {/* Neon glow background */}
+        <div className="absolute inset-0 bg-gradient-cyber opacity-20 group-hover:opacity-40 transition-all duration-300" />
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm border-2 border-primary-glow/50 group-hover:border-primary-glow rounded-lg shadow-cyber group-hover:shadow-hologram transition-all duration-300" />
         
-        {/* Animated scan line effect */}
+        {/* Animated scan line */}
         <div className="absolute inset-0 overflow-hidden rounded-lg">
-          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary-glow to-transparent animate-scan-line opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="absolute top-0 h-px w-full bg-primary-glow/50 animate-scan-line opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
-        
-        {/* Holographic corner accents */}
-        <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-primary-glow rounded-tl-lg opacity-50 group-hover:opacity-100 transition-all duration-300" />
-        <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-primary-glow rounded-br-lg opacity-50 group-hover:opacity-100 transition-all duration-300" />
-        <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-primary/50 rounded-tr-lg opacity-30 group-hover:opacity-80 transition-all duration-300" />
-        <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-primary/50 rounded-bl-lg opacity-30 group-hover:opacity-80 transition-all duration-300" />
         
         {/* Content */}
-        <ArrowLeft className="relative h-4 w-4 text-primary-glow group-hover:text-white group-hover:translate-x-[-2px] transition-all duration-300" />
-        <span className="relative text-primary-glow font-bold tracking-widest group-hover:text-white transition-colors duration-300">HOME</span>
+        <ArrowLeft className="relative h-4 w-4 text-primary-glow group-hover:animate-pulse" />
+        <span className="relative text-primary-glow font-bold tracking-wider group-hover:text-white transition-colors duration-300">HOME</span>
         
-        {/* Glowing dot indicator */}
-        <div className="relative">
-          <div className="w-1.5 h-1.5 rounded-full bg-primary-glow animate-pulse" />
-          <div className="absolute inset-0 w-1.5 h-1.5 rounded-full bg-primary-glow blur-sm animate-pulse" />
-        </div>
+        {/* Corner accents */}
+        <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-primary-glow rounded-tl-lg opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-primary-glow rounded-br-lg opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
       </Link>
 
       <div className="min-h-screen bg-gradient-hero flex items-center justify-center py-12 px-4 sm:py-8 sm:px-4 relative">
@@ -492,7 +484,7 @@ const Auth = () => {
         </Card>
       </div>
       </div>
-    </div>
+    </>
   );
 };
 
