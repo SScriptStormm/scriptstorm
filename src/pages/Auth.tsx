@@ -219,7 +219,7 @@ const Auth = () => {
       >
         {/* Neon glow background layers */}
         <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary-glow to-primary opacity-20 group-hover:opacity-40 blur-md transition-all duration-300" />
-        <div className="absolute inset-0 bg-black/70 backdrop-blur-sm border-2 border-primary-glow/40 group-hover:border-primary-glow rounded-lg shadow-[0_0_20px_rgba(6,182,212,0.3)] group-hover:shadow-[0_0_30px_rgba(6,182,212,0.6)] transition-all duration-300" />
+        <div className="absolute inset-0 bg-black/50 backdrop-blur-sm border-2 border-primary-glow/40 group-hover:border-primary-glow rounded-lg shadow-[0_0_20px_rgba(6,182,212,0.3)] group-hover:shadow-[0_0_30px_rgba(6,182,212,0.6)] transition-all duration-300" />
         
         {/* Animated scan line effect */}
         <div className="absolute inset-0 overflow-hidden rounded-lg">
