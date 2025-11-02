@@ -901,7 +901,7 @@ const Dashboard = () => {
               <div className="text-center py-12">
                 <AlertCircle className="h-12 w-12 text-primary-glow/50 mx-auto mb-3" />
                 <p className="text-white font-mono text-lg mb-2">
-                  No {statusFilter} projects
+                  No projects {statusFilter === 'in_progress' ? 'in progress' : statusFilter}
                 </p>
                 <p className="text-white/70 font-mono text-sm">
                   Try selecting a different filter
