@@ -205,24 +205,14 @@ const Auth = () => {
       {/* Back to Home Button - Scrolls with page */}
       <Link 
         to="/" 
-        className="group absolute top-4 right-4 z-[9999] flex items-center gap-2 px-4 py-2.5 text-white font-mono text-xs rounded-lg overflow-hidden transition-all duration-300 hover:scale-105"
+        className="group absolute top-4 right-4 z-[9999] flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all duration-300 hover:scale-105"
       >
-        {/* Neon glow background */}
-        <div className="absolute inset-0 bg-gradient-cyber opacity-20 group-hover:opacity-40 transition-all duration-300" />
-        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm border-2 border-primary-glow/50 group-hover:border-primary-glow rounded-lg shadow-cyber group-hover:shadow-hologram transition-all duration-300" />
-        
-        {/* Animated scan line */}
-        <div className="absolute inset-0 overflow-hidden rounded-lg">
-          <div className="absolute top-0 h-px w-full bg-primary-glow/50 animate-scan-line opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        </div>
+        {/* Lighter background with glow */}
+        <div className="absolute inset-0 bg-primary/20 group-hover:bg-primary/30 backdrop-blur-md border-2 border-primary-glow group-hover:border-white rounded-lg shadow-[0_0_20px_rgba(6,182,212,0.5)] group-hover:shadow-[0_0_30px_rgba(6,182,212,0.8)] transition-all duration-300" />
         
         {/* Content */}
-        <ArrowLeft className="relative h-4 w-4 text-primary-glow group-hover:animate-pulse" />
-        <span className="relative text-primary-glow font-bold tracking-wider group-hover:text-white transition-colors duration-300">HOME</span>
-        
-        {/* Corner accents */}
-        <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-primary-glow rounded-tl-lg opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
-        <div className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-primary-glow rounded-br-lg opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
+        <ArrowLeft className="relative h-4 w-4 text-white group-hover:text-white animate-pulse" />
+        <span className="relative text-white font-bold tracking-wider font-mono text-xs">HOME</span>
       </Link>
 
       <div className="min-h-screen bg-gradient-hero flex items-center justify-center py-12 px-4 sm:py-8 sm:px-4 relative overflow-x-hidden">
