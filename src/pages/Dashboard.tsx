@@ -573,6 +573,44 @@ const Dashboard = () => {
 
         {/* 2-Column Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+          {/* Account Status */}
+          <Card className="bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide text-base sm:text-lg">
+                <Zap className="h-4 w-4 sm:h-5 sm:w-5 text-primary-glow" />
+                ACCOUNT STATUS
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-white/70 font-mono text-sm">Status</span>
+                  <Badge className="bg-green-500/20 text-green-400 border-green-500/30 font-mono">
+                    READY
+                  </Badge>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-white/70 font-mono text-sm">Plan</span>
+                  <Badge className="bg-primary/20 text-primary-glow border-primary-glow/30 font-mono uppercase">
+                    {subscriber?.subscription_tier || 'Starter'}
+                  </Badge>
+                </div>
+                {subscriber?.subscription_end && (
+                  <div className="flex items-center justify-between">
+                    <span className="text-white/70 font-mono text-sm">Renews</span>
+                    <span className="text-white font-mono text-sm">
+                      {new Date(subscriber.subscription_end).toLocaleDateString()}
+                    </span>
+                  </div>
+                )}
+                <div className="flex items-center justify-between">
+                  <span className="text-white/70 font-mono text-sm">Word Count Range</span>
+                  <span className="text-white font-mono text-sm">{wordCountRange}</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
           {/* Monthly Usage - QuotaUsageWidget */}
           <QuotaUsageWidget 
             subscriptionTier={tier}
@@ -580,43 +618,43 @@ const Dashboard = () => {
             socialPostsUsed={monthlyUsage.socialPosts}
             productDescUsed={monthlyUsage.productDesc}
           />
+        </div>
 
-          {/* Production Stats */}
-          {totalArticles > 0 && (
-            <Card className="bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide text-base sm:text-lg">
-                  <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-primary-glow" />
-                  PRODUCTION STATS
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div>
-                    <div className="flex justify-between text-xs sm:text-sm font-mono text-white/70 mb-2">
-                      <span>Completion Rate</span>
-                      <span>{Math.round((completedArticles / totalArticles) * 100)}%</span>
-                    </div>
-                    <Progress 
-                      value={(completedArticles / totalArticles) * 100} 
-                      className="h-3 bg-black/50"
-                    />
+        {/* Production Stats */}
+        {totalArticles > 0 && (
+          <Card className="mb-8 bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide text-base sm:text-lg">
+                <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-primary-glow" />
+                PRODUCTION STATS
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div>
+                  <div className="flex justify-between text-xs sm:text-sm font-mono text-white/70 mb-2">
+                    <span>Completion Rate</span>
+                    <span>{Math.round((completedArticles / totalArticles) * 100)}%</span>
                   </div>
-                  <div className="grid grid-cols-2 gap-3 sm:gap-4 pt-2">
-                    <div className="text-center p-2 sm:p-3 bg-black/20 rounded-lg border border-primary-glow/20">
-                      <p className="text-white font-mono text-xl sm:text-2xl">{totalArticles}</p>
-                      <p className="text-white/70 font-mono text-xs">Total Briefs</p>
-                    </div>
-                    <div className="text-center p-2 sm:p-3 bg-black/20 rounded-lg border border-primary-glow/20">
-                      <p className="text-white font-mono text-lg sm:text-xl">{wordCountRange}</p>
-                      <p className="text-white/70 font-mono text-xs">Words Per Article</p>
-                    </div>
+                  <Progress 
+                    value={(completedArticles / totalArticles) * 100} 
+                    className="h-3 bg-black/50"
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-3 sm:gap-4 pt-2">
+                  <div className="text-center p-2 sm:p-3 bg-black/20 rounded-lg border border-primary-glow/20">
+                    <p className="text-white font-mono text-xl sm:text-2xl">{totalArticles}</p>
+                    <p className="text-white/70 font-mono text-xs">Total Briefs</p>
+                  </div>
+                  <div className="text-center p-2 sm:p-3 bg-black/20 rounded-lg border border-primary-glow/20">
+                    <p className="text-white font-mono text-lg sm:text-xl">{wordCountRange}</p>
+                    <p className="text-white/70 font-mono text-xs">Words Per Article</p>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          )}
-        </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Consolidated Pipeline & Workflow */}
         {articles.length > 0 ? (

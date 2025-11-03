@@ -44,8 +44,8 @@ export const QuotaUsageWidget = ({
   };
 
   return (
-    <Card className="p-6 bg-card/50 backdrop-blur border-primary-glow/20">
-      <h3 className="text-lg font-bold text-foreground mb-4 font-mono">Monthly Usage</h3>
+    <Card className="p-6 bg-black/30 backdrop-blur-xl border-primary-glow/30">
+      <h3 className="text-lg font-bold text-white mb-4 font-mono tracking-wide">MONTHLY USAGE</h3>
       
       <div className="space-y-4">
         {/* Articles */}
