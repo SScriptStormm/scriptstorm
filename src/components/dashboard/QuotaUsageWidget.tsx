@@ -52,10 +52,10 @@ export const QuotaUsageWidget = ({
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <FileText className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-foreground">Articles</span>
+              <FileText className="w-4 h-4 text-primary-glow" />
+              <span className="text-sm font-medium text-white font-mono">Articles</span>
             </div>
-            <span className="text-sm font-mono text-muted-foreground">
+            <span className="text-sm font-mono text-white/70">
               {articlesUsed}/{limits.articles === 999999 ? "∞" : limits.articles}
             </span>
           </div>
@@ -66,10 +66,10 @@ export const QuotaUsageWidget = ({
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Share2 className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-foreground">Social Posts</span>
+              <Share2 className="w-4 h-4 text-primary-glow" />
+              <span className="text-sm font-medium text-white font-mono">Social Posts</span>
             </div>
-            <span className="text-sm font-mono text-muted-foreground">
+            <span className="text-sm font-mono text-white/70">
               {socialPostsUsed}/{limits.social === 999999 ? "∞" : limits.social}
             </span>
           </div>
@@ -80,15 +80,15 @@ export const QuotaUsageWidget = ({
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Package className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-foreground">Product Descriptions</span>
+              <Package className="w-4 h-4 text-primary-glow" />
+              <span className="text-sm font-medium text-white font-mono">Product Descriptions</span>
             </div>
-            <span className="text-sm font-mono text-muted-foreground">
+            <span className="text-sm font-mono text-white/70">
               {productDescUsed}/{limits.products === 999999 ? "∞" : limits.products}
             </span>
           </div>
           {limits.products === 999999 ? (
-            <div className="text-xs text-muted-foreground font-mono">Unlimited</div>
+            <div className="text-xs text-white/60 font-mono">Unlimited</div>
           ) : (
             <Progress value={productPercentage} className="h-2" indicatorClassName={getProgressColor(productPercentage)} />
           )}
