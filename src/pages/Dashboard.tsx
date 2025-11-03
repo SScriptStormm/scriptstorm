@@ -147,24 +147,29 @@ const Dashboard = () => {
       if (error) throw error;
       setArticles(data || []);
 
-      // Fetch monthly usage
+      // Calculate monthly usage from articles
       const currentMonth = new Date().toISOString().slice(0, 7); // YYYY-MM format
-      const { data: usageData } = await supabase
-        .from('monthly_usage_tracking')
-        .select('*')
-        .eq('user_id', id)
-        .eq('month_year', currentMonth)
-        .maybeSingle();
+      const currentMonthArticles = (data || []).filter(article => 
+        article.created_at.startsWith(currentMonth)
+      );
 
-      if (usageData) {
-        setMonthlyUsage({
-          articles: usageData.articles_submitted || 0,
-          socialPosts: usageData.social_posts_submitted || 0,
-          productDesc: usageData.product_descriptions_submitted || 0,
-        });
-      } else {
-        setMonthlyUsage({ articles: 0, socialPosts: 0, productDesc: 0 });
-      }
+      const articlesCount = currentMonthArticles.filter(a => 
+        a.content_type === 'blog_article'
+      ).length;
+      
+      const socialPostsCount = currentMonthArticles.filter(a => 
+        a.content_type === 'social_media'
+      ).length;
+      
+      const productDescCount = currentMonthArticles.filter(a => 
+        a.content_type === 'product_description'
+      ).length;
+
+      setMonthlyUsage({
+        articles: articlesCount,
+        socialPosts: socialPostsCount,
+        productDesc: productDescCount,
+      });
     } catch (error: any) {
       console.error('Error fetching articles:', error);
     }
