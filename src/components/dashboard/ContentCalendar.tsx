@@ -91,10 +91,15 @@ const ContentCalendar = ({ userId }: ContentCalendarProps) => {
   return (
     <Card className="bg-black/30 backdrop-blur-xl border-primary-glow/30">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
-          <Calendar className="h-5 w-5 text-primary-glow" />
-          CONTENT CALENDAR
-        </CardTitle>
+        <div className="flex items-center justify-between">
+          <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
+            <Calendar className="h-5 w-5 text-primary-glow" />
+            AUTOMATED CONTENT CALENDAR
+          </CardTitle>
+          <div className="px-3 py-1 bg-primary/20 text-primary-glow border border-primary/30 rounded-full text-xs font-mono font-semibold">
+            GROWTH+ FEATURE
+          </div>
+        </div>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">

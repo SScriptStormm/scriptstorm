@@ -543,8 +543,17 @@ const Dashboard = () => {
             Welcome back, <span className="text-primary-glow animate-text-glow block sm:inline mt-1 sm:mt-0">{user?.email}</span>
           </h2>
           <p className="text-white/70 font-mono tracking-wide text-sm sm:text-base">
-            Your content production command center
+            {hasDominance 
+              ? '⚡ Your dedicated client workspace - Market dominance awaits' 
+              : 'Your content production command center'}
           </p>
+          {hasDominance && (
+            <div className="mt-3 p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-lg">
+              <p className="text-yellow-400 font-mono text-sm">
+                <strong>Dominance Tier Active:</strong> 12-hour lightning delivery, unlimited revisions, and dedicated priority support at your service.
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Submit New Brief Button */}
@@ -801,9 +810,14 @@ const Dashboard = () => {
             )}
             
             {hasAuthority && (
-              <TabsTrigger value="support" className="font-mono data-[state=active]:bg-primary-glow/20">
+              <TabsTrigger value="support" className="font-mono data-[state=active]:bg-primary-glow/20 relative">
                 <MessageSquare className="h-4 w-4 mr-2" />
                 SUPPORT
+                {(hasAuthority || hasDominance) && (
+                  <Badge className="ml-2 bg-yellow-500/20 text-yellow-400 border-yellow-500/30 text-xs px-1 py-0">
+                    PRIORITY
+                  </Badge>
+                )}
               </TabsTrigger>
             )}
             

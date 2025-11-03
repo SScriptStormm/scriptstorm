@@ -14,7 +14,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDes
 import { Progress } from "@/components/ui/progress";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
-import { ChevronLeft, ChevronRight, FileText, Target, Palette, MessageSquare, Zap, Briefcase, Smile, Heart, Shield, MessageCircle, Code, Video } from "lucide-react";
+import { ChevronLeft, ChevronRight, FileText, Target, Palette, MessageSquare, Zap, Briefcase, Smile, Heart, Shield, MessageCircle, Code, Video, BarChart3 } from "lucide-react";
 
 // Default word counts for different content types
 const DEFAULT_WORD_COUNTS = {
@@ -39,6 +39,9 @@ const formSchema = z.object({
   avoid_topics: z.string().optional(),
   youtube_script: z.boolean().optional(),
   youtube_script_length: z.number().optional(),
+  competitor_urls: z.string().optional(),
+  strategic_goals: z.array(z.string()).optional(),
+  kpis_to_track: z.array(z.string()).optional(),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -75,6 +78,9 @@ export function MultiStepContentBriefForm() {
       avoid_topics: "",
       youtube_script: false,
       youtube_script_length: 500,
+      competitor_urls: "",
+      strategic_goals: [],
+      kpis_to_track: [],
     },
   });
 
@@ -237,6 +243,9 @@ export function MultiStepContentBriefForm() {
           avoid_topics: data.avoid_topics || null,
           youtube_script: data.youtube_script || false,
           youtube_script_length: data.youtube_script_length || null,
+          competitor_urls: data.competitor_urls || null,
+          strategic_goals: data.strategic_goals || null,
+          kpis_to_track: data.kpis_to_track || null,
           status: 'pending',
         }
       ]);
@@ -547,6 +556,139 @@ export function MultiStepContentBriefForm() {
                       </FormItem>
                     )}
                   />
+
+                  {/* Competitor Research - Growth+ Feature */}
+                  {hasGrowthPlus && (
+                    <div className="p-4 bg-primary/5 rounded-lg border border-primary/20 space-y-4">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Target className="h-5 w-5 text-primary" />
+                        <h3 className="font-semibold text-foreground">Advanced Keyword & Competitor Research (Growth+ Feature)</h3>
+                      </div>
+                      
+                      <FormField
+                        control={form.control}
+                        name="competitor_urls"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Competitor Websites to Analyze (Optional)</FormLabel>
+                            <FormControl>
+                              <Textarea 
+                                placeholder="List up to 3 competitor URLs we should research (one per line or comma-separated)&#10;Example:&#10;https://competitor1.com&#10;https://competitor2.com&#10;https://competitor3.com"
+                                className="min-h-[100px] font-mono text-sm"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormDescription>
+                              We'll analyze these competitors' content strategies and identify keyword gaps
+                            </FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                  )}
+
+                  {/* Strategic Goals - Authority+ Feature */}
+                  {(subscriptionTier === 'authority' || subscriptionTier === 'dominance') && (
+                    <div className="p-4 bg-purple-500/5 rounded-lg border border-purple-500/20 space-y-4">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Target className="h-5 w-5 text-purple-500" />
+                        <h3 className="font-semibold text-foreground">Strategic Content Goals (Authority+ Feature)</h3>
+                      </div>
+                      
+                      <FormField
+                        control={form.control}
+                        name="strategic_goals"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Select Your Strategic Goals (Optional)</FormLabel>
+                            <div className="space-y-2 mt-2">
+                              {[
+                                'Establish thought leadership',
+                                'Target competitor keywords',
+                                'Create pillar content',
+                                'Generate leads',
+                                'Build brand authority',
+                                'Drive organic traffic'
+                              ].map((goal) => (
+                                <label key={goal} className="flex items-center gap-2 cursor-pointer">
+                                  <input
+                                    type="checkbox"
+                                    checked={field.value?.includes(goal) || false}
+                                    onChange={(e) => {
+                                      const currentValues = field.value || [];
+                                      if (e.target.checked) {
+                                        field.onChange([...currentValues, goal]);
+                                      } else {
+                                        field.onChange(currentValues.filter(v => v !== goal));
+                                      }
+                                    }}
+                                    className="w-4 h-4 text-purple-500 border-gray-300 rounded focus:ring-purple-500"
+                                  />
+                                  <span className="text-sm text-foreground">{goal}</span>
+                                </label>
+                              ))}
+                            </div>
+                            <FormDescription>
+                              We'll tailor the content strategy to achieve these specific objectives
+                            </FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                  )}
+
+                  {/* KPI Tracking - Dominance Feature */}
+                  {subscriptionTier === 'dominance' && (
+                    <div className="p-4 bg-yellow-500/5 rounded-lg border border-yellow-500/20 space-y-4">
+                      <div className="flex items-center gap-2 mb-2">
+                        <BarChart3 className="h-5 w-5 text-yellow-500" />
+                        <h3 className="font-semibold text-foreground">Performance Tracking (Dominance Feature)</h3>
+                      </div>
+                      
+                      <FormField
+                        control={form.control}
+                        name="kpis_to_track"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Key Performance Indicators (KPIs) to Track (Optional)</FormLabel>
+                            <div className="space-y-2 mt-2">
+                              {[
+                                'Organic Traffic Growth',
+                                'Lead Conversion Rate',
+                                'Keyword Rankings',
+                                'Engagement Metrics',
+                                'Backlink Acquisition',
+                                'Domain Authority'
+                              ].map((kpi) => (
+                                <label key={kpi} className="flex items-center gap-2 cursor-pointer">
+                                  <input
+                                    type="checkbox"
+                                    checked={field.value?.includes(kpi) || false}
+                                    onChange={(e) => {
+                                      const currentValues = field.value || [];
+                                      if (e.target.checked) {
+                                        field.onChange([...currentValues, kpi]);
+                                      } else {
+                                        field.onChange(currentValues.filter(v => v !== kpi));
+                                      }
+                                    }}
+                                    className="w-4 h-4 text-yellow-500 border-gray-300 rounded focus:ring-yellow-500"
+                                  />
+                                  <span className="text-sm text-foreground">{kpi}</span>
+                                </label>
+                              ))}
+                            </div>
+                            <FormDescription>
+                              We'll include these metrics in your AI-Driven Performance Dashboard
+                            </FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                  )}
                 </div>
               )}
 

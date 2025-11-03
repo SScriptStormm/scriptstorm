@@ -89,10 +89,15 @@ const MarketRoadmap = ({ userId }: MarketRoadmapProps) => {
   return (
     <Card className="bg-black/30 backdrop-blur-xl border-primary-glow/30">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
-          <Target className="h-5 w-5 text-primary-glow" />
-          MARKET DOMINANCE ROADMAP
-        </CardTitle>
+        <div className="flex items-center justify-between">
+          <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
+            <Target className="h-5 w-5 text-primary-glow" />
+            MARKET DOMINANCE ROADMAP
+          </CardTitle>
+          <div className="px-3 py-1 bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 rounded-full text-xs font-mono font-semibold">
+            DOMINANCE EXCLUSIVE
+          </div>
+        </div>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
