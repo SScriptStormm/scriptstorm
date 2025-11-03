@@ -14,8 +14,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDes
 import { Progress } from "@/components/ui/progress";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
-import { Checkbox } from "@/components/ui/checkbox";
-import { ChevronLeft, ChevronRight, FileText, Target, Palette, MessageSquare, Zap, Briefcase, Smile, Heart, Shield, MessageCircle, Code, Video, TrendingUp } from "lucide-react";
+import { ChevronLeft, ChevronRight, FileText, Target, Palette, MessageSquare, Zap, Briefcase, Smile, Heart, Shield, MessageCircle, Code, Video } from "lucide-react";
 
 // Default word counts for different content types
 const DEFAULT_WORD_COUNTS = {
@@ -40,9 +39,6 @@ const formSchema = z.object({
   avoid_topics: z.string().optional(),
   youtube_script: z.boolean().optional(),
   youtube_script_length: z.number().optional(),
-  competitor_urls: z.string().optional(),
-  strategic_goals: z.array(z.string()).optional(),
-  kpis_to_track: z.array(z.string()).optional(),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -79,9 +75,6 @@ export function MultiStepContentBriefForm() {
       avoid_topics: "",
       youtube_script: false,
       youtube_script_length: 500,
-      competitor_urls: "",
-      strategic_goals: [],
-      kpis_to_track: [],
     },
   });
 
@@ -110,8 +103,6 @@ export function MultiStepContentBriefForm() {
   // Check if user has Growth+ tier
   const tier = subscriptionTier?.toLowerCase() || '';
   const hasGrowthPlus = ['growth', 'scale', 'authority', 'dominance'].includes(tier);
-  const hasAuthorityPlus = ['authority', 'dominance'].includes(tier);
-  const hasDominance = tier === 'dominance';
 
   // Get word count range based on subscription tier
   const getWordCountRange = () => {
@@ -224,9 +215,6 @@ export function MultiStepContentBriefForm() {
           avoid_topics: data.avoid_topics || null,
           youtube_script: data.youtube_script || false,
           youtube_script_length: data.youtube_script_length || null,
-          competitor_urls: data.competitor_urls || null,
-          strategic_goals: data.strategic_goals || null,
-          kpis_to_track: data.kpis_to_track || null,
           status: 'pending',
         }
       ]);
@@ -520,189 +508,25 @@ export function MultiStepContentBriefForm() {
                     )}
                   />
 
-                   <FormField
-                     control={form.control}
-                     name="key_points"
-                     render={({ field }) => (
-                       <FormItem>
-                         <FormLabel>Key Points to Cover *</FormLabel>
-                         <FormControl>
-                           <Textarea 
-                             placeholder="List the main points or sections you want included..."
-                             className="min-h-[120px]"
-                             {...field}
-                           />
-                         </FormControl>
-                         <FormMessage />
-                       </FormItem>
-                     )}
-                   />
-
-                   {/* Competitor Analysis Field - Growth+ Feature */}
-                   {hasGrowthPlus && (
-                     <div className="p-4 bg-primary/5 rounded-lg border border-primary/20 space-y-4">
-                       <div className="flex items-center gap-2 mb-2">
-                         <TrendingUp className="h-5 w-5 text-primary" />
-                         <h3 className="font-semibold text-foreground">Advanced Keyword & Competitor Research (Growth+ Feature)</h3>
-                       </div>
-                       
-                       <FormField
-                         control={form.control}
-                         name="competitor_urls"
-                         render={({ field }) => (
-                           <FormItem>
-                             <FormLabel>Competitors to Analyze (Optional)</FormLabel>
-                             <FormControl>
-                               <Textarea 
-                                 placeholder="Enter competitor website URLs (one per line)&#10;e.g., https://competitor1.com&#10;https://competitor2.com&#10;https://competitor3.com"
-                                 className="min-h-[100px] font-mono text-sm"
-                                 {...field}
-                               />
-                             </FormControl>
-                             <FormDescription>
-                               We'll analyze these competitors for keyword opportunities and content gaps
-                             </FormDescription>
-                             <FormMessage />
-                           </FormItem>
-                         )}
-                       />
-                     </div>
-                   )}
-
-                   {/* Strategic Goals Field - Authority+ Feature */}
-                   {hasAuthorityPlus && (
-                     <div className="p-4 bg-primary/5 rounded-lg border border-primary/20 space-y-4">
-                       <div className="flex items-center gap-2 mb-2">
-                         <Target className="h-5 w-5 text-primary" />
-                         <h3 className="font-semibold text-foreground">Strategic Content Goals (Authority+ Feature)</h3>
-                       </div>
-                       
-                       <FormField
-                         control={form.control}
-                         name="strategic_goals"
-                         render={() => (
-                           <FormItem>
-                             <FormLabel>Select Your Strategic Objectives (Optional)</FormLabel>
-                             <div className="space-y-3">
-                               {[
-                                 { id: 'thought_leadership', label: 'Establish Thought Leadership' },
-                                 { id: 'competitor_keywords', label: 'Target Competitor Keywords' },
-                                 { id: 'pillar_content', label: 'Create Pillar Content' },
-                                 { id: 'lead_generation', label: 'Generate Leads' },
-                                 { id: 'brand_awareness', label: 'Build Brand Awareness' },
-                                 { id: 'seo_authority', label: 'Improve SEO Authority' },
-                               ].map((goal) => (
-                                 <FormField
-                                   key={goal.id}
-                                   control={form.control}
-                                   name="strategic_goals"
-                                   render={({ field }) => {
-                                     return (
-                                       <FormItem
-                                         key={goal.id}
-                                         className="flex flex-row items-start space-x-3 space-y-0"
-                                       >
-                                         <FormControl>
-                                           <Checkbox
-                                             checked={field.value?.includes(goal.id)}
-                                             onCheckedChange={(checked) => {
-                                               return checked
-                                                 ? field.onChange([...(field.value || []), goal.id])
-                                                 : field.onChange(
-                                                     field.value?.filter(
-                                                       (value) => value !== goal.id
-                                                     )
-                                                   )
-                                             }}
-                                           />
-                                         </FormControl>
-                                         <FormLabel className="font-normal cursor-pointer">
-                                           {goal.label}
-                                         </FormLabel>
-                                       </FormItem>
-                                     )
-                                   }}
-                                 />
-                               ))}
-                             </div>
-                             <FormDescription>
-                               Help us align content with your strategic objectives
-                             </FormDescription>
-                             <FormMessage />
-                           </FormItem>
-                         )}
-                       />
-                     </div>
-                   )}
-
-                   {/* KPIs Field - Dominance Feature */}
-                   {hasDominance && (
-                     <div className="p-4 bg-primary/5 rounded-lg border border-primary/20 space-y-4">
-                       <div className="flex items-center gap-2 mb-2">
-                         <TrendingUp className="h-5 w-5 text-primary" />
-                         <h3 className="font-semibold text-foreground">Performance Tracking (Dominance Feature)</h3>
-                       </div>
-                       
-                       <FormField
-                         control={form.control}
-                         name="kpis_to_track"
-                         render={() => (
-                           <FormItem>
-                             <FormLabel>Key Performance Indicators (Optional)</FormLabel>
-                             <div className="space-y-3">
-                               {[
-                                 { id: 'organic_traffic', label: 'Organic Traffic Growth' },
-                                 { id: 'lead_conversion', label: 'Lead Conversion Rate' },
-                                 { id: 'engagement_rate', label: 'User Engagement Rate' },
-                                 { id: 'bounce_rate', label: 'Bounce Rate Reduction' },
-                                 { id: 'backlinks', label: 'Backlink Acquisition' },
-                                 { id: 'keyword_rankings', label: 'Keyword Rankings' },
-                                 { id: 'social_shares', label: 'Social Media Shares' },
-                               ].map((kpi) => (
-                                 <FormField
-                                   key={kpi.id}
-                                   control={form.control}
-                                   name="kpis_to_track"
-                                   render={({ field }) => {
-                                     return (
-                                       <FormItem
-                                         key={kpi.id}
-                                         className="flex flex-row items-start space-x-3 space-y-0"
-                                       >
-                                         <FormControl>
-                                           <Checkbox
-                                             checked={field.value?.includes(kpi.id)}
-                                             onCheckedChange={(checked) => {
-                                               return checked
-                                                 ? field.onChange([...(field.value || []), kpi.id])
-                                                 : field.onChange(
-                                                     field.value?.filter(
-                                                       (value) => value !== kpi.id
-                                                     )
-                                                   )
-                                             }}
-                                           />
-                                         </FormControl>
-                                         <FormLabel className="font-normal cursor-pointer">
-                                           {kpi.label}
-                                         </FormLabel>
-                                       </FormItem>
-                                     )
-                                   }}
-                                 />
-                               ))}
-                             </div>
-                             <FormDescription>
-                               Select KPIs for AI-driven performance tracking dashboard
-                             </FormDescription>
-                             <FormMessage />
-                           </FormItem>
-                         )}
-                       />
-                     </div>
-                   )}
-                 </div>
-               )}
+                  <FormField
+                    control={form.control}
+                    name="key_points"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Key Points to Cover *</FormLabel>
+                        <FormControl>
+                          <Textarea 
+                            placeholder="List the main points or sections you want included..."
+                            className="min-h-[120px]"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              )}
 
               {/* Step 3: Brand & Style */}
               {currentStep === 3 && (

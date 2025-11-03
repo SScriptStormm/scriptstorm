@@ -19,7 +19,6 @@ export type Database = {
           article_url: string | null
           avoid_topics: string | null
           brand_voice: string | null
-          competitor_urls: string | null
           content_goal: string | null
           content_type: string | null
           created_at: string
@@ -28,14 +27,12 @@ export type Database = {
           delivery_timeframe: number | null
           id: string
           key_points: string | null
-          kpis_to_track: string[] | null
           notes: string | null
           reference_links: string | null
           revisions_allowed: number | null
           revisions_requested: number
           specific_instructions: string | null
           status: string
-          strategic_goals: string[] | null
           style_preferences: string | null
           target_audience: string | null
           target_keywords: string[] | null
@@ -51,7 +48,6 @@ export type Database = {
           article_url?: string | null
           avoid_topics?: string | null
           brand_voice?: string | null
-          competitor_urls?: string | null
           content_goal?: string | null
           content_type?: string | null
           created_at?: string
@@ -60,14 +56,12 @@ export type Database = {
           delivery_timeframe?: number | null
           id?: string
           key_points?: string | null
-          kpis_to_track?: string[] | null
           notes?: string | null
           reference_links?: string | null
           revisions_allowed?: number | null
           revisions_requested?: number
           specific_instructions?: string | null
           status?: string
-          strategic_goals?: string[] | null
           style_preferences?: string | null
           target_audience?: string | null
           target_keywords?: string[] | null
@@ -83,7 +77,6 @@ export type Database = {
           article_url?: string | null
           avoid_topics?: string | null
           brand_voice?: string | null
-          competitor_urls?: string | null
           content_goal?: string | null
           content_type?: string | null
           created_at?: string
@@ -92,14 +85,12 @@ export type Database = {
           delivery_timeframe?: number | null
           id?: string
           key_points?: string | null
-          kpis_to_track?: string[] | null
           notes?: string | null
           reference_links?: string | null
           revisions_allowed?: number | null
           revisions_requested?: number
           specific_instructions?: string | null
           status?: string
-          strategic_goals?: string[] | null
           style_preferences?: string | null
           target_audience?: string | null
           target_keywords?: string[] | null

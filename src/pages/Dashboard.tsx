@@ -32,7 +32,7 @@ import {
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-const scriptStormLogo = "/scriptstorm-logo.png";
+import scriptStormLogo from "@/assets/scriptstorm-logo.png";
 import ContentCalendar from "@/components/dashboard/ContentCalendar";
 import ResearchReports from "@/components/dashboard/ResearchReports";
 import PerformanceDashboard from "@/components/dashboard/PerformanceDashboard";
@@ -497,18 +497,8 @@ const Dashboard = () => {
             Welcome back, <span className="text-primary-glow animate-text-glow block sm:inline mt-1 sm:mt-0">{user?.email}</span>
           </h2>
           <p className="text-white/70 font-mono tracking-wide text-sm sm:text-base">
-            {hasDominance ? 'Your Dedicated Client Workspace' : 'Your content production command center'}
+            Your content production command center
           </p>
-          {hasDominance && (
-            <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-primary-glow/10 border border-primary-glow/30 rounded-lg">
-              <Badge variant="default" className="bg-primary-glow text-black font-bold text-xs">
-                DOMINANCE TIER
-              </Badge>
-              <span className="text-white/90 text-xs sm:text-sm font-mono">
-                Dedicated Project Manager Assigned
-              </span>
-            </div>
-          )}
         </div>
 
         {/* Submit New Brief Button */}
@@ -834,10 +824,7 @@ const Dashboard = () => {
             {hasAuthority && (
               <TabsTrigger value="support" className="font-mono data-[state=active]:bg-primary-glow/20">
                 <MessageSquare className="h-4 w-4 mr-2" />
-                <span>SUPPORT</span>
-                <Badge variant="default" className="ml-2 bg-primary-glow text-black text-[10px] px-1.5 py-0 h-4 font-bold">
-                  PRIORITY
-                </Badge>
+                SUPPORT
               </TabsTrigger>
             )}
             
@@ -872,7 +859,7 @@ const Dashboard = () => {
                     size="sm"
                     variant={statusFilter === 'completed' ? 'default' : 'outline'}
                     onClick={() => setStatusFilter('completed')}
-                    className="font-mono text-xs whitespace-nowrap flex-shrink-0 active:scale-100 touch-manipulation"
+                    className="font-mono text-xs whitespace-nowrap flex-shrink-0"
                   >
                     Completed ({articles.filter(a => a.status === 'completed').length})
                   </Button>
@@ -880,7 +867,7 @@ const Dashboard = () => {
                     size="sm"
                     variant={statusFilter === 'in_progress' ? 'default' : 'outline'}
                     onClick={() => setStatusFilter('in_progress')}
-                    className="font-mono text-xs whitespace-nowrap flex-shrink-0 active:scale-100 touch-manipulation"
+                    className="font-mono text-xs whitespace-nowrap flex-shrink-0"
                   >
                     In Progress ({articles.filter(a => a.status === 'in_progress').length})
                   </Button>
@@ -914,7 +901,7 @@ const Dashboard = () => {
               <div className="text-center py-12">
                 <AlertCircle className="h-12 w-12 text-primary-glow/50 mx-auto mb-3" />
                 <p className="text-white font-mono text-lg mb-2">
-                  No projects {statusFilter === 'in_progress' ? 'in progress' : statusFilter}
+                  No {statusFilter} projects
                 </p>
                 <p className="text-white/70 font-mono text-sm">
                   Try selecting a different filter

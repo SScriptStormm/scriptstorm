@@ -131,13 +131,6 @@ All colors MUST be HSL.
 @layer base {
   * {
     @apply border-border;
-    -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none;
-  }
-
-  button, a, input, textarea {
-    -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none;
   }
 
   html, body {

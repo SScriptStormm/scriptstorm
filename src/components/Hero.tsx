@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
 import heroImage from "@/assets/hero-image.jpg";
-const scriptStormLogo = "/scriptstorm-logo.png";
+import scriptStormLogo from "@/assets/scriptstorm-logo.png";
 
 const Hero = () => {
   const handleGetStarted = () => {

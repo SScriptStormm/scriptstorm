@@ -8,7 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Navigate, Link } from "react-router-dom";
 import { User, Session } from "@supabase/supabase-js";
 import { Eye, EyeOff, Mail, Lock, LogIn, Zap, Check, X, Shield, AlertCircle, ArrowLeft } from "lucide-react";
-const scriptStormLogo = "/scriptstorm-logo.png";
+import scriptStormLogo from "@/assets/scriptstorm-logo.png";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
@@ -201,21 +201,29 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-[100dvh] bg-gradient-hero flex items-center justify-center py-12 px-4 sm:py-8 sm:px-4 relative overflow-hidden overscroll-none">
-      {/* Extended background to prevent blue screen on mobile scroll */}
-      <div className="fixed inset-0 -top-20 -bottom-20 bg-gradient-hero -z-10" />
-      {/* Back to Home Button - Scrolls with page */}
+    <div style={{ position: 'relative', minHeight: '100vh' }}>
+      {/* Back to Home Button - iOS Safari compatible */}
       <Link 
         to="/" 
-        className="group absolute top-4 right-4 z-[9999] flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all duration-300 hover:scale-105"
+        style={{ 
+          position: 'fixed',
+          top: '16px',
+          right: '16px',
+          zIndex: 9999,
+          transform: 'translate3d(0, 0, 0)',
+          WebkitTransform: 'translate3d(0, 0, 0)',
+          backfaceVisibility: 'hidden',
+          WebkitBackfaceVisibility: 'hidden',
+          perspective: 1000,
+          WebkitPerspective: 1000
+        }}
+        className="flex items-center gap-2 px-3 py-2 text-white border border-primary-glow/30 font-mono text-xs rounded-md bg-black"
       >
-        {/* Lighter background */}
-        <div className="absolute inset-0 bg-primary/20 group-hover:bg-primary/30 backdrop-blur-md border-2 border-primary-glow group-hover:border-white rounded-lg transition-all duration-300" />
-        
-        {/* Content */}
-        <ArrowLeft className="relative h-4 w-4 text-white group-hover:text-white animate-pulse" />
-        <span className="relative text-white font-bold tracking-wider font-mono text-xs">HOME</span>
+        <ArrowLeft className="h-4 w-4" />
+        <span className="hidden sm:inline">HOME</span>
       </Link>
+
+      <div className="min-h-screen bg-gradient-hero flex items-center justify-center py-12 px-4 sm:py-8 sm:px-4 relative">
 
       {/* AI Neural Network Background */}
       <div className="absolute inset-0 bg-gradient-mesh opacity-40" />
@@ -472,6 +480,7 @@ const Auth = () => {
             </div>
           </CardContent>
         </Card>
+      </div>
       </div>
     </div>
   );

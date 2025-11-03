@@ -20,7 +20,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen overflow-y-auto">
+    <div className="min-h-screen">
       <Hero />
       <Services />
       <Pricing />
