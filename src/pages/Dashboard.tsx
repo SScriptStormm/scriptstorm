@@ -579,7 +579,7 @@ const Dashboard = () => {
       </header>
 
       {/* Main Content */}
-      <main className="relative z-10 container mx-auto px-4 py-8">
+      <main className="relative z-10 container mx-auto px-3 sm:px-4 py-4 sm:py-8">
         {/* Welcome Section */}
         <div className="mb-6 sm:mb-8">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 font-mono tracking-wide break-words">
@@ -615,7 +615,7 @@ const Dashboard = () => {
         </div>
 
         {/* 2-Column Grid Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
           {/* Account Status */}
           <Card className="bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber">
             <CardHeader>
@@ -665,76 +665,82 @@ const Dashboard = () => {
 
         {/* Content Queue */}
         {totalArticles > 0 && (
-          <Card className="mb-8 bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber">
-            <CardHeader>
+          <Card className="mb-6 sm:mb-8 bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber">
+            <CardHeader className="px-4 sm:px-6">
               <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide text-base sm:text-lg">
                 <BarChart3 className="h-4 w-4 sm:h-5 sm:w-5 text-primary-glow" />
                 CONTENT QUEUE
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-6">
-                {/* Status Overview */}
-                <div className="flex items-center justify-center gap-4 sm:gap-8 p-4 bg-black/20 rounded-lg border border-primary-glow/20">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-green-400" />
-                    <span className="text-white font-mono text-sm sm:text-base">
-                      {articles.filter(a => a.status === 'completed').length} <span className="text-white/60 text-xs sm:text-sm">Completed</span>
-                    </span>
+            <CardContent className="px-4 sm:px-6">
+              <div className="space-y-4 sm:space-y-6">
+                {/* Status Overview - Stacked on mobile */}
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-center gap-3 sm:gap-8 p-3 sm:p-4 bg-black/20 rounded-lg border border-primary-glow/20">
+                  <div className="flex items-center justify-between sm:justify-start gap-2">
+                    <div className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-green-400 flex-shrink-0" />
+                      <span className="text-white font-mono text-xs sm:text-base whitespace-nowrap">
+                        {articles.filter(a => a.status === 'completed').length} <span className="text-white/60">Completed</span>
+                      </span>
+                    </div>
                   </div>
-                  <div className="h-4 w-px bg-white/20" />
-                  <div className="flex items-center gap-2">
-                    <Clock className="h-4 w-4 text-yellow-400" />
-                    <span className="text-white font-mono text-sm sm:text-base">
-                      {articles.filter(a => a.status === 'in_progress').length} <span className="text-white/60 text-xs sm:text-sm">In Progress</span>
-                    </span>
+                  <div className="hidden sm:block h-4 w-px bg-white/20" />
+                  <div className="flex items-center justify-between sm:justify-start gap-2">
+                    <div className="flex items-center gap-2">
+                      <Clock className="h-4 w-4 text-yellow-400 flex-shrink-0" />
+                      <span className="text-white font-mono text-xs sm:text-base whitespace-nowrap">
+                        {articles.filter(a => a.status === 'in_progress').length} <span className="text-white/60">In Progress</span>
+                      </span>
+                    </div>
                   </div>
-                  <div className="h-4 w-px bg-white/20" />
-                  <div className="flex items-center gap-2">
-                    <AlertCircle className="h-4 w-4 text-blue-400" />
-                    <span className="text-white font-mono text-sm sm:text-base">
-                      {articles.filter(a => a.status === 'pending').length} <span className="text-white/60 text-xs sm:text-sm">Pending</span>
-                    </span>
+                  <div className="hidden sm:block h-4 w-px bg-white/20" />
+                  <div className="flex items-center justify-between sm:justify-start gap-2">
+                    <div className="flex items-center gap-2">
+                      <AlertCircle className="h-4 w-4 text-blue-400 flex-shrink-0" />
+                      <span className="text-white font-mono text-xs sm:text-base whitespace-nowrap">
+                        {articles.filter(a => a.status === 'pending').length} <span className="text-white/60">Pending</span>
+                      </span>
+                    </div>
                   </div>
                 </div>
 
                 {/* Content Mix */}
                 <div>
                   <h3 className="text-white/70 font-mono text-xs uppercase tracking-wider mb-3">Content Mix</h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                     {/* Blog Articles */}
-                    <div className="p-4 bg-black/20 rounded-lg border border-primary-glow/20">
+                    <div className="p-3 sm:p-4 bg-black/20 rounded-lg border border-primary-glow/20">
                       <div className="flex items-center gap-2 mb-2">
-                        <FileText className="h-4 w-4 text-primary-glow" />
-                        <span className="text-white font-mono text-sm">Blog Articles</span>
+                        <FileText className="h-4 w-4 text-primary-glow flex-shrink-0" />
+                        <span className="text-white font-mono text-xs sm:text-sm">Blog Articles</span>
                       </div>
-                      <p className="text-white font-mono text-2xl mb-1">
+                      <p className="text-white font-mono text-xl sm:text-2xl mb-1">
                         {articles.filter(a => !a.content_type || a.content_type === 'article' || a.content_type === 'blog_article').length}
                       </p>
-                      <p className="text-white/60 font-mono text-xs">
+                      <p className="text-white/60 font-mono text-xs break-words">
                         {articles.filter(a => !a.content_type || a.content_type === 'article' || a.content_type === 'blog_article').reduce((sum, a) => sum + (a.word_count || 0), 0).toLocaleString()} words total
                       </p>
                     </div>
 
                     {/* Social Posts */}
-                    <div className="p-4 bg-black/20 rounded-lg border border-primary-glow/20">
+                    <div className="p-3 sm:p-4 bg-black/20 rounded-lg border border-primary-glow/20">
                       <div className="flex items-center gap-2 mb-2">
-                        <MessageSquare className="h-4 w-4 text-primary-glow" />
-                        <span className="text-white font-mono text-sm">Social Posts</span>
+                        <MessageSquare className="h-4 w-4 text-primary-glow flex-shrink-0" />
+                        <span className="text-white font-mono text-xs sm:text-sm">Social Posts</span>
                       </div>
-                      <p className="text-white font-mono text-2xl mb-1">
+                      <p className="text-white font-mono text-xl sm:text-2xl mb-1">
                         {articles.filter(a => a.content_type === 'social_media' || a.content_type === 'social_media_post').length}
                       </p>
                       <p className="text-white/60 font-mono text-xs">submitted</p>
                     </div>
 
                     {/* Product Descriptions */}
-                    <div className="p-4 bg-black/20 rounded-lg border border-primary-glow/20">
+                    <div className="p-3 sm:p-4 bg-black/20 rounded-lg border border-primary-glow/20">
                       <div className="flex items-center gap-2 mb-2">
-                        <CreditCard className="h-4 w-4 text-primary-glow" />
-                        <span className="text-white font-mono text-sm">Product Descriptions</span>
+                        <CreditCard className="h-4 w-4 text-primary-glow flex-shrink-0" />
+                        <span className="text-white font-mono text-xs sm:text-sm">Product Descriptions</span>
                       </div>
-                      <p className="text-white font-mono text-2xl mb-1">
+                      <p className="text-white font-mono text-xl sm:text-2xl mb-1">
                         {articles.filter(a => a.content_type === 'product_description').length}
                       </p>
                       <p className="text-white/60 font-mono text-xs">submitted</p>
@@ -748,92 +754,92 @@ const Dashboard = () => {
 
         {/* Consolidated Pipeline & Workflow */}
         {articles.length > 0 ? (
-          <Card className="mb-8 bg-black/30 backdrop-blur-xl border-green-500/30 shadow-cyber">
+          <Card className="mb-6 sm:mb-8 bg-black/30 backdrop-blur-xl border-green-500/30 shadow-cyber">
             <div className="absolute inset-0 bg-gradient-cyber opacity-5 rounded-lg" />
-            <CardHeader className="relative">
+            <CardHeader className="relative px-4 sm:px-6">
               <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide text-base sm:text-lg">
                 <Target className="h-4 w-4 sm:h-5 sm:w-5 text-green-400" />
                 CONTENT PIPELINE
               </CardTitle>
             </CardHeader>
-            <CardContent className="relative space-y-4 sm:space-y-6">
+            <CardContent className="relative space-y-4 sm:space-y-6 px-4 sm:px-6">
               {/* Latest Project Status */}
               <div className="space-y-3">
                 <h3 className="text-white/70 font-mono text-xs sm:text-sm uppercase tracking-wider">Latest Project</h3>
-                <div className="p-4 sm:p-6 bg-black/20 rounded-lg border border-green-500/20">
-                  <div className="flex items-center justify-between mb-2">
+                <div className="p-3 sm:p-6 bg-black/20 rounded-lg border border-green-500/20">
+                  <div className="mb-2">
                     <p className="text-white font-mono text-sm sm:text-base break-words">{articles[0]?.title}</p>
                   </div>
-                  <p className="text-white/50 font-mono text-xs mb-6">
+                  <p className="text-white/50 font-mono text-xs mb-4 sm:mb-6">
                     Submitted: {new Date(articles[0]?.created_at).toLocaleDateString()} at {new Date(articles[0]?.created_at).toLocaleTimeString()}
                   </p>
                   
                   {/* Progress Tracker */}
-                  <div className="space-y-4">
+                  <div className="space-y-3 sm:space-y-4">
                     {/* Brief Received */}
-                    <div className="flex items-start gap-3">
-                      <div className="flex items-center justify-center w-6 h-6 rounded-full bg-green-500/20 border border-green-500 flex-shrink-0 mt-0.5">
-                        <CheckCircle className="h-4 w-4 text-green-400" />
+                    <div className="flex items-start gap-2 sm:gap-3">
+                      <div className="flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-green-500/20 border border-green-500 flex-shrink-0 mt-0.5">
+                        <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-green-400" />
                       </div>
-                      <div className="flex-1">
+                      <div className="flex-1 min-w-0">
                         <p className="text-green-400 font-mono text-xs sm:text-sm font-semibold">✅ Brief Received</p>
-                        <p className="text-white/60 font-mono text-[10px] sm:text-xs mt-0.5">Your brief has been received and queued</p>
+                        <p className="text-white/60 font-mono text-[10px] sm:text-xs mt-0.5 break-words">Your brief has been received and queued</p>
                       </div>
                     </div>
                     
                     {/* Connector Line */}
-                    <div className="ml-3 w-0.5 h-4 bg-yellow-500/30"></div>
+                    <div className="ml-2 sm:ml-3 w-0.5 h-3 sm:h-4 bg-yellow-500/30"></div>
                     
                     {/* AI Research & Strategy */}
-                    <div className="flex items-start gap-3">
-                      <div className="flex items-center justify-center w-6 h-6 rounded-full bg-yellow-500/20 border border-yellow-500 flex-shrink-0 mt-0.5">
-                        <Clock className="h-4 w-4 text-yellow-400 animate-pulse" />
+                    <div className="flex items-start gap-2 sm:gap-3">
+                      <div className="flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-yellow-500/20 border border-yellow-500 flex-shrink-0 mt-0.5">
+                        <Clock className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-400 animate-pulse" />
                       </div>
-                      <div className="flex-1">
+                      <div className="flex-1 min-w-0">
                         <p className="text-yellow-400 font-mono text-xs sm:text-sm font-semibold">🔄 AI Research & Strategy</p>
-                        <p className="text-white/60 font-mono text-[10px] sm:text-xs mt-0.5">Analyzing keywords and competitor insights</p>
+                        <p className="text-white/60 font-mono text-[10px] sm:text-xs mt-0.5 break-words">Analyzing keywords and competitor insights</p>
                       </div>
                     </div>
                     
                     {/* Connector Line */}
-                    <div className="ml-3 w-0.5 h-4 bg-white/10"></div>
+                    <div className="ml-2 sm:ml-3 w-0.5 h-3 sm:h-4 bg-white/10"></div>
                     
                     {/* AI Writing */}
-                    <div className="flex items-start gap-3">
-                      <div className="flex items-center justify-center w-6 h-6 rounded-full bg-white/10 border border-white/30 flex-shrink-0 mt-0.5">
-                        <FileText className="h-4 w-4 text-white/50" />
+                    <div className="flex items-start gap-2 sm:gap-3">
+                      <div className="flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-white/10 border border-white/30 flex-shrink-0 mt-0.5">
+                        <FileText className="h-3 w-3 sm:h-4 sm:w-4 text-white/50" />
                       </div>
-                      <div className="flex-1">
+                      <div className="flex-1 min-w-0">
                         <p className="text-white/50 font-mono text-xs sm:text-sm font-semibold">✍️ AI Writing</p>
-                        <p className="text-white/40 font-mono text-[10px] sm:text-xs mt-0.5">Content generation in progress</p>
+                        <p className="text-white/40 font-mono text-[10px] sm:text-xs mt-0.5 break-words">Content generation in progress</p>
                       </div>
                     </div>
                     
                     {/* Connector Line */}
-                    <div className="ml-3 w-0.5 h-4 bg-white/10"></div>
+                    <div className="ml-2 sm:ml-3 w-0.5 h-3 sm:h-4 bg-white/10"></div>
                     
                     {/* Quality Control */}
-                    <div className="flex items-start gap-3">
-                      <div className="flex items-center justify-center w-6 h-6 rounded-full bg-white/10 border border-white/30 flex-shrink-0 mt-0.5">
-                        <Eye className="h-4 w-4 text-white/50" />
+                    <div className="flex items-start gap-2 sm:gap-3">
+                      <div className="flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-white/10 border border-white/30 flex-shrink-0 mt-0.5">
+                        <Eye className="h-3 w-3 sm:h-4 sm:w-4 text-white/50" />
                       </div>
-                      <div className="flex-1">
+                      <div className="flex-1 min-w-0">
                         <p className="text-white/50 font-mono text-xs sm:text-sm font-semibold">🔍 Quality Control</p>
-                        <p className="text-white/40 font-mono text-[10px] sm:text-xs mt-0.5">Final review and optimization</p>
+                        <p className="text-white/40 font-mono text-[10px] sm:text-xs mt-0.5 break-words">Human review and optimization</p>
                       </div>
                     </div>
                     
                     {/* Connector Line */}
-                    <div className="ml-3 w-0.5 h-4 bg-white/10"></div>
+                    <div className="ml-2 sm:ml-3 w-0.5 h-3 sm:h-4 bg-white/10"></div>
                     
                     {/* Ready for Download */}
-                    <div className="flex items-start gap-3">
-                      <div className="flex items-center justify-center w-6 h-6 rounded-full bg-white/10 border border-white/30 flex-shrink-0 mt-0.5">
-                        <Zap className="h-4 w-4 text-white/50" />
+                    <div className="flex items-start gap-2 sm:gap-3">
+                      <div className="flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-white/10 border border-white/30 flex-shrink-0 mt-0.5">
+                        <Zap className="h-3 w-3 sm:h-4 sm:w-4 text-white/50" />
                       </div>
-                      <div className="flex-1">
+                      <div className="flex-1 min-w-0">
                         <p className="text-white/50 font-mono text-xs sm:text-sm font-semibold">🚀 Ready for Download</p>
-                        <p className="text-white/40 font-mono text-[10px] sm:text-xs mt-0.5">Your content will be available here</p>
+                        <p className="text-white/40 font-mono text-[10px] sm:text-xs mt-0.5 break-words">Your content will be available here</p>
                       </div>
                     </div>
                   </div>
@@ -960,7 +966,7 @@ const Dashboard = () => {
           {/* Projects Tab (Default) */}
           <TabsContent value="projects">
             <Card className="bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber">
-          <CardHeader>
+          <CardHeader className="px-4 sm:px-6">
             <div className="flex flex-col gap-3 sm:gap-4">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                 <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide text-sm sm:text-base">
@@ -976,27 +982,27 @@ const Dashboard = () => {
               </div>
               
               {articles.length > 0 && (
-                <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
+                <div className="flex flex-col gap-3">
                   {/* Month Filter */}
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 w-full">
                     <CalendarIcon className="h-4 w-4 text-primary-glow flex-shrink-0" />
                     <Select value={monthFilter} onValueChange={setMonthFilter}>
-                      <SelectTrigger className="w-[180px] bg-black/40 border-primary-glow/30 text-white font-mono text-xs">
+                      <SelectTrigger className="flex-1 bg-black/40 border-primary-glow/30 text-white font-mono text-xs sm:text-sm">
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent className="bg-black/95 border-primary-glow/30">
-                        <SelectItem value={currentMonthYear} className="font-mono text-white">
+                      <SelectContent className="bg-black/95 backdrop-blur-xl border-primary-glow/30 z-50">
+                        <SelectItem value={currentMonthYear} className="font-mono text-white hover:bg-primary-glow/20">
                           {getMonthLabel(currentMonthYear)} ({articles.filter(a => getMonthYear(a.created_at) === currentMonthYear).length})
                         </SelectItem>
                         {availableMonths
                           .filter(month => month !== currentMonthYear)
                           .map(month => (
-                            <SelectItem key={month} value={month} className="font-mono text-white">
+                            <SelectItem key={month} value={month} className="font-mono text-white hover:bg-primary-glow/20">
                               {getMonthLabel(month)} ({articles.filter(a => getMonthYear(a.created_at) === month).length})
                             </SelectItem>
                           ))
                         }
-                        <SelectItem value="all_time" className="font-mono text-white">
+                        <SelectItem value="all_time" className="font-mono text-white hover:bg-primary-glow/20">
                           📚 View All Time
                         </SelectItem>
                       </SelectContent>
@@ -1004,7 +1010,7 @@ const Dashboard = () => {
                   </div>
 
                   {/* Status Filters */}
-                  <div className="flex gap-2 overflow-x-auto pb-2 sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0">
+                  <div className="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1">
                     <Button
                       size="sm"
                       variant={statusFilter === 'all' ? 'default' : 'outline'}
@@ -1042,7 +1048,7 @@ const Dashboard = () => {
               )}
             </div>
           </CardHeader>
-          <CardContent>
+          <CardContent className="px-4 sm:px-6">
             {articles.length === 0 ? (
               <div className="text-center py-12">
                 <FileText className="h-16 w-16 text-primary-glow/50 mx-auto mb-4" />
@@ -1070,13 +1076,13 @@ const Dashboard = () => {
             ) : (
               <>
                 {/* Mobile Card Layout */}
-                <div className="block md:hidden space-y-6">
+                <div className="block md:hidden space-y-4">
                   {filteredArticles.map((article) => (
-                    <div key={article.id} className="p-6 bg-black/20 rounded-lg border border-primary-glow/20">
-                      <div className="space-y-5">
+                    <div key={article.id} className="p-4 bg-black/20 rounded-lg border border-primary-glow/20">
+                      <div className="space-y-3">
                         {/* Title and Word Count */}
                         <div>
-                          <h3 className="text-white font-mono tracking-wide font-semibold text-sm mb-1">
+                          <h3 className="text-white font-mono tracking-wide font-semibold text-sm mb-1 break-words">
                             {article.title}
                           </h3>
                           {article.word_count > 0 && (
@@ -1101,9 +1107,9 @@ const Dashboard = () => {
                         
                         {/* Delivery Deadline for In Progress/Pending */}
                         {(article.status === 'pending' || article.status === 'in_progress') && article.delivery_deadline && (
-                          <div className="flex items-center justify-between">
-                            <span className="text-white/70 font-mono text-xs">Deadline:</span>
-                            <span className="text-yellow-400 font-mono text-xs font-semibold">
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="text-white/70 font-mono text-xs flex-shrink-0">Deadline:</span>
+                            <span className="text-yellow-400 font-mono text-xs font-semibold break-words text-right">
                               {getTimeRemaining(article.delivery_deadline)}
                             </span>
                           </div>
@@ -1111,9 +1117,9 @@ const Dashboard = () => {
                         
                         {/* Delivered On */}
                         {article.status === 'completed' && (
-                          <div className="flex items-center justify-between">
-                            <span className="text-white/70 font-mono text-xs">Delivered:</span>
-                            <span className="text-white font-mono text-xs">
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="text-white/70 font-mono text-xs flex-shrink-0">Delivered:</span>
+                            <span className="text-white font-mono text-xs break-words text-right">
                               {article.delivery_date
                                 ? new Date(article.delivery_date).toLocaleDateString()
                                 : 'Completed'}
@@ -1123,8 +1129,8 @@ const Dashboard = () => {
                         
                         {/* Revisions */}
                         {article.status === 'completed' && (
-                          <div className="flex items-center justify-between">
-                            <span className="text-white/70 font-mono text-xs">Revisions:</span>
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="text-white/70 font-mono text-xs flex-shrink-0">Revisions:</span>
                             <span className={`font-mono text-xs ${
                               (article.revisions_requested || 0) >= (article.revisions_allowed || 1)
                                 ? 'text-red-400'
@@ -1136,7 +1142,7 @@ const Dashboard = () => {
                         )}
                         
                         {/* Actions */}
-                        <div className="flex flex-col gap-2 pt-2">
+                        <div className="flex flex-col gap-2 pt-1">
                           {article.status === 'completed' ? (
                             <>
                               <Button 
