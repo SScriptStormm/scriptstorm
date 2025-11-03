@@ -202,12 +202,11 @@ const Auth = () => {
 
   return (
     <>
-      {/* Back to Home Button - Fixed positioning */}
+      {/* Back to Home Button - Absolute positioning */}
       <Link 
         to="/" 
-        className="fixed top-4 right-4 sm:top-6 sm:right-6 z-[9999] flex items-center gap-1 sm:gap-2 px-3 py-2 text-white border border-primary-glow/30 hover:border-primary-glow/60 font-mono text-xs sm:text-sm rounded-md bg-black/20 backdrop-blur-sm transition-colors"
+        className="absolute top-4 right-4 sm:top-6 sm:right-6 z-[9999] flex items-center gap-1 sm:gap-2 px-3 py-2 text-white border border-primary-glow/30 hover:border-primary-glow/60 font-mono text-xs sm:text-sm rounded-md bg-black/20 backdrop-blur-sm transition-colors"
         style={{ 
-          position: 'fixed',
           transform: 'translate3d(0,0,0)',
           backfaceVisibility: 'hidden',
           WebkitBackfaceVisibility: 'hidden'
