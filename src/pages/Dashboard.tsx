@@ -27,7 +27,8 @@ import {
   User as UserIcon,
   Settings,
   LayoutDashboard,
-  ChevronDown
+  ChevronDown,
+  Archive
 } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
@@ -46,6 +47,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface Subscriber {
   subscribed: boolean;
@@ -81,6 +89,10 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [statusFilter, setStatusFilter] = useState<string>('all');
+  const [monthFilter, setMonthFilter] = useState<string>(() => {
+    const now = new Date();
+    return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+  });
   const [revisionDialogOpen, setRevisionDialogOpen] = useState(false);
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
   const [revisionFeedback, setRevisionFeedback] = useState("");
@@ -306,9 +318,35 @@ const Dashboard = () => {
   const totalArticles = articles.length;
   const averageWordCount = articles.length > 0 ? Math.round(articles.reduce((sum, a) => sum + (a.word_count || 0), 0) / articles.length) : 0;
   
-  const filteredArticles = statusFilter === 'all' 
+  // Helper functions for month filtering
+  const getMonthYear = (dateString: string) => {
+    const date = new Date(dateString);
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+  };
+
+  const getCurrentMonthYear = () => {
+    const now = new Date();
+    return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+  };
+
+  const getMonthLabel = (monthYear: string) => {
+    const [year, month] = monthYear.split('-');
+    const date = new Date(parseInt(year), parseInt(month) - 1);
+    return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+  };
+
+  // Get all unique months from articles
+  const availableMonths = [...new Set(articles.map(a => getMonthYear(a.created_at)))].sort().reverse();
+  const currentMonthYear = getCurrentMonthYear();
+
+  // Filter articles by month first, then by status
+  const monthFilteredArticles = monthFilter === 'all_time' 
     ? articles 
-    : articles.filter(a => a.status === statusFilter);
+    : articles.filter(article => getMonthYear(article.created_at) === monthFilter);
+
+  const filteredArticles = statusFilter === 'all' 
+    ? monthFilteredArticles 
+    : monthFilteredArticles.filter(a => a.status === statusFilter);
 
   // Monthly limits by tier
   const getMonthlyLimit = () => {
@@ -923,45 +961,83 @@ const Dashboard = () => {
           <TabsContent value="projects">
             <Card className="bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber">
           <CardHeader>
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
-              <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide text-sm sm:text-base">
-                <FileText className="h-4 w-4 sm:h-5 sm:w-5 text-primary-glow" />
-                YOUR CONTENT PROJECTS
-              </CardTitle>
+            <div className="flex flex-col gap-3 sm:gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide text-sm sm:text-base">
+                  <FileText className="h-4 w-4 sm:h-5 sm:w-5 text-primary-glow" />
+                  YOUR CONTENT PROJECTS
+                  {monthFilter !== 'all_time' && monthFilter !== currentMonthYear && (
+                    <Badge className="ml-2 bg-yellow-500/20 text-yellow-400 border-yellow-500/30 text-xs font-mono">
+                      <Archive className="h-3 w-3 mr-1" />
+                      ARCHIVE
+                    </Badge>
+                  )}
+                </CardTitle>
+              </div>
+              
               {articles.length > 0 && (
-                <div className="flex gap-2 overflow-x-auto pb-2 sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0">
-                  <Button
-                    size="sm"
-                    variant={statusFilter === 'all' ? 'default' : 'outline'}
-                    onClick={() => setStatusFilter('all')}
-                    className="font-mono text-xs whitespace-nowrap flex-shrink-0"
-                  >
-                    All ({articles.length})
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant={statusFilter === 'completed' ? 'default' : 'outline'}
-                    onClick={() => setStatusFilter('completed')}
-                    className="font-mono text-xs whitespace-nowrap flex-shrink-0"
-                  >
-                    Completed ({articles.filter(a => a.status === 'completed').length})
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant={statusFilter === 'in_progress' ? 'default' : 'outline'}
-                    onClick={() => setStatusFilter('in_progress')}
-                    className="font-mono text-xs whitespace-nowrap flex-shrink-0"
-                  >
-                    In Progress ({articles.filter(a => a.status === 'in_progress').length})
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant={statusFilter === 'pending' ? 'default' : 'outline'}
-                    onClick={() => setStatusFilter('pending')}
-                    className="font-mono text-xs whitespace-nowrap flex-shrink-0"
-                  >
-                    Pending ({articles.filter(a => a.status === 'pending').length})
-                  </Button>
+                <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
+                  {/* Month Filter */}
+                  <div className="flex items-center gap-2">
+                    <CalendarIcon className="h-4 w-4 text-primary-glow flex-shrink-0" />
+                    <Select value={monthFilter} onValueChange={setMonthFilter}>
+                      <SelectTrigger className="w-[180px] bg-black/40 border-primary-glow/30 text-white font-mono text-xs">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent className="bg-black/95 border-primary-glow/30">
+                        <SelectItem value={currentMonthYear} className="font-mono text-white">
+                          {getMonthLabel(currentMonthYear)} ({articles.filter(a => getMonthYear(a.created_at) === currentMonthYear).length})
+                        </SelectItem>
+                        {availableMonths
+                          .filter(month => month !== currentMonthYear)
+                          .map(month => (
+                            <SelectItem key={month} value={month} className="font-mono text-white">
+                              {getMonthLabel(month)} ({articles.filter(a => getMonthYear(a.created_at) === month).length})
+                            </SelectItem>
+                          ))
+                        }
+                        <SelectItem value="all_time" className="font-mono text-white">
+                          📚 View All Time
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  {/* Status Filters */}
+                  <div className="flex gap-2 overflow-x-auto pb-2 sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0">
+                    <Button
+                      size="sm"
+                      variant={statusFilter === 'all' ? 'default' : 'outline'}
+                      onClick={() => setStatusFilter('all')}
+                      className="font-mono text-xs whitespace-nowrap flex-shrink-0"
+                    >
+                      All ({monthFilteredArticles.length})
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant={statusFilter === 'completed' ? 'default' : 'outline'}
+                      onClick={() => setStatusFilter('completed')}
+                      className="font-mono text-xs whitespace-nowrap flex-shrink-0"
+                    >
+                      Completed ({monthFilteredArticles.filter(a => a.status === 'completed').length})
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant={statusFilter === 'in_progress' ? 'default' : 'outline'}
+                      onClick={() => setStatusFilter('in_progress')}
+                      className="font-mono text-xs whitespace-nowrap flex-shrink-0"
+                    >
+                      In Progress ({monthFilteredArticles.filter(a => a.status === 'in_progress').length})
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant={statusFilter === 'pending' ? 'default' : 'outline'}
+                      onClick={() => setStatusFilter('pending')}
+                      className="font-mono text-xs whitespace-nowrap flex-shrink-0"
+                    >
+                      Pending ({monthFilteredArticles.filter(a => a.status === 'pending').length})
+                    </Button>
+                  </div>
                 </div>
               )}
             </div>
@@ -984,10 +1060,11 @@ const Dashboard = () => {
               <div className="text-center py-12">
                 <AlertCircle className="h-12 w-12 text-primary-glow/50 mx-auto mb-3" />
                 <p className="text-white font-mono text-lg mb-2">
-                  No projects {statusFilter === 'in_progress' ? 'in progress' : statusFilter}
+                  No {statusFilter === 'in_progress' ? 'in progress' : statusFilter === 'all' ? '' : statusFilter + ' '}projects
+                  {monthFilter !== 'all_time' && ` in ${getMonthLabel(monthFilter)}`}
                 </p>
                 <p className="text-white/70 font-mono text-sm">
-                  Try selecting a different filter
+                  Try selecting a different {monthFilter === 'all_time' ? 'filter' : 'month or filter'}
                 </p>
               </div>
             ) : (
