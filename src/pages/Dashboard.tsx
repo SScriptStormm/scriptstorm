@@ -620,35 +620,82 @@ const Dashboard = () => {
           />
         </div>
 
-        {/* Production Stats */}
+        {/* Content Queue */}
         {totalArticles > 0 && (
           <Card className="mb-8 bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide text-base sm:text-lg">
-                <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-primary-glow" />
-                PRODUCTION STATS
+                <BarChart3 className="h-4 w-4 sm:h-5 sm:w-5 text-primary-glow" />
+                CONTENT QUEUE
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                <div>
-                  <div className="flex justify-between text-xs sm:text-sm font-mono text-white/70 mb-2">
-                    <span>Completion Rate</span>
-                    <span>{Math.round((completedArticles / totalArticles) * 100)}%</span>
+              <div className="space-y-6">
+                {/* Status Overview */}
+                <div className="flex items-center justify-center gap-4 sm:gap-8 p-4 bg-black/20 rounded-lg border border-primary-glow/20">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="h-4 w-4 text-green-400" />
+                    <span className="text-white font-mono text-sm sm:text-base">
+                      {articles.filter(a => a.status === 'completed').length} <span className="text-white/60 text-xs sm:text-sm">Completed</span>
+                    </span>
                   </div>
-                  <Progress 
-                    value={(completedArticles / totalArticles) * 100} 
-                    className="h-3 bg-black/50"
-                  />
+                  <div className="h-4 w-px bg-white/20" />
+                  <div className="flex items-center gap-2">
+                    <Clock className="h-4 w-4 text-yellow-400" />
+                    <span className="text-white font-mono text-sm sm:text-base">
+                      {articles.filter(a => a.status === 'in_progress').length} <span className="text-white/60 text-xs sm:text-sm">In Progress</span>
+                    </span>
+                  </div>
+                  <div className="h-4 w-px bg-white/20" />
+                  <div className="flex items-center gap-2">
+                    <AlertCircle className="h-4 w-4 text-blue-400" />
+                    <span className="text-white font-mono text-sm sm:text-base">
+                      {articles.filter(a => a.status === 'pending').length} <span className="text-white/60 text-xs sm:text-sm">Pending</span>
+                    </span>
+                  </div>
                 </div>
-                <div className="grid grid-cols-2 gap-3 sm:gap-4 pt-2">
-                  <div className="text-center p-2 sm:p-3 bg-black/20 rounded-lg border border-primary-glow/20">
-                    <p className="text-white font-mono text-xl sm:text-2xl">{totalArticles}</p>
-                    <p className="text-white/70 font-mono text-xs">Total Briefs</p>
-                  </div>
-                  <div className="text-center p-2 sm:p-3 bg-black/20 rounded-lg border border-primary-glow/20">
-                    <p className="text-white font-mono text-lg sm:text-xl">{wordCountRange}</p>
-                    <p className="text-white/70 font-mono text-xs">Words Per Article</p>
+
+                {/* Content Mix */}
+                <div>
+                  <h3 className="text-white/70 font-mono text-xs uppercase tracking-wider mb-3">Content Mix</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {/* Blog Articles */}
+                    <div className="p-4 bg-black/20 rounded-lg border border-primary-glow/20">
+                      <div className="flex items-center gap-2 mb-2">
+                        <FileText className="h-4 w-4 text-primary-glow" />
+                        <span className="text-white font-mono text-sm">Blog Articles</span>
+                      </div>
+                      <p className="text-white font-mono text-2xl mb-1">
+                        {articles.filter(a => !a.content_type || a.content_type === 'article' || a.content_type === 'blog_article').length}
+                      </p>
+                      <p className="text-white/60 font-mono text-xs">
+                        {articles.filter(a => !a.content_type || a.content_type === 'article' || a.content_type === 'blog_article').reduce((sum, a) => sum + (a.word_count || 0), 0).toLocaleString()} words total
+                      </p>
+                    </div>
+
+                    {/* Social Posts */}
+                    <div className="p-4 bg-black/20 rounded-lg border border-primary-glow/20">
+                      <div className="flex items-center gap-2 mb-2">
+                        <MessageSquare className="h-4 w-4 text-primary-glow" />
+                        <span className="text-white font-mono text-sm">Social Posts</span>
+                      </div>
+                      <p className="text-white font-mono text-2xl mb-1">
+                        {articles.filter(a => a.content_type === 'social_media' || a.content_type === 'social_media_post').length}
+                      </p>
+                      <p className="text-white/60 font-mono text-xs">submitted</p>
+                    </div>
+
+                    {/* Product Descriptions */}
+                    <div className="p-4 bg-black/20 rounded-lg border border-primary-glow/20">
+                      <div className="flex items-center gap-2 mb-2">
+                        <CreditCard className="h-4 w-4 text-primary-glow" />
+                        <span className="text-white font-mono text-sm">Product Descriptions</span>
+                      </div>
+                      <p className="text-white font-mono text-2xl mb-1">
+                        {articles.filter(a => a.content_type === 'product_description').length}
+                      </p>
+                      <p className="text-white/60 font-mono text-xs">submitted</p>
+                    </div>
                   </div>
                 </div>
               </div>
