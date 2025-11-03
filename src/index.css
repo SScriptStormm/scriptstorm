@@ -7,13 +7,6 @@ All colors MUST be HSL.
 */
 
 @layer base {
-  /* iOS Safari fixed position fix */
-  html, body {
-    height: 100%;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  
   :root {
     --background: 0 0% 100%;
     --foreground: 220 15% 5%;
