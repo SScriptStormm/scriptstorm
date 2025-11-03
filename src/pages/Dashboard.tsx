@@ -38,6 +38,7 @@ import ResearchReports from "@/components/dashboard/ResearchReports";
 import PerformanceDashboard from "@/components/dashboard/PerformanceDashboard";
 import PrioritySupport from "@/components/dashboard/PrioritySupport";
 import MarketRoadmap from "@/components/dashboard/MarketRoadmap";
+import { QuotaUsageWidget } from "@/components/dashboard/QuotaUsageWidget";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -76,6 +77,7 @@ const Dashboard = () => {
   const [session, setSession] = useState<Session | null>(null);
   const [subscriber, setSubscriber] = useState<Subscriber | null>(null);
   const [articles, setArticles] = useState<Article[]>([]);
+  const [monthlyUsage, setMonthlyUsage] = useState({ articles: 0, socialPosts: 0, productDesc: 0 });
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [statusFilter, setStatusFilter] = useState<string>('all');
@@ -144,6 +146,25 @@ const Dashboard = () => {
       
       if (error) throw error;
       setArticles(data || []);
+
+      // Fetch monthly usage
+      const currentMonth = new Date().toISOString().slice(0, 7); // YYYY-MM format
+      const { data: usageData } = await supabase
+        .from('monthly_usage_tracking')
+        .select('*')
+        .eq('user_id', id)
+        .eq('month_year', currentMonth)
+        .maybeSingle();
+
+      if (usageData) {
+        setMonthlyUsage({
+          articles: usageData.articles_submitted || 0,
+          socialPosts: usageData.social_posts_submitted || 0,
+          productDesc: usageData.product_descriptions_submitted || 0,
+        });
+      } else {
+        setMonthlyUsage({ articles: 0, socialPosts: 0, productDesc: 0 });
+      }
     } catch (error: any) {
       console.error('Error fetching articles:', error);
     }
@@ -217,6 +238,31 @@ const Dashboard = () => {
       case 'pending': return <AlertCircle className="h-4 w-4" />;
       default: return <FileText className="h-4 w-4" />;
     }
+  };
+
+  const getDeliveryTimeframe = (article: Article) => {
+    if (article.delivery_timeframe === 12) {
+      return '12-Hour Lightning Delivery ⚡';
+    }
+    return '24-Hour Delivery ⏱️';
+  };
+
+  const getTimeRemaining = (deadline: string | null) => {
+    if (!deadline) return null;
+    const now = new Date();
+    const deadlineDate = new Date(deadline);
+    const diff = deadlineDate.getTime() - now.getTime();
+    
+    if (diff <= 0) return 'Overdue';
+    
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    
+    if (hours < 1) return `${minutes}m remaining`;
+    if (hours < 24) return `${hours}h ${minutes}m remaining`;
+    
+    const days = Math.floor(hours / 24);
+    return `${days}d ${hours % 24}h remaining`;
   };
 
   // Get subscription tier for feature access (must be declared before use)
@@ -518,80 +564,13 @@ const Dashboard = () => {
 
         {/* 2-Column Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          {/* Account Status */}
-          <Card className="bg-black/30 backdrop-blur-xl border-green-500/30 shadow-cyber">
-            <div className="absolute inset-0 bg-gradient-cyber opacity-5 rounded-lg" />
-            <CardHeader className="relative">
-              <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide text-base sm:text-lg">
-                <CreditCard className="h-4 w-4 sm:h-5 sm:w-5 text-green-400" />
-                ACCOUNT STATUS
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="relative">
-              <div className="space-y-3">
-                <div className="flex items-center gap-2 flex-wrap">
-                  <Badge className="bg-green-500/20 text-green-400 border-green-500/30 font-mono tracking-wide text-xs sm:text-sm">
-                    READY ✅
-                  </Badge>
-                  <Badge className="bg-primary-glow/20 text-primary-glow border-primary-glow/30 font-mono tracking-wide text-xs sm:text-sm">
-                    PLAN: {(subscriber?.subscription_tier || 'STARTER').toUpperCase()}
-                  </Badge>
-                </div>
-                <div className="pt-2 space-y-4">
-                  {/* Articles */}
-                  <div>
-                    <p className="text-white/70 font-mono text-xs sm:text-sm">Monthly Articles:</p>
-                    <p className="text-white font-mono text-xl sm:text-2xl">{completedArticlesThisMonth} / {monthlyLimit}</p>
-                    <Progress 
-                      value={(completedArticlesThisMonth / monthlyLimit) * 100} 
-                      className="h-2 bg-black/50 mt-2"
-                    />
-                    <p className="text-primary-glow font-mono text-xs mt-2">
-                      {monthlyLimit - completedArticlesThisMonth} articles remaining this month
-                    </p>
-                  </div>
-                  
-                  {/* Product Descriptions */}
-                  <div>
-                    <p className="text-white/70 font-mono text-xs sm:text-sm">Monthly Product Descriptions:</p>
-                    <p className="text-white font-mono text-xl sm:text-2xl">{completedProductDescriptionsThisMonth} / {productDescriptionLimit}</p>
-                    <Progress 
-                      value={(completedProductDescriptionsThisMonth / productDescriptionLimit) * 100} 
-                      className="h-2 bg-black/50 mt-2"
-                    />
-                    <p className="text-primary-glow font-mono text-xs mt-2">
-                      {productDescriptionLimit - completedProductDescriptionsThisMonth} product descriptions remaining this month
-                    </p>
-                  </div>
-                  
-                  {/* Social Media Posts */}
-                  <div>
-                    <p className="text-white/70 font-mono text-xs sm:text-sm">Monthly Social Media Posts:</p>
-                    <p className="text-white font-mono text-xl sm:text-2xl">{completedSocialPostsThisMonth} / {socialPostLimit}</p>
-                    <Progress 
-                      value={(completedSocialPostsThisMonth / socialPostLimit) * 100} 
-                      className="h-2 bg-black/50 mt-2"
-                    />
-                    <p className="text-primary-glow font-mono text-xs mt-2">
-                      {socialPostLimit - completedSocialPostsThisMonth} social media posts remaining this month
-                      {tier === 'growth+' && <span className="block text-white/50 text-[10px] mt-1">(includes YouTube scripts)</span>}
-                    </p>
-                  </div>
-                </div>
-                <div className="pt-3">
-                  <Button 
-                    variant="outline"
-                    size="sm"
-                    className="w-full bg-white/5 border-primary-glow/30 text-white hover:bg-white/10 hover:border-primary-glow/50 font-mono text-xs sm:text-sm"
-                    onClick={() => window.open('https://billing.stripe.com/p/login/test_your_link', '_blank')}
-                  >
-                    <CreditCard className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
-                    Manage Subscription
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          {/* Monthly Usage - QuotaUsageWidget */}
+          <QuotaUsageWidget 
+            subscriptionTier={tier}
+            articlesUsed={monthlyUsage.articles}
+            socialPostsUsed={monthlyUsage.socialPosts}
+            productDescUsed={monthlyUsage.productDesc}
+          />
 
           {/* Production Stats */}
           {totalArticles > 0 && (
@@ -932,19 +911,34 @@ const Dashboard = () => {
                              article.status === 'in_progress' ? '🔄 In Progress' : 
                              '⏳ Pending'}
                           </Badge>
+                          {(article.status === 'pending' || article.status === 'in_progress') && (
+                            <p className="text-primary-glow font-mono text-xs mt-1">
+                              {getDeliveryTimeframe(article)}
+                            </p>
+                          )}
                         </div>
                         
+                        {/* Delivery Deadline for In Progress/Pending */}
+                        {(article.status === 'pending' || article.status === 'in_progress') && article.delivery_deadline && (
+                          <div className="flex items-center justify-between">
+                            <span className="text-white/70 font-mono text-xs">Deadline:</span>
+                            <span className="text-yellow-400 font-mono text-xs font-semibold">
+                              {getTimeRemaining(article.delivery_deadline)}
+                            </span>
+                          </div>
+                        )}
+                        
                         {/* Delivered On */}
-                        <div className="flex items-center justify-between">
-                          <span className="text-white/70 font-mono text-xs">Delivered:</span>
-                          <span className="text-white font-mono text-xs">
-                            {article.status === 'completed' && article.delivery_date
-                              ? new Date(article.delivery_date).toLocaleDateString()
-                              : article.status === 'completed'
-                              ? 'Completed'
-                              : '—'}
-                          </span>
-                        </div>
+                        {article.status === 'completed' && (
+                          <div className="flex items-center justify-between">
+                            <span className="text-white/70 font-mono text-xs">Delivered:</span>
+                            <span className="text-white font-mono text-xs">
+                              {article.delivery_date
+                                ? new Date(article.delivery_date).toLocaleDateString()
+                                : 'Completed'}
+                            </span>
+                          </div>
+                        )}
                         
                         {/* Revisions */}
                         {article.status === 'completed' && (
@@ -1016,7 +1010,7 @@ const Dashboard = () => {
                       <tr className="border-b border-primary-glow/20 text-left">
                         <th className="text-white/70 font-mono text-sm pb-3">Project Title</th>
                         <th className="text-white/70 font-mono text-sm pb-3">Status</th>
-                        <th className="text-white/70 font-mono text-sm pb-3">Delivered On</th>
+                        <th className="text-white/70 font-mono text-sm pb-3">Delivery</th>
                         <th className="text-white/70 font-mono text-sm pb-3">Revisions</th>
                         <th className="text-white/70 font-mono text-sm pb-3 text-right">Actions</th>
                       </tr>
@@ -1041,15 +1035,26 @@ const Dashboard = () => {
                                article.status === 'in_progress' ? '🔄 In Progress' : 
                                '⏳ Pending'}
                             </Badge>
+                            {(article.status === 'pending' || article.status === 'in_progress') && (
+                              <p className="text-primary-glow font-mono text-xs mt-1">
+                                {getDeliveryTimeframe(article)}
+                              </p>
+                            )}
                           </td>
                           <td className="py-4 align-top">
-                            <span className="text-white font-mono text-xs md:text-sm">
-                              {article.status === 'completed' && article.delivery_date
-                                ? new Date(article.delivery_date).toLocaleDateString()
-                                : article.status === 'completed'
-                                ? 'Completed'
-                                : '—'}
-                            </span>
+                            {article.status === 'completed' ? (
+                              <span className="text-white font-mono text-xs md:text-sm">
+                                {article.delivery_date
+                                  ? new Date(article.delivery_date).toLocaleDateString()
+                                  : 'Completed'}
+                              </span>
+                            ) : article.delivery_deadline ? (
+                              <span className="text-yellow-400 font-mono text-xs md:text-sm font-semibold">
+                                {getTimeRemaining(article.delivery_deadline)}
+                              </span>
+                            ) : (
+                              <span className="text-white/50 font-mono text-xs">—</span>
+                            )}
                           </td>
                           <td className="py-4 align-top">
                             {article.status === 'completed' ? (

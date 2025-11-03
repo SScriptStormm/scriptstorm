@@ -197,6 +197,28 @@ export function MultiStepContentBriefForm() {
         return;
       }
 
+      // Check quota before submission
+      const { data: quotaCheck, error: quotaError } = await supabase
+        .rpc('can_submit_content', {
+          p_user_id: user.id,
+          p_content_type: data.content_type
+        });
+
+      if (quotaError) {
+        console.error('Quota check error:', quotaError);
+        throw new Error('Failed to verify quota. Please try again.');
+      }
+
+      if (quotaCheck && quotaCheck.length > 0 && !quotaCheck[0].can_submit) {
+        toast({
+          title: "Monthly Limit Reached",
+          description: quotaCheck[0].message || "You've reached your monthly limit for this content type.",
+          variant: "destructive",
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
       const { error } = await supabase.from('articles').insert([
         {
           user_id: user.id,

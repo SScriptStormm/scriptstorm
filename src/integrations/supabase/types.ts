@@ -19,6 +19,7 @@ export type Database = {
           article_url: string | null
           avoid_topics: string | null
           brand_voice: string | null
+          competitor_urls: string | null
           content_goal: string | null
           content_type: string | null
           created_at: string
@@ -27,12 +28,14 @@ export type Database = {
           delivery_timeframe: number | null
           id: string
           key_points: string | null
+          kpis_to_track: string[] | null
           notes: string | null
           reference_links: string | null
           revisions_allowed: number | null
           revisions_requested: number
           specific_instructions: string | null
           status: string
+          strategic_goals: string[] | null
           style_preferences: string | null
           target_audience: string | null
           target_keywords: string[] | null
@@ -48,6 +51,7 @@ export type Database = {
           article_url?: string | null
           avoid_topics?: string | null
           brand_voice?: string | null
+          competitor_urls?: string | null
           content_goal?: string | null
           content_type?: string | null
           created_at?: string
@@ -56,12 +60,14 @@ export type Database = {
           delivery_timeframe?: number | null
           id?: string
           key_points?: string | null
+          kpis_to_track?: string[] | null
           notes?: string | null
           reference_links?: string | null
           revisions_allowed?: number | null
           revisions_requested?: number
           specific_instructions?: string | null
           status?: string
+          strategic_goals?: string[] | null
           style_preferences?: string | null
           target_audience?: string | null
           target_keywords?: string[] | null
@@ -77,6 +83,7 @@ export type Database = {
           article_url?: string | null
           avoid_topics?: string | null
           brand_voice?: string | null
+          competitor_urls?: string | null
           content_goal?: string | null
           content_type?: string | null
           created_at?: string
@@ -85,12 +92,14 @@ export type Database = {
           delivery_timeframe?: number | null
           id?: string
           key_points?: string | null
+          kpis_to_track?: string[] | null
           notes?: string | null
           reference_links?: string | null
           revisions_allowed?: number | null
           revisions_requested?: number
           specific_instructions?: string | null
           status?: string
+          strategic_goals?: string[] | null
           style_preferences?: string | null
           target_audience?: string | null
           target_keywords?: string[] | null
@@ -283,6 +292,39 @@ export type Database = {
         }
         Relationships: []
       }
+      monthly_usage_tracking: {
+        Row: {
+          articles_submitted: number | null
+          created_at: string | null
+          id: string
+          month_year: string
+          product_descriptions_submitted: number | null
+          social_posts_submitted: number | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          articles_submitted?: number | null
+          created_at?: string | null
+          id?: string
+          month_year: string
+          product_descriptions_submitted?: number | null
+          social_posts_submitted?: number | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          articles_submitted?: number | null
+          created_at?: string | null
+          id?: string
+          month_year?: string
+          product_descriptions_submitted?: number | null
+          social_posts_submitted?: number | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       research_reports: {
         Row: {
           created_at: string
@@ -428,6 +470,15 @@ export type Database = {
       admin_update_contact_submission: {
         Args: { mark_processed: boolean; submission_id: string }
         Returns: boolean
+      }
+      can_submit_content: {
+        Args: { p_content_type: string; p_user_id: string }
+        Returns: {
+          can_submit: boolean
+          current_count: number
+          message: string
+          monthly_limit: number
+        }[]
       }
       check_subscription_rate_limit: {
         Args: { operation: string; target_user_id: string }
