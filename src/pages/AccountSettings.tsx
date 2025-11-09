@@ -138,8 +138,8 @@ export default function AccountSettings() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary via-primary-dark to-secondary">
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
-        <div className="mb-8">
+      <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-4xl">
+        <div className="mb-6 sm:mb-8">
           <Button
             variant="outline"
             onClick={() => navigate("/dashboard")}
@@ -147,55 +147,55 @@ export default function AccountSettings() {
           >
             ← Back to Dashboard
           </Button>
-          <h1 className="text-4xl font-bold text-white mb-2">Account Settings</h1>
-          <p className="text-white/70">Manage your subscription, billing, and account preferences</p>
+          <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2">Account Settings</h1>
+          <p className="text-sm sm:text-base text-white/70">Manage your subscription, billing, and account preferences</p>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {/* Section 1: Subscription & Billing */}
           <Card className="bg-white/10 border-white/20 backdrop-blur">
-            <CardHeader>
-              <CardTitle className="text-white text-2xl">Subscription & Billing</CardTitle>
-              <CardDescription className="text-white/70">
+            <CardHeader className="p-4 sm:p-6">
+              <CardTitle className="text-white text-xl sm:text-2xl">Subscription & Billing</CardTitle>
+              <CardDescription className="text-white/70 text-sm">
                 Your current plan and billing information
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="bg-white/5 border border-white/20 rounded-lg p-6 space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-white/70">Plan Name:</span>
-                  <span className="text-white font-semibold text-lg">
+            <CardContent className="space-y-4 p-4 sm:p-6 pt-0">
+              <div className="bg-white/5 border border-white/20 rounded-lg p-4 sm:p-6 space-y-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <span className="text-white/70 text-sm sm:text-base">Plan Name:</span>
+                  <span className="text-white font-semibold text-base sm:text-lg">
                     {getTierDisplayName(subscriber?.subscription_tier)}
                   </span>
                 </div>
                 
-                <div className="flex items-center justify-between">
-                  <span className="text-white/70">Status:</span>
-                  <Badge className="bg-green-500/20 text-green-300 border-green-500/30">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <span className="text-white/70 text-sm sm:text-base">Status:</span>
+                  <Badge className="bg-green-500/20 text-green-300 border-green-500/30 w-fit">
                     Active ✅
                   </Badge>
                 </div>
 
-                <div className="flex items-center justify-between">
-                  <span className="text-white/70">Billing Cycle:</span>
-                  <span className="text-white">
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+                  <span className="text-white/70 text-sm sm:text-base">Billing Cycle:</span>
+                  <span className="text-white text-sm sm:text-base text-left sm:text-right">
                     {billingInfo.isAnnual ? "Annual" : "Monthly"} 
-                    <span className="text-white/70 ml-2">
+                    <span className="text-white/70 block sm:inline sm:ml-2">
                       (Billed ${billingInfo.price.toLocaleString()}/{billingInfo.isAnnual ? "year" : "month"})
                     </span>
                   </span>
                 </div>
 
-                <div className="flex items-center justify-between">
-                  <span className="text-white/70">Next Billing Date:</span>
-                  <span className="text-white">Renews on {billingInfo.nextDate}</span>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <span className="text-white/70 text-sm sm:text-base">Next Billing Date:</span>
+                  <span className="text-white text-sm sm:text-base text-left sm:text-right">Renews on {billingInfo.nextDate}</span>
                 </div>
               </div>
 
-              <div className="flex gap-3">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <Button
                   onClick={() => navigate("/")}
-                  className="flex-1 bg-white text-primary hover:bg-white/90"
+                  className="w-full sm:flex-1 bg-white text-primary hover:bg-white/90"
                 >
                   Upgrade Plan
                 </Button>
@@ -203,7 +203,7 @@ export default function AccountSettings() {
                   <AlertDialogTrigger asChild>
                     <Button
                       variant="outline"
-                      className="flex-1 bg-red-500/20 text-red-300 border-red-500/30 hover:bg-red-500/30"
+                      className="w-full sm:flex-1 bg-red-500/20 text-red-300 border-red-500/30 hover:bg-red-500/30"
                     >
                       Cancel Subscription
                     </Button>
@@ -229,22 +229,22 @@ export default function AccountSettings() {
 
           {/* Section 2: Payment Method & Invoices */}
           <Card className="bg-white/10 border-white/20 backdrop-blur">
-            <CardHeader>
-              <CardTitle className="text-white text-2xl">Payment Method & Invoices</CardTitle>
-              <CardDescription className="text-white/70">
+            <CardHeader className="p-4 sm:p-6">
+              <CardTitle className="text-white text-xl sm:text-2xl">Payment Method & Invoices</CardTitle>
+              <CardDescription className="text-white/70 text-sm">
                 Manage your payment methods and view billing history
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center justify-between bg-white/5 border border-white/20 rounded-lg p-4">
+            <CardContent className="space-y-4 p-4 sm:p-6 pt-0">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white/5 border border-white/20 rounded-lg p-4">
                 <div>
                   <p className="text-white/70 text-sm mb-1">Payment Method</p>
-                  <p className="text-white">Visa ending in 4242</p>
+                  <p className="text-white text-sm sm:text-base">Visa ending in 4242</p>
                 </div>
                 <Button
                   onClick={handleUpdatePayment}
                   variant="outline"
-                  className="bg-white/10 text-white border-white/30 hover:bg-white/20"
+                  className="w-full sm:w-auto bg-white/10 text-white border-white/30 hover:bg-white/20 text-sm"
                 >
                   Update Payment Method
                 </Button>
@@ -253,33 +253,37 @@ export default function AccountSettings() {
               <Separator className="bg-white/20" />
 
               <div>
-                <h3 className="text-white font-semibold mb-3">Billing History</h3>
-                <Table>
-                  <TableHeader>
-                    <TableRow className="border-white/20 hover:bg-white/5">
-                      <TableHead className="text-white/70">Date</TableHead>
-                      <TableHead className="text-white/70">Description</TableHead>
-                      <TableHead className="text-white/70">Amount</TableHead>
-                      <TableHead className="text-white/70">Download</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    <TableRow className="border-white/20 hover:bg-white/5">
-                      <TableCell className="text-white">Jan 15, 2025</TableCell>
-                      <TableCell className="text-white">{getTierDisplayName(subscriber?.subscription_tier)} Plan</TableCell>
-                      <TableCell className="text-white">${billingInfo.price.toLocaleString()}</TableCell>
-                      <TableCell>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="text-white/70 hover:text-white hover:bg-white/10"
-                        >
-                          PDF ↓
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
+                <h3 className="text-white font-semibold mb-3 text-base sm:text-lg">Billing History</h3>
+                <div className="overflow-x-auto -mx-4 sm:mx-0">
+                  <div className="inline-block min-w-full align-middle">
+                    <Table>
+                      <TableHeader>
+                        <TableRow className="border-white/20 hover:bg-white/5">
+                          <TableHead className="text-white/70 text-xs sm:text-sm">Date</TableHead>
+                          <TableHead className="text-white/70 text-xs sm:text-sm">Description</TableHead>
+                          <TableHead className="text-white/70 text-xs sm:text-sm">Amount</TableHead>
+                          <TableHead className="text-white/70 text-xs sm:text-sm">Download</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        <TableRow className="border-white/20 hover:bg-white/5">
+                          <TableCell className="text-white text-xs sm:text-sm whitespace-nowrap">Jan 15, 2025</TableCell>
+                          <TableCell className="text-white text-xs sm:text-sm">{getTierDisplayName(subscriber?.subscription_tier)} Plan</TableCell>
+                          <TableCell className="text-white text-xs sm:text-sm whitespace-nowrap">${billingInfo.price.toLocaleString()}</TableCell>
+                          <TableCell>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="text-white/70 hover:text-white hover:bg-white/10 text-xs sm:text-sm"
+                            >
+                              PDF ↓
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      </TableBody>
+                    </Table>
+                  </div>
+                </div>
                 <Button
                   onClick={handleUpdatePayment}
                   variant="link"
@@ -293,34 +297,34 @@ export default function AccountSettings() {
 
           {/* Section 3: Profile & Security */}
           <Card className="bg-white/10 border-white/20 backdrop-blur">
-            <CardHeader>
-              <CardTitle className="text-white text-2xl">Profile & Security</CardTitle>
-              <CardDescription className="text-white/70">
+            <CardHeader className="p-4 sm:p-6">
+              <CardTitle className="text-white text-xl sm:text-2xl">Profile & Security</CardTitle>
+              <CardDescription className="text-white/70 text-sm">
                 Manage your account information and security settings
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center justify-between bg-white/5 border border-white/20 rounded-lg p-4">
-                <div>
+            <CardContent className="space-y-4 p-4 sm:p-6 pt-0">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white/5 border border-white/20 rounded-lg p-4">
+                <div className="min-w-0 flex-1">
                   <p className="text-white/70 text-sm mb-1">Email Address</p>
-                  <p className="text-white">{userEmail}</p>
+                  <p className="text-white text-sm sm:text-base break-words">{userEmail}</p>
                 </div>
                 <Button
                   variant="outline"
-                  className="bg-white/10 text-white border-white/30 hover:bg-white/20"
+                  className="w-full sm:w-auto bg-white/10 text-white border-white/30 hover:bg-white/20 text-sm"
                 >
                   Edit
                 </Button>
               </div>
 
-              <div className="flex items-center justify-between bg-white/5 border border-white/20 rounded-lg p-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white/5 border border-white/20 rounded-lg p-4">
                 <div>
                   <p className="text-white/70 text-sm mb-1">Password</p>
-                  <p className="text-white">········</p>
+                  <p className="text-white text-sm sm:text-base">········</p>
                 </div>
                 <Button
                   variant="outline"
-                  className="bg-white/10 text-white border-white/30 hover:bg-white/20"
+                  className="w-full sm:w-auto bg-white/10 text-white border-white/30 hover:bg-white/20 text-sm"
                 >
                   Change Password
                 </Button>
