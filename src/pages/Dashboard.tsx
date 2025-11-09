@@ -635,16 +635,28 @@ const Dashboard = () => {
                 <div className="flex items-center justify-between">
                   <span className="text-white/70 font-mono text-sm">Plan</span>
                   <div className="flex items-center gap-2">
-                    <Badge className="bg-primary/20 text-primary-glow border-primary-glow/30 font-mono uppercase">
-                      {subscriber?.subscription_tier || 'Starter'}
-                    </Badge>
+                    {(() => {
+                      const tier = (subscriber?.subscription_tier || 'starter').toLowerCase();
+                      const tierColors = {
+                        starter: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
+                        growth: 'bg-green-500/20 text-green-300 border-green-500/30',
+                        scale: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
+                        authority: 'bg-red-500/20 text-red-300 border-red-500/30',
+                        dominance: 'bg-amber-500/20 text-amber-300 border-amber-500/30'
+                      };
+                      return (
+                        <Badge className={`${tierColors[tier] || tierColors.starter} font-mono uppercase`}>
+                          {subscriber?.subscription_tier || 'Starter'}
+                        </Badge>
+                      );
+                    })()}
                     {subscriber?.subscription_end && (() => {
                       const endDate = new Date(subscriber.subscription_end);
                       const now = new Date();
                       const daysUntilRenewal = Math.floor((endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
                       const isAnnual = daysUntilRenewal > 180; // More than 6 months = annual
                       return (
-                        <Badge className={isAnnual ? "bg-purple-500/20 text-purple-300 border-purple-500/30 font-mono text-xs" : "bg-blue-500/20 text-blue-300 border-blue-500/30 font-mono text-xs"}>
+                        <Badge className={isAnnual ? "bg-white/10 text-white/90 border-white/20 font-mono text-xs" : "bg-white/10 text-white/90 border-white/20 font-mono text-xs"}>
                           {isAnnual ? 'ANNUAL' : 'MONTHLY'}
                         </Badge>
                       );
