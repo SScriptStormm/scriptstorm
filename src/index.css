@@ -43,7 +43,7 @@ All colors MUST be HSL.
     /* AI Futuristic gradients */
     --gradient-primary: linear-gradient(135deg, hsl(221 83% 53%), hsl(221 83% 65%));
     --gradient-dark: linear-gradient(135deg, hsl(220 15% 5%), hsl(220 15% 15%));
-    --gradient-hero: linear-gradient(135deg, hsl(221 83% 53%) 0%, hsl(220 15% 5%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(221 83% 53%) 0%, hsl(220 15% 12%) 100%);
     --gradient-cyber: linear-gradient(45deg, hsl(221 83% 53%), hsl(221 83% 75%), hsl(221 83% 45%));
     --gradient-mesh: radial-gradient(circle at 20% 50%, hsl(221 83% 53% / 0.12) 0%, transparent 50%), 
                      radial-gradient(circle at 80% 20%, hsl(221 83% 65% / 0.12) 0%, transparent 50%),
