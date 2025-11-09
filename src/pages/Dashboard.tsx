@@ -1215,7 +1215,7 @@ const Dashboard = () => {
                             <Button 
                               size="sm" 
                               variant="ghost"
-                              className="w-full text-gray-400 border border-gray-500/30 font-mono text-xs"
+                              className="w-full text-white/70 border border-white/20 font-mono text-xs"
                               disabled
                             >
                               Queued
@@ -1330,7 +1330,7 @@ const Dashboard = () => {
                                 <Button 
                                   size="sm" 
                                   variant="ghost"
-                                  className="text-gray-400 border border-gray-500/30 font-mono"
+                                  className="text-white/70 border border-white/20 font-mono"
                                   disabled
                                 >
                                   Queued
