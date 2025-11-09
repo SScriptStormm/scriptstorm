@@ -666,7 +666,7 @@ const Dashboard = () => {
                             const isAnnual = daysUntilRenewal > 180;
                             return (
                               <Badge className="bg-white/10 text-white/80 border border-white/30 font-mono text-xs flex items-center gap-1">
-                                <CalendarIcon className="w-3 h-3" />
+                                📅
                                 {isAnnual ? 'ANNUAL' : 'MONTHLY'}
                               </Badge>
                             );
