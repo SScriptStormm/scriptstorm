@@ -665,7 +665,7 @@ const Dashboard = () => {
                             const daysUntilRenewal = Math.floor((endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
                             const isAnnual = daysUntilRenewal > 180;
                             return (
-                              <Badge className="bg-white/10 text-white/80 border border-white/30 font-mono text-xs flex items-center gap-1">
+                              <Badge className="bg-white/10 text-white/80 border border-white/30 font-mono text-xs flex items-center gap-1.5">
                                 📅
                                 {isAnnual ? 'ANNUAL' : 'MONTHLY'}
                               </Badge>
