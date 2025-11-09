@@ -644,21 +644,25 @@ const Dashboard = () => {
                         authority: 'bg-red-500/20 text-red-300 border-red-500/30',
                         dominance: 'bg-amber-500/20 text-amber-300 border-amber-500/30'
                       };
+                      const currentTierColor = tierColors[tier] || tierColors.starter;
+                      
                       return (
-                        <Badge className={`${tierColors[tier] || tierColors.starter} font-mono uppercase`}>
-                          {subscriber?.subscription_tier || 'Starter'}
-                        </Badge>
-                      );
-                    })()}
-                    {subscriber?.subscription_end && (() => {
-                      const endDate = new Date(subscriber.subscription_end);
-                      const now = new Date();
-                      const daysUntilRenewal = Math.floor((endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
-                      const isAnnual = daysUntilRenewal > 180; // More than 6 months = annual
-                      return (
-                        <Badge className={isAnnual ? "bg-white/10 text-white/90 border-white/20 font-mono text-xs" : "bg-white/10 text-white/90 border-white/20 font-mono text-xs"}>
-                          {isAnnual ? 'ANNUAL' : 'MONTHLY'}
-                        </Badge>
+                        <>
+                          <Badge className={`${currentTierColor} font-mono uppercase`}>
+                            {subscriber?.subscription_tier || 'Starter'}
+                          </Badge>
+                          {subscriber?.subscription_end && (() => {
+                            const endDate = new Date(subscriber.subscription_end);
+                            const now = new Date();
+                            const daysUntilRenewal = Math.floor((endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+                            const isAnnual = daysUntilRenewal > 180;
+                            return (
+                              <Badge className={`${currentTierColor} font-mono text-xs`}>
+                                {isAnnual ? 'ANNUAL' : 'MONTHLY'}
+                              </Badge>
+                            );
+                          })()}
+                        </>
                       );
                     })()}
                   </div>
