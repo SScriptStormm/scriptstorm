@@ -676,12 +676,47 @@ const Dashboard = () => {
                   </div>
                 </div>
                 {subscriber?.subscription_end && (
-                  <div className="flex items-center justify-between">
-                    <span className="text-white/70 font-mono text-sm">Renews</span>
-                    <span className="text-white font-mono text-sm">
-                      {new Date(subscriber.subscription_end).toLocaleDateString()}
-                    </span>
-                  </div>
+                  <>
+                    <div className="flex items-center justify-between">
+                      <span className="text-white/70 font-mono text-sm">Renews</span>
+                      <span className="text-white font-mono text-sm">
+                        {new Date(subscriber.subscription_end).toLocaleDateString()}
+                      </span>
+                    </div>
+                    <div className="pt-2 border-t border-primary-glow/10">
+                      {(() => {
+                        const endDate = new Date(subscriber.subscription_end);
+                        const now = new Date();
+                        const daysUntilRenewal = Math.floor((endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+                        const tier = (subscriber?.subscription_tier || 'starter').toLowerCase();
+                        const tierColors = {
+                          starter: { bar: 'bg-blue-500', text: 'text-blue-300' },
+                          growth: { bar: 'bg-green-500', text: 'text-green-300' },
+                          scale: { bar: 'bg-purple-500', text: 'text-purple-300' },
+                          authority: { bar: 'bg-red-500', text: 'text-red-300' },
+                          dominance: { bar: 'bg-amber-500', text: 'text-amber-300' }
+                        };
+                        const colors = tierColors[tier] || tierColors.starter;
+                        
+                        return (
+                          <div className="space-y-2">
+                            <div className="flex items-center justify-between">
+                              <span className="text-white/60 font-mono text-xs">Days Until Renewal</span>
+                              <span className={`${colors.text} font-mono text-sm font-bold`}>
+                                {daysUntilRenewal} days
+                              </span>
+                            </div>
+                            <div className="w-full bg-black/40 rounded-full h-2 overflow-hidden">
+                              <div 
+                                className={`${colors.bar} h-full rounded-full transition-all duration-500`}
+                                style={{ width: `${Math.min((daysUntilRenewal / 365) * 100, 100)}%` }}
+                              />
+                            </div>
+                          </div>
+                        );
+                      })()}
+                    </div>
+                  </>
                 )}
                 <div className="flex items-center justify-between">
                   <span className="text-white/70 font-mono text-sm">Word Count Range</span>
