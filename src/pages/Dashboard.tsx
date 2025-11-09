@@ -54,6 +54,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface Subscriber {
   subscribed: boolean;
@@ -665,9 +671,24 @@ const Dashboard = () => {
                             const daysUntilRenewal = Math.floor((endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
                             const isAnnual = daysUntilRenewal > 180;
                             return (
-                              <Badge className={`${currentTierColor} font-mono text-xs`}>
-                                {isAnnual ? 'ANNUAL' : 'MONTHLY'}
-                              </Badge>
+                              <TooltipProvider>
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <Badge className="bg-white/10 text-white/80 border border-white/30 font-mono text-xs flex items-center gap-1">
+                                      <CalendarIcon className="w-3 h-3" />
+                                      {isAnnual ? 'ANNUAL' : 'MONTHLY'}
+                                    </Badge>
+                                  </TooltipTrigger>
+                                  <TooltipContent>
+                                    <p className="text-sm">
+                                      {isAnnual 
+                                        ? `Annual billing - Renews ${new Date(subscriber.subscription_end).toLocaleDateString()}`
+                                        : `Monthly billing - Renews ${new Date(subscriber.subscription_end).toLocaleDateString()}`
+                                      }
+                                    </p>
+                                  </TooltipContent>
+                                </Tooltip>
+                              </TooltipProvider>
                             );
                           })()}
                         </>
