@@ -922,7 +922,7 @@ const Dashboard = () => {
                       <>
                         <span className="text-blue-400 text-base sm:text-lg flex-shrink-0">🔵</span>
                         <span className="text-white font-mono flex-1 truncate text-xs sm:text-sm">{article.title}</span>
-                        <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30 font-mono text-[10px] sm:text-xs whitespace-nowrap">
+                        <Badge className="bg-blue-500/30 text-blue-300 border-blue-500/50 font-mono text-[10px] sm:text-xs whitespace-nowrap">
                           QUEUED
                         </Badge>
                       </>
@@ -953,39 +953,39 @@ const Dashboard = () => {
 
         {/* Dashboard Features Tabs */}
         <Tabs defaultValue="projects" className="mb-8">
-          <TabsList className="bg-black/30 border border-primary-glow/30 mb-6">
-            <TabsTrigger value="projects" className="font-mono data-[state=active]:bg-primary-glow/20">
+          <TabsList className="bg-black/40 border border-primary-glow/40 mb-6">
+            <TabsTrigger value="projects" className="font-mono data-[state=active]:bg-primary-glow/30 data-[state=active]:text-white">
               <FileText className="h-4 w-4 mr-2" />
               PROJECTS
             </TabsTrigger>
             
             {hasGrowth && (
-              <TabsTrigger value="calendar" className="font-mono data-[state=active]:bg-primary-glow/20">
+              <TabsTrigger value="calendar" className="font-mono data-[state=active]:bg-primary-glow/30 data-[state=active]:text-white">
                 <CalendarIcon className="h-4 w-4 mr-2" />
                 CALENDAR
               </TabsTrigger>
             )}
             
             {hasScale && (
-              <TabsTrigger value="reports" className="font-mono data-[state=active]:bg-primary-glow/20">
+              <TabsTrigger value="reports" className="font-mono data-[state=active]:bg-primary-glow/30 data-[state=active]:text-white">
                 <FileText className="h-4 w-4 mr-2" />
                 RESEARCH
               </TabsTrigger>
             )}
             
             {hasDominance && (
-              <TabsTrigger value="performance" className="font-mono data-[state=active]:bg-primary-glow/20">
+              <TabsTrigger value="performance" className="font-mono data-[state=active]:bg-primary-glow/30 data-[state=active]:text-white">
                 <BarChart3 className="h-4 w-4 mr-2" />
                 PERFORMANCE
               </TabsTrigger>
             )}
             
             {hasAuthority && (
-              <TabsTrigger value="support" className="font-mono data-[state=active]:bg-primary-glow/20 relative">
+              <TabsTrigger value="support" className="font-mono data-[state=active]:bg-primary-glow/30 data-[state=active]:text-white relative">
                 <MessageSquare className="h-4 w-4 mr-2" />
                 SUPPORT
                 {(hasAuthority || hasDominance) && (
-                  <Badge className="ml-2 bg-yellow-500/20 text-yellow-400 border-yellow-500/30 text-xs px-1 py-0">
+                  <Badge className="ml-2 bg-yellow-500/30 text-yellow-300 border-yellow-500/50 text-xs px-1 py-0">
                     PRIORITY
                   </Badge>
                 )}
@@ -993,7 +993,7 @@ const Dashboard = () => {
             )}
             
             {hasDominance && (
-              <TabsTrigger value="roadmap" className="font-mono data-[state=active]:bg-primary-glow/20">
+              <TabsTrigger value="roadmap" className="font-mono data-[state=active]:bg-primary-glow/30 data-[state=active]:text-white">
                 <Target className="h-4 w-4 mr-2" />
                 ROADMAP
               </TabsTrigger>
