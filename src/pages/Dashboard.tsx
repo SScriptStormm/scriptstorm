@@ -634,9 +634,22 @@ const Dashboard = () => {
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-white/70 font-mono text-sm">Plan</span>
-                  <Badge className="bg-primary/20 text-primary-glow border-primary-glow/30 font-mono uppercase">
-                    {subscriber?.subscription_tier || 'Starter'}
-                  </Badge>
+                  <div className="flex items-center gap-2">
+                    <Badge className="bg-primary/20 text-primary-glow border-primary-glow/30 font-mono uppercase">
+                      {subscriber?.subscription_tier || 'Starter'}
+                    </Badge>
+                    {subscriber?.subscription_end && (() => {
+                      const endDate = new Date(subscriber.subscription_end);
+                      const now = new Date();
+                      const daysUntilRenewal = Math.floor((endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+                      const isAnnual = daysUntilRenewal > 180; // More than 6 months = annual
+                      return (
+                        <Badge className={isAnnual ? "bg-purple-500/20 text-purple-300 border-purple-500/30 font-mono text-xs" : "bg-blue-500/20 text-blue-300 border-blue-500/30 font-mono text-xs"}>
+                          {isAnnual ? 'ANNUAL' : 'MONTHLY'}
+                        </Badge>
+                      );
+                    })()}
+                  </div>
                 </div>
                 {subscriber?.subscription_end && (
                   <div className="flex items-center justify-between">
