@@ -19,6 +19,7 @@ import Contact from "./pages/Contact";
 import Support from "./pages/Support";
 import HelpCenter from "./pages/HelpCenter";
 import AboutUs from "./pages/AboutUs";
+import AccountSettings from "./pages/AccountSettings";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
           <Route path="/auth" element={<AuthGuard requireAuth={false}><Auth /></AuthGuard>} />
           <Route path="/dashboard" element={<AuthGuard><Dashboard /></AuthGuard>} />
           <Route path="/content-brief" element={<AuthGuard><ContentBrief /></AuthGuard>} />
+          <Route path="/account-settings" element={<AuthGuard><AccountSettings /></AuthGuard>} />
           <Route path="/why-choose-us" element={<WhyChooseUs />} />
           <Route path="/onboarding-process" element={<OnboardingProcess />} />
               <Route path="/contact" element={<Contact />} />

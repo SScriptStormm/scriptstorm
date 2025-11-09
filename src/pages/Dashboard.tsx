@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { User, Session } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -98,6 +99,7 @@ const Dashboard = () => {
   const [revisionFeedback, setRevisionFeedback] = useState("");
   const [submittingRevision, setSubmittingRevision] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -552,7 +554,10 @@ const Dashboard = () => {
                     <LayoutDashboard className="h-4 w-4 mr-2" />
                     Dashboard
                   </DropdownMenuItem>
-                  <DropdownMenuItem className="font-mono text-white hover:bg-primary-glow/20 cursor-pointer">
+                  <DropdownMenuItem 
+                    className="font-mono text-white hover:bg-primary-glow/20 cursor-pointer"
+                    onClick={() => navigate('/account-settings')}
+                  >
                     <Settings className="h-4 w-4 mr-2" />
                     Account Settings
                   </DropdownMenuItem>
