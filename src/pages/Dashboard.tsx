@@ -644,12 +644,20 @@ const Dashboard = () => {
                         authority: 'bg-red-500/20 text-red-300 border-red-500/30',
                         dominance: 'bg-amber-500/20 text-amber-300 border-amber-500/30'
                       };
+                      const tierEmojis = {
+                        starter: '🚀',
+                        growth: '🔥',
+                        scale: '⚡',
+                        authority: '👑',
+                        dominance: '💎'
+                      };
                       const currentTierColor = tierColors[tier] || tierColors.starter;
+                      const currentEmoji = tierEmojis[tier] || tierEmojis.starter;
                       
                       return (
                         <>
                           <Badge className={`${currentTierColor} font-mono uppercase`}>
-                            {subscriber?.subscription_tier || 'Starter'}
+                            {currentEmoji} {subscriber?.subscription_tier || 'Starter'}
                           </Badge>
                           {subscriber?.subscription_end && (() => {
                             const endDate = new Date(subscriber.subscription_end);
