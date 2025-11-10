@@ -104,6 +104,27 @@ export default function AccountSettings() {
     };
   };
 
+  const generateBillingHistory = () => {
+    if (!subscriber?.subscription_end || !subscriber.subscription_tier) return [];
+    
+    const renewalDate = new Date(subscriber.subscription_end);
+    const billingInfo = getBillingInfo();
+    
+    // Calculate the last payment date based on billing cycle
+    const lastPaymentDate = new Date(renewalDate);
+    if (billingInfo.isAnnual) {
+      lastPaymentDate.setFullYear(lastPaymentDate.getFullYear() - 1);
+    } else {
+      lastPaymentDate.setMonth(lastPaymentDate.getMonth() - 1);
+    }
+    
+    return [{
+      date: lastPaymentDate,
+      description: `${getTierDisplayName(subscriber.subscription_tier)} Plan`,
+      amount: billingInfo.price
+    }];
+  };
+
   const handleUpdatePayment = () => {
     // This would open Stripe Customer Portal
     toast.info("Redirecting to payment portal...");
@@ -263,20 +284,22 @@ export default function AccountSettings() {
                         </TableRow>
                       </TableHeader>
                       <TableBody>
-                        <TableRow className="border-white/20 hover:bg-white/5">
-                          <TableCell className="text-white text-xs sm:text-sm whitespace-nowrap">{formatDateShort('2025-01-15')}</TableCell>
-                          <TableCell className="text-white text-xs sm:text-sm">{getTierDisplayName(subscriber?.subscription_tier)} Plan</TableCell>
-                          <TableCell className="text-white text-xs sm:text-sm whitespace-nowrap">${billingInfo.price.toLocaleString()}</TableCell>
-                          <TableCell>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              className="text-white/70 hover:text-white hover:bg-white/10 text-xs sm:text-sm"
-                            >
-                              PDF ↓
-                            </Button>
-                          </TableCell>
-                        </TableRow>
+                        {generateBillingHistory().map((invoice, index) => (
+                          <TableRow key={index} className="border-white/20 hover:bg-white/5">
+                            <TableCell className="text-white text-xs sm:text-sm whitespace-nowrap">{formatDateShort(invoice.date)}</TableCell>
+                            <TableCell className="text-white text-xs sm:text-sm">{invoice.description}</TableCell>
+                            <TableCell className="text-white text-xs sm:text-sm whitespace-nowrap">${invoice.amount.toLocaleString()}</TableCell>
+                            <TableCell>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="text-white/70 hover:text-white hover:bg-white/10 text-xs sm:text-sm"
+                              >
+                                PDF ↓
+                              </Button>
+                            </TableCell>
+                          </TableRow>
+                        ))}
                       </TableBody>
                     </Table>
                   </div>
