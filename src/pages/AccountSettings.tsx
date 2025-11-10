@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { formatDate, formatDateShort } from "@/lib/dateUtils";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
@@ -99,11 +100,7 @@ export default function AccountSettings() {
     return {
       isAnnual,
       price: price || 0,
-      nextDate: endDate.toLocaleDateString("en-US", { 
-        year: "numeric", 
-        month: "long", 
-        day: "numeric" 
-      })
+      nextDate: formatDate(endDate)
     };
   };
 
@@ -267,7 +264,7 @@ export default function AccountSettings() {
                       </TableHeader>
                       <TableBody>
                         <TableRow className="border-white/20 hover:bg-white/5">
-                          <TableCell className="text-white text-xs sm:text-sm whitespace-nowrap">Jan 15, 2025</TableCell>
+                          <TableCell className="text-white text-xs sm:text-sm whitespace-nowrap">{formatDateShort('2025-01-15')}</TableCell>
                           <TableCell className="text-white text-xs sm:text-sm">{getTierDisplayName(subscriber?.subscription_tier)} Plan</TableCell>
                           <TableCell className="text-white text-xs sm:text-sm whitespace-nowrap">${billingInfo.price.toLocaleString()}</TableCell>
                           <TableCell>

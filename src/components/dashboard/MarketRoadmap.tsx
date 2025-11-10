@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Target, Download, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { formatDate } from "@/lib/dateUtils";
 
 interface MarketRoadmap {
   id: string;
@@ -129,7 +130,7 @@ const MarketRoadmap = ({ userId }: MarketRoadmapProps) => {
 
               <div className="flex items-center justify-between mt-4 pt-4 border-t border-primary-glow/10">
                 <p className="text-white/50 font-mono text-xs">
-                  Created: {new Date(roadmap.created_at).toLocaleDateString()}
+                  Created: {formatDate(roadmap.created_at)}
                 </p>
                 {roadmap.file_url && (
                   <div className="flex gap-2">

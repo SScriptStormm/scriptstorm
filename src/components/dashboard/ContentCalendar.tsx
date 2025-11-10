@@ -4,6 +4,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar, FileText, MessageSquare } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { formatDate, formatTime } from "@/lib/dateUtils";
 
 interface CalendarEvent {
   id: string;
@@ -121,7 +122,7 @@ const ContentCalendar = ({ userId }: ContentCalendarProps) => {
                 <p className="text-white/70 font-mono text-xs mb-2">{event.description}</p>
               )}
               <p className="text-primary-glow font-mono text-xs">
-                Scheduled: {new Date(event.scheduled_date).toLocaleDateString()} at {new Date(event.scheduled_date).toLocaleTimeString()}
+                Scheduled: {formatDate(event.scheduled_date)} at {formatTime(event.scheduled_date)}
               </p>
             </div>
           ))}

@@ -1,3 +1,5 @@
+import { formatDate } from "@/lib/dateUtils";
+
 const PrivacyPolicy = () => {
   return (
     <div className="min-h-screen bg-background">
@@ -37,7 +39,7 @@ const PrivacyPolicy = () => {
         <h1 className="text-4xl font-bold text-primary mb-8">Privacy Policy</h1>
         <div className="prose prose-lg max-w-none">
           <p className="text-muted-foreground mb-6">
-            Last updated: {new Date().toLocaleDateString()}
+            Last updated: {formatDate(new Date())}
           </p>
 
           <section className="mb-8">

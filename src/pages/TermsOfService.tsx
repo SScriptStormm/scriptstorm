@@ -1,3 +1,5 @@
+import { formatDate } from "@/lib/dateUtils";
+
 const TermsOfService = () => {
   return (
     <div className="min-h-screen bg-background">
@@ -134,7 +136,7 @@ const TermsOfService = () => {
           </section>
 
           <div className="text-sm text-muted-foreground mt-12 pt-8 border-t">
-            <p>Last updated: {new Date().toLocaleDateString()}</p>
+            <p>Last updated: {formatDate(new Date())}</p>
           </div>
           </div>
         </div>

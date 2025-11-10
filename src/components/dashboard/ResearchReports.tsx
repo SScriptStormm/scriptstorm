@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FileText, Download, FileBarChart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { formatDate } from "@/lib/dateUtils";
 
 interface ResearchReport {
   id: string;
@@ -125,7 +126,7 @@ const ResearchReports = ({ userId }: ResearchReportsProps) => {
               </div>
               <div className="flex items-center justify-between mt-3 pt-3 border-t border-primary-glow/10">
                 <p className="text-white/50 font-mono text-xs">
-                  Uploaded: {new Date(report.uploaded_at).toLocaleDateString()}
+                  Uploaded: {formatDate(report.uploaded_at)}
                 </p>
                 {report.file_url && (
                   <Button

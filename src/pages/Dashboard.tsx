@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { User, Session } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { formatDate, formatDateTime, formatMonthYear } from "@/lib/dateUtils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -334,7 +335,7 @@ const Dashboard = () => {
   const getMonthLabel = (monthYear: string) => {
     const [year, month] = monthYear.split('-');
     const date = new Date(parseInt(year), parseInt(month) - 1);
-    return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    return formatMonthYear(date);
   };
 
   // Get all unique months from articles
@@ -684,7 +685,7 @@ const Dashboard = () => {
                   <div className="flex items-center justify-between">
                     <span className="text-white/70 font-mono text-sm">Renews</span>
                     <span className="text-white font-mono text-sm">
-                      {new Date(subscriber.subscription_end).toLocaleDateString()}
+                      {formatDate(subscriber.subscription_end)}
                     </span>
                   </div>
                 )}
@@ -813,7 +814,7 @@ const Dashboard = () => {
                     <p className="text-white font-mono text-sm sm:text-base break-words">{articles[0]?.title}</p>
                   </div>
                   <p className="text-white/50 font-mono text-xs mb-4 sm:mb-6">
-                    Submitted: {new Date(articles[0]?.created_at).toLocaleDateString()} at {new Date(articles[0]?.created_at).toLocaleTimeString()}
+                    Submitted: {formatDateTime(articles[0]?.created_at)}
                   </p>
                   
                   {/* Progress Tracker */}
@@ -1163,7 +1164,7 @@ const Dashboard = () => {
                             <span className="text-white/70 font-mono text-xs flex-shrink-0">Delivered:</span>
                             <span className="text-white font-mono text-xs break-words text-right">
                               {article.delivery_date
-                                ? new Date(article.delivery_date).toLocaleDateString()
+                                ? formatDate(article.delivery_date)
                                 : 'Completed'}
                             </span>
                           </div>
@@ -1274,7 +1275,7 @@ const Dashboard = () => {
                             {article.status === 'completed' ? (
                               <span className="text-white font-mono text-xs md:text-sm">
                                 {article.delivery_date
-                                  ? new Date(article.delivery_date).toLocaleDateString()
+                                  ? formatDate(article.delivery_date)
                                   : 'Completed'}
                               </span>
                             ) : article.delivery_deadline ? (
