@@ -819,84 +819,107 @@ const Dashboard = () => {
                   
                   {/* Progress Tracker */}
                   <div className="space-y-3 sm:space-y-4">
-                    {/* Brief Received */}
-                    <div className="flex items-start gap-2 sm:gap-3">
-                      <div className="flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-green-500/20 border border-green-500 flex-shrink-0 mt-0.5">
-                        <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-green-400" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-green-400 font-mono text-xs sm:text-sm font-semibold">✅ Brief Received</p>
-                        <p className="text-white/60 font-mono text-[10px] sm:text-xs mt-0.5 break-words">Your brief has been received and queued</p>
-                      </div>
-                    </div>
-                    
-                    {/* Connector Line */}
-                    <div className="ml-2 sm:ml-3 w-0.5 h-3 sm:h-4 bg-yellow-500/30"></div>
-                    
-                    {/* AI Research & Strategy */}
-                    <div className="flex items-start gap-2 sm:gap-3">
-                      <div className="flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-yellow-500/20 border border-yellow-500 flex-shrink-0 mt-0.5">
-                        <Clock className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-400 animate-pulse" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-yellow-400 font-mono text-xs sm:text-sm font-semibold">🔄 AI Research & Strategy</p>
-                        <p className="text-white/60 font-mono text-[10px] sm:text-xs mt-0.5 break-words">Analyzing keywords and competitor insights</p>
-                      </div>
-                    </div>
-                    
-                    {/* Connector Line */}
-                    <div className="ml-2 sm:ml-3 w-0.5 h-3 sm:h-4 bg-white/10"></div>
-                    
-                    {/* AI Writing */}
-                    <div className="flex items-start gap-2 sm:gap-3">
-                      <div className="flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-white/10 border border-white/30 flex-shrink-0 mt-0.5">
-                        <FileText className="h-3 w-3 sm:h-4 sm:w-4 text-white/50" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-white/50 font-mono text-xs sm:text-sm font-semibold">✍️ AI Writing</p>
-                        <p className="text-white/40 font-mono text-[10px] sm:text-xs mt-0.5 break-words">Content generation in progress</p>
-                      </div>
-                    </div>
-                    
-                    {/* Connector Line */}
-                    <div className="ml-2 sm:ml-3 w-0.5 h-3 sm:h-4 bg-white/10"></div>
-                    
-                    {/* Quality Control */}
-                    <div className="flex items-start gap-2 sm:gap-3">
-                      <div className="flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-white/10 border border-white/30 flex-shrink-0 mt-0.5">
-                        <Eye className="h-3 w-3 sm:h-4 sm:w-4 text-white/50" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-white/50 font-mono text-xs sm:text-sm font-semibold">🔍 Quality Control</p>
-                        <p className="text-white/40 font-mono text-[10px] sm:text-xs mt-0.5 break-words">Human review and optimization</p>
-                      </div>
-                    </div>
-                    
-                    {/* Connector Line */}
-                    <div className="ml-2 sm:ml-3 w-0.5 h-3 sm:h-4 bg-white/10"></div>
-                    
-                    {/* Ready for Download */}
-                    <div className="flex items-start gap-2 sm:gap-3">
-                      <div className="flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-white/10 border border-white/30 flex-shrink-0 mt-0.5">
-                        <Zap className="h-3 w-3 sm:h-4 sm:w-4 text-white/50" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-white/50 font-mono text-xs sm:text-sm font-semibold">🚀 Ready for Download</p>
-                        <p className="text-white/40 font-mono text-[10px] sm:text-xs mt-0.5 break-words">Your content will be available here</p>
-                      </div>
-                    </div>
+                    {(() => {
+                      const status = articles[0]?.status || 'pending';
+                      const stages = [
+                        { name: 'Brief Received', icon: CheckCircle, emoji: '✅', desc: 'Your brief has been received and queued', step: 1 },
+                        { name: 'AI Research & Strategy', icon: Clock, emoji: '🔄', desc: 'Analyzing keywords and competitor insights', step: 2 },
+                        { name: 'AI Writing', icon: FileText, emoji: '✍️', desc: 'Content generation in progress', step: 3 },
+                        { name: 'Quality Control', icon: Eye, emoji: '🔍', desc: 'Human review and optimization', step: 4 },
+                        { name: 'Ready for Download', icon: Zap, emoji: '🚀', desc: 'Your content will be available here', step: 5 }
+                      ];
+
+                      // Determine current step based on status
+                      let currentStep = 1;
+                      if (status === 'pending') currentStep = 2;
+                      else if (status === 'in_progress') currentStep = 3;
+                      else if (status === 'review') currentStep = 4;
+                      else if (status === 'completed') currentStep = 5;
+
+                      return stages.map((stage, index) => {
+                        const isCompleted = stage.step < currentStep;
+                        const isCurrent = stage.step === currentStep;
+                        const isPending = stage.step > currentStep;
+                        const Icon = stage.icon;
+
+                        return (
+                          <div key={stage.name}>
+                            <div className="flex items-start gap-2 sm:gap-3">
+                              <div className={`flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full flex-shrink-0 mt-0.5 ${
+                                isCompleted ? 'bg-green-500/20 border border-green-500' :
+                                isCurrent ? 'bg-yellow-500/20 border border-yellow-500' :
+                                'bg-white/10 border border-white/30'
+                              }`}>
+                                <Icon className={`h-3 w-3 sm:h-4 sm:w-4 ${
+                                  isCompleted ? 'text-green-400' :
+                                  isCurrent ? 'text-yellow-400 animate-pulse' :
+                                  'text-white/50'
+                                }`} />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <p className={`font-mono text-xs sm:text-sm font-semibold ${
+                                  isCompleted ? 'text-green-400' :
+                                  isCurrent ? 'text-yellow-400' :
+                                  'text-white/50'
+                                }`}>
+                                  {stage.emoji} {stage.name}
+                                </p>
+                                <p className={`font-mono text-[10px] sm:text-xs mt-0.5 break-words ${
+                                  isCompleted || isCurrent ? 'text-white/60' : 'text-white/40'
+                                }`}>
+                                  {stage.desc}
+                                </p>
+                              </div>
+                            </div>
+                            {index < stages.length - 1 && (
+                              <div className={`ml-2 sm:ml-3 w-0.5 h-3 sm:h-4 ${
+                                isCompleted ? 'bg-green-500/30' :
+                                isCurrent ? 'bg-yellow-500/30' :
+                                'bg-white/10'
+                              }`}></div>
+                            )}
+                          </div>
+                        );
+                      });
+                    })()}
                   </div>
                   
                   {/* Progress Bar */}
                   <div className="mt-6">
-                    <div className="flex justify-between text-xs font-mono text-white/60 mb-2">
-                      <span>Progress</span>
-                      <span>40% Complete</span>
-                    </div>
-                    <Progress value={40} className="h-2 bg-black/50" />
-                    <p className="text-yellow-400 font-mono text-xs mt-2">
-                      ⏱️ Estimated completion: Within 24 hours
-                    </p>
+                    {(() => {
+                      const status = articles[0]?.status || 'pending';
+                      let progress = 20;
+                      let statusMessage = 'Estimated completion: Within 24 hours';
+                      
+                      if (status === 'pending') {
+                        progress = 20;
+                        statusMessage = 'Brief received, starting research...';
+                      } else if (status === 'in_progress') {
+                        progress = 60;
+                        statusMessage = 'AI writing in progress...';
+                      } else if (status === 'review') {
+                        progress = 80;
+                        statusMessage = 'Under quality review...';
+                      } else if (status === 'completed') {
+                        progress = 100;
+                        statusMessage = 'Content ready for download!';
+                      }
+
+                      return (
+                        <>
+                          <div className="flex justify-between text-xs font-mono text-white/60 mb-2">
+                            <span>Progress</span>
+                            <span>{progress}% Complete</span>
+                          </div>
+                          <Progress value={progress} className="h-2 bg-black/50" />
+                          <p className={`font-mono text-xs mt-2 ${
+                            status === 'completed' ? 'text-green-400' : 'text-yellow-400'
+                          }`}>
+                            {status === 'completed' ? '✅' : '⏱️'} {statusMessage}
+                          </p>
+                        </>
+                      );
+                    })()}
                   </div>
                 </div>
               </div>
