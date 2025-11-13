@@ -8,6 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Navigate, Link } from "react-router-dom";
 import { User, Session } from "@supabase/supabase-js";
 import { Eye, EyeOff, Mail, Lock, LogIn, Zap, Check, X, Shield, AlertCircle, ArrowLeft } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
 import scriptStormLogo from "@/assets/scriptstorm-logo.png";
 
 const Auth = () => {
@@ -23,6 +24,7 @@ const Auth = () => {
   const [showRipple, setShowRipple] = useState(false);
   const [failedAttempts, setFailedAttempts] = useState(0);
   const [isBlocked, setIsBlocked] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
   
   // Form validation states
   const [emailError, setEmailError] = useState("");
@@ -400,6 +402,24 @@ const Auth = () => {
                       {showPassword ? <Eye className="h-4 w-4" /> : <EyeOff className="h-4 w-4" />}
                     </button>
                   </div>
+                </div>
+              )}
+
+              {/* Remember Me Checkbox */}
+              {!showForgotPassword && (
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="remember"
+                    checked={rememberMe}
+                    onCheckedChange={(checked) => setRememberMe(checked as boolean)}
+                    className="border-primary-glow/50 data-[state=checked]:bg-primary data-[state=checked]:border-primary-glow"
+                  />
+                  <label
+                    htmlFor="remember"
+                    className="text-sm text-white/80 font-mono cursor-pointer select-none"
+                  >
+                    Remember me
+                  </label>
                 </div>
               )}
 
