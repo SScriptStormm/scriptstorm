@@ -233,9 +233,9 @@ const Pricing = () => {
         'Efficient Support Portal: Streamlined communication for seamless project management.'
       ],
       annualFeatures: [
-        '300 Market-Dominating Blog Articles (2,000-3,000 words each): An unstoppable, year-long content assault to secure top search rankings and establish undeniable market presence.',
-        '900 Strategic Social Media Posts: A continuous, multi-channel campaign to own the conversation in your market.',
-        '300 High-Conversion Product/Service Pages: A completely optimized sales engine for your entire offerings.',
+        '300 Market-Dominating Blog Articles (2,000-3,000 words each): High-velocity, in-depth content designed to secure top search rankings and establish undeniable market presence.',
+        '900 Strategic Social Media Posts: A multi-channel campaign to amplify your content, engage your entire market, and drive qualified leads at scale.',
+        '300 High-Conversion Product/Service Pages: Persuasive, SEO-optimized copy to transform your key offerings into your top sales performers.',
         '24-Hour Orchestrated Delivery: A relentless, daily content production cycle that keeps you constantly ahead of the competition.',
         '24 Rounds of Priority Revisions (2 per month): Refine content to perfection with our dedicated revision process throughout the year.',
         'Advanced Keyword & Competitor Annihilation: We don\'t just analyze competitors; we identify and exploit their weaknesses to steal their market share.',
