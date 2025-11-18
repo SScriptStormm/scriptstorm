@@ -233,11 +233,11 @@ const Pricing = () => {
         'Efficient Support Portal: Streamlined communication for seamless project management.'
       ],
       annualFeatures: [
-        '300 Market-Dominating Blog Articles (2,000-3,000 words each): High-velocity, in-depth content designed to secure top search rankings and establish undeniable market presence.',
-        '900 Strategic Social Media Posts: A multi-channel campaign to amplify your content, engage your entire market, and drive qualified leads at scale.',
-        '300 High-Conversion Product/Service Pages: Persuasive, SEO-optimized copy to transform your key offerings into your top sales performers.',
+        '25 Market-Dominating Blog Articles (2,000-3,000 words each): High-velocity, in-depth content designed to secure top search rankings and establish undeniable market presence.',
+        '75 Strategic Social Media Posts: A multi-channel campaign to amplify your content, engage your entire market, and drive qualified leads at scale.',
+        '25 High-Conversion Product/Service Pages: Persuasive, SEO-optimized copy to transform your key offerings into your top sales performers.',
         '24-Hour Orchestrated Delivery: A relentless, daily content production cycle that keeps you constantly ahead of the competition.',
-        '24 Rounds of Priority Revisions (2 per month): Refine content to perfection with our dedicated revision process throughout the year.',
+        '2 Rounds of Priority Revisions: Refine content to perfection with our dedicated revision process.',
         'Advanced Keyword & Competitor Annihilation: We don\'t just analyze competitors; we identify and exploit their weaknesses to steal their market share.',
         'Plagiarism & AI Scan Guarantee: Enterprise-grade originality and quality assurance.',
         'Efficient Support Portal: Streamlined communication for seamless project management.'
@@ -272,11 +272,11 @@ const Pricing = () => {
         'Priority Support Portal: Faster response times and dedicated handling for mission-critical projects.'
       ],
       annualFeatures: [
-        '360 Industry-Leading Blog Articles (2,000-3,000 words each): Definitive, data-driven reports and pillar content that becomes the primary resource in your field.',
-        '1,080 Targeted Social Media Campaign Posts: Sophisticated campaigns designed to build a loyal community around your brand and establish a feedback loop with your audience.',
-        '360 Premium Product/Service Descriptions: Complete, feature-to-benefit storytelling that justifies premium pricing and closes high-value deals.',
+        '30 Industry-Leading Blog Articles (2,000-3,000 words each): Definitive, data-driven reports and pillar content that becomes the primary resource in your field.',
+        '90 Targeted Social Media Campaign Posts: Sophisticated campaigns designed to build a loyal community around your brand and establish a feedback loop with your audience.',
+        '30 Premium Product/Service Descriptions: Complete, feature-to-benefit storytelling that justifies premium pricing and closes high-value deals.',
         '24-Hour Orchestrated Delivery: A relentless, daily content production cycle that keeps you constantly ahead of the competition.',
-        '36 Rounds of Priority Revisions (3 per month): Enhanced revision cycles for complex, enterprise-level content.',
+        '3 Rounds of Priority Revisions: Enhanced revision cycles for complex, enterprise-level content.',
         'Strategic Keyword & Topic Mapping: We map the entire competitive landscape to own the conversation around your core offerings.',
         'Competitor Gap Exploitation: In-depth analysis that reveals and attacks the content voids in your competitors\' strategies.',
         'Plagiarism & AI Scan Guarantee: Enterprise-grade originality and quality assurance.',
@@ -311,8 +311,8 @@ const Pricing = () => {
         'Priority Support Portal & Dedicated Client Workspace: A white-glove experience for your enterprise team.'
       ],
       annualFeatures: [
-        '600 Unbeatable Cornerstone Assets (2,000-5,000+ words each): A relentless firehose of flagship content that makes your brand synonymous with the industry itself.',
-        '1,800 Viral-Ready Social Media Posts: A constant, high-impact social presence engineered for maximum shareability and brand recall.',
+        '50 Unbeatable Cornerstone Assets (2,000-5,000+ words each): A relentless firehose of flagship content that makes your brand synonymous with the industry itself.',
+        '150 Viral-Ready Social Media Posts: A constant, high-impact social presence engineered for maximum shareability and brand recall.',
         'Unlimited Product Descriptions*: Blanket your entire catalog with conversion-optimized copy.',
         '12-Hour Lightning Delivery: The fastest content turnaround on the market, giving you an insurmountable speed advantage.',
         'Unlimited White-Glove Revisions*: Perfection, on demand.',
