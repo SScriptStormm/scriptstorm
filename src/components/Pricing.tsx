@@ -272,11 +272,11 @@ const Pricing = () => {
         'Priority Support Portal: Faster response times and dedicated handling for mission-critical projects.'
       ],
       annualFeatures: [
-        '360 Industry-Leading Blog Articles (2,000-3,000 words each): A year\'s worth of definitive, data-driven reports that make your brand the primary resource in your field.',
-        '1,080 Targeted Social Media Campaign Posts: A non-stop, sophisticated community-building and engagement machine.',
-        '360 Premium Product/Service Descriptions: Complete storytelling for your entire portfolio, justifying premium pricing.',
+        '360 Industry-Leading Blog Articles (2,000-3,000 words each): Definitive, data-driven reports and pillar content that becomes the primary resource in your field.',
+        '1,080 Targeted Social Media Campaign Posts: Sophisticated campaigns designed to build a loyal community around your brand and establish a feedback loop with your audience.',
+        '360 Premium Product/Service Descriptions: Complete, feature-to-benefit storytelling that justifies premium pricing and closes high-value deals.',
         '24-Hour Orchestrated Delivery: A relentless, daily content production cycle that keeps you constantly ahead of the competition.',
-        '36 Rounds of Priority Revisions (3 per month): Enhanced revision cycles for complex, enterprise-level content throughout the year.',
+        '36 Rounds of Priority Revisions (3 per month): Enhanced revision cycles for complex, enterprise-level content.',
         'Strategic Keyword & Topic Mapping: We map the entire competitive landscape to own the conversation around your core offerings.',
         'Competitor Gap Exploitation: In-depth analysis that reveals and attacks the content voids in your competitors\' strategies.',
         'Plagiarism & AI Scan Guarantee: Enterprise-grade originality and quality assurance.',
