@@ -157,12 +157,12 @@ const Pricing = () => {
         'Standard Keyword Research: We target relevant keywords to ensure your content gets found.'
       ],
       annualFeatures: [
-        "60 Foundational Blog Articles (1,500-2,000 words each): A year's worth of SEO-optimized content to steadily build your organic traffic and establish your brand's voice.",
-        '180 Ready-to-Post Social Media Captions: Consistent, daily engagement across platforms to grow your audience and promote your latest insights.',
-        '60 Persuasive Product Descriptions: Convert browsing into sales with compelling copy for your key products or services, refreshed throughout the year.',
-        "Dedicated Revision Rounds: We fine-tune every piece until you're 100% satisfied.",
-        'Plagiarism & AI Scan Guarantee: Every piece is guaranteed original and human-like.',
-        'Standard Keyword Research: We target relevant, attainable keywords to ensure your content gets found.'
+        '60 Foundational Blog Articles (1,500-2,000 words each): Deeply-researched, SEO-optimized content designed to attract organic traffic and establish your expertise.',
+        '180 Ready-to-Post Social Media Captions: Engaging posts tailored for LinkedIn, X (Twitter), or Instagram to drive discussion and promote your new articles.',
+        '60 Persuasive Product Descriptions: Compelling copy that highlights benefits and drives conversions for your key offerings.',
+        '1 Dedicated Revision Round: We fine-tune your content to ensure it meets your expectations.',
+        'Plagiarism & AI Scan Guarantee: Every piece is guaranteed to be original and pass the latest AI detection benchmarks.',
+        'Standard Keyword Research: We target relevant keywords to ensure your content gets found.'
       ]
     },
     {
