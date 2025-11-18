@@ -554,15 +554,17 @@ export function MultiStepContentBriefForm() {
                   )}
                 />
 
-                  {/* AI Competitor Analysis Message */}
-                  <div className="p-4 bg-primary/5 rounded-lg border border-primary/20">
-                    <div className="flex items-start gap-3">
-                      <Target className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                      <p className="text-sm text-foreground leading-relaxed">
-                        <span className="font-semibold">Don't know your top competitors?</span> No problem. Our AI will automatically analyze the top-ranking pages for your topic to ensure your content outperforms them.
-                      </p>
+                  {/* AI Competitor Analysis Message - Growth+ Feature */}
+                  {hasGrowthPlus && (
+                    <div className="p-4 bg-primary/5 rounded-lg border border-primary/20">
+                      <div className="flex items-start gap-3">
+                        <Target className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                        <p className="text-sm text-foreground leading-relaxed">
+                          <span className="font-semibold">Don't know your top competitors?</span> No problem. Our AI will automatically analyze the top-ranking pages for your topic to ensure your content outperforms them.
+                        </p>
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   {/* Strategic Goals - Authority+ Feature */}
                   {(subscriptionTier === 'authority' || subscriptionTier === 'dominance') && (
