@@ -157,9 +157,9 @@ const Pricing = () => {
         'Standard Keyword Research: We target relevant keywords to ensure your content gets found.'
       ],
       annualFeatures: [
-        '60 Foundational Blog Articles (1,500-2,000 words each): Deeply-researched, SEO-optimized content designed to attract organic traffic and establish your expertise.',
-        '180 Ready-to-Post Social Media Captions: Engaging posts tailored for LinkedIn, X (Twitter), or Instagram to drive discussion and promote your new articles.',
-        '60 Persuasive Product Descriptions: Compelling copy that highlights benefits and drives conversions for your key offerings.',
+        '5 Foundational Blog Articles (1,500-2,000 words each): Deeply-researched, SEO-optimized content designed to attract organic traffic and establish your expertise.',
+        '15 Ready-to-Post Social Media Captions: Engaging posts tailored for LinkedIn, X (Twitter), or Instagram to drive discussion and promote your new articles.',
+        '5 Persuasive Product Descriptions: Compelling copy that highlights benefits and drives conversions for your key offerings.',
         '1 Dedicated Revision Round: We fine-tune your content to ensure it meets your expectations.',
         'Plagiarism & AI Scan Guarantee: Every piece is guaranteed to be original and pass the latest AI detection benchmarks.',
         'Standard Keyword Research: We target relevant keywords to ensure your content gets found.'
@@ -196,10 +196,10 @@ const Pricing = () => {
         'Plagiarism & AI Scan Guarantee: Our highest standard of originality and quality assurance.'
       ],
       annualFeatures: [
-        '120 Authority-Building Blog Articles (1,500-2,000 words each):Comprehensive, data-driven content that positions you as a thought leader and crushes the competition.',
-        '12 Automated Strategic Content Calendars: A strategic, monthly plan that aligns all content with your business goals for maximum impact.',
-        '360 High-Engagement Social Media Posts: A multi-platform mix of posts for LinkedIn, X, and Instagram, plus YouTube video script outlines to drive traffic and build authority.',
-        "120 High-Converting Product/Service Descriptions: Persuasive copy that speaks directly to your customer's pain points and boosts sales.",
+        '10 Authority-Building Blog Articles (1,500-2,000 words each): Comprehensive, data-driven content that positions you as a thought leader and crushes the competition.',
+        'Automated Content Calendar: A strategic, monthly plan that aligns all content with your business goals for maximum impact.',
+        '30 High-Engagement Social & Video Assets: A multi-platform mix of posts for LinkedIn, X, and Instagram, plus YouTube video script outlines to drive traffic and build authority.',
+        "10 High-Converting Product/Service Descriptions: Persuasive copy that speaks directly to your customer's pain points and boosts sales.",
         '2 Priority Revision Rounds: Get your content perfected faster with our prioritized revision process.',
         "Advanced Keyword & Competitor Research: We don't just find keywords; we find gaps in your competitors' strategies to help you win.",
         'Plagiarism & AI Scan Guarantee: Our highest standard of originality and quality assurance.'
