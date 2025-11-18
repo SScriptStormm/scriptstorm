@@ -196,12 +196,12 @@ const Pricing = () => {
         'Plagiarism & AI Scan Guarantee: Our highest standard of originality and quality assurance.'
       ],
       annualFeatures: [
-        '120 Authority-Building Blog Articles (1,500-2,000 words each): A powerful stream of in-depth, data-driven content that positions you as the undisputed thought leader in your space.',
-        '12 Automated Strategic Content Calendars: A full year of planned, strategic publishing that aligns every piece of content with your core business goals.',
-        '360 High-Engagement Social Media Posts: A constant drumbeat of community-building and traffic-driving content across all major platforms.',
-        '120 High-Converting Product/Service Descriptions: A complete library of sales-driven copy that systematically addresses customer pain points and boosts conversion rates.',
-        'Priority Revision Rounds: Get your content perfected faster with prioritized revisions.',
-        "Advanced Keyword & Competitor Research: We perform deep analysis to find and exploit gaps in your competitors' content, ensuring you win the search rankings.",
+        '120 Authority-Building Blog Articles (1,500-2,000 words each):Comprehensive, data-driven content that positions you as a thought leader and crushes the competition.',
+        '12 Automated Strategic Content Calendars: A strategic, monthly plan that aligns all content with your business goals for maximum impact.',
+        '360 High-Engagement Social Media Posts: A multi-platform mix of posts for LinkedIn, X, and Instagram, plus YouTube video script outlines to drive traffic and build authority.',
+        "120 High-Converting Product/Service Descriptions: Persuasive copy that speaks directly to your customer's pain points and boosts sales.",
+        '2 Priority Revision Rounds: Get your content perfected faster with our prioritized revision process.',
+        "Advanced Keyword & Competitor Research: We don't just find keywords; we find gaps in your competitors' strategies to help you win.",
         'Plagiarism & AI Scan Guarantee: Our highest standard of originality and quality assurance.'
       ]
     }
