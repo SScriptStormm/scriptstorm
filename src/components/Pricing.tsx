@@ -311,7 +311,7 @@ const Pricing = () => {
         'Priority Support Portal & Dedicated Client Workspace: A white-glove experience for your enterprise team.'
       ],
       annualFeatures: [
-        '600 Unbeatable Cornerstone Assets (2,000-5,000+ words each): An annual arsenal of flagship content that makes your brand synonymous with the industry itself.',
+        '600 Unbeatable Cornerstone Assets (2,000-5,000+ words each): A relentless firehose of flagship content that makes your brand synonymous with the industry itself.',
         '1,800 Viral-Ready Social Media Posts: A constant, high-impact social presence engineered for maximum shareability and brand recall.',
         'Unlimited Product Descriptions*: Blanket your entire catalog with conversion-optimized copy.',
         '12-Hour Lightning Delivery: The fastest content turnaround on the market, giving you an insurmountable speed advantage.',
