@@ -39,7 +39,6 @@ const formSchema = z.object({
   avoid_topics: z.string().optional(),
   youtube_script: z.boolean().optional(),
   youtube_script_length: z.number().optional(),
-  competitor_urls: z.string().optional(),
   strategic_goals: z.array(z.string()).optional(),
   kpis_to_track: z.array(z.string()).optional(),
 });
@@ -78,7 +77,6 @@ export function MultiStepContentBriefForm() {
       avoid_topics: "",
       youtube_script: false,
       youtube_script_length: 500,
-      competitor_urls: "",
       strategic_goals: [],
       kpis_to_track: [],
     },
@@ -243,7 +241,6 @@ export function MultiStepContentBriefForm() {
           avoid_topics: data.avoid_topics || null,
           youtube_script: data.youtube_script || false,
           youtube_script_length: data.youtube_script_length || null,
-          competitor_urls: data.competitor_urls || null,
           strategic_goals: data.strategic_goals || null,
           kpis_to_track: data.kpis_to_track || null,
           status: 'pending',
@@ -554,39 +551,18 @@ export function MultiStepContentBriefForm() {
                         </FormControl>
                         <FormMessage />
                       </FormItem>
-                    )}
-                  />
-
-                  {/* Competitor Research - Growth+ Feature */}
-                  {hasGrowthPlus && (
-                    <div className="p-4 bg-primary/5 rounded-lg border border-primary/20 space-y-4">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Target className="h-5 w-5 text-primary" />
-                        <h3 className="font-semibold text-foreground">Advanced Keyword & Competitor Research (Growth+ Feature)</h3>
-                      </div>
-                      
-                      <FormField
-                        control={form.control}
-                        name="competitor_urls"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Competitor Websites to Analyze (Optional)</FormLabel>
-                            <FormControl>
-                              <Textarea 
-                                placeholder="List up to 3 competitor URLs we should research (one per line or comma-separated)&#10;Example:&#10;https://competitor1.com&#10;https://competitor2.com&#10;https://competitor3.com"
-                                className="min-h-[100px] font-mono text-sm"
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormDescription>
-                              We'll analyze these competitors' content strategies and identify keyword gaps
-                            </FormDescription>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
                   )}
+                />
+
+                  {/* AI Competitor Analysis Message */}
+                  <div className="p-4 bg-primary/5 rounded-lg border border-primary/20">
+                    <div className="flex items-start gap-3">
+                      <Target className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                      <p className="text-sm text-foreground leading-relaxed">
+                        <span className="font-semibold">Don't know your top competitors?</span> No problem. Our AI will automatically analyze the top-ranking pages for your topic to ensure your content outperforms them.
+                      </p>
+                    </div>
+                  </div>
 
                   {/* Strategic Goals - Authority+ Feature */}
                   {(subscriptionTier === 'authority' || subscriptionTier === 'dominance') && (
