@@ -102,7 +102,7 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
   };
 
   return (
-    <Card className="relative border-0 hover:scale-105 transition-all duration-500 group" style={{
+    <Card className={`relative border-0 hover:scale-105 transition-all duration-500 group ${pkg.badge ? 'mt-6 md:mt-0' : ''}`} style={{
       background: `linear-gradient(135deg, ${pkg.color}08 0%, ${pkg.color}15 30%, ${pkg.color}08 100%)`,
       boxShadow: `0 20px 40px -10px ${pkg.color}30, 0 0 30px ${pkg.color}20, inset 0 1px 0 ${pkg.color}40`,
       border: `2px solid ${pkg.color}40`
@@ -150,33 +150,33 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
         zIndex: -2
       }} />
       
-      <CardHeader className={`text-center ${pkg.badge ? 'pt-10 md:pt-10' : 'pt-4 md:pt-6'} pb-3 md:pb-6 relative`}>
-        <CardTitle className="text-2xl font-bold mb-2" style={{ color: pkg.color }}>
+      <CardHeader className={`text-center ${pkg.badge ? 'pt-6 md:pt-10' : 'pt-3 md:pt-6'} pb-2 md:pb-6 relative`}>
+        <CardTitle className="text-xl md:text-2xl font-bold mb-1 md:mb-2" style={{ color: pkg.color }}>
           {pkg.name}
         </CardTitle>
-        <div className="mb-4">
-          <span className="text-4xl font-bold text-foreground">
+        <div className="mb-2 md:mb-4">
+          <span className="text-3xl md:text-4xl font-bold text-foreground">
             {isAnnual ? pkg.annual.price : pkg.monthly.price}
           </span>
-          <span className="text-lg font-semibold text-foreground ml-1">USD</span>
-          <span className="text-muted-foreground ml-2 font-semibold">
+          <span className="text-base md:text-lg font-semibold text-foreground ml-1">USD</span>
+          <span className="text-muted-foreground ml-2 text-sm md:text-base font-semibold">
             {isAnnual ? '/ year' : '/ month'}
           </span>
         </div>
         {isAnnual && (
-          <div className="mb-3 md:mb-4 p-3 md:p-4 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900 dark:to-emerald-900 rounded-lg border-3 border-green-500 dark:border-green-400 shadow-xl ring-2 ring-green-300 dark:ring-green-600">
-            <p className="text-lg text-green-800 dark:text-green-200 font-extrabold mb-1">
+          <div className="mb-2 md:mb-4 p-2 md:p-4 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900 dark:to-emerald-900 rounded-lg border-3 border-green-500 dark:border-green-400 shadow-xl ring-2 ring-green-300 dark:ring-green-600">
+            <p className="text-base md:text-lg text-green-800 dark:text-green-200 font-extrabold mb-0.5 md:mb-1">
               🎉 Get 2 Months Free & Save {pkg.annual.savings}
             </p>
-            <p className="text-sm text-green-700 dark:text-green-300 font-bold">
+            <p className="text-xs md:text-sm text-green-700 dark:text-green-300 font-bold">
               Equivalent to {pkg.annual.monthlyEquivalent}/month
             </p>
           </div>
         )}
       </CardHeader>
       
-      <CardContent className="space-y-3 md:space-y-6 p-4 md:p-6 relative">
-        <div className="space-y-1.5 md:space-y-2">
+      <CardContent className="space-y-2 md:space-y-6 p-3 md:p-6 relative">
+        <div className="space-y-1 md:space-y-2">
           {/* Get the correct feature list based on billing type */}
           {(() => {
             const displayFeatures = isAnnual && pkg.annualFeatures ? pkg.annualFeatures : pkg.features;
@@ -199,7 +199,7 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
                       >
                         {getFeatureIcon(feature)}
                       </div>
-                      <span className="text-sm">
+                      <span className="text-xs md:text-sm">
                         {restText ? (
                           <>
                             <strong>{boldPart}</strong>:{restText}
@@ -231,7 +231,7 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
                           >
                             {getFeatureIcon(feature)}
                           </div>
-                          <span className="text-sm">
+                          <span className="text-xs md:text-sm">
                             {restText ? (
                               <>
                                 <strong>{boldPart}</strong>:{restText}
@@ -278,7 +278,7 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
         <Button 
           onClick={() => onCheckout(pkg.id)}
           disabled={loadingStates[pkg.id]}
-          className="w-full font-bold py-3 px-6 transition-all duration-300"
+          className="w-full font-bold py-2 md:py-3 px-4 md:px-6 text-sm md:text-base transition-all duration-300"
           style={{ 
             background: `linear-gradient(135deg, ${pkg.color}, ${pkg.color}dd)`,
             color: 'white'
@@ -295,17 +295,17 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
           href="https://docs.google.com/document/d/11oF_e-yAGsdnYLenzUswEZtOaWbIb_04uFQWGuPS4pk/edit?usp=sharing"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-sm text-center block hover:underline transition-all duration-200"
+          className="text-xs md:text-sm text-center block hover:underline transition-all duration-200"
           style={{ color: pkg.color }}
         >
           📄 See a Sample Article
         </a>
         
-        <p className="text-sm text-center font-semibold text-foreground mt-2">
+        <p className="text-xs md:text-sm text-center font-semibold text-foreground mt-1 md:mt-2">
           👉 Get your first draft in &lt;5 minutes. No calls.
         </p>
         
-        <p className="text-xs text-muted-foreground text-center italic">
+        <p className="text-[10px] md:text-xs text-muted-foreground text-center italic">
           Fully Automated Workflow • No Meetings • No Delays
         </p>
       </CardContent>
