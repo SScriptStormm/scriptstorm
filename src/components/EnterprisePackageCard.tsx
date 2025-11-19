@@ -150,7 +150,7 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
         zIndex: -2
       }} />
       
-      <CardHeader className={`text-center ${pkg.badge ? 'pt-10' : 'pt-6'} relative`}>
+      <CardHeader className={`text-center ${pkg.badge ? 'pt-10 md:pt-10' : 'pt-4 md:pt-6'} pb-3 md:pb-6 relative`}>
         <CardTitle className="text-2xl font-bold mb-2" style={{ color: pkg.color }}>
           {pkg.name}
         </CardTitle>
@@ -164,7 +164,7 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
           </span>
         </div>
         {isAnnual && (
-          <div className="mb-4 p-4 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900 dark:to-emerald-900 rounded-lg border-3 border-green-500 dark:border-green-400 shadow-xl ring-2 ring-green-300 dark:ring-green-600">
+          <div className="mb-3 md:mb-4 p-3 md:p-4 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900 dark:to-emerald-900 rounded-lg border-3 border-green-500 dark:border-green-400 shadow-xl ring-2 ring-green-300 dark:ring-green-600">
             <p className="text-lg text-green-800 dark:text-green-200 font-extrabold mb-1">
               🎉 Get 2 Months Free & Save {pkg.annual.savings}
             </p>
@@ -175,8 +175,8 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
         )}
       </CardHeader>
       
-      <CardContent className="space-y-6 relative">
-        <div className="space-y-2">
+      <CardContent className="space-y-3 md:space-y-6 p-4 md:p-6 relative">
+        <div className="space-y-1.5 md:space-y-2">
           {/* Get the correct feature list based on billing type */}
           {(() => {
             const displayFeatures = isAnnual && pkg.annualFeatures ? pkg.annualFeatures : pkg.features;

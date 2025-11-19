@@ -383,7 +383,7 @@ const Pricing = () => {
         </div>
 
         {/* Main Packages */}
-        <div className="grid md:grid-cols-2 gap-8 mb-20 max-w-4xl mx-auto items-stretch">
+        <div className="grid md:grid-cols-2 gap-4 md:gap-8 mb-20 max-w-4xl mx-auto items-stretch">
           {packages.map((pkg) => (
             <Card key={pkg.id} className={`relative border-2 hover:scale-105 transition-all duration-300 h-full flex flex-col ${
               pkg.popular ? 'shadow-lg' : ''
@@ -499,7 +499,7 @@ const Pricing = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 lg:gap-8 mb-16 max-w-7xl mx-auto items-start">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-10 lg:gap-8 mb-16 max-w-7xl mx-auto items-start">
           {enterprisePackages.map((pkg) => (
             <EnterprisePackageCard
               key={pkg.id}
