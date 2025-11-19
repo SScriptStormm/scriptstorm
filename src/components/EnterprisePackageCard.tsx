@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { useIsMobile } from "@/hooks/use-mobile";
 import { 
   CheckCircle, Star, FileText, Share2, Package, Clock, 
   RefreshCw, Search, Shield, Headphones, TrendingUp, 
@@ -95,7 +94,6 @@ const getFeatureIcon = (feature: string) => {
 
 const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: EnterprisePackageCardProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const isMobile = useIsMobile();
 
   const toggleExpansion = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -214,8 +212,8 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
                   );
                 })}
                 
-                {/* Only show additional features when THIS specific package is expanded (or always on mobile) */}
-                {(isExpanded || isMobile) && displayFeatures.length > 5 && (
+                {/* Only show additional features when THIS specific package is expanded */}
+                {isExpanded && displayFeatures.length > 5 && (
                   <>
                     <div className="pt-2 border-t border-border" />
                     {displayFeatures.slice(5).map((feature, index) => {
@@ -256,13 +254,13 @@ const EnterprisePackageCard = ({ pkg, onCheckout, loadingStates, isAnnual }: Ent
           <p className="text-xs text-muted-foreground italic">{pkg.note}</p>
         )}
 
-        {pkg.details && (isExpanded || isMobile) && (
+        {pkg.details && isExpanded && (
           <p className="text-xs text-muted-foreground bg-muted/30 p-2 rounded">{pkg.details}</p>
         )}
 
         {(() => {
           const displayFeatures = isAnnual && pkg.annualFeatures ? pkg.annualFeatures : pkg.features;
-          return displayFeatures.length > 5 && !isMobile && (
+          return displayFeatures.length > 5 && (
             <Button 
               variant="ghost" 
               size="sm" 
