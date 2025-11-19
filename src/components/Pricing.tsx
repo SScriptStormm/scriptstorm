@@ -386,7 +386,7 @@ const Pricing = () => {
         <div className="grid md:grid-cols-2 gap-4 md:gap-8 mb-20 max-w-4xl mx-auto items-stretch">
           {packages.map((pkg) => (
             <Card key={pkg.id} className={`relative border-2 hover:scale-105 transition-all duration-300 h-full flex flex-col ${
-              pkg.popular ? 'shadow-lg' : ''
+              pkg.popular ? 'shadow-lg mt-6 md:mt-0' : ''
             }`} style={{
               borderColor: pkg.color
             }}>
@@ -399,36 +399,36 @@ const Pricing = () => {
                 </div>
               )}
               
-              <CardHeader className={`text-center ${pkg.popular ? 'pt-8' : 'pt-6'}`}>
-                <div className="text-4xl mb-4">{pkg.icon}</div>
-                <CardTitle className="text-2xl font-bold mb-2" style={{ color: pkg.color }}>
+              <CardHeader className={`text-center ${pkg.popular ? 'pt-6 md:pt-8' : 'pt-3 md:pt-6'} pb-2 md:pb-6`}>
+                <div className="text-3xl md:text-4xl mb-2 md:mb-4">{pkg.icon}</div>
+                <CardTitle className="text-xl md:text-2xl font-bold mb-1 md:mb-2" style={{ color: pkg.color }}>
                   {pkg.name}
                 </CardTitle>
-                <div className="mb-4">
-                  <span className="text-4xl font-bold text-foreground">
+                <div className="mb-2 md:mb-4">
+                  <span className="text-3xl md:text-4xl font-bold text-foreground">
                     {isAnnual ? pkg.annual.price : pkg.monthly.price}
                   </span>
-                  <span className="text-lg font-semibold text-foreground ml-1">USD</span>
-                  <span className="text-muted-foreground ml-2 font-semibold">
+                  <span className="text-base md:text-lg font-semibold text-foreground ml-1">USD</span>
+                  <span className="text-muted-foreground ml-2 text-sm md:text-base font-semibold">
                     {isAnnual ? '/ year' : '/ month'}
                   </span>
                 </div>
                 {isAnnual && (
-                  <div className="mb-4 p-4 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900 dark:to-emerald-900 rounded-lg border-3 border-green-500 dark:border-green-400 shadow-xl ring-2 ring-green-300 dark:ring-green-600">
-                    <p className="text-lg text-green-800 dark:text-green-200 font-extrabold mb-1">
+                  <div className="mb-2 md:mb-4 p-2 md:p-4 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900 dark:to-emerald-900 rounded-lg border-3 border-green-500 dark:border-green-400 shadow-xl ring-2 ring-green-300 dark:ring-green-600">
+                    <p className="text-base md:text-lg text-green-800 dark:text-green-200 font-extrabold mb-0.5 md:mb-1">
                       🎉 Get 2 Months Free & Save {pkg.annual.savings}
                     </p>
-                    <p className="text-sm text-green-700 dark:text-green-300 font-bold">
+                    <p className="text-xs md:text-sm text-green-700 dark:text-green-300 font-bold">
                       Equivalent to {pkg.annual.monthlyEquivalent}/month
                     </p>
                   </div>
                 )}
-                <CardDescription className="text-base">{isAnnual ? pkg.annualDescription : pkg.monthlyDescription}</CardDescription>
+                <CardDescription className="text-sm md:text-base">{isAnnual ? pkg.annualDescription : pkg.monthlyDescription}</CardDescription>
               </CardHeader>
               
-              <CardContent className="space-y-6 pb-2 flex-1 flex flex-col">
-                <div className="mb-3">
-                  <p className="font-semibold text-foreground text-sm mb-2">
+              <CardContent className="space-y-2 md:space-y-6 p-3 md:p-6 pb-2 flex-1 flex flex-col">
+                <div className="mb-1 md:mb-3">
+                  <p className="font-semibold text-foreground text-xs md:text-sm mb-1 md:mb-2">
                     {isAnnual ? pkg.annualSectionHeader : pkg.sectionHeader}
                   </p>
                 </div>
@@ -438,14 +438,14 @@ const Pricing = () => {
                     const description = rest.join(':');
                     
                     return (
-                      <div key={index} className="flex items-start gap-3">
+                      <div key={index} className="flex items-start gap-2 md:gap-3">
                         <div 
-                          className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                          className="w-4 h-4 md:w-5 md:h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
                           style={{ backgroundColor: pkg.color }}
                         >
                           {getFeatureIcon(feature)}
                         </div>
-                        <span className="text-sm leading-relaxed">
+                        <span className="text-xs md:text-sm leading-relaxed">
                           <strong>{title}</strong>{description ? `:${description}` : ''}
                         </span>
                       </div>
@@ -456,7 +456,7 @@ const Pricing = () => {
                 <Button 
                   onClick={() => handleCheckout(pkg.id)}
                   disabled={loadingStates[pkg.id]}
-                  className="w-full font-bold py-3 transition-all duration-300"
+                  className="w-full font-bold py-2 md:py-3 px-4 md:px-6 text-sm md:text-base transition-all duration-300"
                   style={{ 
                     background: `linear-gradient(135deg, ${pkg.color}, ${pkg.color}dd)`,
                     color: 'white'
@@ -471,17 +471,17 @@ const Pricing = () => {
                     href="https://docs.google.com/document/d/11oF_e-yAGsdnYLenzUswEZtOaWbIb_04uFQWGuPS4pk/edit?usp=sharing"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-center text-primary hover:underline font-semibold block mt-3"
+                    className="text-xs md:text-sm text-center text-primary hover:underline font-semibold block mt-1 md:mt-3"
                   >
                     📄 See a Sample Article
                   </a>
                 )}
                 
-                <p className="text-sm text-center font-semibold text-foreground mt-2">
+                <p className="text-xs md:text-sm text-center font-semibold text-foreground mt-1 md:mt-2">
                   👉 Get your first draft in &lt;5 minutes. No calls.
                 </p>
                 
-                <p className="text-xs text-muted-foreground text-center italic mt-1 mb-0">
+                <p className="text-[10px] md:text-xs text-muted-foreground text-center italic mt-0.5 md:mt-1 mb-0">
                   Fully Automated Workflow • No Meetings • No Delays
                 </p>
               </CardContent>
