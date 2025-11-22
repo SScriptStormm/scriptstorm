@@ -443,9 +443,6 @@ const Dashboard = () => {
       </div>;
   }
   return <div className="min-h-screen bg-gradient-hero relative overflow-hidden">
-      {/* AI Neural Network Background */}
-      <div className="absolute inset-0 bg-gradient-mesh opacity-30" />
-      
       {/* Floating elements */}
       <div className="absolute top-20 left-10 w-16 h-16 border border-primary-glow/10 rotate-45 animate-float" />
       <div className="absolute top-40 right-20 w-12 h-12 border border-primary-glow/15 rotate-12 animate-float" style={{
