@@ -207,15 +207,15 @@ const Auth = () => {
       {/* Back to Home Button - Absolute positioning */}
       <Link 
         to="/" 
-        className="absolute top-4 right-4 sm:top-6 sm:right-6 z-[9999] flex items-center gap-1 sm:gap-2 px-3 py-2 text-white border border-primary-glow/30 hover:border-primary-glow/60 font-mono text-xs sm:text-sm rounded-md bg-black/20 backdrop-blur-sm transition-colors"
+        className="absolute top-6 right-6 z-[9999] flex items-center gap-2 px-3 py-2 text-white border border-primary-glow/30 hover:border-primary-glow/60 font-mono text-sm rounded-md bg-black/20 backdrop-blur-sm transition-colors"
         style={{ 
           transform: 'translate3d(0,0,0)',
           backfaceVisibility: 'hidden',
           WebkitBackfaceVisibility: 'hidden'
         }}
       >
-        <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4" />
-        <span className="hidden sm:inline">HOME</span>
+        <ArrowLeft className="h-4 w-4" />
+        <span>HOME</span>
       </Link>
 
       <div className="min-h-screen bg-gradient-hero flex items-center justify-center py-12 px-4 sm:py-8 sm:px-4 relative overflow-hidden">
