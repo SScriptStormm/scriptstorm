@@ -2,25 +2,21 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { 
-  CheckCircle, Star, Crown, Mail, Phone, Calendar,
-  FileText, Share2, Package, Clock, RefreshCw, Search, Shield, Headphones
-} from "lucide-react";
+import { Star, Crown, Mail, Phone, Calendar, FileText, Package, Clock, RefreshCw, Search, Shield, Headphones, Instagram } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import ContactForm from "./ContactForm";
 import EnterprisePackageCard from "./EnterprisePackageCard";
-
 const getFeatureIcon = (feature: string) => {
   const lowerFeature = feature.toLowerCase();
-  
+
   // Articles/Blog Content
   if (lowerFeature.includes('blog articles') || lowerFeature.includes('foundational') || lowerFeature.includes('authority-building')) {
     return <FileText className="h-3 w-3 text-white" />;
   }
   // Social Media
   if (lowerFeature.includes('social media')) {
-    return <Share2 className="h-3 w-3 text-white" />;
+    return <Instagram className="h-3 w-3 text-white" />;
   }
   // Product Descriptions
   if (lowerFeature.includes('product') || lowerFeature.includes('descriptions')) {
@@ -42,55 +38,58 @@ const getFeatureIcon = (feature: string) => {
   if (lowerFeature.includes('calendar') || lowerFeature.includes('automated')) {
     return <Calendar className="h-3 w-3 text-white" />;
   }
-  
-  // Default fallback
-  return <CheckCircle className="h-3 w-3 text-white" />;
-};
 
+  // Default fallback
+  return <Instagram className="h-3 w-3 text-white" />;
+};
 const Pricing = () => {
   const [showContactForm, setShowContactForm] = useState(false);
-  const [loadingStates, setLoadingStates] = useState<{[key: string]: boolean}>({});
+  const [loadingStates, setLoadingStates] = useState<{
+    [key: string]: boolean;
+  }>({});
   const [isAnnual, setIsAnnual] = useState(false);
-  const { toast } = useToast();
-
+  const {
+    toast
+  } = useToast();
   const handleContactClick = () => {
     setShowContactForm(true);
     // Scroll to contact form
     setTimeout(() => {
-      document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
+      document.getElementById('contact-form')?.scrollIntoView({
+        behavior: 'smooth'
+      });
     }, 100);
   };
-
   const handleEmailClick = () => {
     window.location.href = 'mailto:hello@scriptstorm.io?subject=Content%20Services%20Inquiry';
   };
-
   const handleCheckout = async (packageType: string, selectedAddOns = {}) => {
     if (loadingStates[packageType]) return;
-    
-    setLoadingStates(prev => ({ ...prev, [packageType]: true }));
-    
+    setLoadingStates(prev => ({
+      ...prev,
+      [packageType]: true
+    }));
+
     // Map enterprise package IDs to backend expected format
     const packageMap = {
       'scale': 'starter-enterprise',
-      'authority': 'growth-enterprise', 
+      'authority': 'growth-enterprise',
       'dominance': 'authority-enterprise'
     };
-    
     const backendPackageType = packageMap[packageType] || packageType;
     const billingType = isAnnual ? 'annual' : 'monthly';
-    
     try {
-      const { data, error } = await supabase.functions.invoke('create-checkout', {
-        body: { 
-          packageType: backendPackageType, 
+      const {
+        data,
+        error
+      } = await supabase.functions.invoke('create-checkout', {
+        body: {
+          packageType: backendPackageType,
           selectedAddOns,
           billing: billingType
         }
       });
-
       if (error) throw error;
-
       if (data?.url) {
         // Show urgency message before redirect with package-specific delivery time
         const deliveryTime = backendPackageType === 'authority-enterprise' ? '12-hour' : '24-hour';
@@ -98,13 +97,12 @@ const Pricing = () => {
         toast({
           title: "🚀 Redirecting to Checkout",
           description: `Complete ${billingMessage} in the next 10 minutes to lock in ${deliveryTime} delivery for your first draft!`,
-          duration: 3000,
+          duration: 3000
         });
-        
+
         // Detect mobile devices and tablets and handle redirect appropriately
-        const isMobileOrTablet = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|tablet|ipad/i.test(navigator.userAgent) 
-          || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1); // Detect iPad Pro on iOS 13+
-        
+        const isMobileOrTablet = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|tablet|ipad/i.test(navigator.userAgent) || navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1; // Detect iPad Pro on iOS 13+
+
         if (isMobileOrTablet) {
           // On mobile/tablet, redirect in same tab immediately to avoid popup blockers
           window.location.href = data.url;
@@ -120,228 +118,136 @@ const Pricing = () => {
       toast({
         title: "Error",
         description: "Unable to start checkout. Please try again.",
-        variant: "destructive",
+        variant: "destructive"
       });
     } finally {
-      setLoadingStates(prev => ({ ...prev, [packageType]: false }));
+      setLoadingStates(prev => ({
+        ...prev,
+        [packageType]: false
+      }));
     }
   };
-
-  const packages = [
-    {
-      id: 'starter',
-      name: 'Starter Package',
-      monthly: {
-        price: '$297',
-        period: 'USD / month'
-      },
-      annual: {
-        price: '$2,850',
-        period: 'USD / year',
-        monthlyEquivalent: '$238',
-        savings: '$714'
-      },
-      description: 'Ideal for small businesses and founders who need to establish a consistent online presence and start attracting traffic.',
-      monthlyDescription: 'Ideal for small businesses and founders who need to establish a consistent online presence and start attracting traffic.',
-      annualDescription: 'Ideal for small businesses and founders ready to build a consistent, traffic-driving content foundation.',
-      icon: '🚀',
-      color: '#3498DB',
-      sectionHeader: 'Your Monthly Content Engine Includes:',
-      annualSectionHeader: 'Your Annual Content Foundation Includes:',
-      features: [
-        '5 Foundational Blog Articles (1,500-2,000 words each): Deeply-researched, SEO-optimized content designed to attract organic traffic and establish your expertise.',
-        '15 Ready-to-Post Social Media Captions: Engaging posts tailored for LinkedIn, X (Twitter), or Instagram to drive discussion and promote your new articles.',
-        '5 Persuasive Product Descriptions: Compelling copy that highlights benefits and drives conversions for your key offerings.',
-        "1 Dedicated Revision Round: We fine-tune your content to ensure it meets your expectations.",
-        'Plagiarism & AI Scan Guarantee: Every piece is guaranteed to be original and pass the latest AI detection benchmarks.',
-        'Standard Keyword Research: We target relevant keywords to ensure your content gets found.'
-      ],
-      annualFeatures: [
-        '5 Foundational Blog Articles (1,500-2,000 words each): Deeply-researched, SEO-optimized content designed to attract organic traffic and establish your expertise.',
-        '15 Ready-to-Post Social Media Captions: Engaging posts tailored for LinkedIn, X (Twitter), or Instagram to drive discussion and promote your new articles.',
-        '5 Persuasive Product Descriptions: Compelling copy that highlights benefits and drives conversions for your key offerings.',
-        '1 Dedicated Revision Round: We fine-tune your content to ensure it meets your expectations.',
-        'Plagiarism & AI Scan Guarantee: Every piece is guaranteed to be original and pass the latest AI detection benchmarks.',
-        'Standard Keyword Research: We target relevant keywords to ensure your content gets found.'
-      ]
+  const packages = [{
+    id: 'starter',
+    name: 'Starter Package',
+    monthly: {
+      price: '$297',
+      period: 'USD / month'
     },
-    {
-      id: 'growth',
-      name: 'Growth Package',
-      monthly: {
-        price: '$597',
-        period: 'USD / month'
-      },
-      annual: {
-        price: '$5,730',
-        period: 'USD / year',
-        monthlyEquivalent: '$478',
-        savings: '$1,434'
-      },
-      description: 'The ultimate package for established companies looking to scale their content output, dominate their niche, and generate qualified leads.',
-      monthlyDescription: 'The ultimate package for established companies looking to scale their content output, dominate their niche, and generate qualified leads.',
-      annualDescription: 'The ultimate package for established companies scaling their authority and dominating their niche with a relentless content engine.',
-      icon: '🔥',
-      color: '#2ECC71',
-      popular: true,
-      sectionHeader: 'Your Scalable Content Dominance System Includes:',
-      annualSectionHeader: 'Your Annual Content Dominance System Includes:',
-      features: [
-        '10 Authority-Building Blog Articles (1,500-2,000 words each): Comprehensive, data-driven content that positions you as a thought leader and crushes the competition.',
-        'Automated Content Calendar: A strategic, monthly plan that aligns all content with your business goals for maximum impact.',
-        '30 High-Engagement Social & Video Assets: A multi-platform mix of posts for LinkedIn, X, and Instagram, plus YouTube video script outlines to drive traffic and build authority.',
-        "10 High-Converting Product/Service Descriptions: Persuasive copy that speaks directly to your customer's pain points and boosts sales.",
-        '2 Priority Revision Rounds: Get your content perfected faster with our prioritized revision process.',
-        "Advanced Keyword & Competitor Research: We don't just find keywords; we find gaps in your competitors' strategies to help you win.",
-        'Plagiarism & AI Scan Guarantee: Our highest standard of originality and quality assurance.'
-      ],
-      annualFeatures: [
-        '10 Authority-Building Blog Articles (1,500-2,000 words each): Comprehensive, data-driven content that positions you as a thought leader and crushes the competition.',
-        'Automated Content Calendar: A strategic, monthly plan that aligns all content with your business goals for maximum impact.',
-        '30 High-Engagement Social & Video Assets: A multi-platform mix of posts for LinkedIn, X, and Instagram, plus YouTube video script outlines to drive traffic and build authority.',
-        "10 High-Converting Product/Service Descriptions: Persuasive copy that speaks directly to your customer's pain points and boosts sales.",
-        '2 Priority Revision Rounds: Get your content perfected faster with our prioritized revision process.',
-        "Advanced Keyword & Competitor Research: We don't just find keywords; we find gaps in your competitors' strategies to help you win.",
-        'Plagiarism & AI Scan Guarantee: Our highest standard of originality and quality assurance.'
-      ]
-    }
-  ];
-
-  const enterprisePackages = [
-    {
-      id: 'scale',
-      name: 'SCALE',
-      monthly: {
-        price: '$1,297',
-        period: 'USD / month'
-      },
-      annual: {
-        price: '$12,450',
-        period: 'USD / year',
-        monthlyEquivalent: '$1,038',
-        savings: '$3,114'
-      },
-      color: '#8B5CF6',
-      features: [
-        '25 Market-Dominating Blog Articles (2,000-3,000 words each): High-velocity, in-depth content designed to secure top search rankings and establish undeniable market presence.',
-        '75 Strategic Social Media Posts: A multi-channel campaign to amplify your content, engage your entire market, and drive qualified leads at scale.',
-        '25 High-Conversion Product/Service Pages: Persuasive, SEO-optimized copy to transform your key offerings into your top sales performers.',
-        '24-Hour Orchestrated Delivery: A relentless, daily content production cycle that keeps you constantly ahead of the competition.',
-        '2 Rounds of Priority Revisions: Refine content to perfection with our dedicated revision process.',
-        'Advanced Keyword & Competitor Annihilation: We don\'t just analyze competitors; we identify and exploit their weaknesses to steal their market share.',
-        'Plagiarism & AI Scan Guarantee: Enterprise-grade originality and quality assurance.',
-        'Efficient Support Portal: Streamlined communication for seamless project management.'
-      ],
-      annualFeatures: [
-        '25 Market-Dominating Blog Articles (2,000-3,000 words each): High-velocity, in-depth content designed to secure top search rankings and establish undeniable market presence.',
-        '75 Strategic Social Media Posts: A multi-channel campaign to amplify your content, engage your entire market, and drive qualified leads at scale.',
-        '25 High-Conversion Product/Service Pages: Persuasive, SEO-optimized copy to transform your key offerings into your top sales performers.',
-        '24-Hour Orchestrated Delivery: A relentless, daily content production cycle that keeps you constantly ahead of the competition.',
-        '2 Rounds of Priority Revisions: Refine content to perfection with our dedicated revision process.',
-        'Advanced Keyword & Competitor Annihilation: We don\'t just analyze competitors; we identify and exploit their weaknesses to steal their market share.',
-        'Plagiarism & AI Scan Guarantee: Enterprise-grade originality and quality assurance.',
-        'Efficient Support Portal: Streamlined communication for seamless project management.'
-      ],
-      note: 'Fully Automated Workflow • No Meetings • No Delays',
-      details: 'For established businesses ready to dominate their niche and outpace competitors with relentless, high-volume content.'
+    annual: {
+      price: '$2,850',
+      period: 'USD / year',
+      monthlyEquivalent: '$238',
+      savings: '$714'
     },
-    {
-      id: 'authority',
-      name: 'AUTHORITY',
-      monthly: {
-        price: '$1,797',
-        period: 'USD / month'
-      },
-      annual: {
-        price: '$17,250',
-        period: 'USD / year',
-        monthlyEquivalent: '$1,438',
-        savings: '$4,314'
-      },
-      color: '#E74C3C',
-      badge: 'BEST VALUE',
-      features: [
-        '30 Industry-Leading Blog Articles (2,000-3,000 words each): Definitive, data-driven reports and pillar content that becomes the primary resource in your field.',
-        '90 Targeted Social Media Campaign Posts: Sophisticated campaigns designed to build a loyal community around your brand and establish a feedback loop with your audience.',
-        '30 Premium Product/Service Descriptions: Complete, feature-to-benefit storytelling that justifies premium pricing and closes high-value deals.',
-        '24-Hour Orchestrated Delivery: A relentless, daily content production cycle that keeps you constantly ahead of the competition.',
-        '3 Rounds of Priority Revisions: Enhanced revision cycles for complex, enterprise-level content.',
-        'Strategic Keyword & Topic Mapping: We map the entire competitive landscape to own the conversation around your core offerings.',
-        'Competitor Gap Exploitation: In-depth analysis that reveals and attacks the content voids in your competitors\' strategies.',
-        'Plagiarism & AI Scan Guarantee: Enterprise-grade originality and quality assurance.',
-        'Priority Support Portal: Faster response times and dedicated handling for mission-critical projects.'
-      ],
-      annualFeatures: [
-        '30 Industry-Leading Blog Articles (2,000-3,000 words each): Definitive, data-driven reports and pillar content that becomes the primary resource in your field.',
-        '90 Targeted Social Media Campaign Posts: Sophisticated campaigns designed to build a loyal community around your brand and establish a feedback loop with your audience.',
-        '30 Premium Product/Service Descriptions: Complete, feature-to-benefit storytelling that justifies premium pricing and closes high-value deals.',
-        '24-Hour Orchestrated Delivery: A relentless, daily content production cycle that keeps you constantly ahead of the competition.',
-        '3 Rounds of Priority Revisions: Enhanced revision cycles for complex, enterprise-level content.',
-        'Strategic Keyword & Topic Mapping: We map the entire competitive landscape to own the conversation around your core offerings.',
-        'Competitor Gap Exploitation: In-depth analysis that reveals and attacks the content voids in your competitors\' strategies.',
-        'Plagiarism & AI Scan Guarantee: Enterprise-grade originality and quality assurance.',
-        'Priority Support Portal: Faster response times and dedicated handling for mission-critical projects.'
-      ],
-      note: 'Fully Automated Workflow • No Meetings • No Delays',
-      details: 'For industry players who need to become the undisputed thought leader and control the market narrative.'
+    description: 'Ideal for small businesses and founders who need to establish a consistent online presence and start attracting traffic.',
+    monthlyDescription: 'Ideal for small businesses and founders who need to establish a consistent online presence and start attracting traffic.',
+    annualDescription: 'Ideal for small businesses and founders ready to build a consistent, traffic-driving content foundation.',
+    icon: '🚀',
+    color: '#3498DB',
+    sectionHeader: 'Your Monthly Content Engine Includes:',
+    annualSectionHeader: 'Your Annual Content Foundation Includes:',
+    features: ['5 Foundational Blog Articles (1,500-2,000 words each): Deeply-researched, SEO-optimized content designed to attract organic traffic and establish your expertise.', '15 Ready-to-Post Social Media Captions: Engaging posts tailored for LinkedIn, X (Twitter), or Instagram to drive discussion and promote your new articles.', '5 Persuasive Product Descriptions: Compelling copy that highlights benefits and drives conversions for your key offerings.', "1 Dedicated Revision Round: We fine-tune your content to ensure it meets your expectations.", 'Plagiarism & AI Scan Guarantee: Every piece is guaranteed to be original and pass the latest AI detection benchmarks.', 'Standard Keyword Research: We target relevant keywords to ensure your content gets found.'],
+    annualFeatures: ['5 Foundational Blog Articles (1,500-2,000 words each): Deeply-researched, SEO-optimized content designed to attract organic traffic and establish your expertise.', '15 Ready-to-Post Social Media Captions: Engaging posts tailored for LinkedIn, X (Twitter), or Instagram to drive discussion and promote your new articles.', '5 Persuasive Product Descriptions: Compelling copy that highlights benefits and drives conversions for your key offerings.', '1 Dedicated Revision Round: We fine-tune your content to ensure it meets your expectations.', 'Plagiarism & AI Scan Guarantee: Every piece is guaranteed to be original and pass the latest AI detection benchmarks.', 'Standard Keyword Research: We target relevant keywords to ensure your content gets found.']
+  }, {
+    id: 'growth',
+    name: 'Growth Package',
+    monthly: {
+      price: '$597',
+      period: 'USD / month'
     },
-    {
-      id: 'dominance',
-      name: 'DOMINANCE',
-      monthly: {
-        price: '$2,997',
-        period: 'USD / month'
-      },
-      annual: {
-        price: '$28,770',
-        period: 'USD / year',
-        monthlyEquivalent: '$2,398',
-        savings: '$7,194'
-      },
-      color: '#F59E0B',
-      features: [
-        '50 Unbeatable Cornerstone Assets (2,000-5,000+ words each): A relentless firehose of flagship content that makes your brand synonymous with the industry itself.',
-        '150 Viral-Ready Social Media Posts: A constant, high-impact social presence engineered for maximum shareability and brand recall.',
-        'Unlimited Product Descriptions*: Blanket your entire catalog with conversion-optimized copy.',
-        '12-Hour Lightning Delivery: The fastest content turnaround on the market, giving you an insurmountable speed advantage.',
-        'Unlimited White-Glove Revisions*: Perfection, on demand.',
-        'Enterprise Keyword Intelligence: Proprietary insights that uncover untapped market opportunities and predict trends.',
-        'AI-Driven Performance Dashboard: Real-time analytics on content performance, competitor movement, and ROI.',
-        'Market Dominance Roadmap: A strategic, quarterly plan to systematically dismantle competitor positions and cement your #1 status.',
-        'Priority Support Portal & Dedicated Client Workspace: A white-glove experience for your enterprise team.'
-      ],
-      annualFeatures: [
-        '50 Unbeatable Cornerstone Assets (2,000-5,000+ words each): A relentless firehose of flagship content that makes your brand synonymous with the industry itself.',
-        '150 Viral-Ready Social Media Posts: A constant, high-impact social presence engineered for maximum shareability and brand recall.',
-        'Unlimited Product Descriptions*: Blanket your entire catalog with conversion-optimized copy.',
-        '12-Hour Lightning Delivery: The fastest content turnaround on the market, giving you an insurmountable speed advantage.',
-        'Unlimited White-Glove Revisions*: Perfection, on demand.',
-        'Enterprise Keyword Intelligence: Proprietary insights that uncover untapped market opportunities and predict trends.',
-        'AI-Driven Performance Dashboard: Real-time analytics on content performance, competitor movement, and ROI.',
-        'Market Dominance Roadmap: A strategic, quarterly plan to systematically dismantle competitor positions and cement your #1 status.',
-        'Priority Support Portal & Dedicated Client Workspace: A white-glove experience for your enterprise team.'
-      ],
-      note: '*Fair Use policy applies. Unlimited revisions within the scope of the project and brand guidelines.',
-      details: 'The ultimate content weapon for enterprises that accept nothing less than total market leadership.'
-    }
-  ];
-
-  return (
-    <section id="pricing" className="relative py-20 bg-gradient-to-br from-white via-white/95 to-muted/50 overflow-hidden">
+    annual: {
+      price: '$5,730',
+      period: 'USD / year',
+      monthlyEquivalent: '$478',
+      savings: '$1,434'
+    },
+    description: 'The ultimate package for established companies looking to scale their content output, dominate their niche, and generate qualified leads.',
+    monthlyDescription: 'The ultimate package for established companies looking to scale their content output, dominate their niche, and generate qualified leads.',
+    annualDescription: 'The ultimate package for established companies scaling their authority and dominating their niche with a relentless content engine.',
+    icon: '🔥',
+    color: '#2ECC71',
+    popular: true,
+    sectionHeader: 'Your Scalable Content Dominance System Includes:',
+    annualSectionHeader: 'Your Annual Content Dominance System Includes:',
+    features: ['10 Authority-Building Blog Articles (1,500-2,000 words each): Comprehensive, data-driven content that positions you as a thought leader and crushes the competition.', 'Automated Content Calendar: A strategic, monthly plan that aligns all content with your business goals for maximum impact.', '30 High-Engagement Social & Video Assets: A multi-platform mix of posts for LinkedIn, X, and Instagram, plus YouTube video script outlines to drive traffic and build authority.', "10 High-Converting Product/Service Descriptions: Persuasive copy that speaks directly to your customer's pain points and boosts sales.", '2 Priority Revision Rounds: Get your content perfected faster with our prioritized revision process.', "Advanced Keyword & Competitor Research: We don't just find keywords; we find gaps in your competitors' strategies to help you win.", 'Plagiarism & AI Scan Guarantee: Our highest standard of originality and quality assurance.'],
+    annualFeatures: ['10 Authority-Building Blog Articles (1,500-2,000 words each): Comprehensive, data-driven content that positions you as a thought leader and crushes the competition.', 'Automated Content Calendar: A strategic, monthly plan that aligns all content with your business goals for maximum impact.', '30 High-Engagement Social & Video Assets: A multi-platform mix of posts for LinkedIn, X, and Instagram, plus YouTube video script outlines to drive traffic and build authority.', "10 High-Converting Product/Service Descriptions: Persuasive copy that speaks directly to your customer's pain points and boosts sales.", '2 Priority Revision Rounds: Get your content perfected faster with our prioritized revision process.', "Advanced Keyword & Competitor Research: We don't just find keywords; we find gaps in your competitors' strategies to help you win.", 'Plagiarism & AI Scan Guarantee: Our highest standard of originality and quality assurance.']
+  }];
+  const enterprisePackages = [{
+    id: 'scale',
+    name: 'SCALE',
+    monthly: {
+      price: '$1,297',
+      period: 'USD / month'
+    },
+    annual: {
+      price: '$12,450',
+      period: 'USD / year',
+      monthlyEquivalent: '$1,038',
+      savings: '$3,114'
+    },
+    color: '#8B5CF6',
+    features: ['25 Market-Dominating Blog Articles (2,000-3,000 words each): High-velocity, in-depth content designed to secure top search rankings and establish undeniable market presence.', '75 Strategic Social Media Posts: A multi-channel campaign to amplify your content, engage your entire market, and drive qualified leads at scale.', '25 High-Conversion Product/Service Pages: Persuasive, SEO-optimized copy to transform your key offerings into your top sales performers.', '24-Hour Orchestrated Delivery: A relentless, daily content production cycle that keeps you constantly ahead of the competition.', '2 Rounds of Priority Revisions: Refine content to perfection with our dedicated revision process.', 'Advanced Keyword & Competitor Annihilation: We don\'t just analyze competitors; we identify and exploit their weaknesses to steal their market share.', 'Plagiarism & AI Scan Guarantee: Enterprise-grade originality and quality assurance.', 'Efficient Support Portal: Streamlined communication for seamless project management.'],
+    annualFeatures: ['25 Market-Dominating Blog Articles (2,000-3,000 words each): High-velocity, in-depth content designed to secure top search rankings and establish undeniable market presence.', '75 Strategic Social Media Posts: A multi-channel campaign to amplify your content, engage your entire market, and drive qualified leads at scale.', '25 High-Conversion Product/Service Pages: Persuasive, SEO-optimized copy to transform your key offerings into your top sales performers.', '24-Hour Orchestrated Delivery: A relentless, daily content production cycle that keeps you constantly ahead of the competition.', '2 Rounds of Priority Revisions: Refine content to perfection with our dedicated revision process.', 'Advanced Keyword & Competitor Annihilation: We don\'t just analyze competitors; we identify and exploit their weaknesses to steal their market share.', 'Plagiarism & AI Scan Guarantee: Enterprise-grade originality and quality assurance.', 'Efficient Support Portal: Streamlined communication for seamless project management.'],
+    note: 'Fully Automated Workflow • No Meetings • No Delays',
+    details: 'For established businesses ready to dominate their niche and outpace competitors with relentless, high-volume content.'
+  }, {
+    id: 'authority',
+    name: 'AUTHORITY',
+    monthly: {
+      price: '$1,797',
+      period: 'USD / month'
+    },
+    annual: {
+      price: '$17,250',
+      period: 'USD / year',
+      monthlyEquivalent: '$1,438',
+      savings: '$4,314'
+    },
+    color: '#E74C3C',
+    badge: 'BEST VALUE',
+    features: ['30 Industry-Leading Blog Articles (2,000-3,000 words each): Definitive, data-driven reports and pillar content that becomes the primary resource in your field.', '90 Targeted Social Media Campaign Posts: Sophisticated campaigns designed to build a loyal community around your brand and establish a feedback loop with your audience.', '30 Premium Product/Service Descriptions: Complete, feature-to-benefit storytelling that justifies premium pricing and closes high-value deals.', '24-Hour Orchestrated Delivery: A relentless, daily content production cycle that keeps you constantly ahead of the competition.', '3 Rounds of Priority Revisions: Enhanced revision cycles for complex, enterprise-level content.', 'Strategic Keyword & Topic Mapping: We map the entire competitive landscape to own the conversation around your core offerings.', 'Competitor Gap Exploitation: In-depth analysis that reveals and attacks the content voids in your competitors\' strategies.', 'Plagiarism & AI Scan Guarantee: Enterprise-grade originality and quality assurance.', 'Priority Support Portal: Faster response times and dedicated handling for mission-critical projects.'],
+    annualFeatures: ['30 Industry-Leading Blog Articles (2,000-3,000 words each): Definitive, data-driven reports and pillar content that becomes the primary resource in your field.', '90 Targeted Social Media Campaign Posts: Sophisticated campaigns designed to build a loyal community around your brand and establish a feedback loop with your audience.', '30 Premium Product/Service Descriptions: Complete, feature-to-benefit storytelling that justifies premium pricing and closes high-value deals.', '24-Hour Orchestrated Delivery: A relentless, daily content production cycle that keeps you constantly ahead of the competition.', '3 Rounds of Priority Revisions: Enhanced revision cycles for complex, enterprise-level content.', 'Strategic Keyword & Topic Mapping: We map the entire competitive landscape to own the conversation around your core offerings.', 'Competitor Gap Exploitation: In-depth analysis that reveals and attacks the content voids in your competitors\' strategies.', 'Plagiarism & AI Scan Guarantee: Enterprise-grade originality and quality assurance.', 'Priority Support Portal: Faster response times and dedicated handling for mission-critical projects.'],
+    note: 'Fully Automated Workflow • No Meetings • No Delays',
+    details: 'For industry players who need to become the undisputed thought leader and control the market narrative.'
+  }, {
+    id: 'dominance',
+    name: 'DOMINANCE',
+    monthly: {
+      price: '$2,997',
+      period: 'USD / month'
+    },
+    annual: {
+      price: '$28,770',
+      period: 'USD / year',
+      monthlyEquivalent: '$2,398',
+      savings: '$7,194'
+    },
+    color: '#F59E0B',
+    features: ['50 Unbeatable Cornerstone Assets (2,000-5,000+ words each): A relentless firehose of flagship content that makes your brand synonymous with the industry itself.', '150 Viral-Ready Social Media Posts: A constant, high-impact social presence engineered for maximum shareability and brand recall.', 'Unlimited Product Descriptions*: Blanket your entire catalog with conversion-optimized copy.', '12-Hour Lightning Delivery: The fastest content turnaround on the market, giving you an insurmountable speed advantage.', 'Unlimited White-Glove Revisions*: Perfection, on demand.', 'Enterprise Keyword Intelligence: Proprietary insights that uncover untapped market opportunities and predict trends.', 'AI-Driven Performance Dashboard: Real-time analytics on content performance, competitor movement, and ROI.', 'Market Dominance Roadmap: A strategic, quarterly plan to systematically dismantle competitor positions and cement your #1 status.', 'Priority Support Portal & Dedicated Client Workspace: A white-glove experience for your enterprise team.'],
+    annualFeatures: ['50 Unbeatable Cornerstone Assets (2,000-5,000+ words each): A relentless firehose of flagship content that makes your brand synonymous with the industry itself.', '150 Viral-Ready Social Media Posts: A constant, high-impact social presence engineered for maximum shareability and brand recall.', 'Unlimited Product Descriptions*: Blanket your entire catalog with conversion-optimized copy.', '12-Hour Lightning Delivery: The fastest content turnaround on the market, giving you an insurmountable speed advantage.', 'Unlimited White-Glove Revisions*: Perfection, on demand.', 'Enterprise Keyword Intelligence: Proprietary insights that uncover untapped market opportunities and predict trends.', 'AI-Driven Performance Dashboard: Real-time analytics on content performance, competitor movement, and ROI.', 'Market Dominance Roadmap: A strategic, quarterly plan to systematically dismantle competitor positions and cement your #1 status.', 'Priority Support Portal & Dedicated Client Workspace: A white-glove experience for your enterprise team.'],
+    note: '*Fair Use policy applies. Unlimited revisions within the scope of the project and brand guidelines.',
+    details: 'The ultimate content weapon for enterprises that accept nothing less than total market leadership.'
+  }];
+  return <section id="pricing" className="relative py-20 bg-gradient-to-br from-white via-white/95 to-muted/50 overflow-hidden">
       {/* AI Neural Network Background */}
       <div className="absolute inset-0 bg-gradient-mesh opacity-30" />
       <div className="absolute inset-0 bg-gradient-neural animate-neural-pulse opacity-20" />
       
       {/* Grid pattern overlay */}
       <div className="absolute inset-0" style={{
-        backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--primary-glow) / 0.15) 1px, transparent 0)`,
-        backgroundSize: '50px 50px'
-      }} />
+      backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--primary-glow) / 0.15) 1px, transparent 0)`,
+      backgroundSize: '50px 50px'
+    }} />
       
       {/* Floating geometric elements */}
       <div className="absolute top-20 left-10 w-16 h-16 border-2 border-primary-glow/30 rotate-45 animate-float shadow-cyber" />
-      <div className="absolute top-40 right-20 w-12 h-12 border-2 border-primary-glow/25 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '2s' }} />
-      <div className="absolute bottom-40 left-20 w-10 h-10 border-2 border-primary-glow/35 rotate-45 animate-float shadow-cyber" style={{ animationDelay: '4s' }} />
+      <div className="absolute top-40 right-20 w-12 h-12 border-2 border-primary-glow/25 rotate-12 animate-float shadow-cyber" style={{
+      animationDelay: '2s'
+    }} />
+      <div className="absolute bottom-40 left-20 w-10 h-10 border-2 border-primary-glow/35 rotate-45 animate-float shadow-cyber" style={{
+      animationDelay: '4s'
+    }} />
       
       <div className="relative z-10 container mx-auto px-4">
         {/* Header */}
@@ -358,24 +264,10 @@ const Pricing = () => {
           
           {/* Billing Toggle */}
           <div className="flex items-center justify-center gap-4 p-1 bg-muted/30 rounded-xl border w-fit mx-auto mb-8">
-            <button
-              onClick={() => setIsAnnual(false)}
-              className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
-                !isAnnual 
-                  ? 'bg-primary text-primary-foreground shadow-md' 
-                  : 'text-muted-foreground hover:text-foreground'
-              }`}
-            >
+            <button onClick={() => setIsAnnual(false)} className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${!isAnnual ? 'bg-primary text-primary-foreground shadow-md' : 'text-muted-foreground hover:text-foreground'}`}>
               Monthly Billing
             </button>
-            <button
-              onClick={() => setIsAnnual(true)}
-              className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center gap-2 ${
-                isAnnual 
-                  ? 'bg-primary text-primary-foreground shadow-md' 
-                  : 'text-muted-foreground hover:text-foreground'
-              }`}
-            >
+            <button onClick={() => setIsAnnual(true)} className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center gap-2 ${isAnnual ? 'bg-primary text-primary-foreground shadow-md' : 'text-muted-foreground hover:text-foreground'}`}>
               Annual Billing
               <Badge className="bg-green-600 text-white text-xs">Save 20%</Badge>
             </button>
@@ -384,24 +276,23 @@ const Pricing = () => {
 
         {/* Main Packages */}
         <div className="grid md:grid-cols-2 gap-4 md:gap-8 mb-20 max-w-4xl mx-auto items-stretch">
-          {packages.map((pkg) => (
-            <Card key={pkg.id} className={`relative border-2 hover:scale-105 transition-all duration-300 h-full flex flex-col ${
-              pkg.popular ? 'shadow-lg mt-6 md:mt-0' : ''
-            }`} style={{
-              borderColor: pkg.color
+          {packages.map(pkg => <Card key={pkg.id} className={`relative border-2 hover:scale-105 transition-all duration-300 h-full flex flex-col ${pkg.popular ? 'shadow-lg mt-6 md:mt-0' : ''}`} style={{
+          borderColor: pkg.color
+        }}>
+              {pkg.popular && <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                  <Badge className="px-4 py-2 text-sm font-bold text-white" style={{
+              backgroundColor: pkg.color
             }}>
-              {pkg.popular && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <Badge className="px-4 py-2 text-sm font-bold text-white" style={{ backgroundColor: pkg.color }}>
                     <Crown className="h-4 w-4 mr-1" />
                     Most Popular
                   </Badge>
-                </div>
-              )}
+                </div>}
               
               <CardHeader className={`text-center ${pkg.popular ? 'pt-6 md:pt-8' : 'pt-3 md:pt-6'} pb-2 md:pb-6`}>
                 <div className="text-3xl md:text-4xl mb-2 md:mb-4">{pkg.icon}</div>
-                <CardTitle className="text-xl md:text-2xl font-bold mb-1 md:mb-2" style={{ color: pkg.color }}>
+                <CardTitle className="text-xl md:text-2xl font-bold mb-1 md:mb-2" style={{
+              color: pkg.color
+            }}>
                   {pkg.name}
                 </CardTitle>
                 <div className="mb-2 md:mb-4">
@@ -413,16 +304,14 @@ const Pricing = () => {
                     {isAnnual ? '/ year' : '/ month'}
                   </span>
                 </div>
-                {isAnnual && (
-                  <div className="mb-2 md:mb-4 p-2 md:p-4 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900 dark:to-emerald-900 rounded-lg border-3 border-green-500 dark:border-green-400 shadow-xl ring-2 ring-green-300 dark:ring-green-600">
+                {isAnnual && <div className="mb-2 md:mb-4 p-2 md:p-4 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900 dark:to-emerald-900 rounded-lg border-3 border-green-500 dark:border-green-400 shadow-xl ring-2 ring-green-300 dark:ring-green-600">
                     <p className="text-base md:text-lg text-green-800 dark:text-green-200 font-extrabold mb-0.5 md:mb-1">
                       🎉 Get 2 Months Free & Save {pkg.annual.savings}
                     </p>
                     <p className="text-xs md:text-sm text-green-700 dark:text-green-300 font-bold">
                       Equivalent to {pkg.annual.monthlyEquivalent}/month
                     </p>
-                  </div>
-                )}
+                  </div>}
                 <CardDescription className="text-sm md:text-base">{isAnnual ? pkg.annualDescription : pkg.monthlyDescription}</CardDescription>
               </CardHeader>
               
@@ -434,48 +323,31 @@ const Pricing = () => {
                 </div>
                 <div className={`${pkg.id === 'starter' && isAnnual ? 'space-y-6 md:space-y-14 lg:space-y-14' : pkg.id === 'starter' ? 'space-y-6 md:space-y-10 lg:space-y-10' : 'space-y-3 md:space-y-7 lg:space-y-7'} flex-1`}>
                   {(isAnnual ? pkg.annualFeatures : pkg.features).map((feature, index) => {
-                    const [title, ...rest] = feature.split(':');
-                    const description = rest.join(':');
-                    
-                    return (
-                      <div key={index} className="flex items-start gap-2 md:gap-3">
-                        <div 
-                          className="w-4 h-4 md:w-5 md:h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
-                          style={{ backgroundColor: pkg.color }}
-                        >
+                const [title, ...rest] = feature.split(':');
+                const description = rest.join(':');
+                return <div key={index} className="flex items-start gap-2 md:gap-3">
+                        <div className="w-4 h-4 md:w-5 md:h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{
+                    backgroundColor: pkg.color
+                  }}>
                           {getFeatureIcon(feature)}
                         </div>
                         <span className="text-xs md:text-sm leading-relaxed">
                           <strong>{title}</strong>{description ? `:${description}` : ''}
                         </span>
-                      </div>
-                    );
-                  })}
+                      </div>;
+              })}
                 </div>
                 
-                <Button 
-                  onClick={() => handleCheckout(pkg.id)}
-                  disabled={loadingStates[pkg.id]}
-                  className="w-full font-bold py-2 md:py-3 px-4 md:px-6 text-sm md:text-base transition-all duration-300"
-                  style={{ 
-                    background: `linear-gradient(135deg, ${pkg.color}, ${pkg.color}dd)`,
-                    color: 'white'
-                  }}
-                >
-                  {loadingStates[pkg.id] ? "Processing..." : 
-                    isAnnual ? "💎 Start Saving & Get My 24-Hour Draft" : "🚀 Start My 24-Hour Draft"}
+                <Button onClick={() => handleCheckout(pkg.id)} disabled={loadingStates[pkg.id]} className="w-full font-bold py-2 md:py-3 px-4 md:px-6 text-sm md:text-base transition-all duration-300" style={{
+              background: `linear-gradient(135deg, ${pkg.color}, ${pkg.color}dd)`,
+              color: 'white'
+            }}>
+                  {loadingStates[pkg.id] ? "Processing..." : isAnnual ? "💎 Start Saving & Get My 24-Hour Draft" : "🚀 Start My 24-Hour Draft"}
                 </Button>
                 
-                {['starter', 'growth', 'scale', 'authority', 'dominance'].includes(pkg.id) && (
-                  <a 
-                    href="https://docs.google.com/document/d/11oF_e-yAGsdnYLenzUswEZtOaWbIb_04uFQWGuPS4pk/edit?usp=sharing"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs md:text-sm text-center text-primary hover:underline font-semibold block mt-1 md:mt-3"
-                  >
+                {['starter', 'growth', 'scale', 'authority', 'dominance'].includes(pkg.id) && <a href="https://docs.google.com/document/d/11oF_e-yAGsdnYLenzUswEZtOaWbIb_04uFQWGuPS4pk/edit?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-xs md:text-sm text-center text-primary hover:underline font-semibold block mt-1 md:mt-3">
                     📄 See a Sample Article
-                  </a>
-                )}
+                  </a>}
                 
                 <p className="text-xs md:text-sm text-center font-semibold text-foreground mt-1 md:mt-2">
                   👉 Get your first draft in &lt;5 minutes. No calls.
@@ -485,8 +357,7 @@ const Pricing = () => {
                   Fully Automated Workflow • No Meetings • No Delays
                 </p>
               </CardContent>
-            </Card>
-          ))}
+            </Card>)}
         </div>
 
         {/* Enterprise Packages */}
@@ -500,15 +371,7 @@ const Pricing = () => {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-10 lg:gap-8 mb-16 max-w-7xl mx-auto items-start">
-          {enterprisePackages.map((pkg) => (
-            <EnterprisePackageCard
-              key={pkg.id}
-              pkg={pkg}
-              onCheckout={handleCheckout}
-              loadingStates={loadingStates}
-              isAnnual={isAnnual}
-            />
-          ))}
+          {enterprisePackages.map(pkg => <EnterprisePackageCard key={pkg.id} pkg={pkg} onCheckout={handleCheckout} loadingStates={loadingStates} isAnnual={isAnnual} />)}
         </div>
 
         {/* Simple Comparison Table */}
@@ -564,10 +427,9 @@ const Pricing = () => {
         <div className="text-center bg-gradient-to-r from-primary/10 to-secondary/10 rounded-xl p-8 border">
           <h4 className="text-2xl font-bold mb-4">Ready to Get Started?</h4>
           <div className="flex flex-col items-center gap-2 mb-6">
-            <Button 
-              onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-8"
-            >
+            <Button onClick={() => document.getElementById('pricing')?.scrollIntoView({
+            behavior: 'smooth'
+          })} className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-8">
               🚀 Start My 24-Hour Draft
             </Button>
             <p className="text-sm font-semibold text-foreground">
@@ -582,14 +444,10 @@ const Pricing = () => {
           </p>
         </div>
 
-        {showContactForm && (
-          <div className="mt-16">
+        {showContactForm && <div className="mt-16">
             <ContactForm />
-          </div>
-        )}
+          </div>}
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Pricing;
