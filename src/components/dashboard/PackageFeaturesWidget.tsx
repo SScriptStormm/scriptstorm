@@ -70,6 +70,42 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
 
   const features = getFeaturesByTier();
 
+  const getKeywordResearchLabel = () => {
+    const tier = subscriptionTier.toLowerCase();
+    switch (tier) {
+      case "starter":
+        return "Standard Keyword Research";
+      case "growth":
+        return "Advanced Keyword & Competitor Research";
+      case "scale":
+        return "Advanced Keyword & Competitor Annihilation";
+      case "authority":
+        return "Strategic Keyword & Topic Mapping";
+      case "dominance":
+        return "Enterprise Keyword Intelligence";
+      default:
+        return "Standard Keyword Research";
+    }
+  };
+
+  const getKeywordResearchDescription = () => {
+    const tier = subscriptionTier.toLowerCase();
+    switch (tier) {
+      case "starter":
+        return "SEO-optimized targeting";
+      case "growth":
+        return "Find gaps in competitors' strategies";
+      case "scale":
+        return "Identify and exploit competitor weaknesses";
+      case "authority":
+        return "Map the competitive landscape";
+      case "dominance":
+        return "Proprietary insights for untapped opportunities";
+      default:
+        return "SEO-optimized targeting";
+    }
+  };
+
   return (
     <Card className="p-6 bg-black/30 backdrop-blur-xl border-primary-glow/30">
       <div className="flex items-center justify-between mb-4">
@@ -134,9 +170,9 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
           <CheckCircle className="w-4 h-4 text-primary-glow mt-0.5 flex-shrink-0" />
           <div className="flex-1">
             <p className="text-sm text-white font-mono">
-              <strong>Standard Keyword Research</strong>
+              <strong>{getKeywordResearchLabel()}</strong>
             </p>
-            <p className="text-xs text-white/60 font-mono mt-0.5">SEO-optimized targeting</p>
+            <p className="text-xs text-white/60 font-mono mt-0.5">{getKeywordResearchDescription()}</p>
           </div>
         </div>
       </div>
