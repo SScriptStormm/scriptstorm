@@ -8,8 +8,25 @@ interface PackageFeaturesWidgetProps {
 }
 
 export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidgetProps) => {
+  const tier = subscriptionTier.toLowerCase();
+
+  const tierColors: Record<string, string> = {
+    starter: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
+    growth: 'bg-green-500/20 text-green-300 border-green-500/30',
+    scale: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
+    authority: 'bg-red-500/20 text-red-300 border-red-500/30',
+    dominance: 'bg-amber-500/20 text-amber-300 border-amber-500/30'
+  };
+
+  const tierEmojis: Record<string, string> = {
+    starter: '🚀',
+    growth: '🔥',
+    scale: '⚡',
+    authority: '👑',
+    dominance: '💎'
+  };
+
   const getFeaturesByTier = () => {
-    const tier = subscriptionTier.toLowerCase();
     
     switch (tier) {
       case "starter":
@@ -141,8 +158,8 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
     <Card className="p-6 bg-black/30 backdrop-blur-xl border-primary-glow/30">
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-lg font-bold text-white font-mono tracking-wide">YOUR PACKAGE</h3>
-        <Badge variant="outline" className="border-primary-glow/50 text-primary-glow font-mono">
-          {features.name}
+        <Badge className={`${tierColors[tier] || tierColors.starter} font-mono uppercase`}>
+          {tierEmojis[tier] || tierEmojis.starter} {features.name}
         </Badge>
       </div>
       
