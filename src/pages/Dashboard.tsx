@@ -886,7 +886,7 @@ const Dashboard = () => {
                 PERFORMANCE
               </TabsTrigger>}
             
-            {hasAuthority && <TabsTrigger value="support" className="font-mono data-[state=active]:bg-primary-glow/30 data-[state=active]:text-white relative">
+            {hasScale && <TabsTrigger value="support" className="font-mono data-[state=active]:bg-primary-glow/30 data-[state=active]:text-white relative">
                 <MessageSquare className="h-4 w-4 mr-2" />
                 SUPPORT
                 {(hasAuthority || hasDominance) && <Badge className="ml-2 bg-yellow-500/30 text-yellow-300 border-yellow-500/50 text-xs px-1 py-0">
