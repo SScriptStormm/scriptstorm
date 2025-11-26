@@ -126,6 +126,40 @@ export function MultiStepContentBriefForm() {
 
   const wordCountRange = getWordCountRange();
 
+  const getKeywordResearchLabel = () => {
+    switch(tier) {
+      case 'starter':
+        return 'Standard Keyword Research Included';
+      case 'growth':
+        return 'Advanced Keyword & Competitor Research Included';
+      case 'scale':
+        return 'Advanced Keyword & Competitor Annihilation Included';
+      case 'authority':
+        return 'Strategic Keyword & Topic Mapping Included';
+      case 'dominance':
+        return 'Enterprise Keyword Intelligence Included';
+      default:
+        return 'Standard Keyword Research Included';
+    }
+  };
+
+  const getKeywordResearchDescription = () => {
+    switch(tier) {
+      case 'starter':
+        return "We'll research and optimize your target keywords to maximize SEO performance.";
+      case 'growth':
+        return "We find gaps in competitors' strategies to help you win market share.";
+      case 'scale':
+        return "We identify and exploit competitor weaknesses to dominate your niche.";
+      case 'authority':
+        return "We map the competitive landscape to help you own the conversation.";
+      case 'dominance':
+        return "Proprietary insights to help you discover untapped market opportunities.";
+      default:
+        return "We'll research and optimize your target keywords to maximize SEO performance.";
+    }
+  };
+
   useEffect(() => {
     if (contentType === "blog_article") {
       // Set to tier-specific default for blog articles
@@ -379,7 +413,7 @@ export function MultiStepContentBriefForm() {
                         <div className="mt-2 p-3 bg-primary/10 border border-primary/20 rounded-lg">
                           <p className="text-xs text-primary-glow/90 font-mono flex items-center gap-2">
                             <Target className="h-3 w-3" />
-                            <strong>Standard Keyword Research Included:</strong> We'll research and optimize your target keywords to maximize SEO performance.
+                            <strong>{getKeywordResearchLabel()}:</strong> {getKeywordResearchDescription()}
                           </p>
                         </div>
                         <FormMessage />
