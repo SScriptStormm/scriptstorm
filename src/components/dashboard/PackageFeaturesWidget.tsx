@@ -1,0 +1,145 @@
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { CheckCircle, FileText, Share2, Package, RefreshCw, Shield, Target } from "lucide-react";
+
+interface PackageFeaturesWidgetProps {
+  subscriptionTier: string;
+}
+
+export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidgetProps) => {
+  const getFeaturesByTier = () => {
+    const tier = subscriptionTier.toLowerCase();
+    
+    switch (tier) {
+      case "starter":
+        return {
+          name: "Starter Package",
+          wordCount: "1,500-2,000 words",
+          articles: 5,
+          socialPosts: 15,
+          productDesc: 5,
+          revisions: 1,
+        };
+      case "growth":
+        return {
+          name: "Growth Package",
+          wordCount: "1,500-2,000 words",
+          articles: 10,
+          socialPosts: 30,
+          productDesc: 10,
+          revisions: 2,
+        };
+      case "scale":
+        return {
+          name: "Scale Package",
+          wordCount: "2,000-3,000 words",
+          articles: 25,
+          socialPosts: 75,
+          productDesc: 25,
+          revisions: 2,
+        };
+      case "authority":
+        return {
+          name: "Authority Package",
+          wordCount: "2,000-3,000 words",
+          articles: 30,
+          socialPosts: 90,
+          productDesc: 30,
+          revisions: 3,
+        };
+      case "dominance":
+        return {
+          name: "Dominance Package",
+          wordCount: "2,000-5,000 words",
+          articles: 50,
+          socialPosts: 150,
+          productDesc: "Unlimited",
+          revisions: "Unlimited",
+        };
+      default:
+        return {
+          name: "Starter Package",
+          wordCount: "1,500-2,000 words",
+          articles: 5,
+          socialPosts: 15,
+          productDesc: 5,
+          revisions: 1,
+        };
+    }
+  };
+
+  const features = getFeaturesByTier();
+
+  return (
+    <Card className="p-6 bg-black/30 backdrop-blur-xl border-primary-glow/30">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-lg font-bold text-white font-mono tracking-wide">YOUR PACKAGE</h3>
+        <Badge variant="outline" className="border-primary-glow/50 text-primary-glow font-mono">
+          {features.name}
+        </Badge>
+      </div>
+      
+      <div className="space-y-3">
+        <div className="flex items-start gap-3">
+          <CheckCircle className="w-4 h-4 text-primary-glow mt-0.5 flex-shrink-0" />
+          <div className="flex-1">
+            <p className="text-sm text-white font-mono">
+              <strong>{features.articles}</strong> Blog Articles
+            </p>
+            <p className="text-xs text-white/60 font-mono mt-0.5">{features.wordCount} each</p>
+          </div>
+        </div>
+
+        <div className="flex items-start gap-3">
+          <CheckCircle className="w-4 h-4 text-primary-glow mt-0.5 flex-shrink-0" />
+          <div className="flex-1">
+            <p className="text-sm text-white font-mono">
+              <strong>{features.socialPosts}</strong> Social Media Posts
+            </p>
+            <p className="text-xs text-white/60 font-mono mt-0.5">LinkedIn, X (Twitter), Instagram</p>
+          </div>
+        </div>
+
+        <div className="flex items-start gap-3">
+          <CheckCircle className="w-4 h-4 text-primary-glow mt-0.5 flex-shrink-0" />
+          <div className="flex-1">
+            <p className="text-sm text-white font-mono">
+              <strong>{features.productDesc}</strong> Product Descriptions
+            </p>
+            <p className="text-xs text-white/60 font-mono mt-0.5">Benefit-focused copy</p>
+          </div>
+        </div>
+
+        <div className="flex items-start gap-3">
+          <CheckCircle className="w-4 h-4 text-primary-glow mt-0.5 flex-shrink-0" />
+          <div className="flex-1">
+            <p className="text-sm text-white font-mono">
+              <strong>{features.revisions}</strong> Revision Round{features.revisions !== 1 && features.revisions !== "Unlimited" ? "s" : ""}
+            </p>
+            <p className="text-xs text-white/60 font-mono mt-0.5">Per content piece</p>
+          </div>
+        </div>
+
+        <div className="flex items-start gap-3">
+          <CheckCircle className="w-4 h-4 text-primary-glow mt-0.5 flex-shrink-0" />
+          <div className="flex-1">
+            <p className="text-sm text-white font-mono">
+              <strong>Plagiarism & AI Scan Guarantee</strong>
+            </p>
+            <p className="text-xs text-white/60 font-mono mt-0.5">100% original content</p>
+          </div>
+        </div>
+
+        <div className="flex items-start gap-3">
+          <CheckCircle className="w-4 h-4 text-primary-glow mt-0.5 flex-shrink-0" />
+          <div className="flex-1">
+            <p className="text-sm text-white font-mono">
+              <strong>Standard Keyword Research</strong>
+            </p>
+            <p className="text-xs text-white/60 font-mono mt-0.5">SEO-optimized targeting</p>
+          </div>
+        </div>
+      </div>
+    </Card>
+  );
+};

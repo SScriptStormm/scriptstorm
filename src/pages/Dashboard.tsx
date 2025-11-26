@@ -20,6 +20,7 @@ import PerformanceDashboard from "@/components/dashboard/PerformanceDashboard";
 import PrioritySupport from "@/components/dashboard/PrioritySupport";
 import MarketRoadmap from "@/components/dashboard/MarketRoadmap";
 import { QuotaUsageWidget } from "@/components/dashboard/QuotaUsageWidget";
+import { PackageFeaturesWidget } from "@/components/dashboard/PackageFeaturesWidget";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 interface Subscriber {
@@ -604,6 +605,11 @@ const Dashboard = () => {
 
           {/* Monthly Usage - QuotaUsageWidget */}
           <QuotaUsageWidget subscriptionTier={tier} articlesUsed={monthlyUsage.articles} socialPostsUsed={monthlyUsage.socialPosts} productDescUsed={monthlyUsage.productDesc} />
+        </div>
+
+        {/* Package Features */}
+        <div className="mb-6 sm:mb-8">
+          <PackageFeaturesWidget subscriptionTier={subscriber?.subscription_tier || 'starter'} />
         </div>
 
         {/* Content Queue */}
