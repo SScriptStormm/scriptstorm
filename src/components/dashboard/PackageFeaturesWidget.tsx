@@ -106,6 +106,34 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
     }
   };
 
+  const getDeliveryTimeframe = () => {
+    const tier = subscriptionTier.toLowerCase();
+    if (tier === "dominance") {
+      return "12-Hour Lightning Delivery ⚡";
+    }
+    if (tier === "scale" || tier === "authority") {
+      return "24-Hour Orchestrated Delivery";
+    }
+    return null;
+  };
+
+  const getSupportLevel = () => {
+    const tier = subscriptionTier.toLowerCase();
+    switch (tier) {
+      case "scale":
+        return { label: "Efficient Support Portal", description: "Streamlined support access" };
+      case "authority":
+        return { label: "Priority Support Portal", description: "Fast-track support queue" };
+      case "dominance":
+        return { label: "Priority Support & Dedicated Workspace", description: "VIP support + private workspace" };
+      default:
+        return null;
+    }
+  };
+
+  const showCompetitorGapExploitation = subscriptionTier.toLowerCase() === "authority";
+  const isDominance = subscriptionTier.toLowerCase() === "dominance";
+
   return (
     <Card className="p-6 bg-black/30 backdrop-blur-xl border-primary-glow/30">
       <div className="flex items-center justify-between mb-4">
@@ -175,6 +203,74 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
             <p className="text-xs text-white/60 font-mono mt-0.5">{getKeywordResearchDescription()}</p>
           </div>
         </div>
+
+        {showCompetitorGapExploitation && (
+          <div className="flex items-start gap-3">
+            <CheckCircle className="w-4 h-4 text-primary-glow mt-0.5 flex-shrink-0" />
+            <div className="flex-1">
+              <p className="text-sm text-white font-mono">
+                <strong>Competitor Gap Exploitation</strong>
+              </p>
+              <p className="text-xs text-white/60 font-mono mt-0.5">In-depth analysis revealing content voids</p>
+            </div>
+          </div>
+        )}
+
+        {getDeliveryTimeframe() && (
+          <div className="flex items-start gap-3">
+            <CheckCircle className="w-4 h-4 text-primary-glow mt-0.5 flex-shrink-0" />
+            <div className="flex-1">
+              <p className="text-sm text-white font-mono">
+                <strong>{getDeliveryTimeframe()}</strong>
+              </p>
+              <p className="text-xs text-white/60 font-mono mt-0.5">
+                {isDominance ? "Ultra-fast turnaround for urgent content" : "Coordinated delivery workflow"}
+              </p>
+            </div>
+          </div>
+        )}
+
+        {getSupportLevel() && (
+          <div className="flex items-start gap-3">
+            <CheckCircle className="w-4 h-4 text-primary-glow mt-0.5 flex-shrink-0" />
+            <div className="flex-1">
+              <p className="text-sm text-white font-mono">
+                <strong>{getSupportLevel()?.label}</strong>
+              </p>
+              <p className="text-xs text-white/60 font-mono mt-0.5">{getSupportLevel()?.description}</p>
+            </div>
+          </div>
+        )}
+
+        {isDominance && (
+          <>
+            <div className="flex items-start gap-3">
+              <CheckCircle className="w-4 h-4 text-primary-glow mt-0.5 flex-shrink-0" />
+              <div className="flex-1">
+                <p className="text-sm text-white font-mono">
+                  <strong>Performance Dashboard</strong>
+                  <Badge variant="outline" className="ml-2 border-primary-glow/50 text-primary-glow font-mono text-[10px]">
+                    EXCLUSIVE
+                  </Badge>
+                </p>
+                <p className="text-xs text-white/60 font-mono mt-0.5">Advanced analytics & insights</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <CheckCircle className="w-4 h-4 text-primary-glow mt-0.5 flex-shrink-0" />
+              <div className="flex-1">
+                <p className="text-sm text-white font-mono">
+                  <strong>Market Roadmap</strong>
+                  <Badge variant="outline" className="ml-2 border-primary-glow/50 text-primary-glow font-mono text-[10px]">
+                    EXCLUSIVE
+                  </Badge>
+                </p>
+                <p className="text-xs text-white/60 font-mono mt-0.5">Strategic content planning</p>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </Card>
   );
