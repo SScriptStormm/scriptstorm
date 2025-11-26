@@ -376,6 +376,12 @@ export function MultiStepContentBriefForm() {
                         <FormControl>
                           <Input placeholder="e.g., 'SaaS marketing, product launch, customer acquisition' (comma-separated)" {...field} />
                         </FormControl>
+                        <div className="mt-2 p-3 bg-primary/10 border border-primary/20 rounded-lg">
+                          <p className="text-xs text-primary-glow/90 font-mono flex items-center gap-2">
+                            <Target className="h-3 w-3" />
+                            <strong>Standard Keyword Research Included:</strong> We'll research and optimize your target keywords to maximize SEO performance.
+                          </p>
+                        </div>
                         <FormMessage />
                       </FormItem>
                     )}
