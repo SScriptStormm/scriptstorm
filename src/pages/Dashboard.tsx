@@ -595,10 +595,6 @@ const Dashboard = () => {
                       {formatDate(subscriber.subscription_end)}
                     </span>
                   </div>}
-                <div className="flex items-center justify-between">
-                  <span className="text-white/70 font-mono text-sm">Word Count Range</span>
-                  <span className="text-white font-mono text-sm">{wordCountRange}</span>
-                </div>
               </div>
             </CardContent>
           </Card>
