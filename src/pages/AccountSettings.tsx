@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,7 +7,6 @@ import { formatDate, formatDateShort } from "@/lib/dateUtils";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
-import { PackageFeaturesWidget } from "@/components/dashboard/PackageFeaturesWidget";
 import { Info } from "lucide-react";
 import {
   Table,
@@ -50,11 +49,6 @@ export default function AccountSettings() {
   const [loading, setLoading] = useState(true);
   const [subscriber, setSubscriber] = useState<SubscriberData | null>(null);
   const [userEmail, setUserEmail] = useState("");
-  const packageRef = useRef<HTMLDivElement>(null);
-
-  const scrollToPackage = () => {
-    packageRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
 
   useEffect(() => {
     const fetchSubscriberData = async () => {
@@ -196,7 +190,7 @@ export default function AccountSettings() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={scrollToPackage}
+                      onClick={() => navigate("/package-details")}
                       className="h-6 w-6 p-0 text-white/70 hover:text-white hover:bg-white/10"
                       title="View package details"
                     >
@@ -398,11 +392,6 @@ export default function AccountSettings() {
               </div>
             </CardContent>
           </Card>
-
-          {/* Section 4: Your Package Details */}
-          <div ref={packageRef}>
-            <PackageFeaturesWidget subscriptionTier={subscriber?.subscription_tier || 'starter'} />
-          </div>
         </div>
       </div>
     </div>
