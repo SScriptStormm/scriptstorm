@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,6 +7,8 @@ import { formatDate, formatDateShort } from "@/lib/dateUtils";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
+import { PackageFeaturesWidget } from "@/components/dashboard/PackageFeaturesWidget";
+import { Info } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -48,6 +50,11 @@ export default function AccountSettings() {
   const [loading, setLoading] = useState(true);
   const [subscriber, setSubscriber] = useState<SubscriberData | null>(null);
   const [userEmail, setUserEmail] = useState("");
+  const packageRef = useRef<HTMLDivElement>(null);
+
+  const scrollToPackage = () => {
+    packageRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   useEffect(() => {
     const fetchSubscriberData = async () => {
@@ -182,9 +189,20 @@ export default function AccountSettings() {
               <div className="bg-white/5 border border-white/20 rounded-lg p-4 sm:p-6 space-y-3">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <span className="text-white/70 text-sm sm:text-base">Plan Name:</span>
-                  <span className="text-white font-semibold text-base sm:text-lg">
-                    {getTierDisplayName(subscriber?.subscription_tier)}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-white font-semibold text-base sm:text-lg">
+                      {getTierDisplayName(subscriber?.subscription_tier)}
+                    </span>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={scrollToPackage}
+                      className="h-6 w-6 p-0 text-white/70 hover:text-white hover:bg-white/10"
+                      title="View package details"
+                    >
+                      <Info className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
                 
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
@@ -380,6 +398,11 @@ export default function AccountSettings() {
               </div>
             </CardContent>
           </Card>
+
+          {/* Section 4: Your Package Details */}
+          <div ref={packageRef}>
+            <PackageFeaturesWidget subscriptionTier={subscriber?.subscription_tier || 'starter'} />
+          </div>
         </div>
       </div>
     </div>
