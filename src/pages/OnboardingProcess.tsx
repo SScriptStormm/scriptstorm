@@ -315,7 +315,7 @@ const OnboardingProcess = () => {
       {/* CTA Section */}
       <section className="relative py-16 overflow-hidden">
         {/* AI Background Effects */}
-        <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80 opacity-90" />
+        <div className="absolute inset-0 bg-gradient-hero opacity-90" />
         <div className="absolute inset-0 bg-gradient-neural animate-neural-pulse opacity-20" />
         
         {/* Scanning lines */}
