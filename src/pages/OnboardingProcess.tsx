@@ -147,7 +147,7 @@ const OnboardingProcess = () => {
         
         <div className="container mx-auto px-4 text-center relative z-10">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-foreground font-mono tracking-wide">
-            🚀 How Our <span className="text-[#3498DB]">AI Process</span> Works
+            🚀 How Our <span className="text-primary">AI Process</span> Works
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
             A fully automated system delivering publish-ready content in 24 hours—powered by enterprise-grade AI.
@@ -242,7 +242,7 @@ const OnboardingProcess = () => {
         
         <div className="container mx-auto px-4 relative z-10">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-mono">
-            Why Our <span className="text-[#3498DB]">AI Process</span> Works
+            Why Our <span className="text-primary">AI Process</span> Works
           </h2>
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <Card className="relative text-center p-8 border-2 border-[#3498DB]/40 hover:border-[#3498DB]/70 bg-white/95 backdrop-blur-sm transition-all duration-500 shadow-neural hover:shadow-cyber">
