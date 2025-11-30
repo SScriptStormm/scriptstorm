@@ -223,7 +223,6 @@ const OnboardingProcess = () => {
                             <Icon className="h-12 w-12 text-white" />
                           </div>
                           <h4 className="text-xl font-bold mb-3 font-mono">{step.title}</h4>
-                          <p className="text-muted-foreground text-sm">{step.description}</p>
                         </div>
                       </Card>
                     </div>
