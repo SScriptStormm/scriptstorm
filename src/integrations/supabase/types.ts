@@ -325,6 +325,63 @@ export type Database = {
         }
         Relationships: []
       }
+      projects: {
+        Row: {
+          client_id: string | null
+          content_goal: string | null
+          content_type: string | null
+          created_at: string | null
+          id: number
+          keywords: string | null
+          progress: number | null
+          project_id: string | null
+          research_data: Json | null
+          seo_outline: Json | null
+          status: string | null
+          target_audience: string | null
+          tier: string | null
+          title: string | null
+          tone: string | null
+          word_count: number | null
+        }
+        Insert: {
+          client_id?: string | null
+          content_goal?: string | null
+          content_type?: string | null
+          created_at?: string | null
+          id?: number
+          keywords?: string | null
+          progress?: number | null
+          project_id?: string | null
+          research_data?: Json | null
+          seo_outline?: Json | null
+          status?: string | null
+          target_audience?: string | null
+          tier?: string | null
+          title?: string | null
+          tone?: string | null
+          word_count?: number | null
+        }
+        Update: {
+          client_id?: string | null
+          content_goal?: string | null
+          content_type?: string | null
+          created_at?: string | null
+          id?: number
+          keywords?: string | null
+          progress?: number | null
+          project_id?: string | null
+          research_data?: Json | null
+          seo_outline?: Json | null
+          status?: string | null
+          target_audience?: string | null
+          tier?: string | null
+          title?: string | null
+          tone?: string | null
+          word_count?: number | null
+        }
+        Relationships: []
+      }
       research_reports: {
         Row: {
           created_at: string
