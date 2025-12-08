@@ -98,7 +98,7 @@ const EnterprisePackageCard = ({
     e.stopPropagation();
     setIsExpanded(prev => !prev);
   };
-  return <Card className={`relative border-0 hover:scale-105 transition-all duration-500 group flex flex-col ${pkg.badge ? 'mt-6 md:mt-0' : ''}`} style={{
+  return <Card className={`relative border-0 hover:scale-105 transition-all duration-500 group ${pkg.badge ? 'mt-6 md:mt-0' : ''}`} style={{
     background: `linear-gradient(135deg, ${pkg.color}08 0%, ${pkg.color}15 30%, ${pkg.color}08 100%)`,
     boxShadow: `0 20px 40px -10px ${pkg.color}30, 0 0 30px ${pkg.color}20, inset 0 1px 0 ${pkg.color}40`,
     border: `2px solid ${pkg.color}40`
@@ -143,7 +143,7 @@ const EnterprisePackageCard = ({
       zIndex: -2
     }} />
       
-      <CardHeader className={`text-center ${pkg.badge ? 'pt-6 md:pt-10' : 'pt-3 md:pt-6'} pb-2 md:pb-6 relative`}>
+      <CardHeader className="text-center pt-6 md:pt-10 pb-2 md:pb-6 relative">
         <CardTitle className="text-xl md:text-2xl font-bold mb-1 md:mb-2" style={{
         color: pkg.color
       }}>
@@ -168,8 +168,8 @@ const EnterprisePackageCard = ({
           </div>}
       </CardHeader>
       
-      <CardContent className="space-y-2 md:space-y-6 p-3 md:p-6 relative flex-1 flex flex-col">
-        <div className="space-y-1 md:space-y-2 flex-1">
+      <CardContent className="space-y-2 md:space-y-6 p-3 md:p-6 relative">
+        <div className="space-y-1 md:space-y-2">
           {/* Get the correct feature list based on billing type */}
           {(() => {
           const displayFeatures = isAnnual && pkg.annualFeatures ? pkg.annualFeatures : pkg.features;

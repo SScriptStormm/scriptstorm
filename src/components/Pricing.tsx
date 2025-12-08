@@ -370,7 +370,7 @@ const Pricing = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-10 lg:gap-8 mb-16 max-w-7xl mx-auto items-stretch">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-10 lg:gap-8 mb-16 max-w-7xl mx-auto items-start">
           {enterprisePackages.map(pkg => <EnterprisePackageCard key={pkg.id} pkg={pkg} onCheckout={handleCheckout} loadingStates={loadingStates} isAnnual={isAnnual} />)}
         </div>
 
