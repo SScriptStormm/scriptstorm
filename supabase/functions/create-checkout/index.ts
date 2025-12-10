@@ -48,8 +48,8 @@ serve(async (req) => {
         annual: { amount: 285000, name: "ScriptStorm Starter Package - $2,850 USD/year (Get 2 Months Free!)", description: "60 Foundational Blog Articles + 180 Social Media Captions + 60 Product Descriptions annually" }
       },
       growth: { 
-        monthly: { amount: 59700, name: "ScriptStorm Growth Package - $597 USD", description: "10 Authority-Building Blog Articles + 30 Social Media Posts + 10 Product Descriptions monthly" },
-        annual: { amount: 573000, name: "ScriptStorm Growth Package - $5,730 USD/year (Get 2 Months Free!)", description: "120 Authority-Building Blog Articles + 360 Social Media Posts + 120 Product Descriptions annually" }
+        monthly: { amount: 59700, name: "ScriptStorm Growth Package - $597 USD", description: "10 Foundational Blog Articles + 30 Social Media Posts & Video assets + 10 Product Descriptions monthly" },
+        annual: { amount: 573000, name: "ScriptStorm Growth Package - $5,730 USD/year (Get 2 Months Free!)", description: "120 Foundational Blog Articles + 360 Social Media Posts & Video assets + 120 Product Descriptions annually" }
       },
       "starter-enterprise": { 
         monthly: { amount: 129700, name: "ScriptStorm Scale - $1,297 USD", description: "25 SEO Articles + 75 Social Posts + 25 Product Descriptions monthly" },
