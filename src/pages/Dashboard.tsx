@@ -535,67 +535,63 @@ const Dashboard = () => {
         {/* 2-Column Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
           {/* Account Status */}
-          <Card className="bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber h-fit">
-            <CardHeader className="pb-2 pt-4 px-4">
-              <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide text-sm sm:text-base">
-                <Zap className="h-4 w-4 text-primary-glow" />
-                ACCOUNT STATUS
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="px-4 pb-4 pt-0">
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-white/70 font-mono text-xs">Status</span>
-                  <Badge className="bg-green-500/20 text-green-400 border-green-500/30 font-mono text-xs">
-                    READY
-                  </Badge>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-white/70 font-mono text-xs">Plan</span>
-                  <div className="flex items-center gap-1.5">
-                    {(() => {
-                    const tier = (subscriber?.subscription_tier || 'starter').toLowerCase();
-                    const tierColors = {
-                      starter: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
-                      growth: 'bg-green-500/20 text-green-300 border-green-500/30',
-                      scale: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
-                      authority: 'bg-red-500/20 text-red-300 border-red-500/30',
-                      dominance: 'bg-amber-500/20 text-amber-300 border-amber-500/30'
-                    };
-                    const tierEmojis = {
-                      starter: '🚀',
-                      growth: '🔥',
-                      scale: '⚡',
-                      authority: '👑',
-                      dominance: '💎'
-                    };
-                    const currentTierColor = tierColors[tier] || tierColors.starter;
-                    const currentEmoji = tierEmojis[tier] || tierEmojis.starter;
-                    return <>
-                          <Badge className={`${currentTierColor} font-mono uppercase text-xs`}>
-                            {currentEmoji} {subscriber?.subscription_tier || 'Starter'}
-                          </Badge>
-                          {subscriber?.subscription_end && (() => {
-                        const endDate = new Date(subscriber.subscription_end);
-                        const now = new Date();
-                        const daysUntilRenewal = Math.floor((endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
-                        const isAnnual = daysUntilRenewal > 180;
-                        return <Badge className="bg-white/10 text-white/80 border border-white/30 font-mono text-[10px]">
-                                📅 {isAnnual ? 'ANNUAL' : 'MONTHLY'}
-                              </Badge>;
-                      })()}
-                        </>;
-                  })()}
-                  </div>
-                </div>
-                {subscriber?.subscription_end && <div className="flex items-center justify-between">
-                    <span className="text-white/70 font-mono text-xs">Renews</span>
-                    <span className="text-white font-mono text-xs">
-                      {formatDate(subscriber.subscription_end)}
-                    </span>
-                  </div>}
+          <Card className="p-6 bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber">
+            <h3 className="text-lg font-bold text-white mb-4 font-mono tracking-wide flex items-center gap-2">
+              <Zap className="h-5 w-5 text-primary-glow" />
+              ACCOUNT STATUS
+            </h3>
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium text-white font-mono">Status</span>
+                <Badge className="bg-green-500/20 text-green-400 border-green-500/30 font-mono">
+                  READY
+                </Badge>
               </div>
-            </CardContent>
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium text-white font-mono">Plan</span>
+                <div className="flex items-center gap-2">
+                  {(() => {
+                  const tier = (subscriber?.subscription_tier || 'starter').toLowerCase();
+                  const tierColors = {
+                    starter: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
+                    growth: 'bg-green-500/20 text-green-300 border-green-500/30',
+                    scale: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
+                    authority: 'bg-red-500/20 text-red-300 border-red-500/30',
+                    dominance: 'bg-amber-500/20 text-amber-300 border-amber-500/30'
+                  };
+                  const tierEmojis = {
+                    starter: '🚀',
+                    growth: '🔥',
+                    scale: '⚡',
+                    authority: '👑',
+                    dominance: '💎'
+                  };
+                  const currentTierColor = tierColors[tier] || tierColors.starter;
+                  const currentEmoji = tierEmojis[tier] || tierEmojis.starter;
+                  return <>
+                        <Badge className={`${currentTierColor} font-mono uppercase`}>
+                          {currentEmoji} {subscriber?.subscription_tier || 'Starter'}
+                        </Badge>
+                        {subscriber?.subscription_end && (() => {
+                      const endDate = new Date(subscriber.subscription_end);
+                      const now = new Date();
+                      const daysUntilRenewal = Math.floor((endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+                      const isAnnual = daysUntilRenewal > 180;
+                      return <Badge className="bg-white/10 text-white/80 border border-white/30 font-mono text-xs">
+                              📅 {isAnnual ? 'ANNUAL' : 'MONTHLY'}
+                            </Badge>;
+                    })()}
+                      </>;
+                })()}
+                </div>
+              </div>
+              {subscriber?.subscription_end && <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium text-white font-mono">Renews</span>
+                  <span className="text-sm font-mono text-white/70">
+                    {formatDate(subscriber.subscription_end)}
+                  </span>
+                </div>}
+            </div>
           </Card>
 
           {/* Monthly Usage - QuotaUsageWidget */}
