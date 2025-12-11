@@ -98,6 +98,50 @@ const Dashboard = () => {
     });
     return () => subscription.unsubscribe();
   }, []);
+
+  // Real-time subscription for articles updates
+  useEffect(() => {
+    if (!user?.id) return;
+
+    const channel = supabase
+      .channel('articles-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: 'UPDATE',
+          schema: 'public',
+          table: 'articles',
+          filter: `user_id=eq.${user.id}`
+        },
+        (payload) => {
+          console.log('Article updated:', payload);
+          setArticles(prev => 
+            prev.map(article => 
+              article.id === payload.new.id ? payload.new as Article : article
+            )
+          );
+        }
+      )
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'articles',
+          filter: `user_id=eq.${user.id}`
+        },
+        (payload) => {
+          console.log('New article:', payload);
+          setArticles(prev => [payload.new as Article, ...prev]);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [user?.id]);
+
   const fetchSubscriberData = async (userId?: string) => {
     const id = userId || user?.id;
     if (!id) return;
