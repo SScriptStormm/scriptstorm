@@ -535,7 +535,7 @@ const Dashboard = () => {
         {/* 2-Column Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
           {/* Account Status */}
-          <Card className="p-6 bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber">
+          <Card className="px-6 pt-6 pb-4 bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber h-fit">
             <h3 className="text-lg font-bold text-white mb-4 font-mono tracking-wide flex items-center gap-2">
               <Zap className="h-5 w-5 text-primary-glow" />
               ACCOUNT STATUS
