@@ -535,24 +535,24 @@ const Dashboard = () => {
         {/* 2-Column Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
           {/* Account Status */}
-          <Card className="bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide text-base sm:text-lg">
-                <Zap className="h-4 w-4 sm:h-5 sm:w-5 text-primary-glow" />
+          <Card className="bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber h-fit">
+            <CardHeader className="pb-2 pt-4 px-4">
+              <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide text-sm sm:text-base">
+                <Zap className="h-4 w-4 text-primary-glow" />
                 ACCOUNT STATUS
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
+            <CardContent className="px-4 pb-4 pt-0">
+              <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="text-white/70 font-mono text-sm">Status</span>
-                  <Badge className="bg-green-500/20 text-green-400 border-green-500/30 font-mono">
+                  <span className="text-white/70 font-mono text-xs">Status</span>
+                  <Badge className="bg-green-500/20 text-green-400 border-green-500/30 font-mono text-xs">
                     READY
                   </Badge>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-white/70 font-mono text-sm">Plan</span>
-                  <div className="flex items-center gap-2">
+                  <span className="text-white/70 font-mono text-xs">Plan</span>
+                  <div className="flex items-center gap-1.5">
                     {(() => {
                     const tier = (subscriber?.subscription_tier || 'starter').toLowerCase();
                     const tierColors = {
@@ -572,7 +572,7 @@ const Dashboard = () => {
                     const currentTierColor = tierColors[tier] || tierColors.starter;
                     const currentEmoji = tierEmojis[tier] || tierEmojis.starter;
                     return <>
-                          <Badge className={`${currentTierColor} font-mono uppercase`}>
+                          <Badge className={`${currentTierColor} font-mono uppercase text-xs`}>
                             {currentEmoji} {subscriber?.subscription_tier || 'Starter'}
                           </Badge>
                           {subscriber?.subscription_end && (() => {
@@ -580,7 +580,7 @@ const Dashboard = () => {
                         const now = new Date();
                         const daysUntilRenewal = Math.floor((endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
                         const isAnnual = daysUntilRenewal > 180;
-                        return <Badge className="bg-white/10 text-white/80 border border-white/30 font-mono text-xs">
+                        return <Badge className="bg-white/10 text-white/80 border border-white/30 font-mono text-[10px]">
                                 📅 {isAnnual ? 'ANNUAL' : 'MONTHLY'}
                               </Badge>;
                       })()}
@@ -589,8 +589,8 @@ const Dashboard = () => {
                   </div>
                 </div>
                 {subscriber?.subscription_end && <div className="flex items-center justify-between">
-                    <span className="text-white/70 font-mono text-sm">Renews</span>
-                    <span className="text-white font-mono text-sm">
+                    <span className="text-white/70 font-mono text-xs">Renews</span>
+                    <span className="text-white font-mono text-xs">
                       {formatDate(subscriber.subscription_end)}
                     </span>
                   </div>}
