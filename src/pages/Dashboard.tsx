@@ -1066,11 +1066,7 @@ const Dashboard = () => {
                                 <Edit className="h-3 w-3 mr-1" />
                                 {(article.revisions_requested || 0) >= (article.revisions_allowed || 1) ? 'Revision Limit Reached' : 'Request Revision'}
                               </Button>
-                            </> : article.status === 'in_progress' ? <Badge className="w-full bg-blue-500/20 text-blue-400 border border-blue-500/30 font-mono text-xs justify-center">
-                              🔄 In Progress
-                            </Badge> : <Badge className="w-full bg-white/10 text-white/60 border border-white/20 font-mono text-xs justify-center">
-                              ⏳ Queued
-                            </Badge>}
+                            </> : null}
                         </div>
                       </div>
                     </div>)}
@@ -1130,11 +1126,7 @@ const Dashboard = () => {
                                     <Edit className="h-4 w-4 mr-1" />
                                     {(article.revisions_requested || 0) >= (article.revisions_allowed || 1) ? 'Limit Reached' : 'Request Revision'}
                                   </Button>
-                                </> : article.status === 'in_progress' ? <Badge className="bg-blue-500/20 text-blue-400 border border-blue-500/30 font-mono">
-                                  🔄 In Progress
-                                </Badge> : <Badge className="bg-white/10 text-white/60 border border-white/20 font-mono">
-                                  ⏳ Queued
-                                </Badge>}
+                                </> : null}
                             </div>
                           </td>
                         </tr>)}
