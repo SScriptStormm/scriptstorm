@@ -95,10 +95,50 @@ export const QuotaUsageWidget = ({
         </div>
       </div>
 
-      {(articlePercentage >= 90 || socialPercentage >= 90 || (productPercentage >= 90 && limits.products !== 999999)) && (
-        <div className="mt-4 p-3 bg-destructive/10 border border-destructive/20 rounded-md">
-          <p className="text-xs text-destructive font-mono">
-            You're approaching your monthly limit. Consider upgrading your plan.
+      {/* Article Warnings */}
+      {articlePercentage >= 100 && (
+        <div className="mt-4 p-3 bg-destructive/20 border border-destructive/40 rounded-md">
+          <p className="text-xs text-destructive font-mono font-semibold">
+            🚫 You've reached your article monthly limit. Resets at the end of the month.
+          </p>
+        </div>
+      )}
+      {articlePercentage >= 90 && articlePercentage < 100 && (
+        <div className="mt-4 p-3 bg-yellow-500/10 border border-yellow-500/30 rounded-md">
+          <p className="text-xs text-yellow-400 font-mono">
+            ⚠️ You're approaching your article monthly limit. Consider upgrading your plan.
+          </p>
+        </div>
+      )}
+
+      {/* Social Posts Warnings */}
+      {socialPercentage >= 100 && (
+        <div className="mt-4 p-3 bg-destructive/20 border border-destructive/40 rounded-md">
+          <p className="text-xs text-destructive font-mono font-semibold">
+            🚫 You've reached your social posts monthly limit. Resets at the end of the month.
+          </p>
+        </div>
+      )}
+      {socialPercentage >= 90 && socialPercentage < 100 && (
+        <div className="mt-4 p-3 bg-yellow-500/10 border border-yellow-500/30 rounded-md">
+          <p className="text-xs text-yellow-400 font-mono">
+            ⚠️ You're approaching your social posts monthly limit. Consider upgrading your plan.
+          </p>
+        </div>
+      )}
+
+      {/* Product Descriptions Warnings */}
+      {limits.products !== 999999 && productPercentage >= 100 && (
+        <div className="mt-4 p-3 bg-destructive/20 border border-destructive/40 rounded-md">
+          <p className="text-xs text-destructive font-mono font-semibold">
+            🚫 You've reached your product descriptions monthly limit. Resets at the end of the month.
+          </p>
+        </div>
+      )}
+      {limits.products !== 999999 && productPercentage >= 90 && productPercentage < 100 && (
+        <div className="mt-4 p-3 bg-yellow-500/10 border border-yellow-500/30 rounded-md">
+          <p className="text-xs text-yellow-400 font-mono">
+            ⚠️ You're approaching your product descriptions monthly limit. Consider upgrading your plan.
           </p>
         </div>
       )}
