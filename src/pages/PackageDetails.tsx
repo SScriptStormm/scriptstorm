@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { PackageFeaturesWidget } from "@/components/dashboard/PackageFeaturesWidget";
+import LoadingScreen from "@/components/ui/LoadingScreen";
 
 interface SubscriberData {
   subscription_tier: string | null;
@@ -41,11 +42,7 @@ export default function PackageDetails() {
   }, [navigate]);
 
   if (loading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-primary via-primary-dark to-secondary flex items-center justify-center">
-        <div className="text-white text-xl">Loading...</div>
-      </div>
-    );
+    return <LoadingScreen message="Loading package details..." />;
   }
 
   return (
