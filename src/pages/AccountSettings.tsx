@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 import { Info } from "lucide-react";
+import LoadingScreen from "@/components/ui/LoadingScreen";
 import {
   Table,
   TableBody,
@@ -146,11 +147,7 @@ export default function AccountSettings() {
   };
 
   if (loading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-primary via-primary-dark to-secondary flex items-center justify-center">
-        <div className="text-white text-xl">Loading...</div>
-      </div>
-    );
+    return <LoadingScreen message="Loading account settings..." />;
   }
 
   const billingInfo = getBillingInfo();
