@@ -160,6 +160,28 @@ export function MultiStepContentBriefForm() {
     }
   };
 
+  const getTitleLabel = () => {
+    switch(contentType) {
+      case 'social_media':
+        return 'Post Topic/Title *';
+      case 'product_description':
+        return 'Product Name *';
+      default:
+        return 'Article Title *';
+    }
+  };
+
+  const getTitlePlaceholder = () => {
+    switch(contentType) {
+      case 'social_media':
+        return "e.g., 'New product launch announcement'";
+      case 'product_description':
+        return "e.g., 'Premium Wireless Headphones XL'";
+      default:
+        return "e.g., 'How to Build a Successful SaaS Product'";
+    }
+  };
+
   useEffect(() => {
     if (contentType === "blog_article") {
       // Set to tier-specific default for blog articles
@@ -353,9 +375,9 @@ export function MultiStepContentBriefForm() {
                     name="title"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Article Title *</FormLabel>
+                        <FormLabel>{getTitleLabel()}</FormLabel>
                         <FormControl>
-                          <Input placeholder="e.g., 'How to Build a Successful SaaS Product'" {...field} />
+                          <Input placeholder={getTitlePlaceholder()} {...field} />
                         </FormControl>
                         <p className="text-xs text-muted-foreground">{getCharCount(field.value, 200)}</p>
                         <FormMessage />
