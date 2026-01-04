@@ -542,21 +542,21 @@ const Dashboard = () => {
                     <ChevronDown className="h-3 w-3 sm:h-4 sm:w-4 ml-1 sm:ml-2" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56 bg-black/95 backdrop-blur-xl border-primary-glow/30 z-50">
-                  <DropdownMenuItem className="font-mono text-white hover:bg-primary-glow/20 cursor-pointer">
+                <DropdownMenuContent align="end" className="w-56 border-primary-glow/20">
+                  <DropdownMenuItem className="font-mono text-white hover:bg-primary-glow/20">
                     <LayoutDashboard className="h-4 w-4 mr-2" />
                     Dashboard
                   </DropdownMenuItem>
-                  <DropdownMenuItem className="font-mono text-white hover:bg-primary-glow/20 cursor-pointer" onClick={() => navigate('/account-settings')}>
+                  <DropdownMenuItem className="font-mono text-white hover:bg-primary-glow/20" onClick={() => navigate('/account-settings')}>
                     <Settings className="h-4 w-4 mr-2" />
                     Account Settings
                   </DropdownMenuItem>
-                  <DropdownMenuItem className="font-mono text-white hover:bg-primary-glow/20 cursor-pointer" onClick={() => window.open('https://billing.stripe.com/p/login/test_your_link', '_blank')}>
+                  <DropdownMenuItem className="font-mono text-white hover:bg-primary-glow/20" onClick={() => window.open('https://billing.stripe.com/p/login/test_your_link', '_blank')}>
                     <CreditCard className="h-4 w-4 mr-2" />
                     Manage Subscription
                   </DropdownMenuItem>
-                  <DropdownMenuSeparator className="bg-primary-glow/20" />
-                  <DropdownMenuItem className="font-mono text-red-400 hover:bg-red-500/20 cursor-pointer" onClick={handleSignOut}>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem className="font-mono text-red-400 hover:bg-red-500/20" onClick={handleSignOut}>
                     <LogOut className="h-4 w-4 mr-2" />
                     Logout
                   </DropdownMenuItem>
