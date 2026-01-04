@@ -9,8 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FileText, Calendar as CalendarIcon, TrendingUp, Clock, CheckCircle, AlertCircle, Zap, LogOut, RefreshCw, CreditCard, BarChart3, Target, Eye, Download, Edit, MessageSquare, User as UserIcon, Settings, LayoutDashboard, ChevronDown, Archive, History } from "lucide-react";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { FileText, Calendar as CalendarIcon, Clock, CheckCircle, AlertCircle, Zap, LogOut, RefreshCw, CreditCard, BarChart3, Target, Eye, Download, Edit, MessageSquare, User as UserIcon, Settings, LayoutDashboard, ChevronDown, Archive } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -20,9 +19,15 @@ import ResearchReports from "@/components/dashboard/ResearchReports";
 import PerformanceDashboard from "@/components/dashboard/PerformanceDashboard";
 import PrioritySupport from "@/components/dashboard/PrioritySupport";
 import MarketRoadmap from "@/components/dashboard/MarketRoadmap";
-import { QuotaUsageWidget } from "@/components/dashboard/QuotaUsageWidget";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { GlassCard, GlassCardContent, GlassCardHeader, GlassCardTitle } from "@/components/ui/GlassCard";
+import { HoloBadge } from "@/components/ui/HoloBadge";
+import { NeonProgress } from "@/components/ui/NeonProgress";
+import { AccountStatusCard } from "@/components/dashboard/AccountStatusCard";
+import { MonthlyUsageCard } from "@/components/dashboard/MonthlyUsageCard";
+import { ContentQueueCard } from "@/components/dashboard/ContentQueueCard";
+import { ContentPipelineCard } from "@/components/dashboard/ContentPipelineCard";
 interface Subscriber {
   subscribed: boolean;
   subscription_tier: string | null;
@@ -588,323 +593,37 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* 2-Column Grid Layout */}
+        {/* 2-Column Grid Layout - Premium Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
-          {/* Account Status */}
-          <Card className="px-6 pt-6 pb-4 bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber h-fit">
-            <h3 className="text-lg font-bold text-white mb-4 font-mono tracking-wide flex items-center gap-2">
-              <Zap className="h-5 w-5 text-primary-glow" />
-              ACCOUNT STATUS
-            </h3>
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-white font-mono">Status</span>
-                <Badge className="bg-green-500/20 text-green-400 border-green-500/30 font-mono">
-                  READY
-                </Badge>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-white font-mono">Plan</span>
-                <div className="flex items-center gap-2">
-                  {(() => {
-                  const tier = (subscriber?.subscription_tier || 'starter').toLowerCase();
-                  const tierColors = {
-                    starter: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
-                    growth: 'bg-green-500/20 text-green-300 border-green-500/30',
-                    scale: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
-                    authority: 'bg-red-500/20 text-red-300 border-red-500/30',
-                    dominance: 'bg-amber-500/20 text-amber-300 border-amber-500/30'
-                  };
-                  const tierEmojis = {
-                    starter: '🚀',
-                    growth: '🔥',
-                    scale: '⚡',
-                    authority: '👑',
-                    dominance: '💎'
-                  };
-                  const currentTierColor = tierColors[tier] || tierColors.starter;
-                  const currentEmoji = tierEmojis[tier] || tierEmojis.starter;
-                  return <>
-                        <Badge className={`${currentTierColor} font-mono uppercase`}>
-                          {currentEmoji} {subscriber?.subscription_tier || 'Starter'}
-                        </Badge>
-                        {subscriber?.subscription_end && (() => {
-                      const endDate = new Date(subscriber.subscription_end);
-                      const now = new Date();
-                      const daysUntilRenewal = Math.floor((endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
-                      const isAnnual = daysUntilRenewal > 180;
-                      return <Badge className="bg-white/10 text-white/80 border border-white/30 font-mono text-xs">
-                              📅 {isAnnual ? 'ANNUAL' : 'MONTHLY'}
-                            </Badge>;
-                    })()}
-                      </>;
-                })()}
-                </div>
-              </div>
-              {subscriber?.subscription_end && <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-white font-mono">Renews</span>
-                  <span className="text-sm font-mono text-white/70">
-                    {formatDate(subscriber.subscription_end)}
-                  </span>
-                </div>}
-            </div>
-          </Card>
-
-          {/* Monthly Usage - QuotaUsageWidget */}
-          <QuotaUsageWidget subscriptionTier={tier} articlesUsed={monthlyUsage.articles} socialPostsUsed={monthlyUsage.socialPosts} productDescUsed={monthlyUsage.productDesc} />
+          <AccountStatusCard 
+            subscriptionTier={subscriber?.subscription_tier || 'starter'}
+            subscriptionEnd={subscriber?.subscription_end || null}
+            isSubscribed={subscriber?.subscribed || false}
+          />
+          <MonthlyUsageCard 
+            subscriptionTier={tier} 
+            articlesUsed={monthlyUsage.articles} 
+            socialPostsUsed={monthlyUsage.socialPosts} 
+            productDescUsed={monthlyUsage.productDesc} 
+          />
         </div>
 
-        {/* Content Queue */}
-        {totalArticles > 0 && <Card className="mb-6 sm:mb-8 bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber">
-            <CardHeader className="px-4 sm:px-6">
-              <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide text-base sm:text-lg">
-                <BarChart3 className="h-4 w-4 sm:h-5 sm:w-5 text-primary-glow" />
-                CONTENT QUEUE
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="px-4 sm:px-6">
-              <div className="space-y-4 sm:space-y-6">
-                {/* Status Overview - Stacked on mobile */}
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-center gap-3 sm:gap-8 p-3 sm:p-4 bg-black/20 rounded-lg border border-primary-glow/20">
-                  <div className="flex items-center justify-between sm:justify-start gap-2">
-                    <div className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 flex-shrink-0 text-green-500" />
-                      <span className="text-white font-mono text-xs sm:text-base whitespace-nowrap">
-                        {articles.filter(a => a.status === 'completed').length} <span className="text-white/60">Completed</span>
-                      </span>
-                    </div>
-                  </div>
-                  <div className="hidden sm:block h-4 w-px bg-white/20" />
-                  <div className="flex items-center justify-between sm:justify-start gap-2">
-                    <div className="flex items-center gap-2">
-                      <Clock className="h-4 w-4 text-yellow-400 flex-shrink-0" />
-                      <span className="text-white font-mono text-xs sm:text-base whitespace-nowrap">
-                        {articles.filter(a => a.status === 'in_progress').length} <span className="text-white/60">In Progress</span>
-                      </span>
-                    </div>
-                  </div>
-                  <div className="hidden sm:block h-4 w-px bg-white/20" />
-                  <div className="flex items-center justify-between sm:justify-start gap-2">
-                    <div className="flex items-center gap-2">
-                      <AlertCircle className="h-4 w-4 text-blue-400 flex-shrink-0" />
-                      <span className="text-white font-mono text-xs sm:text-base whitespace-nowrap">
-                        {articles.filter(a => a.status === 'pending').length} <span className="text-white/60">Pending</span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
+        {/* Content Queue - Premium Card */}
+        {totalArticles > 0 && (
+          <div className="mb-6 sm:mb-8">
+            <ContentQueueCard articles={articles} />
+          </div>
+        )}
 
-                {/* Content Mix */}
-                <div>
-                  <h3 className="text-white/70 font-mono text-xs uppercase tracking-wider mb-3">Content Mix</h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-                    {/* Blog Articles */}
-                    <div className="p-3 sm:p-4 bg-black/20 rounded-lg border border-primary-glow/20">
-                      <div className="flex items-center gap-2 mb-2">
-                        <FileText className="h-4 w-4 text-primary-glow flex-shrink-0" />
-                        <span className="text-white font-mono text-xs sm:text-sm">Blog Articles</span>
-                      </div>
-                      <p className="text-white font-mono text-xl sm:text-2xl mb-1">
-                        {articles.filter(a => !a.content_type || a.content_type === 'article' || a.content_type === 'blog_article').length}
-                      </p>
-                      <p className="text-white/60 font-mono text-xs break-words">
-                        {articles.filter(a => !a.content_type || a.content_type === 'article' || a.content_type === 'blog_article').reduce((sum, a) => sum + (a.word_count || 0), 0).toLocaleString()} words total
-                      </p>
-                    </div>
-
-                    {/* Social Posts */}
-                    <div className="p-3 sm:p-4 bg-black/20 rounded-lg border border-primary-glow/20">
-                      <div className="flex items-center gap-2 mb-2">
-                        <MessageSquare className="h-4 w-4 text-primary-glow flex-shrink-0" />
-                        <span className="text-white font-mono text-xs sm:text-sm">Social Posts</span>
-                      </div>
-                      <p className="text-white font-mono text-xl sm:text-2xl mb-1">
-                        {articles.filter(a => a.content_type === 'social_media' || a.content_type === 'social_media_post').length}
-                      </p>
-                      <p className="text-white/60 font-mono text-xs">submitted</p>
-                    </div>
-
-                    {/* Product Descriptions */}
-                    <div className="p-3 sm:p-4 bg-black/20 rounded-lg border border-primary-glow/20">
-                      <div className="flex items-center gap-2 mb-2">
-                        <CreditCard className="h-4 w-4 text-primary-glow flex-shrink-0" />
-                        <span className="text-white font-mono text-xs sm:text-sm">Product Descriptions</span>
-                      </div>
-                      <p className="text-white font-mono text-xl sm:text-2xl mb-1">
-                        {articles.filter(a => a.content_type === 'product_description').length}
-                      </p>
-                      <p className="text-white/60 font-mono text-xs">submitted</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>}
-
-        {/* Consolidated Pipeline & Workflow */}
-        <Card className="mb-6 sm:mb-8 bg-black/30 backdrop-blur-xl border-green-500/30 shadow-cyber">
-          <div className="absolute inset-0 bg-gradient-cyber opacity-5 rounded-lg" />
-          <CardHeader className="relative px-4 sm:px-6">
-            <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide text-base sm:text-lg">
-              <Target className="h-4 w-4 sm:h-5 sm:w-5 text-green-400" />
-              CONTENT PIPELINE
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="relative space-y-4 sm:space-y-6 px-4 sm:px-6">
-            {/* Selected Project Indicator */}
-            {selectedPipelineArticleId && displayedPipelineArticle && (
-              <div className="flex items-center justify-between p-2 bg-primary-glow/10 rounded-lg border border-primary-glow/30">
-                <span className="text-white/70 font-mono text-xs">
-                  Viewing: <span className="text-primary-glow">{displayedPipelineArticle.title}</span>
-                </span>
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  onClick={() => setSelectedPipelineArticleId(null)}
-                  className="font-mono text-xs text-primary-glow hover:text-white h-7"
-                >
-                  {currentMonthPipelineArticles.length > 0 ? 'Show Latest' : 'Clear Selection'}
-                </Button>
-              </div>
-            )}
-
-            {/* Latest Project Status or Empty State */}
-            {displayedPipelineArticle ? (
-              <div className="space-y-3">
-                <h3 className="text-white/70 font-mono text-xs sm:text-sm uppercase tracking-wider">
-                  {selectedPipelineArticleId ? 'Selected Project' : 'Latest Project'}
-                </h3>
-                <div className="p-3 sm:p-6 bg-black/20 rounded-lg border border-green-500/20">
-                  <div className="mb-2">
-                    <p className="text-white font-mono text-sm sm:text-base break-words">{displayedPipelineArticle.title}</p>
-                  </div>
-                  <p className="text-white/50 font-mono text-xs mb-4 sm:mb-6">
-                    Submitted: {formatDateTime(displayedPipelineArticle.created_at)}
-                  </p>
-                  
-                  {/* Progress Tracker */}
-                  <div className="space-y-3 sm:space-y-4">
-                    {(() => {
-                      const status = displayedPipelineArticle.status || 'pending';
-                      const stages = [{
-                        name: 'Brief Received',
-                        icon: CheckCircle,
-                        emoji: '✅',
-                        desc: 'Your brief has been received and queued',
-                        step: 1
-                      }, {
-                        name: 'AI Research & Strategy',
-                        icon: Clock,
-                        emoji: '🔄',
-                        desc: 'Analyzing keywords and competitor insights',
-                        step: 2
-                      }, {
-                        name: 'AI Writing',
-                        icon: FileText,
-                        emoji: '✍️',
-                        desc: 'Content generation in progress',
-                        step: 3
-                      }, {
-                        name: 'Quality Control',
-                        icon: Eye,
-                        emoji: '🔍',
-                        desc: 'Human review and optimization',
-                        step: 4
-                      }, {
-                        name: 'Ready for Download',
-                        icon: Zap,
-                        emoji: '🚀',
-                        desc: 'Your content will be available here',
-                        step: 5
-                      }];
-
-                      let currentStep = 1;
-                      if (status === 'pending') currentStep = 2;
-                      else if (status === 'in_progress') currentStep = 3;
-                      else if (status === 'review') currentStep = 4;
-                      else if (status === 'completed') currentStep = 5;
-
-                      return stages.map((stage, index) => {
-                        const isCompleted = stage.step < currentStep;
-                        const isCurrent = stage.step === currentStep;
-                        const Icon = stage.icon;
-                        return (
-                          <div key={stage.name}>
-                            <div className="flex items-start gap-2 sm:gap-3">
-                              <div className={`flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full flex-shrink-0 mt-0.5 ${isCompleted ? 'bg-green-500/20 border border-green-500' : isCurrent ? 'bg-yellow-500/20 border border-yellow-500' : 'bg-white/10 border border-white/30'}`}>
-                                <Icon className={`h-3 w-3 sm:h-4 sm:w-4 ${isCompleted ? 'text-green-400' : isCurrent ? 'text-yellow-400 animate-pulse' : 'text-white/50'}`} />
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <p className={`font-mono text-xs sm:text-sm font-semibold ${isCompleted ? 'text-green-400' : isCurrent ? 'text-yellow-400' : 'text-white/50'}`}>
-                                  {stage.emoji} {stage.name}
-                                </p>
-                                <p className={`font-mono text-[10px] sm:text-xs mt-0.5 break-words ${isCompleted || isCurrent ? 'text-white/60' : 'text-white/40'}`}>
-                                  {stage.desc}
-                                </p>
-                              </div>
-                            </div>
-                            {index < stages.length - 1 && <div className={`ml-2 sm:ml-3 w-0.5 h-3 sm:h-4 ${isCompleted ? 'bg-green-500/30' : isCurrent ? 'bg-yellow-500/30' : 'bg-white/10'}`}></div>}
-                          </div>
-                        );
-                      });
-                    })()}
-                  </div>
-                  
-                  {/* Progress Bar */}
-                  <div className="mt-6">
-                    {(() => {
-                      const status = displayedPipelineArticle.status || 'pending';
-                      let progress = 20;
-                      let statusMessage = 'Estimated completion: Within 24 hours';
-                      if (status === 'pending') {
-                        progress = 20;
-                        statusMessage = 'Brief received, starting research...';
-                      } else if (status === 'in_progress') {
-                        progress = 60;
-                        statusMessage = 'AI writing in progress...';
-                      } else if (status === 'review') {
-                        progress = 80;
-                        statusMessage = 'Under quality review...';
-                      } else if (status === 'completed') {
-                        progress = 100;
-                        statusMessage = 'Content ready for download!';
-                      }
-                      return (
-                        <>
-                          <div className="flex justify-between text-xs font-mono text-white/60 mb-2">
-                            <span>Progress</span>
-                            <span>{progress}% Complete</span>
-                          </div>
-                          <Progress value={progress} className="h-2 bg-black/50" />
-                          <p className={`font-mono text-xs mt-2 ${status === 'completed' ? 'text-green-400' : 'text-yellow-400'}`}>
-                            {status === 'completed' ? '✅' : '⏱️'} {statusMessage}
-                          </p>
-                        </>
-                      );
-                    })()}
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div className="text-center py-12">
-                <AlertCircle className="h-16 w-16 text-primary-glow/50 mx-auto mb-4" />
-                <p className="text-white font-mono text-xl mb-2">Ready for Content Production</p>
-                <p className="text-white/70 font-mono text-sm">
-                  {articles.length > 0 
-                    ? "No content briefs submitted this month. Submit a new brief to get started!" 
-                    : "Submit your first content brief to get started"}
-                </p>
-              </div>
-            )}
-
-            {/* Hint to use PROJECTS tab */}
-            {articles.length > 1 && (
-              <p className="text-white/50 font-mono text-xs text-center">
-                View all projects in the PROJECTS tab below
-              </p>
-            )}
-          </CardContent>
-        </Card>
+        {/* Content Pipeline - Premium Card */}
+        <div className="mb-6 sm:mb-8">
+          <ContentPipelineCard
+            article={displayedPipelineArticle}
+            articlesCount={articles.length}
+            selectedId={selectedPipelineArticleId}
+            onClearSelection={() => setSelectedPipelineArticleId(null)}
+          />
+        </div>
 
         {/* Dashboard Features Tabs */}
         <Tabs defaultValue="projects" className="mb-8">
@@ -943,20 +662,21 @@ const Dashboard = () => {
               </TabsTrigger>}
           </TabsList>
 
-          {/* Projects Tab (Default) */}
           <TabsContent value="projects">
-            <Card className="bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber">
-          <CardHeader className="px-4 sm:px-6">
+            <GlassCard variant="default" glow hover={false}>
+          <GlassCardHeader className="px-4 sm:px-6">
             <div className="flex flex-col gap-3 sm:gap-4">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide text-sm sm:text-base">
+                <GlassCardTitle className="flex items-center gap-2 text-sm sm:text-base">
                   <FileText className="h-4 w-4 sm:h-5 sm:w-5 text-primary-glow" />
                   YOUR CONTENT PROJECTS
-                  {monthFilter !== 'all_time' && monthFilter !== currentMonthYear && <Badge className="ml-2 bg-yellow-500/20 text-yellow-400 border-yellow-500/30 text-xs font-mono">
+                  {monthFilter !== 'all_time' && monthFilter !== currentMonthYear && (
+                    <HoloBadge variant="warning" size="sm">
                       <Archive className="h-3 w-3 mr-1" />
                       ARCHIVE
-                    </Badge>}
-                </CardTitle>
+                    </HoloBadge>
+                  )}
+                </GlassCardTitle>
               </div>
               
               {articles.length > 0 && <div className="flex flex-col gap-3">
@@ -1018,8 +738,8 @@ const Dashboard = () => {
                   </div>
                 </div>}
             </div>
-          </CardHeader>
-          <CardContent className="px-4 sm:px-6">
+          </GlassCardHeader>
+          <GlassCardContent className="px-4 sm:px-6">
             {articles.length === 0 ? <div className="text-center py-12">
                 <FileText className="h-16 w-16 text-primary-glow/50 mx-auto mb-4" />
                 <p className="text-white font-mono tracking-wide text-xl mb-2">
@@ -1167,8 +887,8 @@ const Dashboard = () => {
                   </table>
                 </div>
               </>}
-          </CardContent>
-        </Card>
+          </GlassCardContent>
+        </GlassCard>
           </TabsContent>
 
           {/* Content Calendar Tab (Growth) */}
