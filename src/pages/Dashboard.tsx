@@ -763,7 +763,7 @@ const Dashboard = () => {
                   onClick={() => setSelectedPipelineArticleId(null)}
                   className="font-mono text-xs text-primary-glow hover:text-white h-7"
                 >
-                  Show Latest
+                  {currentMonthPipelineArticles.length > 0 ? 'Show Latest' : 'Clear Selection'}
                 </Button>
               </div>
             )}
@@ -897,70 +897,13 @@ const Dashboard = () => {
               </div>
             )}
 
-            {/* This Month's Projects - Clickable */}
-            {currentMonthPipelineArticles.length > 0 && (
-              <div className="space-y-3">
-                <h3 className="text-white/70 font-mono text-xs sm:text-sm uppercase tracking-wider">
-                  This Month's Projects ({currentMonthPipelineArticles.length})
-                </h3>
-                {currentMonthPipelineArticles.slice(0, 5).map(article => (
-                  <div 
-                    key={article.id} 
-                    onClick={() => setSelectedPipelineArticleId(article.id === selectedPipelineArticleId ? null : article.id)}
-                    className={`flex items-center gap-2 sm:gap-4 p-2 sm:p-3 bg-black/20 rounded-lg border cursor-pointer transition-all hover:bg-black/30 ${
-                      article.id === selectedPipelineArticleId 
-                        ? 'border-green-500/60 bg-green-500/10' 
-                        : 'border-primary-glow/20 hover:border-primary-glow/40'
-                    }`}
-                  >
-                    {article.status === 'completed' && (
-                      <>
-                        <span className="text-green-400 text-base sm:text-lg flex-shrink-0">🟢</span>
-                        <span className="text-white font-mono flex-1 truncate text-xs sm:text-sm">{article.title}</span>
-                        <Badge className="bg-green-500/20 text-green-400 border-green-500/30 font-mono text-[10px] sm:text-xs whitespace-nowrap">
-                          COMPLETE
-                        </Badge>
-                      </>
-                    )}
-                    {article.status === 'in_progress' && (
-                      <>
-                        <span className="text-yellow-400 text-base sm:text-lg flex-shrink-0">🟡</span>
-                        <span className="text-white font-mono flex-1 truncate text-xs sm:text-sm">{article.title}</span>
-                        <Badge className="bg-yellow-500/20 text-yellow-400 border-yellow-500/30 font-mono text-[10px] sm:text-xs whitespace-nowrap">
-                          IN PROGRESS
-                        </Badge>
-                      </>
-                    )}
-                    {article.status === 'pending' && (
-                      <>
-                        <span className="text-blue-400 text-base sm:text-lg flex-shrink-0">🔵</span>
-                        <span className="text-white font-mono flex-1 truncate text-xs sm:text-sm">{article.title}</span>
-                        <Badge className="bg-blue-500/30 text-blue-300 border-blue-500/50 font-mono text-[10px] sm:text-xs whitespace-nowrap">
-                          QUEUED
-                        </Badge>
-                      </>
-                    )}
-                    {article.status === 'review' && (
-                      <>
-                        <span className="text-purple-400 text-base sm:text-lg flex-shrink-0">🟣</span>
-                        <span className="text-white font-mono flex-1 truncate text-xs sm:text-sm">{article.title}</span>
-                        <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 font-mono text-[10px] sm:text-xs whitespace-nowrap">
-                          REVIEW
-                        </Badge>
-                      </>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {/* Previous Months - Collapsible */}
+            {/* Previous Projects - Collapsible */}
             {previousMonthArticles.length > 0 && (
               <Collapsible open={previousMonthsOpen} onOpenChange={setPreviousMonthsOpen}>
                 <CollapsibleTrigger className="flex items-center gap-2 w-full p-2 bg-black/20 rounded-lg border border-primary-glow/20 hover:bg-black/30 hover:border-primary-glow/40 transition-all">
                   <History className="h-4 w-4 text-primary-glow" />
                   <span className="text-white/70 font-mono text-xs sm:text-sm uppercase tracking-wider flex-1 text-left">
-                    Previous Months ({previousMonthArticles.length})
+                    View Previous Projects ({previousMonthArticles.length})
                   </span>
                   <ChevronDown className={`h-4 w-4 text-primary-glow transition-transform ${previousMonthsOpen ? 'rotate-180' : ''}`} />
                 </CollapsibleTrigger>
