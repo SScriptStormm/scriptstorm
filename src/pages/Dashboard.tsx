@@ -608,25 +608,31 @@ const Dashboard = () => {
         <div className="mb-6 sm:mb-8">
           <button
             onClick={() => navigate('/content-brief')}
-            className="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-primary/20 via-primary/30 to-primary/20 p-[1px] transition-all duration-500 hover:from-primary/40 hover:via-primary-glow/50 hover:to-primary/40"
+            className="group relative w-full overflow-hidden rounded-xl border border-primary-glow/30 backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] transition-all duration-300 hover:border-primary-glow/60 hover:shadow-[0_0_40px_hsl(221_83%_53%/0.3)] hover:scale-[1.01]"
           >
-            {/* Animated border glow */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-glow/50 to-transparent animate-shimmer" />
+            {/* Gradient accent overlay */}
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/15 via-primary-glow/10 to-transparent opacity-60 pointer-events-none group-hover:opacity-100 transition-opacity duration-300" />
             
-            {/* Button inner */}
-            <div className="relative flex items-center justify-center gap-3 sm:gap-4 rounded-[11px] bg-black/80 backdrop-blur-xl px-4 sm:px-6 py-4 sm:py-5 transition-all duration-300 group-hover:bg-black/60">
-              {/* Icon container */}
-              <div className="flex items-center justify-center h-10 w-10 sm:h-12 sm:w-12 rounded-lg bg-primary/20 border border-primary-glow/30 group-hover:border-primary-glow/60 group-hover:bg-primary/30 transition-all duration-300">
+            {/* Inner glow effect */}
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-t from-transparent via-transparent to-white/[0.05] pointer-events-none" />
+            
+            {/* Animated shimmer on hover */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-glow/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 pointer-events-none" />
+            
+            {/* Button content */}
+            <div className="relative z-10 flex items-center gap-3 sm:gap-4 px-5 sm:px-6 py-4 sm:py-5">
+              {/* Icon with glowing border */}
+              <div className="flex items-center justify-center h-10 w-10 sm:h-11 sm:w-11 rounded-lg bg-primary/20 border border-primary-glow/40 group-hover:border-primary-glow group-hover:bg-primary/30 group-hover:shadow-[0_0_15px_hsl(221_83%_53%/0.4)] transition-all duration-300">
                 <Plus className="h-5 w-5 sm:h-6 sm:w-6 text-primary-glow group-hover:scale-110 transition-transform duration-300" />
               </div>
               
               {/* Text */}
               <div className="text-left flex-1">
-                <p className="text-white font-mono text-sm sm:text-base md:text-lg tracking-wide font-semibold">
+                <p className="text-white font-mono text-sm sm:text-base md:text-lg tracking-wide font-semibold group-hover:text-primary-glow transition-colors duration-300">
                   Submit New Content Brief
                 </p>
-                <p className="text-white/40 font-mono text-xs sm:text-sm tracking-wide hidden sm:block">
-                  Start your next project
+                <p className="text-white/50 font-mono text-xs sm:text-sm tracking-wide hidden sm:block">
+                  Start your next project — 24-hour turnaround
                 </p>
               </div>
               
