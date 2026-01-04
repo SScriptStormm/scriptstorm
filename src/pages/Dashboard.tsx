@@ -687,14 +687,14 @@ const Dashboard = () => {
                       <SelectTrigger className="flex-1 bg-black/40 border-primary-glow/30 text-white font-mono text-xs sm:text-sm">
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent className="bg-black/95 backdrop-blur-xl border-primary-glow/30 z-50">
-                        <SelectItem value={currentMonthYear} className="font-mono text-white hover:bg-primary-glow/20">
+                      <SelectContent className="bg-black/80 backdrop-blur-xl border-white/[0.1] shadow-lg shadow-primary-glow/10 z-50">
+                        <SelectItem value={currentMonthYear} className="font-mono text-white hover:bg-white/10 focus:bg-white/10">
                           {getMonthLabel(currentMonthYear)} ({articles.filter(a => getMonthYear(a.created_at) === currentMonthYear).length})
                         </SelectItem>
-                        {availableMonths.filter(month => month !== currentMonthYear).map(month => <SelectItem key={month} value={month} className="font-mono text-white hover:bg-primary-glow/20">
+                        {availableMonths.filter(month => month !== currentMonthYear).map(month => <SelectItem key={month} value={month} className="font-mono text-white hover:bg-white/10 focus:bg-white/10">
                               {getMonthLabel(month)} ({articles.filter(a => getMonthYear(a.created_at) === month).length})
                             </SelectItem>)}
-                        <SelectItem value="all_time" className="font-mono text-white hover:bg-primary-glow/20">
+                        <SelectItem value="all_time" className="font-mono text-white hover:bg-white/10 focus:bg-white/10">
                           📚 View All Time
                         </SelectItem>
                       </SelectContent>
