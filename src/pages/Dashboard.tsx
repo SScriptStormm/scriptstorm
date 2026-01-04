@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FileText, Calendar as CalendarIcon, Clock, CheckCircle, AlertCircle, Zap, LogOut, RefreshCw, CreditCard, BarChart3, Target, Eye, Download, Edit, MessageSquare, User as UserIcon, Settings, LayoutDashboard, ChevronDown, Archive } from "lucide-react";
+import { FileText, Calendar as CalendarIcon, Clock, CheckCircle, AlertCircle, Zap, LogOut, RefreshCw, CreditCard, BarChart3, Target, Eye, Download, Edit, MessageSquare, User as UserIcon, Settings, LayoutDashboard, ChevronDown, Archive, Plus, ArrowRight } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -569,31 +569,71 @@ const Dashboard = () => {
 
       {/* Main Content */}
       <main className="relative z-10 container mx-auto px-3 sm:px-4 py-4 sm:py-8">
-        {/* Welcome Section */}
-        <div className="mb-6 sm:mb-8">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 font-mono tracking-wide break-words">
-            Welcome back, <span className="text-primary-glow animate-text-glow block sm:inline mt-1 sm:mt-0">{user?.email}</span>
-          </h2>
-          <p className="text-white/70 font-mono tracking-wide text-sm sm:text-base">
-            {hasDominance ? '⚡ Your dedicated client workspace - Market dominance awaits' : 'Your content production command center'}
-          </p>
-          {hasDominance && <div className="mt-3 p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-lg">
-              <p className="text-yellow-400 font-mono text-sm">
-                <strong>Dominance Tier Active:</strong> 12-hour lightning delivery, unlimited revisions, and dedicated priority support at your service.
-              </p>
-            </div>}
-        </div>
-
-        {/* Submit New Brief Button */}
-        <div className="mb-6 sm:mb-8">
-          <div className="relative group">
-            <div className="absolute inset-0 bg-gradient-cyber rounded-lg blur-lg opacity-40 group-hover:opacity-70 transition-all duration-500" />
-            <Button onClick={() => window.location.href = '/content-brief'} className="relative w-full bg-primary hover:bg-primary-glow text-white font-mono tracking-wide border-2 border-primary-glow/50 hover:border-primary-glow shadow-cyber hover:shadow-hologram transition-all duration-500 h-12 sm:h-14 md:h-16 text-sm sm:text-base md:text-xl">
-              <FileText className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 mr-2 sm:mr-3" />
-              <span className="hidden sm:inline">+ SUBMIT NEW CONTENT BRIEF</span>
-              <span className="sm:hidden">+ NEW BRIEF</span>
-            </Button>
+        {/* Welcome Section - Premium Hero */}
+        <GlassCard className="mb-6 sm:mb-8 p-0 relative overflow-hidden" hover={false}>
+          {/* Accent glow line */}
+          <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-primary-glow to-primary/50" />
+          
+          <div className="p-6 sm:p-8 pl-5 sm:pl-10">
+            <p className="text-primary-glow/80 font-mono text-xs sm:text-sm tracking-[0.2em] uppercase mb-2">
+              Command Center Active
+            </p>
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-1 font-mono tracking-wide">
+              Welcome back
+            </h2>
+            <p className="text-primary-glow text-base sm:text-lg md:text-xl font-mono tracking-wide break-all animate-text-glow mb-3">
+              {user?.email}
+            </p>
+            <p className="text-white/50 font-mono text-sm tracking-wide">
+              {hasDominance 
+                ? 'Market dominance awaits — Your dedicated workspace is ready' 
+                : 'Your content production command center'}
+            </p>
+            
+            {/* Dominance tier notice - integrated */}
+            {hasDominance && (
+              <div className="mt-4 pt-4 border-t border-white/[0.1]">
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-yellow-400 animate-pulse" />
+                  <p className="text-yellow-400/90 font-mono text-sm">
+                    <strong>Dominance Tier:</strong> 12-hour delivery • Unlimited revisions • Priority support
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
+        </GlassCard>
+
+        {/* Submit New Brief Button - Premium CTA */}
+        <div className="mb-6 sm:mb-8">
+          <button
+            onClick={() => navigate('/content-brief')}
+            className="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-primary/20 via-primary/30 to-primary/20 p-[1px] transition-all duration-500 hover:from-primary/40 hover:via-primary-glow/50 hover:to-primary/40"
+          >
+            {/* Animated border glow */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-glow/50 to-transparent animate-shimmer" />
+            
+            {/* Button inner */}
+            <div className="relative flex items-center justify-center gap-3 sm:gap-4 rounded-[11px] bg-black/80 backdrop-blur-xl px-4 sm:px-6 py-4 sm:py-5 transition-all duration-300 group-hover:bg-black/60">
+              {/* Icon container */}
+              <div className="flex items-center justify-center h-10 w-10 sm:h-12 sm:w-12 rounded-lg bg-primary/20 border border-primary-glow/30 group-hover:border-primary-glow/60 group-hover:bg-primary/30 transition-all duration-300">
+                <Plus className="h-5 w-5 sm:h-6 sm:w-6 text-primary-glow group-hover:scale-110 transition-transform duration-300" />
+              </div>
+              
+              {/* Text */}
+              <div className="text-left flex-1">
+                <p className="text-white font-mono text-sm sm:text-base md:text-lg tracking-wide font-semibold">
+                  Submit New Content Brief
+                </p>
+                <p className="text-white/40 font-mono text-xs sm:text-sm tracking-wide hidden sm:block">
+                  Start your next project
+                </p>
+              </div>
+              
+              {/* Arrow indicator */}
+              <ArrowRight className="h-5 w-5 text-primary-glow/50 group-hover:text-primary-glow group-hover:translate-x-1 transition-all duration-300" />
+            </div>
+          </button>
         </div>
 
         {/* 2-Column Grid Layout - Premium Cards */}
