@@ -4,20 +4,52 @@ interface LoadingScreenProps {
 
 const LoadingScreen = ({ message }: LoadingScreenProps) => {
   return (
-    <div className="min-h-screen bg-gradient-hero flex items-center justify-center">
-      <div className="flex flex-col items-center gap-4">
-        <div className="relative">
-          {/* Outer glow ring - gradient based, no border artifacts */}
-          <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-primary-glow via-primary to-primary-glow/30 animate-spin p-[3px]">
-            <div className="w-full h-full rounded-full bg-gradient-hero" />
-          </div>
+    <div className="min-h-screen bg-gradient-hero flex items-center justify-center relative overflow-hidden">
+      {/* Subtle neural grid overlay */}
+      <div className="absolute inset-0 opacity-[0.03]" style={{
+        backgroundImage: `radial-gradient(circle at 25% 25%, hsl(var(--primary)) 1px, transparent 1px),
+                         radial-gradient(circle at 75% 75%, hsl(var(--primary-glow)) 1px, transparent 1px)`,
+        backgroundSize: '40px 40px'
+      }} />
+      
+      {/* Glass container */}
+      <div className="relative bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-8 flex flex-col items-center gap-5">
+        {/* SVG-based spinner - no gradient seam artifacts */}
+        <div className="relative w-16 h-16">
+          <svg 
+            className="w-full h-full animate-spin" 
+            viewBox="0 0 64 64"
+            style={{ animationDuration: '1.2s' }}
+          >
+            <defs>
+              <linearGradient id="spinnerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="hsl(221 83% 65%)" />
+                <stop offset="50%" stopColor="hsl(221 83% 53%)" />
+                <stop offset="100%" stopColor="hsl(221 83% 65% / 0.3)" />
+              </linearGradient>
+            </defs>
+            <circle
+              cx="32"
+              cy="32"
+              r="28"
+              fill="none"
+              stroke="url(#spinnerGradient)"
+              strokeWidth="4"
+              strokeLinecap="round"
+              strokeDasharray="140 60"
+              style={{ filter: 'drop-shadow(0 0 8px hsl(221 83% 53% / 0.5))' }}
+            />
+          </svg>
+          
           {/* Inner pulsing dot */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-3 h-3 rounded-full bg-primary-glow animate-pulse" />
+            <div className="w-2.5 h-2.5 rounded-full bg-primary-glow animate-pulse" 
+                 style={{ boxShadow: '0 0 12px hsl(221 83% 65% / 0.6)' }} />
           </div>
         </div>
+        
         {message && (
-          <p className="text-white/70 text-sm font-mono animate-pulse">{message}</p>
+          <p className="text-white/75 text-sm font-mono">{message}</p>
         )}
       </div>
     </div>

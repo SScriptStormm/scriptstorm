@@ -368,12 +368,12 @@ export function MultiStepContentBriefForm() {
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <GlassCard variant="default" glow hover className="overflow-hidden">
-            <GlassCardHeader>
-              <GlassCardTitle className="text-2xl font-mono">{steps[currentStep - 1].title}</GlassCardTitle>
-              <GlassCardDescription>{steps[currentStep - 1].description}</GlassCardDescription>
+          <GlassCard variant="default" glow hover className="overflow-hidden bg-black/50 backdrop-blur-2xl border-white/15 shadow-[0_0_60px_hsl(221_83%_53%/0.12)]">
+            <GlassCardHeader className="border-b border-white/10 pb-6">
+              <GlassCardTitle className="text-2xl font-mono text-white">{steps[currentStep - 1].title}</GlassCardTitle>
+              <GlassCardDescription className="text-white/60">{steps[currentStep - 1].description}</GlassCardDescription>
             </GlassCardHeader>
-            <GlassCardContent className="space-y-6">
+            <GlassCardContent className="space-y-6 pt-6">
               {/* Step 1: Project Details */}
               {currentStep === 1 && (
                 <div className="space-y-4">
@@ -382,11 +382,15 @@ export function MultiStepContentBriefForm() {
                     name="title"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{getTitleLabel()}</FormLabel>
+                        <FormLabel className="text-white/90 font-mono">{getTitleLabel()}</FormLabel>
                         <FormControl>
-                          <Input placeholder={getTitlePlaceholder()} {...field} />
+                          <Input 
+                            placeholder={getTitlePlaceholder()} 
+                            {...field} 
+                            className="bg-white/[0.06] text-white placeholder:text-white/40 border-white/10 focus-visible:ring-primary-glow/30 focus-visible:border-primary-glow/40 backdrop-blur-xl"
+                          />
                         </FormControl>
-                        <p className="text-xs text-muted-foreground">{getCharCount(field.value, 200)}</p>
+                        <p className="text-xs text-white/50">{getCharCount(field.value, 200)}</p>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -397,27 +401,27 @@ export function MultiStepContentBriefForm() {
                     name="content_type"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Content Type *</FormLabel>
+                        <FormLabel className="text-white/90 font-mono">Content Type *</FormLabel>
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
-                            <SelectTrigger>
+                            <SelectTrigger className="bg-white/[0.06] text-white border-white/10 focus:ring-primary-glow/30 focus:border-primary-glow/40 backdrop-blur-xl [&>span]:text-white/80">
                               <SelectValue placeholder="Select content type" />
                             </SelectTrigger>
                           </FormControl>
-                          <SelectContent>
-                            <SelectItem value="blog_article">
+                          <SelectContent className="bg-black/95 backdrop-blur-xl border-white/10 text-white">
+                            <SelectItem value="blog_article" className="text-white focus:bg-white/10 focus:text-white">
                               <div className="flex items-center gap-2">
                                 <FileText className="h-4 w-4" />
                                 <span>Blog Article</span>
                               </div>
                             </SelectItem>
-                            <SelectItem value="social_media">
+                            <SelectItem value="social_media" className="text-white focus:bg-white/10 focus:text-white">
                               <div className="flex items-center gap-2">
                                 <Zap className="h-4 w-4" />
                                 <span>Social Media Posts</span>
                               </div>
                             </SelectItem>
-                            <SelectItem value="product_description">
+                            <SelectItem value="product_description" className="text-white focus:bg-white/10 focus:text-white">
                               <div className="flex items-center gap-2">
                                 <Target className="h-4 w-4" />
                                 <span>Product Description</span>
@@ -435,12 +439,16 @@ export function MultiStepContentBriefForm() {
                     name="target_keywords"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Target Keywords *</FormLabel>
+                        <FormLabel className="text-white/90 font-mono">Target Keywords *</FormLabel>
                         <FormControl>
-                          <Input placeholder="e.g., 'SaaS marketing, product launch, customer acquisition' (comma-separated)" {...field} />
+                          <Input 
+                            placeholder="e.g., 'SaaS marketing, product launch, customer acquisition' (comma-separated)" 
+                            {...field}
+                            className="bg-white/[0.06] text-white placeholder:text-white/40 border-white/10 focus-visible:ring-primary-glow/30 focus-visible:border-primary-glow/40 backdrop-blur-xl"
+                          />
                         </FormControl>
-                        <div className="mt-2 p-3 bg-primary/10 border border-primary/20 rounded-lg">
-                          <p className="text-xs text-primary-glow/90 font-mono flex items-center gap-2">
+                        <div className="mt-2 p-3 bg-primary/15 border border-primary/25 rounded-lg">
+                          <p className="text-xs text-primary-glow font-mono flex items-center gap-2">
                             <Target className="h-3 w-3" />
                             <strong>{getKeywordResearchLabel()}:</strong> {getKeywordResearchDescription()}
                           </p>
@@ -457,7 +465,7 @@ export function MultiStepContentBriefForm() {
                       name="word_count"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Word Count: {field.value?.toLocaleString()} words *</FormLabel>
+                          <FormLabel className="text-white/90 font-mono">Word Count: {field.value?.toLocaleString()} words *</FormLabel>
                           <FormControl>
                             <Slider
                               min={wordCountRange.min}
@@ -468,7 +476,7 @@ export function MultiStepContentBriefForm() {
                               className="py-4"
                             />
                           </FormControl>
-                          <div className="flex justify-between text-xs text-muted-foreground">
+                          <div className="flex justify-between text-xs text-white/50">
                             <span>{wordCountRange.labels[0]}</span>
                             <span>{wordCountRange.labels[1]}</span>
                             <span>{wordCountRange.labels[2]}</span>
@@ -482,9 +490,9 @@ export function MultiStepContentBriefForm() {
                   {/* Show info for non-blog content types */}
                   {contentType === "social_media" && (
                     <div className="space-y-4">
-                      <div className="p-4 bg-muted/50 rounded-lg border border-border">
-                        <p className="text-sm text-muted-foreground">
-                          <span className="font-semibold text-foreground">Optimal Word Count:</span> 50-120 words (automatically optimized for social media content)
+                      <div className="p-4 bg-white/[0.05] rounded-lg border border-white/10">
+                        <p className="text-sm text-white/70">
+                          <span className="font-semibold text-white/90">Optimal Word Count:</span> 50-120 words (automatically optimized for social media content)
                         </p>
                       </div>
 
@@ -555,9 +563,9 @@ export function MultiStepContentBriefForm() {
                   )}
 
                   {contentType === "product_description" && (
-                    <div className="p-4 bg-muted/50 rounded-lg border border-border">
-                      <p className="text-sm text-muted-foreground">
-                        <span className="font-semibold text-foreground">Optimal Word Count:</span> 100-200 words (automatically optimized for product descriptions)
+                    <div className="p-4 bg-white/[0.05] rounded-lg border border-white/10">
+                      <p className="text-sm text-white/70">
+                        <span className="font-semibold text-white/90">Optimal Word Count:</span> 100-200 words (automatically optimized for product descriptions)
                       </p>
                     </div>
                   )}
@@ -572,15 +580,15 @@ export function MultiStepContentBriefForm() {
                     name="target_audience"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Target Audience *</FormLabel>
+                        <FormLabel className="text-white/90 font-mono">Target Audience *</FormLabel>
                         <FormControl>
                           <Textarea 
                             placeholder="Describe your target audience (demographics, interests, pain points)..."
-                            className="min-h-[100px]"
+                            className="min-h-[100px] bg-white/[0.06] text-white placeholder:text-white/40 border-white/10 focus-visible:ring-primary-glow/30 focus-visible:border-primary-glow/40 backdrop-blur-xl"
                             {...field}
                           />
                         </FormControl>
-                        <p className="text-xs text-muted-foreground">{getCharCount(field.value, 500)}</p>
+                        <p className="text-xs text-white/50">{getCharCount(field.value, 500)}</p>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -591,15 +599,15 @@ export function MultiStepContentBriefForm() {
                     name="content_goal"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Content Goal *</FormLabel>
+                        <FormLabel className="text-white/90 font-mono">Content Goal *</FormLabel>
                         <FormControl>
                           <Textarea 
                             placeholder="What do you want to achieve with this content? (e.g., educate, convert, engage)"
-                            className="min-h-[100px]"
+                            className="min-h-[100px] bg-white/[0.06] text-white placeholder:text-white/40 border-white/10 focus-visible:ring-primary-glow/30 focus-visible:border-primary-glow/40 backdrop-blur-xl"
                             {...field}
                           />
                         </FormControl>
-                        <p className="text-xs text-muted-foreground">{getCharCount(field.value, 500)}</p>
+                        <p className="text-xs text-white/50">{getCharCount(field.value, 500)}</p>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -610,11 +618,11 @@ export function MultiStepContentBriefForm() {
                     name="key_points"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Key Points to Cover *</FormLabel>
+                        <FormLabel className="text-white/90 font-mono">Key Points to Cover *</FormLabel>
                         <FormControl>
                           <Textarea 
                             placeholder="List the main points or sections you want included..."
-                            className="min-h-[120px]"
+                            className="min-h-[120px] bg-white/[0.06] text-white placeholder:text-white/40 border-white/10 focus-visible:ring-primary-glow/30 focus-visible:border-primary-glow/40 backdrop-blur-xl"
                             {...field}
                           />
                         </FormControl>
@@ -625,11 +633,11 @@ export function MultiStepContentBriefForm() {
 
                   {/* AI Competitor Analysis Message - Growth+ Feature */}
                   {hasGrowthPlus && (
-                    <div className="p-4 bg-primary/5 rounded-lg border border-primary/20">
+                    <div className="p-4 bg-primary/15 rounded-lg border border-primary/25">
                       <div className="flex items-start gap-3">
-                        <Target className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                        <p className="text-sm text-foreground leading-relaxed">
-                          <span className="font-semibold">Don't know your top competitors?</span> No problem. Our AI will automatically analyze the top-ranking pages for your topic to ensure your content outperforms them.
+                        <Target className="h-5 w-5 text-primary-glow mt-0.5 flex-shrink-0" />
+                        <p className="text-sm text-white/80 leading-relaxed">
+                          <span className="font-semibold text-white">Don't know your top competitors?</span> No problem. Our AI will automatically analyze the top-ranking pages for your topic to ensure your content outperforms them.
                         </p>
                       </div>
                     </div>
@@ -747,45 +755,45 @@ export function MultiStepContentBriefForm() {
                     name="tone"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Tone *</FormLabel>
+                        <FormLabel className="text-white/90 font-mono">Tone *</FormLabel>
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
-                            <SelectTrigger>
+                            <SelectTrigger className="bg-white/[0.06] text-white border-white/10 focus:ring-primary-glow/30 focus:border-primary-glow/40 backdrop-blur-xl [&>span]:text-white/80">
                               <SelectValue placeholder="Select tone" />
                             </SelectTrigger>
                           </FormControl>
-                          <SelectContent>
-                            <SelectItem value="professional">
+                          <SelectContent className="bg-black/95 backdrop-blur-xl border-white/10 text-white">
+                            <SelectItem value="professional" className="text-white focus:bg-white/10 focus:text-white">
                               <div className="flex items-center gap-2">
                                 <Briefcase className="h-4 w-4" />
                                 <span>Professional</span>
                               </div>
                             </SelectItem>
-                            <SelectItem value="casual">
+                            <SelectItem value="casual" className="text-white focus:bg-white/10 focus:text-white">
                               <div className="flex items-center gap-2">
                                 <Smile className="h-4 w-4" />
                                 <span>Casual</span>
                               </div>
                             </SelectItem>
-                            <SelectItem value="friendly">
+                            <SelectItem value="friendly" className="text-white focus:bg-white/10 focus:text-white">
                               <div className="flex items-center gap-2">
                                 <Heart className="h-4 w-4" />
                                 <span>Friendly</span>
                               </div>
                             </SelectItem>
-                            <SelectItem value="authoritative">
+                            <SelectItem value="authoritative" className="text-white focus:bg-white/10 focus:text-white">
                               <div className="flex items-center gap-2">
                                 <Shield className="h-4 w-4" />
                                 <span>Authoritative</span>
                               </div>
                             </SelectItem>
-                            <SelectItem value="conversational">
+                            <SelectItem value="conversational" className="text-white focus:bg-white/10 focus:text-white">
                               <div className="flex items-center gap-2">
                                 <MessageCircle className="h-4 w-4" />
                                 <span>Conversational</span>
                               </div>
                             </SelectItem>
-                            <SelectItem value="technical">
+                            <SelectItem value="technical" className="text-white focus:bg-white/10 focus:text-white">
                               <div className="flex items-center gap-2">
                                 <Code className="h-4 w-4" />
                                 <span>Technical</span>
@@ -803,11 +811,11 @@ export function MultiStepContentBriefForm() {
                     name="brand_voice"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Brand Voice (Optional)</FormLabel>
+                        <FormLabel className="text-white/90 font-mono">Brand Voice (Optional)</FormLabel>
                         <FormControl>
                           <Textarea 
                             placeholder="Describe your brand's unique voice and personality..."
-                            className="min-h-[100px]"
+                            className="min-h-[100px] bg-white/[0.06] text-white placeholder:text-white/40 border-white/10 focus-visible:ring-primary-glow/30 focus-visible:border-primary-glow/40 backdrop-blur-xl"
                             {...field}
                           />
                         </FormControl>
@@ -821,11 +829,11 @@ export function MultiStepContentBriefForm() {
                     name="style_preferences"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Style Preferences (Optional)</FormLabel>
+                        <FormLabel className="text-white/90 font-mono">Style Preferences (Optional)</FormLabel>
                         <FormControl>
                           <Textarea 
                             placeholder="Any specific formatting, structure, or stylistic preferences..."
-                            className="min-h-[100px]"
+                            className="min-h-[100px] bg-white/[0.06] text-white placeholder:text-white/40 border-white/10 focus-visible:ring-primary-glow/30 focus-visible:border-primary-glow/40 backdrop-blur-xl"
                             {...field}
                           />
                         </FormControl>
@@ -844,11 +852,11 @@ export function MultiStepContentBriefForm() {
                     name="specific_instructions"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Specific Instructions (Optional)</FormLabel>
+                        <FormLabel className="text-white/90 font-mono">Specific Instructions (Optional)</FormLabel>
                         <FormControl>
                           <Textarea 
                             placeholder="Any additional instructions or requirements..."
-                            className="min-h-[120px]"
+                            className="min-h-[120px] bg-white/[0.06] text-white placeholder:text-white/40 border-white/10 focus-visible:ring-primary-glow/30 focus-visible:border-primary-glow/40 backdrop-blur-xl"
                             {...field}
                           />
                         </FormControl>
@@ -862,11 +870,11 @@ export function MultiStepContentBriefForm() {
                     name="reference_links"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Reference Links (Optional)</FormLabel>
+                        <FormLabel className="text-white/90 font-mono">Reference Links (Optional)</FormLabel>
                         <FormControl>
                           <Textarea 
                             placeholder="Links to reference materials, competitor content, or examples (one per line)..."
-                            className="min-h-[100px]"
+                            className="min-h-[100px] bg-white/[0.06] text-white placeholder:text-white/40 border-white/10 focus-visible:ring-primary-glow/30 focus-visible:border-primary-glow/40 backdrop-blur-xl"
                             {...field}
                           />
                         </FormControl>
@@ -880,11 +888,11 @@ export function MultiStepContentBriefForm() {
                     name="avoid_topics"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Topics to Avoid (Optional)</FormLabel>
+                        <FormLabel className="text-white/90 font-mono">Topics to Avoid (Optional)</FormLabel>
                         <FormControl>
                           <Textarea 
                             placeholder="Any topics, angles, or perspectives to avoid..."
-                            className="min-h-[100px]"
+                            className="min-h-[100px] bg-white/[0.06] text-white placeholder:text-white/40 border-white/10 focus-visible:ring-primary-glow/30 focus-visible:border-primary-glow/40 backdrop-blur-xl"
                             {...field}
                           />
                         </FormControl>
