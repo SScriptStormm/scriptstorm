@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { PackageFeaturesWidget } from "@/components/dashboard/PackageFeaturesWidget";
 import LoadingScreen from "@/components/ui/LoadingScreen";
+import { ChevronLeft } from "lucide-react";
 
 interface SubscriberData {
   subscription_tier: string | null;
@@ -46,18 +47,36 @@ export default function PackageDetails() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary via-primary-dark to-secondary">
-      <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-4xl">
+    <div className="min-h-screen bg-gradient-hero bg-fixed relative overflow-hidden">
+      {/* Animated neural network overlay */}
+      <div className="fixed inset-0 opacity-[0.03] pointer-events-none">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 25% 25%, hsl(var(--primary)) 1px, transparent 1px),
+                           radial-gradient(circle at 75% 75%, hsl(var(--primary-glow)) 1px, transparent 1px)`,
+          backgroundSize: '60px 60px'
+        }} />
+      </div>
+
+      {/* Floating geometric elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary-glow/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/3 rounded-full blur-3xl" />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-4xl">
         <div className="mb-6 sm:mb-8">
           <Button
-            variant="outline"
+            variant="ghost"
             onClick={() => navigate("/account-settings")}
-            className="mb-4 bg-white/10 text-white border-white/30 hover:bg-white/20"
+            className="mb-4 group relative overflow-hidden rounded-lg border border-white/10 bg-white/[0.03] backdrop-blur-xl text-white/80 hover:text-white hover:bg-white/[0.08] hover:border-white/20 transition-all duration-300"
           >
-            ← Back to Account Settings
+            <ChevronLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform duration-300" />
+            Back to Account Settings
           </Button>
-          <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2">Your Package Details</h1>
-          <p className="text-sm sm:text-base text-white/70">Everything included in your subscription</p>
+          <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2 font-mono tracking-tight">Your Package Details</h1>
+          <p className="text-sm sm:text-base text-white/60 font-mono">Everything included in your subscription</p>
         </div>
 
         <PackageFeaturesWidget subscriptionTier={subscriber?.subscription_tier || 'starter'} />

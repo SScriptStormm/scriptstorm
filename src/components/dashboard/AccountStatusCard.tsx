@@ -76,7 +76,7 @@ export const AccountStatusCard = ({ subscriptionTier, subscriptionEnd, isSubscri
               <span className="text-white/50 font-mono text-xs uppercase tracking-wider">Current Plan</span>
               <div className="flex items-center gap-2 flex-wrap">
                 <HoloBadge variant={variant} size="md" animated>
-                  {emoji} {subscriptionTier || 'Starter'}
+                  {emoji} {subscriptionTier ? subscriptionTier.charAt(0).toUpperCase() + subscriptionTier.slice(1) : 'Starter'}
                 </HoloBadge>
                 {subscriptionEnd && (
                   <HoloBadge variant="default" size="sm">
