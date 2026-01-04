@@ -9,7 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FileText, Calendar as CalendarIcon, TrendingUp, Clock, CheckCircle, AlertCircle, Zap, LogOut, RefreshCw, CreditCard, BarChart3, Target, Eye, Download, Edit, MessageSquare, User as UserIcon, Settings, LayoutDashboard, ChevronDown, Archive } from "lucide-react";
+import { FileText, Calendar as CalendarIcon, TrendingUp, Clock, CheckCircle, AlertCircle, Zap, LogOut, RefreshCw, CreditCard, BarChart3, Target, Eye, Download, Edit, MessageSquare, User as UserIcon, Settings, LayoutDashboard, ChevronDown, Archive, History } from "lucide-react";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -65,6 +66,8 @@ const Dashboard = () => {
   const [revisionDialogOpen, setRevisionDialogOpen] = useState(false);
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
   const [revisionFeedback, setRevisionFeedback] = useState("");
+  const [selectedPipelineArticleId, setSelectedPipelineArticleId] = useState<string | null>(null);
+  const [previousMonthsOpen, setPreviousMonthsOpen] = useState(false);
   const [submittingRevision, setSubmittingRevision] = useState(false);
   const {
     toast
@@ -333,6 +336,15 @@ const Dashboard = () => {
   // Filter articles by month first, then by status
   const monthFilteredArticles = monthFilter === 'all_time' ? articles : articles.filter(article => getMonthYear(article.created_at) === monthFilter);
   const filteredArticles = statusFilter === 'all' ? monthFilteredArticles : monthFilteredArticles.filter(a => a.status === statusFilter);
+
+  // Current month articles for pipeline display
+  const currentMonthPipelineArticles = articles.filter(article => getMonthYear(article.created_at) === currentMonthYear);
+  const previousMonthArticles = articles.filter(article => getMonthYear(article.created_at) !== currentMonthYear);
+  
+  // Determine which article to display in pipeline
+  const displayedPipelineArticle = selectedPipelineArticleId 
+    ? articles.find(a => a.id === selectedPipelineArticleId) 
+    : currentMonthPipelineArticles[0] || null;
 
   // Monthly limits by tier
   const getMonthlyLimit = () => {
@@ -730,71 +742,94 @@ const Dashboard = () => {
           </Card>}
 
         {/* Consolidated Pipeline & Workflow */}
-        {articles.length > 0 ? <Card className="mb-6 sm:mb-8 bg-black/30 backdrop-blur-xl border-green-500/30 shadow-cyber">
-            <div className="absolute inset-0 bg-gradient-cyber opacity-5 rounded-lg" />
-            <CardHeader className="relative px-4 sm:px-6">
-              <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide text-base sm:text-lg">
-                <Target className="h-4 w-4 sm:h-5 sm:w-5 text-green-400" />
-                CONTENT PIPELINE
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="relative space-y-4 sm:space-y-6 px-4 sm:px-6">
-              {/* Latest Project Status */}
+        <Card className="mb-6 sm:mb-8 bg-black/30 backdrop-blur-xl border-green-500/30 shadow-cyber">
+          <div className="absolute inset-0 bg-gradient-cyber opacity-5 rounded-lg" />
+          <CardHeader className="relative px-4 sm:px-6">
+            <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide text-base sm:text-lg">
+              <Target className="h-4 w-4 sm:h-5 sm:w-5 text-green-400" />
+              CONTENT PIPELINE
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="relative space-y-4 sm:space-y-6 px-4 sm:px-6">
+            {/* Selected Project Indicator */}
+            {selectedPipelineArticleId && displayedPipelineArticle && (
+              <div className="flex items-center justify-between p-2 bg-primary-glow/10 rounded-lg border border-primary-glow/30">
+                <span className="text-white/70 font-mono text-xs">
+                  Viewing: <span className="text-primary-glow">{displayedPipelineArticle.title}</span>
+                </span>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={() => setSelectedPipelineArticleId(null)}
+                  className="font-mono text-xs text-primary-glow hover:text-white h-7"
+                >
+                  Show Latest
+                </Button>
+              </div>
+            )}
+
+            {/* Latest Project Status or Empty State */}
+            {displayedPipelineArticle ? (
               <div className="space-y-3">
-                <h3 className="text-white/70 font-mono text-xs sm:text-sm uppercase tracking-wider">Latest Project</h3>
+                <h3 className="text-white/70 font-mono text-xs sm:text-sm uppercase tracking-wider">
+                  {selectedPipelineArticleId ? 'Selected Project' : 'Latest Project'}
+                </h3>
                 <div className="p-3 sm:p-6 bg-black/20 rounded-lg border border-green-500/20">
                   <div className="mb-2">
-                    <p className="text-white font-mono text-sm sm:text-base break-words">{articles[0]?.title}</p>
+                    <p className="text-white font-mono text-sm sm:text-base break-words">{displayedPipelineArticle.title}</p>
                   </div>
                   <p className="text-white/50 font-mono text-xs mb-4 sm:mb-6">
-                    Submitted: {formatDateTime(articles[0]?.created_at)}
+                    Submitted: {formatDateTime(displayedPipelineArticle.created_at)}
                   </p>
                   
                   {/* Progress Tracker */}
                   <div className="space-y-3 sm:space-y-4">
                     {(() => {
-                  const status = articles[0]?.status || 'pending';
-                  const stages = [{
-                    name: 'Brief Received',
-                    icon: CheckCircle,
-                    emoji: '✅',
-                    desc: 'Your brief has been received and queued',
-                    step: 1
-                  }, {
-                    name: 'AI Research & Strategy',
-                    icon: Clock,
-                    emoji: '🔄',
-                    desc: 'Analyzing keywords and competitor insights',
-                    step: 2
-                  }, {
-                    name: 'AI Writing',
-                    icon: FileText,
-                    emoji: '✍️',
-                    desc: 'Content generation in progress',
-                    step: 3
-                  }, {
-                    name: 'Quality Control',
-                    icon: Eye,
-                    emoji: '🔍',
-                    desc: 'Human review and optimization',
-                    step: 4
-                  }, {
-                    name: 'Ready for Download',
-                    icon: Zap,
-                    emoji: '🚀',
-                    desc: 'Your content will be available here',
-                    step: 5
-                  }];
+                      const status = displayedPipelineArticle.status || 'pending';
+                      const stages = [{
+                        name: 'Brief Received',
+                        icon: CheckCircle,
+                        emoji: '✅',
+                        desc: 'Your brief has been received and queued',
+                        step: 1
+                      }, {
+                        name: 'AI Research & Strategy',
+                        icon: Clock,
+                        emoji: '🔄',
+                        desc: 'Analyzing keywords and competitor insights',
+                        step: 2
+                      }, {
+                        name: 'AI Writing',
+                        icon: FileText,
+                        emoji: '✍️',
+                        desc: 'Content generation in progress',
+                        step: 3
+                      }, {
+                        name: 'Quality Control',
+                        icon: Eye,
+                        emoji: '🔍',
+                        desc: 'Human review and optimization',
+                        step: 4
+                      }, {
+                        name: 'Ready for Download',
+                        icon: Zap,
+                        emoji: '🚀',
+                        desc: 'Your content will be available here',
+                        step: 5
+                      }];
 
-                  // Determine current step based on status
-                  let currentStep = 1;
-                  if (status === 'pending') currentStep = 2;else if (status === 'in_progress') currentStep = 3;else if (status === 'review') currentStep = 4;else if (status === 'completed') currentStep = 5;
-                  return stages.map((stage, index) => {
-                    const isCompleted = stage.step < currentStep;
-                    const isCurrent = stage.step === currentStep;
-                    const isPending = stage.step > currentStep;
-                    const Icon = stage.icon;
-                    return <div key={stage.name}>
+                      let currentStep = 1;
+                      if (status === 'pending') currentStep = 2;
+                      else if (status === 'in_progress') currentStep = 3;
+                      else if (status === 'review') currentStep = 4;
+                      else if (status === 'completed') currentStep = 5;
+
+                      return stages.map((stage, index) => {
+                        const isCompleted = stage.step < currentStep;
+                        const isCurrent = stage.step === currentStep;
+                        const Icon = stage.icon;
+                        return (
+                          <div key={stage.name}>
                             <div className="flex items-start gap-2 sm:gap-3">
                               <div className={`flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full flex-shrink-0 mt-0.5 ${isCompleted ? 'bg-green-500/20 border border-green-500' : isCurrent ? 'bg-yellow-500/20 border border-yellow-500' : 'bg-white/10 border border-white/30'}`}>
                                 <Icon className={`h-3 w-3 sm:h-4 sm:w-4 ${isCompleted ? 'text-green-400' : isCurrent ? 'text-yellow-400 animate-pulse' : 'text-white/50'}`} />
@@ -809,31 +844,33 @@ const Dashboard = () => {
                               </div>
                             </div>
                             {index < stages.length - 1 && <div className={`ml-2 sm:ml-3 w-0.5 h-3 sm:h-4 ${isCompleted ? 'bg-green-500/30' : isCurrent ? 'bg-yellow-500/30' : 'bg-white/10'}`}></div>}
-                          </div>;
-                  });
-                })()}
+                          </div>
+                        );
+                      });
+                    })()}
                   </div>
                   
                   {/* Progress Bar */}
                   <div className="mt-6">
                     {(() => {
-                  const status = articles[0]?.status || 'pending';
-                  let progress = 20;
-                  let statusMessage = 'Estimated completion: Within 24 hours';
-                  if (status === 'pending') {
-                    progress = 20;
-                    statusMessage = 'Brief received, starting research...';
-                  } else if (status === 'in_progress') {
-                    progress = 60;
-                    statusMessage = 'AI writing in progress...';
-                  } else if (status === 'review') {
-                    progress = 80;
-                    statusMessage = 'Under quality review...';
-                  } else if (status === 'completed') {
-                    progress = 100;
-                    statusMessage = 'Content ready for download!';
-                  }
-                  return <>
+                      const status = displayedPipelineArticle.status || 'pending';
+                      let progress = 20;
+                      let statusMessage = 'Estimated completion: Within 24 hours';
+                      if (status === 'pending') {
+                        progress = 20;
+                        statusMessage = 'Brief received, starting research...';
+                      } else if (status === 'in_progress') {
+                        progress = 60;
+                        statusMessage = 'AI writing in progress...';
+                      } else if (status === 'review') {
+                        progress = 80;
+                        statusMessage = 'Under quality review...';
+                      } else if (status === 'completed') {
+                        progress = 100;
+                        statusMessage = 'Content ready for download!';
+                      }
+                      return (
+                        <>
                           <div className="flex justify-between text-xs font-mono text-white/60 mb-2">
                             <span>Progress</span>
                             <span>{progress}% Complete</span>
@@ -842,56 +879,157 @@ const Dashboard = () => {
                           <p className={`font-mono text-xs mt-2 ${status === 'completed' ? 'text-green-400' : 'text-yellow-400'}`}>
                             {status === 'completed' ? '✅' : '⏱️'} {statusMessage}
                           </p>
-                        </>;
-                })()}
+                        </>
+                      );
+                    })()}
                   </div>
                 </div>
               </div>
+            ) : (
+              <div className="text-center py-12">
+                <AlertCircle className="h-16 w-16 text-primary-glow/50 mx-auto mb-4" />
+                <p className="text-white font-mono text-xl mb-2">Ready for Content Production</p>
+                <p className="text-white/70 font-mono text-sm">
+                  {articles.length > 0 
+                    ? "No content briefs submitted this month. Submit a new brief to get started!" 
+                    : "Submit your first content brief to get started"}
+                </p>
+              </div>
+            )}
 
-              {/* Workflow Progress */}
+            {/* This Month's Projects - Clickable */}
+            {currentMonthPipelineArticles.length > 0 && (
               <div className="space-y-3">
-                <h3 className="text-white/70 font-mono text-xs sm:text-sm uppercase tracking-wider">Recent Projects</h3>
-                {articles.slice(0, 3).map(article => <div key={article.id} className="flex items-center gap-2 sm:gap-4 p-2 sm:p-3 bg-black/20 rounded-lg border border-primary-glow/20">
-                    {article.status === 'completed' && <>
+                <h3 className="text-white/70 font-mono text-xs sm:text-sm uppercase tracking-wider">
+                  This Month's Projects ({currentMonthPipelineArticles.length})
+                </h3>
+                {currentMonthPipelineArticles.slice(0, 5).map(article => (
+                  <div 
+                    key={article.id} 
+                    onClick={() => setSelectedPipelineArticleId(article.id === selectedPipelineArticleId ? null : article.id)}
+                    className={`flex items-center gap-2 sm:gap-4 p-2 sm:p-3 bg-black/20 rounded-lg border cursor-pointer transition-all hover:bg-black/30 ${
+                      article.id === selectedPipelineArticleId 
+                        ? 'border-green-500/60 bg-green-500/10' 
+                        : 'border-primary-glow/20 hover:border-primary-glow/40'
+                    }`}
+                  >
+                    {article.status === 'completed' && (
+                      <>
                         <span className="text-green-400 text-base sm:text-lg flex-shrink-0">🟢</span>
                         <span className="text-white font-mono flex-1 truncate text-xs sm:text-sm">{article.title}</span>
                         <Badge className="bg-green-500/20 text-green-400 border-green-500/30 font-mono text-[10px] sm:text-xs whitespace-nowrap">
                           COMPLETE
                         </Badge>
-                      </>}
-                    {article.status === 'in_progress' && <>
+                      </>
+                    )}
+                    {article.status === 'in_progress' && (
+                      <>
                         <span className="text-yellow-400 text-base sm:text-lg flex-shrink-0">🟡</span>
                         <span className="text-white font-mono flex-1 truncate text-xs sm:text-sm">{article.title}</span>
                         <Badge className="bg-yellow-500/20 text-yellow-400 border-yellow-500/30 font-mono text-[10px] sm:text-xs whitespace-nowrap">
                           IN PROGRESS
                         </Badge>
-                      </>}
-                    {article.status === 'pending' && <>
+                      </>
+                    )}
+                    {article.status === 'pending' && (
+                      <>
                         <span className="text-blue-400 text-base sm:text-lg flex-shrink-0">🔵</span>
                         <span className="text-white font-mono flex-1 truncate text-xs sm:text-sm">{article.title}</span>
                         <Badge className="bg-blue-500/30 text-blue-300 border-blue-500/50 font-mono text-[10px] sm:text-xs whitespace-nowrap">
                           QUEUED
                         </Badge>
-                      </>}
-                  </div>)}
+                      </>
+                    )}
+                    {article.status === 'review' && (
+                      <>
+                        <span className="text-purple-400 text-base sm:text-lg flex-shrink-0">🟣</span>
+                        <span className="text-white font-mono flex-1 truncate text-xs sm:text-sm">{article.title}</span>
+                        <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 font-mono text-[10px] sm:text-xs whitespace-nowrap">
+                          REVIEW
+                        </Badge>
+                      </>
+                    )}
+                  </div>
+                ))}
               </div>
-            </CardContent>
-          </Card> : <Card className="mb-8 bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber">
-            <div className="absolute inset-0 bg-gradient-cyber opacity-5 rounded-lg" />
-            <CardHeader className="relative">
-              <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
-                <Target className="h-5 w-5 text-primary-glow" />
-                CONTENT PIPELINE
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="relative">
-              <div className="text-center py-12">
-                <AlertCircle className="h-16 w-16 text-primary-glow/50 mx-auto mb-4" />
-                <p className="text-white font-mono text-xl mb-2">Ready for Content Production</p>
-                <p className="text-white/70 font-mono text-sm">Submit your first content brief to get started</p>
-              </div>
-            </CardContent>
-          </Card>}
+            )}
+
+            {/* Previous Months - Collapsible */}
+            {previousMonthArticles.length > 0 && (
+              <Collapsible open={previousMonthsOpen} onOpenChange={setPreviousMonthsOpen}>
+                <CollapsibleTrigger className="flex items-center gap-2 w-full p-2 bg-black/20 rounded-lg border border-primary-glow/20 hover:bg-black/30 hover:border-primary-glow/40 transition-all">
+                  <History className="h-4 w-4 text-primary-glow" />
+                  <span className="text-white/70 font-mono text-xs sm:text-sm uppercase tracking-wider flex-1 text-left">
+                    Previous Months ({previousMonthArticles.length})
+                  </span>
+                  <ChevronDown className={`h-4 w-4 text-primary-glow transition-transform ${previousMonthsOpen ? 'rotate-180' : ''}`} />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="space-y-2 mt-2">
+                  {previousMonthArticles.slice(0, 10).map(article => (
+                    <div 
+                      key={article.id} 
+                      onClick={() => setSelectedPipelineArticleId(article.id === selectedPipelineArticleId ? null : article.id)}
+                      className={`flex items-center gap-2 sm:gap-4 p-2 sm:p-3 bg-black/20 rounded-lg border cursor-pointer transition-all hover:bg-black/30 ${
+                        article.id === selectedPipelineArticleId 
+                          ? 'border-green-500/60 bg-green-500/10' 
+                          : 'border-white/10 hover:border-primary-glow/30'
+                      }`}
+                    >
+                      {article.status === 'completed' && (
+                        <>
+                          <span className="text-green-400 text-base sm:text-lg flex-shrink-0">🟢</span>
+                          <div className="flex-1 min-w-0">
+                            <span className="text-white font-mono truncate text-xs sm:text-sm block">{article.title}</span>
+                            <span className="text-white/40 font-mono text-[10px]">{getMonthLabel(getMonthYear(article.created_at))}</span>
+                          </div>
+                          <Badge className="bg-green-500/20 text-green-400 border-green-500/30 font-mono text-[10px] sm:text-xs whitespace-nowrap">
+                            COMPLETE
+                          </Badge>
+                        </>
+                      )}
+                      {article.status === 'in_progress' && (
+                        <>
+                          <span className="text-yellow-400 text-base sm:text-lg flex-shrink-0">🟡</span>
+                          <div className="flex-1 min-w-0">
+                            <span className="text-white font-mono truncate text-xs sm:text-sm block">{article.title}</span>
+                            <span className="text-white/40 font-mono text-[10px]">{getMonthLabel(getMonthYear(article.created_at))}</span>
+                          </div>
+                          <Badge className="bg-yellow-500/20 text-yellow-400 border-yellow-500/30 font-mono text-[10px] sm:text-xs whitespace-nowrap">
+                            IN PROGRESS
+                          </Badge>
+                        </>
+                      )}
+                      {article.status === 'pending' && (
+                        <>
+                          <span className="text-blue-400 text-base sm:text-lg flex-shrink-0">🔵</span>
+                          <div className="flex-1 min-w-0">
+                            <span className="text-white font-mono truncate text-xs sm:text-sm block">{article.title}</span>
+                            <span className="text-white/40 font-mono text-[10px]">{getMonthLabel(getMonthYear(article.created_at))}</span>
+                          </div>
+                          <Badge className="bg-blue-500/30 text-blue-300 border-blue-500/50 font-mono text-[10px] sm:text-xs whitespace-nowrap">
+                            QUEUED
+                          </Badge>
+                        </>
+                      )}
+                      {article.status === 'review' && (
+                        <>
+                          <span className="text-purple-400 text-base sm:text-lg flex-shrink-0">🟣</span>
+                          <div className="flex-1 min-w-0">
+                            <span className="text-white font-mono truncate text-xs sm:text-sm block">{article.title}</span>
+                            <span className="text-white/40 font-mono text-[10px]">{getMonthLabel(getMonthYear(article.created_at))}</span>
+                          </div>
+                          <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 font-mono text-[10px] sm:text-xs whitespace-nowrap">
+                            REVIEW
+                          </Badge>
+                        </>
+                      )}
+                    </div>
+                  ))}
+                </CollapsibleContent>
+              </Collapsible>
+            )}
+          </CardContent>
+        </Card>
 
         {/* Dashboard Features Tabs */}
         <Tabs defaultValue="projects" className="mb-8">
