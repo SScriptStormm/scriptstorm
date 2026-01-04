@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { GlassCard, GlassCardContent, GlassCardHeader, GlassCardTitle } from "@/components/ui/GlassCard";
 import { Target, Download, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { formatDate } from "@/lib/dateUtils";
 
-interface MarketRoadmap {
+interface MarketRoadmapData {
   id: string;
   title: string;
   description: string | null;
@@ -23,7 +23,7 @@ interface MarketRoadmapProps {
 }
 
 const MarketRoadmap = ({ userId }: MarketRoadmapProps) => {
-  const [roadmaps, setRoadmaps] = useState<MarketRoadmap[]>([]);
+  const [roadmaps, setRoadmaps] = useState<MarketRoadmapData[]>([]);
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
 
@@ -75,37 +75,39 @@ const MarketRoadmap = ({ userId }: MarketRoadmapProps) => {
 
   if (roadmaps.length === 0) {
     return (
-      <Card className="bg-black/30 backdrop-blur-xl border-primary-glow/30">
-        <CardContent className="py-12 text-center">
-          <Target className="h-16 w-16 text-primary-glow/50 mx-auto mb-4" />
+      <GlassCard variant="dominance" glow>
+        <GlassCardContent className="py-12 text-center">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/[0.05] border border-white/[0.1] mb-4">
+            <Target className="h-10 w-10 text-primary-glow" />
+          </div>
           <h3 className="text-white font-mono text-lg mb-2">No Market Roadmaps</h3>
           <p className="text-white/70 font-mono text-sm">
             Your strategic quarterly roadmaps will appear here once created by our team.
           </p>
-        </CardContent>
-      </Card>
+        </GlassCardContent>
+      </GlassCard>
     );
   }
 
   return (
-    <Card className="bg-black/30 backdrop-blur-xl border-primary-glow/30">
-      <CardHeader>
+    <GlassCard variant="dominance" glow>
+      <GlassCardHeader>
         <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
+          <GlassCardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
             <Target className="h-5 w-5 text-primary-glow" />
             MARKET DOMINANCE ROADMAP
-          </CardTitle>
+          </GlassCardTitle>
           <div className="px-3 py-1 bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 rounded-full text-xs font-mono font-semibold">
             DOMINANCE EXCLUSIVE
           </div>
         </div>
-      </CardHeader>
-      <CardContent>
+      </GlassCardHeader>
+      <GlassCardContent>
         <div className="space-y-4">
           {roadmaps.map((roadmap) => (
             <div 
               key={roadmap.id}
-              className="p-6 bg-gradient-cyber/10 rounded-lg border border-primary-glow/30 hover:border-primary-glow/50 transition-all"
+              className="p-6 bg-white/[0.05] backdrop-blur-sm rounded-lg border border-white/[0.1] hover:bg-white/[0.08] hover:border-white/[0.15] transition-all"
             >
               <div className="flex items-start justify-between mb-3">
                 <div className="flex-1">
@@ -128,7 +130,7 @@ const MarketRoadmap = ({ userId }: MarketRoadmapProps) => {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between mt-4 pt-4 border-t border-primary-glow/10">
+              <div className="flex items-center justify-between mt-4 pt-4 border-t border-white/[0.1]">
                 <p className="text-white/50 font-mono text-xs">
                   Created: {formatDate(roadmap.created_at)}
                 </p>
@@ -157,7 +159,7 @@ const MarketRoadmap = ({ userId }: MarketRoadmapProps) => {
           ))}
         </div>
 
-        <div className="mt-6 p-4 bg-black/20 rounded-lg border border-primary-glow/20">
+        <div className="mt-6 p-4 bg-white/[0.03] rounded-lg border border-white/[0.1]">
           <h4 className="text-white font-mono text-sm mb-2">About Your Roadmap</h4>
           <p className="text-white/70 font-mono text-xs">
             Your Market Dominance Roadmap is a strategic, quarterly plan designed to systematically 
@@ -165,8 +167,8 @@ const MarketRoadmap = ({ userId }: MarketRoadmapProps) => {
             includes detailed action items, content themes, and competitive analysis.
           </p>
         </div>
-      </CardContent>
-    </Card>
+      </GlassCardContent>
+    </GlassCard>
   );
 };
 

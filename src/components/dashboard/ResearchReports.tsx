@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { GlassCard, GlassCardContent, GlassCardHeader, GlassCardTitle } from "@/components/ui/GlassCard";
 import { FileText, Download, FileBarChart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -88,32 +88,34 @@ const ResearchReports = ({ userId }: ResearchReportsProps) => {
 
   if (reports.length === 0) {
     return (
-      <Card className="bg-black/30 backdrop-blur-xl border-primary-glow/30">
-        <CardContent className="py-12 text-center">
-          <FileBarChart className="h-16 w-16 text-primary-glow/50 mx-auto mb-4" />
+      <GlassCard variant="default" glow>
+        <GlassCardContent className="py-12 text-center">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/[0.05] border border-white/[0.1] mb-4">
+            <FileBarChart className="h-10 w-10 text-primary-glow" />
+          </div>
           <h3 className="text-white font-mono text-lg mb-2">No Research Reports</h3>
           <p className="text-white/70 font-mono text-sm">
             Your research reports will appear here once uploaded by our team.
           </p>
-        </CardContent>
-      </Card>
+        </GlassCardContent>
+      </GlassCard>
     );
   }
 
   return (
-    <Card className="bg-black/30 backdrop-blur-xl border-primary-glow/30">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
+    <GlassCard variant="default" glow>
+      <GlassCardHeader>
+        <GlassCardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
           <FileText className="h-5 w-5 text-primary-glow" />
           RESEARCH REPORTS
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
+        </GlassCardTitle>
+      </GlassCardHeader>
+      <GlassCardContent>
         <div className="space-y-4">
           {reports.map((report) => (
             <div 
               key={report.id}
-              className="p-4 bg-black/20 rounded-lg border border-primary-glow/20 hover:border-primary-glow/40 transition-all"
+              className="p-4 bg-white/[0.05] backdrop-blur-sm rounded-lg border border-white/[0.1] hover:bg-white/[0.08] hover:border-white/[0.15] transition-all"
             >
               <div className="flex items-start justify-between mb-3">
                 <div className="flex-1">
@@ -124,7 +126,7 @@ const ResearchReports = ({ userId }: ResearchReportsProps) => {
                   {getReportTypeBadge(report.report_type)}
                 </div>
               </div>
-              <div className="flex items-center justify-between mt-3 pt-3 border-t border-primary-glow/10">
+              <div className="flex items-center justify-between mt-3 pt-3 border-t border-white/[0.1]">
                 <p className="text-white/50 font-mono text-xs">
                   Uploaded: {formatDate(report.uploaded_at)}
                 </p>
@@ -142,8 +144,8 @@ const ResearchReports = ({ userId }: ResearchReportsProps) => {
             </div>
           ))}
         </div>
-      </CardContent>
-    </Card>
+      </GlassCardContent>
+    </GlassCard>
   );
 };
 

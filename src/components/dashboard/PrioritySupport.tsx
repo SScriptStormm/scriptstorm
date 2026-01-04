@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { GlassCard, GlassCardContent, GlassCardHeader, GlassCardTitle } from "@/components/ui/GlassCard";
 import { Button } from "@/components/ui/button";
 import { Mail, MessageSquare, Phone } from "lucide-react";
 
@@ -26,21 +26,21 @@ ${userEmail}
   };
 
   return (
-    <Card className="bg-black/30 backdrop-blur-xl border-primary-glow/30">
-      <CardHeader>
+    <GlassCard variant="default" glow>
+      <GlassCardHeader>
         <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
+          <GlassCardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
             <MessageSquare className="h-5 w-5 text-primary-glow" />
             PRIORITY SUPPORT PORTAL
-          </CardTitle>
+          </GlassCardTitle>
           <div className="px-3 py-1 bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 rounded-full text-xs font-mono font-semibold">
             PRIORITY ACCESS
           </div>
         </div>
-      </CardHeader>
-      <CardContent>
+      </GlassCardHeader>
+      <GlassCardContent>
         <div className="space-y-6">
-          <div className="p-6 bg-gradient-cyber/10 rounded-lg border border-primary-glow/30 text-center">
+          <div className="p-6 bg-white/[0.05] backdrop-blur-sm rounded-lg border border-white/[0.1] text-center">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary-glow/20 border-2 border-primary-glow mb-4">
               <Phone className="h-8 w-8 text-primary-glow" />
             </div>
@@ -58,7 +58,7 @@ ${userEmail}
           </div>
 
           <div className="space-y-3">
-            <div className="p-4 bg-black/20 rounded-lg border border-primary-glow/20">
+            <div className="p-4 bg-white/[0.05] backdrop-blur-sm rounded-lg border border-white/[0.1] hover:bg-white/[0.08] transition-all">
               <div className="flex items-start gap-3">
                 <div className="text-primary-glow font-mono text-sm">✓</div>
                 <div>
@@ -70,7 +70,7 @@ ${userEmail}
               </div>
             </div>
 
-            <div className="p-4 bg-black/20 rounded-lg border border-primary-glow/20">
+            <div className="p-4 bg-white/[0.05] backdrop-blur-sm rounded-lg border border-white/[0.1] hover:bg-white/[0.08] transition-all">
               <div className="flex items-start gap-3">
                 <div className="text-primary-glow font-mono text-sm">✓</div>
                 <div>
@@ -82,7 +82,7 @@ ${userEmail}
               </div>
             </div>
 
-            <div className="p-4 bg-black/20 rounded-lg border border-primary-glow/20">
+            <div className="p-4 bg-white/[0.05] backdrop-blur-sm rounded-lg border border-white/[0.1] hover:bg-white/[0.08] transition-all">
               <div className="flex items-start gap-3">
                 <div className="text-primary-glow font-mono text-sm">✓</div>
                 <div>
@@ -95,14 +95,14 @@ ${userEmail}
             </div>
           </div>
 
-          <div className="p-4 bg-primary-glow/5 rounded-lg border border-primary-glow/20">
+          <div className="p-4 bg-white/[0.03] rounded-lg border border-white/[0.1]">
             <p className="text-white/70 font-mono text-xs text-center">
               Support Email: <span className="text-primary-glow">support@scriptstorm.org</span>
             </p>
           </div>
         </div>
-      </CardContent>
-    </Card>
+      </GlassCardContent>
+    </GlassCard>
   );
 };
 

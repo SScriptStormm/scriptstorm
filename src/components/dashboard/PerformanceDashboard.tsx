@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { GlassCard, GlassCardContent, GlassCardHeader, GlassCardTitle } from "@/components/ui/GlassCard";
 import { BarChart3, TrendingUp, Target, FileText } from "lucide-react";
-import { Progress } from "@/components/ui/progress";
+import { NeonProgress } from "@/components/ui/NeonProgress";
 
 interface Article {
   id: string;
@@ -58,14 +58,14 @@ const PerformanceDashboard = ({ articles, monthlyLimit }: PerformanceDashboardPr
   return (
     <div className="space-y-6">
       {/* Performance Score Card */}
-      <Card className="bg-black/30 backdrop-blur-xl border-primary-glow/30">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
+      <GlassCard variant="default" glow>
+        <GlassCardHeader>
+          <GlassCardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
             <BarChart3 className="h-5 w-5 text-primary-glow" />
             AI-DRIVEN PERFORMANCE DASHBOARD
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
+          </GlassCardTitle>
+        </GlassCardHeader>
+        <GlassCardContent>
           <div className="text-center py-8">
             <div className="relative inline-block">
               <div className={`text-6xl font-bold font-mono ${getScoreColor(performanceScore)}`}>
@@ -81,16 +81,21 @@ const PerformanceDashboard = ({ articles, monthlyLimit }: PerformanceDashboardPr
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-            <div className="p-4 bg-black/20 rounded-lg border border-green-500/20">
+            <div className="p-4 bg-white/[0.05] backdrop-blur-sm rounded-lg border border-green-500/20 hover:bg-white/[0.08] transition-all">
               <div className="flex items-center gap-2 mb-2">
                 <FileText className="h-4 w-4 text-green-400" />
                 <span className="text-white/70 font-mono text-xs">COMPLETED</span>
               </div>
               <div className="text-white font-mono text-2xl">{completedArticles}</div>
-              <Progress value={(completedArticles / monthlyLimit) * 100} className="h-1 mt-2 bg-black/50" />
+              <NeonProgress 
+                value={(completedArticles / monthlyLimit) * 100} 
+                variant="success"
+                size="sm"
+                className="mt-2"
+              />
             </div>
 
-            <div className="p-4 bg-black/20 rounded-lg border border-yellow-500/20">
+            <div className="p-4 bg-white/[0.05] backdrop-blur-sm rounded-lg border border-yellow-500/20 hover:bg-white/[0.08] transition-all">
               <div className="flex items-center gap-2 mb-2">
                 <TrendingUp className="h-4 w-4 text-yellow-400" />
                 <span className="text-white/70 font-mono text-xs">IN PROGRESS</span>
@@ -98,7 +103,7 @@ const PerformanceDashboard = ({ articles, monthlyLimit }: PerformanceDashboardPr
               <div className="text-white font-mono text-2xl">{inProgressArticles}</div>
             </div>
 
-            <div className="p-4 bg-black/20 rounded-lg border border-blue-500/20">
+            <div className="p-4 bg-white/[0.05] backdrop-blur-sm rounded-lg border border-blue-500/20 hover:bg-white/[0.08] transition-all">
               <div className="flex items-center gap-2 mb-2">
                 <Target className="h-4 w-4 text-blue-400" />
                 <span className="text-white/70 font-mono text-xs">PENDING</span>
@@ -106,7 +111,7 @@ const PerformanceDashboard = ({ articles, monthlyLimit }: PerformanceDashboardPr
               <div className="text-white font-mono text-2xl">{pendingArticles}</div>
             </div>
 
-            <div className="p-4 bg-black/20 rounded-lg border border-primary-glow/20">
+            <div className="p-4 bg-white/[0.05] backdrop-blur-sm rounded-lg border border-primary-glow/20 hover:bg-white/[0.08] transition-all">
               <div className="flex items-center gap-2 mb-2">
                 <BarChart3 className="h-4 w-4 text-primary-glow" />
                 <span className="text-white/70 font-mono text-xs">TOTAL WORDS</span>
@@ -114,33 +119,35 @@ const PerformanceDashboard = ({ articles, monthlyLimit }: PerformanceDashboardPr
               <div className="text-white font-mono text-2xl">{totalWords.toLocaleString()}</div>
             </div>
           </div>
-        </CardContent>
-      </Card>
+        </GlassCardContent>
+      </GlassCard>
 
       {/* Content Performance Trend */}
-      <Card className="bg-black/30 backdrop-blur-xl border-primary-glow/30">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-white font-mono tracking-wide text-sm">
+      <GlassCard variant="default" glow>
+        <GlassCardHeader>
+          <GlassCardTitle className="flex items-center gap-2 text-white font-mono tracking-wide text-sm">
             <TrendingUp className="h-4 w-4 text-primary-glow" />
             UTILIZATION RATE
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
+          </GlassCardTitle>
+        </GlassCardHeader>
+        <GlassCardContent>
           <div className="space-y-3">
             <div className="flex justify-between text-sm font-mono text-white/70">
               <span>Content Published</span>
               <span>{completedArticles} / {monthlyLimit}</span>
             </div>
-            <Progress 
+            <NeonProgress 
               value={(completedArticles / monthlyLimit) * 100} 
-              className="h-4 bg-black/50"
+              variant="primary"
+              size="lg"
+              animated
             />
             <p className="text-primary-glow font-mono text-xs text-center mt-2">
               {Math.round((completedArticles / monthlyLimit) * 100)}% of monthly capacity utilized
             </p>
           </div>
-        </CardContent>
-      </Card>
+        </GlassCardContent>
+      </GlassCard>
     </div>
   );
 };
