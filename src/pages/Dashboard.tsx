@@ -983,16 +983,36 @@ const Dashboard = () => {
 
                   {/* Status Filters */}
                   <div className="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1">
-                    <Button size="sm" variant={statusFilter === 'all' ? 'default' : 'outline'} onClick={() => setStatusFilter('all')} className={`font-mono text-xs whitespace-nowrap flex-shrink-0 ${statusFilter !== 'all' ? 'hover:!bg-transparent hover:!text-inherit' : ''}`}>
+                    <Button
+                      size="sm"
+                      variant={statusFilter === 'all' ? 'default' : 'outline'}
+                      onClick={() => setStatusFilter('all')}
+                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 ${statusFilter !== 'all' ? 'bg-transparent text-white border-primary-glow/30 hover:!bg-transparent hover:!text-white hover:!border-primary-glow/30' : ''}`}
+                    >
                       All ({monthFilteredArticles.length})
                     </Button>
-                    <Button size="sm" variant={statusFilter === 'completed' ? 'default' : 'outline'} onClick={() => setStatusFilter('completed')} className={`font-mono text-xs whitespace-nowrap flex-shrink-0 ${statusFilter !== 'completed' ? 'hover:!bg-transparent hover:!text-inherit' : ''}`}>
+                    <Button
+                      size="sm"
+                      variant={statusFilter === 'completed' ? 'default' : 'outline'}
+                      onClick={() => setStatusFilter('completed')}
+                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 ${statusFilter !== 'completed' ? 'bg-transparent text-white border-primary-glow/30 hover:!bg-transparent hover:!text-white hover:!border-primary-glow/30' : ''}`}
+                    >
                       Completed ({monthFilteredArticles.filter(a => a.status === 'completed').length})
                     </Button>
-                    <Button size="sm" variant={statusFilter === 'in_progress' ? 'default' : 'outline'} onClick={() => setStatusFilter('in_progress')} className={`font-mono text-xs whitespace-nowrap flex-shrink-0 ${statusFilter !== 'in_progress' ? 'hover:!bg-transparent hover:!text-inherit' : ''}`}>
+                    <Button
+                      size="sm"
+                      variant={statusFilter === 'in_progress' ? 'default' : 'outline'}
+                      onClick={() => setStatusFilter('in_progress')}
+                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 ${statusFilter !== 'in_progress' ? 'bg-transparent text-white border-primary-glow/30 hover:!bg-transparent hover:!text-white hover:!border-primary-glow/30' : ''}`}
+                    >
                       In Progress ({monthFilteredArticles.filter(a => a.status === 'in_progress').length})
                     </Button>
-                    <Button size="sm" variant={statusFilter === 'pending' ? 'default' : 'outline'} onClick={() => setStatusFilter('pending')} className={`font-mono text-xs whitespace-nowrap flex-shrink-0 ${statusFilter !== 'pending' ? 'hover:!bg-transparent hover:!text-inherit' : ''}`}>
+                    <Button
+                      size="sm"
+                      variant={statusFilter === 'pending' ? 'default' : 'outline'}
+                      onClick={() => setStatusFilter('pending')}
+                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 ${statusFilter !== 'pending' ? 'bg-transparent text-white border-primary-glow/30 hover:!bg-transparent hover:!text-white hover:!border-primary-glow/30' : ''}`}
+                    >
                       Pending ({monthFilteredArticles.filter(a => a.status === 'pending').length})
                     </Button>
                   </div>
