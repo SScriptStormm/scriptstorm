@@ -496,14 +496,17 @@ const Dashboard = () => {
     }
   };
   if (loading) {
-    return <div className="min-h-screen bg-gradient-hero flex items-center justify-center">
+    return <div className="min-h-screen bg-gradient-hero bg-fixed flex items-center justify-center">
         <div className="relative">
           <div className="w-20 h-20 border-4 border-primary-glow/30 border-t-primary-glow rounded-full animate-spin"></div>
           <div className="absolute inset-0 w-20 h-20 border-4 border-transparent border-t-primary-glow/60 rounded-full animate-pulse"></div>
         </div>
       </div>;
   }
-  return <div className="min-h-screen bg-gradient-hero relative overflow-hidden">
+  return <div className="min-h-screen bg-gradient-hero bg-fixed relative overflow-hidden">
+      {/* Fixed darkening overlay to prevent gradient color shift */}
+      <div className="fixed inset-0 bg-black/20 pointer-events-none" />
+      
       {/* Floating elements */}
       <div className="absolute top-20 left-10 w-16 h-16 border border-primary-glow/10 rotate-45 animate-float" />
       <div className="absolute top-40 right-20 w-12 h-12 border border-primary-glow/15 rotate-12 animate-float" style={{
