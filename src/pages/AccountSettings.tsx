@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { GlassCard, GlassCardContent, GlassCardHeader, GlassCardTitle, GlassCardDescription } from "@/components/ui/GlassCard";
 import { HoloBadge } from "@/components/ui/HoloBadge";
 import { Button } from "@/components/ui/button";
 import { formatDate, formatDateShort } from "@/lib/dateUtils";
-import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
-import { Info } from "lucide-react";
+import { Info, CreditCard, Shield, User, Calendar, ArrowLeft, Download, Mail, Lock, Trash2, Crown, Zap } from "lucide-react";
 import LoadingScreen from "@/components/ui/LoadingScreen";
 import {
   Table,
@@ -45,6 +43,17 @@ const TIER_PRICES = {
   scale: { monthly: 997, annual: 9641 },
   authority: { monthly: 1497, annual: 14471 },
   dominance: { monthly: 2997, annual: 28971 },
+};
+
+type TierKey = "starter" | "growth" | "scale" | "authority" | "dominance";
+
+const getTierVariant = (tier: string | null): "starter" | "growth" | "scale" | "authority" | "dominance" | "default" => {
+  if (!tier) return "default";
+  const lowerTier = tier.toLowerCase();
+  if (["starter", "growth", "scale", "authority", "dominance"].includes(lowerTier)) {
+    return lowerTier as TierKey;
+  }
+  return "default";
 };
 
 export default function AccountSettings() {
@@ -114,7 +123,6 @@ export default function AccountSettings() {
     const renewalDate = new Date(subscriber.subscription_end);
     const billingInfo = getBillingInfo();
     
-    // Calculate the last payment date based on billing cycle
     const lastPaymentDate = new Date(renewalDate);
     if (billingInfo.isAnnual) {
       lastPaymentDate.setFullYear(lastPaymentDate.getFullYear() - 1);
@@ -130,14 +138,11 @@ export default function AccountSettings() {
   };
 
   const handleUpdatePayment = () => {
-    // This would open Stripe Customer Portal
     toast.info("Redirecting to payment portal...");
-    // In production: window.location.href = stripePortalUrl;
   };
 
   const handleCancelSubscription = async () => {
     toast.info("Cancellation flow initiated");
-    // Implement cancellation logic
   };
 
   const handleDeleteAccount = async () => {
@@ -153,91 +158,137 @@ export default function AccountSettings() {
   }
 
   const billingInfo = getBillingInfo();
+  const tierVariant = getTierVariant(subscriber?.subscription_tier);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary via-primary-dark to-secondary">
-      <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-4xl">
-        <div className="mb-6 sm:mb-8">
+    <div className="min-h-screen bg-gradient-hero relative overflow-hidden">
+      {/* Neural network background overlay */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 25% 25%, hsl(var(--primary-glow) / 0.15) 0%, transparent 50%),
+                           radial-gradient(circle at 75% 75%, hsl(var(--accent) / 0.1) 0%, transparent 50%)`
+        }} />
+      </div>
+
+      {/* Floating geometric elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-40 right-20 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 left-1/3 w-32 h-32 border border-primary-glow/10 rounded-full animate-spin" style={{ animationDuration: '20s' }} />
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-4xl relative z-10">
+        {/* Header */}
+        <div className="mb-8">
           <Button
-            variant="outline"
+            variant="ghost"
             onClick={() => navigate("/dashboard")}
-            className="mb-4 bg-white/10 text-white border-white/30 hover:bg-white/20"
+            className="mb-6 text-white/70 hover:text-white hover:bg-white/10 gap-2 font-mono"
           >
-            ← Back to Dashboard
+            <ArrowLeft className="h-4 w-4" />
+            Back to Dashboard
           </Button>
-          <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2">Account Settings</h1>
-          <p className="text-sm sm:text-base text-white/70">Manage your subscription, billing, and account preferences</p>
+          
+          <div className="flex items-center gap-4 mb-2">
+            <h1 className="text-3xl sm:text-4xl font-bold text-white font-mono tracking-tight">
+              Account Settings
+            </h1>
+            <HoloBadge variant={tierVariant} size="lg" animated>
+              {getTierDisplayName(subscriber?.subscription_tier)}
+            </HoloBadge>
+          </div>
+          <p className="text-white/60 font-mono text-sm">
+            Manage your subscription, billing, and account preferences
+          </p>
         </div>
 
-        <div className="space-y-4 sm:space-y-6">
+        <div className="space-y-6">
           {/* Section 1: Subscription & Billing */}
-          <Card className="bg-white/10 border-white/20 backdrop-blur">
-            <CardHeader className="p-4 sm:p-6">
-              <CardTitle className="text-white text-xl sm:text-2xl">Subscription & Billing</CardTitle>
-              <CardDescription className="text-white/70 text-sm">
-                Your current plan and billing information
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4 p-4 sm:p-6 pt-0">
-              <div className="bg-white/5 border border-white/20 rounded-lg p-4 sm:p-6 space-y-3">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                  <span className="text-white/70 text-sm sm:text-base">Plan Name:</span>
+          <GlassCard variant={tierVariant} glow hover={false}>
+            <GlassCardHeader>
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-primary/20 border border-primary-glow/30">
+                  <Crown className="h-5 w-5 text-primary-glow" />
+                </div>
+                <div>
+                  <GlassCardTitle className="text-xl">Subscription & Billing</GlassCardTitle>
+                  <GlassCardDescription>Your current plan and billing information</GlassCardDescription>
+                </div>
+              </div>
+            </GlassCardHeader>
+            <GlassCardContent className="space-y-4">
+              {/* Plan Details Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/[0.08] transition-colors">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Zap className="h-4 w-4 text-primary-glow" />
+                    <span className="text-white/60 text-sm font-mono">Plan Name</span>
+                  </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-white font-semibold text-base sm:text-lg">
+                    <span className="text-white font-semibold text-lg">
                       {getTierDisplayName(subscriber?.subscription_tier)}
                     </span>
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => navigate("/package-details")}
-                      className="h-6 w-6 p-0 text-white/70 hover:text-white hover:bg-white/10"
+                      className="h-6 w-6 p-0 text-white/50 hover:text-white hover:bg-white/10"
                       title="View package details"
                     >
                       <Info className="h-4 w-4" />
                     </Button>
                   </div>
                 </div>
-                
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                  <span className="text-white/70 text-sm sm:text-base">Status:</span>
-                  <Badge className="bg-green-500/20 text-green-300 border-green-500/30 w-fit">
-                    Active ✅
-                  </Badge>
+
+                <div className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/[0.08] transition-colors">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="text-white/60 text-sm font-mono">Status</span>
+                  </div>
+                  <HoloBadge variant="success" size="sm">Active</HoloBadge>
                 </div>
 
-                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
-                  <span className="text-white/70 text-sm sm:text-base">Billing Cycle:</span>
-                  <span className="text-white text-sm sm:text-base text-left sm:text-right">
-                    {billingInfo.isAnnual ? "Annual" : "Monthly"} 
-                    <span className="text-white/70 block sm:inline sm:ml-2">
-                      (Billed ${billingInfo.price.toLocaleString()}/{billingInfo.isAnnual ? "year" : "month"})
-                    </span>
+                <div className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/[0.08] transition-colors">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Calendar className="h-4 w-4 text-primary-glow" />
+                    <span className="text-white/60 text-sm font-mono">Billing Cycle</span>
+                  </div>
+                  <span className="text-white font-semibold">
+                    {billingInfo.isAnnual ? "Annual" : "Monthly"}
+                  </span>
+                  <span className="text-white/60 text-sm ml-2">
+                    ${billingInfo.price.toLocaleString()}/{billingInfo.isAnnual ? "yr" : "mo"}
                   </span>
                 </div>
 
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                  <span className="text-white/70 text-sm sm:text-base">Next Billing Date:</span>
-                  <span className="text-white text-sm sm:text-base text-left sm:text-right">Renews on {billingInfo.nextDate}</span>
+                <div className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/[0.08] transition-colors">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Calendar className="h-4 w-4 text-primary-glow" />
+                    <span className="text-white/60 text-sm font-mono">Next Billing</span>
+                  </div>
+                  <span className="text-white font-semibold">{billingInfo.nextDate}</span>
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-3">
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-3 pt-2">
                 <Button
                   onClick={() => navigate("/")}
-                  className="w-full sm:flex-1 bg-white text-primary hover:bg-white/90"
+                  className="flex-1 bg-gradient-to-r from-primary to-primary-glow text-white font-mono hover:opacity-90 transition-opacity"
                 >
+                  <Zap className="h-4 w-4 mr-2" />
                   Upgrade Plan
                 </Button>
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
                     <Button
                       variant="outline"
-                      className="w-full sm:flex-1 bg-red-500/20 text-red-300 border-red-500/30 hover:bg-red-500/30"
+                      className="flex-1 bg-rose-500/10 text-rose-400 border-rose-500/30 hover:bg-rose-500/20 hover:text-rose-300 font-mono"
                     >
                       Cancel Subscription
                     </Button>
                   </AlertDialogTrigger>
-                  <AlertDialogContent className="bg-background">
+                  <AlertDialogContent className="bg-background border-white/20">
                     <AlertDialogHeader>
                       <AlertDialogTitle>Cancel Subscription?</AlertDialogTitle>
                       <AlertDialogDescription>
@@ -246,134 +297,174 @@ export default function AccountSettings() {
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                       <AlertDialogCancel>Keep Subscription</AlertDialogCancel>
-                      <AlertDialogAction onClick={handleCancelSubscription} className="bg-red-500 hover:bg-red-600">
+                      <AlertDialogAction onClick={handleCancelSubscription} className="bg-rose-500 hover:bg-rose-600">
                         Yes, Cancel
                       </AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>
                 </AlertDialog>
               </div>
-            </CardContent>
-          </Card>
+            </GlassCardContent>
+          </GlassCard>
 
           {/* Section 2: Payment Method & Invoices */}
-          <Card className="bg-white/10 border-white/20 backdrop-blur">
-            <CardHeader className="p-4 sm:p-6">
-              <CardTitle className="text-white text-xl sm:text-2xl">Payment Method & Invoices</CardTitle>
-              <CardDescription className="text-white/70 text-sm">
-                Manage your payment methods and view billing history
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4 p-4 sm:p-6 pt-0">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white/5 border border-white/20 rounded-lg p-4">
-                <div>
-                  <p className="text-white/70 text-sm mb-1">Payment Method</p>
-                  <p className="text-white text-sm sm:text-base">Visa ending in 4242</p>
+          <GlassCard variant="default" glow hover={false}>
+            <GlassCardHeader>
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-primary/20 border border-primary-glow/30">
+                  <CreditCard className="h-5 w-5 text-primary-glow" />
                 </div>
-                <Button
-                  onClick={handleUpdatePayment}
-                  variant="outline"
-                  className="w-full sm:w-auto bg-white/10 text-white border-white/30 hover:bg-white/20 text-sm"
-                >
-                  Update Payment Method
-                </Button>
+                <div>
+                  <GlassCardTitle className="text-xl">Payment Method & Invoices</GlassCardTitle>
+                  <GlassCardDescription>Manage your payment methods and view billing history</GlassCardDescription>
+                </div>
               </div>
-
-              <Separator className="bg-white/20" />
-
-              <div>
-                <h3 className="text-white font-semibold mb-3 text-base sm:text-lg">Billing History</h3>
-                <div className="overflow-x-auto -mx-4 sm:mx-0">
-                  <div className="inline-block min-w-full align-middle">
-                    <Table>
-                      <TableHeader>
-                        <TableRow className="border-white/20 hover:bg-white/5">
-                          <TableHead className="text-white/70 text-xs sm:text-sm">Date</TableHead>
-                          <TableHead className="text-white/70 text-xs sm:text-sm">Description</TableHead>
-                          <TableHead className="text-white/70 text-xs sm:text-sm">Amount</TableHead>
-                          <TableHead className="text-white/70 text-xs sm:text-sm">Download</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {generateBillingHistory().map((invoice, index) => (
-                          <TableRow key={index} className="border-white/20 hover:bg-white/5">
-                            <TableCell className="text-white text-xs sm:text-sm whitespace-nowrap">{formatDateShort(invoice.date)}</TableCell>
-                            <TableCell className="text-white text-xs sm:text-sm">{invoice.description}</TableCell>
-                            <TableCell className="text-white text-xs sm:text-sm whitespace-nowrap">${invoice.amount.toLocaleString()}</TableCell>
-                            <TableCell>
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                className="text-white/70 hover:text-white hover:bg-white/10 text-xs sm:text-sm"
-                              >
-                                PDF ↓
-                              </Button>
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
+            </GlassCardHeader>
+            <GlassCardContent className="space-y-4">
+              {/* Payment Method */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white/5 border border-white/10 rounded-lg p-4">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-lg border border-white/10">
+                    <CreditCard className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-white/60 text-xs font-mono mb-0.5">Payment Method</p>
+                    <p className="text-white font-mono">•••• •••• •••• 4242</p>
                   </div>
                 </div>
                 <Button
                   onClick={handleUpdatePayment}
+                  variant="outline"
+                  className="bg-white/5 text-white border-white/20 hover:bg-white/10 font-mono text-sm"
+                >
+                  Update
+                </Button>
+              </div>
+
+              <Separator className="bg-white/10" />
+
+              {/* Billing History */}
+              <div>
+                <h3 className="text-white font-semibold mb-3 font-mono flex items-center gap-2">
+                  <Download className="h-4 w-4 text-primary-glow" />
+                  Billing History
+                </h3>
+                <div className="overflow-x-auto rounded-lg border border-white/10">
+                  <Table>
+                    <TableHeader>
+                      <TableRow className="border-white/10 hover:bg-transparent">
+                        <TableHead className="text-white/60 font-mono text-xs">Date</TableHead>
+                        <TableHead className="text-white/60 font-mono text-xs">Description</TableHead>
+                        <TableHead className="text-white/60 font-mono text-xs">Amount</TableHead>
+                        <TableHead className="text-white/60 font-mono text-xs">Invoice</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {generateBillingHistory().map((invoice, index) => (
+                        <TableRow key={index} className="border-white/10 hover:bg-white/5 transition-colors">
+                          <TableCell className="text-white font-mono text-sm">{formatDateShort(invoice.date)}</TableCell>
+                          <TableCell className="text-white font-mono text-sm">{invoice.description}</TableCell>
+                          <TableCell className="text-white font-mono text-sm">${invoice.amount.toLocaleString()}</TableCell>
+                          <TableCell>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="text-primary-glow hover:text-white hover:bg-white/10 font-mono text-xs gap-1"
+                            >
+                              <Download className="h-3 w-3" />
+                              PDF
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+                <Button
+                  onClick={handleUpdatePayment}
                   variant="link"
-                  className="text-white/70 hover:text-white mt-2"
+                  className="text-primary-glow hover:text-white mt-2 font-mono text-sm p-0"
                 >
                   View Full Billing History →
                 </Button>
               </div>
-            </CardContent>
-          </Card>
+            </GlassCardContent>
+          </GlassCard>
 
           {/* Section 3: Profile & Security */}
-          <Card className="bg-white/10 border-white/20 backdrop-blur">
-            <CardHeader className="p-4 sm:p-6">
-              <CardTitle className="text-white text-xl sm:text-2xl">Profile & Security</CardTitle>
-              <CardDescription className="text-white/70 text-sm">
-                Manage your account information and security settings
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4 p-4 sm:p-6 pt-0">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white/5 border border-white/20 rounded-lg p-4">
-                <div className="min-w-0 flex-1">
-                  <p className="text-white/70 text-sm mb-1">Email Address</p>
-                  <p className="text-white text-sm sm:text-base break-words">{userEmail}</p>
+          <GlassCard variant="default" glow hover={false}>
+            <GlassCardHeader>
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-primary/20 border border-primary-glow/30">
+                  <Shield className="h-5 w-5 text-primary-glow" />
+                </div>
+                <div>
+                  <GlassCardTitle className="text-xl">Profile & Security</GlassCardTitle>
+                  <GlassCardDescription>Manage your account information and security settings</GlassCardDescription>
+                </div>
+              </div>
+            </GlassCardHeader>
+            <GlassCardContent className="space-y-4">
+              {/* Email */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/[0.08] transition-colors">
+                <div className="flex items-center gap-3 min-w-0 flex-1">
+                  <div className="p-2 bg-white/5 rounded-lg border border-white/10">
+                    <Mail className="h-5 w-5 text-white/70" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-white/60 text-xs font-mono mb-0.5">Email Address</p>
+                    <p className="text-white font-mono text-sm truncate">{userEmail}</p>
+                  </div>
                 </div>
                 <Button
                   variant="outline"
-                  className="w-full sm:w-auto bg-white/10 text-white border-white/30 hover:bg-white/20 text-sm"
+                  className="bg-white/5 text-white border-white/20 hover:bg-white/10 font-mono text-sm"
                 >
                   Edit
                 </Button>
               </div>
 
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white/5 border border-white/20 rounded-lg p-4">
-                <div>
-                  <p className="text-white/70 text-sm mb-1">Password</p>
-                  <p className="text-white text-sm sm:text-base">········</p>
+              {/* Password */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/[0.08] transition-colors">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-white/5 rounded-lg border border-white/10">
+                    <Lock className="h-5 w-5 text-white/70" />
+                  </div>
+                  <div>
+                    <p className="text-white/60 text-xs font-mono mb-0.5">Password</p>
+                    <p className="text-white font-mono text-sm">••••••••••••</p>
+                  </div>
                 </div>
                 <Button
                   variant="outline"
-                  className="w-full sm:w-auto bg-white/10 text-white border-white/30 hover:bg-white/20 text-sm"
+                  className="bg-white/5 text-white border-white/20 hover:bg-white/10 font-mono text-sm"
                 >
                   Change Password
                 </Button>
               </div>
 
-              <Separator className="bg-white/20" />
+              <Separator className="bg-white/10" />
 
-              <div className="pt-2">
+              {/* Danger Zone */}
+              <div className="bg-rose-500/5 border border-rose-500/20 rounded-lg p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <Trash2 className="h-4 w-4 text-rose-400" />
+                  <span className="text-rose-400 font-mono text-sm font-semibold">Danger Zone</span>
+                </div>
+                <p className="text-white/60 text-sm mb-3 font-mono">
+                  Once you delete your account, there is no going back. Please be certain.
+                </p>
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
                     <Button
-                      variant="link"
-                      className="text-red-400 hover:text-red-300 p-0"
+                      variant="outline"
+                      className="bg-rose-500/10 text-rose-400 border-rose-500/30 hover:bg-rose-500/20 hover:text-rose-300 font-mono text-sm"
                     >
+                      <Trash2 className="h-4 w-4 mr-2" />
                       Delete Account
                     </Button>
                   </AlertDialogTrigger>
-                  <AlertDialogContent className="bg-background">
+                  <AlertDialogContent className="bg-background border-white/20">
                     <AlertDialogHeader>
                       <AlertDialogTitle>Delete Account?</AlertDialogTitle>
                       <AlertDialogDescription>
@@ -382,15 +473,15 @@ export default function AccountSettings() {
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                       <AlertDialogCancel>Cancel</AlertDialogCancel>
-                      <AlertDialogAction onClick={handleDeleteAccount} className="bg-red-500 hover:bg-red-600">
+                      <AlertDialogAction onClick={handleDeleteAccount} className="bg-rose-500 hover:bg-rose-600">
                         Yes, Delete Account
                       </AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>
                 </AlertDialog>
               </div>
-            </CardContent>
-          </Card>
+            </GlassCardContent>
+          </GlassCard>
         </div>
       </div>
     </div>
