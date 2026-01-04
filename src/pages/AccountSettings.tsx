@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { GlassCard, GlassCardContent, GlassCardHeader, GlassCardTitle, GlassCardDescription } from "@/components/ui/GlassCard";
+import { HoloBadge } from "@/components/ui/HoloBadge";
 import { Button } from "@/components/ui/button";
 import { formatDate, formatDateShort } from "@/lib/dateUtils";
 import { Badge } from "@/components/ui/badge";
