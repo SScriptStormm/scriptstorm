@@ -1,7 +1,7 @@
-import { Card } from "@/components/ui/card";
+import { GlassCard, GlassCardContent, GlassCardHeader, GlassCardTitle } from "@/components/ui/GlassCard";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { CheckCircle, FileText, Target, Shield, Zap } from "lucide-react";
+import { CheckCircle, FileText, Target, Shield, Zap, Package } from "lucide-react";
 
 interface PackageFeaturesWidgetProps {
   subscriptionTier: string;
@@ -154,14 +154,22 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
 
   const hasDeliverySupportFeatures = getDeliveryTimeframe() || getSupportLevel() || isDominance;
 
+  const tierVariant = tier as "starter" | "growth" | "scale" | "authority" | "dominance";
+
   return (
-    <Card className="p-6 bg-black/30 backdrop-blur-xl border-primary-glow/30">
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-bold text-white font-mono tracking-wide">YOUR PACKAGE</h3>
-        <Badge className={`${tierColors[tier] || tierColors.starter} font-mono uppercase`}>
-          {tierEmojis[tier] || tierEmojis.starter} {features.name}
-        </Badge>
-      </div>
+    <GlassCard variant={tierVariant} glow hover className="p-0 overflow-hidden">
+      <GlassCardHeader className="pb-4">
+        <div className="flex items-center justify-between">
+          <GlassCardTitle className="flex items-center gap-2">
+            <Package className="h-5 w-5 text-primary-glow" />
+            YOUR PACKAGE
+          </GlassCardTitle>
+          <Badge className={`${tierColors[tier] || tierColors.starter} font-mono uppercase`}>
+            {tierEmojis[tier] || tierEmojis.starter} {features.name}
+          </Badge>
+        </div>
+      </GlassCardHeader>
+      <GlassCardContent className="pt-0">
       
       <Accordion type="single" collapsible defaultValue="content-deliverables" className="w-full">
         {/* Content Deliverables Section */}
@@ -346,6 +354,7 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
           </AccordionItem>
         )}
       </Accordion>
-    </Card>
+      </GlassCardContent>
+    </GlassCard>
   );
 };

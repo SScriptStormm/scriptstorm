@@ -5,13 +5,13 @@ import * as z from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { GlassCard, GlassCardContent, GlassCardHeader, GlassCardTitle, GlassCardDescription } from "@/components/ui/GlassCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDescription } from "@/components/ui/form";
-import { Progress } from "@/components/ui/progress";
+import { NeonProgress } from "@/components/ui/NeonProgress";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { ChevronLeft, ChevronRight, FileText, Target, Palette, MessageSquare, Zap, Briefcase, Smile, Heart, Shield, MessageCircle, Code, Video, BarChart3 } from "lucide-react";
@@ -335,38 +335,45 @@ export function MultiStepContentBriefForm() {
         <div className="flex justify-between mb-4">
           {steps.map((step, index) => {
             const Icon = step.icon;
+            const isActive = currentStep === step.id;
+            const isCompleted = currentStep > step.id;
             return (
               <div key={step.id} className="flex flex-col items-center flex-1">
                 <div 
-                  className={`w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center border-2 transition-all ${
-                    currentStep >= step.id 
-                      ? 'bg-primary border-primary text-white' 
-                      : 'bg-background border-muted text-muted-foreground'
+                  className={`relative w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
+                    isCompleted
+                      ? 'bg-primary/80 border-primary-glow text-white shadow-[0_0_15px_hsl(221_83%_53%/0.4)]' 
+                      : isActive
+                        ? 'bg-primary border-primary-glow text-white shadow-[0_0_20px_hsl(221_83%_53%/0.5)]'
+                        : 'bg-white/[0.05] border-white/20 text-white/40'
                   }`}
                 >
-                  <Icon className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5" />
+                  {isActive && (
+                    <div className="absolute inset-0 rounded-full bg-primary-glow/30 animate-pulse" />
+                  )}
+                  <Icon className="relative z-10 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5" />
                 </div>
                 <div className="text-center mt-2 hidden md:block">
-                  <p className={`text-sm font-medium ${currentStep >= step.id ? 'text-white' : 'text-white/60'}`}>
+                  <p className={`text-sm font-medium font-mono transition-colors ${isCompleted || isActive ? 'text-white' : 'text-white/50'}`}>
                     {step.title}
                   </p>
-                  <p className="text-xs text-white/70">{step.description}</p>
+                  <p className="text-xs text-white/40 font-mono">{step.description}</p>
                 </div>
               </div>
             );
           })}
         </div>
-        <Progress value={progressPercentage} className="h-2" />
+        <NeonProgress value={progressPercentage} max={100} variant="primary" size="md" animated glowIntensity="high" />
       </div>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <Card className="border-2 bg-card/95 backdrop-blur-sm shadow-glow border-primary/20">
-            <CardHeader>
-              <CardTitle className="text-2xl">{steps[currentStep - 1].title}</CardTitle>
-              <CardDescription>{steps[currentStep - 1].description}</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
+          <GlassCard variant="default" glow hover className="overflow-hidden">
+            <GlassCardHeader>
+              <GlassCardTitle className="text-2xl font-mono">{steps[currentStep - 1].title}</GlassCardTitle>
+              <GlassCardDescription>{steps[currentStep - 1].description}</GlassCardDescription>
+            </GlassCardHeader>
+            <GlassCardContent className="space-y-6">
               {/* Step 1: Project Details */}
               {currentStep === 1 && (
                 <div className="space-y-4">
@@ -887,29 +894,37 @@ export function MultiStepContentBriefForm() {
                   />
                 </div>
               )}
-            </CardContent>
-          </Card>
+            </GlassCardContent>
+          </GlassCard>
 
           {/* Navigation Buttons */}
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mt-6">
             <Button
               type="button"
-              variant="outline"
+              variant="ghost"
               onClick={prevStep}
               disabled={currentStep === 1}
-              className="w-full sm:w-auto order-2 sm:order-1"
+              className="w-full sm:w-auto order-2 sm:order-1 border border-white/10 bg-white/[0.03] backdrop-blur-xl text-white/80 hover:text-white hover:bg-white/[0.08] hover:border-white/20 disabled:opacity-30 disabled:hover:bg-transparent"
             >
               <ChevronLeft className="h-4 w-4 mr-2" />
               Previous
             </Button>
 
             {currentStep < steps.length ? (
-              <Button type="button" onClick={nextStep} className="w-full sm:w-auto order-1 sm:order-2">
+              <Button 
+                type="button" 
+                onClick={nextStep} 
+                className="w-full sm:w-auto order-1 sm:order-2 bg-primary hover:bg-primary/90 text-white shadow-[0_0_20px_hsl(221_83%_53%/0.3)] hover:shadow-[0_0_30px_hsl(221_83%_53%/0.5)] transition-all duration-300"
+              >
                 Next
                 <ChevronRight className="h-4 w-4 ml-2" />
               </Button>
             ) : (
-              <Button type="submit" disabled={isSubmitting} className="w-full sm:w-auto order-1 sm:order-2">
+              <Button 
+                type="submit" 
+                disabled={isSubmitting} 
+                className="w-full sm:w-auto order-1 sm:order-2 bg-primary hover:bg-primary/90 text-white shadow-[0_0_20px_hsl(221_83%_53%/0.3)] hover:shadow-[0_0_30px_hsl(221_83%_53%/0.5)] transition-all duration-300 disabled:opacity-50"
+              >
                 {isSubmitting ? "Submitting..." : "Submit Brief"}
               </Button>
             )}
