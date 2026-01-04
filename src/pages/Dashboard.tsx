@@ -742,7 +742,7 @@ const Dashboard = () => {
           <GlassCardContent className="px-4 sm:px-6">
             {articles.length === 0 ? (
               <div className="py-12">
-                <div className="mx-auto max-w-xl p-6 sm:p-8 bg-white/[0.04] backdrop-blur-sm rounded-xl border border-white/[0.1] text-center">
+                <div className="mx-auto max-w-xl p-6 sm:p-8 bg-black/30 backdrop-blur-xl rounded-xl border border-white/[0.1] text-center">
                   <FileText className="h-16 w-16 text-primary-glow/50 mx-auto mb-4" />
                   <p className="text-white font-mono tracking-wide text-xl mb-2">
                     No Active Projects
@@ -757,7 +757,7 @@ const Dashboard = () => {
               </div>
             ) : filteredArticles.length === 0 ? (
               <div className="py-12">
-                <div className="mx-auto max-w-xl p-6 sm:p-8 bg-white/[0.04] backdrop-blur-sm rounded-xl border border-white/[0.1] text-center">
+                <div className="mx-auto max-w-xl p-6 sm:p-8 bg-black/30 backdrop-blur-xl rounded-xl border border-white/[0.1] text-center">
                   <AlertCircle className="h-12 w-12 text-primary-glow/50 mx-auto mb-3" />
                   <p className="text-white font-mono text-lg mb-2">
                     No {statusFilter === 'in_progress' ? 'in progress' : statusFilter === 'all' ? '' : statusFilter + ' '}projects
