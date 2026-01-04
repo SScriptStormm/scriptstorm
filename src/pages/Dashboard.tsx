@@ -897,79 +897,11 @@ const Dashboard = () => {
               </div>
             )}
 
-            {/* Previous Projects - Collapsible */}
-            {previousMonthArticles.length > 0 && (
-              <Collapsible open={previousMonthsOpen} onOpenChange={setPreviousMonthsOpen}>
-                <CollapsibleTrigger className="flex items-center gap-2 w-full p-2 bg-black/20 rounded-lg border border-primary-glow/20 hover:bg-black/30 hover:border-primary-glow/40 transition-all">
-                  <History className="h-4 w-4 text-primary-glow" />
-                  <span className="text-white/70 font-mono text-xs sm:text-sm uppercase tracking-wider flex-1 text-left">
-                    View Previous Projects ({previousMonthArticles.length})
-                  </span>
-                  <ChevronDown className={`h-4 w-4 text-primary-glow transition-transform ${previousMonthsOpen ? 'rotate-180' : ''}`} />
-                </CollapsibleTrigger>
-                <CollapsibleContent className="space-y-2 mt-2">
-                  {previousMonthArticles.slice(0, 10).map(article => (
-                    <div 
-                      key={article.id} 
-                      onClick={() => setSelectedPipelineArticleId(article.id === selectedPipelineArticleId ? null : article.id)}
-                      className={`flex items-center gap-2 sm:gap-4 p-2 sm:p-3 bg-black/20 rounded-lg border cursor-pointer transition-all hover:bg-black/30 ${
-                        article.id === selectedPipelineArticleId 
-                          ? 'border-green-500/60 bg-green-500/10' 
-                          : 'border-white/10 hover:border-primary-glow/30'
-                      }`}
-                    >
-                      {article.status === 'completed' && (
-                        <>
-                          <span className="text-green-400 text-base sm:text-lg flex-shrink-0">🟢</span>
-                          <div className="flex-1 min-w-0">
-                            <span className="text-white font-mono truncate text-xs sm:text-sm block">{article.title}</span>
-                            <span className="text-white/40 font-mono text-[10px]">{getMonthLabel(getMonthYear(article.created_at))}</span>
-                          </div>
-                          <Badge className="bg-green-500/20 text-green-400 border-green-500/30 font-mono text-[10px] sm:text-xs whitespace-nowrap">
-                            COMPLETE
-                          </Badge>
-                        </>
-                      )}
-                      {article.status === 'in_progress' && (
-                        <>
-                          <span className="text-yellow-400 text-base sm:text-lg flex-shrink-0">🟡</span>
-                          <div className="flex-1 min-w-0">
-                            <span className="text-white font-mono truncate text-xs sm:text-sm block">{article.title}</span>
-                            <span className="text-white/40 font-mono text-[10px]">{getMonthLabel(getMonthYear(article.created_at))}</span>
-                          </div>
-                          <Badge className="bg-yellow-500/20 text-yellow-400 border-yellow-500/30 font-mono text-[10px] sm:text-xs whitespace-nowrap">
-                            IN PROGRESS
-                          </Badge>
-                        </>
-                      )}
-                      {article.status === 'pending' && (
-                        <>
-                          <span className="text-blue-400 text-base sm:text-lg flex-shrink-0">🔵</span>
-                          <div className="flex-1 min-w-0">
-                            <span className="text-white font-mono truncate text-xs sm:text-sm block">{article.title}</span>
-                            <span className="text-white/40 font-mono text-[10px]">{getMonthLabel(getMonthYear(article.created_at))}</span>
-                          </div>
-                          <Badge className="bg-blue-500/30 text-blue-300 border-blue-500/50 font-mono text-[10px] sm:text-xs whitespace-nowrap">
-                            QUEUED
-                          </Badge>
-                        </>
-                      )}
-                      {article.status === 'review' && (
-                        <>
-                          <span className="text-purple-400 text-base sm:text-lg flex-shrink-0">🟣</span>
-                          <div className="flex-1 min-w-0">
-                            <span className="text-white font-mono truncate text-xs sm:text-sm block">{article.title}</span>
-                            <span className="text-white/40 font-mono text-[10px]">{getMonthLabel(getMonthYear(article.created_at))}</span>
-                          </div>
-                          <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 font-mono text-[10px] sm:text-xs whitespace-nowrap">
-                            REVIEW
-                          </Badge>
-                        </>
-                      )}
-                    </div>
-                  ))}
-                </CollapsibleContent>
-              </Collapsible>
+            {/* Hint to use PROJECTS tab */}
+            {articles.length > 1 && (
+              <p className="text-white/50 font-mono text-xs text-center">
+                View all projects in the PROJECTS tab below
+              </p>
             )}
           </CardContent>
         </Card>
@@ -1091,7 +1023,7 @@ const Dashboard = () => {
               </div> : <>
                 {/* Mobile Card Layout */}
                 <div className="block md:hidden space-y-4">
-                  {filteredArticles.map(article => <div key={article.id} className="p-4 bg-black/20 rounded-lg border border-primary-glow/20">
+                  {filteredArticles.map(article => <div key={article.id} onClick={() => setSelectedPipelineArticleId(article.id === selectedPipelineArticleId ? null : article.id)} className={`p-4 bg-black/20 rounded-lg border cursor-pointer transition-all ${article.id === selectedPipelineArticleId ? 'border-green-500/60 bg-green-500/10' : 'border-primary-glow/20 hover:border-primary-glow/40'}`}>
                       <div className="space-y-3">
                         {/* Title and Word Count */}
                         <div>
@@ -1166,7 +1098,7 @@ const Dashboard = () => {
                       </tr>
                     </thead>
                     <tbody className="space-y-3">
-                      {filteredArticles.map(article => <tr key={article.id} className="border-b border-primary-glow/10 hover:bg-black/20 transition-colors">
+                      {filteredArticles.map(article => <tr key={article.id} onClick={() => setSelectedPipelineArticleId(article.id === selectedPipelineArticleId ? null : article.id)} className={`border-b border-primary-glow/10 cursor-pointer transition-colors ${article.id === selectedPipelineArticleId ? 'bg-green-500/10' : 'hover:bg-black/20'}`}>
                           <td className="py-4 align-top w-2/5">
                             <div>
                               <h3 className="text-white font-mono tracking-wide font-semibold text-xs md:text-sm lg:text-base">
