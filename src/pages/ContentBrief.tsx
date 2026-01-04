@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 const ContentBrief = () => {
   return (
     <div className="min-h-screen bg-gradient-hero bg-fixed relative overflow-hidden py-6 sm:py-8 md:py-12 px-4">
+      {/* Global dark scrim for readability */}
+      <div className="fixed inset-0 bg-black/25 pointer-events-none" />
+      
       {/* Animated neural network overlay */}
       <div className="fixed inset-0 opacity-[0.03] pointer-events-none">
         <div className="absolute inset-0" style={{
