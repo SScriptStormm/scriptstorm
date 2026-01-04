@@ -744,32 +744,28 @@ const Dashboard = () => {
           </GlassCardHeader>
           <GlassCardContent className="px-4 sm:px-6">
             {articles.length === 0 ? (
-              <div className="py-12">
-                <div className="mx-auto max-w-xl p-6 sm:p-8 bg-black/30 backdrop-blur-xl rounded-xl border border-white/[0.1] text-center">
-                  <FileText className="h-16 w-16 text-primary-glow/50 mx-auto mb-4" />
-                  <p className="text-white font-mono tracking-wide text-xl mb-2">
-                    No Active Projects
-                  </p>
-                  <p className="text-white/70 font-mono text-sm mb-3">
-                    Click "Submit New Content Brief" above to start your first project
-                  </p>
-                  <p className="text-primary-glow font-mono text-sm font-semibold">
-                    Your 24-hour clock starts the moment you submit your first brief.
-                  </p>
-                </div>
+              <div className="py-12 text-center">
+                <FileText className="h-16 w-16 text-primary-glow/50 mx-auto mb-4" />
+                <p className="text-white font-mono tracking-wide text-xl mb-2">
+                  No Active Projects
+                </p>
+                <p className="text-white/70 font-mono text-sm mb-3">
+                  Click "Submit New Content Brief" above to start your first project
+                </p>
+                <p className="text-primary-glow font-mono text-sm font-semibold">
+                  Your 24-hour clock starts the moment you submit your first brief.
+                </p>
               </div>
             ) : filteredArticles.length === 0 ? (
-              <div className="py-12">
-                <div className="mx-auto max-w-xl p-6 sm:p-8 bg-black/30 backdrop-blur-xl rounded-xl border border-white/[0.1] text-center">
-                  <AlertCircle className="h-12 w-12 text-primary-glow/50 mx-auto mb-3" />
-                  <p className="text-white font-mono text-lg mb-2">
-                    No {statusFilter === 'in_progress' ? 'in progress' : statusFilter === 'all' ? '' : statusFilter + ' '}projects
-                    {monthFilter !== 'all_time' && ` in ${getMonthLabel(monthFilter)}`}
-                  </p>
-                  <p className="text-white/70 font-mono text-sm">
-                    Try selecting a different {monthFilter === 'all_time' ? 'filter' : 'month or filter'}
-                  </p>
-                </div>
+              <div className="py-12 text-center">
+                <AlertCircle className="h-12 w-12 text-primary-glow/50 mx-auto mb-3" />
+                <p className="text-white font-mono text-lg mb-2">
+                  No {statusFilter === 'in_progress' ? 'in progress' : statusFilter === 'all' ? '' : statusFilter + ' '}projects
+                  {monthFilter !== 'all_time' && ` in ${getMonthLabel(monthFilter)}`}
+                </p>
+                <p className="text-white/70 font-mono text-sm">
+                  Try selecting a different {monthFilter === 'all_time' ? 'filter' : 'month or filter'}
+                </p>
               </div>
             ) : (
               <>
