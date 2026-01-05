@@ -12,6 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDescription } from "@/components/ui/form";
 import { NeonProgress } from "@/components/ui/NeonProgress";
+import { HoloBadge } from "@/components/ui/HoloBadge";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { ChevronLeft, ChevronRight, FileText, Target, Palette, MessageSquare, Zap, Briefcase, Smile, Heart, Shield, MessageCircle, Code, Video, BarChart3, Check } from "lucide-react";
@@ -330,32 +331,44 @@ export function MultiStepContentBriefForm() {
 
   return (
     <div className="max-w-4xl mx-auto">
-      {/* Step Progress Indicator - Clean version */}
+      {/* Step Progress Indicator */}
       <div className="mb-8 sm:mb-10">
-        {/* Step indicators */}
-        <div className="flex justify-between mb-5">
-          {steps.map((step) => {
+        {/* Step indicators with connecting lines */}
+        <div className="relative flex justify-between mb-5">
+          {/* Connecting line background */}
+          <div className="absolute top-4 sm:top-5 md:top-6 left-0 right-0 h-[2px] bg-white/10 mx-8 sm:mx-12 md:mx-16" />
+          {/* Progress line */}
+          <div 
+            className="absolute top-4 sm:top-5 md:top-6 left-0 h-[2px] bg-gradient-to-r from-primary to-primary-glow mx-8 sm:mx-12 md:mx-16 transition-all duration-500"
+            style={{ width: `calc(${((currentStep - 1) / (steps.length - 1)) * 100}% - 4rem)` }}
+          />
+          
+          {steps.map((step, index) => {
+            const Icon = step.icon;
             const isActive = currentStep === step.id;
             const isCompleted = currentStep > step.id;
             return (
-              <div key={step.id} className="flex flex-col items-center flex-1">
+              <div key={step.id} className="flex flex-col items-center flex-1 relative z-10">
                 <div 
-                  className={`relative w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
+                  className={`relative w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
                     isCompleted
                       ? 'bg-primary border-primary-glow text-white shadow-[0_0_15px_hsl(221_83%_53%/0.4)]' 
                       : isActive
-                        ? 'bg-primary/90 border-primary-glow text-white shadow-[0_0_20px_hsl(221_83%_53%/0.5)]'
-                        : 'bg-black/50 border-white/15 text-white/40'
+                        ? 'bg-primary/90 border-primary-glow text-white shadow-[0_0_25px_hsl(221_83%_53%/0.5)]'
+                        : 'bg-black/60 border-white/15 text-white/30'
                   }`}
                 >
+                  {isActive && (
+                    <div className="absolute inset-0 rounded-full bg-primary-glow/20 animate-pulse" />
+                  )}
                   {isCompleted ? (
-                    <Check className="h-4 w-4 sm:h-5 sm:w-5" />
+                    <Check className="relative z-10 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5" />
                   ) : (
-                    <span className="text-sm font-mono font-bold">{step.id}</span>
+                    <span className="relative z-10 text-xs sm:text-sm font-mono font-bold">{step.id}</span>
                   )}
                 </div>
-                <div className="text-center mt-2 hidden md:block">
-                  <p className={`text-xs font-semibold font-mono transition-colors ${isCompleted ? 'text-primary-glow' : isActive ? 'text-white' : 'text-white/40'}`}>
+                <div className="text-center mt-2.5 hidden md:block">
+                  <p className={`text-xs font-semibold font-mono uppercase tracking-wide transition-colors ${isCompleted ? 'text-primary-glow' : isActive ? 'text-white' : 'text-white/40'}`}>
                     {step.title}
                   </p>
                 </div>
@@ -364,20 +377,36 @@ export function MultiStepContentBriefForm() {
           })}
         </div>
         
-        {/* Progress bar */}
-        <NeonProgress value={progressPercentage} max={100} variant="primary" size="sm" animated glowIntensity="medium" />
+        {/* Progress bar with step counter */}
+        <div className="flex items-center gap-4">
+          <NeonProgress value={progressPercentage} max={100} variant="primary" size="sm" animated glowIntensity="medium" className="flex-1" />
+          <span className="text-xs font-mono text-white/50 shrink-0">
+            {currentStep}/{steps.length}
+          </span>
+        </div>
       </div>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <GlassCard variant="default" glow className="overflow-hidden bg-black/40 backdrop-blur-2xl border-white/[0.08] relative">
+          <GlassCard variant="default" glow className="overflow-hidden bg-black/40 backdrop-blur-2xl border-white/[0.08] shadow-[0_0_60px_hsl(221_83%_53%/0.1)] relative">
             {/* Left accent glow line */}
             <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary-glow via-primary to-primary-glow/20" />
             
-            {/* Form Header */}
-            <GlassCardHeader className="border-b border-white/[0.06] pb-5 relative z-10 pl-6">
-              <GlassCardTitle className="text-xl sm:text-2xl font-mono text-white tracking-tight">{steps[currentStep - 1].title}</GlassCardTitle>
-              <GlassCardDescription className="text-white/50 text-sm mt-1">{steps[currentStep - 1].description}</GlassCardDescription>
+            {/* Corner decorations */}
+            <div className="absolute top-0 right-0 w-16 h-16 border-t border-r border-white/[0.06] rounded-tr-2xl pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-16 h-16 border-b border-l border-white/[0.06] rounded-bl-2xl pointer-events-none" />
+            
+            {/* Form Header with step badge */}
+            <GlassCardHeader className="border-b border-white/[0.06] pb-5 relative z-10 pl-6 bg-white/[0.01]">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <div>
+                  <GlassCardTitle className="text-xl sm:text-2xl font-mono text-white tracking-tight">{steps[currentStep - 1].title}</GlassCardTitle>
+                  <GlassCardDescription className="text-white/50 text-sm mt-1">{steps[currentStep - 1].description}</GlassCardDescription>
+                </div>
+                <HoloBadge variant="default" size="sm">
+                  STEP {currentStep} OF {steps.length}
+                </HoloBadge>
+              </div>
             </GlassCardHeader>
             <GlassCardContent className="space-y-6 pt-6 pl-6 relative z-10">
               {/* Step 1: Project Details */}

@@ -2,9 +2,10 @@ import { MultiStepContentBriefForm } from "@/components/MultiStepContentBriefFor
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Terminal, CheckCircle2 } from "lucide-react";
 import scriptStormLogo from "@/assets/scriptstorm-logo.png";
 import { GlassCard, GlassCardContent } from "@/components/ui/GlassCard";
+import { HoloBadge } from "@/components/ui/HoloBadge";
 
 const ContentBrief = () => {
   return (
@@ -85,7 +86,7 @@ const ContentBrief = () => {
             </BreadcrumbList>
           </Breadcrumb>
           
-          {/* Hero Card - Clean professional style */}
+          {/* Command Center Hero Card */}
           <GlassCard variant="default" className="mb-8 sm:mb-10 bg-black/40 backdrop-blur-2xl border-white/[0.08] overflow-hidden">
             {/* Left accent glow line */}
             <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary-glow via-primary to-primary-glow/20" />
@@ -94,16 +95,33 @@ const ContentBrief = () => {
               {/* Subtle inner glow */}
               <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.03] via-transparent to-transparent pointer-events-none" />
               
-              <div className="relative z-10">
-                <p className="text-primary-glow/80 text-xs font-mono tracking-wider uppercase mb-2">
-                  Content Submission Portal
-                </p>
-                <h2 className="text-2xl sm:text-3xl font-bold text-white font-mono tracking-tight">
-                  Submit Content Brief
-                </h2>
-                <p className="text-white/60 font-mono text-sm mt-2 max-w-lg">
-                  Complete each step to submit your content request for production
-                </p>
+              <div className="relative z-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div className="flex items-start gap-4">
+                  {/* Terminal icon container */}
+                  <div className="hidden sm:flex items-center justify-center w-12 h-12 rounded-lg bg-primary/15 border border-primary-glow/25 shadow-[0_0_20px_hsl(221_83%_53%/0.2)]">
+                    <Terminal className="w-5 h-5 text-primary-glow" />
+                  </div>
+                  
+                  <div>
+                    <p className="text-primary-glow/70 text-[10px] sm:text-xs font-mono tracking-[0.2em] uppercase mb-1">
+                      Content Submission Portal
+                    </p>
+                    <h2 className="text-2xl sm:text-3xl font-bold text-white font-mono tracking-tight">
+                      Submit Content Brief
+                    </h2>
+                    <p className="text-white/40 font-mono text-xs sm:text-sm mt-1.5 max-w-md">
+                      Complete each step to submit your content request for production
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Status indicator */}
+                <div className="flex items-center gap-3">
+                  <HoloBadge variant="active" pulse size="sm">
+                    <CheckCircle2 className="w-3 h-3 mr-1" />
+                    System Ready
+                  </HoloBadge>
+                </div>
               </div>
             </GlassCardContent>
           </GlassCard>
