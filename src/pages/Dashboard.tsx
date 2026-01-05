@@ -14,6 +14,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import scriptStormLogo from "@/assets/scriptstorm-logo.png";
+import LoadingScreen from "@/components/ui/LoadingScreen";
 import ContentCalendar from "@/components/dashboard/ContentCalendar";
 import ResearchReports from "@/components/dashboard/ResearchReports";
 import PerformanceDashboard from "@/components/dashboard/PerformanceDashboard";
@@ -496,12 +497,7 @@ const Dashboard = () => {
     }
   };
   if (loading) {
-    return <div className="min-h-screen bg-gradient-hero bg-fixed flex items-center justify-center">
-        <div className="relative">
-          <div className="w-20 h-20 border-4 border-primary-glow/30 border-t-primary-glow rounded-full animate-spin"></div>
-          <div className="absolute inset-0 w-20 h-20 border-4 border-transparent border-t-primary-glow/60 rounded-full animate-pulse"></div>
-        </div>
-      </div>;
+    return <LoadingScreen message="Initializing dashboard..." />;
   }
   return <div className="min-h-screen bg-gradient-hero bg-fixed relative overflow-hidden">
       {/* Fixed darkening overlay to prevent gradient color shift */}
