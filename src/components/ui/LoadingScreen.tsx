@@ -37,7 +37,6 @@ const LoadingScreen = ({ message }: LoadingScreenProps) => {
               strokeWidth="4"
               strokeLinecap="round"
               strokeDasharray="140 60"
-              style={{ filter: 'drop-shadow(0 0 8px hsl(221 83% 53% / 0.5))' }}
             />
           </svg>
           
