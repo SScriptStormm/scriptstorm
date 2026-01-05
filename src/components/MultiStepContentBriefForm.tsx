@@ -12,10 +12,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDescription } from "@/components/ui/form";
 import { NeonProgress } from "@/components/ui/NeonProgress";
-import { HoloBadge } from "@/components/ui/HoloBadge";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
-import { ChevronLeft, ChevronRight, FileText, Target, Palette, MessageSquare, Zap, Briefcase, Smile, Heart, Shield, MessageCircle, Code, Video, BarChart3, Check } from "lucide-react";
+import { ChevronLeft, ChevronRight, FileText, Target, Palette, MessageSquare, Zap, Briefcase, Smile, Heart, Shield, MessageCircle, Code, Video, BarChart3 } from "lucide-react";
 
 // Default word counts for different content types
 const DEFAULT_WORD_COUNTS = {
@@ -331,82 +330,54 @@ export function MultiStepContentBriefForm() {
 
   return (
     <div className="max-w-4xl mx-auto">
-      {/* Step Progress Indicator */}
-      <div className="mb-8 sm:mb-10">
-        {/* Step indicators with connecting lines */}
-        <div className="relative flex justify-between mb-5">
-          {/* Connecting line background */}
-          <div className="absolute top-4 sm:top-5 md:top-6 left-0 right-0 h-[2px] bg-white/10 mx-8 sm:mx-12 md:mx-16" />
-          {/* Progress line */}
-          <div 
-            className="absolute top-4 sm:top-5 md:top-6 left-0 h-[2px] bg-gradient-to-r from-primary to-primary-glow mx-8 sm:mx-12 md:mx-16 transition-all duration-500"
-            style={{ width: `calc(${((currentStep - 1) / (steps.length - 1)) * 100}% - 4rem)` }}
-          />
-          
+      {/* Progress Bar */}
+      <div className="mb-6 sm:mb-8">
+        <div className="flex justify-between mb-4">
           {steps.map((step, index) => {
             const Icon = step.icon;
             const isActive = currentStep === step.id;
             const isCompleted = currentStep > step.id;
             return (
-              <div key={step.id} className="flex flex-col items-center flex-1 relative z-10">
+              <div key={step.id} className="flex flex-col items-center flex-1">
                 <div 
                   className={`relative w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
                     isCompleted
-                      ? 'bg-primary border-primary-glow text-white shadow-[0_0_15px_hsl(221_83%_53%/0.4)]' 
+                      ? 'bg-primary/80 border-primary-glow text-white shadow-[0_0_15px_hsl(221_83%_53%/0.4)]' 
                       : isActive
-                        ? 'bg-primary/90 border-primary-glow text-white shadow-[0_0_25px_hsl(221_83%_53%/0.5)]'
-                        : 'bg-black/60 border-white/15 text-white/30'
+                        ? 'bg-primary border-primary-glow text-white shadow-[0_0_20px_hsl(221_83%_53%/0.5)]'
+                        : 'bg-white/[0.05] border-white/20 text-white/40'
                   }`}
                 >
                   {isActive && (
-                    <div className="absolute inset-0 rounded-full bg-primary-glow/20 animate-pulse" />
+                    <div className="absolute inset-0 rounded-full bg-primary-glow/30 animate-pulse" />
                   )}
-                  {isCompleted ? (
-                    <Check className="relative z-10 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5" />
-                  ) : (
-                    <span className="relative z-10 text-xs sm:text-sm font-mono font-bold">{step.id}</span>
-                  )}
+                  <Icon className="relative z-10 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5" />
                 </div>
-                <div className="text-center mt-2.5 hidden md:block">
-                  <p className={`text-xs font-semibold font-mono uppercase tracking-wide transition-colors ${isCompleted ? 'text-primary-glow' : isActive ? 'text-white' : 'text-white/40'}`}>
+                <div className="text-center mt-2 hidden md:block">
+                  <p className={`text-sm font-medium font-mono transition-colors ${isCompleted || isActive ? 'text-white' : 'text-white/50'}`}>
                     {step.title}
                   </p>
+                  <p className="text-xs text-white/40 font-mono">{step.description}</p>
                 </div>
               </div>
             );
           })}
         </div>
-        
-        {/* Progress bar with step counter */}
-        <div className="flex items-center gap-4">
-          <NeonProgress value={progressPercentage} max={100} variant="primary" size="sm" animated glowIntensity="medium" className="flex-1" />
-          <span className="text-xs font-mono text-white/50 shrink-0">
-            {currentStep}/{steps.length}
-          </span>
-        </div>
+        <NeonProgress value={progressPercentage} max={100} variant="primary" size="md" animated glowIntensity="high" />
       </div>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <GlassCard variant="default" glow className="overflow-hidden bg-black/40 backdrop-blur-2xl border-white/[0.08] shadow-[0_0_60px_hsl(221_83%_53%/0.1)] relative">
+          <GlassCard variant="default" glow hover className="overflow-hidden bg-black/35 backdrop-blur-2xl border-white/10 shadow-[0_0_80px_hsl(221_83%_53%/0.15)] relative">
             {/* Left accent glow line */}
-            <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary-glow via-primary to-primary-glow/20" />
+            <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary-glow via-primary to-primary-glow/30" />
             
-            {/* Corner decorations */}
-            <div className="absolute top-0 right-0 w-16 h-16 border-t border-r border-white/[0.06] rounded-tr-2xl pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-16 h-16 border-b border-l border-white/[0.06] rounded-bl-2xl pointer-events-none" />
+            {/* Top gradient accent */}
+            <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-primary/10 to-transparent pointer-events-none" />
             
-            {/* Form Header with step badge */}
-            <GlassCardHeader className="border-b border-white/[0.06] pb-5 relative z-10 pl-6 bg-white/[0.01]">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                <div>
-                  <GlassCardTitle className="text-xl sm:text-2xl font-mono text-white tracking-tight">{steps[currentStep - 1].title}</GlassCardTitle>
-                  <GlassCardDescription className="text-white/50 text-sm mt-1">{steps[currentStep - 1].description}</GlassCardDescription>
-                </div>
-                <HoloBadge variant="default" size="sm">
-                  STEP {currentStep} OF {steps.length}
-                </HoloBadge>
-              </div>
+            <GlassCardHeader className="border-b border-white/10 pb-6 relative z-10 pl-6">
+              <GlassCardTitle className="text-2xl font-mono text-white">{steps[currentStep - 1].title}</GlassCardTitle>
+              <GlassCardDescription className="text-white/60">{steps[currentStep - 1].description}</GlassCardDescription>
             </GlassCardHeader>
             <GlassCardContent className="space-y-6 pt-6 pl-6 relative z-10">
               {/* Step 1: Project Details */}
@@ -941,47 +912,40 @@ export function MultiStepContentBriefForm() {
           </GlassCard>
 
           {/* Navigation Buttons */}
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-8 pt-6 border-t border-white/[0.06]">
+          <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mt-8">
             <Button
               type="button"
               variant="ghost"
               onClick={prevStep}
               disabled={currentStep === 1}
-              className="w-full sm:w-auto order-2 sm:order-1 border border-white/10 bg-transparent text-white/60 hover:text-white/90 hover:bg-white/[0.05] hover:border-white/20 disabled:opacity-20 disabled:hover:bg-transparent transition-all duration-300 font-mono text-sm"
+              className="w-full sm:w-auto order-2 sm:order-1 border border-white/15 bg-white/[0.05] backdrop-blur-xl text-white/80 hover:text-white hover:bg-white/[0.1] hover:border-white/25 disabled:opacity-30 disabled:hover:bg-transparent transition-all duration-300"
             >
-              <ChevronLeft className="h-4 w-4 mr-1.5" />
+              <ChevronLeft className="h-4 w-4 mr-2" />
               Previous
             </Button>
-            
-            {/* Step indicator for mobile */}
-            <span className="text-xs font-mono text-white/40 order-3 sm:order-2 hidden sm:block">
-              Step {currentStep} of {steps.length}
-            </span>
 
             {currentStep < steps.length ? (
               <Button 
                 type="button" 
                 onClick={nextStep} 
-                className="w-full sm:w-auto order-1 sm:order-3 relative overflow-hidden group bg-gradient-to-r from-primary to-primary-glow text-white font-semibold font-mono text-sm shadow-[0_0_20px_hsl(221_83%_53%/0.3)] hover:shadow-[0_0_35px_hsl(221_83%_53%/0.5)] transition-all duration-300"
+                className="w-full sm:w-auto order-1 sm:order-2 relative overflow-hidden group bg-gradient-to-r from-primary to-primary-glow text-white font-semibold shadow-[0_0_25px_hsl(221_83%_53%/0.4)] hover:shadow-[0_0_40px_hsl(221_83%_53%/0.6)] transition-all duration-300"
               >
                 <span className="relative z-10 flex items-center">
-                  Continue
-                  <ChevronRight className="h-4 w-4 ml-1.5" />
+                  Next
+                  <ChevronRight className="h-4 w-4 ml-2" />
                 </span>
-                {/* Shimmer effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-r from-primary-glow to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </Button>
             ) : (
               <Button 
                 type="submit" 
                 disabled={isSubmitting} 
-                className="w-full sm:w-auto order-1 sm:order-3 relative overflow-hidden group bg-gradient-to-r from-primary to-primary-glow text-white font-semibold font-mono text-sm shadow-[0_0_20px_hsl(221_83%_53%/0.3)] hover:shadow-[0_0_35px_hsl(221_83%_53%/0.5)] transition-all duration-300 disabled:opacity-50"
+                className="w-full sm:w-auto order-1 sm:order-2 relative overflow-hidden group bg-gradient-to-r from-primary to-primary-glow text-white font-semibold shadow-[0_0_25px_hsl(221_83%_53%/0.4)] hover:shadow-[0_0_40px_hsl(221_83%_53%/0.6)] transition-all duration-300 disabled:opacity-50"
               >
                 <span className="relative z-10 flex items-center">
                   {isSubmitting ? "Submitting..." : "Submit Brief"}
                 </span>
-                {/* Shimmer effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-r from-primary-glow to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </Button>
             )}
           </div>
