@@ -368,12 +368,18 @@ export function MultiStepContentBriefForm() {
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <GlassCard variant="default" glow hover className="overflow-hidden bg-black/50 backdrop-blur-2xl border-white/15 shadow-[0_0_60px_hsl(221_83%_53%/0.12)]">
-            <GlassCardHeader className="border-b border-white/10 pb-6">
+          <GlassCard variant="default" glow hover className="overflow-hidden bg-black/35 backdrop-blur-2xl border-white/10 shadow-[0_0_80px_hsl(221_83%_53%/0.15)] relative">
+            {/* Left accent glow line */}
+            <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary-glow via-primary to-primary-glow/30" />
+            
+            {/* Top gradient accent */}
+            <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-primary/10 to-transparent pointer-events-none" />
+            
+            <GlassCardHeader className="border-b border-white/10 pb-6 relative z-10 pl-6">
               <GlassCardTitle className="text-2xl font-mono text-white">{steps[currentStep - 1].title}</GlassCardTitle>
               <GlassCardDescription className="text-white/60">{steps[currentStep - 1].description}</GlassCardDescription>
             </GlassCardHeader>
-            <GlassCardContent className="space-y-6 pt-6">
+            <GlassCardContent className="space-y-6 pt-6 pl-6 relative z-10">
               {/* Step 1: Project Details */}
               {currentStep === 1 && (
                 <div className="space-y-4">
@@ -906,13 +912,13 @@ export function MultiStepContentBriefForm() {
           </GlassCard>
 
           {/* Navigation Buttons */}
-          <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mt-6">
+          <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mt-8">
             <Button
               type="button"
               variant="ghost"
               onClick={prevStep}
               disabled={currentStep === 1}
-              className="w-full sm:w-auto order-2 sm:order-1 border border-white/10 bg-white/[0.03] backdrop-blur-xl text-white/80 hover:text-white hover:bg-white/[0.08] hover:border-white/20 disabled:opacity-30 disabled:hover:bg-transparent"
+              className="w-full sm:w-auto order-2 sm:order-1 border border-white/15 bg-white/[0.05] backdrop-blur-xl text-white/80 hover:text-white hover:bg-white/[0.1] hover:border-white/25 disabled:opacity-30 disabled:hover:bg-transparent transition-all duration-300"
             >
               <ChevronLeft className="h-4 w-4 mr-2" />
               Previous
@@ -922,18 +928,24 @@ export function MultiStepContentBriefForm() {
               <Button 
                 type="button" 
                 onClick={nextStep} 
-                className="w-full sm:w-auto order-1 sm:order-2 bg-primary hover:bg-primary/90 text-white shadow-[0_0_20px_hsl(221_83%_53%/0.3)] hover:shadow-[0_0_30px_hsl(221_83%_53%/0.5)] transition-all duration-300"
+                className="w-full sm:w-auto order-1 sm:order-2 relative overflow-hidden group bg-gradient-to-r from-primary to-primary-glow text-white font-semibold shadow-[0_0_25px_hsl(221_83%_53%/0.4)] hover:shadow-[0_0_40px_hsl(221_83%_53%/0.6)] transition-all duration-300"
               >
-                Next
-                <ChevronRight className="h-4 w-4 ml-2" />
+                <span className="relative z-10 flex items-center">
+                  Next
+                  <ChevronRight className="h-4 w-4 ml-2" />
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-primary-glow to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </Button>
             ) : (
               <Button 
                 type="submit" 
                 disabled={isSubmitting} 
-                className="w-full sm:w-auto order-1 sm:order-2 bg-primary hover:bg-primary/90 text-white shadow-[0_0_20px_hsl(221_83%_53%/0.3)] hover:shadow-[0_0_30px_hsl(221_83%_53%/0.5)] transition-all duration-300 disabled:opacity-50"
+                className="w-full sm:w-auto order-1 sm:order-2 relative overflow-hidden group bg-gradient-to-r from-primary to-primary-glow text-white font-semibold shadow-[0_0_25px_hsl(221_83%_53%/0.4)] hover:shadow-[0_0_40px_hsl(221_83%_53%/0.6)] transition-all duration-300 disabled:opacity-50"
               >
-                {isSubmitting ? "Submitting..." : "Submit Brief"}
+                <span className="relative z-10 flex items-center">
+                  {isSubmitting ? "Submitting..." : "Submit Brief"}
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-primary-glow to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </Button>
             )}
           </div>
