@@ -12,8 +12,8 @@ const LoadingScreen = ({ message }: LoadingScreenProps) => {
         backgroundSize: '40px 40px'
       }} />
       
-      {/* Glass container */}
-      <div className="relative bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-8 flex flex-col items-center gap-5">
+      {/* Content wrapper */}
+      <div className="relative flex flex-col items-center gap-5">
         {/* SVG-based spinner - no gradient seam artifacts */}
         <div className="relative w-16 h-16">
           <svg 
