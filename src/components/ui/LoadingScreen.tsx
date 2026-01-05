@@ -41,11 +41,6 @@ const LoadingScreen = ({ message }: LoadingScreenProps) => {
             />
           </svg>
           
-          {/* Inner pulsing dot */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-2.5 h-2.5 rounded-full bg-primary-glow animate-pulse" 
-                 style={{ boxShadow: '0 0 12px hsl(221 83% 65% / 0.6)' }} />
-          </div>
         </div>
         
         {message && (
