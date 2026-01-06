@@ -511,22 +511,22 @@ export function MultiStepContentBriefForm() {
 
                       {/* YouTube Script Field - Only for Growth+ clients */}
                       {hasGrowthPlus && (
-                        <div className="p-4 bg-primary/5 rounded-lg border border-primary/20 space-y-4">
+                        <div className="p-5 bg-primary/15 rounded-lg border border-primary/30 space-y-4 backdrop-blur-sm">
                           <div className="flex items-center gap-2 mb-2">
                             <Video className="h-5 w-5 text-primary" />
-                            <h3 className="font-semibold text-foreground">YouTube Video Script (Growth+ Feature)</h3>
+                            <h3 className="font-semibold text-white">YouTube Video Script (Growth+ Feature)</h3>
                           </div>
                           
                           <FormField
                             control={form.control}
                             name="youtube_script"
                             render={({ field }) => (
-                              <FormItem className="flex flex-row items-center justify-between rounded-lg border border-border p-4 bg-background">
+                              <FormItem className="flex flex-row items-center justify-between rounded-lg border border-white/20 p-4 bg-black/40">
                                 <div className="space-y-0.5">
-                                  <FormLabel className="text-base">
+                                  <FormLabel className="text-base text-white">
                                     Include YouTube Video Script
                                   </FormLabel>
-                                  <FormDescription>
+                                  <FormDescription className="text-white/60">
                                     Add a video script outline for YouTube (3-8 minute videos)
                                   </FormDescription>
                                 </div>
@@ -546,7 +546,7 @@ export function MultiStepContentBriefForm() {
                               name="youtube_script_length"
                               render={({ field }) => (
                                 <FormItem>
-                                  <FormLabel>Script Length: {field.value} words</FormLabel>
+                                  <FormLabel className="text-white">Script Length: {field.value} words</FormLabel>
                                   <FormControl>
                                     <Slider
                                       min={300}
@@ -557,12 +557,12 @@ export function MultiStepContentBriefForm() {
                                       className="py-4"
                                     />
                                   </FormControl>
-                                  <div className="flex justify-between text-xs text-muted-foreground">
+                                  <div className="flex justify-between text-xs text-white/60">
                                     <span>300 words</span>
                                     <span>550 words</span>
                                     <span>800 words</span>
                                   </div>
-                                  <FormDescription>
+                                  <FormDescription className="text-white/60">
                                     Optimal for 3-8 minute videos
                                   </FormDescription>
                                   <FormMessage />
