@@ -924,13 +924,12 @@ const Dashboard = () => {
                     <tbody>
                       {filteredArticles.map(article => {
                         const isSelected = article.id === selectedPipelineArticleId;
-                        // Use box-shadow on <tr> for top/bottom lines, borders only on first/last cells
-                        const selectedCellBg = 'bg-gradient-to-r from-primary/20 via-primary/10 to-transparent transition-all duration-300';
-                        const selectedFirstCell = `${selectedCellBg} border-l-2 border-primary-glow/60 rounded-l-lg`;
-                        const selectedMiddleCell = selectedCellBg;
-                        const selectedLastCell = `${selectedCellBg} border-r-2 border-primary-glow/60 rounded-r-lg`;
+                        // Move gradient to <tr> for seamless background, cells only handle borders
                         const unselectedRowBase = 'border-b border-white/[0.1] hover:bg-white/[0.05]';
-                        const selectedRowStyle = 'shadow-[inset_0_2px_0_hsl(221_83%_53%/0.5),inset_0_-2px_0_hsl(221_83%_53%/0.5)]';
+                        const selectedRowStyle = 'bg-primary/10 shadow-[inset_0_2px_0_hsl(221_83%_53%/0.5),inset_0_-2px_0_hsl(221_83%_53%/0.5)]';
+                        const selectedFirstCell = 'border-l-2 border-primary-glow/60 rounded-l-lg';
+                        const selectedMiddleCell = '';
+                        const selectedLastCell = 'border-r-2 border-primary-glow/60 rounded-r-lg';
                         
                         return (
                           <tr 
