@@ -829,66 +829,84 @@ const Dashboard = () => {
               <>
                 {/* Mobile Card Layout */}
                 <div className="block md:hidden space-y-4">
-                  {filteredArticles.map(article => <div key={article.id} onClick={() => setSelectedPipelineArticleId(article.id === selectedPipelineArticleId ? null : article.id)} className={`p-4 bg-white/[0.05] rounded-lg border cursor-pointer transition-all duration-200 ${article.id === selectedPipelineArticleId ? 'border-primary-glow/60 bg-primary/15 shadow-[0_0_20px_hsl(221_83%_53%/0.25)]' : 'border-white/[0.1] hover:border-primary-glow/40 hover:bg-white/[0.08]'}`}>
-                      <div className="space-y-3">
-                        {/* Title and Word Count */}
-                        <div>
-                          <h3 className="text-white font-mono tracking-wide font-semibold text-sm mb-1 break-words">
-                            {article.title}
-                          </h3>
-                          {article.word_count > 0 && <p className="text-white/50 font-mono text-xs">{article.word_count} words</p>}
-                        </div>
+                  {filteredArticles.map(article => {
+                    const isSelected = article.id === selectedPipelineArticleId;
+                    return (
+                      <div 
+                        key={article.id} 
+                        onClick={() => setSelectedPipelineArticleId(isSelected ? null : article.id)} 
+                        className={`relative p-4 rounded-lg cursor-pointer transition-all duration-300 overflow-hidden ${
+                          isSelected 
+                            ? 'bg-gradient-to-br from-primary/25 via-primary/10 to-transparent border border-primary-glow/60 shadow-[0_0_25px_hsl(221_83%_53%/0.3),inset_0_1px_0_rgba(255,255,255,0.08)]' 
+                            : 'bg-white/[0.05] border border-white/[0.1] hover:border-primary-glow/40 hover:bg-white/[0.08]'
+                        }`}
+                      >
+                        {/* Selection Accent Rail */}
+                        {isSelected && (
+                          <div className="absolute left-0 top-3 bottom-3 w-[3px] rounded-full bg-primary-glow shadow-[0_0_12px_hsl(221_83%_53%/0.6)]" />
+                        )}
                         
-                        {/* Status Badge */}
-                        <div>
-                          <Badge className={`${getStatusColor(article.status)} font-mono tracking-wide text-xs`}>
-                            {getStatusIcon(article.status)}
-                            {article.status === 'completed' ? '✅ Ready' : article.status === 'in_progress' ? '🔄 In Progress' : '⏳ Pending'}
-                          </Badge>
-                          {(article.status === 'pending' || article.status === 'in_progress') && <p className="text-primary-glow font-mono text-xs mt-1">
-                              {getDeliveryTimeframe(article)}
-                            </p>}
-                        </div>
-                        
-                        {/* Delivery Deadline for In Progress/Pending */}
-                        {(article.status === 'pending' || article.status === 'in_progress') && article.delivery_deadline && <div className="flex items-center justify-between gap-2">
-                            <span className="text-white/70 font-mono text-xs flex-shrink-0">Deadline:</span>
-                            <span className="text-yellow-400 font-mono text-xs font-semibold break-words text-right">
-                              {getTimeRemaining(article.delivery_deadline)}
-                            </span>
-                          </div>}
-                        
-                        {/* Delivered On */}
-                        {article.status === 'completed' && <div className="flex items-center justify-between gap-2">
-                            <span className="text-white/70 font-mono text-xs flex-shrink-0">Delivered:</span>
-                            <span className="text-white font-mono text-xs break-words text-right">
-                              {article.delivery_date ? formatDate(article.delivery_date) : 'Completed'}
-                            </span>
-                          </div>}
-                        
-                        {/* Revisions */}
-                        {article.status === 'completed' && <div className="flex items-center justify-between gap-2">
-                            <span className="text-white/70 font-mono text-xs flex-shrink-0">Revisions:</span>
-                            <span className={`font-mono text-xs ${(article.revisions_requested || 0) >= (article.revisions_allowed || 1) ? 'text-red-400' : 'text-white'}`}>
-                              {article.revisions_requested || 0} / {article.revisions_allowed === 999999 ? '∞' : article.revisions_allowed || 1}
-                            </span>
-                          </div>}
-                        
-                        {/* Actions */}
-                        <div className="flex flex-col gap-2 pt-1">
-                          {article.status === 'completed' ? <>
-                              <Button size="sm" className="w-full bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono text-xs" onClick={() => article.article_url && window.open(article.article_url, '_blank')}>
-                                <Download className="h-3 w-3 mr-1" />
-                                Download
-                              </Button>
-                              <Button size="sm" variant="ghost" className="w-full text-yellow-400 border border-yellow-500/30 hover:border-yellow-500/60 font-mono text-xs disabled:opacity-50 disabled:cursor-not-allowed" onClick={() => handleRequestRevision(article)} disabled={(article.revisions_requested || 0) >= (article.revisions_allowed || 1)}>
-                                <Edit className="h-3 w-3 mr-1" />
-                                {(article.revisions_requested || 0) >= (article.revisions_allowed || 1) ? 'Revision Limit Reached' : 'Request Revision'}
-                              </Button>
-                            </> : null}
+                        <div className={`space-y-3 ${isSelected ? 'pl-2' : ''}`}>
+                          {/* Title and Word Count */}
+                          <div>
+                            <h3 className="text-white font-mono tracking-wide font-semibold text-sm mb-1 break-words">
+                              {article.title}
+                            </h3>
+                            {article.word_count > 0 && <p className="text-white/50 font-mono text-xs">{article.word_count} words</p>}
+                          </div>
+                          
+                          {/* Status Badge */}
+                          <div>
+                            <Badge className={`${getStatusColor(article.status)} font-mono tracking-wide text-xs`}>
+                              {getStatusIcon(article.status)}
+                              {article.status === 'completed' ? '✅ Ready' : article.status === 'in_progress' ? '🔄 In Progress' : '⏳ Pending'}
+                            </Badge>
+                            {(article.status === 'pending' || article.status === 'in_progress') && <p className="text-primary-glow font-mono text-xs mt-1">
+                                {getDeliveryTimeframe(article)}
+                              </p>}
+                          </div>
+                          
+                          {/* Delivery Deadline for In Progress/Pending */}
+                          {(article.status === 'pending' || article.status === 'in_progress') && article.delivery_deadline && <div className="flex items-center justify-between gap-2">
+                              <span className="text-white/70 font-mono text-xs flex-shrink-0">Deadline:</span>
+                              <span className="text-yellow-400 font-mono text-xs font-semibold break-words text-right">
+                                {getTimeRemaining(article.delivery_deadline)}
+                              </span>
+                            </div>}
+                          
+                          {/* Delivered On */}
+                          {article.status === 'completed' && <div className="flex items-center justify-between gap-2">
+                              <span className="text-white/70 font-mono text-xs flex-shrink-0">Delivered:</span>
+                              <span className="text-white font-mono text-xs break-words text-right">
+                                {article.delivery_date ? formatDate(article.delivery_date) : 'Completed'}
+                              </span>
+                            </div>}
+                          
+                          {/* Revisions */}
+                          {article.status === 'completed' && <div className="flex items-center justify-between gap-2">
+                              <span className="text-white/70 font-mono text-xs flex-shrink-0">Revisions:</span>
+                              <span className={`font-mono text-xs ${(article.revisions_requested || 0) >= (article.revisions_allowed || 1) ? 'text-red-400' : 'text-white'}`}>
+                                {article.revisions_requested || 0} / {article.revisions_allowed === 999999 ? '∞' : article.revisions_allowed || 1}
+                              </span>
+                            </div>}
+                          
+                          {/* Actions */}
+                          <div className="flex flex-col gap-2 pt-1">
+                            {article.status === 'completed' ? <>
+                                <Button size="sm" className="w-full bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono text-xs" onClick={() => article.article_url && window.open(article.article_url, '_blank')}>
+                                  <Download className="h-3 w-3 mr-1" />
+                                  Download
+                                </Button>
+                                <Button size="sm" variant="ghost" className="w-full text-yellow-400 border border-yellow-500/30 hover:border-yellow-500/60 font-mono text-xs disabled:opacity-50 disabled:cursor-not-allowed" onClick={() => handleRequestRevision(article)} disabled={(article.revisions_requested || 0) >= (article.revisions_allowed || 1)}>
+                                  <Edit className="h-3 w-3 mr-1" />
+                                  {(article.revisions_requested || 0) >= (article.revisions_allowed || 1) ? 'Revision Limit Reached' : 'Request Revision'}
+                                </Button>
+                              </> : null}
+                          </div>
                         </div>
                       </div>
-                    </div>)}
+                    );
+                  })}
                 </div>
                 
                 {/* Desktop Table Layout */}
@@ -904,51 +922,76 @@ const Dashboard = () => {
                       </tr>
                     </thead>
                     <tbody className="space-y-3">
-                      {filteredArticles.map(article => <tr key={article.id} onClick={() => setSelectedPipelineArticleId(article.id === selectedPipelineArticleId ? null : article.id)} className={`cursor-pointer transition-all duration-200 ${article.id === selectedPipelineArticleId ? 'bg-primary/15 ring-1 ring-primary-glow/60 ring-inset shadow-[0_0_15px_hsl(221_83%_53%/0.2)]' : 'border-b border-white/[0.1] hover:bg-white/[0.05]'}`}>
-                          <td className="py-4 align-top w-2/5">
-                            <div>
-                              <h3 className="text-white font-mono tracking-wide font-semibold text-xs md:text-sm lg:text-base">
-                                {article.title}
-                              </h3>
-                              {article.word_count > 0 && <p className="text-white/50 font-mono text-[10px] md:text-xs">{article.word_count} words</p>}
-                            </div>
-                          </td>
-                          <td className="py-4 align-top">
-                            <Badge className={`${getStatusColor(article.status)} font-mono tracking-wide text-[10px] md:text-xs inline-flex items-center gap-1`}>
-                              {getStatusIcon(article.status)}
-                              {article.status === 'completed' ? '✅ Ready' : article.status === 'in_progress' ? '🔄 In Progress' : '⏳ Pending'}
-                            </Badge>
-                            {(article.status === 'pending' || article.status === 'in_progress') && <p className="text-primary-glow font-mono text-xs mt-1">
-                                {getDeliveryTimeframe(article)}
-                              </p>}
-                          </td>
-                          <td className="py-4 align-top">
-                            {article.status === 'completed' ? <span className="text-white font-mono text-xs md:text-sm">
-                                {article.delivery_date ? formatDate(article.delivery_date) : 'Completed'}
-                              </span> : article.delivery_deadline ? <span className="text-yellow-400 font-mono text-xs md:text-sm font-semibold">
-                                {getTimeRemaining(article.delivery_deadline)}
-                              </span> : <span className="text-white/50 font-mono text-xs">—</span>}
-                          </td>
-                          <td className="py-4 align-top">
-                            {article.status === 'completed' ? <span className={`font-mono text-xs md:text-sm ${(article.revisions_requested || 0) >= (article.revisions_allowed || 1) ? 'text-red-400' : 'text-white'}`}>
-                                {article.revisions_requested || 0} / {article.revisions_allowed === 999999 ? '∞' : article.revisions_allowed || 1}
-                              </span> : <span className="text-white/50 font-mono text-xs">—</span>}
-                          </td>
-                          <td className="py-4 text-right">
-                            <div className="flex items-center gap-2 justify-end">
-                              {article.status === 'completed' ? <>
-                                  <Button size="sm" className="bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono" onClick={() => article.article_url && window.open(article.article_url, '_blank')}>
-                                    <Download className="h-4 w-4 mr-1" />
-                                    Download
-                                  </Button>
-                                  <Button size="sm" variant="ghost" className="text-yellow-400 border border-yellow-500/30 hover:border-yellow-500/60 font-mono disabled:opacity-50 disabled:cursor-not-allowed" onClick={() => handleRequestRevision(article)} disabled={(article.revisions_requested || 0) >= (article.revisions_allowed || 1)}>
-                                    <Edit className="h-4 w-4 mr-1" />
-                                    {(article.revisions_requested || 0) >= (article.revisions_allowed || 1) ? 'Limit Reached' : 'Request Revision'}
-                                  </Button>
-                                </> : null}
-                            </div>
-                          </td>
-                        </tr>)}
+                      {filteredArticles.map(article => {
+                        const isSelected = article.id === selectedPipelineArticleId;
+                        const selectedCellBase = 'bg-gradient-to-r from-primary/20 via-primary/10 to-transparent border-t border-b border-primary-glow/50 transition-all duration-300';
+                        const unselectedRowBase = 'border-b border-white/[0.1] hover:bg-white/[0.05]';
+                        
+                        return (
+                          <tr 
+                            key={article.id} 
+                            onClick={() => setSelectedPipelineArticleId(isSelected ? null : article.id)} 
+                            className={`cursor-pointer transition-all duration-300 ${!isSelected ? unselectedRowBase : ''}`}
+                          >
+                            {/* First Cell - Project Title with Accent Rail */}
+                            <td className={`py-4 align-top w-2/5 relative ${isSelected ? `${selectedCellBase} border-l rounded-l-lg` : ''}`}>
+                              {/* Accent Rail */}
+                              {isSelected && (
+                                <div className="absolute left-1 top-3 bottom-3 w-[3px] rounded-full bg-primary-glow shadow-[0_0_12px_hsl(221_83%_53%/0.6)]" />
+                              )}
+                              <div className={isSelected ? 'pl-3' : ''}>
+                                <h3 className="text-white font-mono tracking-wide font-semibold text-xs md:text-sm lg:text-base">
+                                  {article.title}
+                                </h3>
+                                {article.word_count > 0 && <p className="text-white/50 font-mono text-[10px] md:text-xs">{article.word_count} words</p>}
+                              </div>
+                            </td>
+                            
+                            {/* Status Cell */}
+                            <td className={`py-4 align-top ${isSelected ? selectedCellBase : ''}`}>
+                              <Badge className={`${getStatusColor(article.status)} font-mono tracking-wide text-[10px] md:text-xs inline-flex items-center gap-1`}>
+                                {getStatusIcon(article.status)}
+                                {article.status === 'completed' ? '✅ Ready' : article.status === 'in_progress' ? '🔄 In Progress' : '⏳ Pending'}
+                              </Badge>
+                              {(article.status === 'pending' || article.status === 'in_progress') && <p className="text-primary-glow font-mono text-xs mt-1">
+                                  {getDeliveryTimeframe(article)}
+                                </p>}
+                            </td>
+                            
+                            {/* Delivery Cell */}
+                            <td className={`py-4 align-top ${isSelected ? selectedCellBase : ''}`}>
+                              {article.status === 'completed' ? <span className="text-white font-mono text-xs md:text-sm">
+                                  {article.delivery_date ? formatDate(article.delivery_date) : 'Completed'}
+                                </span> : article.delivery_deadline ? <span className="text-yellow-400 font-mono text-xs md:text-sm font-semibold">
+                                  {getTimeRemaining(article.delivery_deadline)}
+                                </span> : <span className="text-white/50 font-mono text-xs">—</span>}
+                            </td>
+                            
+                            {/* Revisions Cell */}
+                            <td className={`py-4 align-top ${isSelected ? selectedCellBase : ''}`}>
+                              {article.status === 'completed' ? <span className={`font-mono text-xs md:text-sm ${(article.revisions_requested || 0) >= (article.revisions_allowed || 1) ? 'text-red-400' : 'text-white'}`}>
+                                  {article.revisions_requested || 0} / {article.revisions_allowed === 999999 ? '∞' : article.revisions_allowed || 1}
+                                </span> : <span className="text-white/50 font-mono text-xs">—</span>}
+                            </td>
+                            
+                            {/* Last Cell - Actions */}
+                            <td className={`py-4 text-right ${isSelected ? `${selectedCellBase} border-r rounded-r-lg` : ''}`}>
+                              <div className="flex items-center gap-2 justify-end">
+                                {article.status === 'completed' ? <>
+                                    <Button size="sm" className="bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono" onClick={() => article.article_url && window.open(article.article_url, '_blank')}>
+                                      <Download className="h-4 w-4 mr-1" />
+                                      Download
+                                    </Button>
+                                    <Button size="sm" variant="ghost" className="text-yellow-400 border border-yellow-500/30 hover:border-yellow-500/60 font-mono disabled:opacity-50 disabled:cursor-not-allowed" onClick={() => handleRequestRevision(article)} disabled={(article.revisions_requested || 0) >= (article.revisions_allowed || 1)}>
+                                      <Edit className="h-4 w-4 mr-1" />
+                                      {(article.revisions_requested || 0) >= (article.revisions_allowed || 1) ? 'Limit Reached' : 'Request Revision'}
+                                    </Button>
+                                  </> : null}
+                              </div>
+                            </td>
+                          </tr>
+                        );
+                      })}
                     </tbody>
                   </table>
                 </div>
