@@ -671,7 +671,7 @@ const Dashboard = () => {
         </div>
 
         {/* Dashboard Features Tabs */}
-        <Tabs defaultValue="projects" className="mb-8 min-h-[600px]">
+        <Tabs defaultValue="projects" className="mb-8">
           <TabsList className="bg-black/60 backdrop-blur-xl border border-white/[0.1] rounded-lg p-1.5 mb-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
             <TabsTrigger value="projects" className="font-mono text-white/60 transition-all duration-200 rounded-md px-4 py-2 hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)]">
               <FileText className="h-4 w-4 mr-2" />
@@ -707,7 +707,7 @@ const Dashboard = () => {
               </TabsTrigger>}
           </TabsList>
 
-          <TabsContent value="projects" tabIndex={-1} className="focus:outline-none">
+          <TabsContent value="projects">
             <GlassCard variant="default" glow hover={false}>
           <GlassCardHeader className="px-4 sm:px-6">
             <div className="flex flex-col gap-3 sm:gap-4">
@@ -829,7 +829,7 @@ const Dashboard = () => {
               <>
                 {/* Mobile Card Layout */}
                 <div className="block md:hidden space-y-4">
-                  {filteredArticles.map(article => <div key={article.id} onClick={() => setSelectedPipelineArticleId(article.id === selectedPipelineArticleId ? null : article.id)} className={`p-4 bg-white/[0.05] rounded-lg border cursor-pointer transition-all duration-200 ${article.id === selectedPipelineArticleId ? 'border-primary-glow/60 bg-primary/15 shadow-[0_0_15px_hsl(221_83%_53%/0.2)]' : 'border-white/[0.1] hover:border-primary-glow/40 hover:bg-white/[0.08]'}`}>
+                  {filteredArticles.map(article => <div key={article.id} onClick={() => setSelectedPipelineArticleId(article.id === selectedPipelineArticleId ? null : article.id)} className={`p-4 bg-white/[0.05] rounded-lg border cursor-pointer transition-all ${article.id === selectedPipelineArticleId ? 'border-green-500/60 bg-green-500/10' : 'border-white/[0.1] hover:border-primary-glow/40 hover:bg-white/[0.08]'}`}>
                       <div className="space-y-3">
                         {/* Title and Word Count */}
                         <div>
@@ -904,7 +904,7 @@ const Dashboard = () => {
                       </tr>
                     </thead>
                     <tbody className="space-y-3">
-                      {filteredArticles.map(article => <tr key={article.id} onClick={() => setSelectedPipelineArticleId(article.id === selectedPipelineArticleId ? null : article.id)} className={`cursor-pointer transition-all duration-200 ${article.id === selectedPipelineArticleId ? 'bg-primary/15 border-b border-primary-glow/40' : 'border-b border-white/[0.1] hover:bg-white/[0.05]'}`}>
+                      {filteredArticles.map(article => <tr key={article.id} onClick={() => setSelectedPipelineArticleId(article.id === selectedPipelineArticleId ? null : article.id)} className={`border-b border-white/[0.1] cursor-pointer transition-colors ${article.id === selectedPipelineArticleId ? 'bg-green-500/10' : 'hover:bg-white/[0.05]'}`}>
                           <td className="py-4 align-top w-2/5">
                             <div>
                               <h3 className="text-white font-mono tracking-wide font-semibold text-xs md:text-sm lg:text-base">
@@ -959,27 +959,27 @@ const Dashboard = () => {
           </TabsContent>
 
           {/* Content Calendar Tab (Growth) */}
-          {hasGrowth && <TabsContent value="calendar" tabIndex={-1} className="focus:outline-none">
+          {hasGrowth && <TabsContent value="calendar">
               {user?.id && <ContentCalendar userId={user.id} />}
             </TabsContent>}
 
           {/* Research Reports Tab (Scale, Authority, Dominance) */}
-          {hasScale && <TabsContent value="reports" tabIndex={-1} className="focus:outline-none">
+          {hasScale && <TabsContent value="reports">
               {user?.id && <ResearchReports userId={user.id} />}
             </TabsContent>}
 
           {/* Performance Dashboard Tab (Dominance) */}
-          {hasDominance && <TabsContent value="performance" tabIndex={-1} className="focus:outline-none">
+          {hasDominance && <TabsContent value="performance">
               <PerformanceDashboard articles={articles} monthlyLimit={monthlyLimit} />
             </TabsContent>}
 
           {/* Priority Support Tab (Authority, Dominance) */}
-          {hasAuthority && <TabsContent value="support" tabIndex={-1} className="focus:outline-none">
+          {hasAuthority && <TabsContent value="support">
               <PrioritySupport userEmail={user?.email || ''} />
             </TabsContent>}
 
           {/* Market Roadmap Tab (Dominance) */}
-          {hasDominance && <TabsContent value="roadmap" tabIndex={-1} className="focus:outline-none">
+          {hasDominance && <TabsContent value="roadmap">
               {user?.id && <MarketRoadmap userId={user.id} />}
             </TabsContent>}
         </Tabs>
