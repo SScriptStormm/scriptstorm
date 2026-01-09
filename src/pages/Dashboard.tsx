@@ -672,28 +672,28 @@ const Dashboard = () => {
 
         {/* Dashboard Features Tabs */}
         <Tabs defaultValue="projects" className="mb-8">
-          <TabsList className="bg-black/40 border border-primary-glow/40 mb-6">
-            <TabsTrigger value="projects" className="font-mono data-[state=active]:bg-primary-glow/30 data-[state=active]:text-white">
+          <TabsList className="bg-black/60 backdrop-blur-xl border border-white/[0.1] rounded-lg p-1.5 mb-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
+            <TabsTrigger value="projects" className="font-mono text-white/60 transition-all duration-200 rounded-md px-4 py-2 hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)]">
               <FileText className="h-4 w-4 mr-2" />
               PROJECTS
             </TabsTrigger>
             
-            {hasGrowth && <TabsTrigger value="calendar" className="font-mono data-[state=active]:bg-primary-glow/30 data-[state=active]:text-white">
+            {hasGrowth && <TabsTrigger value="calendar" className="font-mono text-white/60 transition-all duration-200 rounded-md px-4 py-2 hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)]">
                 <CalendarIcon className="h-4 w-4 mr-2" />
                 CALENDAR
               </TabsTrigger>}
             
-            {hasScale && <TabsTrigger value="reports" className="font-mono data-[state=active]:bg-primary-glow/30 data-[state=active]:text-white">
+            {hasScale && <TabsTrigger value="reports" className="font-mono text-white/60 transition-all duration-200 rounded-md px-4 py-2 hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)]">
                 <FileText className="h-4 w-4 mr-2" />
                 RESEARCH
               </TabsTrigger>}
             
-            {hasDominance && <TabsTrigger value="performance" className="font-mono data-[state=active]:bg-primary-glow/30 data-[state=active]:text-white">
+            {hasDominance && <TabsTrigger value="performance" className="font-mono text-white/60 transition-all duration-200 rounded-md px-4 py-2 hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)]">
                 <BarChart3 className="h-4 w-4 mr-2" />
                 PERFORMANCE
               </TabsTrigger>}
             
-            {hasScale && <TabsTrigger value="support" className="font-mono data-[state=active]:bg-primary-glow/30 data-[state=active]:text-white relative">
+            {hasScale && <TabsTrigger value="support" className="font-mono text-white/60 transition-all duration-200 rounded-md px-4 py-2 hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)] relative">
                 <MessageSquare className="h-4 w-4 mr-2" />
                 SUPPORT
                 {(hasAuthority || hasDominance) && <Badge className="ml-2 bg-yellow-500/30 text-yellow-300 border-yellow-500/50 text-xs px-1 py-0">
@@ -701,7 +701,7 @@ const Dashboard = () => {
                   </Badge>}
               </TabsTrigger>}
             
-            {hasDominance && <TabsTrigger value="roadmap" className="font-mono data-[state=active]:bg-primary-glow/30 data-[state=active]:text-white">
+            {hasDominance && <TabsTrigger value="roadmap" className="font-mono text-white/60 transition-all duration-200 rounded-md px-4 py-2 hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)]">
                 <Target className="h-4 w-4 mr-2" />
                 ROADMAP
               </TabsTrigger>}
@@ -729,17 +729,17 @@ const Dashboard = () => {
                   <div className="flex items-center gap-2 w-full">
                     <CalendarIcon className="h-4 w-4 text-primary-glow flex-shrink-0" />
                     <Select value={monthFilter} onValueChange={setMonthFilter}>
-                      <SelectTrigger className="flex-1 bg-black/40 border-primary-glow/30 text-white font-mono text-xs sm:text-sm">
+                      <SelectTrigger className="flex-1 bg-black/50 backdrop-blur-sm border-white/[0.15] text-white font-mono text-xs sm:text-sm transition-all duration-200 hover:border-white/[0.25] focus:border-primary-glow/50 focus:shadow-[0_0_10px_hsl(221_83%_53%/0.15)]">
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent className="bg-black/80 backdrop-blur-xl border-white/[0.1] shadow-lg shadow-primary-glow/10 z-50">
-                        <SelectItem value={currentMonthYear} className="font-mono text-white hover:bg-white/10 focus:bg-white/10">
+                      <SelectContent className="bg-black/90 backdrop-blur-xl border-white/[0.15] shadow-xl shadow-black/50 z-50">
+                        <SelectItem value={currentMonthYear} className="font-mono text-white/80 hover:bg-primary/20 hover:text-white focus:bg-primary/20 focus:text-white transition-colors cursor-pointer">
                           {getMonthLabel(currentMonthYear)} ({articles.filter(a => getMonthYear(a.created_at) === currentMonthYear).length})
                         </SelectItem>
-                        {availableMonths.filter(month => month !== currentMonthYear).map(month => <SelectItem key={month} value={month} className="font-mono text-white hover:bg-white/10 focus:bg-white/10">
+                        {availableMonths.filter(month => month !== currentMonthYear).map(month => <SelectItem key={month} value={month} className="font-mono text-white/80 hover:bg-primary/20 hover:text-white focus:bg-primary/20 focus:text-white transition-colors cursor-pointer">
                               {getMonthLabel(month)} ({articles.filter(a => getMonthYear(a.created_at) === month).length})
                             </SelectItem>)}
-                        <SelectItem value="all_time" className="font-mono text-white hover:bg-white/10 focus:bg-white/10">
+                        <SelectItem value="all_time" className="font-mono text-white/80 hover:bg-primary/20 hover:text-white focus:bg-primary/20 focus:text-white transition-colors cursor-pointer">
                           📚 View All Time
                         </SelectItem>
                       </SelectContent>
@@ -750,33 +750,49 @@ const Dashboard = () => {
                   <div className="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1">
                     <Button
                       size="sm"
-                      variant={statusFilter === 'all' ? 'default' : 'outline'}
+                      variant="ghost"
                       onClick={() => setStatusFilter('all')}
-                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 ${statusFilter !== 'all' ? 'bg-transparent text-white border-primary-glow/30 hover:!bg-transparent hover:!text-white hover:!border-primary-glow/30' : ''}`}
+                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
+                        statusFilter === 'all' 
+                          ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)]' 
+                          : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
+                      }`}
                     >
                       All ({monthFilteredArticles.length})
                     </Button>
                     <Button
                       size="sm"
-                      variant={statusFilter === 'completed' ? 'default' : 'outline'}
+                      variant="ghost"
                       onClick={() => setStatusFilter('completed')}
-                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 ${statusFilter !== 'completed' ? 'bg-transparent text-white border-primary-glow/30 hover:!bg-transparent hover:!text-white hover:!border-primary-glow/30' : ''}`}
+                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
+                        statusFilter === 'completed' 
+                          ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)]' 
+                          : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
+                      }`}
                     >
                       Completed ({monthFilteredArticles.filter(a => a.status === 'completed').length})
                     </Button>
                     <Button
                       size="sm"
-                      variant={statusFilter === 'in_progress' ? 'default' : 'outline'}
+                      variant="ghost"
                       onClick={() => setStatusFilter('in_progress')}
-                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 ${statusFilter !== 'in_progress' ? 'bg-transparent text-white border-primary-glow/30 hover:!bg-transparent hover:!text-white hover:!border-primary-glow/30' : ''}`}
+                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
+                        statusFilter === 'in_progress' 
+                          ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)]' 
+                          : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
+                      }`}
                     >
                       In Progress ({monthFilteredArticles.filter(a => a.status === 'in_progress').length})
                     </Button>
                     <Button
                       size="sm"
-                      variant={statusFilter === 'pending' ? 'default' : 'outline'}
+                      variant="ghost"
                       onClick={() => setStatusFilter('pending')}
-                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 ${statusFilter !== 'pending' ? 'bg-transparent text-white border-primary-glow/30 hover:!bg-transparent hover:!text-white hover:!border-primary-glow/30' : ''}`}
+                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
+                        statusFilter === 'pending' 
+                          ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)]' 
+                          : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
+                      }`}
                     >
                       Pending ({monthFilteredArticles.filter(a => a.status === 'pending').length})
                     </Button>
