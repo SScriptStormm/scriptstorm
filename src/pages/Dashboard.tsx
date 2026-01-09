@@ -904,7 +904,7 @@ const Dashboard = () => {
                       </tr>
                     </thead>
                     <tbody className="space-y-3">
-                      {filteredArticles.map(article => <tr key={article.id} onClick={() => setSelectedPipelineArticleId(article.id === selectedPipelineArticleId ? null : article.id)} className={`cursor-pointer transition-all duration-200 ${article.id === selectedPipelineArticleId ? 'bg-primary/15 border-b border-primary-glow/40 shadow-[0_0_15px_hsl(221_83%_53%/0.15)]' : 'border-b border-white/[0.1] hover:bg-white/[0.05]'}`}>
+                      {filteredArticles.map(article => <tr key={article.id} onClick={() => setSelectedPipelineArticleId(article.id === selectedPipelineArticleId ? null : article.id)} className={`cursor-pointer transition-all duration-200 ${article.id === selectedPipelineArticleId ? 'bg-primary/15 ring-1 ring-primary-glow/60 ring-inset shadow-[0_0_15px_hsl(221_83%_53%/0.2)]' : 'border-b border-white/[0.1] hover:bg-white/[0.05]'}`}>
                           <td className="py-4 align-top w-2/5">
                             <div>
                               <h3 className="text-white font-mono tracking-wide font-semibold text-xs md:text-sm lg:text-base">
