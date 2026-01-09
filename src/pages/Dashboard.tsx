@@ -911,7 +911,7 @@ const Dashboard = () => {
                 
                 {/* Desktop Table Layout */}
                 <div className="hidden md:block overflow-x-auto">
-                  <table className="w-full">
+                  <table className="w-full border-collapse">
                     <thead>
                       <tr className="border-b border-primary-glow/20 text-left">
                         <th className="text-white/70 font-mono text-sm pb-3">Project Title</th>
@@ -921,10 +921,14 @@ const Dashboard = () => {
                         <th className="text-white/70 font-mono text-sm pb-3 text-right">Actions</th>
                       </tr>
                     </thead>
-                    <tbody className="space-y-3">
+                    <tbody>
                       {filteredArticles.map(article => {
                         const isSelected = article.id === selectedPipelineArticleId;
-                        const selectedCellBase = 'bg-gradient-to-r from-primary/20 via-primary/10 to-transparent border-t border-b border-primary-glow/50 transition-all duration-300';
+                        // Separate cell classes for clean rectangle borders
+                        const selectedCellBg = 'bg-gradient-to-r from-primary/20 via-primary/10 to-transparent transition-all duration-300';
+                        const selectedFirstCell = `${selectedCellBg} border-t border-b border-l border-primary-glow/50 rounded-l-lg`;
+                        const selectedMiddleCell = `${selectedCellBg} border-t border-b border-primary-glow/50`;
+                        const selectedLastCell = `${selectedCellBg} border-t border-b border-r border-primary-glow/50 rounded-r-lg`;
                         const unselectedRowBase = 'border-b border-white/[0.1] hover:bg-white/[0.05]';
                         
                         return (
@@ -934,7 +938,7 @@ const Dashboard = () => {
                             className={`cursor-pointer transition-all duration-300 ${!isSelected ? unselectedRowBase : ''}`}
                           >
                             {/* First Cell - Project Title with Accent Rail */}
-                            <td className={`py-4 align-top w-2/5 relative ${isSelected ? `${selectedCellBase} border-l rounded-l-lg` : ''}`}>
+                            <td className={`py-4 align-top w-2/5 relative ${isSelected ? selectedFirstCell : ''}`}>
                               {/* Accent Rail */}
                               {isSelected && (
                                 <div className="absolute left-1 top-3 bottom-3 w-[3px] rounded-full bg-primary-glow shadow-[0_0_12px_hsl(221_83%_53%/0.6)]" />
@@ -948,7 +952,7 @@ const Dashboard = () => {
                             </td>
                             
                             {/* Status Cell */}
-                            <td className={`py-4 align-top ${isSelected ? selectedCellBase : ''}`}>
+                            <td className={`py-4 align-top ${isSelected ? selectedMiddleCell : ''}`}>
                               <Badge className={`${getStatusColor(article.status)} font-mono tracking-wide text-[10px] md:text-xs inline-flex items-center gap-1`}>
                                 {getStatusIcon(article.status)}
                                 {article.status === 'completed' ? '✅ Ready' : article.status === 'in_progress' ? '🔄 In Progress' : '⏳ Pending'}
@@ -959,7 +963,7 @@ const Dashboard = () => {
                             </td>
                             
                             {/* Delivery Cell */}
-                            <td className={`py-4 align-top ${isSelected ? selectedCellBase : ''}`}>
+                            <td className={`py-4 align-top ${isSelected ? selectedMiddleCell : ''}`}>
                               {article.status === 'completed' ? <span className="text-white font-mono text-xs md:text-sm">
                                   {article.delivery_date ? formatDate(article.delivery_date) : 'Completed'}
                                 </span> : article.delivery_deadline ? <span className="text-yellow-400 font-mono text-xs md:text-sm font-semibold">
@@ -968,14 +972,14 @@ const Dashboard = () => {
                             </td>
                             
                             {/* Revisions Cell */}
-                            <td className={`py-4 align-top ${isSelected ? selectedCellBase : ''}`}>
+                            <td className={`py-4 align-top ${isSelected ? selectedMiddleCell : ''}`}>
                               {article.status === 'completed' ? <span className={`font-mono text-xs md:text-sm ${(article.revisions_requested || 0) >= (article.revisions_allowed || 1) ? 'text-red-400' : 'text-white'}`}>
                                   {article.revisions_requested || 0} / {article.revisions_allowed === 999999 ? '∞' : article.revisions_allowed || 1}
                                 </span> : <span className="text-white/50 font-mono text-xs">—</span>}
                             </td>
                             
                             {/* Last Cell - Actions */}
-                            <td className={`py-4 text-right ${isSelected ? `${selectedCellBase} border-r rounded-r-lg` : ''}`}>
+                            <td className={`py-4 text-right ${isSelected ? selectedLastCell : ''}`}>
                               <div className="flex items-center gap-2 justify-end">
                                 {article.status === 'completed' ? <>
                                     <Button size="sm" className="bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono" onClick={() => article.article_url && window.open(article.article_url, '_blank')}>
