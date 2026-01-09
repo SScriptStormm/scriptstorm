@@ -927,18 +927,15 @@ const Dashboard = () => {
                         // Move gradient to <tr> for seamless background, cells only handle borders
                         const unselectedRowBase = 'border-b border-white/[0.1] hover:bg-white/[0.05]';
                         const selectedRowStyle = 'bg-primary/10 shadow-[inset_0_2px_0_hsl(221_83%_53%/0.5),inset_0_-2px_0_hsl(221_83%_53%/0.5)]';
-                        const selectedFirstCell = 'border-l-2 border-primary-glow/60 rounded-l-lg';
-                        const selectedMiddleCell = '';
-                        const selectedLastCell = 'border-r-2 border-primary-glow/60 rounded-r-lg';
                         
                         return (
                           <tr 
                             key={article.id} 
                             onClick={() => setSelectedPipelineArticleId(isSelected ? null : article.id)} 
-                            className={`cursor-pointer transition-all duration-300 ${isSelected ? selectedRowStyle : unselectedRowBase}`}
+                            className={`cursor-pointer transition-[background-color,box-shadow] duration-300 ${isSelected ? selectedRowStyle : unselectedRowBase}`}
                           >
                             {/* First Cell - Project Title with Accent Rail */}
-                            <td className={`py-4 align-top w-2/5 relative ${isSelected ? selectedFirstCell : ''}`}>
+                            <td className={`py-4 align-top w-2/5 relative border-l-2 ${isSelected ? 'border-primary-glow/60 rounded-l-lg' : 'border-transparent'}`}>
                               {/* Accent Rail */}
                               {isSelected && (
                                 <div className="absolute left-1 top-3 bottom-3 w-[3px] rounded-full bg-primary-glow shadow-[0_0_12px_hsl(221_83%_53%/0.6)]" />
@@ -952,7 +949,7 @@ const Dashboard = () => {
                             </td>
                             
                             {/* Status Cell */}
-                            <td className={`py-4 align-top ${isSelected ? selectedMiddleCell : ''}`}>
+                            <td className="py-4 align-top">
                               <Badge className={`${getStatusColor(article.status)} font-mono tracking-wide text-[10px] md:text-xs inline-flex items-center gap-1`}>
                                 {getStatusIcon(article.status)}
                                 {article.status === 'completed' ? '✅ Ready' : article.status === 'in_progress' ? '🔄 In Progress' : '⏳ Pending'}
@@ -963,7 +960,7 @@ const Dashboard = () => {
                             </td>
                             
                             {/* Delivery Cell */}
-                            <td className={`py-4 align-top ${isSelected ? selectedMiddleCell : ''}`}>
+                            <td className="py-4 align-top">
                               {article.status === 'completed' ? <span className="text-white font-mono text-xs md:text-sm">
                                   {article.delivery_date ? formatDate(article.delivery_date) : 'Completed'}
                                 </span> : article.delivery_deadline ? <span className="text-yellow-400 font-mono text-xs md:text-sm font-semibold">
@@ -972,14 +969,14 @@ const Dashboard = () => {
                             </td>
                             
                             {/* Revisions Cell */}
-                            <td className={`py-4 align-top ${isSelected ? selectedMiddleCell : ''}`}>
+                            <td className="py-4 align-top">
                               {article.status === 'completed' ? <span className={`font-mono text-xs md:text-sm ${(article.revisions_requested || 0) >= (article.revisions_allowed || 1) ? 'text-red-400' : 'text-white'}`}>
                                   {article.revisions_requested || 0} / {article.revisions_allowed === 999999 ? '∞' : article.revisions_allowed || 1}
                                 </span> : <span className="text-white/50 font-mono text-xs">—</span>}
                             </td>
                             
                             {/* Last Cell - Actions */}
-                            <td className={`py-4 text-right ${isSelected ? selectedLastCell : ''}`}>
+                            <td className={`py-4 text-right border-r-2 ${isSelected ? 'border-primary-glow/60 rounded-r-lg' : 'border-transparent'}`}>
                               <div className="flex items-center gap-2 justify-end">
                                 {article.status === 'completed' ? <>
                                     <Button size="sm" className="bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono" onClick={() => article.article_url && window.open(article.article_url, '_blank')}>
