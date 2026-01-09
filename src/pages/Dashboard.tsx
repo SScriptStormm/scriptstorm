@@ -924,18 +924,19 @@ const Dashboard = () => {
                     <tbody>
                       {filteredArticles.map(article => {
                         const isSelected = article.id === selectedPipelineArticleId;
-                        // Separate cell classes for clean rectangle borders
+                        // Use box-shadow on <tr> for top/bottom lines, borders only on first/last cells
                         const selectedCellBg = 'bg-gradient-to-r from-primary/20 via-primary/10 to-transparent transition-all duration-300';
-                        const selectedFirstCell = `${selectedCellBg} border-t border-b border-l border-primary-glow/50 rounded-l-lg`;
-                        const selectedMiddleCell = `${selectedCellBg} border-t border-b border-primary-glow/50`;
-                        const selectedLastCell = `${selectedCellBg} border-t border-b border-r border-primary-glow/50 rounded-r-lg`;
+                        const selectedFirstCell = `${selectedCellBg} border-l-2 border-primary-glow/60 rounded-l-lg`;
+                        const selectedMiddleCell = selectedCellBg;
+                        const selectedLastCell = `${selectedCellBg} border-r-2 border-primary-glow/60 rounded-r-lg`;
                         const unselectedRowBase = 'border-b border-white/[0.1] hover:bg-white/[0.05]';
+                        const selectedRowStyle = 'shadow-[inset_0_2px_0_hsl(221_83%_53%/0.5),inset_0_-2px_0_hsl(221_83%_53%/0.5)]';
                         
                         return (
                           <tr 
                             key={article.id} 
                             onClick={() => setSelectedPipelineArticleId(isSelected ? null : article.id)} 
-                            className={`cursor-pointer transition-all duration-300 ${!isSelected ? unselectedRowBase : ''}`}
+                            className={`cursor-pointer transition-all duration-300 ${isSelected ? selectedRowStyle : unselectedRowBase}`}
                           >
                             {/* First Cell - Project Title with Accent Rail */}
                             <td className={`py-4 align-top w-2/5 relative ${isSelected ? selectedFirstCell : ''}`}>
