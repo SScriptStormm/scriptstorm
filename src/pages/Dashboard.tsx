@@ -829,7 +829,7 @@ const Dashboard = () => {
               <>
                 {/* Mobile Card Layout */}
                 <div className="block md:hidden space-y-4">
-                  {filteredArticles.map(article => <div key={article.id} onClick={() => setSelectedPipelineArticleId(article.id === selectedPipelineArticleId ? null : article.id)} className={`p-4 bg-white/[0.05] rounded-lg border cursor-pointer transition-all ${article.id === selectedPipelineArticleId ? 'border-green-500/60 bg-green-500/10' : 'border-white/[0.1] hover:border-primary-glow/40 hover:bg-white/[0.08]'}`}>
+                  {filteredArticles.map(article => <div key={article.id} onClick={() => setSelectedPipelineArticleId(article.id === selectedPipelineArticleId ? null : article.id)} className={`p-4 bg-white/[0.05] rounded-lg border cursor-pointer transition-all duration-200 ${article.id === selectedPipelineArticleId ? 'border-primary-glow/60 bg-primary/15 shadow-[0_0_20px_hsl(221_83%_53%/0.25)]' : 'border-white/[0.1] hover:border-primary-glow/40 hover:bg-white/[0.08]'}`}>
                       <div className="space-y-3">
                         {/* Title and Word Count */}
                         <div>
@@ -904,7 +904,7 @@ const Dashboard = () => {
                       </tr>
                     </thead>
                     <tbody className="space-y-3">
-                      {filteredArticles.map(article => <tr key={article.id} onClick={() => setSelectedPipelineArticleId(article.id === selectedPipelineArticleId ? null : article.id)} className={`border-b border-white/[0.1] cursor-pointer transition-colors ${article.id === selectedPipelineArticleId ? 'bg-green-500/10' : 'hover:bg-white/[0.05]'}`}>
+                      {filteredArticles.map(article => <tr key={article.id} onClick={() => setSelectedPipelineArticleId(article.id === selectedPipelineArticleId ? null : article.id)} className={`cursor-pointer transition-all duration-200 ${article.id === selectedPipelineArticleId ? 'bg-primary/15 border-b border-primary-glow/40 shadow-[0_0_15px_hsl(221_83%_53%/0.15)]' : 'border-b border-white/[0.1] hover:bg-white/[0.05]'}`}>
                           <td className="py-4 align-top w-2/5">
                             <div>
                               <h3 className="text-white font-mono tracking-wide font-semibold text-xs md:text-sm lg:text-base">
