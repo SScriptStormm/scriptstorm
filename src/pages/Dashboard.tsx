@@ -754,7 +754,7 @@ const Dashboard = () => {
                       onClick={() => setStatusFilter('all')}
                       className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
                         statusFilter === 'all' 
-                          ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)]' 
+                          ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
                           : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
                       }`}
                     >
@@ -766,7 +766,7 @@ const Dashboard = () => {
                       onClick={() => setStatusFilter('completed')}
                       className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
                         statusFilter === 'completed' 
-                          ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)]' 
+                          ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
                           : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
                       }`}
                     >
@@ -778,7 +778,7 @@ const Dashboard = () => {
                       onClick={() => setStatusFilter('in_progress')}
                       className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
                         statusFilter === 'in_progress' 
-                          ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)]' 
+                          ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
                           : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
                       }`}
                     >
@@ -790,7 +790,7 @@ const Dashboard = () => {
                       onClick={() => setStatusFilter('pending')}
                       className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
                         statusFilter === 'pending' 
-                          ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)]' 
+                          ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
                           : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
                       }`}
                     >
