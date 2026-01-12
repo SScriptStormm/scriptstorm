@@ -9,7 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FileText, Calendar as CalendarIcon, Clock, CheckCircle, AlertCircle, Zap, LogOut, RefreshCw, CreditCard, BarChart3, Target, Eye, Download, Edit, MessageSquare, User as UserIcon, Settings, LayoutDashboard, ChevronDown, Archive, Plus, ArrowRight } from "lucide-react";
+import { FileText, Calendar as CalendarIcon, Clock, CheckCircle, AlertCircle, Zap, LogOut, RefreshCw, CreditCard, BarChart3, Target, Eye, Download, Edit, MessageSquare, User as UserIcon, Settings, LayoutDashboard, ChevronDown, Archive, Plus, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -75,6 +76,9 @@ const Dashboard = () => {
   const [selectedPipelineArticleId, setSelectedPipelineArticleId] = useState<string | null>(null);
   const [previousMonthsOpen, setPreviousMonthsOpen] = useState(false);
   const [submittingRevision, setSubmittingRevision] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const isMobile = useIsMobile();
+  const itemsPerPage = isMobile ? 5 : 10;
   const {
     toast
   } = useToast();
@@ -342,6 +346,17 @@ const Dashboard = () => {
   // Filter articles by month first, then by status
   const monthFilteredArticles = monthFilter === 'all_time' ? articles : articles.filter(article => getMonthYear(article.created_at) === monthFilter);
   const filteredArticles = statusFilter === 'all' ? monthFilteredArticles : monthFilteredArticles.filter(a => a.status === statusFilter);
+
+  // Pagination calculations
+  const totalPages = Math.ceil(filteredArticles.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedArticles = filteredArticles.slice(startIndex, endIndex);
+
+  // Reset page when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [statusFilter, monthFilter]);
 
   // Current month articles for pipeline display
   const currentMonthPipelineArticles = articles.filter(article => getMonthYear(article.created_at) === currentMonthYear);
@@ -829,7 +844,7 @@ const Dashboard = () => {
               <>
                 {/* Mobile Card Layout */}
                 <div className="block md:hidden space-y-4">
-                  {filteredArticles.map(article => {
+                  {paginatedArticles.map(article => {
                     const isSelected = article.id === selectedPipelineArticleId;
                     return (
                       <div 
@@ -922,7 +937,7 @@ const Dashboard = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {filteredArticles.map(article => {
+                      {paginatedArticles.map(article => {
                         const isSelected = article.id === selectedPipelineArticleId;
                         // Move gradient to <tr> for seamless background, cells only handle borders
                         const unselectedRowBase = 'border-b border-white/[0.1] hover:bg-white/[0.05]';
@@ -996,6 +1011,94 @@ const Dashboard = () => {
                     </tbody>
                   </table>
                 </div>
+
+                {/* Pagination Controls */}
+                {totalPages > 1 && (
+                  <div className="mt-6 flex flex-col md:flex-row items-center justify-between gap-4 pt-4 border-t border-white/[0.1]">
+                    {/* Results Count */}
+                    <p className="text-white/60 font-mono text-xs md:text-sm">
+                      Showing {startIndex + 1}-{Math.min(endIndex, filteredArticles.length)} of {filteredArticles.length} projects
+                    </p>
+                    
+                    {/* Pagination Buttons */}
+                    <div className="flex items-center gap-2">
+                      {/* Previous Button */}
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setCurrentPage(prev => Math.max(1, prev - 1));
+                        }}
+                        disabled={currentPage === 1}
+                        className="font-mono text-xs bg-white/[0.05] border border-white/[0.15] text-white/70 hover:bg-white/[0.08] hover:text-white disabled:opacity-40 disabled:cursor-not-allowed"
+                      >
+                        <ChevronLeft className="h-4 w-4 mr-1" />
+                        Previous
+                      </Button>
+                      
+                      {/* Page Numbers - Desktop */}
+                      <div className="hidden md:flex items-center gap-1">
+                        {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => {
+                          // Show first page, last page, current page, and pages around current
+                          const showPage = page === 1 || 
+                                          page === totalPages || 
+                                          Math.abs(page - currentPage) <= 1;
+                          
+                          const showEllipsisBefore = page === currentPage - 2 && currentPage > 3;
+                          const showEllipsisAfter = page === currentPage + 2 && currentPage < totalPages - 2;
+                          
+                          if (showEllipsisBefore || showEllipsisAfter) {
+                            return (
+                              <span key={page} className="text-white/40 font-mono text-sm px-2">...</span>
+                            );
+                          }
+                          
+                          if (!showPage) return null;
+                          
+                          return (
+                            <Button
+                              key={page}
+                              size="sm"
+                              variant="ghost"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setCurrentPage(page);
+                              }}
+                              className={`font-mono text-xs min-w-[32px] ${
+                                currentPage === page
+                                  ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_10px_hsl(221_83%_53%/0.3)]'
+                                  : 'bg-white/[0.05] border border-white/[0.15] text-white/70 hover:bg-white/[0.08] hover:text-white'
+                              }`}
+                            >
+                              {page}
+                            </Button>
+                          );
+                        })}
+                      </div>
+                      
+                      {/* Page Indicator - Mobile */}
+                      <span className="md:hidden text-white font-mono text-sm px-3">
+                        Page {currentPage} of {totalPages}
+                      </span>
+                      
+                      {/* Next Button */}
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setCurrentPage(prev => Math.min(totalPages, prev + 1));
+                        }}
+                        disabled={currentPage === totalPages}
+                        className="font-mono text-xs bg-white/[0.05] border border-white/[0.15] text-white/70 hover:bg-white/[0.08] hover:text-white disabled:opacity-40 disabled:cursor-not-allowed"
+                      >
+                        Next
+                        <ChevronRight className="h-4 w-4 ml-1" />
+                      </Button>
+                    </div>
+                  </div>
+                )}
               </>
             )}
           </GlassCardContent>
