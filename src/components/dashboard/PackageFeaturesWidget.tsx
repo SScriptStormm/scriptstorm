@@ -11,11 +11,11 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
   const tier = subscriptionTier.toLowerCase();
 
   const tierColors: Record<string, string> = {
-    starter: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
-    growth: 'bg-green-500/20 text-green-300 border-green-500/30',
-    scale: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
-    authority: 'bg-red-500/20 text-red-300 border-red-500/30',
-    dominance: 'bg-amber-500/20 text-amber-300 border-amber-500/30'
+    starter: 'bg-blue-500/20 text-blue-300 border-blue-400/50',
+    growth: 'bg-emerald-500/20 text-emerald-300 border-emerald-400/50',
+    scale: 'bg-purple-500/20 text-purple-300 border-purple-400/50',
+    authority: 'bg-orange-500/20 text-orange-300 border-orange-400/50',
+    dominance: 'bg-amber-500/20 text-amber-300 border-amber-400/50'
   };
 
   const tierEmojis: Record<string, string> = {
@@ -161,7 +161,7 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
       <GlassCardHeader className="pb-4">
         <div className="flex items-center justify-between">
           <GlassCardTitle className="flex items-center gap-2">
-            <Package className="h-5 w-5 text-primary-glow" />
+            <Package className="h-5 w-5 text-white drop-shadow-[0_0_6px_rgba(255,255,255,0.4)]" />
             YOUR PACKAGE
           </GlassCardTitle>
           <Badge className={`${tierColors[tier] || tierColors.starter} font-mono uppercase`}>
@@ -176,7 +176,7 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
         <AccordionItem value="content-deliverables" className="border-primary-glow/20">
           <AccordionTrigger className="hover:no-underline hover:text-primary-glow transition-colors">
             <div className="flex items-center gap-2">
-              <FileText className="w-4 h-4 text-primary-glow" />
+              <FileText className="w-4 h-4 text-white drop-shadow-[0_0_6px_rgba(255,255,255,0.4)]" />
               <span className="text-sm font-bold text-white font-mono">Content Deliverables</span>
             </div>
           </AccordionTrigger>
@@ -229,7 +229,7 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
         <AccordionItem value="research-strategy" className="border-primary-glow/20">
           <AccordionTrigger className="hover:no-underline hover:text-primary-glow transition-colors">
             <div className="flex items-center gap-2">
-              <Target className="w-4 h-4 text-primary-glow" />
+              <Target className="w-4 h-4 text-white drop-shadow-[0_0_6px_rgba(255,255,255,0.4)]" />
               <span className="text-sm font-bold text-white font-mono">Research & Strategy</span>
             </div>
           </AccordionTrigger>
@@ -264,7 +264,7 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
         <AccordionItem value="quality-guarantees" className="border-primary-glow/20">
           <AccordionTrigger className="hover:no-underline hover:text-primary-glow transition-colors">
             <div className="flex items-center gap-2">
-              <Shield className="w-4 h-4 text-primary-glow" />
+              <Shield className="w-4 h-4 text-white drop-shadow-[0_0_6px_rgba(255,255,255,0.4)]" />
               <span className="text-sm font-bold text-white font-mono">Quality Guarantees</span>
             </div>
           </AccordionTrigger>
@@ -288,7 +288,7 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
           <AccordionItem value="delivery-support" className="border-primary-glow/20">
             <AccordionTrigger className="hover:no-underline hover:text-primary-glow transition-colors">
               <div className="flex items-center gap-2">
-                <Zap className="w-4 h-4 text-primary-glow" />
+                <Zap className="w-4 h-4 text-white drop-shadow-[0_0_6px_rgba(255,255,255,0.4)]" />
                 <span className="text-sm font-bold text-white font-mono">Delivery & Support</span>
               </div>
             </AccordionTrigger>
