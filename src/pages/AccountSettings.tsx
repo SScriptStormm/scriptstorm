@@ -9,6 +9,8 @@ import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 import { Info, CreditCard, Shield, User, Calendar, ArrowLeft, Download, Mail, Lock, Trash2, Crown, Zap } from "lucide-react";
 import LoadingScreen from "@/components/ui/LoadingScreen";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Table,
   TableBody,
@@ -28,6 +30,14 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 interface SubscriberData {
   subscription_tier: string | null;
@@ -61,6 +71,14 @@ export default function AccountSettings() {
   const [loading, setLoading] = useState(true);
   const [subscriber, setSubscriber] = useState<SubscriberData | null>(null);
   const [userEmail, setUserEmail] = useState("");
+  
+  // Email and password change state
+  const [emailDialogOpen, setEmailDialogOpen] = useState(false);
+  const [passwordDialogOpen, setPasswordDialogOpen] = useState(false);
+  const [newEmail, setNewEmail] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [isUpdating, setIsUpdating] = useState(false);
 
   useEffect(() => {
     const fetchSubscriberData = async () => {
@@ -150,6 +168,58 @@ export default function AccountSettings() {
     if (!error) {
       toast.success("Account deletion requested");
       navigate("/");
+    }
+  };
+
+  const handleUpdateEmail = async () => {
+    if (!newEmail || !newEmail.includes('@')) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
+    setIsUpdating(true);
+    
+    const { error } = await supabase.auth.updateUser({
+      email: newEmail
+    });
+
+    setIsUpdating(false);
+
+    if (error) {
+      toast.error(error.message);
+    } else {
+      toast.success("Confirmation email sent to both your current and new email addresses. Please check your inbox to confirm the change.");
+      setEmailDialogOpen(false);
+      setNewEmail("");
+    }
+  };
+
+  const handleUpdatePassword = async () => {
+    if (newPassword.length < 6) {
+      toast.error("Password must be at least 6 characters");
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+
+    setIsUpdating(true);
+
+    const { error } = await supabase.auth.updateUser({
+      password: newPassword
+    });
+
+    setIsUpdating(false);
+
+    if (error) {
+      toast.error(error.message);
+    } else {
+      toast.success("Password updated successfully!");
+      setPasswordDialogOpen(false);
+      setNewPassword("");
+      setConfirmPassword("");
     }
   };
 
@@ -419,6 +489,7 @@ export default function AccountSettings() {
                 <Button
                   variant="outline"
                   className="bg-white/5 text-white border-white/20 hover:bg-white/10 font-mono text-sm"
+                  onClick={() => setEmailDialogOpen(true)}
                 >
                   Edit
                 </Button>
@@ -438,6 +509,7 @@ export default function AccountSettings() {
                 <Button
                   variant="outline"
                   className="bg-white/5 text-white border-white/20 hover:bg-white/10 font-mono text-sm"
+                  onClick={() => setPasswordDialogOpen(true)}
                 >
                   Change Password
                 </Button>
@@ -484,6 +556,116 @@ export default function AccountSettings() {
           </GlassCard>
         </div>
       </div>
+
+      {/* Email Change Dialog */}
+      <Dialog open={emailDialogOpen} onOpenChange={setEmailDialogOpen}>
+        <DialogContent className="bg-background border-white/20">
+          <DialogHeader>
+            <DialogTitle className="text-white font-mono">Change Email Address</DialogTitle>
+            <DialogDescription className="text-white/60 font-mono text-sm">
+              Enter your new email address. You'll receive a confirmation link at both your current and new email.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="current-email" className="text-white/70 font-mono text-sm">
+                Current Email
+              </Label>
+              <Input
+                id="current-email"
+                value={userEmail}
+                disabled
+                className="bg-white/5 border-white/20 text-white/50 font-mono"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="new-email" className="text-white/70 font-mono text-sm">
+                New Email
+              </Label>
+              <Input
+                id="new-email"
+                type="email"
+                value={newEmail}
+                onChange={(e) => setNewEmail(e.target.value)}
+                placeholder="Enter new email address"
+                className="bg-white/5 border-white/20 text-white font-mono placeholder:text-white/30"
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={() => setEmailDialogOpen(false)}
+              className="bg-white/5 text-white border-white/20 hover:bg-white/10 font-mono"
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={handleUpdateEmail}
+              disabled={isUpdating || !newEmail}
+              className="bg-primary text-white font-mono"
+            >
+              {isUpdating ? "Sending..." : "Update Email"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Password Change Dialog */}
+      <Dialog open={passwordDialogOpen} onOpenChange={setPasswordDialogOpen}>
+        <DialogContent className="bg-background border-white/20">
+          <DialogHeader>
+            <DialogTitle className="text-white font-mono">Change Password</DialogTitle>
+            <DialogDescription className="text-white/60 font-mono text-sm">
+              Enter your new password. Make sure it's at least 6 characters long.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="new-password" className="text-white/70 font-mono text-sm">
+                New Password
+              </Label>
+              <Input
+                id="new-password"
+                type="password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                placeholder="Enter new password"
+                className="bg-white/5 border-white/20 text-white font-mono placeholder:text-white/30"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="confirm-password" className="text-white/70 font-mono text-sm">
+                Confirm Password
+              </Label>
+              <Input
+                id="confirm-password"
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="Confirm new password"
+                className="bg-white/5 border-white/20 text-white font-mono placeholder:text-white/30"
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={() => setPasswordDialogOpen(false)}
+              className="bg-white/5 text-white border-white/20 hover:bg-white/10 font-mono"
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={handleUpdatePassword}
+              disabled={isUpdating || !newPassword || !confirmPassword}
+              className="bg-primary text-white font-mono"
+            >
+              {isUpdating ? "Updating..." : "Update Password"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
