@@ -597,7 +597,7 @@ export function MultiStepContentBriefForm() {
                         <FormControl>
                           <Textarea 
                             placeholder="Describe your target audience (demographics, interests, pain points)..."
-                            className="min-h-[100px] bg-black/40 text-white placeholder:text-white/50 border-white/20 focus-visible:ring-primary focus-visible:border-primary text-base"
+                            className="min-h-[120px] leading-6 bg-black/40 text-white placeholder:text-white/50 border-white/20 focus-visible:ring-primary focus-visible:border-primary text-base"
                             {...field}
                           />
                         </FormControl>
@@ -618,7 +618,7 @@ export function MultiStepContentBriefForm() {
                         <FormControl>
                           <Textarea 
                             placeholder="What do you want to achieve with this content? (e.g., educate, convert, engage)"
-                            className="min-h-[100px] bg-black/40 text-white placeholder:text-white/50 border-white/20 focus-visible:ring-primary focus-visible:border-primary text-base"
+                            className="min-h-[120px] leading-6 bg-black/40 text-white placeholder:text-white/50 border-white/20 focus-visible:ring-primary focus-visible:border-primary text-base"
                             {...field}
                           />
                         </FormControl>
