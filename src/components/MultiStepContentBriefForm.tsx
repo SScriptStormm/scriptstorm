@@ -639,7 +639,7 @@ export function MultiStepContentBriefForm() {
                         <FormControl>
                           <Textarea 
                             placeholder="List the main points or sections you want included..."
-                            className="min-h-[120px] bg-black/40 text-white placeholder:text-white/50 border-white/20 focus-visible:ring-primary focus-visible:border-primary text-base"
+                            className="min-h-[120px] leading-6 bg-black/40 text-white placeholder:text-white/50 border-white/20 focus-visible:ring-primary focus-visible:border-primary text-base"
                             {...field}
                           />
                         </FormControl>
@@ -832,7 +832,7 @@ export function MultiStepContentBriefForm() {
                         <FormControl>
                           <Textarea 
                             placeholder="Describe your brand's unique voice and personality..."
-                            className="min-h-[100px] bg-black/40 text-white placeholder:text-white/50 border-white/20 focus-visible:ring-primary focus-visible:border-primary text-base"
+                            className="min-h-[120px] leading-6 bg-black/40 text-white placeholder:text-white/50 border-white/20 focus-visible:ring-primary focus-visible:border-primary text-base"
                             {...field}
                           />
                         </FormControl>
@@ -850,7 +850,7 @@ export function MultiStepContentBriefForm() {
                         <FormControl>
                           <Textarea 
                             placeholder="Any specific formatting, structure, or stylistic preferences..."
-                            className="min-h-[100px] bg-black/40 text-white placeholder:text-white/50 border-white/20 focus-visible:ring-primary focus-visible:border-primary text-base"
+                            className="min-h-[120px] leading-6 bg-black/40 text-white placeholder:text-white/50 border-white/20 focus-visible:ring-primary focus-visible:border-primary text-base"
                             {...field}
                           />
                         </FormControl>
@@ -873,7 +873,7 @@ export function MultiStepContentBriefForm() {
                         <FormControl>
                           <Textarea 
                             placeholder="Any additional instructions or requirements..."
-                            className="min-h-[120px] bg-black/40 text-white placeholder:text-white/50 border-white/20 focus-visible:ring-primary focus-visible:border-primary text-base"
+                            className="min-h-[120px] leading-6 bg-black/40 text-white placeholder:text-white/50 border-white/20 focus-visible:ring-primary focus-visible:border-primary text-base"
                             {...field}
                           />
                         </FormControl>
@@ -891,7 +891,7 @@ export function MultiStepContentBriefForm() {
                         <FormControl>
                           <Textarea 
                             placeholder="Links to reference materials, competitor content, or examples (one per line)..."
-                            className="min-h-[100px] bg-black/40 text-white placeholder:text-white/50 border-white/20 focus-visible:ring-primary focus-visible:border-primary text-base"
+                            className="min-h-[120px] leading-6 bg-black/40 text-white placeholder:text-white/50 border-white/20 focus-visible:ring-primary focus-visible:border-primary text-base"
                             {...field}
                           />
                         </FormControl>
@@ -909,7 +909,7 @@ export function MultiStepContentBriefForm() {
                         <FormControl>
                           <Textarea 
                             placeholder="Any topics, angles, or perspectives to avoid..."
-                            className="min-h-[100px] bg-black/40 text-white placeholder:text-white/50 border-white/20 focus-visible:ring-primary focus-visible:border-primary text-base"
+                            className="min-h-[120px] leading-6 bg-black/40 text-white placeholder:text-white/50 border-white/20 focus-visible:ring-primary focus-visible:border-primary text-base"
                             {...field}
                           />
                         </FormControl>

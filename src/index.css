@@ -225,37 +225,28 @@ img[src*='lovable'],
   scrollbar-color: hsl(221 83% 53% / 0.5) rgba(0, 0, 0, 0.3);
 }
 
-/* Textarea-specific scrollbar styling for darker backgrounds */
-textarea::-webkit-scrollbar,
-.glass-card textarea::-webkit-scrollbar,
-form textarea::-webkit-scrollbar {
-  width: 8px !important;
-  height: 8px !important;
+/* Textarea-specific scrollbar - blends with dark boxes */
+textarea::-webkit-scrollbar {
+  width: 6px !important;
+  height: 6px !important;
 }
 
-textarea::-webkit-scrollbar-track,
-.glass-card textarea::-webkit-scrollbar-track,
-form textarea::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.5) !important;
-  border-radius: 4px !important;
+textarea::-webkit-scrollbar-track {
+  background: transparent !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
 }
 
-textarea::-webkit-scrollbar-thumb,
-.glass-card textarea::-webkit-scrollbar-thumb,
-form textarea::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, 
-    hsl(221 83% 53% / 0.7), 
-    hsl(221 83% 45% / 0.5)
-  ) !important;
-  border-radius: 4px !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+textarea::-webkit-scrollbar-thumb {
+  background: hsl(221 83% 53% / 0.4) !important;
+  border-radius: 3px !important;
+  border: none !important;
 }
 
-textarea::-webkit-scrollbar-thumb:hover,
-.glass-card textarea::-webkit-scrollbar-thumb:hover,
-form textarea::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, 
-    hsl(221 83% 65% / 0.9), 
-    hsl(221 83% 55% / 0.7)
-  ) !important;
+textarea::-webkit-scrollbar-thumb:hover {
+  background: hsl(221 83% 53% / 0.6) !important;
+}
+
+textarea::-webkit-scrollbar-corner {
+  background: transparent !important;
 }
