@@ -233,13 +233,13 @@ textarea::-webkit-scrollbar {
 
 textarea::-webkit-scrollbar-track {
   background: transparent !important;
-  border-radius: 3px !important;
+  border-radius: 6px !important;
   margin: 0 !important;
 }
 
 textarea::-webkit-scrollbar-thumb {
   background: hsl(221 83% 53% / 0.4) !important;
-  border-radius: 3px !important;
+  border-radius: 6px !important;
   border: none !important;
 }
 
