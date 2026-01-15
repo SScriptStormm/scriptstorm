@@ -190,33 +190,33 @@ img[src*='lovable'],
 /* Custom Scrollbar Styling - Premium Neon Theme */
 /* Works on Chrome, Edge, Safari */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 8px !important;
+  height: 8px !important;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.3) !important;
+  border-radius: 4px !important;
 }
 
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, 
     hsl(221 83% 53% / 0.6), 
     hsl(221 83% 40% / 0.4)
-  );
-  border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  ) !important;
+  border-radius: 4px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, 
     hsl(221 83% 60% / 0.8), 
     hsl(221 83% 50% / 0.6)
-  );
+  ) !important;
 }
 
 ::-webkit-scrollbar-corner {
-  background: transparent;
+  background: transparent !important;
 }
 
 /* Firefox scrollbar styling */
@@ -226,20 +226,36 @@ img[src*='lovable'],
 }
 
 /* Textarea-specific scrollbar styling for darker backgrounds */
-textarea::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.5);
+textarea::-webkit-scrollbar,
+.glass-card textarea::-webkit-scrollbar,
+form textarea::-webkit-scrollbar {
+  width: 8px !important;
+  height: 8px !important;
 }
 
-textarea::-webkit-scrollbar-thumb {
+textarea::-webkit-scrollbar-track,
+.glass-card textarea::-webkit-scrollbar-track,
+form textarea::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.5) !important;
+  border-radius: 4px !important;
+}
+
+textarea::-webkit-scrollbar-thumb,
+.glass-card textarea::-webkit-scrollbar-thumb,
+form textarea::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, 
     hsl(221 83% 53% / 0.7), 
     hsl(221 83% 45% / 0.5)
-  );
+  ) !important;
+  border-radius: 4px !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
 }
 
-textarea::-webkit-scrollbar-thumb:hover {
+textarea::-webkit-scrollbar-thumb:hover,
+.glass-card textarea::-webkit-scrollbar-thumb:hover,
+form textarea::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, 
     hsl(221 83% 65% / 0.9), 
     hsl(221 83% 55% / 0.7)
-  );
+  ) !important;
 }
