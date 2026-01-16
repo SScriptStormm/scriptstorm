@@ -43,7 +43,7 @@ const HelpCenter = () => {
         },
         {
           q: "What if I need revisions?",
-          a: "Each package includes AI-assisted revisions: Starter (1 round), Growth (2 rounds), Scale (2 rounds), Authority (3 rounds), Dominance (unlimited, Fair Use policy). Submit revision requests through your client dashboard, and our system will process and deliver the refined content within a few hours."
+          a: "Each package includes AI-assisted revisions: Starter (1 round), Growth and Scale (2 rounds), Authority (3 rounds), Dominance (unlimited, Fair Use policy). Submit revision requests through your client dashboard, and our system will process and deliver the refined content within a few hours."
         },
         {
           q: "What types of content do you create?",
