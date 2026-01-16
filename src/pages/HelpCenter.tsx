@@ -105,7 +105,7 @@ const HelpCenter = () => {
         },
         {
           q: "Can you handle large volume content needs?",
-          a: "Absolutely. Our automated system scales effortlessly. Whether you need 10 articles or 100+ per month, we maintain the same quality and delivery speed across all our plans."
+          a: "Absolutely. Our automated system scales effortlessly. Whether you need 10 articles or 50 per month, we maintain the same quality and delivery speed across all our plans."
         },
         {
           q: "Is the content original?",
