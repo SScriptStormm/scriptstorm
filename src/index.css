@@ -233,7 +233,7 @@ textarea::-webkit-scrollbar {
 
 textarea::-webkit-scrollbar-track {
   background: transparent !important;
-  border-radius: 6px !important;
+  border-radius: 0 !important;
   margin: 0 !important;
 }
 
@@ -249,4 +249,5 @@ textarea::-webkit-scrollbar-thumb:hover {
 
 textarea::-webkit-scrollbar-corner {
   background: transparent !important;
+  border-radius: 0 !important;
 }
