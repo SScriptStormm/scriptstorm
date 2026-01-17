@@ -15,8 +15,8 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           className
         )}
       >
-        <textarea
-          className="w-full h-[120px] min-h-[120px] max-h-[120px] bg-transparent border-0 rounded-none px-3 pt-2 pb-0 text-sm leading-6 placeholder:text-muted-foreground focus:outline-none disabled:cursor-not-allowed resize-none overflow-y-auto overflow-x-hidden"
+      <textarea
+          className="w-full h-[120px] min-h-[120px] max-h-[120px] bg-transparent border-0 rounded-none px-3 py-2 text-sm leading-6 placeholder:text-muted-foreground focus:outline-none disabled:cursor-not-allowed resize-none overflow-y-auto overflow-x-hidden [scrollbar-gutter:stable]"
           ref={ref}
           disabled={disabled}
           {...props}
