@@ -129,10 +129,8 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
     if (tier === "dominance") {
       return "12-Hour Lightning Delivery ⚡";
     }
-    if (tier === "scale" || tier === "authority") {
-      return "24-Hour Orchestrated Delivery";
-    }
-    return null;
+    // All tiers (starter, growth, scale, authority) get 24-hour delivery
+    return "24-Hour Orchestrated Delivery";
   };
 
   const getSupportLevel = () => {
