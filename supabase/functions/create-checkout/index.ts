@@ -53,15 +53,15 @@ serve(async (req) => {
       },
       "starter-enterprise": { 
         monthly: { amount: 129700, name: "ScriptStorm Scale - $1,297 USD", description: "25 SEO Articles + 75 Social Posts + 25 Product Descriptions monthly" },
-        annual: { amount: 1245000, name: "ScriptStorm Scale - $12,450 USD/year (Get 2 Months Free!)", description: "25 SEO Articles + 75 Social Posts + 25 Product Descriptions monthly - Annual Plan" }
+        annual: { amount: 1245000, name: "ScriptStorm Scale - $12,450 USD/year (Get 2 Months Free!)", description: "300 SEO Articles + 900 Social Posts + 300 Product Descriptions annually" }
       },
       "growth-enterprise": { 
         monthly: { amount: 179700, name: "ScriptStorm Authority - $1,797 USD", description: "30 SEO Articles + 90 Social Posts + 30 Product Descriptions monthly" },
-        annual: { amount: 1725000, name: "ScriptStorm Authority - $17,250 USD/year (Get 2 Months Free!)", description: "30 SEO Articles + 90 Social Posts + 30 Product Descriptions monthly - Annual Plan" }
+        annual: { amount: 1725000, name: "ScriptStorm Authority - $17,250 USD/year (Get 2 Months Free!)", description: "360 SEO Articles + 1,080 Social Posts + 360 Product Descriptions annually" }
       },
       "authority-enterprise": { 
         monthly: { amount: 299700, name: "ScriptStorm Dominance - $2,997 USD", description: "50 SEO Articles + 150 Social Posts + Unlimited Product Descriptions monthly" },
-        annual: { amount: 2877000, name: "ScriptStorm Dominance - $28,770 USD/year (Get 2 Months Free!)", description: "50 SEO Articles + 150 Social Posts + Unlimited Product Descriptions monthly - Annual Plan" }
+        annual: { amount: 2877000, name: "ScriptStorm Dominance - $28,770 USD/year (Get 2 Months Free!)", description: "600 SEO Articles + 1,800 Social Posts + Unlimited Product Descriptions annually" }
       }
     };
 
