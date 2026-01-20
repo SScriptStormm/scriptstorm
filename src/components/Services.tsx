@@ -19,8 +19,8 @@ const Services = () => {
       title: "Social Media & Video Content",
       description: "Engaging, platform-specific posts and video scripts that build your community and drive traffic.",
       features: [
-        "Platform-Optimized Copy (LinkedIn, X, Instagram, YouTube)",
-        "YouTube Video Script Outlines & Titles",
+        "Social Posts for LinkedIn, X & Instagram",
+        "YouTube Video Scripts (3-8 min)",
         "Hashtag Research",
         "Visual Content Ideas",
         "Built-in Engagement Hooks"
