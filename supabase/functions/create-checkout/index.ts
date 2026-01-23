@@ -41,48 +41,44 @@ serve(async (req) => {
       logStep("Found existing customer", { customerId });
     }
 
-    // Package pricing for both monthly and annual billing
-    const packagePricing = {
-      starter: { 
-        monthly: { amount: 29700, name: "ScriptStorm Starter Package - $297 USD", description: "5 Foundational Blog Articles + 15 Social Media Captions + 5 Product Descriptions monthly" },
-        annual: { amount: 285000, name: "ScriptStorm Starter Package - $2,850 USD/year (Get 2 Months Free!)", description: "60 Foundational Blog Articles + 180 Social Media Captions + 60 Product Descriptions annually" }
+    // Stripe Price IDs for all packages (Test Mode)
+    const priceIds: Record<string, { monthly: string; annual: string }> = {
+      starter: {
+        monthly: "price_1Sr4s7H0XahPXnwCZcVesu8B",
+        annual: "price_1Sr5L4H0XahPXnwCEet08STB"
       },
-      growth: { 
-        monthly: { amount: 59700, name: "ScriptStorm Growth Package - $597 USD", description: "10 Foundational Blog Articles + 30 Social Media Posts & Video assets + 10 Product Descriptions monthly" },
-        annual: { amount: 573000, name: "ScriptStorm Growth Package - $5,730 USD/year (Get 2 Months Free!)", description: "120 Foundational Blog Articles + 360 Social Media Posts & Video assets + 120 Product Descriptions annually" }
+      growth: {
+        monthly: "price_1Sr4u5H0XahPXnwCqBxtrjbR",
+        annual: "price_1Sr5PKH0XahPXnwCQmNv6Nmk"
       },
-      "starter-enterprise": { 
-        monthly: { amount: 129700, name: "ScriptStorm Scale - $1,297 USD", description: "25 SEO Articles + 75 Social Posts + 25 Product Descriptions monthly" },
-        annual: { amount: 1245000, name: "ScriptStorm Scale - $12,450 USD/year (Get 2 Months Free!)", description: "300 SEO Articles + 900 Social Posts + 300 Product Descriptions annually" }
+      "starter-enterprise": {  // Scale tier
+        monthly: "price_1Sr4wsH0XahPXnwCvI42DrMP",
+        annual: "price_1Sr5QiH0XahPXnwClVIk54mv"
       },
-      "growth-enterprise": { 
-        monthly: { amount: 179700, name: "ScriptStorm Authority - $1,797 USD", description: "30 SEO Articles + 90 Social Posts + 30 Product Descriptions monthly" },
-        annual: { amount: 1725000, name: "ScriptStorm Authority - $17,250 USD/year (Get 2 Months Free!)", description: "360 SEO Articles + 1,080 Social Posts + 360 Product Descriptions annually" }
+      "growth-enterprise": {   // Authority tier
+        monthly: "price_1Sr59MH0XahPXnwCcD4FjsZ0",
+        annual: "price_1Sr5RMH0XahPXnwCXmHnUbXM"
       },
-      "authority-enterprise": { 
-        monthly: { amount: 299700, name: "ScriptStorm Dominance - $2,997 USD", description: "50 SEO Articles + 150 Social Posts + Unlimited Product Descriptions monthly" },
-        annual: { amount: 2877000, name: "ScriptStorm Dominance - $28,770 USD/year (Get 2 Months Free!)", description: "600 SEO Articles + 1,800 Social Posts + Unlimited Product Descriptions annually" }
+      "authority-enterprise": { // Dominance tier
+        monthly: "price_1Sr5CGH0XahPXnwClzRKjdJX",
+        annual: "price_1Sr5TdH0XahPXnwCOfj48N4k"
       }
     };
 
-    // Get the correct package and billing type
-    const packageData = packagePricing[packageType] || packagePricing.starter;
-    const selectedPackage = billing === "annual" ? packageData.annual : packageData.monthly;
-    const recurringInterval = billing === "annual" ? "year" : "month";
+    // Validate package type
+    const packagePrices = priceIds[packageType];
+    if (!packagePrices) {
+      throw new Error(`Invalid package type: ${packageType}`);
+    }
+
+    // Get the correct price ID based on billing cycle
+    const selectedPriceId = billing === "annual" ? packagePrices.annual : packagePrices.monthly;
     
-    logStep("Package selected", { packageType, billing, selectedPackage, recurringInterval });
+    logStep("Price ID selected", { packageType, billing, selectedPriceId });
 
     const lineItems = [
       {
-        price_data: {
-          currency: "usd",
-          product_data: {
-            name: selectedPackage.name,
-            description: selectedPackage.description
-          },
-          unit_amount: selectedPackage.amount,
-          recurring: { interval: recurringInterval },
-        },
+        price: selectedPriceId,
         quantity: 1,
       }
     ];
