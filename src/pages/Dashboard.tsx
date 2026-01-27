@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FileText, Calendar as CalendarIcon, Clock, CheckCircle, AlertCircle, Zap, LogOut, RefreshCw, CreditCard, BarChart3, Target, Eye, Download, Edit, MessageSquare, User as UserIcon, Settings, LayoutDashboard, ChevronDown, Archive, Plus, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { FileText, Calendar as CalendarIcon, Clock, CheckCircle, AlertCircle, Zap, LogOut, RefreshCw, CreditCard, BarChart3, Target, Eye, Download, Edit, MessageSquare, User as UserIcon, Settings, LayoutDashboard, ChevronDown, Archive, Plus, ArrowRight, ChevronLeft, ChevronRight, Video, Package } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
@@ -66,6 +66,7 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [statusFilter, setStatusFilter] = useState<string>('all');
+  const [contentTypeFilter, setContentTypeFilter] = useState<string>('all');
   const [monthFilter, setMonthFilter] = useState<string>(() => {
     const now = new Date();
     return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
@@ -343,9 +344,37 @@ const Dashboard = () => {
   const availableMonths = [...new Set(articles.map(a => getMonthYear(a.created_at)))].sort().reverse();
   const currentMonthYear = getCurrentMonthYear();
 
-  // Filter articles by month first, then by status
+  // Helper function to get content type info
+  const getContentTypeInfo = (article: Article) => {
+    if (article.youtube_script) {
+      return { label: 'YouTube Script', shortLabel: 'YouTube', icon: Video, colorClass: 'bg-red-500/20 text-red-400 border-red-500/30' };
+    }
+    switch (article.content_type) {
+      case 'blog_article':
+      case 'article':
+        return { label: 'Blog Article', shortLabel: 'Blog', icon: FileText, colorClass: 'bg-blue-500/20 text-blue-400 border-blue-500/30' };
+      case 'social_media':
+      case 'social_media_post':
+        return { label: 'Social Post', shortLabel: 'Social', icon: MessageSquare, colorClass: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' };
+      case 'product_description':
+        return { label: 'Product Desc', shortLabel: 'Product', icon: Package, colorClass: 'bg-purple-500/20 text-purple-400 border-purple-500/30' };
+      default:
+        return { label: 'Blog Article', shortLabel: 'Blog', icon: FileText, colorClass: 'bg-blue-500/20 text-blue-400 border-blue-500/30' };
+    }
+  };
+
+  // Filter articles by month first, then by status, then by content type
   const monthFilteredArticles = monthFilter === 'all_time' ? articles : articles.filter(article => getMonthYear(article.created_at) === monthFilter);
-  const filteredArticles = statusFilter === 'all' ? monthFilteredArticles : monthFilteredArticles.filter(a => a.status === statusFilter);
+  const statusFilteredArticles = statusFilter === 'all' ? monthFilteredArticles : monthFilteredArticles.filter(a => a.status === statusFilter);
+  const filteredArticles = contentTypeFilter === 'all' 
+    ? statusFilteredArticles 
+    : statusFilteredArticles.filter(a => {
+        if (contentTypeFilter === 'youtube_script') return a.youtube_script;
+        if (contentTypeFilter === 'blog_article') return !a.youtube_script && (!a.content_type || a.content_type === 'article' || a.content_type === 'blog_article');
+        if (contentTypeFilter === 'social_media') return !a.youtube_script && (a.content_type === 'social_media' || a.content_type === 'social_media_post');
+        if (contentTypeFilter === 'product_description') return a.content_type === 'product_description';
+        return true;
+      });
 
   // Pagination calculations
   const totalPages = Math.ceil(filteredArticles.length / itemsPerPage);
@@ -356,7 +385,7 @@ const Dashboard = () => {
   // Reset page when filters change
   useEffect(() => {
     setCurrentPage(1);
-  }, [statusFilter, monthFilter]);
+  }, [statusFilter, monthFilter, contentTypeFilter]);
 
   // Current month articles for pipeline display
   const currentMonthPipelineArticles = articles.filter(article => getMonthYear(article.created_at) === currentMonthYear);
@@ -812,6 +841,74 @@ const Dashboard = () => {
                       Pending ({monthFilteredArticles.filter(a => a.status === 'pending').length})
                     </Button>
                   </div>
+
+                  {/* Content Type Filters */}
+                  <div className="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1">
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => setContentTypeFilter('all')}
+                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
+                        contentTypeFilter === 'all' 
+                          ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
+                          : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
+                      }`}
+                    >
+                      All Types
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => setContentTypeFilter('blog_article')}
+                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
+                        contentTypeFilter === 'blog_article' 
+                          ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
+                          : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
+                      }`}
+                    >
+                      <FileText className="h-3 w-3 mr-1" />
+                      Blogs
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => setContentTypeFilter('social_media')}
+                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
+                        contentTypeFilter === 'social_media' 
+                          ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
+                          : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
+                      }`}
+                    >
+                      <MessageSquare className="h-3 w-3 mr-1" />
+                      Social
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => setContentTypeFilter('youtube_script')}
+                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
+                        contentTypeFilter === 'youtube_script' 
+                          ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
+                          : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
+                      }`}
+                    >
+                      <Video className="h-3 w-3 mr-1" />
+                      YouTube
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => setContentTypeFilter('product_description')}
+                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
+                        contentTypeFilter === 'product_description' 
+                          ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
+                          : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
+                      }`}
+                    >
+                      <Package className="h-3 w-3 mr-1" />
+                      Products
+                    </Button>
+                  </div>
                 </div>}
             </div>
           </GlassCardHeader>
@@ -870,6 +967,18 @@ const Dashboard = () => {
                             </h3>
                             {article.word_count > 0 && <p className="text-white/50 font-mono text-xs">{article.word_count} words</p>}
                           </div>
+                          
+                          {/* Content Type Badge */}
+                          {(() => {
+                            const typeInfo = getContentTypeInfo(article);
+                            const TypeIcon = typeInfo.icon;
+                            return (
+                              <Badge className={`${typeInfo.colorClass} font-mono tracking-wide text-xs inline-flex items-center gap-1`}>
+                                <TypeIcon className="h-3 w-3" />
+                                {typeInfo.shortLabel}
+                              </Badge>
+                            );
+                          })()}
                           
                           {/* Status Badge */}
                           <div>
@@ -931,6 +1040,7 @@ const Dashboard = () => {
                     <thead>
                       <tr className="border-b border-primary-glow/20 text-left">
                         <th className="text-white/70 font-mono text-sm pb-3">Project Title</th>
+                        <th className="text-white/70 font-mono text-sm pb-3">Type</th>
                         <th className="text-white/70 font-mono text-sm pb-3">Status</th>
                         <th className="text-white/70 font-mono text-sm pb-3">Delivery</th>
                         <th className="text-white/70 font-mono text-sm pb-3">Revisions</th>
@@ -962,6 +1072,20 @@ const Dashboard = () => {
                                 </h3>
                                 {article.word_count > 0 && <p className="text-white/50 font-mono text-[10px] md:text-xs">{article.word_count} words</p>}
                               </div>
+                            </td>
+                            
+                            {/* Type Cell */}
+                            <td className="py-4 align-top">
+                              {(() => {
+                                const typeInfo = getContentTypeInfo(article);
+                                const TypeIcon = typeInfo.icon;
+                                return (
+                                  <Badge className={`${typeInfo.colorClass} font-mono tracking-wide text-[10px] md:text-xs inline-flex items-center gap-1`}>
+                                    <TypeIcon className="h-3 w-3" />
+                                    {typeInfo.shortLabel}
+                                  </Badge>
+                                );
+                              })()}
                             </td>
                             
                             {/* Status Cell */}
