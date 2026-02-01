@@ -28,7 +28,7 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
   if (articles.length === 0) return null;
 
   return (
-    <GlassCard variant="default" glow hover>
+    <GlassCard variant="default" glow hover={false}>
       <GlassCardHeader>
         <GlassCardTitle className="flex items-center gap-2">
           <BarChart3 className="h-5 w-5 text-primary-glow" />

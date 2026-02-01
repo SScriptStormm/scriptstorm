@@ -41,7 +41,7 @@ export const AccountStatusCard = ({ subscriptionTier, subscriptionEnd, isSubscri
   const cycleProgress = (daysUsed / cycleTotal) * 100;
 
   return (
-    <GlassCard variant={variant} glow hover className="h-fit">
+    <GlassCard variant={variant} glow hover={false} className="h-fit">
       <GlassCardHeader className="pb-2">
         <GlassCardTitle className="flex items-center gap-2">
           <Zap className="h-5 w-5 text-primary-glow" />
