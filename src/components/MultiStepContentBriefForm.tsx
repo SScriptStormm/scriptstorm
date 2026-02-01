@@ -379,7 +379,7 @@ export function MultiStepContentBriefForm() {
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <GlassCard variant="default" className="overflow-hidden bg-black/50 backdrop-blur-xl border-white/15">
+          <GlassCard variant="default" hover={false} className="overflow-hidden bg-black/50 backdrop-blur-xl border-white/15">
             <GlassCardHeader className="border-b border-white/10 pb-6 px-6 sm:px-8">
               <GlassCardTitle className="text-xl sm:text-2xl font-semibold text-white">{steps[currentStep - 1].title}</GlassCardTitle>
               <GlassCardDescription className="text-white/60 mt-1">{steps[currentStep - 1].description}</GlassCardDescription>
