@@ -1,101 +1,95 @@
 
 
-# Professional Content Type Organization for Dashboard
+# Remove Hover Effects from Display-Only Dashboard Widgets
 
 ## Overview
-Add content type identification and filtering to the PROJECTS tab so users can quickly identify and filter their blog articles, social media posts, YouTube scripts, and product descriptions.
+Remove the hover effects (scale, glow, border brightening) from dashboard widgets that are not interactive buttons. This improves UX by reserving hover states for clickable elements only.
+
+## Affected Widgets
+
+The following display-only widgets currently have hover effects enabled and will be updated:
+
+1. **Account Status Card** - Shows subscription tier and days remaining
+2. **Monthly Usage Card** - Displays quota usage for articles, social posts, and product descriptions
+3. **Content Queue Card** - Shows content status breakdown and content mix statistics
+4. **Content Pipeline Card** - Displays project progress stages
+5. **Content Calendar** - Shows scheduled content events (in the Calendar tab)
 
 ## Changes
 
-### 1. Add Content Type Filter Buttons
-**Location:** Below the month filter, next to the status filter buttons
+### 1. Account Status Card
+**File:** `src/components/dashboard/AccountStatusCard.tsx`
 
-Add a new row of filter buttons for content types:
-- **All Types** (default)
-- **Blog Articles** (with FileText icon)
-- **Social Posts** (with MessageSquare icon)  
-- **YouTube Scripts** (with Video icon)
-- **Product Descriptions** (with Package icon)
+Change `hover` prop from true to false:
+```tsx
+// Before
+<GlassCard variant={variant} glow hover className="h-fit">
 
-The styling will match the existing status filter buttons with the glassmorphic design pattern.
-
-### 2. Add Content Type Column to Desktop Table
-**Location:** New column between "Project Title" and "Status"
-
-Add a "Type" column header and display content type badges for each project:
-- **Blog Article** - Blue badge with FileText icon
-- **Social Post** - Green badge with MessageSquare icon
-- **YouTube Script** - Red badge with Video icon (distinguishes from regular social posts)
-- **Product Description** - Purple badge with Package icon
-
-### 3. Add Content Type Badge to Mobile Cards
-**Location:** Below the project title on mobile card layout
-
-Display a small, color-coded badge indicating the content type so mobile users can also quickly identify project types.
-
-### 4. Filter Logic Enhancement
-Update the filtering logic to support content type filtering:
-- Add new state: `contentTypeFilter` with values: `'all'`, `'blog_article'`, `'social_media'`, `'youtube_script'`, `'product_description'`
-- Chain the filter with existing month and status filters
-- Reset pagination when content type filter changes
-
----
-
-## Technical Details
-
-### New State Variable
-```typescript
-const [contentTypeFilter, setContentTypeFilter] = useState<string>('all');
+// After
+<GlassCard variant={variant} glow hover={false} className="h-fit">
 ```
 
-### Content Type Detection Logic
-```typescript
-const getContentTypeInfo = (article: Article) => {
-  if (article.youtube_script) {
-    return { label: 'YouTube Script', icon: Video, color: 'red' };
-  }
-  switch (article.content_type) {
-    case 'blog_article':
-    case 'article':
-      return { label: 'Blog Article', icon: FileText, color: 'blue' };
-    case 'social_media':
-    case 'social_media_post':
-      return { label: 'Social Post', icon: MessageSquare, color: 'green' };
-    case 'product_description':
-      return { label: 'Product Desc', icon: Package, color: 'purple' };
-    default:
-      return { label: 'Blog Article', icon: FileText, color: 'blue' };
-  }
-};
+### 2. Monthly Usage Card
+**File:** `src/components/dashboard/MonthlyUsageCard.tsx`
+
+Change `hover` prop from true to false:
+```tsx
+// Before
+<GlassCard variant="default" glow hover className="h-fit">
+
+// After
+<GlassCard variant="default" glow hover={false} className="h-fit">
 ```
 
-### Updated Filter Chain
-```typescript
-// Filter by month, then status, then content type
-const monthFiltered = monthFilter === 'all_time' 
-  ? articles 
-  : articles.filter(a => getMonthYear(a.created_at) === monthFilter);
+### 3. Content Queue Card
+**File:** `src/components/dashboard/ContentQueueCard.tsx`
 
-const statusFiltered = statusFilter === 'all' 
-  ? monthFiltered 
-  : monthFiltered.filter(a => a.status === statusFilter);
+Change `hover` prop from true to false:
+```tsx
+// Before
+<GlassCard variant="default" glow hover>
 
-const filteredArticles = contentTypeFilter === 'all'
-  ? statusFiltered
-  : statusFiltered.filter(a => {
-      if (contentTypeFilter === 'youtube_script') return a.youtube_script;
-      if (contentTypeFilter === 'blog_article') return !a.youtube_script && (!a.content_type || a.content_type === 'article' || a.content_type === 'blog_article');
-      if (contentTypeFilter === 'social_media') return !a.youtube_script && (a.content_type === 'social_media' || a.content_type === 'social_media_post');
-      if (contentTypeFilter === 'product_description') return a.content_type === 'product_description';
-      return true;
-    });
+// After
+<GlassCard variant="default" glow hover={false}>
 ```
 
-### Files to Modify
-1. **src/pages/Dashboard.tsx** - Add content type filter, update table/cards, add type column
+### 4. Content Pipeline Card
+**File:** `src/components/dashboard/ContentPipelineCard.tsx`
 
-### Design Consistency
-- Badge colors will use the existing color palette (primary-glow, emerald, purple, etc.)
-- Filter buttons will match the existing "dimmer blue" selected state pattern
-- All styling will follow the established glassmorphic design system
+Change `hover` prop from true to false:
+```tsx
+// Before
+<GlassCard variant="success" glow hover>
+
+// After
+<GlassCard variant="success" glow hover={false}>
+```
+
+### 5. Content Calendar
+**File:** `src/components/dashboard/ContentCalendar.tsx`
+
+Add explicit `hover={false}` to both GlassCard instances (empty state and populated state):
+```tsx
+// Empty state (line 80) - Before
+<GlassCard variant="default" glow>
+
+// After
+<GlassCard variant="default" glow hover={false}>
+
+// Populated state (line 95) - Before
+<GlassCard variant="default" glow>
+
+// After
+<GlassCard variant="default" glow hover={false}>
+```
+
+## Files to Modify
+1. `src/components/dashboard/AccountStatusCard.tsx` (1 change)
+2. `src/components/dashboard/MonthlyUsageCard.tsx` (1 change)
+3. `src/components/dashboard/ContentQueueCard.tsx` (1 change)
+4. `src/components/dashboard/ContentPipelineCard.tsx` (1 change)
+5. `src/components/dashboard/ContentCalendar.tsx` (2 changes)
+
+## Result
+After these changes, the display-only widgets will retain their beautiful glassmorphic styling and glow effects, but will no longer scale or brighten on hover. This creates a cleaner, more intuitive experience where only truly interactive elements (buttons, links, clickable rows) respond to cursor movement.
 
