@@ -39,7 +39,7 @@ export const ContentPipelineCard = ({ article, articlesCount, selectedId, onClea
   };
 
   return (
-    <GlassCard variant="success" glow hover>
+    <GlassCard variant="success" glow hover={false}>
       <GlassCardHeader>
         <GlassCardTitle className="flex items-center gap-2">
           <Target className="h-5 w-5 text-emerald-400" />
