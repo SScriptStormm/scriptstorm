@@ -396,6 +396,10 @@ const Dashboard = () => {
     ? articles.find(a => a.id === selectedPipelineArticleId) 
     : currentMonthPipelineArticles[0] || null;
 
+  // Check if the selected project is already the latest one (to hide "Show Latest" button)
+  const latestArticleId = currentMonthPipelineArticles[0]?.id;
+  const isSelectingLatest = selectedPipelineArticleId === latestArticleId;
+
   // Monthly limits by tier
   const getMonthlyLimit = () => {
     switch (tier) {
@@ -709,7 +713,7 @@ const Dashboard = () => {
           <ContentPipelineCard
             article={displayedPipelineArticle}
             articlesCount={articles.length}
-            selectedId={selectedPipelineArticleId}
+            selectedId={isSelectingLatest ? null : selectedPipelineArticleId}
             onClearSelection={() => setSelectedPipelineArticleId(null)}
           />
         </div>
