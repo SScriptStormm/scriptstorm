@@ -47,7 +47,7 @@ const getVariantStyles = (variant: RadialProgressVariant, percentage: number) =>
       stroke: "stroke-[hsl(221,83%,60%)]",
       glow: "drop-shadow-[0_0_8px_hsl(221_83%_60%/0.6)]",
       text: "text-[hsl(221,83%,60%)]",
-      track: "stroke-[hsl(221,83%,60%)]/10"
+      track: "stroke-[hsl(221,83%,60%)]/20"
     },
     success: {
       stroke: "stroke-emerald-500",
