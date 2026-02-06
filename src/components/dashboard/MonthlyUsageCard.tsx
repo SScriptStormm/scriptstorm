@@ -82,7 +82,7 @@ export const MonthlyUsageCard = ({ subscriptionTier, articlesUsed, socialPostsUs
                 max={limits.articles} 
                 variant="tier" 
                 size="sm"
-                animated
+                animated={articlesUsed < limits.articles}
               />
               {getWarningLevel(articlesPercent) && (
                 <div className="flex items-center gap-1.5">
@@ -110,7 +110,7 @@ export const MonthlyUsageCard = ({ subscriptionTier, articlesUsed, socialPostsUs
                 max={limits.socialPosts} 
                 variant="tier" 
                 size="sm"
-                animated
+                animated={socialPostsUsed < limits.socialPosts}
               />
             </div>
             
@@ -135,7 +135,7 @@ export const MonthlyUsageCard = ({ subscriptionTier, articlesUsed, socialPostsUs
                   max={limits.productDesc} 
                   variant="tier" 
                   size="sm"
-                  animated
+                  animated={productDescUsed < limits.productDesc}
                 />
               )}
             </div>
