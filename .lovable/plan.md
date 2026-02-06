@@ -1,60 +1,62 @@
 
-# Fix "Show Latest" Button Logic in Content Pipeline
+# Fix Transparent Square Corners on Radial Progress Ring
 
-## The Issue
-When you click on the latest project (e.g., "Testing n8n") in the PROJECTS tab, the Content Pipeline widget shows:
-- "Viewing: Testing n8n" indicator
-- "Show Latest" button
-
-This is confusing because the displayed project **is already the latest one** - clicking "Show Latest" would just show the same project.
+## The Problem
+The radial progress rings in the Account Status and Monthly Usage widgets show visible transparent square corners. This is caused by the CSS `drop-shadow` filter being applied directly to the SVG `<circle>` element. Browsers render the filter's bounding box as a rectangle, creating visible square corners around the circular ring.
 
 ## Root Cause
-The current logic in `ContentPipelineCard` shows the selection indicator whenever `selectedId` is truthy:
-
-```tsx
-{selectedId && article && (
-  <div>
-    Viewing: {article.title}
-    <Button>Show Latest</Button>
-  </div>
-)}
-```
-
-It doesn't check whether the selected project is the same as the default "latest" project.
+In `RadialProgress.tsx`, the glow effect (e.g., `drop-shadow-[0_0_8px_hsl(221_83%_53%/0.6)]`) is applied to the progress `<circle>` element on line 155-159. CSS filters on individual SVG child elements use rectangular filter regions, which become visible as transparent square artifacts.
 
 ## Solution
-Update the Dashboard to pass `selectedId` as `null` when the selected project matches the latest project of the current month. This way:
-- The "Show Latest" button only appears when viewing a **different** project
-- The project remains highlighted in the PROJECTS table (the underlying state is unchanged)
-- The label correctly says "Latest Project" instead of "Selected Project"
+Move the `drop-shadow` glow class from the `<circle>` element to the parent `<svg>` element. When `drop-shadow` is applied at the `<svg>` level, the browser correctly traces the alpha channel of all visible SVG content, producing a clean circular glow with no rectangular artifacts.
 
 ## Technical Changes
 
-### File: `src/pages/Dashboard.tsx`
+### File: `src/components/ui/RadialProgress.tsx`
 
-1. **Add a check** to determine if the selected project is already the latest one:
+1. **Add the glow class to the `<svg>` element** (around line 138-141):
+
 ```tsx
-const latestArticleId = currentMonthPipelineArticles[0]?.id;
-const isSelectingLatest = selectedPipelineArticleId === latestArticleId;
+// Before
+<svg
+  className="transform -rotate-90"
+  width={config.size}
+  height={config.size}
+>
+
+// After
+<svg
+  className={cn("transform -rotate-90", animated && styles.glow)}
+  width={config.size}
+  height={config.size}
+>
 ```
 
-2. **Update the `ContentPipelineCard` prop** to pass `null` when the selected project is the latest:
+2. **Remove the glow class from the progress `<circle>` element** (around line 154-159):
+
 ```tsx
-<ContentPipelineCard
-  article={displayedPipelineArticle}
-  articlesCount={articles.length}
-  selectedId={isSelectingLatest ? null : selectedPipelineArticleId}
-  onClearSelection={() => setSelectedPipelineArticleId(null)}
-/>
+// Before
+<circle
+  className={cn(
+    "transition-all duration-500 ease-out",
+    styles.stroke,
+    animated && styles.glow
+  )}
+
+// After
+<circle
+  className={cn(
+    "transition-all duration-500 ease-out",
+    styles.stroke
+  )}
 ```
 
-## Result
+## Impact
 
-| Scenario | Before | After |
-|----------|--------|-------|
-| Click latest project | Shows "Viewing: [title]" + "Show Latest" button | Shows "Latest Project" label, no button |
-| Click older project | Shows "Viewing: [title]" + "Show Latest" button | Same (correct behavior) |
-| No project selected | Shows "Latest Project" label | Same (correct behavior) |
+| Widget | Before | After |
+|--------|--------|-------|
+| Account Status (270 days ring) | Transparent square corners visible | Clean circular glow |
+| Monthly Usage (76% ring) | Transparent square corners visible | Clean circular glow |
 
 ## Summary
-This is a small but important UX improvement - the "Show Latest" button will only appear when it actually does something meaningful.
+A single-file fix in `RadialProgress.tsx` -- moving the `drop-shadow` filter from the `<circle>` to the `<svg>` element eliminates the rectangular filter artifacts and produces a proper circular glow.
