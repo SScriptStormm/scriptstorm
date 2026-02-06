@@ -1,16 +1,16 @@
 
-# Fix: Keep the Original Vivid Blue, Brighten Via Glow
+
+# Keep the Brighter Blue Permanently on the Account Status Ring
 
 ## The Problem
-The last change replaced the ring's vivid blue (`hsl(221 83% 53%)`) with a lighter blue (`hsl(221 83% 65%)`). Higher lightness washes out the color, making it appear grayish rather than brighter. The user wants the original punchy blue kept, with the ring appearing more vivid/glowing, and the "270" label matching the ring color.
+When switching browser tabs and returning, the blue ring briefly appears brighter and more vivid before settling into a duller shade. This happens because the browser re-composites the drop-shadow filter on tab focus, briefly rendering a more vibrant blue. The user wants that vibrant blue to be permanent.
 
-## What "Brighter" Means Here
-- NOT higher lightness (which washes out the color)
-- YES more intense glow effect (the glowing aura around the ring)
-- The ring and text should both use the same vivid blue
+## Why Previous Attempts Failed
+- `stroke-primary` (53% lightness): Too dark/muted -- this is the "dull" state the user dislikes
+- `stroke-primary-glow` (65% lightness): Too washed out -- higher lightness desaturates the blue, making it look gray
 
 ## Solution
-Revert the stroke and text back to the original `primary` color (the vivid blue at 53% lightness), and amplify the drop-shadow glow to make it visually "brighter" without changing the actual color. The text will also use `text-primary` so it matches the ring exactly.
+Use a custom vivid blue color directly in the RadialProgress component's `primary` variant, bypassing both CSS variables. The target is approximately 60% lightness with full 83% saturation -- brighter than `primary` but not washed-out like `primary-glow`. This uses explicit HSL values in Tailwind's arbitrary value syntax so the exact color is locked in and cannot shift.
 
 ## Technical Changes
 
@@ -18,17 +18,7 @@ Revert the stroke and text back to the original `primary` color (the vivid blue 
 
 Update the `primary` entry in the styles object (lines 46-51):
 
-**Current (washed out):**
-```tsx
-primary: {
-  stroke: "stroke-primary-glow",
-  glow: "drop-shadow-[0_0_12px_hsl(221_83%_65%/0.8)]",
-  text: "text-primary-glow",
-  track: "stroke-primary-glow/10"
-},
-```
-
-**Updated (vivid blue with intense glow):**
+**Current:**
 ```tsx
 primary: {
   stroke: "stroke-primary",
@@ -38,14 +28,28 @@ primary: {
 },
 ```
 
-### What changes and why:
-- **Ring stroke**: Back to `stroke-primary` -- the original vivid blue at 53% lightness, not the washed-out 65%
-- **Text**: Changed to `text-primary` -- now the "270" label is the exact same color as the ring
-- **Glow effect**: Increased radius from 12px to 16px, increased opacity from 0.8 to 0.9, using the same 53% lightness blue -- this makes the ring appear brighter/more radiant without changing the actual blue color
-- **Track**: Back to `stroke-primary/10` for consistency
+**Updated:**
+```tsx
+primary: {
+  stroke: "stroke-[hsl(221,83%,60%)]",
+  glow: "drop-shadow-[0_0_16px_hsl(221_83%_53%/0.9)]",
+  text: "text-[hsl(221,83%,60%)]",
+  track: "stroke-[hsl(221,83%,60%)]/10"
+},
+```
+
+### What changes:
+- **Ring stroke and text**: Use `hsl(221, 83%, 60%)` -- same hue (221) and saturation (83%) as the original, but lightness bumped from 53% to 60%. This produces a brighter, more electric blue without the washed-out gray effect that 65% caused
+- **Glow effect**: Kept at the current intense setting (16px radius, 0.9 opacity, 53% lightness) -- the slightly darker glow behind a brighter ring creates a natural depth effect
+- **Track**: Updated to match the new color for consistency
+
+### Why 60% lightness specifically:
+- 53% (current `--primary`): The "dull" state the user sees after the tab-switch brightness fades
+- 60% (proposed): The sweet spot -- visibly brighter, still saturated and vivid, matches the transient "bright flash"
+- 65% (`--primary-glow`): Too light, desaturated, appeared gray
 
 ## Result
-- The ring stays the same vivid, saturated blue it was originally
-- The "270" text now matches the ring color exactly
-- The glow effect is stronger, making the whole ring appear brighter and more vivid
-- No gray, no washed-out appearance
+- The ring and "270" label will permanently display the brighter, vivid blue
+- Same hue and saturation as the original -- just more luminous
+- No more brightness flickering when switching tabs
+- The glow aura remains intense, complementing the brighter ring
