@@ -82,6 +82,7 @@ export const MonthlyUsageCard = ({ subscriptionTier, articlesUsed, socialPostsUs
                 max={limits.articles} 
                 variant="tier" 
                 size="sm"
+                glowIntensity="high"
                 animated={articlesUsed < limits.articles}
               />
               {getWarningLevel(articlesPercent) && (
@@ -110,6 +111,7 @@ export const MonthlyUsageCard = ({ subscriptionTier, articlesUsed, socialPostsUs
                 max={limits.socialPosts} 
                 variant="tier" 
                 size="sm"
+                glowIntensity="high"
                 animated={socialPostsUsed < limits.socialPosts}
               />
             </div>
@@ -130,13 +132,14 @@ export const MonthlyUsageCard = ({ subscriptionTier, articlesUsed, socialPostsUs
                 </span>
               </div>
               {limits.productDesc !== 999999 && (
-                <NeonProgress 
-                  value={productDescUsed} 
-                  max={limits.productDesc} 
-                  variant="tier" 
-                  size="sm"
-                  animated={productDescUsed < limits.productDesc}
-                />
+              <NeonProgress 
+                value={productDescUsed} 
+                max={limits.productDesc} 
+                variant="tier" 
+                size="sm"
+                glowIntensity="high"
+                animated={productDescUsed < limits.productDesc}
+              />
               )}
             </div>
           </div>
