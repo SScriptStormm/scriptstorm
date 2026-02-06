@@ -44,10 +44,10 @@ const getVariantStyles = (variant: RadialProgressVariant, percentage: number) =>
 
   const styles = {
     primary: {
-      stroke: "stroke-primary",
-      glow: "drop-shadow-[0_0_8px_hsl(221_83%_53%/0.6)]",
+      stroke: "stroke-primary-glow",
+      glow: "drop-shadow-[0_0_12px_hsl(221_83%_65%/0.8)]",
       text: "text-primary-glow",
-      track: "stroke-primary/10"
+      track: "stroke-primary-glow/10"
     },
     success: {
       stroke: "stroke-emerald-500",
