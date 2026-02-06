@@ -2,6 +2,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 type NeonProgressVariant = "primary" | "success" | "warning" | "danger" | "tier";
+type GlowIntensity = "low" | "medium" | "high";
 
 interface NeonProgressProps extends React.HTMLAttributes<HTMLDivElement> {
   value: number;
@@ -11,31 +12,39 @@ interface NeonProgressProps extends React.HTMLAttributes<HTMLDivElement> {
   labelPosition?: "inside" | "outside";
   size?: "sm" | "md" | "lg";
   animated?: boolean;
-  glowIntensity?: "low" | "medium" | "high";
+  glowIntensity?: GlowIntensity;
 }
 
-const getVariantStyles = (variant: NeonProgressVariant, percentage: number) => {
+const getVariantStyles = (variant: NeonProgressVariant, percentage: number, glowIntensity: GlowIntensity) => {
+  const isHigh = glowIntensity === "high";
+
   // Auto-determine color based on percentage if tier variant
   if (variant === "tier") {
     if (percentage >= 90) {
       return {
         track: "bg-rose-500/10",
         fill: "bg-gradient-to-r from-rose-400 via-rose-500 to-rose-600",
-        glow: "shadow-[0_0_20px_hsl(0_84%_55%/0.5)]",
+        glow: isHigh
+          ? "shadow-[0_0_30px_hsl(0_84%_55%/0.7)]"
+          : "shadow-[0_0_20px_hsl(0_84%_55%/0.5)]",
         text: "text-rose-400"
       };
     } else if (percentage >= 75) {
       return {
         track: "bg-amber-500/10",
         fill: "bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500",
-        glow: "shadow-[0_0_20px_hsl(45_93%_55%/0.5)]",
+        glow: isHigh
+          ? "shadow-[0_0_30px_hsl(45_93%_55%/0.7)]"
+          : "shadow-[0_0_20px_hsl(45_93%_55%/0.5)]",
         text: "text-amber-400"
       };
     } else {
       return {
         track: "bg-emerald-500/10",
         fill: "bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-500",
-        glow: "shadow-[0_0_20px_hsl(160_84%_45%/0.5)]",
+        glow: isHigh
+          ? "shadow-[0_0_30px_hsl(160_84%_45%/0.7)]"
+          : "shadow-[0_0_20px_hsl(160_84%_45%/0.5)]",
         text: "text-emerald-400"
       };
     }
@@ -45,25 +54,33 @@ const getVariantStyles = (variant: NeonProgressVariant, percentage: number) => {
     primary: {
       track: "bg-primary/10",
       fill: "bg-gradient-to-r from-primary via-primary-glow to-primary",
-      glow: "shadow-[0_0_20px_hsl(221_83%_53%/0.5)]",
+      glow: isHigh
+        ? "shadow-[0_0_30px_hsl(221_83%_53%/0.7)]"
+        : "shadow-[0_0_20px_hsl(221_83%_53%/0.5)]",
       text: "text-primary-glow"
     },
     success: {
       track: "bg-emerald-500/10",
       fill: "bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-500",
-      glow: "shadow-[0_0_20px_hsl(160_84%_45%/0.5)]",
+      glow: isHigh
+        ? "shadow-[0_0_30px_hsl(160_84%_45%/0.7)]"
+        : "shadow-[0_0_20px_hsl(160_84%_45%/0.5)]",
       text: "text-emerald-400"
     },
     warning: {
       track: "bg-amber-500/10",
       fill: "bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500",
-      glow: "shadow-[0_0_20px_hsl(45_93%_55%/0.5)]",
+      glow: isHigh
+        ? "shadow-[0_0_30px_hsl(45_93%_55%/0.7)]"
+        : "shadow-[0_0_20px_hsl(45_93%_55%/0.5)]",
       text: "text-amber-400"
     },
     danger: {
       track: "bg-rose-500/10",
       fill: "bg-gradient-to-r from-rose-400 via-rose-500 to-rose-600",
-      glow: "shadow-[0_0_20px_hsl(0_84%_55%/0.5)]",
+      glow: isHigh
+        ? "shadow-[0_0_30px_hsl(0_84%_55%/0.7)]"
+        : "shadow-[0_0_20px_hsl(0_84%_55%/0.5)]",
       text: "text-rose-400"
     }
   };
@@ -91,13 +108,16 @@ const NeonProgress = React.forwardRef<HTMLDivElement, NeonProgressProps>(
     ...props 
   }, ref) => {
     const percentage = Math.min((value / max) * 100, 100);
-    const styles = getVariantStyles(variant, percentage);
+    const styles = getVariantStyles(variant, percentage, glowIntensity);
     
     const glowOpacity = {
       low: "opacity-30",
       medium: "opacity-50",
       high: "opacity-70"
     };
+
+    const shimmerOpacity = glowIntensity === "high" ? "via-white/50" : "via-white/30";
+    const shouldPulse = animated && glowIntensity === "high";
 
     return (
       <div ref={ref} className={cn("relative w-full", className)} {...props}>
@@ -125,7 +145,10 @@ const NeonProgress = React.forwardRef<HTMLDivElement, NeonProgressProps>(
               styles.fill,
               animated && styles.glow
             )}
-            style={{ width: `${percentage}%` }}
+            style={{
+              width: `${percentage}%`,
+              ...(shouldPulse ? { animation: "neon-bar-pulse 2s ease-in-out infinite" } : {})
+            }}
           >
             {/* Shimmer overlay */}
             {animated && (
@@ -133,7 +156,7 @@ const NeonProgress = React.forwardRef<HTMLDivElement, NeonProgressProps>(
                 <div 
                   className={cn(
                     "absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite]",
-                    "bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                    `bg-gradient-to-r from-transparent ${shimmerOpacity} to-transparent`
                   )}
                 />
               </div>

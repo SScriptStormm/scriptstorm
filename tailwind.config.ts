@@ -388,6 +388,14 @@ export default {
     				'50%': {
     					backgroundPosition: '100% 50%'
     				}
+    			},
+    			'neon-bar-pulse': {
+    				'0%, 100%': {
+    					opacity: '1'
+    				},
+    				'50%': {
+    					opacity: '0.85'
+    				}
     			}
     		},
     		animation: {
