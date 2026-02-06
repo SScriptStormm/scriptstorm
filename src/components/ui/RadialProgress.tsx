@@ -136,7 +136,7 @@ const RadialProgress = React.forwardRef<HTMLDivElement, RadialProgressProps>(
         {...props}
       >
         <svg
-          className="transform -rotate-90"
+          className={cn("transform -rotate-90", animated && styles.glow)}
           width={config.size}
           height={config.size}
         >
@@ -154,8 +154,7 @@ const RadialProgress = React.forwardRef<HTMLDivElement, RadialProgressProps>(
           <circle
             className={cn(
               "transition-all duration-500 ease-out",
-              styles.stroke,
-              animated && styles.glow
+              styles.stroke
             )}
             strokeWidth={strokeWidth}
             strokeLinecap="round"
