@@ -54,7 +54,7 @@ export const MonthlyUsageCard = ({ subscriptionTier, articlesUsed, socialPostsUs
       <GlassCardContent className="pt-4">
         <div className="flex items-start gap-6">
           {/* Overall Usage Radial */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 hidden sm:block">
             <RadialProgress
               value={overallUsage}
               max={100}
