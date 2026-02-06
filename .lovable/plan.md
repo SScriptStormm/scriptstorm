@@ -1,40 +1,37 @@
 
 
-# Match Account Status Ring Style to Monthly Usage Ring
+# Make the Account Status Ring Stand Out from the Background
 
-## What Changes
-The Account Status ring currently has a much stronger glow effect (16px radius, 0.9 opacity) compared to the Monthly Usage ring (8px radius, 0.6 opacity). This makes them look visually different beyond just color. The fix is to dial back the `primary` variant's glow to match the `tier` variant's glow intensity.
+## The Problem
+The Account Status ring uses a blue color (`hsl(221, 83%, 60%)`) sitting inside a GlassCard that also has blue-tinted borders, glows, and gradient overlays. The ring's track (the unfilled circular path behind the progress arc) is set to only **10% opacity** of that same blue. Blue-on-blue at 10% opacity is essentially invisible -- the ring blends right into the card background like camouflage.
+
+The Monthly Usage ring doesn't have this problem because its green/amber/red colors naturally contrast against the blue-tinted card.
+
+## Solution
+Increase the track opacity from 10% to 20%, so the full circular path is visible behind the progress arc. This makes the ring's shape clearly defined against the card background without changing any colors or the overall design language.
+
+This is the same approach used across dashboard UIs -- a subtle but visible track circle that frames the progress arc and separates it from the background.
 
 ## Technical Change
 
 ### File: `src/components/ui/RadialProgress.tsx`
 
-Update the `primary` variant glow to use the same 8px radius and 0.6 opacity that the `tier` variant uses:
+Update only the `track` value in the `primary` variant (line 50):
 
 **Before:**
 ```tsx
-primary: {
-  stroke: "stroke-[hsl(221,83%,60%)]",
-  glow: "drop-shadow-[0_0_16px_hsl(221_83%_53%/0.9)]",
-  text: "text-[hsl(221,83%,60%)]",
-  track: "stroke-[hsl(221,83%,60%)]/10"
-},
+track: "stroke-[hsl(221,83%,60%)]/10"
 ```
 
 **After:**
 ```tsx
-primary: {
-  stroke: "stroke-[hsl(221,83%,60%)]",
-  glow: "drop-shadow-[0_0_8px_hsl(221_83%_60%/0.6)]",
-  text: "text-[hsl(221,83%,60%)]",
-  track: "stroke-[hsl(221,83%,60%)]/10"
-},
+track: "stroke-[hsl(221,83%,60%)]/20"
 ```
 
 ### What this does:
-- **Glow radius**: 16px down to 8px (matches `tier` variant)
-- **Glow opacity**: 0.9 down to 0.6 (matches `tier` variant)
-- **Glow color**: Updated to use the same 60% lightness blue as the ring itself (so the glow matches the stroke, just like the `tier` variants where the glow color matches their stroke color)
-- **Everything else stays the same**: color, size, stroke width, labels, animation
+- The track circle (the unfilled background ring) goes from 10% to 20% opacity
+- This makes the full circular outline clearly visible against the dark glass card
+- The progress arc, text, and glow all remain exactly the same
+- The ring now has a defined shape that pops out from the background instead of blending in
+- Single property change in one file
 
-This is a single line change in one file. The ring color remains the vivid blue -- only the glow intensity is brought in line with the Monthly Usage ring.
