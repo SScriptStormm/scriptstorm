@@ -1,34 +1,17 @@
 
 
-# Keep the Brighter Blue Permanently on the Account Status Ring
+# Match Account Status Ring Style to Monthly Usage Ring
 
-## The Problem
-When switching browser tabs and returning, the blue ring briefly appears brighter and more vivid before settling into a duller shade. This happens because the browser re-composites the drop-shadow filter on tab focus, briefly rendering a more vibrant blue. The user wants that vibrant blue to be permanent.
+## What Changes
+The Account Status ring currently has a much stronger glow effect (16px radius, 0.9 opacity) compared to the Monthly Usage ring (8px radius, 0.6 opacity). This makes them look visually different beyond just color. The fix is to dial back the `primary` variant's glow to match the `tier` variant's glow intensity.
 
-## Why Previous Attempts Failed
-- `stroke-primary` (53% lightness): Too dark/muted -- this is the "dull" state the user dislikes
-- `stroke-primary-glow` (65% lightness): Too washed out -- higher lightness desaturates the blue, making it look gray
-
-## Solution
-Use a custom vivid blue color directly in the RadialProgress component's `primary` variant, bypassing both CSS variables. The target is approximately 60% lightness with full 83% saturation -- brighter than `primary` but not washed-out like `primary-glow`. This uses explicit HSL values in Tailwind's arbitrary value syntax so the exact color is locked in and cannot shift.
-
-## Technical Changes
+## Technical Change
 
 ### File: `src/components/ui/RadialProgress.tsx`
 
-Update the `primary` entry in the styles object (lines 46-51):
+Update the `primary` variant glow to use the same 8px radius and 0.6 opacity that the `tier` variant uses:
 
-**Current:**
-```tsx
-primary: {
-  stroke: "stroke-primary",
-  glow: "drop-shadow-[0_0_16px_hsl(221_83%_53%/0.9)]",
-  text: "text-primary",
-  track: "stroke-primary/10"
-},
-```
-
-**Updated:**
+**Before:**
 ```tsx
 primary: {
   stroke: "stroke-[hsl(221,83%,60%)]",
@@ -38,18 +21,20 @@ primary: {
 },
 ```
 
-### What changes:
-- **Ring stroke and text**: Use `hsl(221, 83%, 60%)` -- same hue (221) and saturation (83%) as the original, but lightness bumped from 53% to 60%. This produces a brighter, more electric blue without the washed-out gray effect that 65% caused
-- **Glow effect**: Kept at the current intense setting (16px radius, 0.9 opacity, 53% lightness) -- the slightly darker glow behind a brighter ring creates a natural depth effect
-- **Track**: Updated to match the new color for consistency
+**After:**
+```tsx
+primary: {
+  stroke: "stroke-[hsl(221,83%,60%)]",
+  glow: "drop-shadow-[0_0_8px_hsl(221_83%_60%/0.6)]",
+  text: "text-[hsl(221,83%,60%)]",
+  track: "stroke-[hsl(221,83%,60%)]/10"
+},
+```
 
-### Why 60% lightness specifically:
-- 53% (current `--primary`): The "dull" state the user sees after the tab-switch brightness fades
-- 60% (proposed): The sweet spot -- visibly brighter, still saturated and vivid, matches the transient "bright flash"
-- 65% (`--primary-glow`): Too light, desaturated, appeared gray
+### What this does:
+- **Glow radius**: 16px down to 8px (matches `tier` variant)
+- **Glow opacity**: 0.9 down to 0.6 (matches `tier` variant)
+- **Glow color**: Updated to use the same 60% lightness blue as the ring itself (so the glow matches the stroke, just like the `tier` variants where the glow color matches their stroke color)
+- **Everything else stays the same**: color, size, stroke width, labels, animation
 
-## Result
-- The ring and "270" label will permanently display the brighter, vivid blue
-- Same hue and saturation as the original -- just more luminous
-- No more brightness flickering when switching tabs
-- The glow aura remains intense, complementing the brighter ring
+This is a single line change in one file. The ring color remains the vivid blue -- only the glow intensity is brought in line with the Monthly Usage ring.
