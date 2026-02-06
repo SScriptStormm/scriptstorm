@@ -1,36 +1,56 @@
 
 
-# Stop Animations When Quota Limits Are Reached
+# Boost Animation Intensity on All Usage Bars
 
-## What Changes
-When a usage bar or ring reaches 100% (the user has used up their monthly quota), the shimmer, glow, and pulse animations will stop. This creates a clear, static "maxed out" visual that reinforces the limit has been hit, rather than the bar continuing to shimmer as if things are still active.
+## The Problem
+All three progress bars (Articles, Social Posts, Product Descriptions) use the same animation settings, but bars with lower fill percentages look visually weaker because the shimmer effect sweeps across less area. This makes the Social Posts bar appear less animated compared to Product Descriptions when both are green.
 
-## Why This Is a Good Idea
-- A static bar at 100% feels "locked" and signals clearly that the quota is used up
-- It creates a visual contrast between active (still has quota) and maxed-out categories
-- It draws the user's attention to which quotas are still available vs. exhausted
-- Subtle but meaningful UX improvement -- no code complexity added
+## The Fix
+Add `glowIntensity="high"` to all three `NeonProgress` bars. This increases the glow opacity from the default 50% to 70%, making the shimmer, inner glow, and underneath glow effect more pronounced and visually consistent across all bars -- even when one bar is less full than another.
 
-## What Gets Updated
+## Technical Changes
 
 ### File: `src/components/dashboard/MonthlyUsageCard.tsx`
 
-Three changes -- each `NeonProgress` bar gets a conditional `animated` prop instead of always-on:
+**Articles bar (~line 80-86):** Add `glowIntensity="high"`
+```tsx
+<NeonProgress 
+  value={articlesUsed} 
+  max={limits.articles} 
+  variant="tier" 
+  size="sm"
+  glowIntensity="high"
+  animated={articlesUsed < limits.articles}
+/>
+```
 
-**Articles bar (line ~85):**
-- Before: `animated`
-- After: `animated={articlesUsed < limits.articles}`
+**Social Posts bar (~line 108-114):** Add `glowIntensity="high"`
+```tsx
+<NeonProgress 
+  value={socialPostsUsed} 
+  max={limits.socialPosts} 
+  variant="tier" 
+  size="sm"
+  glowIntensity="high"
+  animated={socialPostsUsed < limits.socialPosts}
+/>
+```
 
-**Social Posts bar (line ~113):**
-- Before: `animated`
-- After: `animated={socialPostsUsed < limits.socialPosts}`
+**Product Descriptions bar (~line 133-139):** Add `glowIntensity="high"`
+```tsx
+<NeonProgress 
+  value={productDescUsed} 
+  max={limits.productDesc} 
+  variant="tier" 
+  size="sm"
+  glowIntensity="high"
+  animated={productDescUsed < limits.productDesc}
+/>
+```
 
-**Product Descriptions bar (line ~138):**
-- Before: `animated`
-- After: `animated={productDescUsed < limits.productDesc}`
+## What This Changes Visually
+- The glow opacity goes from 50% to 70% on all three bars
+- The shimmer overlay and the glow underneath both become more visible
+- All three bars will look equally vibrant when they are green (below 75% usage)
+- No changes to colors, sizes, layout, or the conditional stop-at-limit behavior
 
-### What stays the same
-- The RadialProgress ring (overall usage) keeps animating since it's an aggregate and never truly "maxes out" unless all three categories hit 100%
-- The AccountStatusCard ring keeps animating since it shows days remaining, not a quota
-- All colors, sizes, glow effects, warning messages, and layout remain unchanged
-- The count-up entrance animation still plays on page load -- only the ongoing shimmer/glow loop stops at the limit
