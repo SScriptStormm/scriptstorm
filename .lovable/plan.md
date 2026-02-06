@@ -1,28 +1,37 @@
 
+# Fix Account Status Ring: Brightness and Color Mismatch
 
-# Fix Account Status Ring: Use Vivid Blue Instead of Washed-Out Grey-Blue
-
-## The Problem
-The previous fix changed both the ring and label to `primary-glow` (65% lightness), which looks washed-out and greyish rather than a clear, vibrant blue. The Monthly Usage ring below it looks vivid and punchy by comparison because it uses Tailwind's built-in saturated colors (like `emerald-500`).
-
-## What You Want
-- The ring should be a vivid, unmistakably **blue** color -- not grey or washed out
-- The "270" label should match the ring color exactly
-- The overall vibrancy should be comparable to the Monthly Usage ring below
+## Problems
+1. The ring is too dim and hard to see against the dark background
+2. The "270" number color (bright blue) does not match the ring color (darker blue)
 
 ## Root Cause
-The CSS variable `--primary-glow` resolves to `hsl(221 83% 65%)`. At 65% lightness, this hue appears desaturated and pastel/greyish on dark backgrounds. It lacks the punch of Tailwind's built-in color palette (e.g., `blue-500` at `hsl(217 91% 60%)`).
+In `RadialProgress.tsx`, the `primary` variant uses two different shades of blue:
+- **Ring stroke**: `stroke-primary` which resolves to `hsl(221 83% 53%)` -- darker
+- **Label text**: `text-primary-glow` which resolves to `hsl(221 83% 65%)` -- brighter
+
+The glow effect is also weak: only 8px radius at 0.6 opacity.
 
 ## Solution
-Switch the `primary` variant to use Tailwind's built-in `blue-500` color, which is a vivid, saturated blue that reads clearly as "blue" on dark backgrounds. This matches the vibrancy of the `emerald-500` used in the Monthly Usage ring's tier variant.
+Update the `primary` variant styles in `RadialProgress.tsx` so the ring, label, and glow all use the same brighter blue and the glow is more visible.
 
 ## Technical Changes
 
 ### File: `src/components/ui/RadialProgress.tsx`
 
-Update the `primary` entry (lines 46-51):
+Update the `primary` entry in the `styles` object inside `getVariantStyles`:
 
 **Before:**
+```tsx
+primary: {
+  stroke: "stroke-primary",
+  glow: "drop-shadow-[0_0_8px_hsl(221_83%_53%/0.6)]",
+  text: "text-primary-glow",
+  track: "stroke-primary/10"
+},
+```
+
+**After:**
 ```tsx
 primary: {
   stroke: "stroke-primary-glow",
@@ -32,24 +41,20 @@ primary: {
 },
 ```
 
-**After:**
-```tsx
-primary: {
-  stroke: "stroke-blue-500",
-  glow: "drop-shadow-[0_0_12px_hsl(217_91%_60%/0.8)]",
-  text: "text-blue-500",
-  track: "stroke-blue-500/15"
-},
-```
+### What this changes:
+- **Ring stroke**: switches from `stroke-primary` (53% lightness) to `stroke-primary-glow` (65% lightness) -- brighter, matching the label
+- **Glow**: increases radius from 8px to 12px and opacity from 0.6 to 0.8 -- more visible
+- **Glow color**: updated to match the brighter `primary-glow` hue (`65%` lightness)
+- **Track**: uses `stroke-primary-glow/15` instead of `stroke-primary/10` -- slightly more visible background track
+- **Label text**: unchanged (`text-primary-glow`) -- already the correct bright blue
 
-## What This Changes
+## Result
 
-| Element | Before (washed out) | After (vivid) |
-|---------|---------------------|---------------|
-| Ring stroke | `primary-glow` -- greyish blue | `blue-500` -- vivid, saturated blue |
-| Label "270" | `primary-glow` -- greyish blue | `blue-500` -- matches ring exactly |
-| Glow color | Based on 65% lightness grey-blue | Based on `blue-500` hue -- vivid |
-| Track | `primary-glow/15` | `blue-500/15` -- consistent |
+| Element | Before | After |
+|---------|--------|-------|
+| Ring color | Dark blue (53% lightness) | Bright blue (65% lightness) |
+| Label "270" color | Bright blue (65% lightness) | Bright blue (65% lightness) -- matches ring |
+| Glow intensity | 8px, 0.6 opacity | 12px, 0.8 opacity -- more visible |
+| Track ring | Very faint (10% opacity) | Slightly visible (15% opacity) |
 
-Tailwind's `blue-500` is `hsl(217 91% 60%)` -- higher saturation (91% vs 83%) and a slightly different hue that reads as a clean, vivid blue. This is the same design approach used for the Monthly Usage ring's `emerald-500`.
-
+This is a single-line change in one file that fixes both the dimness and color mismatch issues.
