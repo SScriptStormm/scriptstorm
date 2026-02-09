@@ -264,7 +264,7 @@ export default function AccountSettings() {
               Account Settings
             </h1>
             <HoloBadge variant={tierVariant} size="lg" animated>
-              {getTierDisplayName(subscriber?.subscription_tier)}
+              {({ starter: "🚀", growth: "🔥", scale: "⚡", authority: "👑", dominance: "💎" }[(subscriber?.subscription_tier || "starter").toLowerCase()] || "🚀")} {getTierDisplayName(subscriber?.subscription_tier)}
             </HoloBadge>
           </div>
           <p className="text-white/60 font-mono text-sm">
