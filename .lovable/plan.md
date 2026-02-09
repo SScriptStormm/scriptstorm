@@ -1,51 +1,56 @@
 
-
-# Add Unique Billing Cycle Badge Colors (Zero Tier Overlap)
+# Polish Project Titles in the Content Projects Table
 
 ## Problem
-Current billing cycle badges share colors with subscription tier badges, causing visual confusion.
+The project titles in the "YOUR CONTENT PROJECTS" section (both mobile cards and desktop table) look plain and unprofessional -- like plain text on a Word document. They use basic `font-mono` styling with no visual hierarchy or polish.
 
 ## Solution
-1. Create a new **`premium`** HoloBadge variant in **cyan/teal** for the ANNUAL badge
-2. Use the existing **`danger`** (rose/red) variant for the MONTHLY badge
+Add subtle visual enhancements to make project titles feel like proper project names rather than raw text:
 
-Neither cyan nor rose is used by any subscription tier, so there's zero overlap.
-
-## Color Map After Change
-
-| Badge | Color |
-|-------|-------|
-| Starter tier | Blue |
-| Growth tier | Emerald |
-| Scale tier | Purple |
-| Authority tier | Orange |
-| Dominance tier | Gold |
-| **ANNUAL cycle** | **Cyan/Teal (new)** |
-| **MONTHLY cycle** | **Rose/Red** |
+1. **Truncate long titles** with ellipsis instead of letting them wrap awkwardly
+2. **Add a subtle gradient text effect** so titles catch the eye
+3. **Show a hover glow** on the title text for interactivity feedback
+4. **Slightly increase letter spacing** for a cleaner look
 
 ## Technical Details
 
-### 1. Add `premium` variant to HoloBadge (`src/components/ui/HoloBadge.tsx`)
+### File: `src/pages/Dashboard.tsx`
 
-Add to the `HoloBadgeVariant` type and `variantStyles` map:
+**Mobile card title (around line 969):**
 
+Change from:
 ```
-premium: {
-  bg: "bg-cyan-500/20",
-  border: "border-cyan-400/50",
-  text: "text-cyan-300",
-  glow: "shadow-[0_0_15px_hsl(185_70%_50%/0.3)]"
-}
+<h3 className="text-white font-mono tracking-wide font-semibold text-sm mb-1 break-words">
+  {article.title}
+</h3>
 ```
 
-### 2. Update AccountStatusCard (`src/components/dashboard/AccountStatusCard.tsx`)
-
-Change the billing badge variant:
-
+To:
 ```
-Before:  variant={isAnnual ? "success" : "warning"}
-After:   variant={isAnnual ? "premium" : "danger"}
+<h3 className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/70 font-mono tracking-wider font-bold text-sm mb-1 line-clamp-2">
+  {article.title}
+</h3>
 ```
 
-Icons stay the same: Crown for ANNUAL, RefreshCw for MONTHLY.
+**Desktop table title (around line 1074):**
 
+Change from:
+```
+<h3 className="text-white font-mono tracking-wide font-semibold text-xs md:text-sm lg:text-base">
+  {article.title}
+</h3>
+```
+
+To:
+```
+<h3 className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/70 font-mono tracking-wider font-bold text-xs md:text-sm lg:text-base truncate max-w-[300px] lg:max-w-[400px]" title={article.title}>
+  {article.title}
+</h3>
+```
+
+### What changes visually
+- Titles get a subtle white-to-faded gradient that looks polished, not flat
+- Wider letter spacing (`tracking-wider`) gives a cleaner, more designed feel
+- Bold weight (`font-bold` instead of `font-semibold`) adds visual authority
+- Long titles truncate cleanly with ellipsis (desktop) or clamp to 2 lines (mobile) instead of wrapping endlessly
+- Full title visible on hover via the `title` attribute (desktop)
