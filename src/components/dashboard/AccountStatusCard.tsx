@@ -1,7 +1,7 @@
 import { GlassCard, GlassCardContent, GlassCardHeader, GlassCardTitle } from "@/components/ui/GlassCard";
 import { HoloBadge } from "@/components/ui/HoloBadge";
 import { RadialProgress } from "@/components/ui/RadialProgress";
-import { Zap, Calendar } from "lucide-react";
+import { Zap, Crown, RefreshCw } from "lucide-react";
 import { formatDate } from "@/lib/dateUtils";
 
 interface AccountStatusCardProps {
@@ -79,8 +79,10 @@ export const AccountStatusCard = ({ subscriptionTier, subscriptionEnd, isSubscri
                   {emoji} {subscriptionTier ? subscriptionTier.charAt(0).toUpperCase() + subscriptionTier.slice(1) : 'Starter'}
                 </HoloBadge>
                 {subscriptionEnd && (
-                  <HoloBadge variant="default" size="sm">
-                    <Calendar className="h-3 w-3 mr-1" />
+                  <HoloBadge variant={isAnnual ? "success" : "warning"} size="sm" animated>
+                    {isAnnual
+                      ? <Crown className="h-3 w-3 mr-1" />
+                      : <RefreshCw className="h-3 w-3 mr-1" />}
                     {isAnnual ? 'ANNUAL' : 'MONTHLY'}
                   </HoloBadge>
                 )}
