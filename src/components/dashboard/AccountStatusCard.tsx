@@ -79,7 +79,7 @@ export const AccountStatusCard = ({ subscriptionTier, subscriptionEnd, isSubscri
                   {emoji} {subscriptionTier ? subscriptionTier.charAt(0).toUpperCase() + subscriptionTier.slice(1) : 'Starter'}
                 </HoloBadge>
                 {subscriptionEnd && (
-                  <HoloBadge variant={isAnnual ? "success" : "warning"} size="sm" animated>
+                  <HoloBadge variant={isAnnual ? "premium" : "danger"} size="sm" animated>
                     {isAnnual
                       ? <Crown className="h-3 w-3 mr-1" />
                       : <RefreshCw className="h-3 w-3 mr-1" />}

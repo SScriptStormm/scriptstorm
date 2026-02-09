@@ -1,7 +1,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-type HoloBadgeVariant = "default" | "starter" | "growth" | "scale" | "authority" | "dominance" | "success" | "warning" | "danger" | "active" | "inactive";
+type HoloBadgeVariant = "default" | "starter" | "growth" | "scale" | "authority" | "dominance" | "premium" | "success" | "warning" | "danger" | "active" | "inactive";
 
 interface HoloBadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   variant?: HoloBadgeVariant;
@@ -47,6 +47,12 @@ const variantStyles: Record<HoloBadgeVariant, { bg: string; border: string; text
     border: "border-amber-400/60",
     text: "text-amber-200",
     glow: "shadow-[0_0_20px_hsl(45_93%_55%/0.4)]"
+  },
+  premium: {
+    bg: "bg-cyan-500/20",
+    border: "border-cyan-400/50",
+    text: "text-cyan-300",
+    glow: "shadow-[0_0_15px_hsl(185_70%_50%/0.3)]"
   },
   success: {
     bg: "bg-emerald-500/20",
