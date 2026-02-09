@@ -1,45 +1,41 @@
 
 
-# Unify Growth Tier Branding Across All Pages
+# Make ANNUAL / MONTHLY Billing Badge More Vibrant
 
 ## Problem
-The Growth tier badge/icon appears differently in three places:
-- **Dashboard (AccountStatusCard)**: Shows the fire emoji with HoloBadge -- "🔥 Growth"
-- **Account Settings page**: Shows HoloBadge but with NO emoji -- just "Growth"
-- **Package Details (PackageFeaturesWidget)**: Uses its own inline color styling instead of HoloBadge, but does include "🔥"
-
-This inconsistency applies to ALL tiers, not just Growth.
+The ANNUAL and MONTHLY badges in the Account Status widget both use `variant="default"` (muted blue), making them look dull and indistinguishable from each other.
 
 ## Solution
-Make the Account Settings page include the tier emoji, matching how the Dashboard and Package Details already display it.
+Give each billing cycle its own distinct, vibrant styling:
 
-The PackageFeaturesWidget already matches the same emoji and color scheme as HoloBadge, so it just needs a minor visual check -- no changes needed there.
+- **ANNUAL**: Emerald green (`variant="success"`) with a Crown icon -- signals premium/reward
+- **MONTHLY**: Amber (`variant="warning"`) with a RefreshCw icon -- signals recurring cycle
 
 ## Technical Details
 
-### File: `src/pages/AccountSettings.tsx`
+### File: `src/components/dashboard/AccountStatusCard.tsx`
 
-Add a `tierEmojis` map (same as in AccountStatusCard) and prepend the emoji to the HoloBadge on the page header (around line 266):
-
-```
-Before:  Growth
-After:   🔥 Growth
-```
-
-This is a single-line change: update the HoloBadge content from `{getTierDisplayName(...)}` to `{tierEmoji} {getTierDisplayName(...)}`, using the same emoji mapping already used in `AccountStatusCard.tsx`:
+1. Add `Crown` and `RefreshCw` to the lucide-react imports (replace `Calendar`)
+2. Update the billing badge (around lines 83-88):
 
 ```
-starter: "🚀"
-growth: "🔥"
-scale: "⚡"
-authority: "👑"
-dominance: "💎"
+Before:
+  <HoloBadge variant="default" size="sm">
+    <Calendar className="h-3 w-3 mr-1" />
+    {isAnnual ? 'ANNUAL' : 'MONTHLY'}
+  </HoloBadge>
+
+After:
+  <HoloBadge variant={isAnnual ? "success" : "warning"} size="sm" animated>
+    {isAnnual
+      ? <Crown className="h-3 w-3 mr-1" />
+      : <RefreshCw className="h-3 w-3 mr-1" />}
+    {isAnnual ? 'ANNUAL' : 'MONTHLY'}
+  </HoloBadge>
 ```
 
-### Files Changed
-- `src/pages/AccountSettings.tsx` -- add emoji map and update the header HoloBadge content
-
-### No Changes Needed
-- `AccountStatusCard.tsx` -- already correct
-- `PackageFeaturesWidget.tsx` -- already uses matching emojis and colors
+### Result
+- ANNUAL: Glowing emerald badge with crown icon
+- MONTHLY: Warm amber badge with refresh icon
+- Both are now visually distinct and match the premium feel of the rest of the dashboard
 
