@@ -966,7 +966,7 @@ const Dashboard = () => {
                         <div className={`space-y-3 ${isSelected ? 'pl-2' : ''}`}>
                           {/* Title and Word Count */}
                           <div>
-                            <h3 className="text-white font-mono tracking-wide font-semibold text-sm mb-1 break-words">
+                            <h3 className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/70 font-mono tracking-wider font-bold text-sm mb-1 line-clamp-2">
                               {article.title}
                             </h3>
                             {article.word_count > 0 && <p className="text-white/50 font-mono text-xs">{article.word_count} words</p>}
@@ -1071,7 +1071,7 @@ const Dashboard = () => {
                                 <div className="absolute left-1 top-3 bottom-3 w-[3px] rounded-full bg-primary-glow shadow-[0_0_12px_hsl(221_83%_53%/0.6)]" />
                               )}
                               <div className={isSelected ? 'pl-3' : ''}>
-                                <h3 className="text-white font-mono tracking-wide font-semibold text-xs md:text-sm lg:text-base">
+                                <h3 className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/70 font-mono tracking-wider font-bold text-xs md:text-sm lg:text-base truncate max-w-[300px] lg:max-w-[400px]" title={article.title}>
                                   {article.title}
                                 </h3>
                                 {article.word_count > 0 && <p className="text-white/50 font-mono text-[10px] md:text-xs">{article.word_count} words</p>}
