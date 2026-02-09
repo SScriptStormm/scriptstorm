@@ -652,7 +652,7 @@ const Dashboard = () => {
         <div className="mb-6 sm:mb-8">
           <button
             onClick={() => navigate('/content-brief')}
-            className="group relative w-full overflow-hidden rounded-xl border border-primary-glow/30 backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] transition-all duration-300 hover:border-primary-glow/60 hover:shadow-[0_0_40px_hsl(221_83%_53%/0.3)] hover:scale-[1.01]"
+            className="group relative w-full overflow-hidden rounded-xl border border-primary-glow/30 backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] transition-all duration-300 hover:border-primary-glow/60 hover:shadow-[0_0_40px_hsl(221_83%_53%/0.3)] hover:scale-[1.01] animate-glow-pulse-soft"
           >
             {/* Gradient accent overlay */}
             <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/15 via-primary-glow/10 to-transparent opacity-60 pointer-events-none group-hover:opacity-100 transition-opacity duration-300" />
@@ -661,12 +661,12 @@ const Dashboard = () => {
             <div className="absolute inset-0 rounded-xl bg-gradient-to-t from-transparent via-transparent to-white/[0.05] pointer-events-none" />
             
             {/* Animated shimmer on hover */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-glow/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-glow/20 to-transparent animate-shimmer pointer-events-none" />
             
             {/* Button content */}
             <div className="relative z-10 flex items-center gap-3 sm:gap-4 px-5 sm:px-6 py-4 sm:py-5">
               {/* Icon with glowing border */}
-              <div className="flex items-center justify-center h-10 w-10 sm:h-11 sm:w-11 rounded-lg bg-primary/20 border border-primary-glow/40 group-hover:border-primary-glow group-hover:bg-primary/30 group-hover:shadow-[0_0_15px_hsl(221_83%_53%/0.4)] transition-all duration-300">
+              <div className="flex items-center justify-center h-10 w-10 sm:h-11 sm:w-11 rounded-lg bg-primary/20 border border-primary-glow/40 group-hover:border-primary-glow group-hover:bg-primary/30 group-hover:shadow-[0_0_15px_hsl(221_83%_53%/0.4)] transition-all duration-300 animate-scale-subtle">
                 <Plus className="h-5 w-5 sm:h-6 sm:w-6 text-primary-glow group-hover:scale-110 transition-transform duration-300" />
               </div>
               
