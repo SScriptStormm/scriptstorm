@@ -1,56 +1,47 @@
 
-# Polish Project Titles in the Content Projects Table
+# Add Title Search to Content Projects
 
-## Problem
-The project titles in the "YOUR CONTENT PROJECTS" section (both mobile cards and desktop table) look plain and unprofessional -- like plain text on a Word document. They use basic `font-mono` styling with no visual hierarchy or polish.
+## What This Does
+Adds a search bar above the existing filters in the "YOUR CONTENT PROJECTS" section so clients can quickly find a specific project by typing part of its title. The search works alongside the existing month, status, and content type filters.
 
-## Solution
-Add subtle visual enhancements to make project titles feel like proper project names rather than raw text:
+## How It Works
+- A search input appears between the section header and the month filter
+- As the client types, the project list filters in real-time to show only matching titles (case-insensitive)
+- A small "X" button inside the input clears the search
+- Pagination resets to page 1 when the search text changes
+- The search combines with all existing filters (month, status, content type)
 
-1. **Truncate long titles** with ellipsis instead of letting them wrap awkwardly
-2. **Add a subtle gradient text effect** so titles catch the eye
-3. **Show a hover glow** on the title text for interactivity feedback
-4. **Slightly increase letter spacing** for a cleaner look
+## Visual Style
+- Matches the existing glassmorphic dark theme with a Search icon on the left
+- Uses the same `font-mono` text style and border/glow effects as the other filter controls
+- Placeholder text: "Search project titles..."
 
 ## Technical Details
 
 ### File: `src/pages/Dashboard.tsx`
 
-**Mobile card title (around line 969):**
-
-Change from:
+**1. Add state variable** (near other filter states ~line 68):
 ```
-<h3 className="text-white font-mono tracking-wide font-semibold text-sm mb-1 break-words">
-  {article.title}
-</h3>
+const [searchQuery, setSearchQuery] = useState<string>('');
 ```
 
-To:
+**2. Add search to the filter chain** (after contentType filtering ~line 377):
 ```
-<h3 className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/70 font-mono tracking-wider font-bold text-sm mb-1 line-clamp-2">
-  {article.title}
-</h3>
+const searchFilteredArticles = searchQuery.trim() === ''
+  ? filteredArticles
+  : filteredArticles.filter(a =>
+      a.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+```
+Then replace `filteredArticles` with `searchFilteredArticles` in the pagination calculations (totalPages, paginatedArticles, results counter).
+
+**3. Reset page when search changes** (add `searchQuery` to the useEffect dependency ~line 388):
+```
+useEffect(() => {
+  setCurrentPage(1);
+}, [statusFilter, monthFilter, contentTypeFilter, searchQuery]);
 ```
 
-**Desktop table title (around line 1074):**
+**4. Add search input UI** between the header and the month filter (~line 775), with a Search icon, glassmorphic styling, and an X button to clear.
 
-Change from:
-```
-<h3 className="text-white font-mono tracking-wide font-semibold text-xs md:text-sm lg:text-base">
-  {article.title}
-</h3>
-```
-
-To:
-```
-<h3 className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/70 font-mono tracking-wider font-bold text-xs md:text-sm lg:text-base truncate max-w-[300px] lg:max-w-[400px]" title={article.title}>
-  {article.title}
-</h3>
-```
-
-### What changes visually
-- Titles get a subtle white-to-faded gradient that looks polished, not flat
-- Wider letter spacing (`tracking-wider`) gives a cleaner, more designed feel
-- Bold weight (`font-bold` instead of `font-semibold`) adds visual authority
-- Long titles truncate cleanly with ellipsis (desktop) or clamp to 2 lines (mobile) instead of wrapping endlessly
-- Full title visible on hover via the `title` attribute (desktop)
+**5. Add import** for `Search` and `X` icons from `lucide-react` (if not already imported).
