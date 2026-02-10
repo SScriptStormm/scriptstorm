@@ -781,22 +781,22 @@ const Dashboard = () => {
               </div>
               
               {articles.length > 0 && <div className="flex flex-col gap-3">
-                  {/* Search Input */}
-                  <div className="relative w-full">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40" />
+                  {/* Mobile-only Search Input */}
+                  <div className="relative w-full md:hidden">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-white/40" />
                     <input
                       type="text"
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      placeholder="Search project titles..."
-                      className="w-full pl-9 pr-9 py-2 bg-black/50 backdrop-blur-sm border border-white/[0.15] rounded-md text-white font-mono text-xs sm:text-sm placeholder:text-white/30 focus:outline-none focus:border-primary-glow/50 focus:shadow-[0_0_10px_hsl(221_83%_53%/0.15)] transition-all duration-200 hover:border-white/[0.25]"
+                      placeholder="Search titles..."
+                      className="w-full pl-8 pr-8 py-1.5 bg-black/50 backdrop-blur-sm border border-white/[0.15] rounded-md text-white font-mono text-xs placeholder:text-white/30 focus:outline-none focus:border-primary-glow/50 focus:shadow-[0_0_10px_hsl(221_83%_53%/0.15)] transition-all duration-200 hover:border-white/[0.25]"
                     />
                     {searchQuery && (
                       <button
                         onClick={() => setSearchQuery('')}
                         className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
                       >
-                        <X className="h-4 w-4" />
+                        <X className="h-3.5 w-3.5" />
                       </button>
                     )}
                   </div>
@@ -874,72 +874,93 @@ const Dashboard = () => {
                     </Button>
                   </div>
 
-                  {/* Content Type Filters */}
-                  <div className="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1">
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      onClick={() => setContentTypeFilter('all')}
-                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
-                        contentTypeFilter === 'all' 
-                          ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
-                          : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
-                      }`}
-                    >
-                      All Types
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      onClick={() => setContentTypeFilter('blog_article')}
-                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
-                        contentTypeFilter === 'blog_article' 
-                          ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
-                          : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
-                      }`}
-                    >
-                      <FileText className="h-3 w-3 mr-1" />
-                      Blogs
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      onClick={() => setContentTypeFilter('social_media')}
-                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
-                        contentTypeFilter === 'social_media' 
-                          ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
-                          : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
-                      }`}
-                    >
-                      <MessageSquare className="h-3 w-3 mr-1" />
-                      Social
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      onClick={() => setContentTypeFilter('youtube_script')}
-                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
-                        contentTypeFilter === 'youtube_script' 
-                          ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
-                          : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
-                      }`}
-                    >
-                      <Video className="h-3 w-3 mr-1" />
-                      YouTube
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      onClick={() => setContentTypeFilter('product_description')}
-                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
-                        contentTypeFilter === 'product_description' 
-                          ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
-                          : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
-                      }`}
-                    >
-                      <Package className="h-3 w-3 mr-1" />
-                      Products
-                    </Button>
+                  {/* Content Type Filters + Inline Search */}
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1 flex-shrink min-w-0">
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        onClick={() => setContentTypeFilter('all')}
+                        className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
+                          contentTypeFilter === 'all' 
+                            ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
+                            : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
+                        }`}
+                      >
+                        All Types
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        onClick={() => setContentTypeFilter('blog_article')}
+                        className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
+                          contentTypeFilter === 'blog_article' 
+                            ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
+                            : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
+                        }`}
+                      >
+                        <FileText className="h-3 w-3 mr-1" />
+                        Blogs
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        onClick={() => setContentTypeFilter('social_media')}
+                        className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
+                          contentTypeFilter === 'social_media' 
+                            ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
+                            : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
+                        }`}
+                      >
+                        <MessageSquare className="h-3 w-3 mr-1" />
+                        Social
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        onClick={() => setContentTypeFilter('youtube_script')}
+                        className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
+                          contentTypeFilter === 'youtube_script' 
+                            ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
+                            : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
+                        }`}
+                      >
+                        <Video className="h-3 w-3 mr-1" />
+                        YouTube
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        onClick={() => setContentTypeFilter('product_description')}
+                        className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
+                          contentTypeFilter === 'product_description' 
+                            ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
+                            : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
+                        }`}
+                      >
+                        <Package className="h-3 w-3 mr-1" />
+                        Products
+                      </Button>
+                    </div>
+                    {/* Desktop inline search */}
+                    <div className="relative hidden md:block flex-shrink-0 w-48 lg:w-56 pb-2">
+                      <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-white/40" />
+                      <input
+                        type="text"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        placeholder="Search titles..."
+                        className="w-full pl-7 pr-7 py-1.5 bg-black/50 backdrop-blur-sm border border-white/[0.15] rounded-md text-white font-mono text-xs placeholder:text-white/30 focus:outline-none focus:border-primary-glow/50 focus:shadow-[0_0_10px_hsl(221_83%_53%/0.15)] transition-all duration-200 hover:border-white/[0.25]"
+                      />
+                      {searchQuery && (
+                        <button
+                          onClick={() => setSearchQuery('')}
+                          className="absolute right-2.5 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
+                        >
+                          <X className="h-3.5 w-3.5" />
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>}
             </div>
