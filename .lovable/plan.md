@@ -1,35 +1,22 @@
 
 
-# Fix Tablet Layout and Extend Search Bar
+# Move Mobile/Tablet Search Bar to Content Type Filter Area
 
 ## Problem
-On tablet screens (768px-1024px), the content type filter buttons and inline search bar are crammed together on one row, making everything look squished. The search bar also needs to be wider (extending to align with the "Delivery" column) and the magnifying glass icon needs better alignment with the placeholder text.
+The mobile/tablet search bar was incorrectly placed above the month filter (line 785). It should stay alongside the content type buttons -- just shown as full-width on its own row on mobile/tablet, and inline on desktop.
 
 ## Changes
 
-### 1. Fix tablet squishing -- stack filters and search on tablet, inline on large screens
-Currently, the content type buttons and search share a row starting at `md` (768px). On tablet this is too tight. The fix:
-- On tablet (`md`), the search bar will be full-width on its own row below the content type buttons (similar to mobile but visible)
-- On large screens (`lg`, 1024px+), the search bar moves inline with the content type buttons as intended
-- This gives tablet users breathing room while keeping the compact desktop layout
-
-### 2. Extend the search bar width
-On large desktop screens, increase the search bar width from `lg:w-56` to a larger value (approximately `lg:w-72`) so it stretches further left, aligning closer to the start of the "Delivery" column header.
-
-### 3. Align the magnifying glass icon with placeholder text
-Adjust the icon's left padding (`left-2.5`) and the input's `pl-7` so the magnifying glass sits neatly beside the "S" in "Search titles...". This means slightly increasing the icon's left offset and the input's left padding to create proper visual alignment.
-
-## Technical Details
-
 ### File: `src/pages/Dashboard.tsx`
 
-**Search bar container (line 946):**
-- Change from `hidden md:block flex-shrink-0 w-48 lg:w-56` to `hidden lg:block flex-shrink-0 w-72` -- only show inline on `lg+` and make it wider
+**1. Remove the misplaced mobile/tablet search bar (lines 785-802)**
+Delete the entire `lg:hidden` search input block that currently sits above the month filter.
 
-**Search input (line 953):**
-- Adjust `pl-7` to `pl-8` and the Search icon `left-2.5` to `left-3` for proper icon-to-text alignment
+**2. Add the mobile/tablet search bar below the content type buttons (after line 963)**
+Insert a full-width search input inside the content type filter area, right after the desktop inline search `</div>`. This new block will use `lg:hidden` so it only shows on mobile and tablet, appearing as a full-width row below the content type buttons.
 
-**Mobile-only search (line 785):**
-- Change from `md:hidden` to `lg:hidden` so it shows as full-width on both mobile AND tablet, only hiding on large screens where it appears inline
+This way:
+- On mobile and tablet: search bar appears as a full-width row directly below the content type filter buttons
+- On desktop (`lg+`): the inline search bar stays to the right of the content type buttons (unchanged)
 
-These are small class name changes -- no logic or structural changes needed.
+No logic changes -- just moving the search bar's position in the DOM.
