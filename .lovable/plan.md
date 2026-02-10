@@ -1,34 +1,19 @@
 
+# Fix Project Row Hover and Vertical Border Styling
 
-# Move Search Bar Inline with Content Type Filters
+## Issues
+1. **White hover fade**: When hovering over project rows, a dim white background (`hover:bg-white/[0.05]`) appears, which looks washed out and inconsistent with the premium blue theme.
+2. **Missing vertical borders**: In the unselected state, the left and right edges of each row have `border-transparent`, making rows look like they have no defined boundaries -- giving a "copy-pasted" appearance.
 
-## What Changes
-The search bar moves from its own full-width row above all filters down to sit on the **same row** as the content type buttons (All Types, Blogs, Social, YouTube, Products). It will appear on the right side of that row, aligned with where the "Delivery" and "Actions" table columns are below.
-
-## Layout
-On desktop, the content type filter row will become a flex row with:
-- **Left side**: The content type buttons (All Types, Blogs, Social, YouTube, Products) — same as now
-- **Right side**: A compact search input with the Search icon and X clear button
-
-On mobile, the search bar will remain full-width above the filters (since there isn't enough horizontal space to share a row).
-
-## Visual Style
-- Smaller input height to match the filter button size
-- Smaller placeholder text ("Search titles...")
-- Same glassmorphic styling (bg-black/50, border-white/[0.15], font-mono)
-- Search and X icons slightly smaller to match the compact size
-
-## Technical Details
+## Changes
 
 ### File: `src/pages/Dashboard.tsx`
 
-**1. Remove the standalone search input block** (lines 784-802) — the full-width search bar that currently sits above the month filter.
+**1. Replace white hover with subtle blue hover** (line 1120)
+- Change `hover:bg-white/[0.05]` to `hover:bg-primary/[0.06]` so the hover uses the brand blue tint instead of a flat white wash.
 
-**2. Add the search input inside the content type filter row** (lines 878-943). Change that `<div>` from just holding buttons to a flex row with two groups:
-- Left group: the existing content type buttons in their scrollable container
-- Right group (hidden on mobile, visible on md+): the compact search input
+**2. Add subtle vertical borders on both ends** (lines 1130 and 1185)
+- Change the unselected `border-transparent` on the first cell (`border-l-2`) to `border-white/[0.08]` so there is always a faint visible left edge.
+- Same for the last cell (`border-r-2`) -- change its unselected state from `border-transparent` to `border-white/[0.08]`.
 
-**3. Add a mobile-only search input** above the filters (visible only on small screens) so mobile users still have easy access.
-
-The search input will use the same `searchQuery` state and behavior — no logic changes needed, just a layout move.
-
+This gives every row a clean, defined boundary on both sides while keeping the selected state's brighter blue border unchanged.
