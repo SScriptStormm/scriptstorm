@@ -781,26 +781,6 @@ const Dashboard = () => {
               </div>
               
               {articles.length > 0 && <div className="flex flex-col gap-3">
-                  {/* Mobile-only Search Input */}
-                  <div className="relative w-full lg:hidden">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-white/40" />
-                    <input
-                      type="text"
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      placeholder="Search titles..."
-                      className="w-full pl-8 pr-8 py-1.5 bg-black/50 backdrop-blur-sm border border-white/[0.15] rounded-md text-white font-mono text-xs placeholder:text-white/30 focus:outline-none focus:border-primary-glow/50 focus:shadow-[0_0_10px_hsl(221_83%_53%/0.15)] transition-all duration-200 hover:border-white/[0.25]"
-                    />
-                    {searchQuery && (
-                      <button
-                        onClick={() => setSearchQuery('')}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
-                      >
-                        <X className="h-3.5 w-3.5" />
-                      </button>
-                    )}
-                  </div>
-
                   {/* Month Filter */}
                   <div className="flex items-center gap-2 w-full">
                     <CalendarIcon className="h-4 w-4 text-primary-glow flex-shrink-0" />
@@ -956,6 +936,25 @@ const Dashboard = () => {
                         <button
                           onClick={() => setSearchQuery('')}
                           className="absolute right-2.5 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
+                        >
+                          <X className="h-3.5 w-3.5" />
+                        </button>
+                      )}
+                    </div>
+                    {/* Mobile/Tablet search - full width row below buttons */}
+                    <div className="relative w-full lg:hidden">
+                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-white/40" />
+                      <input
+                        type="text"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        placeholder="Search titles..."
+                        className="w-full pl-8 pr-8 py-1.5 bg-black/50 backdrop-blur-sm border border-white/[0.15] rounded-md text-white font-mono text-xs placeholder:text-white/30 focus:outline-none focus:border-primary-glow/50 focus:shadow-[0_0_10px_hsl(221_83%_53%/0.15)] transition-all duration-200 hover:border-white/[0.25]"
+                      />
+                      {searchQuery && (
+                        <button
+                          onClick={() => setSearchQuery('')}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
                         >
                           <X className="h-3.5 w-3.5" />
                         </button>
