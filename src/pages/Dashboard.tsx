@@ -944,7 +944,7 @@ const Dashboard = () => {
                     </div>
                     {/* Desktop inline search */}
                     <div className="relative hidden md:block flex-shrink-0 w-48 lg:w-56 pb-2">
-                      <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-white/40" />
+                      <Search className="absolute left-2.5 top-[calc(50%-4px)] -translate-y-1/2 h-3.5 w-3.5 text-white/40" />
                       <input
                         type="text"
                         value={searchQuery}
@@ -955,7 +955,7 @@ const Dashboard = () => {
                       {searchQuery && (
                         <button
                           onClick={() => setSearchQuery('')}
-                          className="absolute right-2.5 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
+                          className="absolute right-2.5 top-[calc(50%-4px)] -translate-y-1/2 text-white/40 hover:text-white transition-colors"
                         >
                           <X className="h-3.5 w-3.5" />
                         </button>
