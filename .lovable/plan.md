@@ -1,47 +1,23 @@
 
-# Add Title Search to Content Projects
 
-## What This Does
-Adds a search bar above the existing filters in the "YOUR CONTENT PROJECTS" section so clients can quickly find a specific project by typing part of its title. The search works alongside the existing month, status, and content type filters.
+# Improve "No Results" Message for Search
 
-## How It Works
-- A search input appears between the section header and the month filter
-- As the client types, the project list filters in real-time to show only matching titles (case-insensitive)
-- A small "X" button inside the input clears the search
-- Pagination resets to page 1 when the search text changes
-- The search combines with all existing filters (month, status, content type)
+## Problem
+When a client searches for a project title that doesn't exist, the empty state message says something like "No projects" and "Try selecting a different filter" -- it doesn't acknowledge that they typed a search query, which feels confusing and unhelpful.
 
-## Visual Style
-- Matches the existing glassmorphic dark theme with a Search icon on the left
-- Uses the same `font-mono` text style and border/glow effects as the other filter controls
-- Placeholder text: "Search project titles..."
+## Solution
+Update the empty state message to be search-aware:
+- When a search query is active, show: **"No projects matching '[query]'"** with the suggestion **"Try a different search term or clear the search"**
+- When only filters are active (no search), keep the current filter-based message
 
 ## Technical Details
 
-### File: `src/pages/Dashboard.tsx`
+### File: `src/pages/Dashboard.tsx` (~lines 962-972)
 
-**1. Add state variable** (near other filter states ~line 68):
-```
-const [searchQuery, setSearchQuery] = useState<string>('');
-```
+Replace the current empty state block so it checks `searchQuery` first:
 
-**2. Add search to the filter chain** (after contentType filtering ~line 377):
-```
-const searchFilteredArticles = searchQuery.trim() === ''
-  ? filteredArticles
-  : filteredArticles.filter(a =>
-      a.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-```
-Then replace `filteredArticles` with `searchFilteredArticles` in the pagination calculations (totalPages, paginatedArticles, results counter).
+- **If `searchQuery` is not empty**: Show "No projects matching '[truncated query]'" with "Try a different search term or clear the search"
+- **Otherwise**: Keep the existing filter-aware message ("No projects in [month]", "Try selecting a different filter")
 
-**3. Reset page when search changes** (add `searchQuery` to the useEffect dependency ~line 388):
-```
-useEffect(() => {
-  setCurrentPage(1);
-}, [statusFilter, monthFilter, contentTypeFilter, searchQuery]);
-```
+This is a small wording change -- just updating the two `<p>` tags inside the empty state `<div>` to be conditional on `searchQuery.trim()`.
 
-**4. Add search input UI** between the header and the month filter (~line 775), with a Search icon, glassmorphic styling, and an X button to clear.
-
-**5. Add import** for `Search` and `X` icons from `lucide-react` (if not already imported).
