@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FileText, Calendar as CalendarIcon, Clock, CheckCircle, AlertCircle, Zap, LogOut, RefreshCw, CreditCard, BarChart3, Target, Eye, Download, Edit, MessageSquare, User as UserIcon, Settings, LayoutDashboard, ChevronDown, Archive, Plus, ArrowRight, ChevronLeft, ChevronRight, Video, Package } from "lucide-react";
+import { FileText, Calendar as CalendarIcon, Clock, CheckCircle, AlertCircle, Zap, LogOut, RefreshCw, CreditCard, BarChart3, Target, Eye, Download, Edit, MessageSquare, User as UserIcon, Settings, LayoutDashboard, ChevronDown, Archive, Plus, ArrowRight, ChevronLeft, ChevronRight, Video, Package, Search, X } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
@@ -78,6 +78,7 @@ const Dashboard = () => {
   const [previousMonthsOpen, setPreviousMonthsOpen] = useState(false);
   const [submittingRevision, setSubmittingRevision] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState<string>('');
   const isMobile = useIsMobile();
   const itemsPerPage = isMobile ? 5 : 10;
   const {
@@ -376,16 +377,23 @@ const Dashboard = () => {
         return true;
       });
 
+  // Search filter
+  const searchFilteredArticles = searchQuery.trim() === ''
+    ? filteredArticles
+    : filteredArticles.filter(a =>
+        a.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+
   // Pagination calculations
-  const totalPages = Math.ceil(filteredArticles.length / itemsPerPage);
+  const totalPages = Math.ceil(searchFilteredArticles.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const paginatedArticles = filteredArticles.slice(startIndex, endIndex);
+  const paginatedArticles = searchFilteredArticles.slice(startIndex, endIndex);
 
   // Reset page when filters change
   useEffect(() => {
     setCurrentPage(1);
-  }, [statusFilter, monthFilter, contentTypeFilter]);
+  }, [statusFilter, monthFilter, contentTypeFilter, searchQuery]);
 
   // Current month articles for pipeline display
   const currentMonthPipelineArticles = articles.filter(article => getMonthYear(article.created_at) === currentMonthYear);
@@ -773,6 +781,26 @@ const Dashboard = () => {
               </div>
               
               {articles.length > 0 && <div className="flex flex-col gap-3">
+                  {/* Search Input */}
+                  <div className="relative w-full">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40" />
+                    <input
+                      type="text"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      placeholder="Search project titles..."
+                      className="w-full pl-9 pr-9 py-2 bg-black/50 backdrop-blur-sm border border-white/[0.15] rounded-md text-white font-mono text-xs sm:text-sm placeholder:text-white/30 focus:outline-none focus:border-primary-glow/50 focus:shadow-[0_0_10px_hsl(221_83%_53%/0.15)] transition-all duration-200 hover:border-white/[0.25]"
+                    />
+                    {searchQuery && (
+                      <button
+                        onClick={() => setSearchQuery('')}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
+                      >
+                        <X className="h-4 w-4" />
+                      </button>
+                    )}
+                  </div>
+
                   {/* Month Filter */}
                   <div className="flex items-center gap-2 w-full">
                     <CalendarIcon className="h-4 w-4 text-primary-glow flex-shrink-0" />
@@ -930,7 +958,7 @@ const Dashboard = () => {
                   Your 24-hour clock starts the moment you submit your first brief.
                 </p>
               </div>
-            ) : filteredArticles.length === 0 ? (
+            ) : searchFilteredArticles.length === 0 ? (
               <div className="py-12 text-center">
                 <AlertCircle className="h-12 w-12 text-primary-glow/50 mx-auto mb-3" />
                   <p className="text-white font-mono text-lg mb-2">
@@ -1146,7 +1174,7 @@ const Dashboard = () => {
                   <div className="mt-6 flex flex-col md:flex-row items-center justify-between gap-4 pt-4 border-t border-white/[0.1]">
                     {/* Results Count */}
                     <p className="text-white/60 font-mono text-xs md:text-sm">
-                      Showing {startIndex + 1}-{Math.min(endIndex, filteredArticles.length)} of {filteredArticles.length} projects
+                      Showing {startIndex + 1}-{Math.min(endIndex, searchFilteredArticles.length)} of {searchFilteredArticles.length} projects
                     </p>
                     
                     {/* Pagination Buttons */}
