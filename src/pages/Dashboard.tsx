@@ -961,14 +961,27 @@ const Dashboard = () => {
             ) : searchFilteredArticles.length === 0 ? (
               <div className="py-12 text-center">
                 <AlertCircle className="h-12 w-12 text-primary-glow/50 mx-auto mb-3" />
-                  <p className="text-white font-mono text-lg mb-2">
-                    No {statusFilter === 'all' ? '' : statusFilter === 'in_progress' ? '' : statusFilter + ' '}projects
-                    {statusFilter === 'in_progress' && ' in progress'}
-                    {monthFilter !== 'all_time' && ` in ${getMonthLabel(monthFilter)}`}
-                  </p>
-                <p className="text-white/70 font-mono text-sm">
-                  Try selecting a different {monthFilter === 'all_time' ? 'filter' : 'month or filter'}
-                </p>
+                {searchQuery.trim() !== '' ? (
+                  <>
+                    <p className="text-white font-mono text-lg mb-2">
+                      No projects matching "{searchQuery.length > 40 ? searchQuery.slice(0, 40) + '…' : searchQuery}"
+                    </p>
+                    <p className="text-white/70 font-mono text-sm">
+                      Try a different search term or clear the search
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-white font-mono text-lg mb-2">
+                      No {statusFilter === 'all' ? '' : statusFilter === 'in_progress' ? '' : statusFilter + ' '}projects
+                      {statusFilter === 'in_progress' && ' in progress'}
+                      {monthFilter !== 'all_time' && ` in ${getMonthLabel(monthFilter)}`}
+                    </p>
+                    <p className="text-white/70 font-mono text-sm">
+                      Try selecting a different {monthFilter === 'all_time' ? 'filter' : 'month or filter'}
+                    </p>
+                  </>
+                )}
               </div>
             ) : (
               <>
