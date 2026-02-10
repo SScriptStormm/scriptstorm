@@ -1117,7 +1117,7 @@ const Dashboard = () => {
                       {paginatedArticles.map(article => {
                         const isSelected = article.id === selectedPipelineArticleId;
                         // Move gradient to <tr> for seamless background, cells only handle borders
-                        const unselectedRowBase = 'border-b border-white/[0.1] hover:bg-white/[0.05]';
+                        const unselectedRowBase = 'border-b border-white/[0.1] hover:bg-primary/[0.06]';
                         const selectedRowStyle = 'bg-primary/10 shadow-[inset_0_2px_0_hsl(221_83%_53%/0.5),inset_0_-2px_0_hsl(221_83%_53%/0.5)]';
                         
                         return (
@@ -1127,7 +1127,7 @@ const Dashboard = () => {
                             className={`cursor-pointer transition-[background-color,box-shadow] duration-300 ${isSelected ? selectedRowStyle : unselectedRowBase}`}
                           >
                             {/* First Cell - Project Title with Accent Rail */}
-                            <td className={`py-4 align-top w-2/5 relative border-l-2 ${isSelected ? 'border-primary-glow/60 rounded-l-lg' : 'border-transparent'}`}>
+                            <td className={`py-4 align-top w-2/5 relative border-l-2 ${isSelected ? 'border-primary-glow/60 rounded-l-lg' : 'border-white/[0.08]'}`}>
                               {/* Accent Rail */}
                               {isSelected && (
                                 <div className="absolute left-1 top-3 bottom-3 w-[3px] rounded-full bg-primary-glow shadow-[0_0_12px_hsl(221_83%_53%/0.6)]" />
@@ -1182,7 +1182,7 @@ const Dashboard = () => {
                             </td>
                             
                             {/* Last Cell - Actions */}
-                            <td className={`py-4 text-right border-r-2 ${isSelected ? 'border-primary-glow/60 rounded-r-lg' : 'border-transparent'}`}>
+                            <td className={`py-4 text-right border-r-2 ${isSelected ? 'border-primary-glow/60 rounded-r-lg' : 'border-white/[0.08]'}`}>
                               <div className="flex items-center gap-2 justify-end">
                                 {article.status === 'completed' ? <>
                                     <Button size="sm" className="bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono" onClick={() => article.article_url && window.open(article.article_url, '_blank')}>
