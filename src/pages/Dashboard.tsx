@@ -1127,7 +1127,7 @@ const Dashboard = () => {
                             className={`cursor-pointer transition-[background-color,box-shadow] duration-300 ${isSelected ? selectedRowStyle : unselectedRowBase}`}
                           >
                             {/* First Cell - Project Title with Accent Rail */}
-                            <td className={`py-4 align-top w-2/5 relative border-l-2 ${isSelected ? 'border-primary-glow/60 rounded-l-lg' : 'border-white/[0.08]'}`}>
+                            <td className={`py-4 pl-2 align-top w-2/5 relative border-l-2 ${isSelected ? 'border-primary-glow/60 rounded-l-lg' : 'border-white/[0.08]'}`}>
                               {/* Accent Rail */}
                               {isSelected && (
                                 <div className="absolute left-1 top-3 bottom-3 w-[3px] rounded-full bg-primary-glow shadow-[0_0_12px_hsl(221_83%_53%/0.6)]" />
