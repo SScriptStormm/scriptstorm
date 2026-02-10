@@ -923,7 +923,7 @@ const Dashboard = () => {
                       </Button>
                     </div>
                     {/* Desktop inline search */}
-                    <div className="relative hidden lg:block flex-shrink-0 w-72 pb-2">
+                    <div className="relative hidden lg:block flex-shrink-0 w-48 pb-2">
                       <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-white/40" />
                       <input
                         type="text"
