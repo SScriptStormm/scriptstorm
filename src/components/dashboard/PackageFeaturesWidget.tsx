@@ -27,61 +27,84 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
   };
 
   const getFeaturesByTier = () => {
-    
     switch (tier) {
       case "starter":
         return {
           name: "Starter Package",
           wordCount: "1,500-2,000 words",
           articles: 5,
-          socialPosts: 15,
-          productDesc: 5,
-          revisions: 1,
+          articleLabel: "Foundational Blog Articles",
+          socialLabel: "15 Ready-to-Post Social Media Captions",
+          socialSubtitle: "LinkedIn, X (Twitter), Instagram",
+          productLabel: "Persuasive Product Descriptions",
+          productCount: 5,
+          revisionLabel: "1 Dedicated Revision Round",
+          hasContentCalendar: false,
         };
       case "growth":
         return {
           name: "Growth Package",
           wordCount: "1,500-2,000 words",
           articles: 10,
-          socialPosts: 30,
-          productDesc: 10,
-          revisions: 2,
+          articleLabel: "Foundational Blog Articles",
+          socialLabel: "30 High-Engagement Social & Video Assets",
+          socialSubtitle: "LinkedIn, X, Instagram + YouTube video script outlines",
+          productLabel: "High-Converting Product/Service Descriptions",
+          productCount: 10,
+          revisionLabel: "2 Priority Revision Rounds",
+          hasContentCalendar: true,
         };
       case "scale":
         return {
           name: "Scale Package",
           wordCount: "2,000-3,000 words",
           articles: 25,
-          socialPosts: 75,
-          productDesc: 25,
-          revisions: 2,
+          articleLabel: "Foundational Blog Articles",
+          socialLabel: "75 Strategic Social Media Posts",
+          socialSubtitle: "Multi-channel campaign",
+          productLabel: "High-Conversion Product/Service Pages",
+          productCount: 25,
+          revisionLabel: "2 Rounds of Priority Revisions",
+          hasContentCalendar: false,
         };
       case "authority":
         return {
           name: "Authority Package",
           wordCount: "2,000-3,000 words",
           articles: 30,
-          socialPosts: 90,
-          productDesc: 30,
-          revisions: 3,
+          articleLabel: "Industry-Leading Blog Articles",
+          socialLabel: "90 Targeted Social Media Campaign Posts",
+          socialSubtitle: "Community-building campaigns",
+          productLabel: "Premium Product/Service Descriptions",
+          productCount: 30,
+          revisionLabel: "3 Rounds of Priority Revisions",
+          hasContentCalendar: false,
         };
       case "dominance":
         return {
           name: "Dominance Package",
           wordCount: "2,000-5,000 words",
           articles: 50,
-          socialPosts: 150,
-          productDesc: "Unlimited",
-          revisions: "Unlimited",
+          articleLabel: "Unbeatable Cornerstone Assets",
+          socialLabel: "150 Viral-Ready Social Media Posts",
+          socialSubtitle: "Maximum shareability and brand recall",
+          productLabel: "Unlimited Product Descriptions*",
+          productCount: "Unlimited",
+          revisionLabel: "Unlimited White-Glove Revisions*",
+          hasContentCalendar: false,
         };
       default:
         return {
           name: "Starter Package",
           wordCount: "1,500-2,000 words",
           articles: 5,
-          socialPosts: 15,
-          productDesc: 5,
-          revisions: 1,
+          articleLabel: "Foundational Blog Articles",
+          socialLabel: "15 Ready-to-Post Social Media Captions",
+          socialSubtitle: "LinkedIn, X (Twitter), Instagram",
+          productLabel: "Persuasive Product Descriptions",
+          productCount: 5,
+          revisionLabel: "1 Dedicated Revision Round",
+          hasContentCalendar: false,
         };
     }
   };
@@ -184,7 +207,7 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
                 <CheckCircle className="w-4 h-4 text-primary-glow mt-0.5 flex-shrink-0" />
                 <div className="flex-1">
                   <p className="text-sm text-white font-mono">
-                    <strong>{features.articles}</strong> Blog Articles
+                    <strong>{features.articles}</strong> {features.articleLabel}
                   </p>
                   <p className="text-xs text-white/60 font-mono mt-0.5">{features.wordCount} each</p>
                 </div>
@@ -194,9 +217,9 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
                 <CheckCircle className="w-4 h-4 text-primary-glow mt-0.5 flex-shrink-0" />
                 <div className="flex-1">
                   <p className="text-sm text-white font-mono">
-                    <strong>{features.socialPosts}</strong> Social Media Posts
+                    <strong>{features.socialLabel}</strong>
                   </p>
-                  <p className="text-xs text-white/60 font-mono mt-0.5">LinkedIn, X (Twitter), Instagram</p>
+                  <p className="text-xs text-white/60 font-mono mt-0.5">{features.socialSubtitle}</p>
                 </div>
               </div>
 
@@ -204,7 +227,7 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
                 <CheckCircle className="w-4 h-4 text-primary-glow mt-0.5 flex-shrink-0" />
                 <div className="flex-1">
                   <p className="text-sm text-white font-mono">
-                    <strong>{features.productDesc}</strong> Product Descriptions
+                    <strong>{features.productCount}</strong> {features.productLabel}
                   </p>
                   <p className="text-xs text-white/60 font-mono mt-0.5">Benefit-focused copy</p>
                 </div>
@@ -214,11 +237,23 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
                 <CheckCircle className="w-4 h-4 text-primary-glow mt-0.5 flex-shrink-0" />
                 <div className="flex-1">
                   <p className="text-sm text-white font-mono">
-                    <strong>{features.revisions}</strong> Revision Round{features.revisions !== 1 && features.revisions !== "Unlimited" ? "s" : ""}
+                    <strong>{features.revisionLabel}</strong>
                   </p>
                   <p className="text-xs text-white/60 font-mono mt-0.5">Per content piece</p>
                 </div>
               </div>
+
+              {features.hasContentCalendar && (
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="w-4 h-4 text-primary-glow mt-0.5 flex-shrink-0" />
+                  <div className="flex-1">
+                    <p className="text-sm text-white font-mono">
+                      <strong>Automated Content Calendar</strong>
+                    </p>
+                    <p className="text-xs text-white/60 font-mono mt-0.5">Strategic monthly plan aligned with business goals</p>
+                  </div>
+                </div>
+              )}
             </div>
           </AccordionContent>
         </AccordionItem>
