@@ -1,19 +1,16 @@
 
-# Fix Project Row Hover and Vertical Border Styling
+# Fix Pagination Button Hover on Selected State
 
-## Issues
-1. **White hover fade**: When hovering over project rows, a dim white background (`hover:bg-white/[0.05]`) appears, which looks washed out and inconsistent with the premium blue theme.
-2. **Missing vertical borders**: In the unselected state, the left and right edges of each row have `border-transparent`, making rows look like they have no defined boundaries -- giving a "copy-pasted" appearance.
+## Issue
+When a page number button is selected (active), hovering over it changes it from the subtle glassmorphic blue (`bg-primary/20`) to a brighter blue. The selected state should remain visually stable regardless of hover.
 
-## Changes
+## Change
 
-### File: `src/pages/Dashboard.tsx`
+### File: `src/pages/Dashboard.tsx` (line 1261)
 
-**1. Replace white hover with subtle blue hover** (line 1120)
-- Change `hover:bg-white/[0.05]` to `hover:bg-primary/[0.06]` so the hover uses the brand blue tint instead of a flat white wash.
+Update the active page button's className to explicitly lock hover styles to match the selected state:
 
-**2. Add subtle vertical borders on both ends** (lines 1130 and 1185)
-- Change the unselected `border-transparent` on the first cell (`border-l-2`) to `border-white/[0.08]` so there is always a faint visible left edge.
-- Same for the last cell (`border-r-2`) -- change its unselected state from `border-transparent` to `border-white/[0.08]`.
+- Current: `'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_10px_hsl(221_83%_53%/0.3)]'`
+- Updated: `'bg-primary/20 hover:bg-primary/20 text-white border border-primary-glow/60 hover:border-primary-glow/60 shadow-[0_0_10px_hsl(221_83%_53%/0.3)] hover:text-white'`
 
-This gives every row a clean, defined boundary on both sides while keeping the selected state's brighter blue border unchanged.
+This pins the hover background, border, and text color to exactly match the resting selected state, so there is no visual change on hover. This follows the same pattern already used for dashboard filter buttons (per the project's existing style convention).
