@@ -1258,7 +1258,7 @@ const Dashboard = () => {
                               }}
                               className={`font-mono text-xs min-w-[32px] ${
                                 currentPage === page
-                                  ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_10px_hsl(221_83%_53%/0.3)]'
+                                  ? 'bg-primary/20 hover:bg-primary/20 text-white hover:text-white border border-primary-glow/60 hover:border-primary-glow/60 shadow-[0_0_10px_hsl(221_83%_53%/0.3)]'
                                   : 'bg-white/[0.05] border border-white/[0.15] text-white/70 hover:bg-white/[0.08] hover:text-white'
                               }`}
                             >
