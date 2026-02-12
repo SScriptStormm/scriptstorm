@@ -1,27 +1,23 @@
 
+# Standardize Revision Labels in Pricing Cards
 
-# Standardize Revision Labels + Add White-Glove Feature for Dominance
-
-## Overview
-Two changes to the PackageFeaturesWidget: standardize all revision labels to a consistent format, and add a separate "White-Glove Revision Handling" feature line exclusively for the Dominance tier.
+## Problem
+The pricing cards on the homepage use inconsistent wording for revision features (e.g., "Dedicated Revision Round", "Priority Revision Rounds", "Rounds of Priority Revisions", "White-Glove Revisions"). These need to match the standardized format already applied to the Package Details widget.
 
 ## Changes
 
-### File: `src/components/dashboard/PackageFeaturesWidget.tsx`
+### File: `src/components/Pricing.tsx`
 
-**1. Standardize revision labels in `getFeaturesByTier()`:**
+Update the revision feature strings in both `features` and `annualFeatures` arrays for all 5 tiers:
 
-| Tier | Current | New |
-|------|---------|-----|
-| Starter | "1 Dedicated Revision Round" | "1 Revision Round" |
-| Growth | "2 Priority Revision Rounds" | "2 Revision Rounds" |
-| Scale | "2 Rounds of Priority Revisions" | "2 Revision Rounds" |
-| Authority | "3 Rounds of Priority Revisions" | "3 Revision Rounds" |
-| Dominance | "Unlimited White-Glove Revisions*" | "Unlimited Revisions*" |
-| Default (fallback) | "1 Dedicated Revision Round" | "1 Revision Round" |
+| Tier | Current Wording | New Wording |
+|------|----------------|-------------|
+| Starter | "1 Dedicated Revision Round: We fine-tune..." | "1 Revision Round: We fine-tune..." |
+| Growth | "2 Priority Revision Rounds: Get your content..." | "2 Revision Rounds: Get your content..." |
+| Scale | "2 Rounds of Priority Revisions: Refine content..." | "2 Revision Rounds: Refine content..." |
+| Authority | "3 Rounds of Priority Revisions: Enhanced revision..." | "3 Revision Rounds: Enhanced revision..." |
+| Dominance | "Unlimited White-Glove Revisions*: Perfection, on demand." | "Unlimited Revisions*: Perfection, on demand." |
 
-**2. Add a new "White-Glove Revision Handling" feature line for Dominance only:**
-- Displayed in the **Delivery and Support** accordion section (where the other Dominance-exclusive features like Performance Dashboard and Market Roadmap already live)
-- Will include an "EXCLUSIVE" badge to match the existing style of the other Dominance-only items
-- Subtitle: "Personalized revision handling through your dedicated workspace"
+10 string replacements total (each tier has both `features` and `annualFeatures` arrays). The description text after the colon stays the same -- only the label portion before the colon changes.
 
+No structural, layout, or logic changes needed.
