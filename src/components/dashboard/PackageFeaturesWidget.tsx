@@ -38,7 +38,7 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
           socialSubtitle: "LinkedIn, X (Twitter), Instagram",
           productLabel: "Persuasive Product Descriptions",
           productCount: 5,
-          revisionLabel: "1 Dedicated Revision Round",
+          revisionLabel: "1 Revision Round",
           hasContentCalendar: false,
         };
       case "growth":
@@ -51,7 +51,7 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
           socialSubtitle: "LinkedIn, X, Instagram + YouTube video script outlines",
           productLabel: "High-Converting Product/Service Descriptions",
           productCount: 10,
-          revisionLabel: "2 Priority Revision Rounds",
+          revisionLabel: "2 Revision Rounds",
           hasContentCalendar: true,
         };
       case "scale":
@@ -64,7 +64,7 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
           socialSubtitle: "Multi-channel campaign",
           productLabel: "High-Conversion Product/Service Pages",
           productCount: 25,
-          revisionLabel: "2 Rounds of Priority Revisions",
+          revisionLabel: "2 Revision Rounds",
           hasContentCalendar: false,
         };
       case "authority":
@@ -77,7 +77,7 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
           socialSubtitle: "Community-building campaigns",
           productLabel: "Premium Product/Service Descriptions",
           productCount: 30,
-          revisionLabel: "3 Rounds of Priority Revisions",
+          revisionLabel: "3 Revision Rounds",
           hasContentCalendar: false,
         };
       case "dominance":
@@ -90,7 +90,7 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
           socialSubtitle: "Maximum shareability and brand recall",
           productLabel: "Unlimited Product Descriptions*",
           productCount: "Unlimited",
-          revisionLabel: "Unlimited White-Glove Revisions*",
+          revisionLabel: "Unlimited Revisions*",
           hasContentCalendar: false,
         };
       default:
@@ -103,7 +103,7 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
           socialSubtitle: "LinkedIn, X (Twitter), Instagram",
           productLabel: "Persuasive Product Descriptions",
           productCount: 5,
-          revisionLabel: "1 Dedicated Revision Round",
+          revisionLabel: "1 Revision Round",
           hasContentCalendar: false,
         };
     }
@@ -378,6 +378,19 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
                           </Badge>
                         </p>
                         <p className="text-xs text-white/60 font-mono mt-0.5">Strategic content planning</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3">
+                      <CheckCircle className="w-4 h-4 text-primary-glow mt-0.5 flex-shrink-0" />
+                      <div className="flex-1">
+                        <p className="text-sm text-white font-mono">
+                          <strong>White-Glove Revision Handling</strong>
+                          <Badge variant="outline" className="ml-2 border-primary-glow/50 text-primary-glow font-mono text-[10px]">
+                            EXCLUSIVE
+                          </Badge>
+                        </p>
+                        <p className="text-xs text-white/60 font-mono mt-0.5">Personalized revision handling through your dedicated workspace</p>
                       </div>
                     </div>
                   </>
