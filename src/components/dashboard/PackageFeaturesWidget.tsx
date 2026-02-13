@@ -119,9 +119,9 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
       case "growth":
         return "Advanced Keyword & Competitor Research";
       case "scale":
-        return "Advanced Keyword & Competitor Annihilation";
+        return "Advanced Competitor & Keyword Analysis";
       case "authority":
-        return "Strategic Keyword & Topic Mapping";
+        return "Advanced Competitor & Keyword Analysis";
       case "dominance":
         return "Enterprise Keyword Intelligence";
       default:
@@ -137,9 +137,9 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
       case "growth":
         return "Find gaps in competitors' strategies";
       case "scale":
-        return "Identify and exploit competitor weaknesses";
+        return "AI-powered competitor content gap & keyword analysis";
       case "authority":
-        return "Map the competitive landscape";
+        return "AI-powered competitor content gap & keyword analysis";
       case "dominance":
         return "Proprietary insights for untapped opportunities";
       default:
@@ -170,7 +170,7 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
     }
   };
 
-  const showCompetitorGapExploitation = subscriptionTier.toLowerCase() === "authority";
+  const showCompetitorGapExploitation = false; // Removed — no longer a feature
   const isDominance = subscriptionTier.toLowerCase() === "dominance";
 
   const hasDeliverySupportFeatures = getDeliveryTimeframe() || getSupportLevel() || isDominance;
@@ -248,9 +248,9 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
                   <CheckCircle className="w-4 h-4 text-primary-glow mt-0.5 flex-shrink-0" />
                   <div className="flex-1">
                     <p className="text-sm text-white font-mono">
-                      <strong>Automated Content Calendar</strong>
+                      <strong>Automated Content Scheduling</strong>
                     </p>
-                    <p className="text-xs text-white/60 font-mono mt-0.5">Strategic monthly plan aligned with business goals</p>
+                    <p className="text-xs text-white/60 font-mono mt-0.5">Automatically scheduled and published based on your calendar preferences</p>
                   </div>
                 </div>
               )}
