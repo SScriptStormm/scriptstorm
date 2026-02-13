@@ -407,10 +407,22 @@ const Pricing = () => {
                   <td className="py-2 px-2 text-center">Unlimited</td>
                 </tr>
                 <tr className="border-b border-border/50">
+                  <td className="py-2 px-2">📱 Social & Video Content</td>
+                  <td className="py-2 px-2 text-center">75</td>
+                  <td className="py-2 px-2 text-center">90</td>
+                  <td className="py-2 px-2 text-center">150</td>
+                </tr>
+                <tr className="border-b border-border/50">
+                  <td className="py-2 px-2">🛍️ Product/Service Descriptions</td>
+                  <td className="py-2 px-2 text-center">25</td>
+                  <td className="py-2 px-2 text-center">30</td>
+                  <td className="py-2 px-2 text-center">Unlimited*</td>
+                </tr>
+                <tr className="border-b border-border/50">
                   <td className="py-2 px-2">🎯 Research</td>
                   <td className="py-2 px-2 text-center">Advanced</td>
                   <td className="py-2 px-2 text-center">Strategic</td>
-                  <td className="py-2 px-2 text-center">Expert</td>
+                  <td className="py-2 px-2 text-center">Enterprise</td>
                 </tr>
                 <tr>
                   <td className="py-2 px-2">👤 Support</td>
