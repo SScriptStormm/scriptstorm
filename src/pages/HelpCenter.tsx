@@ -127,7 +127,7 @@ const HelpCenter = () => {
         },
         {
           q: "Do you provide content analytics?",
-          a: "Our higher-tier plans include high-level performance insights and SEO scoring to help you measure content success."
+          a: "All content is delivered with built-in SEO scoring and optimization metrics. Your client dashboard provides visibility into your content pipeline, delivery status, and revision history."
         },
         {
           q: "What if I have technical issues?",
