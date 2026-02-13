@@ -419,9 +419,15 @@ features: ['50 Unbeatable Cornerstone SEO Blog Articles (2,000-5,000 words each)
                   <td className="py-2 px-2 text-center">Unlimited*</td>
                 </tr>
                 <tr className="border-b border-border/50">
+                  <td className="py-2 px-2">📅 Automated Content Scheduling</td>
+                  <td className="py-2 px-2 text-center">✅</td>
+                  <td className="py-2 px-2 text-center">✅</td>
+                  <td className="py-2 px-2 text-center">✅</td>
+                </tr>
+                <tr className="border-b border-border/50">
                   <td className="py-2 px-2">🎯 Research</td>
                   <td className="py-2 px-2 text-center">Advanced</td>
-                  <td className="py-2 px-2 text-center">Strategic</td>
+                  <td className="py-2 px-2 text-center">Keyword Insights</td>
                   <td className="py-2 px-2 text-center">Enterprise</td>
                 </tr>
                 <tr>

@@ -133,9 +133,9 @@ export function MultiStepContentBriefForm() {
       case 'growth':
         return 'Advanced Keyword & Competitor Research Included';
       case 'scale':
-        return 'Advanced Keyword & Competitor Annihilation Included';
+        return 'Advanced Competitor & Keyword Analysis Included';
       case 'authority':
-        return 'Strategic Keyword & Topic Mapping Included';
+        return 'Strategic Keyword Insights Included';
       case 'dominance':
         return 'Enterprise Keyword Intelligence Included';
       default:
@@ -150,9 +150,9 @@ export function MultiStepContentBriefForm() {
       case 'growth':
         return "We find gaps in competitors' strategies to help you win market share.";
       case 'scale':
-        return "We identify and exploit competitor weaknesses to dominate your niche.";
+        return "AI-powered analysis that identifies competitor content gaps and keyword opportunities.";
       case 'authority':
-        return "We map the competitive landscape to help you own the conversation.";
+        return "AI-powered research that uncovers high-potential topics and search terms aligned with your market.";
       case 'dominance':
         return "Proprietary insights to help you discover untapped market opportunities.";
       default:
@@ -753,7 +753,7 @@ export function MultiStepContentBriefForm() {
                               ))}
                             </div>
                             <FormDescription>
-                              We'll include these metrics in your AI-Driven Performance Dashboard
+                              We'll use these metrics to optimize your content strategy
                             </FormDescription>
                             <FormMessage />
                           </FormItem>
