@@ -9,7 +9,7 @@ const Services = () => {
       description: "Long-form, keyword-optimized content designed to rank on Google and drive targeted organic traffic.",
       features: [
         "Tiered Word Counts (as shown above)",
-        "Strategic Keyword Research & Mapping",
+        "Strategic Keyword Research & Integration",
         "Meta Tags & SEO Headers",
         "Internal Linking Strategy"
       ]
