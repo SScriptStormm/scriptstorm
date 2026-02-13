@@ -1,86 +1,45 @@
 
 
-# Align Entire ScriptStorm Website with Updated Pricing Features
+# Align Remaining Public Pages with Updated Pricing Features
 
 ## Overview
-The pricing cards were recently updated (added Automated Content Scheduling to Scale/Authority/Dominance, added Strategic Keyword Insights to Authority, removed Performance Dashboard and Market Roadmap from Dominance). Several other pages still reference the old feature set and need to be synchronized.
+After a thorough review of every page on the ScriptStorm website (outside the client login area), almost everything is already aligned. Only two minor copy issues were found that reference outdated or removed feature concepts.
 
-## Changes by File
+## Audit Results
 
-### 1. PackageFeaturesWidget.tsx (Package Details page)
+The following public pages were reviewed and confirmed **already aligned** (no changes needed):
+- Hero.tsx -- generic marketing copy, no tier-specific features
+- FAQ.tsx -- revision rounds correctly listed, no removed features referenced
+- WhyChooseUs.tsx -- comparison tables use generic language, all accurate
+- OnboardingProcess.tsx -- process steps and FAQ accurate (revision rounds match)
+- AboutUs.tsx -- generic brand copy, no feature-specific references
+- Contact.tsx -- no feature references
+- Support.tsx -- no feature references
+- Footer.tsx -- generic marketing copy
+- ThankYou.tsx -- no feature references
+- TermsOfService.tsx -- legal copy, no feature references
+- RefundPolicy.tsx -- legal copy, no feature references
+- PrivacyPolicy.tsx -- legal copy, no feature references
+- Pricing.tsx comparison table -- already updated in previous round
 
-**A. Enable Automated Content Scheduling for Scale, Authority, and Dominance**
-- Currently `hasContentCalendar` is `true` only for Growth and `false` for Scale, Authority, and Dominance
-- Change `hasContentCalendar: false` to `hasContentCalendar: true` for Scale (line 68), Authority (line 81), and Dominance (line 94)
+## Changes Needed (2 edits in 2 files)
 
-**B. Update Authority keyword research label**
-- Currently line 124 returns `"Advanced Competitor & Keyword Analysis"` for Authority
-- Change to `"Strategic Keyword Insights"` to match the pricing card
-- Update description (line 142) from `"AI-powered competitor content gap & keyword analysis"` to `"AI-powered research for high-potential topics and search terms"`
+### 1. Services.tsx (line 12)
+**Current**: `"Strategic Keyword Research & Mapping"`
+**New**: `"Strategic Keyword Research & Integration"`
 
-**C. Remove Dominance-exclusive "Performance Dashboard" and "Market Roadmap"**
-- Delete the two feature blocks at lines 358-382 (Performance Dashboard and Market Roadmap with EXCLUSIVE badges)
-- Keep the "White-Glove Revision Handling" exclusive feature -- it is still valid
+Why: The word "Mapping" echoes the removed "Strategic Keyword & Topic Mapping" feature from the old Authority tier. Changing to "Integration" keeps the meaning (keywords are woven into content) while avoiding confusion with the deleted feature label.
 
-### 2. Dashboard.tsx
+### 2. HelpCenter.tsx (lines 129-131)
+**Current**: `"Do you provide content analytics?"` with answer: `"Our higher-tier plans include high-level performance insights and SEO scoring to help you measure content success."`
 
-**A. Expand Calendar tab access to all tiers with Automated Content Scheduling**
-- Currently the Calendar tab only shows for `hasGrowth` (which is `tier === 'growth'` -- excludes higher tiers)
-- Change `hasGrowth` definition (line 302) to: `const hasGrowth = tier === 'growth' || tier === 'scale' || tier === 'authority' || tier === 'dominance';`
-- This makes the Calendar tab and content available to Growth, Scale, Authority, and Dominance (all tiers that now have "Automated Content Scheduling")
+**New answer**: `"All content is delivered with built-in SEO scoring and optimization metrics. Your client dashboard provides visibility into your content pipeline, delivery status, and revision history."`
 
-**B. Remove Performance Dashboard tab (Dominance feature was deleted)**
-- Remove the Performance tab trigger (line 747-750)
-- Remove the Performance tab content (lines 1309-1312)
+Why: The current answer implies "performance insights" which could be confused with the removed "AI-Driven Performance Dashboard." The new answer focuses on what actually exists (SEO scoring, dashboard pipeline tracking) without referencing removed features.
 
-**C. Remove Market Roadmap tab (Dominance feature was deleted)**
-- Remove the Roadmap tab trigger (lines 760-763)
-- Remove the Roadmap tab content (lines 1319-1322)
-
-**D. Update Dominance welcome message**
-- Line 651: Change `"12-hour delivery . Unlimited revisions . Priority support"` to remove any reference to performance dashboard or roadmap (current text is fine -- no changes needed here)
-
-### 3. MultiStepContentBriefForm.tsx (Content Brief page)
-
-**A. Update keyword research labels to match pricing cards**
-- Line 136 (Scale): Change `"Advanced Keyword & Competitor Annihilation Included"` to `"Advanced Competitor & Keyword Analysis Included"`
-- Line 138 (Authority): Change `"Strategic Keyword & Topic Mapping Included"` to `"Strategic Keyword Insights Included"`
-
-**B. Update keyword research descriptions**
-- Line 153 (Scale): Change to `"AI-powered analysis that identifies competitor content gaps and keyword opportunities."`
-- Line 155 (Authority): Change to `"AI-powered research that uncovers high-potential topics and search terms aligned with your market."`
-
-**C. Update Performance Dashboard reference**
-- Line 756: Change `"We'll include these metrics in your AI-Driven Performance Dashboard"` to a generic label like `"We'll use these metrics to optimize your content strategy"` (since the Performance Dashboard feature was removed)
-
-### 4. Enterprise Comparison Table (Pricing.tsx)
-
-**Add a row for Automated Content Scheduling** to the comparison table (after the Product/Service Descriptions row, around line 420):
-- New row: "Automated Content Scheduling" with checkmarks for all three tiers (Scale, Authority, Dominance)
-
-**Update Research row label for Authority**:
-- Line 424: Change Authority's research label from `"Strategic"` to `"Keyword Insights"` to better match "Strategic Keyword Insights"
-
----
-
-## Summary of Alignment
-
-| Feature | Starter | Growth | Scale | Authority | Dominance |
-|---|---|---|---|---|---|
-| Automated Content Scheduling | -- | Yes | Yes (NEW) | Yes (NEW) | Yes (NEW) |
-| Keyword Research Label | Standard | Advanced | Advanced Competitor & Keyword Analysis | Strategic Keyword Insights | Enterprise Keyword Intelligence |
-| Performance Dashboard | -- | -- | -- | -- | REMOVED |
-| Market Roadmap | -- | -- | -- | REMOVED | REMOVED |
-
-## Files Modified
-- `src/components/dashboard/PackageFeaturesWidget.tsx` -- 6 edits
-- `src/pages/Dashboard.tsx` -- 5 edits
-- `src/components/MultiStepContentBriefForm.tsx` -- 5 edits
-- `src/components/Pricing.tsx` -- 2 edits (comparison table only)
-
-## No Changes Needed
-- `src/pages/AccountSettings.tsx` -- no feature-specific copy found
-- `src/components/Services.tsx` -- uses generic labels, already aligned
-- `src/pages/OnboardingProcess.tsx` -- references delivery times only, still accurate
-- `src/components/Footer.tsx` -- generic marketing copy, no changes needed
+## Technical Details
+- **File 1**: `src/components/Services.tsx` -- line 12, single string change
+- **File 2**: `src/pages/HelpCenter.tsx` -- lines 129-131, question answer text update
+- No structural or logic changes
+- No dependencies between edits
 
