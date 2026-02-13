@@ -65,7 +65,7 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
           productLabel: "Product/Service Descriptions",
           productCount: 25,
           revisionLabel: "2 Revision Rounds",
-          hasContentCalendar: false,
+          hasContentCalendar: true,
         };
       case "authority":
         return {
@@ -78,7 +78,7 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
           productLabel: "Product/Service Descriptions",
           productCount: 30,
           revisionLabel: "3 Revision Rounds",
-          hasContentCalendar: false,
+          hasContentCalendar: true,
         };
       case "dominance":
         return {
@@ -91,7 +91,7 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
           productLabel: "Unlimited Product/Service Descriptions*",
           productCount: "Unlimited",
           revisionLabel: "Unlimited Revisions*",
-          hasContentCalendar: false,
+          hasContentCalendar: true,
         };
       default:
         return {
@@ -121,7 +121,7 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
       case "scale":
         return "Advanced Competitor & Keyword Analysis";
       case "authority":
-        return "Advanced Competitor & Keyword Analysis";
+        return "Strategic Keyword Insights";
       case "dominance":
         return "Enterprise Keyword Intelligence";
       default:
@@ -139,7 +139,7 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
       case "scale":
         return "AI-powered competitor content gap & keyword analysis";
       case "authority":
-        return "AI-powered competitor content gap & keyword analysis";
+        return "AI-powered research for high-potential topics and search terms";
       case "dominance":
         return "Proprietary insights for untapped opportunities";
       default:
@@ -355,32 +355,6 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
 
                 {isDominance && (
                   <>
-                    <div className="flex items-start gap-3">
-                      <CheckCircle className="w-4 h-4 text-primary-glow mt-0.5 flex-shrink-0" />
-                      <div className="flex-1">
-                        <p className="text-sm text-white font-mono">
-                          <strong>Performance Dashboard</strong>
-                          <Badge variant="outline" className="ml-2 border-primary-glow/50 text-primary-glow font-mono text-[10px]">
-                            EXCLUSIVE
-                          </Badge>
-                        </p>
-                        <p className="text-xs text-white/60 font-mono mt-0.5">Advanced analytics & insights</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-3">
-                      <CheckCircle className="w-4 h-4 text-primary-glow mt-0.5 flex-shrink-0" />
-                      <div className="flex-1">
-                        <p className="text-sm text-white font-mono">
-                          <strong>Market Roadmap</strong>
-                          <Badge variant="outline" className="ml-2 border-primary-glow/50 text-primary-glow font-mono text-[10px]">
-                            EXCLUSIVE
-                          </Badge>
-                        </p>
-                        <p className="text-xs text-white/60 font-mono mt-0.5">Strategic content planning</p>
-                      </div>
-                    </div>
-
                     <div className="flex items-start gap-3">
                       <CheckCircle className="w-4 h-4 text-primary-glow mt-0.5 flex-shrink-0" />
                       <div className="flex-1">
