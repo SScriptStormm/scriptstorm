@@ -114,6 +114,14 @@ export const MonthlyUsageCard = ({ subscriptionTier, articlesUsed, socialPostsUs
                 glowIntensity="high"
                 animated={socialPostsUsed < limits.socialPosts}
               />
+              {getWarningLevel(socialPercent) && (
+                <div className="flex items-center gap-1.5">
+                  <AlertTriangle className={`h-3 w-3 ${getWarningLevel(socialPercent) === 'danger' ? 'text-rose-400' : 'text-amber-400'}`} />
+                  <span className={`font-mono text-xs ${getWarningLevel(socialPercent) === 'danger' ? 'text-rose-400' : 'text-amber-400'}`}>
+                    {socialPercent >= 100 ? 'Limit reached!' : `${Math.round(socialPercent)}% used`}
+                  </span>
+                </div>
+              )}
             </div>
             
             {/* Product Descriptions */}
@@ -140,6 +148,14 @@ export const MonthlyUsageCard = ({ subscriptionTier, articlesUsed, socialPostsUs
                 glowIntensity="high"
                 animated={productDescUsed < limits.productDesc}
               />
+              )}
+              {limits.productDesc !== 999999 && getWarningLevel(productPercent) && (
+                <div className="flex items-center gap-1.5">
+                  <AlertTriangle className={`h-3 w-3 ${getWarningLevel(productPercent) === 'danger' ? 'text-rose-400' : 'text-amber-400'}`} />
+                  <span className={`font-mono text-xs ${getWarningLevel(productPercent) === 'danger' ? 'text-rose-400' : 'text-amber-400'}`}>
+                    {productPercent >= 100 ? 'Limit reached!' : `${Math.round(productPercent)}% used`}
+                  </span>
+                </div>
               )}
             </div>
           </div>
