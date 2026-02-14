@@ -148,9 +148,12 @@ const Services = () => {
 
         {/* Our Core Content Services Header */}
         <div className="text-center mb-12">
-          <h3 className="text-3xl font-bold mb-2 text-foreground font-mono tracking-wide">
+          <h3 className="text-3xl font-bold mb-4 text-foreground font-mono tracking-wide">
             Our Core Content Services
           </h3>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            All content is fully automated through our proprietary AI workflow – no human intervention, no delays, just consistent quality.
+          </p>
         </div>
 
         {/* Services Grid */}
