@@ -1,37 +1,44 @@
 
-
-# Align Enterprise Comparison Table Research Row
+# Redesign Enterprise Comparison Table
 
 ## Overview
-Update the Research row in the Enterprise Comparison Table to display the full, updated research labels instead of abbreviated terms.
+Transform the plain comparison table into a premium, color-coded design that matches the enterprise package cards above it.
 
-## Change
+## Current State
+The table uses basic `bg-muted/30` background with plain text, no color differentiation between tiers, and simple borders -- it looks generic and disconnected from the visually rich enterprise cards.
 
-### File: `src/components/Pricing.tsx` (lines 427-432)
+## Proposed Design
 
-**Current:**
-```
-<tr className="border-b border-border/50">
-  <td className="py-2 px-2">🎯 Research</td>
-  <td className="py-2 px-2 text-center">Advanced</td>
-  <td className="py-2 px-2 text-center">Keyword Insights</td>
-  <td className="py-2 px-2 text-center">Enterprise</td>
-</tr>
-```
+### Container
+- Replace `bg-muted/30` with a subtle gradient background and styled border matching the site's premium aesthetic
+- Add a more prominent heading with gradient text or accent styling
 
-**Updated:**
-```
-<tr className="border-b border-border/50">
-  <td className="py-2 px-2">🎯 Research</td>
-  <td className="py-2 px-2 text-center text-xs">Advanced Competitor & Keyword Analysis</td>
-  <td className="py-2 px-2 text-center text-xs">Strategic Keyword & Topic Intelligence</td>
-  <td className="py-2 px-2 text-center text-xs">Enterprise Keyword Intelligence + Trend Prediction</td>
-</tr>
-```
+### Column Headers
+- Color-code each tier header to match its package card color:
+  - **Scale**: Purple (`#8B5CF6`)
+  - **Authority**: Red (`#E74C3C`)
+  - **Dominance**: Gold (`#F59E0B`)
+- Add colored top borders or background tints to each column header
 
-The `text-xs` class is added to keep the longer labels from overwhelming the table layout. This ensures the research row matches the exact feature names used in the pricing cards and dashboard widget.
+### Table Body
+- Add subtle column background tints so each tier's column has a faint wash of its color
+- Alternate row styling with slightly more contrast
+- Style the Dominance column values with extra emphasis (bold, gold accents) to reinforce it as the top tier
+- Add colored dots or accent markers next to key differentiators (like "12h" delivery, "Unlimited" revisions)
 
-## Scope
-- 1 file, 3 cell text updates
-- No structural or logic changes
+### Specific Styling
+- Header row: Each tier name gets its color as text color with a faint colored background pill
+- Data cells: Dominance column values in bold, key standout values (Unlimited, 150, 12h) get subtle highlight badges
+- Bottom border of container uses a gradient spanning all three tier colors
 
+## Technical Details
+
+### File: `src/components/Pricing.tsx` (lines 378-441)
+- Replace the outer `div` wrapper with premium styling (gradient border, backdrop blur or deeper background)
+- Update `thead` to use colored backgrounds per column
+- Update `tbody` cells to include subtle column tinting using inline styles with the package colors
+- Highlight standout values (Unlimited, 12h, 150) with small colored badges or bold + color treatment
+- Keep the table responsive with `overflow-x-auto`
+
+### No new files or dependencies needed
+All changes are contained within the existing Pricing.tsx comparison table section.
