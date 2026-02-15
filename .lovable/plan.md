@@ -1,70 +1,64 @@
 
 
-# Improve Content Queue Card — Make It Distinct and Professional
+# Neon Futuristic Redesign: Key Advantages, CTA, and Our Process Page
 
-## Problem
-The Content Queue card currently shows vague status counts (completed/in progress/pending) and a "Content Mix" section with inconsistent detail -- blog articles show word counts but social posts and product descriptions just say "submitted." This overlaps heavily with the Projects tab and feels unprofessional.
+## Overview
+Three areas need visual alignment with the neon futuristic style used in the comparison tables (circuit lines, corner accents, dark glass backgrounds, neon glows, font-mono typography).
 
-## Solution
-Redesign the Content Queue card to become a **"This Month's Production Summary"** — a focused, at-a-glance overview of the current billing month that provides unique value the Projects tab does not.
+Additionally, the stray period in "vs." (first comparison heading) will be removed to match the second heading's "vs" style.
 
-## Key Changes
+## Changes
 
-### 1. Rename to "MONTHLY PRODUCTION SUMMARY"
-Clearly distinguishes it from the Projects tab which shows all-time/filtered project lists.
+### 1. Fix "vs." Typo (WhyChooseUs.tsx, line 94)
+- Change `vs.` to `vs` — removes the unintentional period between "ScriptStorm" and "Generic AI Assistants & DIY Tools"
 
-### 2. Scope to Current Month Only
-All stats reflect the current billing month, making it a quick pulse check rather than a duplicate of the full project list.
+### 2. Redesign "Our Key Advantages" Section (WhyChooseUs.tsx, lines 360-414)
+**Current:** Plain white cards (`bg-white/95 backdrop-blur-sm`) with colored borders
+**Updated:**
+- Dark glass-style cards matching the comparison tables: `bg-gradient-to-br from-black/5 via-primary/5 to-black/10 backdrop-blur-md`
+- Add animated circuit lines (top/bottom gradient bars with `animate-pulse`)
+- Add corner accent borders matching the comparison table style
+- Apply neon glow shadows (`shadow-[0_0_50px...]`) on each card
+- Use `font-mono` on card titles for consistency
+- Icon glow effects with `drop-shadow` matching each card's accent color
+- Section heading gets neon glow treatment like comparison headings
 
-### 3. Consistent Word Counts for All Content Types
-- Blog Articles: show count + total word count (already exists)
-- Social Posts: show count + total word count (add word count calculation)
-- Product Descriptions: show count + total word count (add word count calculation)
+### 3. Redesign "Ready to See the Difference" CTA (WhyChooseUs.tsx, lines 439-469)
+**Current:** Light background with basic gradient overlay
+**Updated:**
+- Full-width dark hero background (`bg-gradient-hero`) matching the OnboardingProcess CTA
+- Neural network animation overlay
+- Scanning line effects
+- Floating geometric elements
+- White text with neon glow
+- Buttons styled with `shadow-cyber` and `hover:shadow-hologram`
+- Star rating row above the heading for visual impact
 
-### 4. Add Completion Rate
-Show a percentage-based completion metric (e.g., "8 of 12 completed — 67%") with a NeonProgress bar, giving instant insight into how the month is progressing.
+### 4. Redesign OnboardingProcess Page (OnboardingProcess.tsx)
+**Current:** Light `bg-white/95` cards for process steps, benefits, and FAQ
+**Updated for each section:**
 
-### 5. Status Breakdown Stays but Gets Context
-Keep the completed/in progress/pending counters but add "this month" context so they clearly differ from the all-time project list.
+**Process Step Cards (lines 212-228):**
+- Dark glass style with colored neon border matching each step's color
+- Circuit line animations and corner accents
+- Neon glow shadows using each step's color
+- `font-mono` on card title
 
-## Technical Details
+**Key Benefits Cards (lines 248-271):**
+- Same dark glass treatment as Key Advantages above
+- Circuit lines, corner accents, neon glows per card color
+- Icon glow with `drop-shadow`
 
-### File: `src/components/dashboard/ContentQueueCard.tsx`
+**FAQ Cards (lines 284-311):**
+- Dark glass background instead of `bg-white/95`
+- Neon border glow with `border-primary-glow/40`
+- Circuit line accents
+- Corner decorations
+- Question headings keep their individual colors with added `drop-shadow` glow
 
-**Changes:**
-- Rename title from "CONTENT QUEUE" to "MONTHLY PRODUCTION SUMMARY"
-- Add `youtube_script` to the Article interface for proper type filtering
-- Calculate word counts for all content types (social posts + product descriptions), not just blogs
-- Add a completion rate section with NeonProgress bar at the top
-- Update Content Mix labels to show word counts for every type instead of "submitted"
-- Add "This Month" context label to the status overview section
-- Import NeonProgress component (already available)
-
-### File: `src/pages/Dashboard.tsx`
-
-**Changes:**
-- Pass only current month articles to ContentQueueCard instead of all articles (change `articles={articles}` to `articles={articlesThisMonth}`)
-- This ensures the widget only reflects the current billing cycle
-
-### No new files or dependencies needed
-
-## Visual Structure (Updated Card)
-
-```text
-+------------------------------------------+
-| MONTHLY PRODUCTION SUMMARY               |
-+------------------------------------------+
-| Completion Rate: 8/12 (67%)              |
-| [============================--------]   |
-+------------------------------------------+
-| This Month's Status                      |
-| [v] 8 Completed | [~] 3 In Progress     |
-|                  | [!] 1 Pending         |
-+------------------------------------------+
-| Content Breakdown                        |
-| Blog Articles:  5  |  12,400 words       |
-| Social Posts:   4  |   2,100 words       |
-| Product Desc:   3  |   1,800 words       |
-+------------------------------------------+
-```
+## Technical Notes
+- No new components or dependencies needed
+- All styling uses existing Tailwind utilities and CSS custom properties already defined in `index.css`
+- Pattern follows the exact same approach used in the comparison table cards (lines 98-250 and 263-354)
+- Consistent use of: circuit lines, corner accents, backdrop blur, neon glow shadows, font-mono headings, drop-shadow on colored elements
 
