@@ -24,7 +24,7 @@ export const ContentPipelineCard = ({ article, articlesCount, selectedId, onClea
     { name: 'Brief Received', icon: CheckCircle, emoji: '✅', desc: 'Your brief has been received and queued', step: 1 },
     { name: 'AI Research & Strategy', icon: Clock, emoji: '🔄', desc: 'Analyzing keywords and competitor insights', step: 2 },
     { name: 'AI Writing', icon: FileText, emoji: '✍️', desc: 'Content generation in progress', step: 3 },
-    { name: 'Quality Control', icon: Eye, emoji: '🔍', desc: 'Human review and optimization', step: 4 },
+    { name: 'Quality Control', icon: Eye, emoji: '🔍', desc: 'Automated plagiarism & AI detection scan', step: 4 },
     { name: 'Ready for Download', icon: Zap, emoji: '🚀', desc: 'Your content will be available here', step: 5 }
   ];
 
