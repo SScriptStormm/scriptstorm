@@ -27,7 +27,7 @@ const formSchema = z.object({
   title: z.string().min(3, "Title must be at least 3 characters").max(200, "Title must not exceed 200 characters"),
   content_type: z.string().min(1, "Please select a content type"),
   target_keywords: z.string().min(1, "Please provide at least one target keyword"),
-  word_count: z.number().min(100, "Minimum word count is 100").max(10000, "Maximum word count is 10,000"),
+  word_count: z.number().min(50, "Minimum word count is 50").max(10000, "Maximum word count is 10,000"),
   target_audience: z.string().min(10, "Please provide target audience details (minimum 10 characters)").max(500, "Target audience description is too long"),
   content_goal: z.string().min(10, "Please describe the content goal (minimum 10 characters)").max(500, "Content goal description is too long"),
   key_points: z.string().min(20, "Please provide key points (minimum 20 characters)"),
@@ -285,7 +285,18 @@ export function MultiStepContentBriefForm() {
           title: data.title,
           content_type: data.content_type,
           target_keywords: data.target_keywords.split(',').map(k => k.trim()),
-          word_count: data.word_count,
+          word_count: (() => {
+            if (data.content_type === 'social_media' && data.youtube_script) {
+              return data.youtube_script_length || 500;
+            }
+            if (data.content_type === 'social_media') {
+              return Math.floor(Math.random() * (120 - 50 + 1)) + 50;
+            }
+            if (data.content_type === 'product_description') {
+              return Math.floor(Math.random() * (200 - 100 + 1)) + 100;
+            }
+            return data.word_count;
+          })(),
           target_audience: data.target_audience,
           content_goal: data.content_goal,
           key_points: data.key_points,
