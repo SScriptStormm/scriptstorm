@@ -1,64 +1,46 @@
 
 
-# Neon Futuristic Redesign: Key Advantages, CTA, and Our Process Page
+# Production Summary Filter + Color Fix
 
-## Overview
-Three areas need visual alignment with the neon futuristic style used in the comparison tables (circuit lines, corner accents, dark glass backgrounds, neon glows, font-mono typography).
+## 1. Fix Content Breakdown Colors
 
-Additionally, the stray period in "vs." (first comparison heading) will be removed to match the second heading's "vs" style.
+**Problem:** YouTube Scripts and Product Descriptions both show white numbers because they use `variant="default"` in AnimatedStat.
 
-## Changes
+**Fix in `AnimatedStat.tsx`:**
+- Add a new `"purple"` variant with `text-purple-400` and matching glow
 
-### 1. Fix "vs." Typo (WhyChooseUs.tsx, line 94)
-- Change `vs.` to `vs` — removes the unintentional period between "ScriptStorm" and "Generic AI Assistants & DIY Tools"
+**Fix in `ContentQueueCard.tsx`:**
+- YouTube Scripts: change `variant="default"` to `variant="danger"` (rose-colored, matching its rose icon)
+- Product Descriptions: change `variant="default"` to `variant="purple"` (matching its purple icon)
 
-### 2. Redesign "Our Key Advantages" Section (WhyChooseUs.tsx, lines 360-414)
-**Current:** Plain white cards (`bg-white/95 backdrop-blur-sm`) with colored borders
-**Updated:**
-- Dark glass-style cards matching the comparison tables: `bg-gradient-to-br from-black/5 via-primary/5 to-black/10 backdrop-blur-md`
-- Add animated circuit lines (top/bottom gradient bars with `animate-pulse`)
-- Add corner accent borders matching the comparison table style
-- Apply neon glow shadows (`shadow-[0_0_50px...]`) on each card
-- Use `font-mono` on card titles for consistency
-- Icon glow effects with `drop-shadow` matching each card's accent color
-- Section heading gets neon glow treatment like comparison headings
+## 2. Add Period Selector to Production Summary Widget
 
-### 3. Redesign "Ready to See the Difference" CTA (WhyChooseUs.tsx, lines 439-469)
-**Current:** Light background with basic gradient overlay
-**Updated:**
-- Full-width dark hero background (`bg-gradient-hero`) matching the OnboardingProcess CTA
-- Neural network animation overlay
-- Scanning line effects
-- Floating geometric elements
-- White text with neon glow
-- Buttons styled with `shadow-cyber` and `hover:shadow-hologram`
-- Star rating row above the heading for visual impact
+**Add a self-contained dropdown** in the widget header that lets the client switch between:
+- **This Month** (default)
+- **Last Month**
+- **All Time**
 
-### 4. Redesign OnboardingProcess Page (OnboardingProcess.tsx)
-**Current:** Light `bg-white/95` cards for process steps, benefits, and FAQ
-**Updated for each section:**
+### Technical Details
 
-**Process Step Cards (lines 212-228):**
-- Dark glass style with colored neon border matching each step's color
-- Circuit line animations and corner accents
-- Neon glow shadows using each step's color
-- `font-mono` on card title
+**`ContentQueueCard.tsx` changes:**
+- Add local state for the selected period (`this_month` | `last_month` | `all_time`)
+- Add a small Select dropdown next to the title
+- Accept the full `articles` array as prop (all articles, not pre-filtered)
+- Filter articles internally based on the selected period using `created_at`
+- Update the Article interface to include `created_at`
+- Rename section label from "This Month's Status" to dynamically reflect the selection (e.g., "Last Month's Status" or "All Time Status")
 
-**Key Benefits Cards (lines 248-271):**
-- Same dark glass treatment as Key Advantages above
-- Circuit lines, corner accents, neon glows per card color
-- Icon glow with `drop-shadow`
+**`Dashboard.tsx` changes:**
+- Revert passing `articlesThisMonth` back to passing all `articles` so the widget can filter internally based on the dropdown selection
 
-**FAQ Cards (lines 284-311):**
-- Dark glass background instead of `bg-white/95`
-- Neon border glow with `border-primary-glow/40`
-- Circuit line accents
-- Corner decorations
-- Question headings keep their individual colors with added `drop-shadow` glow
+**Visual layout:**
+The dropdown sits inline with the title in the card header, styled to match the glass/neon theme using the existing Select component with custom dark styling.
 
-## Technical Notes
-- No new components or dependencies needed
-- All styling uses existing Tailwind utilities and CSS custom properties already defined in `index.css`
-- Pattern follows the exact same approach used in the comparison table cards (lines 98-250 and 263-354)
-- Consistent use of: circuit lines, corner accents, backdrop blur, neon glow shadows, font-mono headings, drop-shadow on colored elements
+```text
++--------------------------------------------------+
+| [icon] PRODUCTION SUMMARY    [This Month v]      |
++--------------------------------------------------+
+| Completion Rate: 8/12 (67%)                      |
+| ...                                              |
+```
 
