@@ -91,7 +91,7 @@ const WhyChooseUs = () => {
             
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-16 font-mono relative px-4">
               <span className="text-primary drop-shadow-[0_0_30px_hsl(var(--primary-glow))] brightness-110">ScriptStorm</span> 
-              <span className="text-muted-foreground mx-1 md:mx-2">vs.</span> 
+              <span className="text-muted-foreground mx-1 md:mx-2">vs</span> 
               <span className="text-[#F39C12] drop-shadow-[0_0_20px_rgba(243,156,18,0.6)]">Generic AI Assistants & DIY Tools</span>
             </h2>
             
@@ -360,56 +360,36 @@ const WhyChooseUs = () => {
           {/* Key Advantages */}
           <div className="mt-24 mb-20">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-12 font-mono px-4">
-              Our Key <span className="text-[#3498DB]">Advantages</span>
+              Our Key <span className="text-[#3498DB] drop-shadow-[0_0_30px_rgba(52,152,219,0.6)]">Advantages</span>
             </h2>
             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-              <Card className="relative text-center p-4 md:p-6 border-2 border-[#3498DB]/40 hover:border-[#3498DB]/70 bg-white/95 backdrop-blur-sm transition-all duration-500 shadow-neural hover:shadow-cyber">
-                <Clock className="h-10 w-10 md:h-12 md:w-12 text-[#3498DB] mx-auto mb-3 md:mb-4" />
-                <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3">Lightning Fast Delivery</h3>
-                <p className="text-sm md:text-base text-muted-foreground">
-                  Get professional AI content in 24 hours, not 24 days. We understand that time is money in business.
-                </p>
-              </Card>
-
-              <Card className="relative text-center p-4 md:p-6 border-2 border-[#2ECC71]/40 hover:border-[#2ECC71]/70 bg-white/95 backdrop-blur-sm transition-all duration-500 shadow-neural hover:shadow-cyber">
-                <Award className="h-10 w-10 md:h-12 md:w-12 text-[#2ECC71] mx-auto mb-3 md:mb-4" />
-                <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3">AI Automation Expert</h3>
-                <p className="text-sm md:text-base text-muted-foreground">
-                  Advanced AI automation systems specialized in SaaS and eCommerce content, with proven track records of driving conversions.
-                </p>
-              </Card>
-
-              <Card className="relative text-center p-4 md:p-6 border-2 border-[#9B59B6]/40 hover:border-[#9B59B6]/70 bg-white/95 backdrop-blur-sm transition-all duration-500 shadow-neural hover:shadow-cyber">
-                <Shield className="h-10 w-10 md:h-12 md:w-12 text-[#9B59B6] mx-auto mb-3 md:mb-4" />
-                <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3">Risk-Free Guarantee</h3>
-                <p className="text-sm md:text-base text-muted-foreground">
-                  Not satisfied? We'll revise until you're happy or provide a full refund. Your success is our priority.
-                </p>
-              </Card>
-
-              <Card className="relative text-center p-4 md:p-6 border-2 border-[#E67E22]/40 hover:border-[#E67E22]/70 bg-white/95 backdrop-blur-sm transition-all duration-500 shadow-neural hover:shadow-cyber">
-                <Users className="h-10 w-10 md:h-12 md:w-12 text-[#E67E22] mx-auto mb-3 md:mb-4" />
-                <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3">Email-Only Workflow</h3>
-                <p className="text-sm md:text-base text-muted-foreground">
-                  Streamlined email communication. No meetings, no delays—just efficient content delivery through your portal.
-                </p>
-              </Card>
-
-              <Card className="relative text-center p-4 md:p-6 border-2 border-[#E74C3C]/40 hover:border-[#E74C3C]/70 bg-white/95 backdrop-blur-sm transition-all duration-500 shadow-neural hover:shadow-cyber">
-                <Target className="h-10 w-10 md:h-12 md:w-12 text-[#E74C3C] mx-auto mb-3 md:mb-4" />
-                <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3">Results-Driven</h3>
-                <p className="text-sm md:text-base text-muted-foreground">
-                  Every AI-generated piece is crafted to drive traffic, engage readers, and convert visitors into customers.
-                </p>
-              </Card>
-
-              <Card className="relative text-center p-4 md:p-6 border-2 border-[#3498DB]/40 hover:border-[#3498DB]/70 bg-white/95 backdrop-blur-sm transition-all duration-500 shadow-neural hover:shadow-cyber">
-                <Zap className="h-10 w-10 md:h-12 md:w-12 text-[#3498DB] mx-auto mb-3 md:mb-4" />
-                <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3">Complete SEO Package</h3>
-                <p className="text-sm md:text-base text-muted-foreground">
-                  Keyword research, meta tags, headers, internal linking—everything needed for search engine success.
-                </p>
-              </Card>
+              {[
+                { icon: Clock, color: "#3498DB", title: "Lightning Fast Delivery", desc: "Get professional AI content in 24 hours, not 24 days. We understand that time is money in business." },
+                { icon: Award, color: "#2ECC71", title: "AI Automation Expert", desc: "Advanced AI automation systems specialized in SaaS and eCommerce content, with proven track records of driving conversions." },
+                { icon: Shield, color: "#9B59B6", title: "Risk-Free Guarantee", desc: "Not satisfied? We'll revise until you're happy or provide a full refund. Your success is our priority." },
+                { icon: Users, color: "#E67E22", title: "Email-Only Workflow", desc: "Streamlined email communication. No meetings, no delays—just efficient content delivery through your portal." },
+                { icon: Target, color: "#E74C3C", title: "Results-Driven", desc: "Every AI-generated piece is crafted to drive traffic, engage readers, and convert visitors into customers." },
+                { icon: Zap, color: "#3498DB", title: "Complete SEO Package", desc: "Keyword research, meta tags, headers, internal linking—everything needed for search engine success." },
+              ].map((item, idx) => {
+                const Icon = item.icon;
+                return (
+                  <Card key={idx} className="relative text-center p-4 md:p-6 border-2 bg-gradient-to-br from-black/5 via-primary/5 to-black/10 backdrop-blur-md transition-all duration-500 overflow-hidden" style={{ borderColor: `${item.color}99`, boxShadow: `0 0 50px -10px ${item.color}80, inset 0 0 30px -10px ${item.color}1a` }}>
+                    {/* Animated circuit lines */}
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent to-transparent opacity-50 animate-pulse" style={{ backgroundImage: `linear-gradient(to right, transparent, ${item.color}, transparent)` }} />
+                    <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent to-transparent opacity-50 animate-pulse" style={{ backgroundImage: `linear-gradient(to right, transparent, ${item.color}, transparent)`, animationDelay: '1s' }} />
+                    {/* Corner accents */}
+                    <div className="absolute top-0 left-0 w-12 h-12 border-t-2 border-l-2 opacity-60" style={{ borderColor: item.color }} />
+                    <div className="absolute top-0 right-0 w-12 h-12 border-t-2 border-r-2 opacity-60" style={{ borderColor: item.color }} />
+                    <div className="absolute bottom-0 left-0 w-12 h-12 border-b-2 border-l-2 opacity-60" style={{ borderColor: item.color }} />
+                    <div className="absolute bottom-0 right-0 w-12 h-12 border-b-2 border-r-2 opacity-60" style={{ borderColor: item.color }} />
+                    <div className="relative z-10">
+                      <Icon className="h-10 w-10 md:h-12 md:w-12 mx-auto mb-3 md:mb-4" style={{ color: item.color, filter: `drop-shadow(0 0 15px ${item.color}80)` }} />
+                      <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3 font-mono">{item.title}</h3>
+                      <p className="text-sm md:text-base text-muted-foreground">{item.desc}</p>
+                    </div>
+                  </Card>
+                );
+              })}
             </div>
           </div>
 
@@ -437,14 +417,28 @@ const WhyChooseUs = () => {
           </div>
 
           {/* CTA Section */}
-          <div className="text-center relative px-4">
-            {/* Background effects */}
-            <div className="absolute inset-0 bg-gradient-cyber opacity-10 rounded-3xl" />
-            <div className="relative z-10 py-12 md:py-16">
+          <div className="relative -mx-4 md:-mx-8 px-4 md:px-8 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-hero opacity-90" />
+            <div className="absolute inset-0 bg-gradient-neural animate-neural-pulse opacity-20" />
+            {/* Scanning lines */}
+            <div className="absolute inset-0 overflow-hidden">
+              <div className="absolute top-0 h-px w-full bg-white/30 animate-scan-line" />
+              <div className="absolute bottom-0 h-px w-full bg-white/20 animate-scan-line" style={{ animationDelay: '2s' }} />
+            </div>
+            {/* Floating elements */}
+            <div className="absolute top-10 left-10 w-16 h-16 border-2 border-white/20 rotate-45 animate-float" />
+            <div className="absolute bottom-10 right-10 w-12 h-12 border-2 border-white/15 rotate-12 animate-float" style={{ animationDelay: '3s' }} />
+            
+            <div className="relative z-10 py-12 md:py-16 text-center text-white">
+              <div className="flex items-center justify-center mb-6">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-7 w-7 md:h-8 md:w-8 text-[#F39C12] fill-current mx-1" />
+                ))}
+              </div>
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 font-mono">
-                Ready to See the <span className="text-[#3498DB]">Difference</span>?
+                Ready to See the <span className="text-[#3498DB] drop-shadow-[0_0_20px_rgba(52,152,219,0.8)]">Difference</span>?
               </h2>
-              <p className="text-base md:text-xl text-muted-foreground mb-6 md:mb-8 max-w-2xl mx-auto">
+              <p className="text-base md:text-xl mb-6 md:mb-8 max-w-2xl mx-auto opacity-90">
                 Stop wasting time with DIY tools. Get professional AI content that actually converts.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -455,12 +449,12 @@ const WhyChooseUs = () => {
                     window.location.href = "/#pricing";
                   }}
                 >
-                  <Button size="lg" className="w-full sm:w-auto bg-[#3498DB] hover:bg-[#2980B9] text-white px-6 md:px-8 py-3 md:py-4 shadow-cyber hover:shadow-hologram transition-all duration-300">
+                  <Button size="lg" className="w-full sm:w-auto bg-white text-[#3498DB] hover:bg-white/90 px-6 md:px-8 py-3 md:py-4 font-semibold shadow-cyber hover:shadow-hologram transition-all duration-300">
                     Start your First Draft
                   </Button>
                 </Link>
                 <Link to="/onboarding-process">
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 border-[#3498DB]/50 hover:border-[#3498DB] hover:shadow-neural transition-all duration-300">
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 border-white text-white bg-white/10 backdrop-blur-sm hover:bg-white/20 font-semibold hover:shadow-neural transition-all duration-300">
                     Learn Our Process
                   </Button>
                 </Link>
