@@ -1,6 +1,8 @@
+import { useState, useMemo } from "react";
 import { GlassCard, GlassCardContent, GlassCardHeader, GlassCardTitle } from "@/components/ui/GlassCard";
 import { AnimatedStat } from "@/components/ui/AnimatedStat";
 import { NeonProgress } from "@/components/ui/NeonProgress";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { BarChart3, FileText, MessageSquare, CreditCard, CheckCircle, Clock, AlertCircle, Video } from "lucide-react";
 
 interface Article {
@@ -9,23 +11,58 @@ interface Article {
   content_type?: string;
   word_count?: number;
   youtube_script?: boolean | null;
+  created_at: string;
 }
 
 interface ContentQueueCardProps {
   articles: Article[];
 }
 
+type Period = "this_month" | "last_month" | "all_time";
+
+const getPeriodLabel = (period: Period) => {
+  switch (period) {
+    case "this_month": return "This Month's Status";
+    case "last_month": return "Last Month's Status";
+    case "all_time": return "All Time Status";
+  }
+};
+
+const filterByPeriod = (articles: Article[], period: Period): Article[] => {
+  if (period === "all_time") return articles;
+
+  const now = new Date();
+  let start: Date, end: Date;
+
+  if (period === "this_month") {
+    start = new Date(now.getFullYear(), now.getMonth(), 1);
+    end = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+  } else {
+    start = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+    end = new Date(now.getFullYear(), now.getMonth(), 1);
+  }
+
+  return articles.filter(a => {
+    const d = new Date(a.created_at);
+    return d >= start && d < end;
+  });
+};
+
 export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
-  const completedCount = articles.filter(a => a.status === 'completed').length;
-  const inProgressCount = articles.filter(a => a.status === 'in_progress').length;
-  const pendingCount = articles.filter(a => a.status === 'pending').length;
-  const totalCount = articles.length;
+  const [period, setPeriod] = useState<Period>("this_month");
+
+  const filtered = useMemo(() => filterByPeriod(articles, period), [articles, period]);
+
+  const completedCount = filtered.filter(a => a.status === 'completed').length;
+  const inProgressCount = filtered.filter(a => a.status === 'in_progress').length;
+  const pendingCount = filtered.filter(a => a.status === 'pending').length;
+  const totalCount = filtered.length;
   const completionRate = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
   
-  const blogArticles = articles.filter(a => !a.content_type || a.content_type === 'article' || a.content_type === 'blog_article');
-  const socialPosts = articles.filter(a => a.content_type === 'social_media' || a.content_type === 'social_media_post');
-  const productDescs = articles.filter(a => a.content_type === 'product_description');
-  const youtubeScripts = articles.filter(a => a.youtube_script);
+  const blogArticles = filtered.filter(a => !a.content_type || a.content_type === 'article' || a.content_type === 'blog_article');
+  const socialPosts = filtered.filter(a => a.content_type === 'social_media' || a.content_type === 'social_media_post');
+  const productDescs = filtered.filter(a => a.content_type === 'product_description');
+  const youtubeScripts = filtered.filter(a => a.youtube_script);
   
   const blogWords = blogArticles.reduce((sum, a) => sum + (a.word_count || 0), 0);
   const socialWords = socialPosts.reduce((sum, a) => sum + (a.word_count || 0), 0);
@@ -37,10 +74,22 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
   return (
     <GlassCard variant="default" glow hover={false}>
       <GlassCardHeader>
-        <GlassCardTitle className="flex items-center gap-2">
-          <BarChart3 className="h-5 w-5 text-primary-glow" />
-          MONTHLY PRODUCTION SUMMARY
-        </GlassCardTitle>
+        <div className="flex items-center justify-between w-full">
+          <GlassCardTitle className="flex items-center gap-2">
+            <BarChart3 className="h-5 w-5 text-primary-glow" />
+            PRODUCTION SUMMARY
+          </GlassCardTitle>
+          <Select value={period} onValueChange={(v) => setPeriod(v as Period)}>
+            <SelectTrigger className="w-[140px] h-8 text-xs bg-white/[0.05] border-white/[0.12] text-white/80 font-mono uppercase tracking-wider">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent className="bg-[hsl(222,30%,12%)] border-white/[0.12]">
+              <SelectItem value="this_month" className="text-white/80 font-mono text-xs">This Month</SelectItem>
+              <SelectItem value="last_month" className="text-white/80 font-mono text-xs">Last Month</SelectItem>
+              <SelectItem value="all_time" className="text-white/80 font-mono text-xs">All Time</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
       </GlassCardHeader>
       <GlassCardContent>
         {/* Completion Rate */}
@@ -63,18 +112,13 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
 
         {/* Status Overview */}
         <div className="mb-6">
-          <h3 className="text-white/50 font-mono text-xs uppercase tracking-wider mb-4">This Month's Status</h3>
+          <h3 className="text-white/50 font-mono text-xs uppercase tracking-wider mb-4">{getPeriodLabel(period)}</h3>
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 p-4 bg-white/[0.03] rounded-xl border border-white/[0.08]">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
                 <CheckCircle className="h-5 w-5 text-emerald-400" />
               </div>
-              <AnimatedStat
-                value={completedCount}
-                label="Completed"
-                variant="success"
-                size="sm"
-              />
+              <AnimatedStat value={completedCount} label="Completed" variant="success" size="sm" />
             </div>
             
             <div className="hidden sm:block w-px h-10 bg-white/10" />
@@ -83,12 +127,7 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
               <div className="w-10 h-10 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center">
                 <Clock className="h-5 w-5 text-amber-400" />
               </div>
-              <AnimatedStat
-                value={inProgressCount}
-                label="In Progress"
-                variant="warning"
-                size="sm"
-              />
+              <AnimatedStat value={inProgressCount} label="In Progress" variant="warning" size="sm" />
             </div>
             
             <div className="hidden sm:block w-px h-10 bg-white/10" />
@@ -97,12 +136,7 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
               <div className="w-10 h-10 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center">
                 <AlertCircle className="h-5 w-5 text-blue-400" />
               </div>
-              <AnimatedStat
-                value={pendingCount}
-                label="Pending"
-                variant="primary"
-                size="sm"
-              />
+              <AnimatedStat value={pendingCount} label="Pending" variant="primary" size="sm" />
             </div>
           </div>
         </div>
@@ -121,12 +155,7 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
                   </div>
                   <span className="text-white/80 font-mono text-xs uppercase">Blog Articles</span>
                 </div>
-                <AnimatedStat
-                  value={blogArticles.length}
-                  label={`${blogWords.toLocaleString()} words`}
-                  variant="primary"
-                  size="md"
-                />
+                <AnimatedStat value={blogArticles.length} label={`${blogWords.toLocaleString()} words`} variant="primary" size="md" />
               </div>
             </div>
             
@@ -140,12 +169,7 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
                   </div>
                   <span className="text-white/80 font-mono text-xs uppercase">Social Posts</span>
                 </div>
-                <AnimatedStat
-                  value={socialPosts.length}
-                  label={`${socialWords.toLocaleString()} words`}
-                  variant="success"
-                  size="md"
-                />
+                <AnimatedStat value={socialPosts.length} label={`${socialWords.toLocaleString()} words`} variant="success" size="md" />
               </div>
             </div>
 
@@ -159,12 +183,7 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
                   </div>
                   <span className="text-white/80 font-mono text-xs uppercase">YT Scripts</span>
                 </div>
-                <AnimatedStat
-                  value={youtubeScripts.length}
-                  label={`${youtubeWords.toLocaleString()} words`}
-                  variant="default"
-                  size="md"
-                />
+                <AnimatedStat value={youtubeScripts.length} label={`${youtubeWords.toLocaleString()} words`} variant="danger" size="md" />
               </div>
             </div>
             
@@ -178,12 +197,7 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
                   </div>
                   <span className="text-white/80 font-mono text-xs uppercase">Product Desc</span>
                 </div>
-                <AnimatedStat
-                  value={productDescs.length}
-                  label={`${productWords.toLocaleString()} words`}
-                  variant="default"
-                  size="md"
-                />
+                <AnimatedStat value={productDescs.length} label={`${productWords.toLocaleString()} words`} variant="purple" size="md" />
               </div>
             </div>
           </div>

@@ -7,7 +7,7 @@ interface AnimatedStatProps extends React.HTMLAttributes<HTMLDivElement> {
   suffix?: string;
   prefix?: string;
   icon?: React.ReactNode;
-  variant?: "default" | "success" | "warning" | "danger" | "primary";
+  variant?: "default" | "success" | "warning" | "danger" | "primary" | "purple";
   size?: "sm" | "md" | "lg";
   animated?: boolean;
 }
@@ -42,6 +42,12 @@ const variantStyles = {
     value: "text-rose-400",
     label: "text-white/50",
     glow: "drop-shadow-[0_0_10px_hsl(0_84%_55%/0.5)]"
+  },
+  purple: {
+    icon: "text-purple-400",
+    value: "text-purple-400",
+    label: "text-white/50",
+    glow: "drop-shadow-[0_0_10px_hsl(270_70%_55%/0.5)]"
   }
 };
 
