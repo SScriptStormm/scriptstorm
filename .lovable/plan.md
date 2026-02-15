@@ -1,35 +1,37 @@
 
 
-# Research Label Differentiation Enhancement
+# Align Enterprise Comparison Table Research Row
 
 ## Overview
-Strengthen the tiered branding ladder for keyword research labels to create clearer differentiation and justify each tier's value jump.
+Update the Research row in the Enterprise Comparison Table to display the full, updated research labels instead of abbreviated terms.
 
-## Changes Summary
+## Change
 
-| Tier | Current | Updated |
-|------|---------|---------|
-| Scale | Advanced Competitor & Keyword Analysis | No change (already aligned) |
-| Authority | Strategic Keyword Insights | Strategic Keyword & Topic Intelligence |
-| Dominance | Enterprise Keyword Intelligence | Enterprise Keyword Intelligence + Trend Prediction |
+### File: `src/components/Pricing.tsx` (lines 427-432)
 
-## Technical Details
+**Current:**
+```
+<tr className="border-b border-border/50">
+  <td className="py-2 px-2">🎯 Research</td>
+  <td className="py-2 px-2 text-center">Advanced</td>
+  <td className="py-2 px-2 text-center">Keyword Insights</td>
+  <td className="py-2 px-2 text-center">Enterprise</td>
+</tr>
+```
 
-Three files need updates:
+**Updated:**
+```
+<tr className="border-b border-border/50">
+  <td className="py-2 px-2">🎯 Research</td>
+  <td className="py-2 px-2 text-center text-xs">Advanced Competitor & Keyword Analysis</td>
+  <td className="py-2 px-2 text-center text-xs">Strategic Keyword & Topic Intelligence</td>
+  <td className="py-2 px-2 text-center text-xs">Enterprise Keyword Intelligence + Trend Prediction</td>
+</tr>
+```
 
-### 1. `src/components/Pricing.tsx`
-- **Authority tier** (features + annualFeatures): Update label from "Strategic Keyword Insights" to "Strategic Keyword & Topic Intelligence" (keep the existing description after the colon)
-- **Dominance tier** (features + annualFeatures): Update label from "Enterprise Keyword Intelligence" to "Enterprise Keyword Intelligence + Trend Prediction" (keep the existing description)
+The `text-xs` class is added to keep the longer labels from overwhelming the table layout. This ensures the research row matches the exact feature names used in the pricing cards and dashboard widget.
 
-### 2. `src/components/dashboard/PackageFeaturesWidget.tsx`
-- Update the `getKeywordResearchLabel()` switch for authority and dominance cases
-- Update the `getKeywordResearchDescription()` switch if needed to match
-
-### 3. `src/components/MultiStepContentBriefForm.tsx`
-- Update the content brief form labels for authority ("Strategic Keyword & Topic Intelligence Included") and dominance ("Enterprise Keyword Intelligence + Trend Prediction Included")
-
-## Why This Works
-- **Authority** gains "Intelligence" (stronger than "Insights") and "Topic" implies broader strategic scope beyond just keywords
-- **Dominance** adds "Trend Prediction" to justify the enterprise label and premium pricing
-- Scale remains unchanged as it already uses the suggested format
+## Scope
+- 1 file, 3 cell text updates
+- No structural or logic changes
 
