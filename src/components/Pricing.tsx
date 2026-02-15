@@ -426,9 +426,9 @@ features: ['50 Unbeatable Cornerstone SEO Blog Articles (2,000-5,000 words each)
                 </tr>
                 <tr className="border-b border-border/50">
                   <td className="py-2 px-2">🎯 Research</td>
-                  <td className="py-2 px-2 text-center">Advanced</td>
-                  <td className="py-2 px-2 text-center">Keyword Insights</td>
-                  <td className="py-2 px-2 text-center">Enterprise</td>
+                  <td className="py-2 px-2 text-center text-xs">Advanced Competitor & Keyword Analysis</td>
+                  <td className="py-2 px-2 text-center text-xs">Strategic Keyword & Topic Intelligence</td>
+                  <td className="py-2 px-2 text-center text-xs">Enterprise Keyword Intelligence + Trend Prediction</td>
                 </tr>
                 <tr>
                   <td className="py-2 px-2">👤 Support</td>
