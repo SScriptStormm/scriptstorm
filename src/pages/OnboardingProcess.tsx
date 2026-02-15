@@ -210,17 +210,22 @@ const OnboardingProcess = () => {
 
                     {/* Visual Card */}
                     <div className={`${index % 2 === 1 ? 'md:order-1' : ''}`}>
-                      <Card className="relative p-8 border-2 border-primary-glow/40 hover:border-primary-glow/70 bg-white/95 backdrop-blur-sm transition-all duration-500 shadow-neural hover:shadow-cyber">
-                        {/* Decorative corner elements */}
-                        <div className="absolute top-2 left-2 w-6 h-6 border-l-2 border-t-2 border-primary-glow/30" />
-                        <div className="absolute bottom-2 right-2 w-6 h-6 border-r-2 border-b-2 border-primary-glow/30" />
+                      <Card className="relative p-8 border-2 bg-gradient-to-br from-black/5 via-primary/5 to-black/10 backdrop-blur-md transition-all duration-500 overflow-hidden" style={{ borderColor: `${step.color}99`, boxShadow: `0 0 50px -10px ${step.color}80, inset 0 0 30px -10px ${step.color}1a` }}>
+                        {/* Animated circuit lines */}
+                        <div className="absolute top-0 left-0 w-full h-1 opacity-50 animate-pulse" style={{ backgroundImage: `linear-gradient(to right, transparent, ${step.color}, transparent)` }} />
+                        <div className="absolute bottom-0 left-0 w-full h-1 opacity-50 animate-pulse" style={{ backgroundImage: `linear-gradient(to right, transparent, ${step.color}, transparent)`, animationDelay: '1s' }} />
+                        {/* Corner accents */}
+                        <div className="absolute top-0 left-0 w-14 h-14 border-t-2 border-l-2 opacity-60" style={{ borderColor: step.color }} />
+                        <div className="absolute top-0 right-0 w-14 h-14 border-t-2 border-r-2 opacity-60" style={{ borderColor: step.color }} />
+                        <div className="absolute bottom-0 left-0 w-14 h-14 border-b-2 border-l-2 opacity-60" style={{ borderColor: step.color }} />
+                        <div className="absolute bottom-0 right-0 w-14 h-14 border-b-2 border-r-2 opacity-60" style={{ borderColor: step.color }} />
                         
                         <div className="text-center relative z-10">
                           <div 
                             className="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 shadow-hologram"
                             style={{ backgroundColor: step.color }}
                           >
-                            <Icon className="h-12 w-12 text-white" />
+                            <Icon className="h-12 w-12 text-white" style={{ filter: `drop-shadow(0 0 10px white)` }} />
                           </div>
                           <h4 className="text-xl font-bold mb-3 font-mono">{step.title}</h4>
                         </div>
@@ -245,29 +250,30 @@ const OnboardingProcess = () => {
             Why Our <span className="text-primary">AI Process</span> Works
           </h2>
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <Card className="relative text-center p-8 border-2 border-[#3498DB]/40 hover:border-[#3498DB]/70 bg-white/95 backdrop-blur-sm transition-all duration-500 shadow-neural hover:shadow-cyber">
-              <Users className="h-16 w-16 text-[#3498DB] mx-auto mb-6" />
-              <h3 className="text-xl font-bold mb-4">AI-Powered Precision</h3>
-              <p className="text-muted-foreground">
-                Advanced AI algorithms ensure consistent, high-quality output without human error or delays.
-              </p>
-            </Card>
-
-            <Card className="relative text-center p-8 border-2 border-[#2ECC71]/40 hover:border-[#2ECC71]/70 bg-white/95 backdrop-blur-sm transition-all duration-500 shadow-neural hover:shadow-cyber">
-              <Target className="h-16 w-16 text-[#2ECC71] mx-auto mb-6" />
-              <h3 className="text-xl font-bold mb-4">Data-Driven Results</h3>
-              <p className="text-muted-foreground">
-                Real-time data research combined with AI optimization ensures maximum impact and up-to-date accuracy on your business goals and conversions.
-              </p>
-            </Card>
-
-            <Card className="relative text-center p-8 border-2 border-[#9B59B6]/40 hover:border-[#9B59B6]/70 bg-white/95 backdrop-blur-sm transition-all duration-500 shadow-neural hover:shadow-cyber">
-              <Zap className="h-16 w-16 text-[#9B59B6] mx-auto mb-6" />
-              <h3 className="text-xl font-bold mb-4">Lightning Fast AI</h3>
-              <p className="text-muted-foreground">
-                Fully automated AI process delivers professional results in a fraction of typical timeframes with zero delays.
-              </p>
-            </Card>
+            {[
+              { icon: Users, color: "#3498DB", title: "AI-Powered Precision", desc: "Advanced AI algorithms ensure consistent, high-quality output without human error or delays." },
+              { icon: Target, color: "#2ECC71", title: "Data-Driven Results", desc: "Real-time data research combined with AI optimization ensures maximum impact and up-to-date accuracy on your business goals and conversions." },
+              { icon: Zap, color: "#9B59B6", title: "Lightning Fast AI", desc: "Fully automated AI process delivers professional results in a fraction of typical timeframes with zero delays." },
+            ].map((item, idx) => {
+              const BenefitIcon = item.icon;
+              return (
+                <Card key={idx} className="relative text-center p-8 border-2 bg-gradient-to-br from-black/5 via-primary/5 to-black/10 backdrop-blur-md transition-all duration-500 overflow-hidden" style={{ borderColor: `${item.color}99`, boxShadow: `0 0 50px -10px ${item.color}80, inset 0 0 30px -10px ${item.color}1a` }}>
+                  {/* Circuit lines */}
+                  <div className="absolute top-0 left-0 w-full h-1 opacity-50 animate-pulse" style={{ backgroundImage: `linear-gradient(to right, transparent, ${item.color}, transparent)` }} />
+                  <div className="absolute bottom-0 left-0 w-full h-1 opacity-50 animate-pulse" style={{ backgroundImage: `linear-gradient(to right, transparent, ${item.color}, transparent)`, animationDelay: '1s' }} />
+                  {/* Corner accents */}
+                  <div className="absolute top-0 left-0 w-12 h-12 border-t-2 border-l-2 opacity-60" style={{ borderColor: item.color }} />
+                  <div className="absolute top-0 right-0 w-12 h-12 border-t-2 border-r-2 opacity-60" style={{ borderColor: item.color }} />
+                  <div className="absolute bottom-0 left-0 w-12 h-12 border-b-2 border-l-2 opacity-60" style={{ borderColor: item.color }} />
+                  <div className="absolute bottom-0 right-0 w-12 h-12 border-b-2 border-r-2 opacity-60" style={{ borderColor: item.color }} />
+                  <div className="relative z-10">
+                    <BenefitIcon className="h-16 w-16 mx-auto mb-6" style={{ color: item.color, filter: `drop-shadow(0 0 15px ${item.color}80)` }} />
+                    <h3 className="text-xl font-bold mb-4 font-mono">{item.title}</h3>
+                    <p className="text-muted-foreground">{item.desc}</p>
+                  </div>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -281,33 +287,25 @@ const OnboardingProcess = () => {
             Common <span className="text-[#3498DB]">Questions</span> About Our AI Process
           </h2>
           <div className="max-w-4xl mx-auto space-y-6">
-            <Card className="p-6 border-2 border-primary-glow/30 bg-white/95 backdrop-blur-sm shadow-neural hover:shadow-cyber transition-all duration-300">
-              <h3 className="text-lg font-bold mb-3 text-[#3498DB]">What if I need revisions?</h3>
-              <p className="text-muted-foreground">
-                We offer AI-assisted revisions based on your plan: Starter (1 round), Growth (2 rounds), Scale (2 rounds), Authority (3 rounds), Dominance (unlimited, under our Fair Use policy). Simply submit your request through your client dashboard—our system will process and deliver the refined content within a few hours.
-              </p>
-            </Card>
-
-            <Card className="p-6 border-2 border-primary-glow/30 bg-white/95 backdrop-blur-sm shadow-neural hover:shadow-cyber transition-all duration-300">
-              <h3 className="text-lg font-bold mb-3 text-[#2ECC71]">How does AI ensure the content matches my brand?</h3>
-              <p className="text-muted-foreground">
-                During the initial brief submission, our AI analyzes your brand voice, style, and any existing content you provide in your dashboard. This allows it to generate new content that maintains perfect consistency with your established tone and guidelines.
-              </p>
-            </Card>
-
-            <Card className="p-6 border-2 border-primary-glow/30 bg-white/95 backdrop-blur-sm shadow-neural hover:shadow-cyber transition-all duration-300">
-              <h3 className="text-lg font-bold mb-3 text-[#9B59B6]">What if I'm not satisfied with the AI-generated content?</h3>
-              <p className="text-muted-foreground">
-                We offer a 100% satisfaction guarantee. If a piece of content doesn't meet your expectations after using your included revisions, we'll rewrite it or provide a prorated refund. We are confident in the quality our automated system delivers.
-              </p>
-            </Card>
-
-            <Card className="p-6 border-2 border-primary-glow/30 bg-white/95 backdrop-blur-sm shadow-neural hover:shadow-cyber transition-all duration-300">
-              <h3 className="text-lg font-bold mb-3 text-[#E67E22]">Can your AI handle urgent requests?</h3>
-              <p className="text-muted-foreground">
-                Our standard automated turnaround is a guaranteed 24 hours. For clients needing even faster delivery, our Dominance package includes a guaranteed 12-hour turnaround for all content.
-              </p>
-            </Card>
+            {[
+              { color: "#3498DB", q: "What if I need revisions?", a: "We offer AI-assisted revisions based on your plan: Starter (1 round), Growth (2 rounds), Scale (2 rounds), Authority (3 rounds), Dominance (unlimited, under our Fair Use policy). Simply submit your request through your client dashboard—our system will process and deliver the refined content within a few hours." },
+              { color: "#2ECC71", q: "How does AI ensure the content matches my brand?", a: "During the initial brief submission, our AI analyzes your brand voice, style, and any existing content you provide in your dashboard. This allows it to generate new content that maintains perfect consistency with your established tone and guidelines." },
+              { color: "#9B59B6", q: "What if I'm not satisfied with the AI-generated content?", a: "We offer a 100% satisfaction guarantee. If a piece of content doesn't meet your expectations after using your included revisions, we'll rewrite it or provide a prorated refund. We are confident in the quality our automated system delivers." },
+              { color: "#E67E22", q: "Can your AI handle urgent requests?", a: "Our standard automated turnaround is a guaranteed 24 hours. For clients needing even faster delivery, our Dominance package includes a guaranteed 12-hour turnaround for all content." },
+            ].map((item, idx) => (
+              <Card key={idx} className="relative p-6 border-2 border-primary-glow/40 bg-gradient-to-br from-black/5 via-primary/5 to-black/10 backdrop-blur-md shadow-neural hover:shadow-cyber transition-all duration-300 overflow-hidden">
+                {/* Circuit lines */}
+                <div className="absolute top-0 left-0 w-full h-0.5 opacity-40 animate-pulse" style={{ backgroundImage: `linear-gradient(to right, transparent, ${item.color}, transparent)` }} />
+                <div className="absolute bottom-0 left-0 w-full h-0.5 opacity-40 animate-pulse" style={{ backgroundImage: `linear-gradient(to right, transparent, ${item.color}, transparent)`, animationDelay: '1s' }} />
+                {/* Corner accents */}
+                <div className="absolute top-0 left-0 w-10 h-10 border-t-2 border-l-2 opacity-50" style={{ borderColor: item.color }} />
+                <div className="absolute bottom-0 right-0 w-10 h-10 border-b-2 border-r-2 opacity-50" style={{ borderColor: item.color }} />
+                <div className="relative z-10">
+                  <h3 className="text-lg font-bold mb-3 font-mono" style={{ color: item.color, filter: `drop-shadow(0 0 10px ${item.color}60)` }}>{item.q}</h3>
+                  <p className="text-muted-foreground">{item.a}</p>
+                </div>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
