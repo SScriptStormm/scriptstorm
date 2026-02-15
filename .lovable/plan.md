@@ -1,46 +1,34 @@
 
 
-# Production Summary Filter + Color Fix
+# Fix Word Counts for Social Posts, YouTube Scripts, and Product Descriptions
 
-## 1. Fix Content Breakdown Colors
+## Problem
+Currently, social posts always get `word_count = 100`, product descriptions always get `word_count = 150`, and YouTube scripts get whatever the social media default is instead of the client's chosen script length. The correct behavior:
 
-**Problem:** YouTube Scripts and Product Descriptions both show white numbers because they use `variant="default"` in AnimatedStat.
+| Content Type | Word Count Behavior |
+|---|---|
+| Social Post | Random between 50-120 |
+| YouTube Script | Client's chosen script length (300-800 slider) |
+| Product Description | Random between 100-200 |
+| Blog Article | Client's chosen value (tier-based slider) |
 
-**Fix in `AnimatedStat.tsx`:**
-- Add a new `"purple"` variant with `text-purple-400` and matching glow
+## Changes
 
-**Fix in `ContentQueueCard.tsx`:**
-- YouTube Scripts: change `variant="default"` to `variant="danger"` (rose-colored, matching its rose icon)
-- Product Descriptions: change `variant="default"` to `variant="purple"` (matching its purple icon)
+### File: `src/components/MultiStepContentBriefForm.tsx`
 
-## 2. Add Period Selector to Production Summary Widget
+**1. Update Zod schema (line 30)**
+- Change `word_count` min from `100` to `50` to allow social posts at the low end of their range
 
-**Add a self-contained dropdown** in the widget header that lets the client switch between:
-- **This Month** (default)
-- **Last Month**
-- **All Time**
+**2. Submission logic (around line 288)**
+- Before inserting into the database, determine the correct `word_count`:
+  - If `social_media` (non-YouTube): generate a random integer between 50 and 120
+  - If `social_media` with `youtube_script = true`: use the `youtube_script_length` value (already set by the client via the 300-800 slider)
+  - If `product_description`: generate a random integer between 100 and 200
+  - If `blog_article`: use `data.word_count` as-is (already set by client)
 
-### Technical Details
+**3. Keep DEFAULT_WORD_COUNTS as-is**
+- The defaults are only used for the form field display, which doesn't matter for non-blog types since the word count field is hidden. The actual stored value will be computed at submission time.
 
-**`ContentQueueCard.tsx` changes:**
-- Add local state for the selected period (`this_month` | `last_month` | `all_time`)
-- Add a small Select dropdown next to the title
-- Accept the full `articles` array as prop (all articles, not pre-filtered)
-- Filter articles internally based on the selected period using `created_at`
-- Update the Article interface to include `created_at`
-- Rename section label from "This Month's Status" to dynamically reflect the selection (e.g., "Last Month's Status" or "All Time Status")
-
-**`Dashboard.tsx` changes:**
-- Revert passing `articlesThisMonth` back to passing all `articles` so the widget can filter internally based on the dropdown selection
-
-**Visual layout:**
-The dropdown sits inline with the title in the card header, styled to match the glass/neon theme using the existing Select component with custom dark styling.
-
-```text
-+--------------------------------------------------+
-| [icon] PRODUCTION SUMMARY    [This Month v]      |
-+--------------------------------------------------+
-| Completion Rate: 8/12 (67%)                      |
-| ...                                              |
-```
+### No database changes needed
+The DB trigger `validate_article_word_count` already skips non-blog content types.
 
