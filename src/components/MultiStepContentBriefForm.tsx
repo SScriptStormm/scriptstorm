@@ -135,9 +135,9 @@ export function MultiStepContentBriefForm() {
       case 'scale':
         return 'Advanced Competitor & Keyword Analysis Included';
       case 'authority':
-        return 'Strategic Keyword Insights Included';
+        return 'Strategic Keyword & Topic Intelligence Included';
       case 'dominance':
-        return 'Enterprise Keyword Intelligence Included';
+        return 'Enterprise Keyword Intelligence + Trend Prediction Included';
       default:
         return 'Standard Keyword Research Included';
     }
