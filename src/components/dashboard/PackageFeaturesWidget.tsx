@@ -121,9 +121,9 @@ export const PackageFeaturesWidget = ({ subscriptionTier }: PackageFeaturesWidge
       case "scale":
         return "Advanced Competitor & Keyword Analysis";
       case "authority":
-        return "Strategic Keyword Insights";
+        return "Strategic Keyword & Topic Intelligence";
       case "dominance":
-        return "Enterprise Keyword Intelligence";
+        return "Enterprise Keyword Intelligence + Trend Prediction";
       default:
         return "Standard Keyword Research";
     }
