@@ -1,38 +1,35 @@
 
 
-# Add Automation Tagline to "Our Core Content Services" Section
+# Research Label Differentiation Enhancement
 
 ## Overview
-Add a subtitle line beneath the "Our Core Content Services" heading to reinforce ScriptStorm's core value proposition of speed, automation, and quality.
+Strengthen the tiered branding ladder for keyword research labels to create clearer differentiation and justify each tier's value jump.
 
-## Change
+## Changes Summary
 
-### File: `src/components/Services.tsx` (lines 150-154)
+| Tier | Current | Updated |
+|------|---------|---------|
+| Scale | Advanced Competitor & Keyword Analysis | No change (already aligned) |
+| Authority | Strategic Keyword Insights | Strategic Keyword & Topic Intelligence |
+| Dominance | Enterprise Keyword Intelligence | Enterprise Keyword Intelligence + Trend Prediction |
 
-**Current:**
-```
-<div className="text-center mb-12">
-  <h3 className="text-3xl font-bold mb-2 text-foreground font-mono tracking-wide">
-    Our Core Content Services
-  </h3>
-</div>
-```
+## Technical Details
 
-**Updated:**
-```
-<div className="text-center mb-12">
-  <h3 className="text-3xl font-bold mb-4 text-foreground font-mono tracking-wide">
-    Our Core Content Services
-  </h3>
-  <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-    All content is fully automated through our proprietary AI workflow -- no human intervention, no delays, just consistent quality.
-  </p>
-</div>
-```
+Three files need updates:
 
-A paragraph is added below the heading using the same styling pattern already used in the "Strategic Content Scaling" and "Content That Converts" sub-headers (text-lg, text-muted-foreground, max-w-3xl, leading-relaxed). The heading's bottom margin is adjusted from mb-2 to mb-4 for balanced spacing.
+### 1. `src/components/Pricing.tsx`
+- **Authority tier** (features + annualFeatures): Update label from "Strategic Keyword Insights" to "Strategic Keyword & Topic Intelligence" (keep the existing description after the colon)
+- **Dominance tier** (features + annualFeatures): Update label from "Enterprise Keyword Intelligence" to "Enterprise Keyword Intelligence + Trend Prediction" (keep the existing description)
 
-## Scope
-- 1 file, minor addition
-- No structural or logic changes
+### 2. `src/components/dashboard/PackageFeaturesWidget.tsx`
+- Update the `getKeywordResearchLabel()` switch for authority and dominance cases
+- Update the `getKeywordResearchDescription()` switch if needed to match
+
+### 3. `src/components/MultiStepContentBriefForm.tsx`
+- Update the content brief form labels for authority ("Strategic Keyword & Topic Intelligence Included") and dominance ("Enterprise Keyword Intelligence + Trend Prediction Included")
+
+## Why This Works
+- **Authority** gains "Intelligence" (stronger than "Insights") and "Topic" implies broader strategic scope beyond just keywords
+- **Dominance** adds "Trend Prediction" to justify the enterprise label and premium pricing
+- Scale remains unchanged as it already uses the suggested format
 
