@@ -374,71 +374,94 @@ features: ['50 Unbeatable Cornerstone SEO Blog Articles (2,000-5,000 words each)
           {enterprisePackages.map(pkg => <EnterprisePackageCard key={pkg.id} pkg={pkg} onCheckout={handleCheckout} loadingStates={loadingStates} isAnnual={isAnnual} />)}
         </div>
 
-        {/* Simple Comparison Table */}
-        <div className="mb-16 p-6 bg-muted/30 rounded-xl border">
-          <h4 className="text-xl font-bold text-center mb-6">📊 Enterprise Comparison</h4>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b">
-                  <th className="text-left py-3 px-2 font-semibold">Feature</th>
-                  <th className="text-center py-3 px-2 font-semibold">Scale</th>
-                  <th className="text-center py-3 px-2 font-semibold">Authority</th>
-                  <th className="text-center py-3 px-2 font-semibold">Dominance</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="border-b border-border/50">
-                  <td className="py-2 px-2">📝 Articles</td>
-                  <td className="py-2 px-2 text-center">25</td>
-                  <td className="py-2 px-2 text-center">30</td>
-                  <td className="py-2 px-2 text-center">50</td>
-                </tr>
-                <tr className="border-b border-border/50">
-                  <td className="py-2 px-2">🚀 Delivery</td>
-                  <td className="py-2 px-2 text-center">24h</td>
-                  <td className="py-2 px-2 text-center">24h</td>
-                  <td className="py-2 px-2 text-center">12h</td>
-                </tr>
-                <tr className="border-b border-border/50">
-                  <td className="py-2 px-2">✏️ Revisions</td>
-                  <td className="py-2 px-2 text-center">2</td>
-                  <td className="py-2 px-2 text-center">3</td>
-                  <td className="py-2 px-2 text-center">Unlimited</td>
-                </tr>
-                <tr className="border-b border-border/50">
-                  <td className="py-2 px-2">📱 Social & Video Content</td>
-                  <td className="py-2 px-2 text-center">75</td>
-                  <td className="py-2 px-2 text-center">90</td>
-                  <td className="py-2 px-2 text-center">150</td>
-                </tr>
-                <tr className="border-b border-border/50">
-                  <td className="py-2 px-2">🛍️ Product/Service Descriptions</td>
-                  <td className="py-2 px-2 text-center">25</td>
-                  <td className="py-2 px-2 text-center">30</td>
-                  <td className="py-2 px-2 text-center">Unlimited*</td>
-                </tr>
-                <tr className="border-b border-border/50">
-                  <td className="py-2 px-2">📅 Automated Content Scheduling</td>
-                  <td className="py-2 px-2 text-center">✅</td>
-                  <td className="py-2 px-2 text-center">✅</td>
-                  <td className="py-2 px-2 text-center">✅</td>
-                </tr>
-                <tr className="border-b border-border/50">
-                  <td className="py-2 px-2">🎯 Research</td>
-                  <td className="py-2 px-2 text-center text-xs">Advanced Competitor & Keyword Analysis</td>
-                  <td className="py-2 px-2 text-center text-xs">Strategic Keyword & Topic Intelligence</td>
-                  <td className="py-2 px-2 text-center text-xs">Enterprise Keyword Intelligence + Trend Prediction</td>
-                </tr>
-                <tr>
-                  <td className="py-2 px-2">👤 Support</td>
-                  <td className="py-2 px-2 text-center">Efficient</td>
-                  <td className="py-2 px-2 text-center">Priority</td>
-                  <td className="py-2 px-2 text-center">Priority + Workspace</td>
-                </tr>
-              </tbody>
-            </table>
+        {/* Premium Enterprise Comparison Table */}
+        <div className="mb-16 rounded-2xl overflow-hidden" style={{
+          background: 'linear-gradient(135deg, rgba(139,92,246,0.06) 0%, rgba(231,76,60,0.06) 50%, rgba(245,158,11,0.06) 100%)',
+          border: '2px solid transparent',
+          backgroundClip: 'padding-box',
+          boxShadow: '0 0 0 2px rgba(139,92,246,0.15), 0 20px 40px -10px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.05)'
+        }}>
+          {/* Gradient top accent bar */}
+          <div className="h-1" style={{
+            background: 'linear-gradient(90deg, #8B5CF6, #E74C3C, #F59E0B)'
+          }} />
+          
+          <div className="p-6 md:p-8">
+            <h4 className="text-2xl font-bold text-center mb-8">
+              <span style={{
+                background: 'linear-gradient(135deg, #8B5CF6, #E74C3C, #F59E0B)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent'
+              }}>📊 Enterprise Comparison</span>
+            </h4>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr>
+                    <th className="text-left py-4 px-3 font-semibold text-muted-foreground">Feature</th>
+                    <th className="text-center py-4 px-3">
+                      <span className="inline-block px-4 py-1.5 rounded-full text-sm font-bold" style={{
+                        color: '#8B5CF6',
+                        backgroundColor: 'rgba(139,92,246,0.15)',
+                        border: '1px solid rgba(139,92,246,0.3)'
+                      }}>⚡ Scale</span>
+                    </th>
+                    <th className="text-center py-4 px-3">
+                      <span className="inline-block px-4 py-1.5 rounded-full text-sm font-bold" style={{
+                        color: '#E74C3C',
+                        backgroundColor: 'rgba(231,76,60,0.15)',
+                        border: '1px solid rgba(231,76,60,0.3)'
+                      }}>👑 Authority</span>
+                    </th>
+                    <th className="text-center py-4 px-3">
+                      <span className="inline-block px-4 py-1.5 rounded-full text-sm font-bold" style={{
+                        color: '#F59E0B',
+                        backgroundColor: 'rgba(245,158,11,0.15)',
+                        border: '1px solid rgba(245,158,11,0.3)',
+                        boxShadow: '0 0 12px rgba(245,158,11,0.2)'
+                      }}>💎 Dominance</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { label: '📝 Articles', scale: '25', authority: '30', dominance: '50', dominanceHighlight: true },
+                    { label: '🚀 Delivery', scale: '24h', authority: '24h', dominance: '12h', dominanceHighlight: true },
+                    { label: '✏️ Revisions', scale: '2', authority: '3', dominance: 'Unlimited', dominanceHighlight: true },
+                    { label: '📱 Social & Video Content', scale: '75', authority: '90', dominance: '150', dominanceHighlight: true },
+                    { label: '🛍️ Product/Service Descriptions', scale: '25', authority: '30', dominance: 'Unlimited*', dominanceHighlight: true },
+                    { label: '📅 Automated Content Scheduling', scale: '✅', authority: '✅', dominance: '✅' },
+                    { label: '🎯 Research', scale: 'Advanced Competitor & Keyword Analysis', authority: 'Strategic Keyword & Topic Intelligence', dominance: 'Enterprise Keyword Intelligence + Trend Prediction', isResearch: true },
+                    { label: '👤 Support', scale: 'Efficient', authority: 'Priority', dominance: 'Priority + Workspace', dominanceHighlight: true },
+                  ].map((row, i) => (
+                    <tr key={i} className="border-t border-border/30" style={{
+                      backgroundColor: i % 2 === 0 ? 'rgba(255,255,255,0.02)' : 'transparent'
+                    }}>
+                      <td className="py-3 px-3 font-medium text-foreground">{row.label}</td>
+                      <td className="py-3 px-3 text-center" style={{ backgroundColor: 'rgba(139,92,246,0.04)' }}>
+                        <span className={row.isResearch ? 'text-xs' : ''}>{row.scale}</span>
+                      </td>
+                      <td className="py-3 px-3 text-center" style={{ backgroundColor: 'rgba(231,76,60,0.04)' }}>
+                        <span className={row.isResearch ? 'text-xs' : ''}>{row.authority}</span>
+                      </td>
+                      <td className="py-3 px-3 text-center" style={{ backgroundColor: 'rgba(245,158,11,0.04)' }}>
+                        {row.dominanceHighlight ? (
+                          <span className={`font-bold ${row.isResearch ? 'text-xs' : ''}`} style={{ color: '#F59E0B' }}>{row.dominance}</span>
+                        ) : (
+                          <span className={row.isResearch ? 'text-xs' : ''}>{row.dominance}</span>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
+          
+          {/* Gradient bottom accent bar */}
+          <div className="h-1" style={{
+            background: 'linear-gradient(90deg, #8B5CF6, #E74C3C, #F59E0B)'
+          }} />
         </div>
 
         {/* Final CTA */}
