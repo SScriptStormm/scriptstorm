@@ -354,9 +354,6 @@ const WhyChooseUs = () => {
               </Card>
             </div>
           </div>
-          </div>
-          </div>
-
           {/* Key Advantages */}
           <div className="mt-24 mb-20">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-12 font-mono px-4">
@@ -415,30 +412,40 @@ const WhyChooseUs = () => {
               </div>
             </Card>
           </div>
+          </div>
+          </div>
 
           {/* CTA Section */}
           <div className="relative -mx-4 md:-mx-8 px-4 md:px-8 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-hero opacity-90" />
-            <div className="absolute inset-0 bg-gradient-neural animate-neural-pulse opacity-20" />
+            <div className="absolute inset-0 bg-gradient-mesh opacity-25" />
+            <div className="absolute inset-0 bg-gradient-neural animate-neural-pulse opacity-15" />
+            
+            {/* Grid pattern overlay */}
+            <div className="absolute inset-0" style={{
+              backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--primary-glow) / 0.1) 1px, transparent 0)`,
+              backgroundSize: '60px 60px'
+            }} />
+            
+            {/* Floating geometric elements */}
+            <div className="absolute top-10 left-10 w-16 h-16 border-2 border-primary-glow/25 rotate-45 animate-float shadow-cyber" />
+            <div className="absolute bottom-10 right-10 w-12 h-12 border-2 border-primary-glow/20 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '3s' }} />
+            
             {/* Scanning lines */}
             <div className="absolute inset-0 overflow-hidden">
-              <div className="absolute top-0 h-px w-full bg-white/30 animate-scan-line" />
-              <div className="absolute bottom-0 h-px w-full bg-white/20 animate-scan-line" style={{ animationDelay: '2s' }} />
+              <div className="absolute top-0 h-px w-full bg-gradient-neural animate-scan-line opacity-30" />
+              <div className="absolute bottom-0 h-px w-full bg-gradient-cyber animate-scan-line opacity-25" style={{ animationDelay: '2s' }} />
             </div>
-            {/* Floating elements */}
-            <div className="absolute top-10 left-10 w-16 h-16 border-2 border-white/20 rotate-45 animate-float" />
-            <div className="absolute bottom-10 right-10 w-12 h-12 border-2 border-white/15 rotate-12 animate-float" style={{ animationDelay: '3s' }} />
             
-            <div className="relative z-10 py-12 md:py-16 text-center text-white">
+            <div className="relative z-10 py-12 md:py-16 text-center">
               <div className="flex items-center justify-center mb-6">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="h-7 w-7 md:h-8 md:w-8 text-[#F39C12] fill-current mx-1" />
                 ))}
               </div>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 font-mono">
-                Ready to See the <span className="text-[#3498DB] drop-shadow-[0_0_20px_rgba(52,152,219,0.8)]">Difference</span>?
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 font-mono text-foreground">
+                Ready to See the <span className="text-primary">Difference</span>?
               </h2>
-              <p className="text-base md:text-xl mb-6 md:mb-8 max-w-2xl mx-auto opacity-90">
+              <p className="text-base md:text-xl mb-6 md:mb-8 max-w-2xl mx-auto text-muted-foreground">
                 Stop wasting time with DIY tools. Get professional AI content that actually converts.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -449,12 +456,12 @@ const WhyChooseUs = () => {
                     window.location.href = "/#pricing";
                   }}
                 >
-                  <Button size="lg" className="w-full sm:w-auto bg-white text-[#3498DB] hover:bg-white/90 px-6 md:px-8 py-3 md:py-4 font-semibold shadow-cyber hover:shadow-hologram transition-all duration-300">
+                  <Button size="lg" className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 px-6 md:px-8 py-3 md:py-4 font-semibold shadow-cyber hover:shadow-hologram transition-all duration-300">
                     Start your First Draft
                   </Button>
                 </Link>
                 <Link to="/onboarding-process">
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 border-white text-white bg-white/10 backdrop-blur-sm hover:bg-white/20 font-semibold hover:shadow-neural transition-all duration-300">
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 border-primary text-primary hover:bg-primary/10 font-semibold hover:shadow-neural transition-all duration-300">
                     Learn Our Process
                   </Button>
                 </Link>
