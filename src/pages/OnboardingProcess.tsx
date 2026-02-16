@@ -24,7 +24,7 @@ const OnboardingProcess = () => {
       duration: "Instant",
       icon: MessageSquare,
       color: "#3498DB",
-      description: "You submit your detailed content brief directly through your secure Client Dashboard. The moment you hit 'Submit,' our automated workflow is triggered. The 24-hour countdown officially begins.",
+      description: "Submit your brief, and our system instantly:",
       details: [
         "Complete the brief form in your Client Dashboard",
         "Automated workflow triggers instantly upon submission",
@@ -312,38 +312,44 @@ const OnboardingProcess = () => {
 
       {/* CTA Section */}
       <section className="relative py-16 overflow-hidden">
-        {/* AI Background Effects */}
-        <div className="absolute inset-0 bg-gradient-hero opacity-85" />
-        <div className="absolute inset-0 bg-gradient-neural animate-neural-pulse opacity-20" />
+        {/* Light Background Effects matching hero */}
+        <div className="absolute inset-0 bg-gradient-mesh opacity-25" />
+        <div className="absolute inset-0 bg-gradient-neural animate-neural-pulse opacity-15" />
+        
+        {/* Grid pattern overlay */}
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--primary-glow) / 0.1) 1px, transparent 0)`,
+          backgroundSize: '60px 60px'
+        }} />
+        
+        {/* Floating geometric elements */}
+        <div className="absolute top-10 left-10 w-16 h-16 border-2 border-primary-glow/25 rotate-45 animate-float shadow-cyber" />
+        <div className="absolute bottom-10 right-10 w-12 h-12 border-2 border-primary-glow/20 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '3s' }} />
         
         {/* Scanning lines */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 h-px w-full bg-white/30 animate-scan-line" />
-          <div className="absolute bottom-0 h-px w-full bg-white/20 animate-scan-line" style={{ animationDelay: '2s' }} />
+          <div className="absolute top-0 h-px w-full bg-gradient-neural animate-scan-line opacity-30" />
+          <div className="absolute bottom-0 h-px w-full bg-gradient-cyber animate-scan-line opacity-25" style={{ animationDelay: '2s' }} />
         </div>
         
-        {/* Floating elements */}
-        <div className="absolute top-10 left-10 w-16 h-16 border-2 border-white/20 rotate-45 animate-float" />
-        <div className="absolute bottom-10 right-10 w-12 h-12 border-2 border-white/15 rotate-12 animate-float" style={{ animationDelay: '3s' }} />
-        
-        <div className="container mx-auto px-4 text-center text-white relative z-10">
+        <div className="container mx-auto px-4 text-center relative z-10">
           <div className="flex items-center justify-center mb-6">
             {[...Array(5)].map((_, i) => (
               <Star key={i} className="h-8 w-8 text-[#F39C12] fill-current mx-1" />
             ))}
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 font-mono">Ready to Experience AI Content?</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 font-mono text-foreground">Ready to Experience <span className="text-primary">AI Content</span>?</h2>
+          <p className="text-xl mb-8 max-w-2xl mx-auto text-muted-foreground">
             Join businesses transforming their content marketing with our fully automated AI process.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/#pricing">
-              <Button size="lg" variant="secondary" className="bg-white text-[#3498DB] hover:bg-white/90 px-8 py-4 font-semibold shadow-cyber hover:shadow-hologram transition-all duration-300">
+              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 font-semibold shadow-cyber hover:shadow-hologram transition-all duration-300">
                 Start your First Draft
               </Button>
             </Link>
             <Link to="/why-choose-us">
-              <Button size="lg" variant="outline" className="border-white text-white bg-white/10 backdrop-blur-sm hover:bg-white/20 px-8 py-4 font-semibold hover:shadow-neural transition-all duration-300">
+              <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary/10 px-8 py-4 font-semibold hover:shadow-neural transition-all duration-300">
                 Why Choose Us
               </Button>
             </Link>
