@@ -31,6 +31,9 @@ export const AccountStatusCard = ({ subscriptionTier, subscriptionEnd, isSubscri
   const variant = tierVariants[tier] || "starter";
   const emoji = tierEmojis[tier] || "🚀";
   
+  // Determine if subscription is active (subscribed AND not expired)
+  const isActive = isSubscribed && (!subscriptionEnd || new Date(subscriptionEnd).getTime() > Date.now());
+
   // Calculate days remaining
   const daysRemaining = subscriptionEnd 
     ? Math.max(0, Math.floor((new Date(subscriptionEnd).getTime() - Date.now()) / (1000 * 60 * 60 * 24)))
@@ -66,7 +69,7 @@ export const AccountStatusCard = ({ subscriptionTier, subscriptionEnd, isSubscri
           <div className="flex-1 space-y-4">
             {/* Status Badge */}
             <div className="flex items-center gap-3">
-              {false ? (
+              {isActive ? (
                 <HoloBadge variant="active" pulse animated={false} size="sm">
                   ACTIVE
                 </HoloBadge>
