@@ -655,7 +655,7 @@ const Dashboard = () => {
                   border border-primary-glow/30 backdrop-blur-xl
                   bg-gradient-to-r from-primary/15 to-primary-glow/10
                   hover:border-primary-glow/60 hover:shadow-[0_0_30px_hsl(221_83%_53%/0.3)]
-                  transition-all duration-300 animate-glow-pulse-soft"
+                  transform hover:scale-105 transition-all duration-300 animate-glow-pulse-soft"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-glow/20 to-transparent animate-shimmer pointer-events-none" />
                 <div className="relative flex items-center justify-center h-8 w-8 rounded-md bg-primary/20 border border-primary-glow/40 animate-scale-subtle">
