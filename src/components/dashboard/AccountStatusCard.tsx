@@ -71,7 +71,7 @@ export const AccountStatusCard = ({ subscriptionTier, subscriptionEnd, isSubscri
                   ACTIVE
                 </HoloBadge>
               ) : (
-                <HoloBadge variant="danger" pulse size="sm">
+                <HoloBadge variant="danger" pulse animated={false} size="sm">
                   INACTIVE
                 </HoloBadge>
               )}
