@@ -229,6 +229,7 @@ export default function AccountSettings() {
 
   const billingInfo = getBillingInfo();
   const tierVariant = getTierVariant(subscriber?.subscription_tier);
+  const isActive = subscriber?.subscribed && (!subscriber?.subscription_end || new Date(subscriber.subscription_end).getTime() > Date.now());
 
   return (
     <div className="min-h-screen bg-gradient-hero relative overflow-hidden">
@@ -312,10 +313,10 @@ export default function AccountSettings() {
 
                 <div className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/[0.08] transition-colors">
                   <div className="flex items-center gap-2 mb-2">
-                    <div className={`h-2 w-2 rounded-full ${false ? 'bg-emerald-400' : 'bg-rose-400'} animate-pulse`} />
+                    <div className={`h-2 w-2 rounded-full ${isActive ? 'bg-emerald-400' : 'bg-rose-400'} animate-pulse`} />
                     <span className="text-white/60 text-sm font-mono">Status</span>
                   </div>
-                  {false ? (
+                  {isActive ? (
                     <HoloBadge variant="success" size="sm">Active</HoloBadge>
                   ) : (
                     <HoloBadge variant="danger" size="sm">Inactive</HoloBadge>
