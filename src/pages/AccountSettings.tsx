@@ -312,10 +312,14 @@ export default function AccountSettings() {
 
                 <div className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/[0.08] transition-colors">
                   <div className="flex items-center gap-2 mb-2">
-                    <div className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <div className={`h-2 w-2 rounded-full ${subscriber?.subscribed ? 'bg-emerald-400' : 'bg-rose-400'} animate-pulse`} />
                     <span className="text-white/60 text-sm font-mono">Status</span>
                   </div>
-                  <HoloBadge variant="success" size="sm">Active</HoloBadge>
+                  {subscriber?.subscribed ? (
+                    <HoloBadge variant="success" size="sm">Active</HoloBadge>
+                  ) : (
+                    <HoloBadge variant="danger" size="sm">Inactive</HoloBadge>
+                  )}
                 </div>
 
                 <div className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/[0.08] transition-colors">
