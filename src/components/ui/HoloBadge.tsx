@@ -107,7 +107,7 @@ const HoloBadge = React.forwardRef<HTMLSpanElement, HoloBadgeProps>(
           animated && styles.glow,
           sizeStyles[size],
           animated && "transition-all duration-300",
-          pulse && "animate-pulse-glow",
+          pulse && animated && "animate-pulse-glow",
           className
         )}
         {...props}
