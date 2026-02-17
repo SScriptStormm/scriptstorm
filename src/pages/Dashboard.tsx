@@ -321,6 +321,31 @@ const Dashboard = () => {
   const socialPostsThisMonth = articlesThisMonth.filter(a => a.content_type === 'social_media' || a.content_type === 'social_media_post' || tier === 'growth+' && a.youtube_script);
   const completedArticles = articles.filter(a => a.status === 'completed').length;
   const completedArticlesThisMonth = articlesOnlyThisMonth.length;
+
+  // Time-based greeting
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return 'Good morning';
+    if (hour < 18) return 'Good afternoon';
+    return 'Good evening';
+  };
+  const timeGreeting = getGreeting();
+
+  // Quick counts for welcome strip
+  const inProgressCount = articles.filter(a => a.status === 'in_progress').length;
+  const pendingCount = articles.filter(a => a.status === 'pending').length;
+  const completedThisMonth = articlesThisMonth.filter(a => a.status === 'completed').length;
+
+  // Map tier to HoloBadge variant
+  const tierBadgeVariant = (tier: string | null): "starter" | "growth" | "scale" | "authority" | "dominance" | "default" => {
+    const t = tier?.toLowerCase();
+    if (t === 'starter') return 'starter';
+    if (t === 'growth' || t === 'growth+') return 'growth';
+    if (t === 'scale') return 'scale';
+    if (t === 'authority') return 'authority';
+    if (t === 'dominance') return 'dominance';
+    return 'default';
+  };
   const completedProductDescriptionsThisMonth = productDescriptionsThisMonth.length;
   const completedSocialPostsThisMonth = socialPostsThisMonth.length;
   const totalArticles = articles.length;
@@ -621,34 +646,56 @@ const Dashboard = () => {
 
       {/* Main Content */}
       <main className="relative z-10 container mx-auto px-3 sm:px-4 py-4 sm:py-8">
-        {/* Welcome Section - Premium Hero */}
+        {/* Smart Welcome Strip */}
         <GlassCard className="mb-6 sm:mb-8 p-0 relative overflow-hidden" hover={false}>
           {/* Accent glow line */}
           <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-primary-glow to-primary/50" />
           
-          <div className="p-6 sm:p-8 pl-5 sm:pl-10">
-            <p className="text-primary-glow/80 font-mono text-xs sm:text-sm tracking-[0.2em] uppercase mb-2">
-              Command Center Active
-            </p>
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-1 font-mono tracking-wide">
-              Welcome back
-            </h2>
-            <p className="text-primary-glow text-base sm:text-lg md:text-xl font-mono tracking-wide break-all animate-text-glow mb-3">
-              {user?.email}
-            </p>
-            <p className="text-white/50 font-mono text-sm tracking-wide">
-              {hasDominance 
-                ? 'Market dominance awaits — Your dedicated workspace is ready' 
-                : 'Your content production command center'}
-            </p>
+          <div className="p-5 sm:p-6 pl-5 sm:pl-10">
+            {/* Row 1: Greeting + Tier */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 mb-3">
+              <div>
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white font-mono tracking-wide">
+                  {timeGreeting}
+                </h2>
+                <p className="text-white/40 font-mono text-xs sm:text-sm tracking-wide">
+                  {user?.email}
+                </p>
+              </div>
+              <HoloBadge variant={tierBadgeVariant(subscriber?.subscription_tier)} size="sm">
+                {subscriber?.subscription_tier?.toUpperCase() || 'STARTER'}
+              </HoloBadge>
+            </div>
             
-            {/* Dominance tier notice - integrated */}
+            {/* Row 2: Live content snapshot */}
+            <div className="flex flex-wrap gap-4 sm:gap-6 pt-3 border-t border-white/[0.08]">
+              <div className="flex items-center gap-2">
+                <Clock className="h-3.5 w-3.5 text-amber-400" />
+                <span className="text-white/70 font-mono text-xs sm:text-sm">
+                  <span className="text-white font-semibold">{inProgressCount}</span> In Progress
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <AlertCircle className="h-3.5 w-3.5 text-blue-400" />
+                <span className="text-white/70 font-mono text-xs sm:text-sm">
+                  <span className="text-white font-semibold">{pendingCount}</span> Pending
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-3.5 w-3.5 text-emerald-400" />
+                <span className="text-white/70 font-mono text-xs sm:text-sm">
+                  <span className="text-white font-semibold">{completedThisMonth}</span> Completed
+                </span>
+              </div>
+            </div>
+
+            {/* Dominance tier notice */}
             {hasDominance && (
               <div className="mt-4 pt-4 border-t border-white/[0.1]">
                 <div className="flex items-center gap-2">
                   <div className="h-2 w-2 rounded-full bg-yellow-400 animate-pulse" />
                   <p className="text-yellow-400/90 font-mono text-sm">
-                    <strong>Dominance Tier:</strong> 12-hour delivery • Unlimited revisions • Priority support
+                    <strong>Dominance Tier:</strong> 12-hour delivery · Unlimited revisions · Priority support
                   </p>
                 </div>
               </div>
