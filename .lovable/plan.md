@@ -1,20 +1,23 @@
 
 
-# Fix Scanning Line Position at Section Border
+# Remove Gap Between Scanning Line and Dotted Background
 
 ## Problem
-The CTA section has `py-24` (6rem top padding), creating a visible gap between the dotted background section above and where the CTA content begins. The scanning lines are at `top-0` of the section, but the large top padding makes them appear disconnected from the visible content boundary.
+There's a small gap between the bottom of the dotted background section and the top of the CTA section where the scanning line lives. Even though both sections have zero padding at their shared border, internal margins (like the `mb-12 md:mb-20` on the testimonial card wrapper at line 394) create residual space.
 
 ## Solution
 
 ### File: `src/pages/WhyChooseUs.tsx`
 
-1. **Line 421**: Change CTA section padding from `py-24` to `pt-0 pb-24` -- this removes the top padding gap entirely, making the scanning lines flush against the previous section.
+**Line 421**: Add `-mt-px` (negative 1px top margin) to the CTA section to pull it up and eliminate the hairline gap between sections.
 
-2. **Line 441**: Add `mt-16` to the content container (`<div className="container ...">`) so the stars/heading/buttons still have breathing room below the scanning lines, without creating a gap above the section itself.
+Change:
+```
+<section className="relative pt-0 pb-24 overflow-hidden">
+```
+To:
+```
+<section className="relative pt-0 pb-24 overflow-hidden -mt-px">
+```
 
-This way:
-- The scanning lines sit right at the section's top edge with zero gap from the section above
-- The actual content (stars, heading, buttons) is pushed down by the container's top margin
-- No visible gap between the dotted background and the CTA section
-
+This is a single-line change that closes the tiny gap without affecting any other spacing.
