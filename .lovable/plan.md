@@ -1,24 +1,30 @@
 
 
-# Fix: Align Scanning Line with Dotted Background Border
+# Fix: Move Scanning Lines to the Dotted Background Border
 
-## What's Happening
+## Problem
+The scanning lines are inside the CTA section (a separate `<section>` element), but there's a large gap between the dotted background section and the CTA section caused by:
+- `pb-20` padding on the dotted background wrapper (line 82)
+- `mb-12 md:mb-20` margin on the testimonial card (line 394)
+- The natural section break between the two `<section>` elements
 
-The dotted background lives inside a wrapper div (line 82) that has `pb-20` padding. Below that, the testimonial card has `mb-12 md:mb-20` bottom margin. These create a large white gap between where the dotted background visually ends and where the CTA section (with scanning lines) begins. The `-mt-px` fix only addresses a 1px gap, but the actual gap is much larger.
+No amount of negative margin on the CTA section will close this gap properly.
 
-## The Fix
-
-Move the scanning lines out of the CTA section and place them as an absolutely positioned element right at the bottom edge of the dotted background wrapper. This way they'll always sit exactly at the border regardless of spacing.
+## Solution
+Move the scanning lines out of the CTA section and anchor them to the bottom edge of the dotted background wrapper using absolute positioning.
 
 ### Changes in `src/pages/WhyChooseUs.tsx`:
 
-1. **Remove scanning lines from the CTA section** (lines 435-439) -- delete the scanning line div block from inside the CTA section.
+1. **Add `relative` to the dotted background wrapper** (line 82) if not already present, so absolute children position relative to it.
 
-2. **Add scanning lines at the bottom of the dotted background wrapper** (after line 85, inside the div at line 82) -- place them as absolute-positioned elements at `bottom-0` of the dotted background container, so they sit precisely at its lower edge.
+2. **Add scanning lines inside the dotted background wrapper** (before the closing `</div>` at line 415) -- two absolutely positioned lines at `bottom-0`, sitting exactly on the dotted background's lower edge.
 
-3. **Remove the `-mt-px` hack** from the CTA section (line 421) since it's no longer needed.
+3. **Remove scanning lines from the CTA section** (lines 435-439) -- delete the entire scanning lines block from the CTA section since they now live in the dotted background wrapper.
 
-4. **Remove `mt-16`** from the CTA content container (line 441) since the scanning lines are no longer at the top of this section.
+4. **Clean up CTA section classes** (line 421) -- remove `-mt-px` hack since it's no longer needed.
+
+5. **Remove `mt-16` from CTA content container** (line 441) -- no longer needed since scanning lines aren't at the top of this section. Restore appropriate padding on the CTA section itself.
 
 ### Result
-The scanning lines will be anchored to the bottom edge of the dotted background, sitting exactly at its border -- no matter what margins or padding exist between sections.
+The scanning lines will be anchored to the exact bottom edge of the dotted background, sitting precisely at its border regardless of any margins or padding between sections.
+
