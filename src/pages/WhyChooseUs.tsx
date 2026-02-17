@@ -412,13 +412,18 @@ const WhyChooseUs = () => {
               </div>
             </Card>
           </div>
+          {/* Scanning lines - anchored to bottom of dotted background */}
+          <div className="absolute bottom-0 left-0 right-0 overflow-hidden">
+            <div className="absolute bottom-0 h-px w-full bg-gradient-neural animate-scan-line opacity-30" />
+            <div className="absolute bottom-2 h-px w-full bg-gradient-cyber animate-scan-line opacity-25" style={{ animationDelay: '2s' }} />
+          </div>
           </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="relative pt-0 pb-24 overflow-hidden -mt-px">
+      <section className="relative pt-0 pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-mesh opacity-25" />
         <div className="absolute inset-0 bg-gradient-neural animate-neural-pulse opacity-15" />
         
@@ -431,12 +436,6 @@ const WhyChooseUs = () => {
         {/* Floating geometric elements */}
         <div className="absolute top-10 left-10 w-16 h-16 border-2 border-primary-glow/25 rotate-45 animate-float shadow-cyber" />
         <div className="absolute bottom-10 right-10 w-12 h-12 border-2 border-primary-glow/20 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '3s' }} />
-        
-        {/* Scanning lines */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 h-px w-full bg-gradient-neural animate-scan-line opacity-30" />
-          <div className="absolute top-2 h-px w-full bg-gradient-cyber animate-scan-line opacity-25" style={{ animationDelay: '2s' }} />
-        </div>
         
         <div className="container mx-auto px-4 text-center relative z-10 mt-16">
           <div className="flex items-center justify-center mb-6">
