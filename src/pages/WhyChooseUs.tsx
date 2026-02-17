@@ -77,7 +77,7 @@ const WhyChooseUs = () => {
         <div className="absolute top-1/3 left-1/4 w-1 h-1 bg-primary-glow rounded-full animate-ping opacity-25" style={{ animationDelay: '1s' }} />
         <div className="absolute top-2/3 right-1/3 w-1 h-1 bg-primary-glow rounded-full animate-ping opacity-30" style={{ animationDelay: '3s' }} />
         
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto px-4 relative z-10 overflow-visible">
           {/* Comparison Charts Wrapper with Dotted Background */}
           <div className="relative -mt-16 pt-16 pb-20 mb-0">
             {/* Unified Full-Width Dotted Background - ONLY for Comparison Charts */}
