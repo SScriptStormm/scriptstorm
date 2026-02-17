@@ -66,7 +66,7 @@ export const AccountStatusCard = ({ subscriptionTier, subscriptionEnd, isSubscri
           <div className="flex-1 space-y-4">
             {/* Status Badge */}
             <div className="flex items-center gap-3">
-              {isSubscribed ? (
+              {false ? (
                 <HoloBadge variant="active" pulse animated={false} size="sm">
                   ACTIVE
                 </HoloBadge>
