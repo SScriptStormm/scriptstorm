@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { GlassCard, GlassCardContent, GlassCardHeader, GlassCardTitle } from "@/components/ui/GlassCard";
 import { AnimatedStat } from "@/components/ui/AnimatedStat";
-import { NeonProgress } from "@/components/ui/NeonProgress";
+
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { BarChart3, FileText, MessageSquare, CreditCard, CheckCircle, Clock, AlertCircle, Video } from "lucide-react";
 
@@ -57,7 +57,7 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
   const inProgressCount = filtered.filter(a => a.status === 'in_progress').length;
   const pendingCount = filtered.filter(a => a.status === 'pending').length;
   const totalCount = filtered.length;
-  const completionRate = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
+  
   
   const blogArticles = filtered.filter(a => !a.content_type || a.content_type === 'article' || a.content_type === 'blog_article');
   const socialPosts = filtered.filter(a => a.content_type === 'social_media' || a.content_type === 'social_media_post');
@@ -92,23 +92,6 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
         </div>
       </GlassCardHeader>
       <GlassCardContent>
-        {/* Completion Rate */}
-        <div className="p-4 bg-white/[0.03] rounded-xl border border-white/[0.08] mb-6">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-white/50 font-mono text-xs uppercase tracking-wider">Completion Rate</span>
-            <span className="text-white font-mono text-sm">
-              {completedCount} of {totalCount} completed — <span className="text-primary-glow">{completionRate}%</span>
-            </span>
-          </div>
-          <NeonProgress
-            value={completedCount}
-            max={totalCount}
-            variant="tier"
-            size="md"
-            animated
-            glowIntensity="medium"
-          />
-        </div>
 
         {/* Status Overview */}
         <div className="mb-6">
