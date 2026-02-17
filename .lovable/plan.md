@@ -1,17 +1,20 @@
 
 
-# Fix Scanning Lines Position in "Ready to See the Difference" CTA
+# Fix Scanning Line Position at Section Border
 
 ## Problem
-The scanning lines are positioned at `top-0` and `top-2` inside the CTA section, but because the section has `pt-0`, they overlap with the stars and content instead of sitting at the section's top border.
+The CTA section has `py-24` (6rem top padding), creating a visible gap between the dotted background section above and where the CTA content begins. The scanning lines are at `top-0` of the section, but the large top padding makes them appear disconnected from the visible content boundary.
 
 ## Solution
 
 ### File: `src/pages/WhyChooseUs.tsx`
 
-**Line 421**: Change `pt-0 pb-24` to `py-24` on the CTA section. This restores top padding so the content (stars, heading, etc.) is pushed down, while the scanning lines remain at `top-0` -- right at the section border where they belong.
+1. **Line 421**: Change CTA section padding from `py-24` to `pt-0 pb-24` -- this removes the top padding gap entirely, making the scanning lines flush against the previous section.
 
-This single change fixes both issues:
-- Scanning lines stay at the top edge of the section
-- Stars and content have proper spacing below the scanning lines
+2. **Line 441**: Add `mt-16` to the content container (`<div className="container ...">`) so the stars/heading/buttons still have breathing room below the scanning lines, without creating a gap above the section itself.
+
+This way:
+- The scanning lines sit right at the section's top edge with zero gap from the section above
+- The actual content (stars, heading, buttons) is pushed down by the container's top margin
+- No visible gap between the dotted background and the CTA section
 
