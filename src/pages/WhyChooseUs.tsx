@@ -438,7 +438,7 @@ const WhyChooseUs = () => {
           <div className="absolute top-2 h-px w-full bg-gradient-cyber animate-scan-line opacity-25" style={{ animationDelay: '2s' }} />
         </div>
         
-        <div className="container mx-auto px-4 text-center relative z-10 mt-4">
+        <div className="container mx-auto px-4 text-center relative z-10 mt-16">
           <div className="flex items-center justify-center mb-6">
             {[...Array(5)].map((_, i) => (
               <Star key={i} className="h-7 w-7 md:h-8 md:w-8 text-[#F39C12] fill-current mx-1" />
