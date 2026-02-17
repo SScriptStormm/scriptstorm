@@ -101,7 +101,7 @@ export const ContentPipelineCard = ({ article, articlesCount, selectedId, onClea
                                   ? 'bg-amber-500/20 border-2 border-amber-500 shadow-[0_0_10px_hsl(45_93%_55%/0.4)]' 
                                   : 'bg-white/5 border border-white/20'}
                             `}>
-                              <Icon className={`h-4 w-4 ${isCompleted ? 'text-emerald-400' : isCurrent ? 'text-amber-400 animate-pulse' : 'text-white/40'}`} />
+                              <Icon className={`h-4 w-4 ${isCompleted ? 'text-emerald-400' : isCurrent ? 'text-amber-400' : 'text-white/40'}`} />
                             </div>
                             <div className="flex-1 min-w-0 pt-1">
                               <p className={`font-mono text-sm font-semibold ${isCompleted ? 'text-emerald-400' : isCurrent ? 'text-amber-400' : 'text-white/40'}`}>
