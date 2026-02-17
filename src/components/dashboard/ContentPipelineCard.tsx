@@ -138,6 +138,7 @@ export const ContentPipelineCard = ({ article, articlesCount, selectedId, onClea
                           variant={article.status === 'completed' ? 'success' : 'warning'} 
                           size="sm"
                           pulse={article.status !== 'completed'}
+                          animated={false}
                         >
                           {article.status === 'completed' ? '✅' : '⏱️'} {message}
                         </HoloBadge>
