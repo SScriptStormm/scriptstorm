@@ -1,23 +1,26 @@
 
 
-# Remove Gap Between Scanning Line and Dotted Background
+# Remove Gap Between Dotted Background and Scanning Line
 
 ## Problem
-There's a small gap between the bottom of the dotted background section and the top of the CTA section where the scanning line lives. Even though both sections have zero padding at their shared border, internal margins (like the `mb-12 md:mb-20` on the testimonial card wrapper at line 394) create residual space.
+The testimonial card wrapper (line 394) has `mb-12 md:mb-20`, creating a large empty space at the bottom of the dotted background section. The scanning lines sit at `top-0` of the next section. This means: testimonial card -> big empty dotted space -> scanning line -> CTA content. The user wants the scanning line right where the dotted background ends.
 
 ## Solution
 
 ### File: `src/pages/WhyChooseUs.tsx`
 
-**Line 421**: Add `-mt-px` (negative 1px top margin) to the CTA section to pull it up and eliminate the hairline gap between sections.
+**Line 394**: Remove the bottom margin from the testimonial wrapper.
 
 Change:
 ```
-<section className="relative pt-0 pb-24 overflow-hidden">
+<div className="mb-12 md:mb-20">
 ```
 To:
 ```
-<section className="relative pt-0 pb-24 overflow-hidden -mt-px">
+<div>
 ```
 
-This is a single-line change that closes the tiny gap without affecting any other spacing.
+This eliminates the empty space between the last visible content in the dotted section and the scanning line at the top of the CTA section. The `-mt-px` already on the CTA section handles any remaining hairline gap.
+
+Single-line change. Nothing else needs to move.
+
