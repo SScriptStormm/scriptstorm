@@ -1,30 +1,33 @@
 
 
-# Fix: Move Scanning Lines to the Dotted Background Border
+# Fix: Make Scanning Lines Visible at Dotted Background Border
 
 ## Problem
-The scanning lines are inside the CTA section (a separate `<section>` element), but there's a large gap between the dotted background section and the CTA section caused by:
-- `pb-20` padding on the dotted background wrapper (line 82)
-- `mb-12 md:mb-20` margin on the testimonial card (line 394)
-- The natural section break between the two `<section>` elements
-
-No amount of negative margin on the CTA section will close this gap properly.
+The scanning lines were moved inside the dotted background wrapper, but they're invisible because they're nested inside a `container mx-auto px-4` div (line 80) that clips overflow. The `w-screen` on the scanning lines extends beyond the container, but the container constrains them.
 
 ## Solution
-Move the scanning lines out of the CTA section and anchor them to the bottom edge of the dotted background wrapper using absolute positioning.
+Add `overflow-visible` to the container div at line 80, OR move the scanning lines outside the container but still inside the section, positioned absolutely at the correct vertical position.
+
+The cleaner approach: move the scanning lines out of the container div entirely and place them directly inside the `<section>` element, absolutely positioned to align with where the dotted background ends.
 
 ### Changes in `src/pages/WhyChooseUs.tsx`:
 
-1. **Add `relative` to the dotted background wrapper** (line 82) if not already present, so absolute children position relative to it.
+1. **Remove scanning lines from inside the container wrapper** (lines 418-422) -- delete the scanning line block from its current position inside the dotted background wrapper.
 
-2. **Add scanning lines inside the dotted background wrapper** (before the closing `</div>` at line 415) -- two absolutely positioned lines at `bottom-0`, sitting exactly on the dotted background's lower edge.
+2. **Add scanning lines directly inside the `<section>` tag** (after line 67, the section opening) -- place them as absolutely positioned elements. Since the dotted background wrapper ends at the bottom of the container content, we need to calculate the right position. Instead, we can place them at the bottom of the entire first section using `absolute bottom-0`.
 
-3. **Remove scanning lines from the CTA section** (lines 435-439) -- delete the entire scanning lines block from the CTA section since they now live in the dotted background wrapper.
+   However, the section has `pb-0` or similar padding that may not align. A simpler approach:
 
-4. **Clean up CTA section classes** (line 421) -- remove `-mt-px` hack since it's no longer needed.
+3. **Actually, the simplest fix**: Just add `overflow-visible` to the container div at line 80 so the `w-screen` scanning lines can extend beyond it and be visible.
 
-5. **Remove `mt-16` from CTA content container** (line 441) -- no longer needed since scanning lines aren't at the top of this section. Restore appropriate padding on the CTA section itself.
+### Final approach (single line change):
 
-### Result
-The scanning lines will be anchored to the exact bottom edge of the dotted background, sitting precisely at its border regardless of any margins or padding between sections.
+**Line 80**: Add `overflow-visible` to the container div.
+
+```
+Before: <div className="container mx-auto px-4 relative z-10">
+After:  <div className="container mx-auto px-4 relative z-10 overflow-visible">
+```
+
+This allows the scanning lines (which use `w-screen` and `left-1/2 -translate-x-1/2`) to extend beyond the container and be visible across the full viewport width, just like the dotted background elements on lines 84-85 that use the same technique.
 
