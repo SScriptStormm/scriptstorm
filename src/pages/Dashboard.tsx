@@ -331,21 +331,6 @@ const Dashboard = () => {
   };
   const timeGreeting = getGreeting();
 
-  // Quick counts for welcome strip
-  const inProgressCount = articles.filter(a => a.status === 'in_progress').length;
-  const pendingCount = articles.filter(a => a.status === 'pending').length;
-  const completedThisMonth = articlesThisMonth.filter(a => a.status === 'completed').length;
-
-  // Map tier to HoloBadge variant
-  const tierBadgeVariant = (tier: string | null): "starter" | "growth" | "scale" | "authority" | "dominance" | "default" => {
-    const t = tier?.toLowerCase();
-    if (t === 'starter') return 'starter';
-    if (t === 'growth' || t === 'growth+') return 'growth';
-    if (t === 'scale') return 'scale';
-    if (t === 'authority') return 'authority';
-    if (t === 'dominance') return 'dominance';
-    return 'default';
-  };
   const completedProductDescriptionsThisMonth = productDescriptionsThisMonth.length;
   const completedSocialPostsThisMonth = socialPostsThisMonth.length;
   const totalArticles = articles.length;
@@ -646,55 +631,49 @@ const Dashboard = () => {
 
       {/* Main Content */}
       <main className="relative z-10 container mx-auto px-3 sm:px-4 py-4 sm:py-8">
-        {/* Smart Welcome Strip */}
+        {/* Welcome Strip + CTA */}
         <GlassCard className="mb-6 sm:mb-8 p-0 relative overflow-hidden" hover={false}>
           {/* Accent glow line */}
           <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-primary-glow to-primary/50" />
-          
-          <div className="p-5 sm:p-6 pl-5 sm:pl-10">
-            {/* Row 1: Greeting + Tier */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 mb-3">
+
+          <div className="p-4 sm:p-5 pl-5 sm:pl-10">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+              {/* Left: Greeting */}
               <div>
-                <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white font-mono tracking-wide">
+                <h2 className="text-lg sm:text-xl font-bold text-white font-mono tracking-wide">
                   {timeGreeting}
                 </h2>
                 <p className="text-white/40 font-mono text-xs sm:text-sm tracking-wide">
                   {user?.email}
                 </p>
               </div>
-              <HoloBadge variant={tierBadgeVariant(subscriber?.subscription_tier)} size="sm">
-                {subscriber?.subscription_tier?.toUpperCase() || 'STARTER'}
-              </HoloBadge>
-            </div>
-            
-            {/* Row 2: Live content snapshot */}
-            <div className="flex flex-wrap gap-4 sm:gap-6 pt-3 border-t border-white/[0.08]">
-              <div className="flex items-center gap-2">
-                <Clock className="h-3.5 w-3.5 text-amber-400" />
-                <span className="text-white/70 font-mono text-xs sm:text-sm">
-                  <span className="text-white font-semibold">{inProgressCount}</span> In Progress
+
+              {/* Right: CTA */}
+              <button
+                onClick={() => navigate('/content-brief')}
+                className="group relative flex items-center gap-3 px-5 py-3 rounded-lg overflow-hidden
+                  border border-primary-glow/30 backdrop-blur-xl
+                  bg-gradient-to-r from-primary/15 to-primary-glow/10
+                  hover:border-primary-glow/60 hover:shadow-[0_0_30px_hsl(221_83%_53%/0.3)]
+                  transition-all duration-300 animate-glow-pulse-soft"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-glow/20 to-transparent animate-shimmer pointer-events-none" />
+                <div className="relative flex items-center justify-center h-8 w-8 rounded-md bg-primary/20 border border-primary-glow/40 animate-scale-subtle">
+                  <Plus className="h-4 w-4 text-primary-glow" />
+                </div>
+                <span className="relative text-white font-mono text-sm sm:text-base font-semibold tracking-wide group-hover:text-primary-glow transition-colors duration-300">
+                  Submit New Brief
                 </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <AlertCircle className="h-3.5 w-3.5 text-blue-400" />
-                <span className="text-white/70 font-mono text-xs sm:text-sm">
-                  <span className="text-white font-semibold">{pendingCount}</span> Pending
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-3.5 w-3.5 text-emerald-400" />
-                <span className="text-white/70 font-mono text-xs sm:text-sm">
-                  <span className="text-white font-semibold">{completedThisMonth}</span> Completed
-                </span>
-              </div>
+                <ArrowRight className="relative h-4 w-4 text-primary-glow/50 group-hover:text-primary-glow group-hover:translate-x-1 transition-all duration-300" />
+              </button>
             </div>
 
-            {/* Dominance tier notice */}
+            {/* Dominance tier notice (conditional) */}
             {hasDominance && (
-              <div className="mt-4 pt-4 border-t border-white/[0.1]">
+              <div className="mt-3 pt-3 border-t border-white/[0.08]">
                 <div className="flex items-center gap-2">
                   <div className="h-2 w-2 rounded-full bg-yellow-400 animate-pulse" />
-                  <p className="text-yellow-400/90 font-mono text-sm">
+                  <p className="text-yellow-400/90 font-mono text-xs sm:text-sm">
                     <strong>Dominance Tier:</strong> 12-hour delivery · Unlimited revisions · Priority support
                   </p>
                 </div>
@@ -702,44 +681,6 @@ const Dashboard = () => {
             )}
           </div>
         </GlassCard>
-
-        {/* Submit New Brief Button - Premium CTA */}
-        <div className="mb-6 sm:mb-8">
-          <button
-            onClick={() => navigate('/content-brief')}
-            className="group relative w-full overflow-hidden rounded-xl border border-primary-glow/30 backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] transition-all duration-300 hover:border-primary-glow/60 hover:shadow-[0_0_40px_hsl(221_83%_53%/0.3)] hover:scale-[1.01] animate-glow-pulse-soft"
-          >
-            {/* Gradient accent overlay */}
-            <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/15 via-primary-glow/10 to-transparent opacity-60 pointer-events-none group-hover:opacity-100 transition-opacity duration-300" />
-            
-            {/* Inner glow effect */}
-            <div className="absolute inset-0 rounded-xl bg-gradient-to-t from-transparent via-transparent to-white/[0.05] pointer-events-none" />
-            
-            {/* Animated shimmer on hover */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-glow/20 to-transparent animate-shimmer pointer-events-none" />
-            
-            {/* Button content */}
-            <div className="relative z-10 flex items-center gap-3 sm:gap-4 px-5 sm:px-6 py-4 sm:py-5">
-              {/* Icon with glowing border */}
-              <div className="flex items-center justify-center h-10 w-10 sm:h-11 sm:w-11 rounded-lg bg-primary/20 border border-primary-glow/40 group-hover:border-primary-glow group-hover:bg-primary/30 group-hover:shadow-[0_0_15px_hsl(221_83%_53%/0.4)] transition-all duration-300 animate-scale-subtle">
-                <Plus className="h-5 w-5 sm:h-6 sm:w-6 text-primary-glow group-hover:scale-110 transition-transform duration-300" />
-              </div>
-              
-              {/* Text */}
-              <div className="text-left flex-1">
-                <p className="text-white font-mono text-sm sm:text-base md:text-lg tracking-wide font-semibold group-hover:text-primary-glow transition-colors duration-300">
-                  Submit New Content Brief
-                </p>
-                <p className="text-white/50 font-mono text-xs sm:text-sm tracking-wide hidden sm:block">
-                  Start your next project — 24-hour turnaround
-                </p>
-              </div>
-              
-              {/* Arrow indicator */}
-              <ArrowRight className="h-5 w-5 text-primary-glow/50 group-hover:text-primary-glow group-hover:translate-x-1 transition-all duration-300" />
-            </div>
-          </button>
-        </div>
 
         {/* 2-Column Grid Layout - Premium Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
