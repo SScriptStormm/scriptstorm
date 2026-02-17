@@ -71,7 +71,7 @@ const WhyChooseUs = () => {
       </section>
 
       {/* Main Content */}
-      <section className="relative py-16 overflow-hidden">
+      <section className="relative pt-16 pb-0 overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 bg-gradient-mesh opacity-15" />
         <div className="absolute top-1/3 left-1/4 w-1 h-1 bg-primary-glow rounded-full animate-ping opacity-25" style={{ animationDelay: '1s' }} />
@@ -418,7 +418,7 @@ const WhyChooseUs = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="relative py-24 -mt-px">
+      <section className="relative pt-0 pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-mesh opacity-25" />
         <div className="absolute inset-0 bg-gradient-neural animate-neural-pulse opacity-15" />
         
