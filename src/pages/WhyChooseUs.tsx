@@ -425,7 +425,6 @@ const WhyChooseUs = () => {
       {/* CTA Section */}
       <section className="relative pt-0 pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-mesh opacity-25" />
-        <div className="absolute inset-0 bg-gradient-neural animate-neural-pulse opacity-15" />
         
         {/* Grid pattern overlay */}
         <div className="absolute inset-0" style={{
