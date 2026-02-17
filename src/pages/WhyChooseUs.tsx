@@ -412,12 +412,12 @@ const WhyChooseUs = () => {
               </div>
             </Card>
           </div>
-          {/* Scanning lines - anchored to bottom of dotted background */}
+          </div>
+          </div>
+          {/* Scanning lines - direct child of dotted background wrapper */}
           <div className="absolute bottom-0 left-0 right-0 overflow-hidden">
             <div className="absolute bottom-0 h-px w-full bg-gradient-neural animate-scan-line opacity-30" />
             <div className="absolute bottom-2 h-px w-full bg-gradient-cyber animate-scan-line opacity-25" style={{ animationDelay: '2s' }} />
-          </div>
-          </div>
           </div>
         </div>
       </section>
