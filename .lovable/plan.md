@@ -1,44 +1,45 @@
 
 
-# Why Choose Us + Our Process Page Fixes
+# Our Process Page -- Dotted Background, CTA Expansion, and Scanning Line Fix
 
-## 1. Add Dotted Background to Key Advantages and Testimonial Sections (WhyChooseUs.tsx)
+## 1. Add Dotted Crosshatch Background to Process Steps and FAQ Sections
 
-The dotted crosshatch background currently only wraps the two comparison chart sections (lines 82-85). We will extend it to also cover the "Our Key Advantages" section (line 360) and the "Coming Soon" testimonial card (line 397).
+The same dotted crosshatch pattern used on the Why Choose Us page will be added to two sections:
+- **Process Steps section** (lines 162-240) -- the 5-step process
+- **Common Questions / FAQ section** (lines 281-311)
 
-**Approach:** Move the closing tags of the dotted background wrapper to encompass the Key Advantages grid and the testimonial card, so they share the same dotted crosshatch pattern as the comparison tables above.
+Each section gets two absolute-positioned full-width divs with the repeating linear gradients (horizontal and vertical lines at 2px intervals).
 
-## 2. Make "Ready to See the Difference" CTA Consistent with Hero (WhyChooseUs.tsx)
+## 2. Expand the "Ready to Experience AI Content" CTA Section
 
-Currently the CTA (line 420) uses a dark `bg-gradient-hero` background, which clashes with the page's light hero section. We will restyle it to match the hero's design pattern:
-- Light background with `bg-gradient-mesh`, `bg-gradient-neural` overlays
-- Grid dot pattern overlay
-- Floating geometric border elements
-- Scanning line effects
-- Dark text instead of white text
-- Buttons styled with primary color scheme instead of white-on-dark
+The bottom CTA (lines 314-358) currently has minimal padding (`py-16`). It will be expanded:
+- Increase vertical padding to `py-24`
+- Add more breathing room with larger text sizing and spacing
+- Add a subtitle or trust badge element for visual weight
 
-## 3. Shorten Step 1 Description (OnboardingProcess.tsx)
+## 3. Move Scanning Lines to the Top
 
-Current description (line 27) is too long: *"You submit your detailed content brief directly through your secure Client Dashboard. The moment you hit 'Submit,' our automated workflow is triggered. The 24-hour countdown officially begins."*
+In both CTA sections:
 
-**Proposed replacement:** `"Submit your brief, and our system instantly:"`
+**OnboardingProcess.tsx (line 330-333):** The scanning lines are positioned at `top-0` and `bottom-0`. The user wants them both at the **top**. Change the second line from `bottom-0` to `top-0` with a slight offset or different delay so both animate across the top area.
 
-This mirrors the concise pattern used by Steps 2-5 (e.g., "Our system autonomously:", "Industry-trained AI drafts:", "Every piece undergoes:"). The bullet points below already cover the details.
+**WhyChooseUs.tsx (lines 434-437):** Same fix -- move the `bottom-0` scanning line to `top-0`.
 
-## 4. Make "Ready to Experience AI Content" CTA Consistent with Hero (OnboardingProcess.tsx)
-
-Same issue as WhyChooseUs -- the CTA section (line 314) uses a dark `bg-gradient-hero` while the hero section above uses a light background with mesh/neural overlays. We will restyle the CTA to match the hero's light design pattern with the same decorative elements (grid dots, floating shapes, scanning lines) and dark text with primary-colored buttons.
-
----
-
-## Technical Summary
-
-### File: `src/pages/WhyChooseUs.tsx`
-- **Lines 357-358**: Move the closing `</div>` tags for the dotted background wrapper to after the testimonial section (after line 417), so Key Advantages and testimonial are inside the dotted area
-- **Lines 420-463**: Replace the dark CTA styling with the hero's light pattern (gradient-mesh, neural overlays, grid dots, floating elements, dark text, primary-colored buttons)
+## Technical Details
 
 ### File: `src/pages/OnboardingProcess.tsx`
-- **Line 27**: Change description to `"Submit your brief, and our system instantly:"`
-- **Lines 314-352**: Replace the dark CTA styling with the hero's light pattern (matching the "How Our AI Process Works" hero section design)
+
+**Process Steps section (line 163):** Add two dotted background divs inside the section:
+```
+<div className="absolute left-1/2 -translate-x-1/2 w-screen top-0 bottom-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,hsl(var(--primary-glow)/0.03)_2px,hsl(var(--primary-glow)/0.03)_4px)] pointer-events-none" />
+<div className="absolute left-1/2 -translate-x-1/2 w-screen top-0 bottom-0 bg-[repeating-linear-gradient(90deg,transparent,transparent_2px,hsl(var(--primary-glow)/0.03)_2px,hsl(var(--primary-glow)/0.03)_4px)] pointer-events-none" />
+```
+
+**FAQ section (line 283):** Add the same two dotted background divs.
+
+**CTA section (line 314):** Change `py-16` to `py-24`. Move the second scanning line from `bottom-0` to `top-0` (with slight offset via `top-2`).
+
+### File: `src/pages/WhyChooseUs.tsx`
+
+**CTA section (line 436):** Move the second scanning line from `bottom-0` to `top-0` with a slight offset.
 
