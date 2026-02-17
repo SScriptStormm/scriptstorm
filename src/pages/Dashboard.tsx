@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FileText, Calendar as CalendarIcon, Clock, CheckCircle, AlertCircle, Zap, LogOut, RefreshCw, CreditCard, BarChart3, Target, Eye, Download, Edit, MessageSquare, User as UserIcon, Settings, LayoutDashboard, ChevronDown, Archive, Plus, ArrowRight, ChevronLeft, ChevronRight, Video, Package, Search, X } from "lucide-react";
+import { FileText, Calendar as CalendarIcon, Clock, CheckCircle, AlertCircle, Zap, LogOut, RefreshCw, CreditCard, BarChart3, Target, Eye, Download, Edit, MessageSquare, User as UserIcon, Settings, LayoutDashboard, ChevronDown, Archive, Plus, ArrowRight, ChevronLeft, ChevronRight, Video, Package, Search, X, Sun, SunDim, Moon } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
@@ -323,13 +323,13 @@ const Dashboard = () => {
   const completedArticlesThisMonth = articlesOnlyThisMonth.length;
 
   // Time-based greeting
-  const getGreeting = () => {
+  const getGreetingData = () => {
     const hour = new Date().getHours();
-    if (hour < 12) return 'Good morning';
-    if (hour < 18) return 'Good afternoon';
-    return 'Good evening';
+    if (hour < 12) return { text: 'Good morning', icon: 'sunrise' as const };
+    if (hour < 18) return { text: 'Good afternoon', icon: 'sun' as const };
+    return { text: 'Good evening', icon: 'moon' as const };
   };
-  const timeGreeting = getGreeting();
+  const greetingData = getGreetingData();
 
   const completedProductDescriptionsThisMonth = productDescriptionsThisMonth.length;
   const completedSocialPostsThisMonth = socialPostsThisMonth.length;
@@ -640,9 +640,14 @@ const Dashboard = () => {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
               {/* Left: Greeting */}
               <div>
-                <h2 className="text-lg sm:text-xl font-bold text-white font-mono tracking-wide">
-                  {timeGreeting}
-                </h2>
+                <div className="flex items-center gap-2">
+                  {greetingData.icon === 'sunrise' && <Sun className="h-5 w-5 text-amber-400" />}
+                  {greetingData.icon === 'sun' && <SunDim className="h-5 w-5 text-orange-400" />}
+                  {greetingData.icon === 'moon' && <Moon className="h-5 w-5 text-blue-300" />}
+                  <h2 className="text-lg sm:text-xl font-bold text-white font-mono tracking-wide">
+                    {greetingData.text}
+                  </h2>
+                </div>
                 <p className="text-white/40 font-mono text-xs sm:text-sm tracking-wide">
                   {user?.email}
                 </p>
