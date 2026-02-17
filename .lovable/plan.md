@@ -1,26 +1,23 @@
 
 
-# Remove Gap Between Dotted Background and Scanning Line
+# Close Gap Between Scanning Line and CTA Content
 
 ## Problem
-The testimonial card wrapper (line 394) has `mb-12 md:mb-20`, creating a large empty space at the bottom of the dotted background section. The scanning lines sit at `top-0` of the next section. This means: testimonial card -> big empty dotted space -> scanning line -> CTA content. The user wants the scanning line right where the dotted background ends.
+The scanning lines sit at `top-0` of the CTA section, but the content container has `mt-16` (4rem), creating a large empty space between the moving line and the stars/heading. The user wants the scanning line to sit right against the top of the visible CTA content.
 
 ## Solution
 
 ### File: `src/pages/WhyChooseUs.tsx`
 
-**Line 394**: Remove the bottom margin from the testimonial wrapper.
+**Line 441**: Reduce `mt-16` to `mt-4` on the content container so the stars and heading sit close to the scanning line.
 
 Change:
 ```
-<div className="mb-12 md:mb-20">
+<div className="container mx-auto px-4 text-center relative z-10 mt-16">
 ```
 To:
 ```
-<div>
+<div className="container mx-auto px-4 text-center relative z-10 mt-4">
 ```
 
-This eliminates the empty space between the last visible content in the dotted section and the scanning line at the top of the CTA section. The `-mt-px` already on the CTA section handles any remaining hairline gap.
-
-Single-line change. Nothing else needs to move.
-
+Single-line change. The scanning line will appear right above the star rating and heading.
