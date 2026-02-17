@@ -433,7 +433,7 @@ const WhyChooseUs = () => {
             {/* Scanning lines */}
             <div className="absolute inset-0 overflow-hidden">
               <div className="absolute top-0 h-px w-full bg-gradient-neural animate-scan-line opacity-30" />
-              <div className="absolute bottom-0 h-px w-full bg-gradient-cyber animate-scan-line opacity-25" style={{ animationDelay: '2s' }} />
+              <div className="absolute top-2 h-px w-full bg-gradient-cyber animate-scan-line opacity-25" style={{ animationDelay: '2s' }} />
             </div>
             
             <div className="relative z-10 py-12 md:py-16 text-center">

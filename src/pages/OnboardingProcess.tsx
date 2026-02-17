@@ -163,6 +163,9 @@ const OnboardingProcess = () => {
       <section className="relative py-16 overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 bg-gradient-mesh opacity-15" />
+        {/* Dotted crosshatch background */}
+        <div className="absolute left-1/2 -translate-x-1/2 w-screen top-0 bottom-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,hsl(var(--primary-glow)/0.03)_2px,hsl(var(--primary-glow)/0.03)_4px)] pointer-events-none" />
+        <div className="absolute left-1/2 -translate-x-1/2 w-screen top-0 bottom-0 bg-[repeating-linear-gradient(90deg,transparent,transparent_2px,hsl(var(--primary-glow)/0.03)_2px,hsl(var(--primary-glow)/0.03)_4px)] pointer-events-none" />
         <div className="absolute top-1/4 right-1/4 w-1 h-1 bg-primary-glow rounded-full animate-ping opacity-25" style={{ animationDelay: '2s' }} />
         <div className="absolute bottom-1/4 left-1/3 w-1 h-1 bg-primary-glow rounded-full animate-ping opacity-30" style={{ animationDelay: '4s' }} />
         
@@ -281,6 +284,9 @@ const OnboardingProcess = () => {
       {/* FAQ Section */}
       <section className="relative py-16 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-mesh opacity-15" />
+        {/* Dotted crosshatch background */}
+        <div className="absolute left-1/2 -translate-x-1/2 w-screen top-0 bottom-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,hsl(var(--primary-glow)/0.03)_2px,hsl(var(--primary-glow)/0.03)_4px)] pointer-events-none" />
+        <div className="absolute left-1/2 -translate-x-1/2 w-screen top-0 bottom-0 bg-[repeating-linear-gradient(90deg,transparent,transparent_2px,hsl(var(--primary-glow)/0.03)_2px,hsl(var(--primary-glow)/0.03)_4px)] pointer-events-none" />
         
         <div className="container mx-auto px-4 relative z-10">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-mono">
@@ -311,7 +317,7 @@ const OnboardingProcess = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="relative py-16 overflow-hidden">
+      <section className="relative py-24 overflow-hidden">
         {/* Light Background Effects matching hero */}
         <div className="absolute inset-0 bg-gradient-mesh opacity-25" />
         <div className="absolute inset-0 bg-gradient-neural animate-neural-pulse opacity-15" />
@@ -326,10 +332,10 @@ const OnboardingProcess = () => {
         <div className="absolute top-10 left-10 w-16 h-16 border-2 border-primary-glow/25 rotate-45 animate-float shadow-cyber" />
         <div className="absolute bottom-10 right-10 w-12 h-12 border-2 border-primary-glow/20 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '3s' }} />
         
-        {/* Scanning lines */}
+        {/* Scanning lines - both at top */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 h-px w-full bg-gradient-neural animate-scan-line opacity-30" />
-          <div className="absolute bottom-0 h-px w-full bg-gradient-cyber animate-scan-line opacity-25" style={{ animationDelay: '2s' }} />
+          <div className="absolute top-2 h-px w-full bg-gradient-cyber animate-scan-line opacity-25" style={{ animationDelay: '2s' }} />
         </div>
         
         <div className="container mx-auto px-4 text-center relative z-10">
