@@ -1,36 +1,19 @@
 
 
-# Fix: Scanning Lines Positioned Outside Their Container
+# Fix Gaps in "Why Choose Us" CTA Section
 
 ## Problem
-The last edit accidentally placed the scanning lines **after** both closing `</div>` tags at lines 415-416, putting them outside the dotted background wrapper (line 82) that has `position: relative`. Without a relative parent, `absolute bottom-0` has no effect and the lines are invisible.
+1. There is a visible gap between the dotted background section and the "Ready to See the Difference" CTA section, caused by the `py-16` bottom padding on the main content section (line 74) plus the `py-24` top padding on the CTA section (line 421).
+2. The scanning lines at the top of the CTA section may show a clipped gap since the section no longer has `overflow-hidden` but the scanning lines wrapper (line 436) still does.
 
-## Current (broken) structure:
-```
-<div className="relative ...">        <!-- line 82, wrapper -->
-  <div className="relative">           <!-- line 88, content -->
-    ...content...
-  </div>                               <!-- line 415, closes content -->
-</div>                                 <!-- line 416, closes wrapper -->
-<!-- Scanning lines are HERE - OUTSIDE the wrapper! -->
-<div className="absolute bottom-0 ...">
-```
+## Changes (File: `src/pages/WhyChooseUs.tsx`)
 
-## Fix in `src/pages/WhyChooseUs.tsx`
+1. **Remove the gap between sections**: Change the CTA section's padding from `py-24` to `pt-0 pb-24` and remove the `-mt-px` hack. Also remove the bottom padding from the main content section by changing `py-16` (line 74) to `pt-16 pb-0`.
 
-Swap lines 415-416 with lines 417-421 so the scanning lines come **before** the wrapper's closing `</div>`:
+2. **Fix scanning line gap**: Add `overflow-hidden` back to the CTA section itself (line 421) so the scanning lines and decorative elements don't overflow, while keeping them flush against the top.
 
-```
-<div className="relative ...">        <!-- line 82, wrapper -->
-  <div className="relative">           <!-- line 88, content -->
-    ...content...
-  </div>                               <!-- closes content div -->
-  <!-- Scanning lines HERE - inside the wrapper -->
-  <div className="absolute bottom-0 left-0 right-0 overflow-hidden">
-    <div className="absolute bottom-0 h-px w-full bg-gradient-neural animate-scan-line opacity-30" />
-    <div className="absolute bottom-2 h-px w-full bg-gradient-cyber animate-scan-line opacity-25" style={{ animationDelay: '2s' }} />
-  </div>
-</div>                                 <!-- closes wrapper -->
-```
+### Specific edits
 
-This is a single reorder of existing lines (415-421) in the file. No new code needed.
+- **Line 74**: Change `py-16` to `pt-16 pb-0` on the main content section
+- **Line 421**: Change `relative py-24 -mt-px` to `relative pt-0 pb-24 overflow-hidden` on the CTA section
+
