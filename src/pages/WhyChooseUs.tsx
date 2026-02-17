@@ -414,11 +414,17 @@ const WhyChooseUs = () => {
           </div>
           </div>
           </div>
+
+          {/* Scanning lines - anchored to bottom edge of dotted background */}
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-screen overflow-hidden">
+            <div className="absolute bottom-0 h-px w-full bg-gradient-neural animate-scan-line opacity-30" />
+            <div className="absolute bottom-2 h-px w-full bg-gradient-cyber animate-scan-line opacity-25" style={{ animationDelay: '2s' }} />
+          </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="relative pt-0 pb-24 overflow-hidden -mt-px">
+      <section className="relative pt-0 pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-mesh opacity-25" />
         <div className="absolute inset-0 bg-gradient-neural animate-neural-pulse opacity-15" />
         
@@ -432,13 +438,7 @@ const WhyChooseUs = () => {
         <div className="absolute top-10 left-10 w-16 h-16 border-2 border-primary-glow/25 rotate-45 animate-float shadow-cyber" />
         <div className="absolute bottom-10 right-10 w-12 h-12 border-2 border-primary-glow/20 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '3s' }} />
         
-        {/* Scanning lines */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 h-px w-full bg-gradient-neural animate-scan-line opacity-30" />
-          <div className="absolute top-2 h-px w-full bg-gradient-cyber animate-scan-line opacity-25" style={{ animationDelay: '2s' }} />
-        </div>
-        
-        <div className="container mx-auto px-4 text-center relative z-10 mt-16">
+        <div className="container mx-auto px-4 text-center relative z-10">
           <div className="flex items-center justify-center mb-6">
             {[...Array(5)].map((_, i) => (
               <Star key={i} className="h-7 w-7 md:h-8 md:w-8 text-[#F39C12] fill-current mx-1" />
