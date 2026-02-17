@@ -391,7 +391,7 @@ const WhyChooseUs = () => {
           </div>
 
           {/* Testimonial */}
-          <div className="mb-12 md:mb-20">
+          <div className="mb-0">
             <Card className="relative max-w-4xl mx-auto p-6 md:p-8 bg-gradient-to-r from-[#3498DB]/10 to-[#2ECC71]/10 border-2 border-[#3498DB]/40 shadow-hologram">
               {/* Decorative elements */}
               <div className="absolute top-4 left-4 w-6 h-6 md:w-8 md:h-8 border-2 border-[#3498DB]/30 rotate-45" />
