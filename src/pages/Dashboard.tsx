@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FileText, Calendar as CalendarIcon, Clock, CheckCircle, AlertCircle, Zap, LogOut, RefreshCw, CreditCard, BarChart3, Target, Eye, Download, Edit, MessageSquare, User as UserIcon, Settings, LayoutDashboard, ChevronDown, Archive, Plus, ArrowRight, ChevronLeft, ChevronRight, Video, Package, Search, X, Sun, SunDim, Moon } from "lucide-react";
+import { FileText, Calendar as CalendarIcon, Clock, CheckCircle, AlertCircle, Zap, LogOut, RefreshCw, BarChart3, Target, Eye, Download, Edit, MessageSquare, User as UserIcon, Settings, LayoutDashboard, ChevronDown, Archive, Plus, ArrowRight, ChevronLeft, ChevronRight, Video, Package, Search, X, Sun, SunDim, Moon } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
@@ -612,10 +612,6 @@ const Dashboard = () => {
                   <DropdownMenuItem className="font-mono text-white hover:bg-primary-glow/20" onClick={() => navigate('/account-settings')}>
                     <Settings className="h-4 w-4 mr-2" />
                     Account Settings
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="font-mono text-white hover:bg-primary-glow/20" onClick={() => window.open('https://billing.stripe.com/p/login/test_your_link', '_blank')}>
-                    <CreditCard className="h-4 w-4 mr-2" />
-                    Manage Subscription
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem className="font-mono text-red-400 hover:bg-red-500/20" onClick={handleSignOut}>
