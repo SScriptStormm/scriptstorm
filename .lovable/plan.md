@@ -1,20 +1,15 @@
 
 
-# Update Dominance Tier Support Feature Label
+# Remove "Manage Subscription" from Account Dropdown
 
 ## Summary
-A one-word copy enhancement to the Dominance tier's support feature, adding "Success" to reinforce premium positioning.
+Remove the redundant "Manage Subscription" dropdown menu item from the dashboard header, since Account Settings already covers subscription and billing in full.
 
 ## What Changes
 
-### File: `src/components/Pricing.tsx` (lines 227-228)
+### File: `src/components/dashboard/DashboardHeader.tsx`
 
-In both the `features` and `annualFeatures` arrays for the Dominance package, update:
+Remove the "Manage Subscription" `DropdownMenuItem` (lines 79-85) that opens a Stripe billing link. This leaves the dropdown with three clean items: Dashboard, Account Settings, and Logout.
 
-**Before:** `Priority Support Portal & Dedicated Client Workspace`
-**After:** `Priority Support Portal + Dedicated Client Success Workspace`
-
-Note: the `&` also changes to `+` to match the suggested copy.
-
-No other files, logic, or dependencies are affected.
+Also remove the `CreditCard` icon from the `lucide-react` import since it will no longer be used.
 
