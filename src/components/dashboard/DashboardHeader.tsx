@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { RefreshCw, LogOut, CreditCard, Settings, LayoutDashboard, ChevronDown, User as UserIcon } from "lucide-react";
+import { RefreshCw, LogOut, Settings, LayoutDashboard, ChevronDown, User as UserIcon } from "lucide-react";
 import scriptStormLogo from "@/assets/scriptstorm-logo.png";
 
 interface DashboardHeaderProps {
@@ -77,13 +77,6 @@ export const DashboardHeader = ({ onRefresh, onSignOut, refreshing }: DashboardH
                 >
                   <Settings className="h-4 w-4 mr-2" />
                   Account Settings
-                </DropdownMenuItem>
-                <DropdownMenuItem 
-                  className="font-mono text-white hover:bg-primary-glow/20 cursor-pointer" 
-                  onClick={() => window.open('https://billing.stripe.com/p/login/test_your_link', '_blank')}
-                >
-                  <CreditCard className="h-4 w-4 mr-2" />
-                  Manage Subscription
                 </DropdownMenuItem>
                 <DropdownMenuSeparator className="bg-primary-glow/20" />
                 <DropdownMenuItem 
