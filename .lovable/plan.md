@@ -1,15 +1,22 @@
 
+# Remove "Manage Subscription" from Dashboard's Inline Dropdown
 
-# Remove "Manage Subscription" from Account Dropdown
-
-## Summary
-Remove the redundant "Manage Subscription" dropdown menu item from the dashboard header, since Account Settings already covers subscription and billing in full.
+## Problem
+The previous fix only removed "Manage Subscription" from `DashboardHeader.tsx`, but the dashboard page (`Dashboard.tsx`) has its own inline header with a duplicate account dropdown that still contains the "Manage Subscription" menu item.
 
 ## What Changes
 
-### File: `src/components/dashboard/DashboardHeader.tsx`
+### File: `src/pages/Dashboard.tsx`
 
-Remove the "Manage Subscription" `DropdownMenuItem` (lines 79-85) that opens a Stripe billing link. This leaves the dropdown with three clean items: Dashboard, Account Settings, and Logout.
+**Step 1 — Remove the "Manage Subscription" menu item** (lines 616-619):
+```tsx
+// DELETE these lines:
+<DropdownMenuItem className="font-mono text-white hover:bg-primary-glow/20" onClick={() => window.open('https://billing.stripe.com/p/login/test_your_link', '_blank')}>
+  <CreditCard className="h-4 w-4 mr-2" />
+  Manage Subscription
+</DropdownMenuItem>
+```
 
-Also remove the `CreditCard` icon from the `lucide-react` import since it will no longer be used.
+**Step 2 — Remove `CreditCard` from the lucide-react imports** at the top of the file, since it will no longer be used.
 
+No other files or logic are affected.
