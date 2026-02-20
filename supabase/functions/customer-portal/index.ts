@@ -97,9 +97,7 @@ serve(async (req) => {
       );
     }
 
-    // Determine return URL from Origin header
-    const origin = req.headers.get("origin") || "https://scriptstorm.lovable.app";
-    const returnUrl = `${origin}/account-settings`;
+    const returnUrl = "https://scriptstorm.org/account-settings";
 
     const session = await stripe.billingPortal.sessions.create({
       customer: customerId,

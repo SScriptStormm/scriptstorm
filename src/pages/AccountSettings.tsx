@@ -364,11 +364,12 @@ export default function AccountSettings() {
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
                 <Button
-                  onClick={() => navigate("/")}
+                  onClick={handleOpenPortal}
+                  disabled={portalLoading}
                   className="flex-1 bg-gradient-to-r from-primary to-primary-glow text-white font-mono hover:opacity-90 transition-opacity"
                 >
                   <Zap className="h-4 w-4 mr-2" />
-                  Upgrade Plan
+                  {portalLoading ? "Opening portal..." : "Upgrade Plan"}
                 </Button>
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
