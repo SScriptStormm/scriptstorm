@@ -1,64 +1,55 @@
 
-# Wire "Upgrade Plan" to Stripe Customer Portal + Fix Return URL
+# Fix: "billing.stripe.com refused to connect"
 
-## Current State
+## Root Cause
 
-All subscription management buttons are already wired to `handleOpenPortal` except one:
+The edge function is working correctly — confirmed by:
+- Edge function logs showing "Portal session created" with a valid URL
+- Network request returning HTTP 200 with `{"url":"https://billing.stripe.com/p/session/..."}`
 
-| Button | Current behaviour | Target |
-|---|---|---|
-| Update (Payment Method) | ✅ `handleOpenPortal()` | No change |
-| PDF (Invoice download) | ✅ `handleOpenPortal()` | No change |
-| View Full Billing History | ✅ `handleOpenPortal()` | No change |
-| Yes, Cancel (Subscription) | ✅ `handleOpenPortal()` | No change |
-| **Upgrade Plan** | ❌ `navigate("/")` | `handleOpenPortal()` |
+The error is caused by how the redirect is handled in the frontend.
 
-## Changes
-
-### 1. `src/pages/AccountSettings.tsx` — Wire "Upgrade Plan"
-
-Replace the `onClick={() => navigate("/")}` on the Upgrade Plan button with `onClick={handleOpenPortal}` and add `disabled={portalLoading}`. Also update the button label to show a loading state while the portal is being prepared.
-
-Before:
-```tsx
-<Button
-  onClick={() => navigate("/")}
-  className="flex-1 bg-gradient-to-r from-primary to-primary-glow ..."
->
-  <Zap className="h-4 w-4 mr-2" />
-  Upgrade Plan
-</Button>
-```
-
-After:
-```tsx
-<Button
-  onClick={handleOpenPortal}
-  disabled={portalLoading}
-  className="flex-1 bg-gradient-to-r from-primary to-primary-glow ..."
->
-  <Zap className="h-4 w-4 mr-2" />
-  {portalLoading ? "Opening portal..." : "Upgrade Plan"}
-</Button>
-```
-
-### 2. `supabase/functions/customer-portal/index.ts` — Fix Return URL
-
-The return URL currently falls back dynamically to the request's `origin` header. This works in most cases but should be hardcoded to the production domain to be reliable across all environments.
-
-Before:
+The current code in `AccountSettings.tsx` line 165:
 ```typescript
-const origin = req.headers.get("origin") || "https://scriptstorm.lovable.app";
-const returnUrl = `${origin}/account-settings`;
+window.location.href = data.url;
 ```
 
-After:
+This redirects the **current browser window context**. When the app is running inside an iframe (Lovable preview, or any embedded context), `window.location.href` navigates the iframe itself — not the top-level browser window. Stripe's billing portal returns the HTTP header `X-Frame-Options: DENY`, which tells the browser: "I refuse to be displayed inside an iframe." The browser honours this and shows "refused to connect."
+
+Even on the production domain (`scriptstorm.org`), using `window.location.href` to navigate to Stripe is problematic — it navigates away from the page entirely, which is a poor user experience. The industry-standard pattern is to open the Stripe portal in a **new tab** using `window.open`.
+
+## The Fix
+
+### File: `src/pages/AccountSettings.tsx`
+
+Change line 165 from:
 ```typescript
-const returnUrl = "https://scriptstorm.org/account-settings";
+window.location.href = data.url;
 ```
+
+To:
+```typescript
+window.open(data.url, '_blank', 'noopener,noreferrer');
+```
+
+This opens the Stripe Customer Portal in a new browser tab. The `noopener,noreferrer` flags are a security best practice — they prevent the new tab from being able to access or manipulate the original tab.
+
+### Why this works
+
+- `window.open(..., '_blank')` opens a new top-level browser tab — not inside the iframe
+- Stripe's `X-Frame-Options: DENY` header only applies to iframes, not new tabs
+- The return URL (`https://scriptstorm.org/account-settings`) will close the portal and send the user back to Account Settings
+- Works in both preview mode and production
+
+### No other changes needed
+
+- The edge function is correct and deployed
+- The Stripe Secret Key is properly configured
+- The return URL is correctly formatted
+- The portal session creation is working
 
 ## Files Changed
+
 ```text
-src/pages/AccountSettings.tsx                ← Wire Upgrade Plan button
-supabase/functions/customer-portal/index.ts  ← Hardcode return URL
+src/pages/AccountSettings.tsx  ← Change window.location.href to window.open(_blank)
 ```
