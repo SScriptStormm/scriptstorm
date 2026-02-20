@@ -46,39 +46,55 @@ serve(async (req) => {
     }
 
     const userId = claimsData.claims.sub;
-    logStep("User authenticated", { userId });
+    const userEmail = claimsData.claims.email as string | undefined;
+    logStep("User authenticated", { userId, userEmail });
+
+    const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
+    if (!stripeKey) throw new Error("Stripe secret key not configured");
+    const stripe = new Stripe(stripeKey, { apiVersion: "2023-10-16" });
 
     // Look up stripe_customer_id from subscribers table
     const { data: subscriber, error: subError } = await supabase
       .from("subscribers")
-      .select("stripe_customer_id")
+      .select("stripe_customer_id, email")
       .eq("user_id", userId)
       .single();
 
-    if (subError || !subscriber?.stripe_customer_id) {
-      logStep("No stripe customer found", { subError });
-      return new Response(
-        JSON.stringify({ error: "No active subscription found. Please subscribe first." }),
-        {
-          status: 400,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        }
-      );
+    logStep("Subscriber lookup", { subscriber, subError });
+
+    let customerId: string | null = subscriber?.stripe_customer_id ?? null;
+
+    // If no customer ID stored, look up by email in Stripe as fallback
+    if (!customerId) {
+      const emailToSearch = subscriber?.email || userEmail;
+      if (!emailToSearch) {
+        return new Response(
+          JSON.stringify({ error: "No active subscription found. Please subscribe first." }),
+          { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+      logStep("No stripe_customer_id in DB, searching Stripe by email", { emailToSearch });
+      const customers = await stripe.customers.list({ email: emailToSearch, limit: 5 });
+      if (customers.data.length > 0) {
+        customerId = customers.data[0].id;
+        logStep("Found Stripe customer by email", { customerId });
+      }
     }
 
-    logStep("Stripe customer found", { customerId: subscriber.stripe_customer_id });
-
-    const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
-    if (!stripeKey) throw new Error("Stripe secret key not configured");
-
-    const stripe = new Stripe(stripeKey, { apiVersion: "2023-10-16" });
+    if (!customerId) {
+      logStep("No Stripe customer found by ID or email");
+      return new Response(
+        JSON.stringify({ error: "No active subscription found. Please subscribe first." }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
 
     // Determine return URL from Origin header
     const origin = req.headers.get("origin") || "https://scriptstorm.lovable.app";
     const returnUrl = `${origin}/account-settings`;
 
     const session = await stripe.billingPortal.sessions.create({
-      customer: subscriber.stripe_customer_id,
+      customer: customerId,
       return_url: returnUrl,
     });
 
