@@ -64,25 +64,33 @@ serve(async (req) => {
 
     let customerId: string | null = subscriber?.stripe_customer_id ?? null;
 
-    // If no customer ID stored, look up by email in Stripe as fallback
+    // If no customer ID stored, try multiple email fallbacks in sequence
     if (!customerId) {
-      const emailToSearch = subscriber?.email || userEmail;
-      if (!emailToSearch) {
-        return new Response(
-          JSON.stringify({ error: "No active subscription found. Please subscribe first." }),
-          { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-        );
-      }
-      logStep("No stripe_customer_id in DB, searching Stripe by email", { emailToSearch });
-      const customers = await stripe.customers.list({ email: emailToSearch, limit: 5 });
-      if (customers.data.length > 0) {
-        customerId = customers.data[0].id;
-        logStep("Found Stripe customer by email", { customerId });
+      // Build list of emails to try, in order of likelihood
+      const emailsToTry = [
+        subscriber?.email,          // e.g. ethaprotect@gmail.com (from DB)
+        userEmail,                  // e.g. hello@scriptstorm.org (from auth)
+        "billing@scriptstorm.org",  // hardcoded fallback (used during checkout)
+      ].filter((e): e is string => !!e && e.trim() !== "");
+
+      // Deduplicate
+      const uniqueEmails = [...new Set(emailsToTry)];
+
+      logStep("Searching Stripe by email fallbacks", { uniqueEmails });
+
+      for (const email of uniqueEmails) {
+        const customers = await stripe.customers.list({ email, limit: 5 });
+        if (customers.data.length > 0) {
+          customerId = customers.data[0].id;
+          logStep("Found Stripe customer by email", { email, customerId });
+          break;
+        }
+        logStep("No Stripe customer found for email", { email });
       }
     }
 
     if (!customerId) {
-      logStep("No Stripe customer found by ID or email");
+      logStep("No Stripe customer found across all email fallbacks");
       return new Response(
         JSON.stringify({ error: "No active subscription found. Please subscribe first." }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
