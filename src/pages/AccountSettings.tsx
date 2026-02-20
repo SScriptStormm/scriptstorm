@@ -79,6 +79,7 @@ export default function AccountSettings() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isUpdating, setIsUpdating] = useState(false);
+  const [portalLoading, setPortalLoading] = useState(false);
 
   useEffect(() => {
     const fetchSubscriberData = async () => {
@@ -155,12 +156,27 @@ export default function AccountSettings() {
     }];
   };
 
-  const handleUpdatePayment = () => {
-    toast.info("Redirecting to payment portal...");
-  };
-
-  const handleCancelSubscription = async () => {
-    toast.info("Cancellation flow initiated");
+  const handleOpenPortal = async () => {
+    setPortalLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("customer-portal");
+      if (error) throw error;
+      if (data?.url) {
+        window.location.href = data.url;
+      } else {
+        toast.error("Could not open billing portal. Please try again.");
+      }
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : String(err);
+      if (message.includes("No active subscription")) {
+        toast.error("No active subscription found. Please subscribe first.");
+      } else {
+        toast.error("Failed to open billing portal. Please try again.");
+      }
+      console.error("Customer portal error:", err);
+    } finally {
+      setPortalLoading(false);
+    }
   };
 
   const handleDeleteAccount = async () => {
@@ -372,8 +388,8 @@ export default function AccountSettings() {
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                       <AlertDialogCancel>Keep Subscription</AlertDialogCancel>
-                      <AlertDialogAction onClick={handleCancelSubscription} className="bg-rose-500 hover:bg-rose-600">
-                        Yes, Cancel
+                      <AlertDialogAction onClick={handleOpenPortal} disabled={portalLoading} className="bg-rose-500 hover:bg-rose-600">
+                        {portalLoading ? "Opening portal..." : "Yes, Cancel"}
                       </AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>
@@ -408,11 +424,12 @@ export default function AccountSettings() {
                   </div>
                 </div>
                 <Button
-                  onClick={handleUpdatePayment}
+                  onClick={handleOpenPortal}
+                  disabled={portalLoading}
                   variant="outline"
                   className="bg-white/5 text-white border-white/20 hover:bg-white/10 font-mono text-sm"
                 >
-                  Update
+                  {portalLoading ? "Loading..." : "Update"}
                 </Button>
               </div>
 
@@ -444,6 +461,8 @@ export default function AccountSettings() {
                             <Button
                               variant="ghost"
                               size="sm"
+                              onClick={handleOpenPortal}
+                              disabled={portalLoading}
                               className="text-primary-glow hover:text-white hover:bg-white/10 font-mono text-xs gap-1"
                             >
                               <Download className="h-3 w-3" />
@@ -456,11 +475,12 @@ export default function AccountSettings() {
                   </Table>
                 </div>
                 <Button
-                  onClick={handleUpdatePayment}
+                  onClick={handleOpenPortal}
+                  disabled={portalLoading}
                   variant="link"
                   className="text-primary-glow hover:text-white mt-2 font-mono text-sm p-0"
                 >
-                  View Full Billing History →
+                  {portalLoading ? "Loading..." : "View Full Billing History →"}
                 </Button>
               </div>
             </GlassCardContent>
