@@ -1,57 +1,59 @@
 
-# Connect Account Settings Buttons to Stripe Customer Portal
+# Fix the Stripe Customer Portal — Email Mismatch
 
-## Overview
-Create a new Supabase Edge Function (`customer-portal`) that generates a Stripe Customer Portal session URL for the logged-in user, then wire up the relevant buttons in `AccountSettings.tsx` to redirect there.
+## The Problem (in plain terms)
 
-## How the Stripe Customer Portal Works
-When a user clicks "Update Payment", "Cancel Subscription", or "View Billing History", the app calls the edge function, which:
-1. Looks up the user's Stripe Customer ID (from the `subscribers` table)
-2. Asks Stripe to create a short-lived portal session URL for that customer
-3. Returns the URL and the browser redirects the user to it
+When someone buys a subscription on ScriptStorm, the checkout function registers them in Stripe using a **hardcoded email** (`billing@scriptstorm.org`) instead of the actual customer's email. So in Stripe's records, every customer is stored under `billing@scriptstorm.org`.
 
-The customer lands on your fully branded Stripe portal (which you've already configured), does what they need, and Stripe redirects them back to the Account Settings page.
+When you then try to open the Customer Portal, the edge function tries to find your Stripe account by searching for your real email (`ethaprotect@gmail.com`). That email doesn't exist in Stripe — so the portal returns "No active subscription found."
+
+## The Fix — Two-Part Solution
+
+### Part 1: Add `billing@scriptstorm.org` as a Final Fallback in the Portal Function
+
+The `customer-portal/index.ts` already tries:
+1. `stripe_customer_id` from the database (null — never saved)
+2. The subscriber's email from the database (`ethaprotect@gmail.com` — not in Stripe)
+
+We need to add a **third fallback**: also try searching Stripe for `hello@scriptstorm.org` (the auth email) and then as a last resort try `billing@scriptstorm.org` — the actual email used during checkout.
+
+This will unblock the portal immediately.
+
+### Part 2: Fix the Checkout Function to Use Real Customer Emails
+
+The `create-checkout/index.ts` hardcodes `billing@scriptstorm.org` as the customer email. This means:
+- Every subscriber appears as the same Stripe customer
+- The `stripe_customer_id` is never linked back to the real user in the database
+- The customer portal can never find the right customer
+
+The fix: remove the hardcoded email. Since checkout doesn't require auth (it's a guest checkout by design), we'll **collect the customer's email during checkout** by passing it in from the frontend, or by using Stripe's built-in email collection on the checkout page (`customer_email: undefined` so Stripe asks for it).
+
+For now (to unblock the portal immediately without changing the checkout flow), we focus on Part 1.
 
 ## Technical Changes
 
-### 1. New File: `supabase/functions/customer-portal/index.ts`
-A new edge function that:
-- Reads the user's auth token from the `Authorization` header to identify who they are
-- Queries the `subscribers` table to get their `stripe_customer_id`
-- Calls `stripe.billingPortal.sessions.create()` with a `return_url` pointing back to `/account-settings`
-- Returns the portal session URL
+### File: `supabase/functions/customer-portal/index.ts`
 
-### 2. Modified File: `src/pages/AccountSettings.tsx`
+Update the email fallback logic to try multiple emails in sequence:
 
-**New `handleOpenPortal` function** replaces the three stub handlers (`handleUpdatePayment`, `handleCancelSubscription`):
 ```
-const handleOpenPortal = async () => {
-  setPortalLoading(true);
-  // call the customer-portal edge function
-  // redirect to the returned URL
-  setPortalLoading(false);
-};
+1. stripe_customer_id from subscribers table  → (null currently)
+2. subscriber.email from DB (ethaprotect@gmail.com) → (not in Stripe)  
+3. userEmail from auth claims (hello@scriptstorm.org) → (not in Stripe)
+4. billing@scriptstorm.org → (THIS IS WHERE YOUR STRIPE CUSTOMER IS)
 ```
 
-**New `portalLoading` state** to disable buttons while the redirect is being prepared (prevents double-clicks).
+This will find the Stripe customer and open the portal correctly.
 
-**Wire up buttons:**
-| Button | Current | After |
-|---|---|---|
-| "Update" (Payment Method) | toast.info | `handleOpenPortal()` |
-| "Cancel Subscription" (confirm dialog → Yes, Cancel) | toast.info | `handleOpenPortal()` |
-| "View Full Billing History →" | toast.info | `handleOpenPortal()` |
-| "Download PDF" buttons | nothing | `handleOpenPortal()` |
+### Note on the Bigger Fix
 
-The "Upgrade Plan" button keeps navigating to `/` (the pricing page) — this is intentional and correct.
+The real long-term solution is to fix `create-checkout` so it:
+- Uses the actual customer's email (passed from the frontend or collected by Stripe)
+- Saves the `stripe_customer_id` back to the `subscribers` table after a successful payment (via a Stripe webhook)
 
-## Edge Cases Handled
-- **No Stripe Customer ID**: If the user has no `stripe_customer_id` in the database (e.g. they signed up but never completed checkout), the function returns a clear error and the UI shows a toast explaining they don't have an active subscription to manage.
-- **Loading state**: Buttons show a loading spinner/disabled state while the portal URL is being fetched.
-- **Auth**: The edge function validates the user's session token — anonymous users cannot access it.
+But that's a separate task. The portal fallback fix above will get the portal working for you right now.
 
-## File Summary
+## Files Changed
 ```text
-supabase/functions/customer-portal/index.ts   ← NEW edge function
-src/pages/AccountSettings.tsx                 ← Wire up buttons + new handler
+supabase/functions/customer-portal/index.ts  ← Add billing@scriptstorm.org as final fallback
 ```
