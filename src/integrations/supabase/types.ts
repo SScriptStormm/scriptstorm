@@ -20,6 +20,7 @@ export type Database = {
           avoid_topics: string | null
           brand_voice: string | null
           competitor_urls: string | null
+          content_draft: string | null
           content_goal: string | null
           content_type: string | null
           created_at: string
@@ -52,6 +53,7 @@ export type Database = {
           avoid_topics?: string | null
           brand_voice?: string | null
           competitor_urls?: string | null
+          content_draft?: string | null
           content_goal?: string | null
           content_type?: string | null
           created_at?: string
@@ -84,6 +86,7 @@ export type Database = {
           avoid_topics?: string | null
           brand_voice?: string | null
           competitor_urls?: string | null
+          content_draft?: string | null
           content_goal?: string | null
           content_type?: string | null
           created_at?: string
