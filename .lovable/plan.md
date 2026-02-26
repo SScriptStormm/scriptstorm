@@ -1,29 +1,27 @@
 
 
-# Update Subscription Tier: Growth to Scale
+## Update Article Status Lifecycle
 
-## Change
+Two changes are needed to align the database and dashboard code to the lifecycle: `pending` → `in_progress` → `review` → `completed`.
 
-Update the `subscribers` table for `ethaprotect@gmail.com` (user_id: `84c8a788-f4a7-48b1-9136-bf8e8fd36c61`) to change `subscription_tier` from `growth` to `scale`.
+### 1. Database Migration
+- Drop the existing `articles_status_check` constraint (currently allows `pending`, `in_progress`, `completed`, `published`)
+- Add a new check constraint allowing only: `pending`, `in_progress`, `review`, `completed`
+- Update any articles currently set to `published` (if any exist) to `completed`
 
-## SQL to execute
+### 2. Code — `ContentPipelineCard.tsx`
+- No changes needed. The `getProgress` function already maps all four statuses correctly (`pending` → 20%, `in_progress` → 60%, `review` → 80%, `completed` → 100%) with appropriate messages.
 
+### Technical Details
+
+**SQL Migration:**
 ```sql
-UPDATE subscribers
-SET subscription_tier = 'scale', updated_at = now()
-WHERE user_id = '84c8a788-f4a7-48b1-9136-bf8e8fd36c61';
+-- Migrate any 'published' articles to 'completed'
+UPDATE articles SET status = 'completed' WHERE status = 'published';
+
+-- Replace the check constraint
+ALTER TABLE articles DROP CONSTRAINT articles_status_check;
+ALTER TABLE articles ADD CONSTRAINT articles_status_check 
+  CHECK (status IN ('pending', 'in_progress', 'review', 'completed'));
 ```
-
-## What changes on the dashboard
-
-- Account Status card: "Growth" badge becomes "Scale"
-- Monthly Usage quotas: 25 articles, 75 social posts, 25 product descriptions
-- Word count range: 2,000-3,000 words per article
-- Revisions on new articles: 2 rounds
-- Package Features widget: Scale features displayed
-- Delivery & Support section appears (24-Hour Orchestrated Delivery + Efficient Support Portal)
-
-## Files Changed
-
-No code changes -- data-only update using the insert/update tool.
 
