@@ -3,7 +3,7 @@ import { GlassCard, GlassCardContent, GlassCardHeader, GlassCardTitle } from "@/
 import { AnimatedStat } from "@/components/ui/AnimatedStat";
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { BarChart3, FileText, MessageSquare, CreditCard, CheckCircle, Clock, AlertCircle, Video } from "lucide-react";
+import { BarChart3, FileText, MessageSquare, CreditCard, CheckCircle, Clock, AlertCircle, Video, Eye } from "lucide-react";
 
 interface Article {
   id: string;
@@ -55,6 +55,7 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
 
   const completedCount = filtered.filter(a => a.status === 'completed').length;
   const inProgressCount = filtered.filter(a => a.status === 'in_progress').length;
+  const reviewCount = filtered.filter(a => a.status === 'review').length;
   const pendingCount = filtered.filter(a => a.status === 'pending').length;
   const totalCount = filtered.length;
   
@@ -111,6 +112,15 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
                 <Clock className="h-5 w-5 text-amber-400" />
               </div>
               <AnimatedStat value={inProgressCount} label="In Progress" variant="warning" size="sm" />
+            </div>
+            
+            <div className="hidden sm:block w-px h-10 bg-white/10" />
+            
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-purple-500/20 border border-purple-500/30 flex items-center justify-center">
+                <Eye className="h-5 w-5 text-purple-400" />
+              </div>
+              <AnimatedStat value={reviewCount} label="In Review" variant="purple" size="sm" />
             </div>
             
             <div className="hidden sm:block w-px h-10 bg-white/10" />
