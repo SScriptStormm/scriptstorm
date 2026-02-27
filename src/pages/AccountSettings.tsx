@@ -48,11 +48,11 @@ interface SubscriberData {
 }
 
 const TIER_PRICES = {
-  starter: { monthly: 297, annual: 2873 },
-  growth: { monthly: 597, annual: 5767 },
-  scale: { monthly: 997, annual: 9641 },
-  authority: { monthly: 1497, annual: 14471 },
-  dominance: { monthly: 2997, annual: 28971 },
+  starter: { monthly: 297, annual: 2850 },
+  growth: { monthly: 597, annual: 5730 },
+  scale: { monthly: 1297, annual: 12450 },
+  authority: { monthly: 1797, annual: 17250 },
+  dominance: { monthly: 2997, annual: 28770 },
 };
 
 type TierKey = "starter" | "growth" | "scale" | "authority" | "dominance";
