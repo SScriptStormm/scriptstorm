@@ -1,27 +1,20 @@
 
 
-## Update Article Status Lifecycle
+## Fix TIER_PRICES in Account Settings
 
-Two changes are needed to align the database and dashboard code to the lifecycle: `pending` → `in_progress` → `review` → `completed`.
+The `TIER_PRICES` object in `src/pages/AccountSettings.tsx` (lines 50-56) is out of sync with the actual pricing defined in `Pricing.tsx`. Multiple prices are incorrect across both monthly and annual tiers.
 
-### 1. Database Migration
-- Drop the existing `articles_status_check` constraint (currently allows `pending`, `in_progress`, `completed`, `published`)
-- Add a new check constraint allowing only: `pending`, `in_progress`, `review`, `completed`
-- Update any articles currently set to `published` (if any exist) to `completed`
+### Change
 
-### 2. Code — `ContentPipelineCard.tsx`
-- No changes needed. The `getProgress` function already maps all four statuses correctly (`pending` → 20%, `in_progress` → 60%, `review` → 80%, `completed` → 100%) with appropriate messages.
+Update the `TIER_PRICES` constant to match the Pricing section:
 
-### Technical Details
-
-**SQL Migration:**
-```sql
--- Migrate any 'published' articles to 'completed'
-UPDATE articles SET status = 'completed' WHERE status = 'published';
-
--- Replace the check constraint
-ALTER TABLE articles DROP CONSTRAINT articles_status_check;
-ALTER TABLE articles ADD CONSTRAINT articles_status_check 
-  CHECK (status IN ('pending', 'in_progress', 'review', 'completed'));
 ```
+starter:   { monthly: 297,  annual: 2850  }   (was 2873)
+growth:    { monthly: 597,  annual: 5730  }   (was 5767)
+scale:     { monthly: 1297, annual: 12450 }   (was 997 / 9641)
+authority: { monthly: 1797, annual: 17250 }   (was 1497 / 14471)
+dominance: { monthly: 2997, annual: 28770 }   (was 28971)
+```
+
+Single file edit — `src/pages/AccountSettings.tsx`, lines 50-56.
 
