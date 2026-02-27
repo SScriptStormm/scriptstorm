@@ -261,6 +261,8 @@ const Dashboard = () => {
         return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30';
       case 'pending':
         return 'bg-blue-500/20 text-blue-400 border-blue-500/30';
+      case 'review':
+        return 'bg-purple-500/20 text-purple-400 border-purple-500/30';
       default:
         return 'bg-gray-500/20 text-gray-400 border-gray-500/30';
     }
@@ -273,6 +275,8 @@ const Dashboard = () => {
         return <Clock className="h-4 w-4" />;
       case 'pending':
         return <AlertCircle className="h-4 w-4" />;
+      case 'review':
+        return <Eye className="h-4 w-4" />;
       default:
         return <FileText className="h-4 w-4" />;
     }
@@ -853,6 +857,18 @@ const Dashboard = () => {
                     >
                       Pending ({monthFilteredArticles.filter(a => a.status === 'pending').length})
                     </Button>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => setStatusFilter('review')}
+                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
+                        statusFilter === 'review' 
+                          ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
+                          : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
+                      }`}
+                    >
+                      In Review ({monthFilteredArticles.filter(a => a.status === 'review').length})
+                    </Button>
                   </div>
 
                   {/* Content Type Filters + Inline Search */}
@@ -1031,15 +1047,15 @@ const Dashboard = () => {
                           <div>
                             <Badge className={`${getStatusColor(article.status)} font-mono tracking-wide text-xs`}>
                               {getStatusIcon(article.status)}
-                              {article.status === 'completed' ? '✅ Ready' : article.status === 'in_progress' ? '🔄 In Progress' : '⏳ Pending'}
+                              {article.status === 'completed' ? '✅ Ready' : article.status === 'in_progress' ? '🔄 In Progress' : article.status === 'review' ? '🔍 In Review' : '⏳ Pending'}
                             </Badge>
-                            {(article.status === 'pending' || article.status === 'in_progress') && <p className="text-primary-glow font-mono text-xs mt-1">
-                                {getDeliveryTimeframe(article)}
+                            {(article.status === 'pending' || article.status === 'in_progress' || article.status === 'review') && <p className="text-primary-glow font-mono text-xs mt-1">
+                                {article.status === 'review' ? 'Quality Control in Progress' : getDeliveryTimeframe(article)}
                               </p>}
                           </div>
                           
-                          {/* Delivery Deadline for In Progress/Pending */}
-                          {(article.status === 'pending' || article.status === 'in_progress') && article.delivery_deadline && <div className="flex items-center justify-between gap-2">
+                          {/* Delivery Deadline for In Progress/Pending/Review */}
+                          {(article.status === 'pending' || article.status === 'in_progress' || article.status === 'review') && article.delivery_deadline && <div className="flex items-center justify-between gap-2">
                               <span className="text-white/70 font-mono text-xs flex-shrink-0">Deadline:</span>
                               <span className="text-yellow-400 font-mono text-xs font-semibold break-words text-right">
                                 {getTimeRemaining(article.delivery_deadline)}
@@ -1139,10 +1155,10 @@ const Dashboard = () => {
                             <td className="py-4 align-top">
                               <Badge className={`${getStatusColor(article.status)} font-mono tracking-wide text-[10px] md:text-xs inline-flex items-center gap-1`}>
                                 {getStatusIcon(article.status)}
-                                {article.status === 'completed' ? '✅ Ready' : article.status === 'in_progress' ? '🔄 In Progress' : '⏳ Pending'}
+                                {article.status === 'completed' ? '✅ Ready' : article.status === 'in_progress' ? '🔄 In Progress' : article.status === 'review' ? '🔍 In Review' : '⏳ Pending'}
                               </Badge>
-                              {(article.status === 'pending' || article.status === 'in_progress') && <p className="text-primary-glow font-mono text-xs mt-1">
-                                  {getDeliveryTimeframe(article)}
+                              {(article.status === 'pending' || article.status === 'in_progress' || article.status === 'review') && <p className="text-primary-glow font-mono text-xs mt-1">
+                                  {article.status === 'review' ? 'Quality Control in Progress' : getDeliveryTimeframe(article)}
                                 </p>}
                             </td>
                             
