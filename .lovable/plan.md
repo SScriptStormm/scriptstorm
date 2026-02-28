@@ -1,46 +1,38 @@
 
 
-## Fix Account Settings Portal Buttons
+## Fix Portal Buttons to Deep-Link to Correct Stripe Pages
 
-### Problem Analysis
-- **Upgrade Plan 500 error**: Stripe's Customer Portal configuration has "subscription updates" disabled. The edge function should gracefully fall back to the generic portal instead of crashing with a 500.
-- **All buttons loading together**: Single `portalLoading` boolean state shared by all buttons.
-- **Billing History & Invoice PDF same page**: Both call `handleOpenPortal()` without differentiation.
+Currently all three actions (Upgrade Plan, Cancel Subscription, Update Payment) call `handleOpenPortal` which opens the same generic Stripe portal home page. We'll use Stripe's `flow_data` parameter to route each button to its specific page.
 
-### Changes
+### 1. Update `customer-portal` Edge Function
 
-#### 1. `supabase/functions/customer-portal/index.ts`
-- When `flow_data` causes a Stripe error (e.g. subscription_update disabled), catch it and retry without `flow_data` to fall back to the generic portal instead of returning a 500.
+Accept a `flow_type` body parameter (`subscription_update`, `subscription_cancel`, `payment_method_update`). When provided:
+- Look up the customer's active subscription via `stripe.subscriptions.list({ customer: customerId, status: 'active', limit: 1 })`
+- Pass `flow_data` to `stripe.billingPortal.sessions.create()` with the appropriate type and subscription ID
+- If no `flow_type` is sent, behave as before (generic portal)
 
-#### 2. `src/pages/AccountSettings.tsx`
-- Replace single `portalLoading` boolean with a string tracking which action is loading (e.g. `"upgrade"`, `"cancel"`, `"payment"`, `"history"`, `"invoice"`, or `null`).
-- Each button checks only its own loading key, so clicking one doesn't affect others.
-- "View Full Billing History" opens portal with no flow (generic portal -- Stripe shows billing history on the main page).
-- "Invoice PDF" button: since Stripe doesn't have a direct "invoice PDF" flow, this should also open the generic portal (where invoices are accessible). Alternatively, we can label it more accurately.
+### 2. Update `AccountSettings.tsx`
+
+- Refactor `handleOpenPortal` to accept an optional `flowType` parameter
+- **Upgrade Plan** button → calls with `flow_type: "subscription_update"`
+- **Cancel Subscription** confirm button → calls with `flow_type: "subscription_cancel"`
+- **Update Payment** button → calls with `flow_type: "payment_method_update"`
 
 ### Technical Detail
 
-**Edge function fallback logic:**
+Stripe's `flow_data` object structure:
 ```typescript
-try {
-  session = await stripe.billingPortal.sessions.create(portalParams);
-} catch (err) {
-  // If flow_data caused the error, retry without it
-  if (portalParams.flow_data) {
-    delete portalParams.flow_data;
-    session = await stripe.billingPortal.sessions.create(portalParams);
-  } else {
-    throw err;
-  }
+// For subscription update/cancel:
+flow_data: {
+  type: "subscription_update", // or "subscription_cancel"
+  subscription_update: { subscription: "sub_xxx" } // or subscription_cancel
+}
+
+// For payment method:
+flow_data: {
+  type: "payment_method_update"
 }
 ```
 
-**Loading state refactor:**
-```typescript
-const [portalLoading, setPortalLoading] = useState<string | null>(null);
-// Each button: disabled={portalLoading === "upgrade"} or disabled={!!portalLoading}
-```
-
-### Important Note for User
-The "Upgrade Plan" button will work but will land on the generic portal page until you enable "Subscription updates" in your **Stripe Dashboard > Settings > Billing > Customer Portal**. The code fix prevents the 500 error by falling back gracefully.
+This requires looking up the subscription ID in the edge function, which adds one Stripe API call but ensures buttons go directly to the right page.
 

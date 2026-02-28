@@ -148,18 +148,7 @@ serve(async (req) => {
       }
     }
 
-    let session;
-    try {
-      session = await stripe.billingPortal.sessions.create(portalParams);
-    } catch (err) {
-      if (portalParams.flow_data) {
-        logStep("flow_data caused error, retrying without it", { error: err instanceof Error ? err.message : String(err) });
-        delete portalParams.flow_data;
-        session = await stripe.billingPortal.sessions.create(portalParams);
-      } else {
-        throw err;
-      }
-    }
+    const session = await stripe.billingPortal.sessions.create(portalParams);
     logStep("Portal session created", { url: session.url });
 
     return new Response(JSON.stringify({ url: session.url }), {
