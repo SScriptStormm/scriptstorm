@@ -76,68 +76,6 @@ serve(async (req) => {
     
     logStep("Price ID selected", { packageType, billing, selectedPriceId });
 
-    // Feature descriptions for each package (vertical format for Stripe checkout)
-    const packageDescriptions: Record<string, string> = {
-      starter: [
-        "✓ 5 SEO Blog Articles (1,500–2,000 words)",
-        "✓ 15 Social Media Posts",
-        "✓ 5 Product/Service Descriptions",
-        "✓ 24-Hour Orchestrated Delivery",
-        "✓ 1 Revision Round",
-        "✓ Standard Keyword Research",
-        "✓ Plagiarism & AI Scan Guarantee",
-      ].join("\n"),
-      growth: [
-        "✓ 10 SEO Blog Articles (1,500–2,000 words)",
-        "✓ 30 Social Media Posts",
-        "✓ 10 Product/Service Descriptions",
-        "✓ 24-Hour Orchestrated Delivery",
-        "✓ 2 Revision Rounds",
-        "✓ Advanced Keyword Research",
-        "✓ Plagiarism & AI Scan Guarantee",
-        "✓ Efficient Support Portal",
-      ].join("\n"),
-      "starter-enterprise": [
-        "✓ 25 SEO Blog Articles (2,000–3,000 words)",
-        "✓ 75 Social & Video Content Pieces",
-        "✓ 25 Product/Service Descriptions",
-        "✓ 24-Hour Orchestrated Delivery",
-        "✓ 2 Revision Rounds",
-        "✓ Advanced Competitor & Keyword Analysis",
-        "✓ Plagiarism & AI Scan Guarantee",
-        "✓ Efficient Support Portal",
-      ].join("\n"),
-      "growth-enterprise": [
-        "✓ 30 SEO Blog Articles (2,000–3,000 words)",
-        "✓ 90 Social & Video Content Pieces",
-        "✓ 30 Product/Service Descriptions",
-        "✓ 24-Hour Orchestrated Delivery",
-        "✓ 3 Revision Rounds",
-        "✓ Advanced Competitor & Keyword Analysis",
-        "✓ Plagiarism & AI Scan Guarantee",
-        "✓ Priority Support Portal",
-      ].join("\n"),
-      "authority-enterprise": [
-        "✓ 50 SEO Blog Articles (2,000–5,000 words)",
-        "✓ 150 Social & Video Content Pieces",
-        "✓ Unlimited Product/Service Descriptions",
-        "✓ 12-Hour Orchestrated Delivery",
-        "✓ Unlimited Revision Rounds",
-        "✓ Full Competitor & Market Analysis",
-        "✓ Plagiarism & AI Scan Guarantee",
-        "✓ Dedicated Account Manager",
-      ].join("\n"),
-    };
-
-    // Update product description in Stripe for vertical checkout display
-    const description = packageDescriptions[packageType];
-    if (description) {
-      const priceData = await stripe.prices.retrieve(selectedPriceId);
-      const productId = typeof priceData.product === "string" ? priceData.product : priceData.product.id;
-      await stripe.products.update(productId, { description });
-      logStep("Product description updated", { productId });
-    }
-
     const lineItems = [
       {
         price: selectedPriceId,
