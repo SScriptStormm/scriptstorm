@@ -20,6 +20,16 @@ serve(async (req) => {
   try {
     logStep("Function started");
 
+    // Parse optional flow_type from body
+    let flowType: string | null = null;
+    try {
+      const body = await req.json();
+      flowType = body?.flow_type || null;
+    } catch {
+      // No body or invalid JSON — that's fine, default to generic portal
+    }
+    logStep("Flow type", { flowType });
+
     // Validate auth
     const authHeader = req.headers.get("Authorization");
     if (!authHeader?.startsWith("Bearer ")) {
@@ -66,16 +76,13 @@ serve(async (req) => {
 
     // If no customer ID stored, try multiple email fallbacks in sequence
     if (!customerId) {
-      // Build list of emails to try, in order of likelihood
       const emailsToTry = [
-        subscriber?.email,          // e.g. ethaprotect@gmail.com (from DB)
-        userEmail,                  // e.g. hello@scriptstorm.org (from auth)
-        "billing@scriptstorm.org",  // hardcoded fallback (used during checkout)
+        subscriber?.email,
+        userEmail,
+        "billing@scriptstorm.org",
       ].filter((e): e is string => !!e && e.trim() !== "");
 
-      // Deduplicate
       const uniqueEmails = [...new Set(emailsToTry)];
-
       logStep("Searching Stripe by email fallbacks", { uniqueEmails });
 
       for (const email of uniqueEmails) {
@@ -99,11 +106,49 @@ serve(async (req) => {
 
     const returnUrl = "https://scriptstorm.org/account-settings";
 
-    const session = await stripe.billingPortal.sessions.create({
+    // Build portal session params
+    const portalParams: Stripe.BillingPortal.SessionCreateParams = {
       customer: customerId,
       return_url: returnUrl,
-    });
+    };
 
+    // If flow_type provided, build flow_data with subscription lookup
+    if (flowType && ["subscription_update", "subscription_cancel", "payment_method_update"].includes(flowType)) {
+      if (flowType === "payment_method_update") {
+        portalParams.flow_data = {
+          type: "payment_method_update",
+        };
+        logStep("Using flow_data for payment_method_update");
+      } else {
+        // Need subscription ID for subscription_update and subscription_cancel
+        const subscriptions = await stripe.subscriptions.list({
+          customer: customerId,
+          status: "active",
+          limit: 1,
+        });
+
+        if (subscriptions.data.length > 0) {
+          const subscriptionId = subscriptions.data[0].id;
+          logStep("Found active subscription", { subscriptionId });
+
+          if (flowType === "subscription_update") {
+            portalParams.flow_data = {
+              type: "subscription_update",
+              subscription_update: { subscription: subscriptionId },
+            };
+          } else if (flowType === "subscription_cancel") {
+            portalParams.flow_data = {
+              type: "subscription_cancel",
+              subscription_cancel: { subscription: subscriptionId },
+            };
+          }
+        } else {
+          logStep("No active subscription found for flow_data, falling back to generic portal");
+        }
+      }
+    }
+
+    const session = await stripe.billingPortal.sessions.create(portalParams);
     logStep("Portal session created", { url: session.url });
 
     return new Response(JSON.stringify({ url: session.url }), {
