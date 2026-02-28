@@ -1,38 +1,20 @@
 
 
-## Fix Portal Buttons to Deep-Link to Correct Stripe Pages
+## Fix TIER_PRICES in Account Settings
 
-Currently all three actions (Upgrade Plan, Cancel Subscription, Update Payment) call `handleOpenPortal` which opens the same generic Stripe portal home page. We'll use Stripe's `flow_data` parameter to route each button to its specific page.
+The `TIER_PRICES` object in `src/pages/AccountSettings.tsx` (lines 50-56) is out of sync with the actual pricing defined in `Pricing.tsx`. Multiple prices are incorrect across both monthly and annual tiers.
 
-### 1. Update `customer-portal` Edge Function
+### Change
 
-Accept a `flow_type` body parameter (`subscription_update`, `subscription_cancel`, `payment_method_update`). When provided:
-- Look up the customer's active subscription via `stripe.subscriptions.list({ customer: customerId, status: 'active', limit: 1 })`
-- Pass `flow_data` to `stripe.billingPortal.sessions.create()` with the appropriate type and subscription ID
-- If no `flow_type` is sent, behave as before (generic portal)
+Update the `TIER_PRICES` constant to match the Pricing section:
 
-### 2. Update `AccountSettings.tsx`
-
-- Refactor `handleOpenPortal` to accept an optional `flowType` parameter
-- **Upgrade Plan** button → calls with `flow_type: "subscription_update"`
-- **Cancel Subscription** confirm button → calls with `flow_type: "subscription_cancel"`
-- **Update Payment** button → calls with `flow_type: "payment_method_update"`
-
-### Technical Detail
-
-Stripe's `flow_data` object structure:
-```typescript
-// For subscription update/cancel:
-flow_data: {
-  type: "subscription_update", // or "subscription_cancel"
-  subscription_update: { subscription: "sub_xxx" } // or subscription_cancel
-}
-
-// For payment method:
-flow_data: {
-  type: "payment_method_update"
-}
+```
+starter:   { monthly: 297,  annual: 2850  }   (was 2873)
+growth:    { monthly: 597,  annual: 5730  }   (was 5767)
+scale:     { monthly: 1297, annual: 12450 }   (was 997 / 9641)
+authority: { monthly: 1797, annual: 17250 }   (was 1497 / 14471)
+dominance: { monthly: 2997, annual: 28770 }   (was 28971)
 ```
 
-This requires looking up the subscription ID in the edge function, which adds one Stripe API call but ensures buttons go directly to the right page.
+Single file edit — `src/pages/AccountSettings.tsx`, lines 50-56.
 

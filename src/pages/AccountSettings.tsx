@@ -156,12 +156,10 @@ export default function AccountSettings() {
     }];
   };
 
-  const handleOpenPortal = async (flowType?: string) => {
+  const handleOpenPortal = async () => {
     setPortalLoading(true);
     try {
-      const { data, error } = await supabase.functions.invoke("customer-portal", {
-        body: flowType ? { flow_type: flowType } : {},
-      });
+      const { data, error } = await supabase.functions.invoke("customer-portal");
       if (error) throw error;
       if (data?.url) {
         window.open(data.url, '_blank', 'noopener,noreferrer');
@@ -366,7 +364,7 @@ export default function AccountSettings() {
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
                 <Button
-                  onClick={() => handleOpenPortal("subscription_update")}
+                  onClick={handleOpenPortal}
                   disabled={portalLoading}
                   className="flex-1 bg-gradient-to-r from-primary to-primary-glow text-white font-mono hover:opacity-90 transition-opacity"
                 >
@@ -391,7 +389,7 @@ export default function AccountSettings() {
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                       <AlertDialogCancel>Keep Subscription</AlertDialogCancel>
-                      <AlertDialogAction onClick={() => handleOpenPortal("subscription_cancel")} disabled={portalLoading} className="bg-rose-500 hover:bg-rose-600">
+                      <AlertDialogAction onClick={handleOpenPortal} disabled={portalLoading} className="bg-rose-500 hover:bg-rose-600">
                         {portalLoading ? "Opening portal..." : "Yes, Cancel"}
                       </AlertDialogAction>
                     </AlertDialogFooter>
@@ -427,7 +425,7 @@ export default function AccountSettings() {
                   </div>
                 </div>
                 <Button
-                  onClick={() => handleOpenPortal("payment_method_update")}
+                  onClick={handleOpenPortal}
                   disabled={portalLoading}
                   variant="outline"
                   className="bg-white/5 text-white border-white/20 hover:bg-white/10 font-mono text-sm"
@@ -464,7 +462,7 @@ export default function AccountSettings() {
                             <Button
                               variant="ghost"
                               size="sm"
-                              onClick={() => handleOpenPortal()}
+                              onClick={handleOpenPortal}
                               disabled={portalLoading}
                               className="text-primary-glow hover:text-white hover:bg-white/10 font-mono text-xs gap-1"
                             >
@@ -478,7 +476,7 @@ export default function AccountSettings() {
                   </Table>
                 </div>
                 <Button
-                  onClick={() => handleOpenPortal()}
+                  onClick={handleOpenPortal}
                   disabled={portalLoading}
                   variant="link"
                   className="text-primary-glow hover:text-white mt-2 font-mono text-sm p-0"
