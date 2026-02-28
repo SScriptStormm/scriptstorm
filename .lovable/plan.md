@@ -1,47 +1,30 @@
 
 
-## Important Context
+## Update Stripe Product Descriptions to Vertical Format
 
-The checkout page and customer portal pages you're seeing are **hosted by Stripe** — their appearance (text color, font, background, feature listing) is controlled in your **Stripe Dashboard**, not in our codebase. Our code only redirects users to Stripe's hosted pages.
+The Stripe checkout page pulls feature text from the **Product description** stored in Stripe. We'll update the `create-checkout` edge function to programmatically set each product's description with line-break-separated features before creating the checkout session.
 
-### What needs to change (all in Stripe Dashboard):
+### Changes to `supabase/functions/create-checkout/index.ts`
 
-**1. Checkout Page Branding (Colors/Font)**
-- Go to **Stripe Dashboard → Settings → Branding** (or Settings → Checkout)
-- Update your brand color to match your blue (`#3B82F6` or similar)
-- Upload your logo
-- Adjust accent colors and font settings so text is readable against the blue background
+1. Add a feature description map for each package, with features separated by `\n` and prefixed with `✓`:
 
-**2. Customer Portal Branding**
-- Go to **Stripe Dashboard → Settings → Billing → Customer Portal → Branding**
-- Same brand color and logo settings apply here
-
-**3. Feature Listing on Checkout**
-The product description shown on checkout comes from the **Product description field** in Stripe. Currently it's one long string. To make it a clean vertical list:
-- Go to **Stripe Dashboard → Products** → click each product (Starter, Growth, Scale, Authority, Dominance)
-- Edit the **Description** field
-- Use line breaks to list features vertically:
-
-```text
-✓ 25 SEO Blog Articles (2,000-3,000 words)
-✓ 75 Social & Video Content Pieces
-✓ 25 Product/Service Descriptions
+```
+starter:
+✓ 5 SEO Blog Articles (1,500–2,000 words)
+✓ 15 Social Media Posts
+✓ 5 Product/Service Descriptions
 ✓ 24-Hour Orchestrated Delivery
-✓ 2 Revision Rounds
-✓ Advanced Competitor & Keyword Analysis
+✓ 1 Revision Round
+✓ Standard Keyword Research
 ✓ Plagiarism & AI Scan Guarantee
-✓ Efficient Support Portal
 ```
 
-### Recommendation on listing format
+(Similar vertical lists for Growth, Scale, Authority, Dominance — matching features from Pricing.tsx)
 
-The vertical list with checkmarks is significantly better for conversion. Here's why:
-- **Scannable** — clients can instantly see what they're paying for
-- **Perceived value** — each line item feels like a distinct deliverable
-- **Reduces friction** — at checkout, clarity = confidence = fewer abandoned carts
+2. After selecting the `priceId`, call `stripe.prices.retrieve(priceId)` to get the `product` ID, then call `stripe.products.update(productId, { description })` with the vertical feature list.
 
-Keep descriptions short on checkout (just the deliverable + quantity). Save the detailed explanations for your pricing page, which already does this well.
+3. This adds two quick Stripe API calls per checkout but is idempotent (same data each time), so it keeps descriptions permanently in sync with the codebase.
 
-### No code changes needed
-This is entirely a Stripe Dashboard configuration task.
+### No frontend changes needed
+The checkout page will automatically render the updated multi-line description.
 
