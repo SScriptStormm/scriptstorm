@@ -148,8 +148,20 @@ serve(async (req) => {
       }
     }
 
-    const session = await stripe.billingPortal.sessions.create(portalParams);
-    logStep("Portal session created", { url: session.url });
+    let session;
+    try {
+      session = await stripe.billingPortal.sessions.create(portalParams);
+      logStep("Portal session created", { url: session.url });
+    } catch (portalError) {
+      if (portalParams.flow_data) {
+        logStep("flow_data failed, retrying without it", { error: portalError instanceof Error ? portalError.message : String(portalError) });
+        delete portalParams.flow_data;
+        session = await stripe.billingPortal.sessions.create(portalParams);
+        logStep("Fallback portal session created", { url: session.url });
+      } else {
+        throw portalError;
+      }
+    }
 
     return new Response(JSON.stringify({ url: session.url }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
