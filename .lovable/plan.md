@@ -1,38 +1,27 @@
 
 
-## Fix Portal Buttons to Deep-Link to Correct Stripe Pages
+## Fix Account Settings Portal Buttons
 
-Currently all three actions (Upgrade Plan, Cancel Subscription, Update Payment) call `handleOpenPortal` which opens the same generic Stripe portal home page. We'll use Stripe's `flow_data` parameter to route each button to its specific page.
+### Problem 1: All buttons loading simultaneously
+The `portalLoading` state is a single boolean shared by all three buttons (Upgrade, Cancel, Update Payment). Clicking any one disables and shows "loading" on all of them.
 
-### 1. Update `customer-portal` Edge Function
+**Fix:** Replace `const [portalLoading, setPortalLoading] = useState(false)` with `const [portalLoading, setPortalLoading] = useState<string | null>(null)` — store the `flowType` string (or a label) of the currently loading button. Each button checks `portalLoading === "its_flow_type"` for its loading text and `portalLoading !== null` only for `disabled`.
 
-Accept a `flow_type` body parameter (`subscription_update`, `subscription_cancel`, `payment_method_update`). When provided:
-- Look up the customer's active subscription via `stripe.subscriptions.list({ customer: customerId, status: 'active', limit: 1 })`
-- Pass `flow_data` to `stripe.billingPortal.sessions.create()` with the appropriate type and subscription ID
-- If no `flow_type` is sent, behave as before (generic portal)
+### Problem 2: Upgrade button fails
+Edge function logs show: `"This subscription cannot be updated because the subscription update feature in the portal configuration is disabled."` — the Stripe Billing Portal configuration in the dashboard doesn't have subscription updates enabled, so passing `flow_data.type = "subscription_update"` fails.
 
-### 2. Update `AccountSettings.tsx`
+**Fix:** Add a fallback in the `customer-portal` edge function: if creating a session with `flow_data` throws an error, retry without `flow_data` to open the generic portal instead of returning a 500 error. Also add `e.stopPropagation()` to button click handlers to prevent event bubbling.
 
-- Refactor `handleOpenPortal` to accept an optional `flowType` parameter
-- **Upgrade Plan** button → calls with `flow_type: "subscription_update"`
-- **Cancel Subscription** confirm button → calls with `flow_type: "subscription_cancel"`
-- **Update Payment** button → calls with `flow_type: "payment_method_update"`
+### Changes
 
-### Technical Detail
+**`src/pages/AccountSettings.tsx`:**
+- Change `portalLoading` from `boolean` to `string | null`
+- Update `handleOpenPortal` to set `portalLoading` to the flowType string
+- Each button: `disabled={portalLoading !== null}`, loading text only when `portalLoading === "its_type"`
+- Add `e.stopPropagation()` to each button's onClick
 
-Stripe's `flow_data` object structure:
-```typescript
-// For subscription update/cancel:
-flow_data: {
-  type: "subscription_update", // or "subscription_cancel"
-  subscription_update: { subscription: "sub_xxx" } // or subscription_cancel
-}
-
-// For payment method:
-flow_data: {
-  type: "payment_method_update"
-}
-```
-
-This requires looking up the subscription ID in the edge function, which adds one Stripe API call but ensures buttons go directly to the right page.
+**`supabase/functions/customer-portal/index.ts`:**
+- Wrap `stripe.billingPortal.sessions.create(portalParams)` in a try/catch
+- On failure when `flow_data` is set, retry without `flow_data` (fallback to generic portal)
+- Log the fallback for debugging
 
