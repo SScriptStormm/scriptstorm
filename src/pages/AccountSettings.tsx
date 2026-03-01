@@ -79,7 +79,7 @@ export default function AccountSettings() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isUpdating, setIsUpdating] = useState(false);
-  const [portalLoading, setPortalLoading] = useState(false);
+  const [portalLoading, setPortalLoading] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchSubscriberData = async () => {
@@ -157,7 +157,8 @@ export default function AccountSettings() {
   };
 
   const handleOpenPortal = async (flowType?: string) => {
-    setPortalLoading(true);
+    const loadingKey = flowType || "generic";
+    setPortalLoading(loadingKey);
     try {
       const { data, error } = await supabase.functions.invoke("customer-portal", {
         body: flowType ? { flow_type: flowType } : {},
@@ -177,7 +178,7 @@ export default function AccountSettings() {
       }
       console.error("Customer portal error:", err);
     } finally {
-      setPortalLoading(false);
+      setPortalLoading(null);
     }
   };
 
@@ -366,12 +367,12 @@ export default function AccountSettings() {
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
                 <Button
-                  onClick={() => handleOpenPortal("subscription_update")}
-                  disabled={portalLoading}
+                  onClick={(e) => { e.stopPropagation(); handleOpenPortal("subscription_update"); }}
+                  disabled={portalLoading !== null}
                   className="flex-1 bg-gradient-to-r from-primary to-primary-glow text-white font-mono hover:opacity-90 transition-opacity"
                 >
                   <Zap className="h-4 w-4 mr-2" />
-                  {portalLoading ? "Opening portal..." : "Upgrade Plan"}
+                  {portalLoading === "subscription_update" ? "Opening portal..." : "Upgrade Plan"}
                 </Button>
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
@@ -391,8 +392,8 @@ export default function AccountSettings() {
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                       <AlertDialogCancel>Keep Subscription</AlertDialogCancel>
-                      <AlertDialogAction onClick={() => handleOpenPortal("subscription_cancel")} disabled={portalLoading} className="bg-rose-500 hover:bg-rose-600">
-                        {portalLoading ? "Opening portal..." : "Yes, Cancel"}
+                      <AlertDialogAction onClick={(e) => { e.stopPropagation(); handleOpenPortal("subscription_cancel"); }} disabled={portalLoading !== null} className="bg-rose-500 hover:bg-rose-600">
+                        {portalLoading === "subscription_cancel" ? "Opening portal..." : "Yes, Cancel"}
                       </AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>
@@ -427,12 +428,12 @@ export default function AccountSettings() {
                   </div>
                 </div>
                 <Button
-                  onClick={() => handleOpenPortal("payment_method_update")}
-                  disabled={portalLoading}
+                  onClick={(e) => { e.stopPropagation(); handleOpenPortal("payment_method_update"); }}
+                  disabled={portalLoading !== null}
                   variant="outline"
                   className="bg-white/5 text-white border-white/20 hover:bg-white/10 font-mono text-sm"
                 >
-                  {portalLoading ? "Loading..." : "Update"}
+                  {portalLoading === "payment_method_update" ? "Loading..." : "Update"}
                 </Button>
               </div>
 
@@ -464,8 +465,8 @@ export default function AccountSettings() {
                             <Button
                               variant="ghost"
                               size="sm"
-                              onClick={() => handleOpenPortal()}
-                              disabled={portalLoading}
+                              onClick={(e) => { e.stopPropagation(); handleOpenPortal(); }}
+                              disabled={portalLoading !== null}
                               className="text-primary-glow hover:text-white hover:bg-white/10 font-mono text-xs gap-1"
                             >
                               <Download className="h-3 w-3" />
@@ -478,12 +479,12 @@ export default function AccountSettings() {
                   </Table>
                 </div>
                 <Button
-                  onClick={() => handleOpenPortal()}
-                  disabled={portalLoading}
+                  onClick={(e) => { e.stopPropagation(); handleOpenPortal(); }}
+                  disabled={portalLoading !== null}
                   variant="link"
                   className="text-primary-glow hover:text-white mt-2 font-mono text-sm p-0"
                 >
-                  {portalLoading ? "Loading..." : "View Full Billing History →"}
+                  {portalLoading === "generic" ? "Loading..." : "View Full Billing History →"}
                 </Button>
               </div>
             </GlassCardContent>
