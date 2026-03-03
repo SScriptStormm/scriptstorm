@@ -39,10 +39,10 @@ export const ContentPipelineCard = ({ article, articlesCount, selectedId, onClea
   };
 
   return (
-    <GlassCard variant="success" glow hover={false}>
+    <GlassCard variant="default" glow hover={false}>
       <GlassCardHeader>
         <GlassCardTitle className="flex items-center gap-2">
-          <Target className="h-5 w-5 text-emerald-400" />
+          <Target className="h-5 w-5 text-primary-glow" />
           CONTENT PIPELINE
         </GlassCardTitle>
       </GlassCardHeader>
@@ -70,7 +70,7 @@ export const ContentPipelineCard = ({ article, articlesCount, selectedId, onClea
               <h3 className="text-white/50 font-mono text-xs uppercase tracking-wider">
                 {selectedId ? 'Selected Project' : 'Latest Project'}
               </h3>
-              <div className="p-4 bg-white/[0.03] rounded-xl border border-emerald-500/20">
+              <div className="p-4 bg-white/[0.03] rounded-xl border border-primary-glow/20">
                 <p className="text-white font-mono text-base mb-1">{article.title}</p>
                 <p className="text-white/40 font-mono text-xs">
                   Submitted: {formatDateTime(article.created_at)}
