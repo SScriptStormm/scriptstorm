@@ -251,7 +251,7 @@ export default function AccountSettings() {
   const isActive = subscriber?.subscribed && (!subscriber?.subscription_end || new Date(subscriber.subscription_end).getTime() > Date.now());
 
   return (
-    <div className="min-h-screen bg-gradient-hero relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-hero bg-fixed relative overflow-hidden">
       {/* Neural network background overlay */}
       <div className="absolute inset-0 opacity-30">
         <div className="absolute inset-0" style={{
@@ -259,6 +259,9 @@ export default function AccountSettings() {
                            radial-gradient(circle at 75% 75%, hsl(var(--accent) / 0.1) 0%, transparent 50%)`
         }} />
       </div>
+
+      {/* Background darkening overlay */}
+      <div className="fixed inset-0 bg-black/20 pointer-events-none" />
 
       {/* Floating geometric elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -271,12 +274,12 @@ export default function AccountSettings() {
         {/* Header */}
         <div className="mb-8">
           <Button
-            variant="ghost"
             onClick={() => navigate("/dashboard")}
-            className="mb-6 text-white/70 hover:text-white hover:bg-white/10 gap-2 font-mono"
+            size="sm"
+            className="mb-6 bg-primary/10 backdrop-blur-sm text-primary-glow border border-primary-glow/40 hover:border-primary-glow hover:bg-primary/20 hover:shadow-[0_0_20px_hsl(221_83%_53%/0.3)] font-mono text-xs sm:text-sm transition-all duration-300 gap-2"
           >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Dashboard
+            <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4" />
+            BACK TO DASHBOARD
           </Button>
           
           <div className="flex items-center gap-4 mb-2">
