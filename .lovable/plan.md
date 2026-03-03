@@ -1,26 +1,31 @@
 
 
-## Rebrand Content Pipeline Card: Green Container to Blue, Keep Green for Completed Steps
+## Fix Account Settings Background & Back Button Consistency
 
-### Rationale
-The green card border/glow implies "success" regardless of pipeline status. Switching the container to blue matches the dashboard's brand consistency while preserving green only where it semantically belongs — on completed stages.
+### Background Fix
+The Account Settings page (`min-h-screen bg-gradient-hero`) is missing two properties the Dashboard has:
+- `bg-fixed` — prevents gradient from shifting on scroll
+- A `fixed inset-0 bg-black/20 pointer-events-none` overlay — darkens the background to match
 
-### Changes (single file: `src/components/dashboard/ContentPipelineCard.tsx`)
+**Change in `src/pages/AccountSettings.tsx`:**
+1. Line 254: Add `bg-fixed` to the outer div: `"min-h-screen bg-gradient-hero bg-fixed relative overflow-hidden"`
+2. After line 261 (after the neural network overlay div): Add `<div className="fixed inset-0 bg-black/20 pointer-events-none" />`
 
-**1. Change GlassCard variant from `"success"` to `"default"`**
-- Line 42: `variant="success"` → `variant="default"`
-- This switches the card border/glow from emerald to the standard blue
+### Back to Dashboard Button Restyle
+Replace the plain ghost button with a bordered glassmorphic style matching the dashboard header buttons (SYNC/ACCOUNT style).
 
-**2. Change the header icon color from emerald to blue**
-- Line 45: `text-emerald-400` → `text-primary-glow` (or `text-blue-400`)
+**Change in `src/pages/AccountSettings.tsx`:**
+Lines 273-280: Replace the current Button with:
+```tsx
+<Button
+  onClick={() => navigate("/dashboard")}
+  size="sm"
+  className="mb-6 bg-primary/10 backdrop-blur-sm text-primary-glow border border-primary-glow/40 hover:border-primary-glow hover:bg-primary/20 hover:shadow-[0_0_20px_hsl(221_83%_53%/0.3)] font-mono text-xs sm:text-sm transition-all duration-300 gap-2"
+>
+  <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4" />
+  BACK TO DASHBOARD
+</Button>
+```
 
-**3. Change the project info box border from emerald to blue**
-- Line 73: `border-emerald-500/20` → `border-primary-glow/20`
-
-**4. Keep all pipeline stage colors unchanged**
-- Completed steps stay emerald green (checkmarks, text, connector lines)
-- Current step stays amber
-- Future steps stay muted white
-
-This is a 3-line change in one file. No functional changes — purely visual refinement.
+This gives it the same blue-bordered, glowing hover style as the dashboard's SYNC button — uppercase mono text, primary glow border, and hover effects. Two changes, one file.
 
