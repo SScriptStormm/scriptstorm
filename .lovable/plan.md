@@ -1,27 +1,26 @@
 
 
-## Fix Account Settings Portal Buttons
+## Rebrand Content Pipeline Card: Green Container to Blue, Keep Green for Completed Steps
 
-### Problem 1: All buttons loading simultaneously
-The `portalLoading` state is a single boolean shared by all three buttons (Upgrade, Cancel, Update Payment). Clicking any one disables and shows "loading" on all of them.
+### Rationale
+The green card border/glow implies "success" regardless of pipeline status. Switching the container to blue matches the dashboard's brand consistency while preserving green only where it semantically belongs — on completed stages.
 
-**Fix:** Replace `const [portalLoading, setPortalLoading] = useState(false)` with `const [portalLoading, setPortalLoading] = useState<string | null>(null)` — store the `flowType` string (or a label) of the currently loading button. Each button checks `portalLoading === "its_flow_type"` for its loading text and `portalLoading !== null` only for `disabled`.
+### Changes (single file: `src/components/dashboard/ContentPipelineCard.tsx`)
 
-### Problem 2: Upgrade button fails
-Edge function logs show: `"This subscription cannot be updated because the subscription update feature in the portal configuration is disabled."` — the Stripe Billing Portal configuration in the dashboard doesn't have subscription updates enabled, so passing `flow_data.type = "subscription_update"` fails.
+**1. Change GlassCard variant from `"success"` to `"default"`**
+- Line 42: `variant="success"` → `variant="default"`
+- This switches the card border/glow from emerald to the standard blue
 
-**Fix:** Add a fallback in the `customer-portal` edge function: if creating a session with `flow_data` throws an error, retry without `flow_data` to open the generic portal instead of returning a 500 error. Also add `e.stopPropagation()` to button click handlers to prevent event bubbling.
+**2. Change the header icon color from emerald to blue**
+- Line 45: `text-emerald-400` → `text-primary-glow` (or `text-blue-400`)
 
-### Changes
+**3. Change the project info box border from emerald to blue**
+- Line 73: `border-emerald-500/20` → `border-primary-glow/20`
 
-**`src/pages/AccountSettings.tsx`:**
-- Change `portalLoading` from `boolean` to `string | null`
-- Update `handleOpenPortal` to set `portalLoading` to the flowType string
-- Each button: `disabled={portalLoading !== null}`, loading text only when `portalLoading === "its_type"`
-- Add `e.stopPropagation()` to each button's onClick
+**4. Keep all pipeline stage colors unchanged**
+- Completed steps stay emerald green (checkmarks, text, connector lines)
+- Current step stays amber
+- Future steps stay muted white
 
-**`supabase/functions/customer-portal/index.ts`:**
-- Wrap `stripe.billingPortal.sessions.create(portalParams)` in a try/catch
-- On failure when `flow_data` is set, retry without `flow_data` (fallback to generic portal)
-- Log the fallback for debugging
+This is a 3-line change in one file. No functional changes — purely visual refinement.
 
