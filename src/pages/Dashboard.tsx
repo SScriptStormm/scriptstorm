@@ -648,7 +648,7 @@ const Dashboard = () => {
                     {greetingData.text}
                   </h2>
                 </div>
-                <p className="text-white/40 font-mono text-xs sm:text-sm tracking-wide">
+                <p className="text-white/60 font-mono text-xs sm:text-sm tracking-wide">
                   {user?.email}
                 </p>
               </div>
@@ -675,7 +675,7 @@ const Dashboard = () => {
 
             {/* Dominance tier notice (conditional) */}
             {hasDominance && (
-              <div className="mt-3 pt-3 border-t border-white/[0.08]">
+              <div className="mt-3 pt-3 border-t border-white/[0.12]">
                 <div className="flex items-center gap-2">
                   <div className="h-2 w-2 rounded-full bg-yellow-400 animate-pulse" />
                   <p className="text-yellow-400/90 font-mono text-xs sm:text-sm">

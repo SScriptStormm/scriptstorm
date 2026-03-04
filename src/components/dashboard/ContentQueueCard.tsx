@@ -96,8 +96,8 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
 
         {/* Status Overview */}
         <div className="mb-6">
-          <h3 className="text-white/50 font-mono text-xs uppercase tracking-wider mb-4">{getPeriodLabel(period)}</h3>
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 p-4 bg-white/[0.03] rounded-xl border border-white/[0.08]">
+          <h3 className="text-white/60 font-mono text-xs uppercase tracking-wider mb-4">{getPeriodLabel(period)}</h3>
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 p-4 bg-white/[0.03] rounded-xl border border-white/[0.12]">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
                 <CheckCircle className="h-5 w-5 text-emerald-400" />
@@ -136,10 +136,10 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
         
         {/* Content Breakdown */}
         <div>
-          <h3 className="text-white/50 font-mono text-xs uppercase tracking-wider mb-4">Content Breakdown</h3>
+          <h3 className="text-white/60 font-mono text-xs uppercase tracking-wider mb-4">Content Breakdown</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Blog Articles */}
-            <div className="group relative p-4 bg-white/[0.03] rounded-xl border border-white/[0.08] hover:border-primary-glow/30 hover:bg-white/[0.05] transition-all duration-300">
+            <div className="group relative p-4 bg-white/[0.03] rounded-xl border border-white/[0.12] hover:border-primary-glow/30 hover:bg-white/[0.05] transition-all duration-300">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="relative">
                 <div className="flex items-center gap-2 mb-3">
@@ -153,7 +153,7 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
             </div>
             
             {/* Social Posts */}
-            <div className="group relative p-4 bg-white/[0.03] rounded-xl border border-white/[0.08] hover:border-emerald-500/30 hover:bg-white/[0.05] transition-all duration-300">
+            <div className="group relative p-4 bg-white/[0.03] rounded-xl border border-white/[0.12] hover:border-emerald-500/30 hover:bg-white/[0.05] transition-all duration-300">
               <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="relative">
                 <div className="flex items-center gap-2 mb-3">
@@ -167,7 +167,7 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
             </div>
 
             {/* YouTube Scripts */}
-            <div className="group relative p-4 bg-white/[0.03] rounded-xl border border-white/[0.08] hover:border-rose-500/30 hover:bg-white/[0.05] transition-all duration-300">
+            <div className="group relative p-4 bg-white/[0.03] rounded-xl border border-white/[0.12] hover:border-rose-500/30 hover:bg-white/[0.05] transition-all duration-300">
               <div className="absolute inset-0 bg-gradient-to-br from-rose-500/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="relative">
                 <div className="flex items-center gap-2 mb-3">
@@ -181,7 +181,7 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
             </div>
             
             {/* Product Descriptions */}
-            <div className="group relative p-4 bg-white/[0.03] rounded-xl border border-white/[0.08] hover:border-purple-500/30 hover:bg-white/[0.05] transition-all duration-300">
+            <div className="group relative p-4 bg-white/[0.03] rounded-xl border border-white/[0.12] hover:border-purple-500/30 hover:bg-white/[0.05] transition-all duration-300">
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="relative">
                 <div className="flex items-center gap-2 mb-3">

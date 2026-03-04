@@ -82,7 +82,7 @@ export const AccountStatusCard = ({ subscriptionTier, subscriptionEnd, isSubscri
             
             {/* Plan */}
             <div className="space-y-1">
-              <span className="text-white/50 font-mono text-xs uppercase tracking-wider">Current Plan</span>
+              <span className="text-white/60 font-mono text-xs uppercase tracking-wider">Current Plan</span>
               <div className="flex items-center gap-2 flex-wrap">
                 <HoloBadge variant={variant} size="md" animated>
                   {emoji} {subscriptionTier ? subscriptionTier.charAt(0).toUpperCase() + subscriptionTier.slice(1) : 'Starter'}
@@ -101,7 +101,7 @@ export const AccountStatusCard = ({ subscriptionTier, subscriptionEnd, isSubscri
             {/* Renewal Date */}
             {subscriptionEnd && (
               <div className="space-y-1">
-                <span className="text-white/50 font-mono text-xs uppercase tracking-wider">Renews On</span>
+                <span className="text-white/60 font-mono text-xs uppercase tracking-wider">Renews On</span>
                 <p className="text-white font-mono text-sm">
                   {formatDate(subscriptionEnd)}
                 </p>

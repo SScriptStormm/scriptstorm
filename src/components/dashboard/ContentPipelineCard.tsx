@@ -67,12 +67,12 @@ export const ContentPipelineCard = ({ article, articlesCount, selectedId, onClea
         {article ? (
           <div className="space-y-6">
             <div className="space-y-2">
-              <h3 className="text-white/50 font-mono text-xs uppercase tracking-wider">
+              <h3 className="text-white/60 font-mono text-xs uppercase tracking-wider">
                 {selectedId ? 'Selected Project' : 'Latest Project'}
               </h3>
               <div className="p-4 bg-white/[0.03] rounded-xl border border-primary-glow/20">
                 <p className="text-white font-mono text-base mb-1">{article.title}</p>
-                <p className="text-white/40 font-mono text-xs">
+                <p className="text-white/60 font-mono text-xs">
                   Submitted: {formatDateTime(article.created_at)}
                 </p>
               </div>
@@ -107,7 +107,7 @@ export const ContentPipelineCard = ({ article, articlesCount, selectedId, onClea
                               <p className={`font-mono text-sm font-semibold ${isCompleted ? 'text-emerald-400' : isCurrent ? 'text-amber-400' : 'text-white/40'}`}>
                                 {stage.emoji} {stage.name}
                               </p>
-                              <p className={`font-mono text-xs mt-0.5 ${isCompleted || isCurrent ? 'text-white/50' : 'text-white/30'}`}>
+                              <p className={`font-mono text-xs mt-0.5 ${isCompleted || isCurrent ? 'text-white/60' : 'text-white/50'}`}>
                                 {stage.desc}
                               </p>
                             </div>
@@ -120,7 +120,7 @@ export const ContentPipelineCard = ({ article, articlesCount, selectedId, onClea
                     })}
                     
                     {/* Progress Bar */}
-                    <div className="mt-6 pt-4 border-t border-white/10">
+                    <div className="mt-6 pt-4 border-t border-white/[0.15]">
                       <div className="flex justify-between text-xs font-mono text-white/50 mb-3">
                         <span>Progress</span>
                         <span>{progress}% Complete</span>
@@ -164,7 +164,7 @@ export const ContentPipelineCard = ({ article, articlesCount, selectedId, onClea
         )}
 
         {articlesCount > 1 && (
-          <p className="text-white/40 font-mono text-xs text-center mt-4 pt-4 border-t border-white/10">
+          <p className="text-white/50 font-mono text-xs text-center mt-4 pt-4 border-t border-white/[0.15]">
             View all projects in the PROJECTS tab below
           </p>
         )}
