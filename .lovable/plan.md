@@ -1,57 +1,38 @@
 
 
-## Dashboard Text Readability Analysis — All Screen Settings
+## Three Fixes: Scrollbar Consistency, Dashboard Text Readability, Back Button Brightness
 
-### Summary of Findings
+### 1. Scrollbar — Force Dark Track + Blue Thumb Globally
 
-After reviewing every dashboard component, the text is **generally well-structured** but has **5 specific problem areas** that could cause readability issues under low brightness, night light (warm/yellow filter), or low-resolution screens.
+The current scrollbar CSS in `src/index.css` uses `!important` and should work, but the issue is that the `--background` CSS variable is white (`0 0% 100%`) in light mode. On the production domain, if the page briefly renders without the gradient background, the browser's native scrollbar shows white.
 
----
+**Fix:** Add `html` and `body` explicit dark scrollbar overrides at the top level, and add `color-scheme: dark` to force the browser's native scrollbar to default to dark mode even before CSS loads.
 
-### Problem Areas Identified
+**File: `src/index.css`**
+- In the `html, body` block (line 130), add `color-scheme: dark;` — this tells the browser to render native UI elements (including scrollbars) in dark mode universally.
 
-**1. `text-white/30` and `text-white/40` — Too faint**
-These appear in multiple places and represent only 30-40% opacity white text. On a dimmed screen or with night light enabled, these become nearly invisible.
+### 2. Dashboard Text — Final Readability Pass
 
-- `ContentPipelineCard.tsx` line 76: `text-white/40` for submission date
-- `ContentPipelineCard.tsx` line 110: `text-white/30` for inactive stage descriptions
-- `ContentPipelineCard.tsx` line 167: `text-white/40` for footer hint text
-- `Dashboard.tsx` line 651: `text-white/40` for user email
-- `AccountStatusCard.tsx` lines 85, 104: `text-white/50` for labels (borderline)
+The previous changes bumped `/30` and `/40` to `/50` and `/60`. After review, these values are now appropriate. The remaining `/40` instances in inactive pipeline icons (`text-white/40`) are intentional to show disabled state. No further text changes needed — the current state is readable.
 
-**2. `text-white/50` labels — Borderline**
-Used for section labels like "Current Plan", "Renews On", "Progress", etc. These are acceptable on normal brightness but strain under night light or low brightness.
+### 3. Back to Dashboard Button — Too Dim
 
-- `MonthlyUsageCard.tsx` lines 74, 103, 132: `text-white/80` for category labels (these are fine)
-- `ContentQueueCard.tsx` lines 99, 139: `text-white/50` for section headers
+The button uses `bg-primary/10` and `text-primary-glow` with `border-primary-glow/40`. The issue is `bg-primary/10` is extremely translucent and `text-primary-glow` alone isn't bright enough against the dark overlay.
 
-**3. Small font sizes on low-resolution screens**
-`text-xs` (12px) is used extensively for labels and metadata. On 720p or lower-resolution monitors, these can be hard to read, especially in monospace (`font-mono` makes characters narrower).
+**File: `src/pages/AccountSettings.tsx` (line 279)**
+Change the button className:
+- `bg-primary/10` → `bg-primary/20` (double the background opacity)
+- `text-primary-glow` → `text-white` (white text is universally readable)
+- `border-primary-glow/40` → `border-primary-glow/60` (stronger border)
+- Add `shadow-[0_0_15px_hsl(221_83%_53%/0.2)]` for a subtle default glow
 
-**4. `text-primary-glow/80` in header — Night light concern**
-The blue `primary-glow` color at 80% opacity in the header subtitle ("CLIENT DASHBOARD") will shift to a muddy green under night light filters, reducing contrast against the dark background.
+New className:
+```
+mb-6 bg-primary/20 backdrop-blur-sm text-white border border-primary-glow/60 hover:border-primary-glow hover:bg-primary/30 hover:shadow-[0_0_20px_hsl(221_83%_53%/0.4)] shadow-[0_0_15px_hsl(221_83%_53%/0.2)] font-mono text-xs sm:text-sm transition-all duration-300 gap-2
+```
 
-**5. Low-opacity borders as visual separators**
-`border-white/10` and `border-white/[0.08]` are used as section dividers. Under low brightness these disappear entirely, making content sections blur together.
-
----
-
-### Recommended Fixes
-
-| Issue | Current | Proposed | File(s) |
-|-------|---------|----------|---------|
-| Faint body text | `text-white/30`, `text-white/40` | Bump to `text-white/50` and `text-white/60` | ContentPipelineCard, Dashboard |
-| Faint labels | `text-white/50` | Bump to `text-white/60` | AccountStatusCard, ContentQueueCard, ContentPipelineCard |
-| User email | `text-white/40` | `text-white/60` | Dashboard.tsx |
-| Footer hints | `text-white/40` | `text-white/50` | ContentPipelineCard |
-| Section borders | `border-white/10`, `border-white/[0.08]` | `border-white/[0.12]` and `border-white/[0.15]` | ContentQueueCard, ContentPipelineCard, Dashboard |
-
-### What stays the same
-- `text-white` for primary headings — already full opacity, excellent readability
-- `text-white/80` for category labels — good contrast ratio
-- Colored text (`text-emerald-400`, `text-amber-400`, `text-primary-glow`) — these are vivid enough to survive brightness/night light changes
-- Font sizes above `text-sm` — no changes needed
-
-### Scope
-~15-20 small opacity value changes across 4-5 files. No layout or structural changes. Purely a contrast/accessibility improvement.
+### Summary
+- **1 line** in `src/index.css`: add `color-scheme: dark;`
+- **1 line** in `src/pages/AccountSettings.tsx`: brighten the back button
+- Dashboard text is already at acceptable readability after the previous round of fixes
 
