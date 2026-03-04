@@ -1,31 +1,57 @@
 
 
-## Fix Account Settings Background & Back Button Consistency
+## Dashboard Text Readability Analysis — All Screen Settings
 
-### Background Fix
-The Account Settings page (`min-h-screen bg-gradient-hero`) is missing two properties the Dashboard has:
-- `bg-fixed` — prevents gradient from shifting on scroll
-- A `fixed inset-0 bg-black/20 pointer-events-none` overlay — darkens the background to match
+### Summary of Findings
 
-**Change in `src/pages/AccountSettings.tsx`:**
-1. Line 254: Add `bg-fixed` to the outer div: `"min-h-screen bg-gradient-hero bg-fixed relative overflow-hidden"`
-2. After line 261 (after the neural network overlay div): Add `<div className="fixed inset-0 bg-black/20 pointer-events-none" />`
+After reviewing every dashboard component, the text is **generally well-structured** but has **5 specific problem areas** that could cause readability issues under low brightness, night light (warm/yellow filter), or low-resolution screens.
 
-### Back to Dashboard Button Restyle
-Replace the plain ghost button with a bordered glassmorphic style matching the dashboard header buttons (SYNC/ACCOUNT style).
+---
 
-**Change in `src/pages/AccountSettings.tsx`:**
-Lines 273-280: Replace the current Button with:
-```tsx
-<Button
-  onClick={() => navigate("/dashboard")}
-  size="sm"
-  className="mb-6 bg-primary/10 backdrop-blur-sm text-primary-glow border border-primary-glow/40 hover:border-primary-glow hover:bg-primary/20 hover:shadow-[0_0_20px_hsl(221_83%_53%/0.3)] font-mono text-xs sm:text-sm transition-all duration-300 gap-2"
->
-  <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4" />
-  BACK TO DASHBOARD
-</Button>
-```
+### Problem Areas Identified
 
-This gives it the same blue-bordered, glowing hover style as the dashboard's SYNC button — uppercase mono text, primary glow border, and hover effects. Two changes, one file.
+**1. `text-white/30` and `text-white/40` — Too faint**
+These appear in multiple places and represent only 30-40% opacity white text. On a dimmed screen or with night light enabled, these become nearly invisible.
+
+- `ContentPipelineCard.tsx` line 76: `text-white/40` for submission date
+- `ContentPipelineCard.tsx` line 110: `text-white/30` for inactive stage descriptions
+- `ContentPipelineCard.tsx` line 167: `text-white/40` for footer hint text
+- `Dashboard.tsx` line 651: `text-white/40` for user email
+- `AccountStatusCard.tsx` lines 85, 104: `text-white/50` for labels (borderline)
+
+**2. `text-white/50` labels — Borderline**
+Used for section labels like "Current Plan", "Renews On", "Progress", etc. These are acceptable on normal brightness but strain under night light or low brightness.
+
+- `MonthlyUsageCard.tsx` lines 74, 103, 132: `text-white/80` for category labels (these are fine)
+- `ContentQueueCard.tsx` lines 99, 139: `text-white/50` for section headers
+
+**3. Small font sizes on low-resolution screens**
+`text-xs` (12px) is used extensively for labels and metadata. On 720p or lower-resolution monitors, these can be hard to read, especially in monospace (`font-mono` makes characters narrower).
+
+**4. `text-primary-glow/80` in header — Night light concern**
+The blue `primary-glow` color at 80% opacity in the header subtitle ("CLIENT DASHBOARD") will shift to a muddy green under night light filters, reducing contrast against the dark background.
+
+**5. Low-opacity borders as visual separators**
+`border-white/10` and `border-white/[0.08]` are used as section dividers. Under low brightness these disappear entirely, making content sections blur together.
+
+---
+
+### Recommended Fixes
+
+| Issue | Current | Proposed | File(s) |
+|-------|---------|----------|---------|
+| Faint body text | `text-white/30`, `text-white/40` | Bump to `text-white/50` and `text-white/60` | ContentPipelineCard, Dashboard |
+| Faint labels | `text-white/50` | Bump to `text-white/60` | AccountStatusCard, ContentQueueCard, ContentPipelineCard |
+| User email | `text-white/40` | `text-white/60` | Dashboard.tsx |
+| Footer hints | `text-white/40` | `text-white/50` | ContentPipelineCard |
+| Section borders | `border-white/10`, `border-white/[0.08]` | `border-white/[0.12]` and `border-white/[0.15]` | ContentQueueCard, ContentPipelineCard, Dashboard |
+
+### What stays the same
+- `text-white` for primary headings — already full opacity, excellent readability
+- `text-white/80` for category labels — good contrast ratio
+- Colored text (`text-emerald-400`, `text-amber-400`, `text-primary-glow`) — these are vivid enough to survive brightness/night light changes
+- Font sizes above `text-sm` — no changes needed
+
+### Scope
+~15-20 small opacity value changes across 4-5 files. No layout or structural changes. Purely a contrast/accessibility improvement.
 
