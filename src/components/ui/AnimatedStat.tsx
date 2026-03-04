@@ -16,37 +16,37 @@ const variantStyles = {
   default: {
     icon: "text-white/60",
     value: "text-white",
-    label: "text-white/50",
+    label: "text-white/60",
     glow: ""
   },
   primary: {
     icon: "text-primary-glow",
     value: "text-primary-glow",
-    label: "text-white/50",
+    label: "text-white/60",
     glow: "drop-shadow-[0_0_10px_hsl(221_83%_53%/0.5)]"
   },
   success: {
     icon: "text-emerald-400",
     value: "text-emerald-400",
-    label: "text-white/50",
+    label: "text-white/60",
     glow: "drop-shadow-[0_0_10px_hsl(160_84%_45%/0.5)]"
   },
   warning: {
     icon: "text-amber-400",
     value: "text-amber-400",
-    label: "text-white/50",
+    label: "text-white/60",
     glow: "drop-shadow-[0_0_10px_hsl(45_93%_55%/0.5)]"
   },
   danger: {
     icon: "text-rose-400",
     value: "text-rose-400",
-    label: "text-white/50",
+    label: "text-white/60",
     glow: "drop-shadow-[0_0_10px_hsl(0_84%_55%/0.5)]"
   },
   purple: {
     icon: "text-purple-400",
     value: "text-purple-400",
-    label: "text-white/50",
+    label: "text-white/60",
     glow: "drop-shadow-[0_0_10px_hsl(270_70%_55%/0.5)]"
   }
 };
