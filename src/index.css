@@ -196,7 +196,7 @@ img[src*='lovable'],
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.3) !important;
+  background: rgb(15, 15, 20) !important;
   border-radius: 4px !important;
 }
 
@@ -223,7 +223,7 @@ img[src*='lovable'],
 /* Firefox scrollbar styling */
 * {
   scrollbar-width: thin;
-  scrollbar-color: hsl(221 83% 53% / 0.5) rgba(0, 0, 0, 0.3);
+  scrollbar-color: hsl(221 83% 53% / 0.5) rgb(15, 15, 20);
 }
 
 /* Textarea-specific scrollbar - blends with dark boxes */
