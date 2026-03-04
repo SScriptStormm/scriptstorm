@@ -276,7 +276,7 @@ export default function AccountSettings() {
           <Button
             onClick={() => navigate("/dashboard")}
             size="sm"
-            className="mb-6 bg-primary/10 backdrop-blur-sm text-primary-glow border border-primary-glow/40 hover:border-primary-glow hover:bg-primary/20 hover:shadow-[0_0_20px_hsl(221_83%_53%/0.3)] font-mono text-xs sm:text-sm transition-all duration-300 gap-2"
+            className="mb-6 bg-primary/20 backdrop-blur-sm text-white border border-primary-glow/60 hover:border-primary-glow hover:bg-primary/30 hover:shadow-[0_0_20px_hsl(221_83%_53%/0.4)] shadow-[0_0_15px_hsl(221_83%_53%/0.2)] font-mono text-xs sm:text-sm transition-all duration-300 gap-2"
           >
             <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4" />
             BACK TO DASHBOARD
