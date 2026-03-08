@@ -263,13 +263,17 @@ export default function AccountSettings() {
       {/* Background darkening overlay */}
       <div className="fixed inset-0 bg-black/20 pointer-events-none" />
 
-      {/* Floating geometric elements */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none z-[5]">
+      {/* Floating background elements */}
+      <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-40 right-20 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
         <div className="absolute top-1/2 left-1/3 w-32 h-32 border border-primary-glow/10 rounded-full animate-spin" style={{ animationDuration: '20s' }} />
-        <div className="absolute top-20 left-10 w-16 h-16 border-2 border-primary-glow/40 rotate-45 animate-float shadow-cyber" />
-        <div className="absolute top-40 right-20 w-12 h-12 border-2 border-primary-glow/35 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '2s' }} />
+      </div>
+
+      {/* Floating geometric squares */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-[15]">
+        <div className="absolute top-[30vh] left-10 w-16 h-16 border-2 border-primary-glow/40 rotate-45 animate-float shadow-cyber" />
+        <div className="absolute top-[45vh] right-20 w-12 h-12 border-2 border-primary-glow/35 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '2s' }} />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-4xl relative z-10">
