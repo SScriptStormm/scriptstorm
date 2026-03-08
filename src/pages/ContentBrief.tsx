@@ -7,16 +7,20 @@ import scriptStormLogo from "@/assets/scriptstorm-logo.png";
 
 const ContentBrief = () => {
   return (
-    <div className="min-h-screen bg-gradient-hero bg-fixed relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-hero bg-fixed relative">
       {/* Subtle dark overlay */}
       <div className="fixed inset-0 bg-black/20 pointer-events-none" />
       
-      {/* Minimal floating elements */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none z-[5]">
+      {/* Minimal floating background elements */}
+      <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-20 right-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute bottom-40 left-10 w-80 h-80 bg-primary-glow/5 rounded-full blur-3xl" />
-        <div className="absolute top-20 left-10 w-16 h-16 border-2 border-primary-glow/40 rotate-45 animate-float shadow-cyber" />
-        <div className="absolute top-40 right-20 w-12 h-12 border-2 border-primary-glow/35 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '2s' }} />
+      </div>
+
+      {/* Floating geometric squares */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-[15]">
+        <div className="absolute top-[30vh] left-10 w-16 h-16 border-2 border-primary-glow/40 rotate-45 animate-float shadow-cyber" />
+        <div className="absolute top-[45vh] right-20 w-12 h-12 border-2 border-primary-glow/35 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '2s' }} />
       </div>
 
       {/* Streamlined header */}

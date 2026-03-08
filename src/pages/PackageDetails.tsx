@@ -60,13 +60,17 @@ export default function PackageDetails() {
       {/* Darkening overlay */}
       <div className="fixed inset-0 bg-black/20 pointer-events-none" />
 
-      {/* Floating geometric elements */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none z-[5]">
+      {/* Floating background elements */}
+      <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary-glow/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/3 rounded-full blur-3xl" />
-        <div className="absolute top-20 left-10 w-16 h-16 border-2 border-primary-glow/40 rotate-45 animate-float shadow-cyber" />
-        <div className="absolute top-40 right-20 w-12 h-12 border-2 border-primary-glow/35 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '2s' }} />
+      </div>
+
+      {/* Floating geometric squares */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-[15]">
+        <div className="absolute top-[30vh] left-10 w-16 h-16 border-2 border-primary-glow/40 rotate-45 animate-float shadow-cyber" />
+        <div className="absolute top-[45vh] right-20 w-12 h-12 border-2 border-primary-glow/35 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '2s' }} />
       </div>
 
       {/* Content */}
