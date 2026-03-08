@@ -573,11 +573,11 @@ const Dashboard = () => {
       {/* Fixed darkening overlay to prevent gradient color shift */}
       <div className="fixed inset-0 bg-black/20 pointer-events-none" />
       
-      {/* Floating elements */}
-      <div className="absolute top-20 left-10 w-16 h-16 border border-primary-glow/10 rotate-45 animate-float" />
-      <div className="absolute top-40 right-20 w-12 h-12 border border-primary-glow/15 rotate-12 animate-float" style={{
-      animationDelay: '2s'
-    }} />
+      {/* Floating geometric elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-[1]">
+        <div className="absolute top-20 left-10 w-16 h-16 border-2 border-primary-glow/30 rotate-45 animate-float shadow-cyber" />
+        <div className="absolute top-40 right-20 w-12 h-12 border-2 border-primary-glow/25 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '2s' }} />
+      </div>
       
       {/* Header */}
       <header className="relative z-10 border-b border-primary-glow/20 bg-black/20 backdrop-blur-xl">
