@@ -67,11 +67,9 @@ export default function PackageDetails() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/3 rounded-full blur-3xl" />
       </div>
 
-      {/* Floating geometric squares */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none z-[15]">
-        <div className="absolute top-[30vh] left-10 w-16 h-16 border-2 border-primary-glow/40 rotate-45 animate-float shadow-cyber" />
-        <div className="absolute top-[45vh] right-20 w-12 h-12 border-2 border-primary-glow/35 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '2s' }} />
-      </div>
+      {/* Floating geometric elements */}
+      <div className="absolute top-20 left-10 w-16 h-16 border-2 border-primary-glow/30 rotate-45 animate-float shadow-cyber" />
+      <div className="absolute top-40 right-20 w-12 h-12 border-2 border-primary-glow/25 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '2s' }} />
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-4xl">

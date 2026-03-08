@@ -270,11 +270,9 @@ export default function AccountSettings() {
         <div className="absolute top-1/2 left-1/3 w-32 h-32 border border-primary-glow/10 rounded-full animate-spin" style={{ animationDuration: '20s' }} />
       </div>
 
-      {/* Floating geometric squares */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none z-[15]">
-        <div className="absolute top-[30vh] left-10 w-16 h-16 border-2 border-primary-glow/40 rotate-45 animate-float shadow-cyber" />
-        <div className="absolute top-[45vh] right-20 w-12 h-12 border-2 border-primary-glow/35 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '2s' }} />
-      </div>
+      {/* Floating geometric elements */}
+      <div className="absolute top-20 left-10 w-16 h-16 border-2 border-primary-glow/30 rotate-45 animate-float shadow-cyber" />
+      <div className="absolute top-40 right-20 w-12 h-12 border-2 border-primary-glow/25 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '2s' }} />
 
       <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-4xl relative z-10">
         {/* Header */}
