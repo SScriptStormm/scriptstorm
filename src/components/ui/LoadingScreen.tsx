@@ -5,6 +5,8 @@ interface LoadingScreenProps {
 const LoadingScreen = ({ message }: LoadingScreenProps) => {
   return (
     <div className="min-h-screen bg-gradient-hero flex items-center justify-center relative overflow-hidden">
+      {/* Darkening overlay to match main pages */}
+      <div className="absolute inset-0 bg-black/20 pointer-events-none" />
       {/* Subtle neural grid overlay */}
       <div className="absolute inset-0 opacity-[0.03]" style={{
         backgroundImage: `radial-gradient(circle at 25% 25%, hsl(var(--primary)) 1px, transparent 1px),
