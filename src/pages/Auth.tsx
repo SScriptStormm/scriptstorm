@@ -224,10 +224,11 @@ const Auth = () => {
       <div className="absolute inset-0 bg-gradient-mesh opacity-40" />
       <div className="absolute inset-0 bg-gradient-neural animate-neural-pulse" />
       
-      {/* Floating elements */}
-      <div className="absolute top-20 left-10 w-20 h-20 border border-primary-glow/20 rotate-45 animate-float" />
-      <div className="absolute top-40 right-20 w-16 h-16 border border-primary-glow/15 rotate-12 animate-float" style={{ animationDelay: '2s' }} />
-      <div className="absolute bottom-40 left-20 w-12 h-12 border border-primary-glow/25 rotate-45 animate-float" style={{ animationDelay: '4s' }} />
+      {/* Floating geometric elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-[5]">
+        <div className="absolute top-20 left-10 w-16 h-16 border-2 border-primary-glow/40 rotate-45 animate-float shadow-cyber" />
+        <div className="absolute top-40 right-20 w-12 h-12 border-2 border-primary-glow/35 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '2s' }} />
+      </div>
       
       {/* Scanning line effect */}
       <div className="absolute inset-0 overflow-hidden">
