@@ -17,11 +17,9 @@ const ContentBrief = () => {
         <div className="absolute bottom-40 left-10 w-80 h-80 bg-primary-glow/5 rounded-full blur-3xl" />
       </div>
 
-      {/* Floating geometric squares */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none z-[15]">
-        <div className="absolute top-[30vh] left-10 w-16 h-16 border-2 border-primary-glow/40 rotate-45 animate-float shadow-cyber" />
-        <div className="absolute top-[45vh] right-20 w-12 h-12 border-2 border-primary-glow/35 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '2s' }} />
-      </div>
+      {/* Floating geometric elements */}
+      <div className="absolute top-20 left-10 w-16 h-16 border-2 border-primary-glow/30 rotate-45 animate-float shadow-cyber" />
+      <div className="absolute top-40 right-20 w-12 h-12 border-2 border-primary-glow/25 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '2s' }} />
 
       {/* Streamlined header */}
       <header className="relative z-10 border-b border-white/10 bg-black/30 backdrop-blur-xl">
