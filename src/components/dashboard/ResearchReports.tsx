@@ -103,7 +103,7 @@ const ResearchReports = ({ userId }: ResearchReportsProps) => {
   }
 
   return (
-    <GlassCard variant="default" glow>
+    <GlassCard variant="default" glow hover={false}>
       <GlassCardHeader>
         <GlassCardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
           <FileText className="h-5 w-5 text-primary-glow" />
