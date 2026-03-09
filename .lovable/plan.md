@@ -1,19 +1,20 @@
 
 
-## Fix: Scrollbar Track Still Appears White
+## Fix: Tablet Project Table Squished + Mobile Support Tab Missing
 
-### Root Cause
+### Problem 1: Tablet Layout Squished
+The project table switches from cards to table at `md` (768px). On tablets (768–1024px), the 6-column table is too cramped. The card layout should extend up to `lg` (1024px).
 
-The scrollbar track uses `rgba(0, 0, 0, 0.3)` — a **semi-transparent** black. On pages where the underlying background is white (the CSS variable `--background: 0 0% 100%`), this renders as light gray/white. The `color-scheme: dark` only affects the browser's *native* scrollbar fallback, not the custom `-webkit-scrollbar` styles which take priority.
+### Problem 2: Mobile Support Tab Missing
+All tab triggers show icon + full text at every screen size. On mobile, with 4+ tabs (Projects, Calendar, Research, Support), they overflow the `TabsList` and the Support tab gets pushed out of view. On mobile, tabs should show icons only; text appears at `md` (768px+).
 
-### Fix
+### Files to Update
 
-**File: `src/index.css`**
+**`src/pages/Dashboard.tsx`**
 
-Change the scrollbar track background from semi-transparent to fully opaque dark:
+1. **Tab triggers** (lines 723–745): Hide text labels on mobile using `hidden md:inline`. Change icon `mr-2` to `md:mr-2` so spacing only applies when text is visible. For the Support tab's PRIORITY badge, also hide it on mobile.
 
-- Line 199: `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)` (solid near-black)
-- Line 226 (Firefox): `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)`
+2. **TabsList** (line 722): Add `overflow-x-auto` to allow horizontal scrolling as a fallback.
 
-This ensures the track is always dark regardless of what's behind it.
+3. **Card vs Table breakpoint** (lines 1005, 1099): Change `block md:hidden` → `block lg:hidden` and `hidden md:block` → `hidden lg:block` so tablets use the card layout instead of the squished table.
 
