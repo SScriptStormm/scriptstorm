@@ -1,13 +1,19 @@
 
 
-## Make First Square More Visible
+## Fix: Scrollbar Track Still Appears White
 
-Increase the border opacity of the first (left) square from `/30` to `/40` across all pages that have these decorative elements. This makes it more prominent against the background while keeping it lighter than a fully opaque border.
+### Root Cause
 
-### Files to Update
-- `src/pages/Dashboard.tsx` — first square `border-primary-glow/30` → `border-primary-glow/40`
-- `src/pages/ContentBrief.tsx` — same change
-- `src/pages/AccountSettings.tsx` — same change
-- `src/pages/PackageDetails.tsx` — same change
-- `src/pages/Auth.tsx` — same change
+The scrollbar track uses `rgba(0, 0, 0, 0.3)` — a **semi-transparent** black. On pages where the underlying background is white (the CSS variable `--background: 0 0% 100%`), this renders as light gray/white. The `color-scheme: dark` only affects the browser's *native* scrollbar fallback, not the custom `-webkit-scrollbar` styles which take priority.
+
+### Fix
+
+**File: `src/index.css`**
+
+Change the scrollbar track background from semi-transparent to fully opaque dark:
+
+- Line 199: `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)` (solid near-black)
+- Line 226 (Firefox): `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)`
+
+This ensures the track is always dark regardless of what's behind it.
 
