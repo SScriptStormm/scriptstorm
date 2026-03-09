@@ -731,7 +731,7 @@ const Dashboard = () => {
               </TabsTrigger>}
             
             {hasScale && <TabsTrigger value="reports" className="font-mono text-white/60 transition-all duration-200 rounded-md px-2 sm:px-4 py-2 hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)]">
-                <FileText className="h-4 w-4 sm:mr-2" />
+                <FileText className="h-6 w-6 sm:h-4 sm:w-4 sm:mr-2" />
                 <span className="hidden sm:inline">RESEARCH</span>
               </TabsTrigger>}
             
