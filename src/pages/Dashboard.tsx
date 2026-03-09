@@ -1096,7 +1096,7 @@ const Dashboard = () => {
                 </div>
                 
                 {/* Desktop Table Layout */}
-                <div className="hidden md:block overflow-x-auto">
+                <div className="hidden lg:block overflow-x-auto">
                   <table className="w-full border-collapse">
                     <thead>
                       <tr className="border-b border-primary-glow/20 text-left">
