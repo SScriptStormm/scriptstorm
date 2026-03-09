@@ -18,8 +18,8 @@ const ContentBrief = () => {
       </div>
 
       {/* Floating geometric elements */}
-      <div className="absolute top-20 left-10 w-16 h-16 border-2 border-primary-glow/30 rotate-45 animate-float shadow-cyber" />
-      <div className="absolute top-40 right-20 w-12 h-12 border-2 border-primary-glow/25 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '2s' }} />
+      <div className="absolute top-40 left-10 w-16 h-16 border-2 border-primary-glow/30 rotate-45 animate-float shadow-cyber" />
+      <div className="absolute top-60 right-20 w-12 h-12 border-2 border-primary-glow/25 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '2s' }} />
 
       {/* Streamlined header */}
       <header className="relative z-10 border-b border-white/10 bg-black/30 backdrop-blur-xl">
