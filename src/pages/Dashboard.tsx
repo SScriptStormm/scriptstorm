@@ -1200,9 +1200,9 @@ const Dashboard = () => {
 
                 {/* Pagination Controls */}
                 {totalPages > 1 && (
-                  <div className="mt-6 flex flex-col md:flex-row items-center justify-between gap-4 pt-4 border-t border-white/[0.1]">
+                  <div className="mt-6 flex flex-col lg:flex-row items-center justify-between gap-4 pt-4 border-t border-white/[0.1]">
                     {/* Results Count */}
-                    <p className="text-white/60 font-mono text-xs md:text-sm">
+                    <p className="text-white/60 font-mono text-xs lg:text-sm">
                       Showing {startIndex + 1}-{Math.min(endIndex, searchFilteredArticles.length)} of {searchFilteredArticles.length} projects
                     </p>
                     
