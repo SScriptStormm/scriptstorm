@@ -1,16 +1,19 @@
 
 
-## Restore Desktop Tab Layout
+## Fix: Scrollbar Track Still Appears White
 
-Looking at the current code, the tabs now have `flex-shrink-0`, `overflow-x-auto`, and `hidden md:inline` classes that were added for mobile/tablet fixes. On desktop these shouldn't visually change much, but the `w-full` on TabsList and `flex-shrink-0` on triggers may be spreading tabs differently than the original layout.
+### Root Cause
 
-### Changes to `src/pages/Dashboard.tsx`
+The scrollbar track uses `rgba(0, 0, 0, 0.3)` — a **semi-transparent** black. On pages where the underlying background is white (the CSS variable `--background: 0 0% 100%`), this renders as light gray/white. The `color-scheme: dark` only affects the browser's *native* scrollbar fallback, not the custom `-webkit-scrollbar` styles which take priority.
 
-1. **TabsList (line 722)**: Remove `w-full` and `min-w-0` so desktop tabs don't stretch. Keep `overflow-x-auto scrollbar-hide` only for small screens using responsive classes: add `md:overflow-visible` so desktop behaves as before.
+### Fix
 
-2. **TabsTrigger (lines 723-744)**: Remove `flex-shrink-0` on `md:` and up so desktop tabs size naturally. Change classes to `flex-shrink-0 md:flex-shrink` on each trigger. Restore `px-4` as default (remove the `px-3 md:px-4` split — use `px-3 md:px-4` is fine, keep it). Make text always visible on desktop by keeping `hidden md:inline`.
+**File: `src/index.css`**
 
-3. **Badge (line 741)**: Keep `hidden md:inline-flex` so PRIORITY badge shows on tablet+ and desktop.
+Change the scrollbar track background from semi-transparent to fully opaque dark:
 
-Essentially: mobile gets icon-only scrollable tabs, tablet gets icon+text scrollable tabs, desktop gets the original non-scrollable full-text tabs — all by adding `md:overflow-visible` and `md:flex-shrink` to undo the mobile-specific constraints at the `md` breakpoint.
+- Line 199: `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)` (solid near-black)
+- Line 226 (Firefox): `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)`
+
+This ensures the track is always dark regardless of what's behind it.
 
