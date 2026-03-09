@@ -1,10 +1,19 @@
 
 
-## Fix: Remove Hover Effect from Research Reports Card
+## Fix: Scrollbar Track Still Appears White
 
-The `GlassCard` component defaults `hover` to `true`, causing a scale-up effect on hover. The `ResearchReports` component doesn't pass `hover={false}` like the other dashboard widgets do.
+### Root Cause
 
-### File to Update
+The scrollbar track uses `rgba(0, 0, 0, 0.3)` — a **semi-transparent** black. On pages where the underlying background is white (the CSS variable `--background: 0 0% 100%`), this renders as light gray/white. The `color-scheme: dark` only affects the browser's *native* scrollbar fallback, not the custom `-webkit-scrollbar` styles which take priority.
 
-**`src/components/dashboard/ResearchReports.tsx`** — Add `hover={false}` to both `GlassCard` instances (the empty state card around line 92 and the reports list card around line 103).
+### Fix
+
+**File: `src/index.css`**
+
+Change the scrollbar track background from semi-transparent to fully opaque dark:
+
+- Line 199: `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)` (solid near-black)
+- Line 226 (Firefox): `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)`
+
+This ensures the track is always dark regardless of what's behind it.
 

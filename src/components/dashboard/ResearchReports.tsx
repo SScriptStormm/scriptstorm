@@ -88,7 +88,7 @@ const ResearchReports = ({ userId }: ResearchReportsProps) => {
 
   if (reports.length === 0) {
     return (
-      <GlassCard variant="default" glow>
+      <GlassCard variant="default" glow hover={false}>
         <GlassCardContent className="py-12 text-center">
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/[0.05] border border-white/[0.1] mb-4">
             <FileBarChart className="h-10 w-10 text-primary-glow" />
@@ -103,7 +103,7 @@ const ResearchReports = ({ userId }: ResearchReportsProps) => {
   }
 
   return (
-    <GlassCard variant="default" glow>
+    <GlassCard variant="default" glow hover={false}>
       <GlassCardHeader>
         <GlassCardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
           <FileText className="h-5 w-5 text-primary-glow" />
