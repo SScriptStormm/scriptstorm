@@ -1302,7 +1302,7 @@ const Dashboard = () => {
 
 
           {/* Priority Support Tab (Authority, Dominance) */}
-          {hasAuthority && <TabsContent value="support">
+          {hasScale && <TabsContent value="support">
               <PrioritySupport userEmail={user?.email || ''} />
             </TabsContent>}
 
