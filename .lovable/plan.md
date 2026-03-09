@@ -1,14 +1,19 @@
 
 
-## Fix: Center and Enlarge Mobile Tab Icons
+## Fix: Scrollbar Track Still Appears White
 
-On mobile, the icon-only tabs appear small and left-aligned. We'll center them within the `TabsList` and bump up the icon size on mobile, without affecting `sm:` and above.
+### Root Cause
 
-### Changes in `src/pages/Dashboard.tsx`
+The scrollbar track uses `rgba(0, 0, 0, 0.3)` — a **semi-transparent** black. On pages where the underlying background is white (the CSS variable `--background: 0 0% 100%`), this renders as light gray/white. The `color-scheme: dark` only affects the browser's *native* scrollbar fallback, not the custom `-webkit-scrollbar` styles which take priority.
 
-1. **TabsList (line 722)**: Add `justify-center w-full` so the tab buttons are centered on mobile.
+### Fix
 
-2. **Each TabsTrigger (lines 723, 728, 733, 739)**: Change icon size from `h-4 w-4` to `h-5 w-5 sm:h-4 sm:w-4` — larger on mobile, normal on tablet/desktop. Also increase mobile padding slightly: `px-3 sm:px-4`.
+**File: `src/index.css`**
 
-This is purely a mobile visual tweak — tablet and desktop layouts remain identical.
+Change the scrollbar track background from semi-transparent to fully opaque dark:
+
+- Line 199: `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)` (solid near-black)
+- Line 226 (Firefox): `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)`
+
+This ensures the track is always dark regardless of what's behind it.
 
