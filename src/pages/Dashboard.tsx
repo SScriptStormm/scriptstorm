@@ -1002,7 +1002,7 @@ const Dashboard = () => {
             ) : (
               <>
                 {/* Mobile Card Layout */}
-                <div className="block md:hidden space-y-4">
+                <div className="block lg:hidden space-y-4">
                   {paginatedArticles.map(article => {
                     const isSelected = article.id === selectedPipelineArticleId;
                     return (
