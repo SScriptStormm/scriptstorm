@@ -765,7 +765,7 @@ const Dashboard = () => {
               
               {articles.length > 0 && <div className="flex flex-col gap-3">
                   {/* Mobile-only Search Input */}
-                  <div className="relative w-full md:hidden">
+                  <div className="relative w-full lg:hidden">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-white/40" />
                     <input
                       type="text"
@@ -938,7 +938,7 @@ const Dashboard = () => {
                       </Button>
                     </div>
                     {/* Desktop inline search */}
-                    <div className="relative hidden md:block flex-shrink-0 w-48 lg:w-56 pb-2">
+                    <div className="relative hidden lg:block flex-shrink-0 w-48 lg:w-56 pb-2">
                       <Search className="absolute left-2.5 top-[calc(50%-4px)] -translate-y-1/2 h-3.5 w-3.5 text-white/40" />
                       <input
                         type="text"
@@ -1002,7 +1002,7 @@ const Dashboard = () => {
             ) : (
               <>
                 {/* Mobile Card Layout */}
-                <div className="block md:hidden space-y-4">
+                <div className="block lg:hidden space-y-4">
                   {paginatedArticles.map(article => {
                     const isSelected = article.id === selectedPipelineArticleId;
                     return (
@@ -1096,7 +1096,7 @@ const Dashboard = () => {
                 </div>
                 
                 {/* Desktop Table Layout */}
-                <div className="hidden md:block overflow-x-auto">
+                <div className="hidden lg:block overflow-x-auto">
                   <table className="w-full border-collapse">
                     <thead>
                       <tr className="border-b border-primary-glow/20 text-left">
@@ -1200,9 +1200,9 @@ const Dashboard = () => {
 
                 {/* Pagination Controls */}
                 {totalPages > 1 && (
-                  <div className="mt-6 flex flex-col md:flex-row items-center justify-between gap-4 pt-4 border-t border-white/[0.1]">
+                  <div className="mt-6 flex flex-col lg:flex-row items-center justify-between gap-4 pt-4 border-t border-white/[0.1]">
                     {/* Results Count */}
-                    <p className="text-white/60 font-mono text-xs md:text-sm">
+                    <p className="text-white/60 font-mono text-xs lg:text-sm">
                       Showing {startIndex + 1}-{Math.min(endIndex, searchFilteredArticles.length)} of {searchFilteredArticles.length} projects
                     </p>
                     
@@ -1224,7 +1224,7 @@ const Dashboard = () => {
                       </Button>
                       
                       {/* Page Numbers - Desktop */}
-                      <div className="hidden md:flex items-center gap-1">
+                      <div className="hidden lg:flex items-center gap-1">
                         {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => {
                           // Show first page, last page, current page, and pages around current
                           const showPage = page === 1 || 
@@ -1264,7 +1264,7 @@ const Dashboard = () => {
                       </div>
                       
                       {/* Page Indicator - Mobile */}
-                      <span className="md:hidden text-white font-mono text-sm px-3">
+                      <span className="lg:hidden text-white font-mono text-sm px-3">
                         Page {currentPage} of {totalPages}
                       </span>
                       

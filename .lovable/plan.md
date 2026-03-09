@@ -1,18 +1,19 @@
 
 
-## Fix: Tablet Layout for Content Projects
+## Fix: Scrollbar Track Still Appears White
 
-The table currently switches from card layout to table layout at `md` (768px), but the table columns are too cramped on tablet screens. The breakpoint should be `lg` (1024px) so tablets get the spacious card layout instead.
+### Root Cause
 
-### Changes in `src/pages/Dashboard.tsx`
+The scrollbar track uses `rgba(0, 0, 0, 0.3)` — a **semi-transparent** black. On pages where the underlying background is white (the CSS variable `--background: 0 0% 100%`), this renders as light gray/white. The `color-scheme: dark` only affects the browser's *native* scrollbar fallback, not the custom `-webkit-scrollbar` styles which take priority.
 
-Update all `md:` breakpoint references in the projects section to `lg:`:
+### Fix
 
-1. **Mobile card layout** (~line 1005): `block md:hidden` → `block lg:hidden`
-2. **Desktop table layout** (~line 1099): `hidden md:block` → `hidden lg:block`
-3. **Mobile search input** (~line 768): `md:hidden` → `lg:hidden`
-4. **Desktop search input** (if separate): `hidden md:block` → `hidden lg:block`
-5. **Pagination responsive classes**: Update `md:flex`, `md:hidden` references in the pagination section to `lg:flex`, `lg:hidden`
+**File: `src/index.css`**
 
-This ensures tablet users (768-1023px) see the card-based layout, and only desktop users (1024px+) see the full table.
+Change the scrollbar track background from semi-transparent to fully opaque dark:
+
+- Line 199: `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)` (solid near-black)
+- Line 226 (Firefox): `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)`
+
+This ensures the track is always dark regardless of what's behind it.
 
