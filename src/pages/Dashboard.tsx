@@ -737,7 +737,7 @@ const Dashboard = () => {
             
             
             {hasScale && <TabsTrigger value="support" className="font-mono text-white/60 transition-all duration-200 rounded-md px-2 sm:px-4 py-2 hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)] relative">
-                <MessageSquare className="h-4 w-4 sm:mr-2" />
+                <MessageSquare className="h-6 w-6 sm:h-4 sm:w-4 sm:mr-2" />
                 <span className="hidden sm:inline">SUPPORT</span>
                 {(hasAuthority || hasDominance) && <Badge className="ml-2 bg-yellow-500/30 text-yellow-300 border-yellow-500/50 text-xs px-1 py-0 hidden sm:inline-flex">
                     PRIORITY
