@@ -725,7 +725,7 @@ const Dashboard = () => {
               <span className="hidden sm:inline">PROJECTS</span>
             </TabsTrigger>
             
-            {hasGrowth && <TabsTrigger value="calendar" className="font-mono text-white/60 transition-all duration-200 rounded-md px-2 sm:px-4 py-2 hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)]">
+            {hasGrowth && <TabsTrigger value="calendar" className="font-mono text-white/60 transition-all duration-200 rounded-md px-4 sm:px-4 py-3 sm:py-2 hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)] min-w-[48px] sm:min-w-0">
                 <CalendarIcon className="h-6 w-6 sm:h-4 sm:w-4 sm:mr-2" />
                 <span className="hidden sm:inline">CALENDAR</span>
               </TabsTrigger>}
