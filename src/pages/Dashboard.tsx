@@ -1224,7 +1224,7 @@ const Dashboard = () => {
                       </Button>
                       
                       {/* Page Numbers - Desktop */}
-                      <div className="hidden md:flex items-center gap-1">
+                      <div className="hidden lg:flex items-center gap-1">
                         {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => {
                           // Show first page, last page, current page, and pages around current
                           const showPage = page === 1 || 
