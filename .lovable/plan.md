@@ -1,17 +1,19 @@
 
 
-## Shrink Mobile Tab Container Width
+## Fix: Scrollbar Track Still Appears White
 
-The `TabsList` currently has `w-full` on mobile, stretching it across the entire screen. To make it shorter (narrower), replace `w-full` with `w-auto` on mobile so it only takes the width of its contents.
+### Root Cause
 
-### Change in `src/pages/Dashboard.tsx` (line 722)
+The scrollbar track uses `rgba(0, 0, 0, 0.3)` — a **semi-transparent** black. On pages where the underlying background is white (the CSS variable `--background: 0 0% 100%`), this renders as light gray/white. The `color-scheme: dark` only affects the browser's *native* scrollbar fallback, not the custom `-webkit-scrollbar` styles which take priority.
 
-Replace `w-full justify-center` with `w-auto mx-auto` so the container shrinks to fit the 4 icons and auto-centers via margin instead of stretching full-width:
+### Fix
 
-```
-- w-full justify-center sm:w-auto sm:justify-start
-+ w-auto mx-auto justify-center sm:mx-0 sm:justify-start
-```
+**File: `src/index.css`**
 
-This keeps the tabs centered on mobile but removes the full-width stretch. Desktop/tablet layout is unchanged.
+Change the scrollbar track background from semi-transparent to fully opaque dark:
+
+- Line 199: `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)` (solid near-black)
+- Line 226 (Firefox): `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)`
+
+This ensures the track is always dark regardless of what's behind it.
 
