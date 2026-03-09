@@ -1,22 +1,19 @@
 
 
-## Fix Dashboard Tablet & Mobile Layout
+## Fix: Scrollbar Track Still Appears White
 
-### Changes to `src/pages/Dashboard.tsx`
+### Root Cause
 
-**1. Remove scroll from TabsList, make tabs fit naturally**
+The scrollbar track uses `rgba(0, 0, 0, 0.3)` — a **semi-transparent** black. On pages where the underlying background is white (the CSS variable `--background: 0 0% 100%`), this renders as light gray/white. The `color-scheme: dark` only affects the browser's *native* scrollbar fallback, not the custom `-webkit-scrollbar` styles which take priority.
 
-Replace `overflow-x-auto scrollbar-hide` and `min-w-0` on the TabsList with `flex` layout that distributes tabs evenly. Remove `flex-shrink-0` from each TabsTrigger so they can size naturally. Reduce padding on triggers (`px-2 py-1.5 sm:px-3 sm:py-2`) so they fit comfortably at tablet widths without needing scroll.
+### Fix
 
-**2. Always show text labels (remove hidden sm:inline)**
+**File: `src/index.css`**
 
-Since we're removing scroll, the tabs need to be compact but still readable. Change `<span className="hidden sm:inline">` to always-visible but use smaller text on mobile (`text-[10px] sm:text-xs`). This avoids icon-only tabs that are unclear.
+Change the scrollbar track background from semi-transparent to fully opaque dark:
 
-**3. Fix "Your Content Projects" table on tablet**
+- Line 199: `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)` (solid near-black)
+- Line 226 (Firefox): `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)`
 
-The table currently shows at `md` (768px+) but it's too wide at that breakpoint with 6 columns. Change the breakpoint from `md` to `lg` (1024px):
-- Card layout: `block lg:hidden` (shown on mobile + tablet)
-- Table layout: `hidden lg:block` (shown on desktop only)
-
-This way tablet users get the spacious card layout instead of the squished table.
+This ensures the track is always dark regardless of what's behind it.
 
