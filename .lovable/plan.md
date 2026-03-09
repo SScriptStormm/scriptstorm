@@ -1,19 +1,25 @@
 
 
-## Fix: Scrollbar Track Still Appears White
+## Fix: Restore Desktop Tab Layout and Fix Tablet/Mobile
 
-### Root Cause
+### What Went Wrong
+The previous change made tab labels hidden below `sm` (640px), which affected desktop appearance. The content projects table also shows at `md` (768px) on tablets where it's too cramped.
 
-The scrollbar track uses `rgba(0, 0, 0, 0.3)` — a **semi-transparent** black. On pages where the underlying background is white (the CSS variable `--background: 0 0% 100%`), this renders as light gray/white. The `color-scheme: dark` only affects the browser's *native* scrollbar fallback, not the custom `-webkit-scrollbar` styles which take priority.
+### Changes to `src/pages/Dashboard.tsx`
 
-### Fix
+**1. Restore desktop tab text, hide only on mobile (<768px)**
+- Change `hidden sm:inline` to `hidden md:inline` on all tab labels (PROJECTS, CALENDAR, RESEARCH, SUPPORT)
+- Change `sm:mr-2` to `md:mr-2` on tab icons
+- Change `sm:ml-2` / `hidden sm:inline-flex` on PRIORITY badge similarly
+- This means: mobile shows icons only, tablet and desktop show full text
 
-**File: `src/index.css`**
+**2. Fix content projects table on tablet**
+- Change the table breakpoint from `md:block` / `md:hidden` to `lg:block` / `lg:hidden`
+- This means tablets (768px-1023px) get the mobile card layout instead of the squished table
+- Desktop (1024px+) gets the full table as before
 
-Change the scrollbar track background from semi-transparent to fully opaque dark:
-
-- Line 199: `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)` (solid near-black)
-- Line 226 (Firefox): `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)`
-
-This ensures the track is always dark regardless of what's behind it.
+### Result
+- Desktop: unchanged from original (full text labels, full table)
+- Tablet: scrollable icon+text tabs, card-based project list instead of cramped table
+- Mobile: icon-only tabs, card-based project list
 
