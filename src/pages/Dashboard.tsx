@@ -574,7 +574,7 @@ const Dashboard = () => {
       <div className="fixed inset-0 bg-black/20 pointer-events-none" />
       
       {/* Floating geometric elements */}
-      <div className="absolute top-40 left-10 w-16 h-16 border-2 border-primary-glow/40 rotate-45 animate-float shadow-cyber" />
+      <div className="absolute top-40 left-10 w-16 h-16 border-2 border-primary-glow/40 rotate-45 animate-float shadow-cyber bg-primary/[0.08]" />
       <div className="absolute top-60 right-20 w-12 h-12 border-2 border-primary-glow/25 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '2s' }} />
       
       {/* Header */}
