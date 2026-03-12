@@ -1,13 +1,19 @@
 
 
-## Fix Left Square Background to Dark Blue
+## Fix: Scrollbar Track Still Appears White
 
-**Problem:** `bg-primary-glow/10` doesn't work because Tailwind's opacity modifier requires a raw color format, but `primary.glow` is defined as a complete `hsl()` string. The opacity modifier silently fails, producing no visible blue tint.
+### Root Cause
 
-**Fix in `src/pages/Auth.tsx` (line 228):**
-Replace `bg-primary-glow/10` with `bg-primary/10` — the `primary` color is the same blue family (HSL 221 83% 53%) and its opacity modifier works correctly since all other classes use the same pattern.
+The scrollbar track uses `rgba(0, 0, 0, 0.3)` — a **semi-transparent** black. On pages where the underlying background is white (the CSS variable `--background: 0 0% 100%`), this renders as light gray/white. The `color-scheme: dark` only affects the browser's *native* scrollbar fallback, not the custom `-webkit-scrollbar` styles which take priority.
 
-```
-border-2 border-primary-glow/60 bg-primary/10 rotate-45 animate-float shadow-cyber
-```
+### Fix
+
+**File: `src/index.css`**
+
+Change the scrollbar track background from semi-transparent to fully opaque dark:
+
+- Line 199: `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)` (solid near-black)
+- Line 226 (Firefox): `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)`
+
+This ensures the track is always dark regardless of what's behind it.
 
