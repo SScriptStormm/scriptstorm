@@ -1,19 +1,19 @@
-## Add Dark Blue Background to Left Floating Square on Auth Page
 
-The right square appears darker because the `shadow-cyber` glow pools inside its smaller area, giving it a visible blue fill. The left square is larger so the glow is more spread out and its interior looks empty/transparent.
 
-**Fix**: Add a semi-transparent dark blue background to the left square to visually match.
+## Fix: Scrollbar Track Still Appears White
 
-**Change in `src/pages/Auth.tsx` line 228:**
+### Root Cause
 
-```tsx
-// Before
-<div className="absolute top-20 left-10 w-16 h-16 border-2 border-primary-glow/45 rotate-45 animate-float shadow-cyber" />
+The scrollbar track uses `rgba(0, 0, 0, 0.3)` — a **semi-transparent** black. On pages where the underlying background is white (the CSS variable `--background: 0 0% 100%`), this renders as light gray/white. The `color-scheme: dark` only affects the browser's *native* scrollbar fallback, not the custom `-webkit-scrollbar` styles which take priority.
 
-// After
-<div className="absolute top-20 left-10 w-16 h-16 border-2 border-primary-glow/45 rotate-45 animate-float shadow-cyber bg-primary-glow/5" />
-```
+### Fix
 
-This adds a subtle dark blue tint (`bg-primary-glow/5`) to the left square's interior, making it look more consistent with the right square's appearance.
+**File: `src/index.css`**
 
-Also change opacity of the left square to 45%
+Change the scrollbar track background from semi-transparent to fully opaque dark:
+
+- Line 199: `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)` (solid near-black)
+- Line 226 (Firefox): `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)`
+
+This ensures the track is always dark regardless of what's behind it.
+
