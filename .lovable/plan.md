@@ -1,19 +1,15 @@
 
 
-## Fix: Scrollbar Track Still Appears White
+## Change Left Square Border Opacity Back to 40%
 
-### Root Cause
+Update `src/pages/Dashboard.tsx` line 577: change `border-primary-glow/50` to `border-primary-glow/40`.
 
-The scrollbar track uses `rgba(0, 0, 0, 0.3)` — a **semi-transparent** black. On pages where the underlying background is white (the CSS variable `--background: 0 0% 100%`), this renders as light gray/white. The `color-scheme: dark` only affects the browser's *native* scrollbar fallback, not the custom `-webkit-scrollbar` styles which take priority.
+### Why the right square looks darker
 
-### Fix
+Both squares have `shadow-cyber` which produces a large blue glow (60px + 120px blur). Neither square has a background color — they are transparent bordered divs. The right square appears darker because:
 
-**File: `src/index.css`**
+1. It is smaller (12x12 vs 16x16), so the glow concentrates more within its interior
+2. Its lower border opacity (25%) makes the border less distinct, so the pooled glow inside becomes more visually dominant
 
-Change the scrollbar track background from semi-transparent to fully opaque dark:
-
-- Line 199: `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)` (solid near-black)
-- Line 226 (Firefox): `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)`
-
-This ensures the track is always dark regardless of what's behind it.
+If you want them to look more uniform, the right square's `shadow-cyber` could be removed or replaced with a lighter shadow.
 
