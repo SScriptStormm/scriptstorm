@@ -1,18 +1,19 @@
 
 
-## Add 5 Floating Squares to Auth Page (Matching Services Section)
+## Fix: Scrollbar Track Still Appears White
 
-Currently the Auth page has 2 floating squares. The Services section ("Content That Converts") has 5. We'll update the Auth page to have 5 squares with matching styles, while keeping the existing left square's position (`top-20 left-10`, `w-16 h-16`) and right square's position (`top-40 right-20`, `w-12 h-12`) unchanged.
+### Root Cause
 
-### Changes in `src/pages/Auth.tsx` (line 228-229)
+The scrollbar track uses `rgba(0, 0, 0, 0.3)` — a **semi-transparent** black. On pages where the underlying background is white (the CSS variable `--background: 0 0% 100%`), this renders as light gray/white. The `color-scheme: dark` only affects the browser's *native* scrollbar fallback, not the custom `-webkit-scrollbar` styles which take priority.
 
-Replace the 2 existing squares with 5, matching the Services section pattern:
+### Fix
 
-1. **Top-left** — `top-20 left-10 w-16 h-16` border-2 border-primary-glow/30 rotate-45 (existing, adjusted opacity)
-2. **Top-right** — `top-40 right-20 w-12 h-12` border-2 border-primary-glow/25 rotate-12, delay 2s (existing)
-3. **Bottom-left** — `bottom-40 left-20 w-10 h-10` border-2 border-primary-glow/35 rotate-45, delay 4s (new)
-4. **Mid-right** — `top-60 right-40 w-8 h-8` border border-primary-glow/20 rotate-90, delay 1s (new)
-5. **Bottom-right** — `bottom-60 right-10 w-14 h-14` border border-primary-glow/25 rotate-12, delay 3s (new)
+**File: `src/index.css`**
 
-All squares use `animate-float shadow-cyber` consistent with the Services section.
+Change the scrollbar track background from semi-transparent to fully opaque dark:
+
+- Line 199: `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)` (solid near-black)
+- Line 226 (Firefox): `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)`
+
+This ensures the track is always dark regardless of what's behind it.
 
