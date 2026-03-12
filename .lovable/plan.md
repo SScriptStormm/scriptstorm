@@ -1,18 +1,19 @@
 
 
-## Fix Auth Page Floating Squares to Match Dashboard
+## Fix: Scrollbar Track Still Appears White
 
-The opacity values are actually identical (`/45` and `/25`), but the **positioning** differs, which makes them look different due to the background gradients at different page positions.
+### Root Cause
 
-| Property | Auth (current) | Dashboard | Auth (fixed) |
-|----------|---------------|-----------|-------------|
-| Left square top | `top-20` | `top-40` | `top-40` |
-| Right square top | `top-40` | `top-60` | `top-60` |
+The scrollbar track uses `rgba(0, 0, 0, 0.3)` — a **semi-transparent** black. On pages where the underlying background is white (the CSS variable `--background: 0 0% 100%`), this renders as light gray/white. The `color-scheme: dark` only affects the browser's *native* scrollbar fallback, not the custom `-webkit-scrollbar` styles which take priority.
 
-### Change
-Update `src/pages/Auth.tsx` lines 228-229:
-- Left square: `top-20` → `top-40`
-- Right square: `top-40` → `top-60`
+### Fix
 
-This aligns with the consistent pattern used across Dashboard, Content Brief, Account Settings, and Package Details pages.
+**File: `src/index.css`**
+
+Change the scrollbar track background from semi-transparent to fully opaque dark:
+
+- Line 199: `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)` (solid near-black)
+- Line 226 (Firefox): `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)`
+
+This ensures the track is always dark regardless of what's behind it.
 
