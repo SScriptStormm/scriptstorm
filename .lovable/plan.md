@@ -1,19 +1,15 @@
 
 
-## Fix: Scrollbar Track Still Appears White
+## Darken the First Floating Square's Interior
 
-### Root Cause
+**Line 577 in `src/pages/Dashboard.tsx`**
 
-The scrollbar track uses `rgba(0, 0, 0, 0.3)` — a **semi-transparent** black. On pages where the underlying background is white (the CSS variable `--background: 0 0% 100%`), this renders as light gray/white. The `color-scheme: dark` only affects the browser's *native* scrollbar fallback, not the custom `-webkit-scrollbar` styles which take priority.
+Add a subtle dark blue background fill to the first (left) floating square. Currently it has no `bg-` class — the visible blue comes from `border-primary-glow/40` and `shadow-cyber`. Adding `bg-primary/8` will darken the interior slightly without making it as dark as the second square.
 
-### Fix
+```diff
+- <div className="absolute top-40 left-10 w-16 h-16 border-2 border-primary-glow/40 rotate-45 animate-float shadow-cyber" />
++ <div className="absolute top-40 left-10 w-16 h-16 border-2 border-primary-glow/40 rotate-45 animate-float shadow-cyber bg-primary/[0.08]" />
+```
 
-**File: `src/index.css`**
-
-Change the scrollbar track background from semi-transparent to fully opaque dark:
-
-- Line 199: `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)` (solid near-black)
-- Line 226 (Firefox): `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)`
-
-This ensures the track is always dark regardless of what's behind it.
+Single class addition — no other files affected.
 
