@@ -1,8 +1,19 @@
 
 
-## Make Auth Left Square Darker with Background Fill
+## Fix: Scrollbar Track Still Appears White
 
-Add a semi-transparent background fill to the left floating square in `src/pages/Auth.tsx` (line 228) without changing the border opacity. Change from no background to `bg-primary-glow/15` to give it more visual weight.
+### Root Cause
 
-**Change:** Add `bg-primary-glow/15` class to the left square div at line 228.
+The scrollbar track uses `rgba(0, 0, 0, 0.3)` — a **semi-transparent** black. On pages where the underlying background is white (the CSS variable `--background: 0 0% 100%`), this renders as light gray/white. The `color-scheme: dark` only affects the browser's *native* scrollbar fallback, not the custom `-webkit-scrollbar` styles which take priority.
+
+### Fix
+
+**File: `src/index.css`**
+
+Change the scrollbar track background from semi-transparent to fully opaque dark:
+
+- Line 199: `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)` (solid near-black)
+- Line 226 (Firefox): `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)`
+
+This ensures the track is always dark regardless of what's behind it.
 
