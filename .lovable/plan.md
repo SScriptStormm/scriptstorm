@@ -1,13 +1,19 @@
 
 
-## Fix Floating Squares Visibility on Auth Page
+## Fix: Scrollbar Track Still Appears White
 
-The squares use `border-primary-glow` which is the same blue hue (221°) as the background gradient — they'll always blend in regardless of opacity.
+### Root Cause
 
-**Fix in `src/pages/Auth.tsx` lines 228-229:**
+The scrollbar track uses `rgba(0, 0, 0, 0.3)` — a **semi-transparent** black. On pages where the underlying background is white (the CSS variable `--background: 0 0% 100%`), this renders as light gray/white. The `color-scheme: dark` only affects the browser's *native* scrollbar fallback, not the custom `-webkit-scrollbar` styles which take priority.
 
-- Left square: Change to `border-cyan-300/50` with a `bg-cyan-400/10` fill and increase border width to `border-[3px]` — gives it a distinctly lighter, more visible cyan tone against the dark blue background
-- Right square: Change to `border-cyan-300/20` with `bg-cyan-400/5` fill for subtle but visible contrast
+### Fix
 
-Cyan (hue ~180°) contrasts well against the blue (hue 221°) background while staying on-brand with the cyber/tech aesthetic.
+**File: `src/index.css`**
+
+Change the scrollbar track background from semi-transparent to fully opaque dark:
+
+- Line 199: `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)` (solid near-black)
+- Line 226 (Firefox): `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)`
+
+This ensures the track is always dark regardless of what's behind it.
 

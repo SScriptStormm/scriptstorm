@@ -225,8 +225,8 @@ const Auth = () => {
       <div className="absolute inset-0 bg-gradient-neural animate-neural-pulse" />
       
       {/* Floating geometric elements */}
-      <div className="absolute top-20 left-10 w-16 h-16 border-2 border-primary-glow/60 rotate-45 animate-float shadow-cyber" />
-      <div className="absolute top-40 right-20 w-12 h-12 border-2 border-primary-glow/25 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '2s' }} />
+      <div className="absolute top-20 left-10 w-16 h-16 border-[3px] border-cyan-300/50 bg-cyan-400/10 rotate-45 animate-float shadow-cyber" />
+      <div className="absolute top-40 right-20 w-12 h-12 border-2 border-cyan-300/20 bg-cyan-400/5 rotate-12 animate-float shadow-cyber" style={{ animationDelay: '2s' }} />
       
       {/* Scanning line effect */}
       <div className="absolute inset-0 overflow-hidden">
