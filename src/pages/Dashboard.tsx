@@ -708,8 +708,8 @@ const Dashboard = () => {
         )}
 
         {/* Content Pipeline - Premium Card */}
-        <div className="mb-6 sm:mb-8">
-          <ContentPipelineCard
+         <div className="mb-8">
+           <ContentPipelineCard
             article={displayedPipelineArticle}
             articlesCount={articles.length}
             selectedId={isSelectingLatest ? null : selectedPipelineArticleId}
