@@ -52,7 +52,7 @@ export const MonthlyUsageCard = ({ subscriptionTier, articlesUsed, socialPostsUs
         </GlassCardTitle>
       </GlassCardHeader>
       <GlassCardContent className="pt-4">
-        <div className="flex items-start gap-6">
+        <div className="flex items-start gap-4 sm:gap-6">
           {/* Overall Usage Radial */}
           <div className="flex-shrink-0 hidden sm:block">
             <RadialProgress
@@ -65,7 +65,7 @@ export const MonthlyUsageCard = ({ subscriptionTier, articlesUsed, socialPostsUs
           </div>
           
           {/* Usage Breakdown */}
-          <div className="flex-1 space-y-5">
+          <div className="flex-1 space-y-3 sm:space-y-5">
             {/* Articles */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">

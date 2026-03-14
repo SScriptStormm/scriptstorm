@@ -654,14 +654,14 @@ const Dashboard = () => {
               {/* Right: CTA */}
               <button
                 onClick={() => navigate('/content-brief')}
-                className="group relative flex items-center gap-3 px-5 py-3 rounded-lg overflow-hidden
+                className="group relative flex items-center gap-3 px-4 py-2.5 sm:px-5 sm:py-3 rounded-lg overflow-hidden
                   border border-primary-glow/30 backdrop-blur-xl
                   bg-gradient-to-r from-primary/15 to-primary-glow/10
                   hover:border-primary-glow/60 hover:shadow-[0_0_30px_hsl(221_83%_53%/0.3)]
                   transform hover:scale-105 transition-all duration-300 animate-glow-pulse-soft"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-glow/20 to-transparent animate-shimmer pointer-events-none" />
-                <div className="relative flex items-center justify-center h-8 w-8 rounded-md bg-primary/20 border border-primary-glow/40 animate-scale-subtle">
+                <div className="relative flex items-center justify-center h-7 w-7 sm:h-8 sm:w-8 rounded-md bg-primary/20 border border-primary-glow/40 animate-scale-subtle">
                   <Plus className="h-4 w-4 text-primary-glow" />
                 </div>
                 <span className="relative text-white font-mono text-sm sm:text-base font-semibold tracking-wide group-hover:text-primary-glow transition-colors duration-300">
