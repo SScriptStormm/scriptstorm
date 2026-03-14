@@ -3,7 +3,7 @@ import { NeonProgress } from "@/components/ui/NeonProgress";
 import { RadialProgress } from "@/components/ui/RadialProgress";
 import { HoloBadge } from "@/components/ui/HoloBadge";
 import { BarChart3, FileText, MessageSquare, Package, AlertTriangle } from "lucide-react";
-import { useIsMobile } from "@/hooks/use-mobile";
+
 
 interface MonthlyUsageCardProps {
   subscriptionTier: string;
