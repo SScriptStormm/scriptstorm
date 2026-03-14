@@ -661,7 +661,7 @@ const Dashboard = () => {
                   transform hover:scale-105 transition-all duration-300 animate-glow-pulse-soft"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-glow/20 to-transparent animate-shimmer pointer-events-none" />
-                <div className="relative flex items-center justify-center h-7 w-7 sm:h-8 sm:w-8 rounded-md bg-primary/20 border border-primary-glow/40 animate-scale-subtle">
+                <div className="relative flex items-center justify-center h-8 w-8 rounded-md bg-primary/20 border border-primary-glow/40 animate-scale-subtle">
                   <Plus className="h-4 w-4 text-primary-glow" />
                 </div>
                 <span className="relative text-white font-mono text-sm sm:text-base font-semibold tracking-wide group-hover:text-primary-glow transition-colors duration-300">
