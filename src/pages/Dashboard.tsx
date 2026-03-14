@@ -642,7 +642,7 @@ const Dashboard = () => {
                   {greetingData.icon === 'sunrise' && <Sun className="h-5 w-5 text-amber-400" />}
                   {greetingData.icon === 'sun' && <SunDim className="h-5 w-5 text-orange-400" />}
                   {greetingData.icon === 'moon' && <Moon className="h-5 w-5 text-blue-300" />}
-                  <h2 className="text-lg sm:text-xl font-bold text-white font-mono tracking-wide">
+                  <h2 className="text-lg sm:text-xl font-bold text-white font-mono tracking-wide whitespace-nowrap">
                     {greetingData.text}
                   </h2>
                 </div>
