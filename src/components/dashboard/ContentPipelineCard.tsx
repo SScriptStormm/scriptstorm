@@ -65,7 +65,7 @@ export const ContentPipelineCard = ({ article, articlesCount, selectedId, onClea
         )}
 
         {article ? (
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             <div className="space-y-2">
               <h3 className="text-white/60 font-mono text-xs uppercase tracking-wider">
                 {selectedId ? 'Selected Project' : 'Latest Project'}
