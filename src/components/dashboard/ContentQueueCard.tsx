@@ -95,7 +95,7 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
       <GlassCardContent>
 
         {/* Status Overview */}
-        <div className="mb-4 sm:mb-6">
+        <div className="mb-6">
           <h3 className="text-white/60 font-mono text-xs uppercase tracking-wider mb-3 sm:mb-4">{getPeriodLabel(period)}</h3>
           <div className="flex flex-wrap items-center justify-center gap-8 p-4 bg-white/[0.03] rounded-xl border border-white/[0.12]">
             <div className="flex items-center gap-3">
