@@ -1263,7 +1263,7 @@ const Dashboard = () => {
                       </div>
                       
                       {/* Page Indicator - Mobile */}
-                      <span className="lg:hidden text-white font-mono text-sm px-3">
+                      <span className="lg:hidden text-white font-mono text-sm px-3 whitespace-nowrap">
                         Page {currentPage} of {totalPages}
                       </span>
                       
