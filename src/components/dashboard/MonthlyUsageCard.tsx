@@ -46,7 +46,7 @@ export const MonthlyUsageCard = ({ subscriptionTier, articlesUsed, socialPostsUs
   };
 
   return (
-    <GlassCard variant="default" glow hover={false} className="h-fit">
+    <GlassCard variant="default" glow hover={false}>
       <GlassCardHeader className="pb-2">
         <GlassCardTitle className="flex items-center gap-2">
           <BarChart3 className="h-5 w-5 text-primary-glow" />

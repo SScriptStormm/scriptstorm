@@ -46,7 +46,7 @@ export const AccountStatusCard = ({ subscriptionTier, subscriptionEnd, isSubscri
   const cycleProgress = (daysUsed / cycleTotal) * 100;
 
   return (
-    <GlassCard variant={variant} glow hover={false} className="h-fit">
+    <GlassCard variant={variant} glow hover={false}>
       <GlassCardHeader className="pb-2">
         <GlassCardTitle className="flex items-center gap-2">
           <Zap className="h-5 w-5 text-primary-glow" />
@@ -68,7 +68,7 @@ export const AccountStatusCard = ({ subscriptionTier, subscriptionEnd, isSubscri
           </div>
           
           {/* Status Info */}
-          <div className="flex-1 space-y-4">
+          <div className="flex-1 space-y-3 sm:space-y-4">
             {/* Status Badge */}
             <div className="flex items-center gap-3">
               {isActive ? (

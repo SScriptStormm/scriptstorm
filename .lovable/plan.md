@@ -1,14 +1,19 @@
 
 
-## Match Account Status Card to Monthly Usage Card Size
+## Fix: Scrollbar Track Still Appears White
 
-Two simple changes to make both cards consistent, using `sm:` breakpoints so tablet/desktop stays identical:
+### Root Cause
 
-### `src/components/dashboard/AccountStatusCard.tsx`
-- **Line 49**: Remove `h-fit` from GlassCard → allows grid stretch to match sibling height
-- **Line 71**: `space-y-4` → `space-y-3 sm:space-y-4` — tighter mobile spacing to match Monthly Usage
+The scrollbar track uses `rgba(0, 0, 0, 0.3)` — a **semi-transparent** black. On pages where the underlying background is white (the CSS variable `--background: 0 0% 100%`), this renders as light gray/white. The `color-scheme: dark` only affects the browser's *native* scrollbar fallback, not the custom `-webkit-scrollbar` styles which take priority.
 
-### `src/components/dashboard/MonthlyUsageCard.tsx`
-- **Line 49 (GlassCard)**: Remove `h-fit` — same reason
+### Fix
 
-Both cards already share the same RadialProgress responsive sizing (`md` on mobile, `lg` on desktop) and gap pattern (`gap-4 sm:gap-6`). Removing `h-fit` lets the grid's default `stretch` alignment equalize their heights on desktop/tablet. The `space-y-3` tweak only applies below 640px.
+**File: `src/index.css`**
+
+Change the scrollbar track background from semi-transparent to fully opaque dark:
+
+- Line 199: `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)` (solid near-black)
+- Line 226 (Firefox): `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)`
+
+This ensures the track is always dark regardless of what's behind it.
+
