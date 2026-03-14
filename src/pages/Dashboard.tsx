@@ -630,12 +630,12 @@ const Dashboard = () => {
       {/* Main Content */}
       <main className="relative z-10 container mx-auto px-4 py-8">
         {/* Welcome Strip + CTA */}
-        <GlassCard className="mb-6 sm:mb-8 p-0 relative overflow-hidden" hover={false}>
-          {/* Accent glow line */}
-          <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-primary-glow to-primary/50" />
+         <GlassCard className="mb-8 p-0 relative overflow-hidden" hover={false}>
+           {/* Accent glow line */}
+           <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-primary-glow to-primary/50" />
 
-          <div className="p-4 sm:p-5 pl-5 sm:pl-10">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+           <div className="p-5 pl-10">
+             <div className="flex flex-row items-center justify-between gap-4">
               {/* Left: Greeting */}
               <div>
                 <div className="flex items-center gap-2">
