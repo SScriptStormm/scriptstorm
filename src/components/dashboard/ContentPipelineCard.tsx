@@ -94,7 +94,7 @@ export const ContentPipelineCard = ({ article, articlesCount, selectedId, onClea
                         <div key={stage.name}>
                           <div className="flex items-start gap-3">
                             <div className={`
-                              flex items-center justify-center w-8 h-8 rounded-full flex-shrink-0 transition-all duration-300
+                              flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full flex-shrink-0 transition-all duration-300
                               ${isCompleted 
                                 ? 'bg-emerald-500/20 border-2 border-emerald-500 shadow-[0_0_10px_hsl(160_84%_45%/0.4)]' 
                                 : isCurrent 
