@@ -718,7 +718,7 @@ const Dashboard = () => {
 
         {/* Dashboard Features Tabs */}
         <Tabs defaultValue="projects" className="mb-8">
-          <TabsList className="bg-black/60 backdrop-blur-xl border border-white/[0.1] rounded-lg p-1.5 mb-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] w-full justify-center sm:w-auto sm:justify-start overflow-x-auto">
+          <TabsList className="bg-black/60 backdrop-blur-xl border border-white/[0.1] rounded-lg p-1.5 mb-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] w-full justify-center sm:w-auto sm:justify-start">
             <TabsTrigger value="projects" className="font-mono text-white/60 transition-all duration-200 rounded-md px-2 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)]">
               <FileText className="h-4 w-4 mr-1 sm:mr-2" />
               PROJECTS
@@ -937,7 +937,7 @@ const Dashboard = () => {
                       </Button>
                     </div>
                     {/* Desktop inline search */}
-                    <div className="relative hidden lg:block lg:flex-1 pb-2">
+                    <div className="relative hidden lg:block lg:w-[320px] pb-2">
                       <Search className="absolute left-2.5 top-[calc(50%-4px)] -translate-y-1/2 h-3.5 w-3.5 text-white/40" />
                       <input
                         type="text"
