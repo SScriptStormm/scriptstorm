@@ -628,7 +628,7 @@ const Dashboard = () => {
       </header>
 
       {/* Main Content */}
-      <main className="relative z-10 container mx-auto px-3 sm:px-4 py-4 sm:py-8">
+      <main className="relative z-10 container mx-auto px-4 py-8">
         {/* Welcome Strip + CTA */}
         <GlassCard className="mb-6 sm:mb-8 p-0 relative overflow-hidden" hover={false}>
           {/* Accent glow line */}
