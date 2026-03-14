@@ -171,14 +171,14 @@ const RadialProgress = React.forwardRef<HTMLDivElement, RadialProgressProps>(
         
         {/* Center content */}
         {showLabel && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center leading-none px-1">
             {icon ? (
               <span className={cn("mb-0.5", styles.text)}>
                 {icon}
               </span>
             ) : null}
             <span className={cn(
-              "font-mono font-bold",
+              "font-mono font-bold leading-tight",
               config.labelSize,
               styles.text
             )}>
@@ -186,8 +186,8 @@ const RadialProgress = React.forwardRef<HTMLDivElement, RadialProgressProps>(
             </span>
             {sublabel && (
               <span className={cn(
-                "font-mono text-white/50 uppercase tracking-wider",
-                config.sublabelSize
+                "font-mono text-white/50 uppercase leading-tight",
+                size === "sm" ? "text-[0.6rem] tracking-wide" : cn(config.sublabelSize, "tracking-wider")
               )}>
                 {sublabel}
               </span>

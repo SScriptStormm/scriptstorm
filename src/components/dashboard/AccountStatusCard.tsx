@@ -61,7 +61,7 @@ export const AccountStatusCard = ({ subscriptionTier, subscriptionEnd, isSubscri
               value={100 - cycleProgress}
               max={100}
               variant="primary"
-              size={isMobile ? "sm" : "lg"}
+              size={isMobile ? "md" : "lg"}
               label={`${daysRemaining}`}
               sublabel="days left"
             />
