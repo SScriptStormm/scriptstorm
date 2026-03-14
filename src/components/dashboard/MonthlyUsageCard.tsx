@@ -60,7 +60,7 @@ export const MonthlyUsageCard = ({ subscriptionTier, articlesUsed, socialPostsUs
               value={overallUsage}
               max={100}
               variant="tier"
-              size={isMobile ? "md" : "lg"}
+              size="md"
               sublabel="used"
             />
           </div>
