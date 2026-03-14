@@ -53,7 +53,7 @@ export const AccountStatusCard = ({ subscriptionTier, subscriptionEnd, isSubscri
         </GlassCardTitle>
       </GlassCardHeader>
       <GlassCardContent className="pt-4">
-        <div className="flex items-start gap-4 sm:gap-6">
+        <div className="flex items-start gap-6">
           {/* Radial Progress */}
           <div className="flex-shrink-0">
             <RadialProgress
