@@ -29,7 +29,6 @@ const getQuotaLimits = (tier: string) => {
 };
 
 export const MonthlyUsageCard = ({ subscriptionTier, articlesUsed, socialPostsUsed, productDescUsed }: MonthlyUsageCardProps) => {
-  const isMobile = useIsMobile();
   const limits = getQuotaLimits(subscriptionTier);
   
   const articlesPercent = (articlesUsed / limits.articles) * 100;
