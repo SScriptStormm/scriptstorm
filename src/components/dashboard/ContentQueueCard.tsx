@@ -114,11 +114,11 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
               <AnimatedStat value={inProgressCount} label="In Progress" variant="warning" size="sm" />
             </div>
             
-            <div className="hidden sm:block w-px h-10 bg-white/10" />
+            <div className="w-px h-10 bg-white/10" />
             
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-purple-500/20 border border-purple-500/30 flex items-center justify-center">
-                <Eye className="h-4 w-4 sm:h-5 sm:w-5 text-purple-400" />
+              <div className="w-10 h-10 rounded-full bg-purple-500/20 border border-purple-500/30 flex items-center justify-center">
+                <Eye className="h-5 w-5 text-purple-400" />
               </div>
               <AnimatedStat value={reviewCount} label="In Review" variant="purple" size="sm" />
             </div>
