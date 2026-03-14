@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FileText, Calendar as CalendarIcon, Clock, CheckCircle, AlertCircle, Zap, LogOut, RefreshCw, BarChart3, Target, Eye, Download, Edit, MessageSquare, User as UserIcon, Settings, LayoutDashboard, ChevronDown, Archive, Plus, ArrowRight, ChevronLeft, ChevronRight, Video, Package, Search, X, Sun, SunDim, Moon } from "lucide-react";
-import { useIsMobile } from "@/hooks/use-mobile";
+
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
