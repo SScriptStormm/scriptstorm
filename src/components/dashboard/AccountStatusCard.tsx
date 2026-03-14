@@ -3,7 +3,7 @@ import { HoloBadge } from "@/components/ui/HoloBadge";
 import { RadialProgress } from "@/components/ui/RadialProgress";
 import { Zap, Crown, RefreshCw } from "lucide-react";
 import { formatDate } from "@/lib/dateUtils";
-import { useIsMobile } from "@/hooks/use-mobile";
+
 
 interface AccountStatusCardProps {
   subscriptionTier: string;
