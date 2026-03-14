@@ -593,8 +593,8 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
-              <Button onClick={refreshSubscription} disabled={refreshing} size="sm" className="relative bg-primary/20 backdrop-blur-sm text-primary-glow border-2 border-primary-glow/50 hover:border-primary-glow hover:bg-primary/30 hover:shadow-cyber font-mono text-xs sm:text-sm flex-1 sm:flex-initial transition-all duration-300 disabled:opacity-50">
-                <RefreshCw className={`h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 ${refreshing ? 'animate-spin' : ''}`} />
+               <Button onClick={refreshSubscription} disabled={refreshing} size="sm" className="relative bg-primary/20 backdrop-blur-sm text-primary-glow border-2 border-primary-glow/50 hover:border-primary-glow hover:bg-primary/30 hover:shadow-cyber font-mono text-xs sm:text-sm transition-all duration-300 disabled:opacity-50">
+                 <RefreshCw className={`h-4 w-4 mr-2 ${refreshing ? 'animate-spin' : ''}`} />
                 REFRESH
               </Button>
               
