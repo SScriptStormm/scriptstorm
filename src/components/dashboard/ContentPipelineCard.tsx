@@ -65,7 +65,7 @@ export const ContentPipelineCard = ({ article, articlesCount, selectedId, onClea
         )}
 
         {article ? (
-          <div className="space-y-4 sm:space-y-6">
+          <div className="space-y-6">
             <div className="space-y-2">
               <h3 className="text-white/60 font-mono text-xs uppercase tracking-wider">
                 {selectedId ? 'Selected Project' : 'Latest Project'}
@@ -94,7 +94,7 @@ export const ContentPipelineCard = ({ article, articlesCount, selectedId, onClea
                         <div key={stage.name}>
                           <div className="flex items-start gap-3">
                             <div className={`
-                              flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full flex-shrink-0 transition-all duration-300
+                              flex items-center justify-center w-8 h-8 rounded-full flex-shrink-0 transition-all duration-300
                               ${isCompleted 
                                 ? 'bg-emerald-500/20 border-2 border-emerald-500 shadow-[0_0_10px_hsl(160_84%_45%/0.4)]' 
                                 : isCurrent 
@@ -150,11 +150,11 @@ export const ContentPipelineCard = ({ article, articlesCount, selectedId, onClea
             </div>
           </div>
         ) : (
-          <div className="text-center py-8 sm:py-12">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-primary/10 border border-primary-glow/30 flex items-center justify-center mx-auto mb-4">
-              <AlertCircle className="h-8 w-8 sm:h-10 sm:w-10 text-primary-glow/50" />
+          <div className="text-center py-12">
+            <div className="w-20 h-20 rounded-full bg-primary/10 border border-primary-glow/30 flex items-center justify-center mx-auto mb-4">
+              <AlertCircle className="h-10 w-10 text-primary-glow/50" />
             </div>
-            <p className="text-white font-mono text-lg sm:text-xl mb-2">Ready for Content Production</p>
+            <p className="text-white font-mono text-xl mb-2">Ready for Content Production</p>
             <p className="text-white/50 font-mono text-sm">
               {articlesCount > 0
                 ? "No content briefs submitted this month. Submit a new brief to get started!"

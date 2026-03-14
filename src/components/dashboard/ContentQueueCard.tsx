@@ -95,39 +95,39 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
       <GlassCardContent>
 
         {/* Status Overview */}
-        <div className="mb-4 sm:mb-6">
-          <h3 className="text-white/60 font-mono text-xs uppercase tracking-wider mb-3 sm:mb-4">{getPeriodLabel(period)}</h3>
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-8 p-3 sm:p-4 bg-white/[0.03] rounded-xl border border-white/[0.12]">
+        <div className="mb-6">
+          <h3 className="text-white/60 font-mono text-xs uppercase tracking-wider mb-4">{getPeriodLabel(period)}</h3>
+          <div className="flex flex-wrap items-center justify-center gap-8 p-4 bg-white/[0.03] rounded-xl border border-white/[0.12]">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
-                <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-emerald-400" />
+              <div className="w-10 h-10 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
+                <CheckCircle className="h-5 w-5 text-emerald-400" />
               </div>
               <AnimatedStat value={completedCount} label="Completed" variant="success" size="sm" />
             </div>
             
-            <div className="hidden sm:block w-px h-10 bg-white/10" />
+            <div className="w-px h-10 bg-white/10" />
             
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center">
-                <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-amber-400" />
+              <div className="w-10 h-10 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center">
+                <Clock className="h-5 w-5 text-amber-400" />
               </div>
               <AnimatedStat value={inProgressCount} label="In Progress" variant="warning" size="sm" />
             </div>
             
-            <div className="hidden sm:block w-px h-10 bg-white/10" />
+            <div className="w-px h-10 bg-white/10" />
             
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-purple-500/20 border border-purple-500/30 flex items-center justify-center">
-                <Eye className="h-4 w-4 sm:h-5 sm:w-5 text-purple-400" />
+              <div className="w-10 h-10 rounded-full bg-purple-500/20 border border-purple-500/30 flex items-center justify-center">
+                <Eye className="h-5 w-5 text-purple-400" />
               </div>
               <AnimatedStat value={reviewCount} label="In Review" variant="purple" size="sm" />
             </div>
             
-            <div className="hidden sm:block w-px h-10 bg-white/10" />
+            <div className="w-px h-10 bg-white/10" />
             
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center">
-                <AlertCircle className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400" />
+              <div className="w-10 h-10 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center">
+                <AlertCircle className="h-5 w-5 text-blue-400" />
               </div>
               <AnimatedStat value={pendingCount} label="Pending" variant="primary" size="sm" />
             </div>
@@ -137,13 +137,13 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
         {/* Content Breakdown */}
         <div>
           <h3 className="text-white/60 font-mono text-xs uppercase tracking-wider mb-4">Content Breakdown</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Blog Articles */}
-            <div className="group relative p-3 sm:p-4 bg-white/[0.03] rounded-xl border border-white/[0.12] hover:border-primary-glow/30 hover:bg-white/[0.05] transition-all duration-300">
+            <div className="group relative p-4 bg-white/[0.03] rounded-xl border border-white/[0.12] hover:border-primary-glow/30 hover:bg-white/[0.05] transition-all duration-300">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="relative">
-                <div className="flex items-center gap-2 mb-2 sm:mb-3">
-                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-primary/20 flex items-center justify-center">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
                     <FileText className="h-4 w-4 text-primary-glow" />
                   </div>
                   <span className="text-white/80 font-mono text-xs uppercase">Blog Articles</span>
@@ -153,11 +153,11 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
             </div>
             
             {/* Social Posts */}
-            <div className="group relative p-3 sm:p-4 bg-white/[0.03] rounded-xl border border-white/[0.12] hover:border-emerald-500/30 hover:bg-white/[0.05] transition-all duration-300">
+            <div className="group relative p-4 bg-white/[0.03] rounded-xl border border-white/[0.12] hover:border-emerald-500/30 hover:bg-white/[0.05] transition-all duration-300">
               <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="relative">
-                <div className="flex items-center gap-2 mb-2 sm:mb-3">
-                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center">
                     <MessageSquare className="h-4 w-4 text-emerald-400" />
                   </div>
                   <span className="text-white/80 font-mono text-xs uppercase">Social Posts</span>
@@ -167,11 +167,11 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
             </div>
 
             {/* YouTube Scripts */}
-            <div className="group relative p-3 sm:p-4 bg-white/[0.03] rounded-xl border border-white/[0.12] hover:border-rose-500/30 hover:bg-white/[0.05] transition-all duration-300">
+            <div className="group relative p-4 bg-white/[0.03] rounded-xl border border-white/[0.12] hover:border-rose-500/30 hover:bg-white/[0.05] transition-all duration-300">
               <div className="absolute inset-0 bg-gradient-to-br from-rose-500/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="relative">
-                <div className="flex items-center gap-2 mb-2 sm:mb-3">
-                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-rose-500/20 flex items-center justify-center">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-8 h-8 rounded-lg bg-rose-500/20 flex items-center justify-center">
                     <Video className="h-4 w-4 text-rose-400" />
                   </div>
                   <span className="text-white/80 font-mono text-xs uppercase">YT Scripts</span>
@@ -181,11 +181,11 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
             </div>
             
             {/* Product Descriptions */}
-            <div className="group relative p-3 sm:p-4 bg-white/[0.03] rounded-xl border border-white/[0.12] hover:border-purple-500/30 hover:bg-white/[0.05] transition-all duration-300">
+            <div className="group relative p-4 bg-white/[0.03] rounded-xl border border-white/[0.12] hover:border-purple-500/30 hover:bg-white/[0.05] transition-all duration-300">
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="relative">
-                <div className="flex items-center gap-2 mb-2 sm:mb-3">
-                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
                     <CreditCard className="h-4 w-4 text-purple-400" />
                   </div>
                   <span className="text-white/80 font-mono text-xs uppercase">Product Desc</span>

@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FileText, Calendar as CalendarIcon, Clock, CheckCircle, AlertCircle, Zap, LogOut, RefreshCw, BarChart3, Target, Eye, Download, Edit, MessageSquare, User as UserIcon, Settings, LayoutDashboard, ChevronDown, Archive, Plus, ArrowRight, ChevronLeft, ChevronRight, Video, Package, Search, X, Sun, SunDim, Moon } from "lucide-react";
-import { useIsMobile } from "@/hooks/use-mobile";
+
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -79,8 +79,7 @@ const Dashboard = () => {
   const [submittingRevision, setSubmittingRevision] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const isMobile = useIsMobile();
-  const itemsPerPage = isMobile ? 5 : 10;
+  const itemsPerPage = 10;
   const {
     toast
   } = useToast();
@@ -628,7 +627,7 @@ const Dashboard = () => {
       </header>
 
       {/* Main Content */}
-      <main className="relative z-10 container mx-auto px-3 sm:px-4 py-4 sm:py-8">
+      <main className="relative z-10 container mx-auto px-4 py-8">
         {/* Welcome Strip + CTA */}
         <GlassCard className="mb-6 sm:mb-8 p-0 relative overflow-hidden" hover={false}>
           {/* Accent glow line */}
@@ -686,7 +685,7 @@ const Dashboard = () => {
         </GlassCard>
 
         {/* 2-Column Grid Layout - Premium Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           <AccountStatusCard 
             subscriptionTier={subscriber?.subscription_tier || 'starter'}
             subscriptionEnd={subscriber?.subscription_end || null}
@@ -702,13 +701,13 @@ const Dashboard = () => {
 
         {/* Content Queue - Premium Card */}
         {totalArticles > 0 && (
-          <div className="mb-6 sm:mb-8">
+          <div className="mb-8">
             <ContentQueueCard articles={articles} />
           </div>
         )}
 
         {/* Content Pipeline - Premium Card */}
-        <div className="mb-6 sm:mb-8">
+        <div className="mb-8">
           <ContentPipelineCard
             article={displayedPipelineArticle}
             articlesCount={articles.length}
@@ -719,27 +718,27 @@ const Dashboard = () => {
 
         {/* Dashboard Features Tabs */}
         <Tabs defaultValue="projects" className="mb-8">
-          <TabsList className="bg-black/60 backdrop-blur-xl border border-white/[0.1] rounded-lg p-1.5 mb-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] w-auto mx-auto justify-center sm:mx-0 sm:justify-start">
-            <TabsTrigger value="projects" className="font-mono text-white/60 transition-all duration-200 rounded-md px-4 sm:px-4 py-3 sm:py-2 hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)] min-w-[48px] sm:min-w-0">
-              <FileText className="h-6 w-6 sm:h-4 sm:w-4 sm:mr-2" />
-              <span className="hidden sm:inline">PROJECTS</span>
+          <TabsList className="bg-black/60 backdrop-blur-xl border border-white/[0.1] rounded-lg p-1.5 mb-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] w-auto justify-start">
+            <TabsTrigger value="projects" className="font-mono text-white/60 transition-all duration-200 rounded-md px-4 py-2 hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)]">
+              <FileText className="h-4 w-4 mr-2" />
+              PROJECTS
             </TabsTrigger>
             
-            {hasGrowth && <TabsTrigger value="calendar" className="font-mono text-white/60 transition-all duration-200 rounded-md px-4 sm:px-4 py-3 sm:py-2 hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)] min-w-[48px] sm:min-w-0">
-                <CalendarIcon className="h-6 w-6 sm:h-4 sm:w-4 sm:mr-2" />
-                <span className="hidden sm:inline">CALENDAR</span>
+            {hasGrowth && <TabsTrigger value="calendar" className="font-mono text-white/60 transition-all duration-200 rounded-md px-4 py-2 hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)]">
+                <CalendarIcon className="h-4 w-4 mr-2" />
+                CALENDAR
               </TabsTrigger>}
             
-            {hasScale && <TabsTrigger value="reports" className="font-mono text-white/60 transition-all duration-200 rounded-md px-4 sm:px-4 py-3 sm:py-2 hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)] min-w-[48px] sm:min-w-0">
-                <FileText className="h-6 w-6 sm:h-4 sm:w-4 sm:mr-2" />
-                <span className="hidden sm:inline">RESEARCH</span>
+            {hasScale && <TabsTrigger value="reports" className="font-mono text-white/60 transition-all duration-200 rounded-md px-4 py-2 hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)]">
+                <FileText className="h-4 w-4 mr-2" />
+                RESEARCH
               </TabsTrigger>}
             
             
-            {hasScale && <TabsTrigger value="support" className="font-mono text-white/60 transition-all duration-200 rounded-md px-4 sm:px-4 py-3 sm:py-2 hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)] min-w-[48px] sm:min-w-0 relative">
-                <MessageSquare className="h-6 w-6 sm:h-4 sm:w-4 sm:mr-2" />
-                <span className="hidden sm:inline">SUPPORT</span>
-                {(hasAuthority || hasDominance) && <Badge className="ml-2 bg-yellow-500/30 text-yellow-300 border-yellow-500/50 text-xs px-1 py-0 hidden sm:inline-flex">
+            {hasScale && <TabsTrigger value="support" className="font-mono text-white/60 transition-all duration-200 rounded-md px-4 py-2 hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)] relative">
+                <MessageSquare className="h-4 w-4 mr-2" />
+                SUPPORT
+                {(hasAuthority || hasDominance) && <Badge className="ml-2 bg-yellow-500/30 text-yellow-300 border-yellow-500/50 text-xs px-1 py-0">
                     PRIORITY
                   </Badge>}
               </TabsTrigger>}
@@ -748,11 +747,11 @@ const Dashboard = () => {
 
           <TabsContent value="projects">
             <GlassCard variant="default" glow hover={false}>
-          <GlassCardHeader className="px-4 sm:px-6">
-            <div className="flex flex-col gap-3 sm:gap-4">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                <GlassCardTitle className="flex items-center gap-2 text-sm sm:text-base">
-                  <FileText className="h-4 w-4 sm:h-5 sm:w-5 text-primary-glow" />
+          <GlassCardHeader className="px-6">
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-row items-center justify-between gap-3">
+                <GlassCardTitle className="flex items-center gap-2 text-base">
+                  <FileText className="h-5 w-5 text-primary-glow" />
                   YOUR CONTENT PROJECTS
                   {monthFilter !== 'all_time' && monthFilter !== currentMonthYear && (
                     <HoloBadge variant="warning" size="sm">
@@ -960,7 +959,7 @@ const Dashboard = () => {
                 </div>}
             </div>
           </GlassCardHeader>
-          <GlassCardContent className="px-4 sm:px-6">
+          <GlassCardContent className="px-6">
             {articles.length === 0 ? (
               <div className="py-12 text-center">
                 <FileText className="h-16 w-16 text-primary-glow/50 mx-auto mb-4" />
