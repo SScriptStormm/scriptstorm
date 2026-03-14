@@ -153,11 +153,11 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
             </div>
             
             {/* Social Posts */}
-            <div className="group relative p-3 sm:p-4 bg-white/[0.03] rounded-xl border border-white/[0.12] hover:border-emerald-500/30 hover:bg-white/[0.05] transition-all duration-300">
+            <div className="group relative p-4 bg-white/[0.03] rounded-xl border border-white/[0.12] hover:border-emerald-500/30 hover:bg-white/[0.05] transition-all duration-300">
               <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="relative">
-                <div className="flex items-center gap-2 mb-2 sm:mb-3">
-                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center">
                     <MessageSquare className="h-4 w-4 text-emerald-400" />
                   </div>
                   <span className="text-white/80 font-mono text-xs uppercase">Social Posts</span>
