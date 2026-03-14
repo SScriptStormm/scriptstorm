@@ -718,7 +718,7 @@ const Dashboard = () => {
 
         {/* Dashboard Features Tabs */}
         <Tabs defaultValue="projects" className="mb-8">
-          <TabsList className="bg-black/60 backdrop-blur-xl border border-white/[0.1] rounded-lg p-1.5 mb-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] w-auto justify-start">
+          <TabsList className="bg-black/60 backdrop-blur-xl border border-white/[0.1] rounded-lg p-1.5 mb-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] w-full justify-center sm:w-auto sm:justify-start">
             <TabsTrigger value="projects" className="font-mono text-white/60 transition-all duration-200 rounded-md px-4 py-2 hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)]">
               <FileText className="h-4 w-4 mr-2" />
               PROJECTS
@@ -805,12 +805,12 @@ const Dashboard = () => {
                   </div>
 
                   {/* Status Filters */}
-                  <div className="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1">
+                  <div className="flex gap-1.5 overflow-x-auto pb-2 -mx-1 px-1">
                     <Button
                       size="sm"
                       variant="ghost"
                       onClick={() => setStatusFilter('all')}
-                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
+                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-7 ${
                         statusFilter === 'all' 
                           ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
                           : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
@@ -822,7 +822,7 @@ const Dashboard = () => {
                       size="sm"
                       variant="ghost"
                       onClick={() => setStatusFilter('completed')}
-                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
+                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-7 ${
                         statusFilter === 'completed' 
                           ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
                           : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
@@ -834,7 +834,7 @@ const Dashboard = () => {
                       size="sm"
                       variant="ghost"
                       onClick={() => setStatusFilter('in_progress')}
-                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
+                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-7 ${
                         statusFilter === 'in_progress' 
                           ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
                           : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
@@ -846,7 +846,7 @@ const Dashboard = () => {
                       size="sm"
                       variant="ghost"
                       onClick={() => setStatusFilter('pending')}
-                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
+                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-7 ${
                         statusFilter === 'pending' 
                           ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
                           : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
@@ -858,7 +858,7 @@ const Dashboard = () => {
                       size="sm"
                       variant="ghost"
                       onClick={() => setStatusFilter('review')}
-                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
+                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-7 ${
                         statusFilter === 'review' 
                           ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
                           : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
@@ -870,12 +870,12 @@ const Dashboard = () => {
 
                   {/* Content Type Filters + Inline Search */}
                   <div className="flex items-center justify-between gap-3">
-                    <div className="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1 flex-shrink min-w-0">
+                    <div className="flex gap-1.5 overflow-x-auto pb-2 -mx-1 px-1 flex-shrink min-w-0">
                       <Button
                         size="sm"
                         variant="ghost"
                         onClick={() => setContentTypeFilter('all')}
-                        className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
+                        className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-7 ${
                           contentTypeFilter === 'all' 
                             ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
                             : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
@@ -887,7 +887,7 @@ const Dashboard = () => {
                         size="sm"
                         variant="ghost"
                         onClick={() => setContentTypeFilter('blog_article')}
-                        className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
+                        className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-7 ${
                           contentTypeFilter === 'blog_article' 
                             ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
                             : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
@@ -900,7 +900,7 @@ const Dashboard = () => {
                         size="sm"
                         variant="ghost"
                         onClick={() => setContentTypeFilter('social_media')}
-                        className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
+                        className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-7 ${
                           contentTypeFilter === 'social_media' 
                             ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
                             : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
@@ -913,7 +913,7 @@ const Dashboard = () => {
                         size="sm"
                         variant="ghost"
                         onClick={() => setContentTypeFilter('youtube_script')}
-                        className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
+                        className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-7 ${
                           contentTypeFilter === 'youtube_script' 
                             ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
                             : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
@@ -926,7 +926,7 @@ const Dashboard = () => {
                         size="sm"
                         variant="ghost"
                         onClick={() => setContentTypeFilter('product_description')}
-                        className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 ${
+                        className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-7 ${
                           contentTypeFilter === 'product_description' 
                             ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
                             : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
@@ -937,7 +937,7 @@ const Dashboard = () => {
                       </Button>
                     </div>
                     {/* Desktop inline search */}
-                    <div className="relative hidden lg:block flex-shrink-0 w-48 lg:w-56 pb-2">
+                    <div className="relative hidden lg:block flex-shrink-0 w-48 lg:w-72 pb-2">
                       <Search className="absolute left-2.5 top-[calc(50%-4px)] -translate-y-1/2 h-3.5 w-3.5 text-white/40" />
                       <input
                         type="text"
