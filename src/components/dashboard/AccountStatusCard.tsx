@@ -28,7 +28,6 @@ const tierEmojis: Record<string, string> = {
 };
 
 export const AccountStatusCard = ({ subscriptionTier, subscriptionEnd, isSubscribed }: AccountStatusCardProps) => {
-  const isMobile = useIsMobile();
   const tier = subscriptionTier.toLowerCase();
   const variant = tierVariants[tier] || "starter";
   const emoji = tierEmojis[tier] || "🚀";
