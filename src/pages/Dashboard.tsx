@@ -79,8 +79,7 @@ const Dashboard = () => {
   const [submittingRevision, setSubmittingRevision] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const isMobile = useIsMobile();
-  const itemsPerPage = isMobile ? 5 : 10;
+  const itemsPerPage = 10;
   const {
     toast
   } = useToast();
