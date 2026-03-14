@@ -686,7 +686,7 @@ const Dashboard = () => {
         </GlassCard>
 
         {/* 2-Column Grid Layout - Premium Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           <AccountStatusCard 
             subscriptionTier={subscriber?.subscription_tier || 'starter'}
             subscriptionEnd={subscriber?.subscription_end || null}
