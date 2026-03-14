@@ -53,7 +53,7 @@ export const MonthlyUsageCard = ({ subscriptionTier, articlesUsed, socialPostsUs
         </GlassCardTitle>
       </GlassCardHeader>
       <GlassCardContent className="pt-4">
-        <div className="flex items-start gap-4 sm:gap-6">
+        <div className="flex items-start gap-6">
           {/* Overall Usage Radial */}
            <div className="flex-shrink-0">
             <RadialProgress
