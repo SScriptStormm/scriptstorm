@@ -97,15 +97,13 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
         {/* Status Overview */}
         <div className="mb-6">
           <h3 className="text-white/60 font-mono text-xs uppercase tracking-wider mb-4">{getPeriodLabel(period)}</h3>
-          <div className="flex flex-wrap items-center justify-center gap-8 p-4 bg-white/[0.03] rounded-xl border border-white/[0.12]">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 p-4 bg-white/[0.03] rounded-xl border border-white/[0.12]">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
                 <CheckCircle className="h-5 w-5 text-emerald-400" />
               </div>
               <AnimatedStat value={completedCount} label="Completed" variant="success" size="sm" />
             </div>
-            
-            <div className="w-px h-10 bg-white/10" />
             
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center">
@@ -114,16 +112,12 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
               <AnimatedStat value={inProgressCount} label="In Progress" variant="warning" size="sm" />
             </div>
             
-            <div className="w-px h-10 bg-white/10" />
-            
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-purple-500/20 border border-purple-500/30 flex items-center justify-center">
                 <Eye className="h-5 w-5 text-purple-400" />
               </div>
               <AnimatedStat value={reviewCount} label="In Review" variant="purple" size="sm" />
             </div>
-            
-            <div className="w-px h-10 bg-white/10" />
             
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center">
