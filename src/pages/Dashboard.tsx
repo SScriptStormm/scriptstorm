@@ -646,7 +646,7 @@ const Dashboard = () => {
                     {greetingData.text}
                   </h2>
                 </div>
-                <p className="text-white/60 font-mono text-xs sm:text-sm tracking-wide">
+                <p className="text-white/60 font-mono text-xs sm:text-sm tracking-wide truncate">
                   {user?.email}
                 </p>
               </div>
