@@ -654,7 +654,7 @@ const Dashboard = () => {
               {/* Right: CTA */}
               <button
                 onClick={() => navigate('/content-brief')}
-                className="group relative flex items-center gap-3 px-4 py-2.5 sm:px-5 sm:py-3 rounded-lg overflow-hidden
+                className="group relative flex items-center gap-3 px-5 py-3 rounded-lg overflow-hidden flex-shrink-0
                   border border-primary-glow/30 backdrop-blur-xl
                   bg-gradient-to-r from-primary/15 to-primary-glow/10
                   hover:border-primary-glow/60 hover:shadow-[0_0_30px_hsl(221_83%_53%/0.3)]
