@@ -3,6 +3,7 @@ import { NeonProgress } from "@/components/ui/NeonProgress";
 import { RadialProgress } from "@/components/ui/RadialProgress";
 import { HoloBadge } from "@/components/ui/HoloBadge";
 import { BarChart3, FileText, MessageSquare, Package, AlertTriangle } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface MonthlyUsageCardProps {
   subscriptionTier: string;
@@ -28,6 +29,7 @@ const getQuotaLimits = (tier: string) => {
 };
 
 export const MonthlyUsageCard = ({ subscriptionTier, articlesUsed, socialPostsUsed, productDescUsed }: MonthlyUsageCardProps) => {
+  const isMobile = useIsMobile();
   const limits = getQuotaLimits(subscriptionTier);
   
   const articlesPercent = (articlesUsed / limits.articles) * 100;
@@ -54,12 +56,12 @@ export const MonthlyUsageCard = ({ subscriptionTier, articlesUsed, socialPostsUs
       <GlassCardContent className="pt-4">
         <div className="flex items-start gap-4 sm:gap-6">
           {/* Overall Usage Radial */}
-          <div className="flex-shrink-0 hidden sm:block">
+           <div className="flex-shrink-0">
             <RadialProgress
               value={overallUsage}
               max={100}
               variant="tier"
-              size="lg"
+              size={isMobile ? "md" : "lg"}
               sublabel="used"
             />
           </div>
