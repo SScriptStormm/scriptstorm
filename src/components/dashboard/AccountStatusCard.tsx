@@ -3,7 +3,7 @@ import { HoloBadge } from "@/components/ui/HoloBadge";
 import { RadialProgress } from "@/components/ui/RadialProgress";
 import { Zap, Crown, RefreshCw } from "lucide-react";
 import { formatDate } from "@/lib/dateUtils";
-
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface AccountStatusCardProps {
   subscriptionTier: string;
@@ -28,6 +28,7 @@ const tierEmojis: Record<string, string> = {
 };
 
 export const AccountStatusCard = ({ subscriptionTier, subscriptionEnd, isSubscribed }: AccountStatusCardProps) => {
+  const isMobile = useIsMobile();
   const tier = subscriptionTier.toLowerCase();
   const variant = tierVariants[tier] || "starter";
   const emoji = tierEmojis[tier] || "🚀";
@@ -53,21 +54,21 @@ export const AccountStatusCard = ({ subscriptionTier, subscriptionEnd, isSubscri
         </GlassCardTitle>
       </GlassCardHeader>
       <GlassCardContent className="pt-4">
-        <div className="flex items-start gap-6">
+        <div className="flex items-start gap-4 sm:gap-6">
           {/* Radial Progress */}
           <div className="flex-shrink-0">
             <RadialProgress
               value={100 - cycleProgress}
               max={100}
               variant="primary"
-              size="md"
+              size={isMobile ? "md" : "lg"}
               label={`${daysRemaining}`}
               sublabel="days left"
             />
           </div>
           
           {/* Status Info */}
-          <div className="flex-1 space-y-4">
+          <div className="flex-1 space-y-3 sm:space-y-4">
             {/* Status Badge */}
             <div className="flex items-center gap-3">
               {isActive ? (
