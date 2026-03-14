@@ -701,7 +701,7 @@ const Dashboard = () => {
 
         {/* Content Queue - Premium Card */}
         {totalArticles > 0 && (
-          <div className="mb-6 sm:mb-8">
+          <div className="mb-8">
             <ContentQueueCard articles={articles} />
           </div>
         )}
