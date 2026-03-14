@@ -593,17 +593,17 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
-              <Button onClick={refreshSubscription} disabled={refreshing} size="sm" className="relative bg-primary/20 backdrop-blur-sm text-primary-glow border-2 border-primary-glow/50 hover:border-primary-glow hover:bg-primary/30 hover:shadow-cyber font-mono text-xs sm:text-sm flex-1 sm:flex-initial transition-all duration-300 disabled:opacity-50">
-                <RefreshCw className={`h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 ${refreshing ? 'animate-spin' : ''}`} />
+               <Button onClick={refreshSubscription} disabled={refreshing} size="sm" className="relative bg-primary/20 backdrop-blur-sm text-primary-glow border-2 border-primary-glow/50 hover:border-primary-glow hover:bg-primary/30 hover:shadow-cyber font-mono text-xs sm:text-sm transition-all duration-300 disabled:opacity-50">
+                 <RefreshCw className={`h-4 w-4 mr-2 ${refreshing ? 'animate-spin' : ''}`} />
                 REFRESH
               </Button>
               
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button size="sm" className="relative bg-white/5 backdrop-blur-sm text-white border-2 border-white/30 hover:border-white/50 hover:bg-white/10 font-mono text-xs sm:text-sm flex-1 sm:flex-initial transition-all duration-300">
-                    <UserIcon className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                    ACCOUNT
-                    <ChevronDown className="h-3 w-3 sm:h-4 sm:w-4 ml-1 sm:ml-2" />
+                   <Button size="sm" className="relative bg-white/5 backdrop-blur-sm text-white border-2 border-white/30 hover:border-white/50 hover:bg-white/10 font-mono text-xs sm:text-sm transition-all duration-300">
+                     <UserIcon className="h-4 w-4 mr-2" />
+                     ACCOUNT
+                     <ChevronDown className="h-4 w-4 ml-2" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-56 border-primary-glow/20">
@@ -628,25 +628,25 @@ const Dashboard = () => {
       </header>
 
       {/* Main Content */}
-      <main className="relative z-10 container mx-auto px-3 sm:px-4 py-4 sm:py-8">
+      <main className="relative z-10 container mx-auto px-4 py-8">
         {/* Welcome Strip + CTA */}
-        <GlassCard className="mb-6 sm:mb-8 p-0 relative overflow-hidden" hover={false}>
-          {/* Accent glow line */}
-          <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-primary-glow to-primary/50" />
+         <GlassCard className="mb-8 p-0 relative overflow-hidden" hover={false}>
+           {/* Accent glow line */}
+           <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-primary-glow to-primary/50" />
 
-          <div className="p-4 sm:p-5 pl-5 sm:pl-10">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+           <div className="p-5 pl-10">
+             <div className="flex flex-row items-center justify-between gap-4">
               {/* Left: Greeting */}
               <div>
                 <div className="flex items-center gap-2">
                   {greetingData.icon === 'sunrise' && <Sun className="h-5 w-5 text-amber-400" />}
                   {greetingData.icon === 'sun' && <SunDim className="h-5 w-5 text-orange-400" />}
                   {greetingData.icon === 'moon' && <Moon className="h-5 w-5 text-blue-300" />}
-                  <h2 className="text-lg sm:text-xl font-bold text-white font-mono tracking-wide">
+                  <h2 className="text-lg sm:text-xl font-bold text-white font-mono tracking-wide whitespace-nowrap">
                     {greetingData.text}
                   </h2>
                 </div>
-                <p className="text-white/60 font-mono text-xs sm:text-sm tracking-wide">
+                <p className="text-white/60 font-mono text-xs sm:text-sm tracking-wide truncate">
                   {user?.email}
                 </p>
               </div>
@@ -654,14 +654,14 @@ const Dashboard = () => {
               {/* Right: CTA */}
               <button
                 onClick={() => navigate('/content-brief')}
-                className="group relative flex items-center gap-3 px-4 py-2.5 sm:px-5 sm:py-3 rounded-lg overflow-hidden
+                className="group relative flex items-center gap-3 px-5 py-3 rounded-lg overflow-hidden flex-shrink-0
                   border border-primary-glow/30 backdrop-blur-xl
                   bg-gradient-to-r from-primary/15 to-primary-glow/10
                   hover:border-primary-glow/60 hover:shadow-[0_0_30px_hsl(221_83%_53%/0.3)]
                   transform hover:scale-105 transition-all duration-300 animate-glow-pulse-soft"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-glow/20 to-transparent animate-shimmer pointer-events-none" />
-                <div className="relative flex items-center justify-center h-7 w-7 sm:h-8 sm:w-8 rounded-md bg-primary/20 border border-primary-glow/40 animate-scale-subtle">
+                <div className="relative flex items-center justify-center h-8 w-8 rounded-md bg-primary/20 border border-primary-glow/40 animate-scale-subtle">
                   <Plus className="h-4 w-4 text-primary-glow" />
                 </div>
                 <span className="relative text-white font-mono text-sm sm:text-base font-semibold tracking-wide group-hover:text-primary-glow transition-colors duration-300">
@@ -686,7 +686,7 @@ const Dashboard = () => {
         </GlassCard>
 
         {/* 2-Column Grid Layout - Premium Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           <AccountStatusCard 
             subscriptionTier={subscriber?.subscription_tier || 'starter'}
             subscriptionEnd={subscriber?.subscription_end || null}
@@ -702,14 +702,14 @@ const Dashboard = () => {
 
         {/* Content Queue - Premium Card */}
         {totalArticles > 0 && (
-          <div className="mb-6 sm:mb-8">
-            <ContentQueueCard articles={articles} />
+           <div className="mb-8">
+             <ContentQueueCard articles={articles} />
           </div>
         )}
 
         {/* Content Pipeline - Premium Card */}
-        <div className="mb-6 sm:mb-8">
-          <ContentPipelineCard
+         <div className="mb-8">
+           <ContentPipelineCard
             article={displayedPipelineArticle}
             articlesCount={articles.length}
             selectedId={isSelectingLatest ? null : selectedPipelineArticleId}
@@ -719,38 +719,38 @@ const Dashboard = () => {
 
         {/* Dashboard Features Tabs */}
         <Tabs defaultValue="projects" className="mb-8">
-          <TabsList className="bg-black/60 backdrop-blur-xl border border-white/[0.1] rounded-lg p-1.5 mb-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] w-auto mx-auto justify-center sm:mx-0 sm:justify-start">
-            <TabsTrigger value="projects" className="font-mono text-white/60 transition-all duration-200 rounded-md px-4 sm:px-4 py-3 sm:py-2 hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)] min-w-[48px] sm:min-w-0">
-              <FileText className="h-6 w-6 sm:h-4 sm:w-4 sm:mr-2" />
-              <span className="hidden sm:inline">PROJECTS</span>
-            </TabsTrigger>
+           <TabsList className="bg-black/60 backdrop-blur-xl border border-white/[0.1] rounded-lg p-1.5 mb-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] justify-start">
+             <TabsTrigger value="projects" className="font-mono text-white/60 transition-all duration-200 rounded-md px-4 py-2 hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)]">
+               <FileText className="h-4 w-4 mr-2" />
+               PROJECTS
+             </TabsTrigger>
             
-            {hasGrowth && <TabsTrigger value="calendar" className="font-mono text-white/60 transition-all duration-200 rounded-md px-4 sm:px-4 py-3 sm:py-2 hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)] min-w-[48px] sm:min-w-0">
-                <CalendarIcon className="h-6 w-6 sm:h-4 sm:w-4 sm:mr-2" />
-                <span className="hidden sm:inline">CALENDAR</span>
-              </TabsTrigger>}
-            
-            {hasScale && <TabsTrigger value="reports" className="font-mono text-white/60 transition-all duration-200 rounded-md px-4 sm:px-4 py-3 sm:py-2 hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)] min-w-[48px] sm:min-w-0">
-                <FileText className="h-6 w-6 sm:h-4 sm:w-4 sm:mr-2" />
-                <span className="hidden sm:inline">RESEARCH</span>
-              </TabsTrigger>}
-            
-            
-            {hasScale && <TabsTrigger value="support" className="font-mono text-white/60 transition-all duration-200 rounded-md px-4 sm:px-4 py-3 sm:py-2 hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)] min-w-[48px] sm:min-w-0 relative">
-                <MessageSquare className="h-6 w-6 sm:h-4 sm:w-4 sm:mr-2" />
-                <span className="hidden sm:inline">SUPPORT</span>
-                {(hasAuthority || hasDominance) && <Badge className="ml-2 bg-yellow-500/30 text-yellow-300 border-yellow-500/50 text-xs px-1 py-0 hidden sm:inline-flex">
-                    PRIORITY
-                  </Badge>}
-              </TabsTrigger>}
+             {hasGrowth && <TabsTrigger value="calendar" className="font-mono text-white/60 transition-all duration-200 rounded-md px-4 py-2 hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)]">
+                 <CalendarIcon className="h-4 w-4 mr-2" />
+                 CALENDAR
+               </TabsTrigger>}
+             
+             {hasScale && <TabsTrigger value="reports" className="font-mono text-white/60 transition-all duration-200 rounded-md px-4 py-2 hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)]">
+                 <FileText className="h-4 w-4 mr-2" />
+                 RESEARCH
+               </TabsTrigger>}
+             
+             
+             {hasScale && <TabsTrigger value="support" className="font-mono text-white/60 transition-all duration-200 rounded-md px-4 py-2 hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)] relative">
+                 <MessageSquare className="h-4 w-4 mr-2" />
+                 SUPPORT
+                 {(hasAuthority || hasDominance) && <Badge className="ml-2 bg-yellow-500/30 text-yellow-300 border-yellow-500/50 text-xs px-1 py-0">
+                     PRIORITY
+                   </Badge>}
+               </TabsTrigger>}
             
           </TabsList>
 
           <TabsContent value="projects">
             <GlassCard variant="default" glow hover={false}>
-          <GlassCardHeader className="px-4 sm:px-6">
-            <div className="flex flex-col gap-3 sm:gap-4">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+           <GlassCardHeader>
+             <div className="flex flex-col gap-4">
+               <div className="flex flex-row items-center justify-between gap-3">
                 <GlassCardTitle className="flex items-center gap-2 text-sm sm:text-base">
                   <FileText className="h-4 w-4 sm:h-5 sm:w-5 text-primary-glow" />
                   YOUR CONTENT PROJECTS

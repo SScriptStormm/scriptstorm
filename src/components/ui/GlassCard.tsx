@@ -112,7 +112,7 @@ const GlassCardHeader = React.forwardRef<HTMLDivElement, GlassCardHeaderProps>(
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn("flex flex-col space-y-1.5 p-4 pb-3 sm:p-6 sm:pb-4", className)}
+      className={cn("flex flex-col space-y-1.5 p-6 pb-4", className)}
       {...props}
     />
   )
@@ -152,7 +152,7 @@ interface GlassCardContentProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const GlassCardContent = React.forwardRef<HTMLDivElement, GlassCardContentProps>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn("p-4 pt-0 sm:p-6 sm:pt-0", className)} {...props} />
+    <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
   )
 );
 GlassCardContent.displayName = "GlassCardContent";
@@ -163,7 +163,7 @@ const GlassCardFooter = React.forwardRef<HTMLDivElement, GlassCardFooterProps>(
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn("flex items-center p-4 pt-0 sm:p-6 sm:pt-0", className)}
+      className={cn("flex items-center p-6 pt-0", className)}
       {...props}
     />
   )
