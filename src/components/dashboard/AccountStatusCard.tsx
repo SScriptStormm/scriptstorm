@@ -68,7 +68,7 @@ export const AccountStatusCard = ({ subscriptionTier, subscriptionEnd, isSubscri
           </div>
           
           {/* Status Info */}
-          <div className="flex-1 space-y-4">
+          <div className="flex-1 space-y-3 sm:space-y-4">
             {/* Status Badge */}
             <div className="flex items-center gap-3">
               {isActive ? (
