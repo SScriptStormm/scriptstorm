@@ -959,7 +959,7 @@ const Dashboard = () => {
                 </div>}
             </div>
           </GlassCardHeader>
-          <GlassCardContent className="px-4 sm:px-6">
+          <GlassCardContent className="px-6">
             {articles.length === 0 ? (
               <div className="py-12 text-center">
                 <FileText className="h-16 w-16 text-primary-glow/50 mx-auto mb-4" />
