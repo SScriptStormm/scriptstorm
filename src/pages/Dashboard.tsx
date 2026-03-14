@@ -600,10 +600,10 @@ const Dashboard = () => {
               
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button size="sm" className="relative bg-white/5 backdrop-blur-sm text-white border-2 border-white/30 hover:border-white/50 hover:bg-white/10 font-mono text-xs sm:text-sm flex-1 sm:flex-initial transition-all duration-300">
-                    <UserIcon className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                    ACCOUNT
-                    <ChevronDown className="h-3 w-3 sm:h-4 sm:w-4 ml-1 sm:ml-2" />
+                   <Button size="sm" className="relative bg-white/5 backdrop-blur-sm text-white border-2 border-white/30 hover:border-white/50 hover:bg-white/10 font-mono text-xs sm:text-sm transition-all duration-300">
+                     <UserIcon className="h-4 w-4 mr-2" />
+                     ACCOUNT
+                     <ChevronDown className="h-4 w-4 ml-2" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-56 border-primary-glow/20">
