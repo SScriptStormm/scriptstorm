@@ -139,16 +139,16 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
           <h3 className="text-white/60 font-mono text-xs uppercase tracking-wider mb-4">Content Breakdown</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Blog Articles */}
-            <div className="group relative p-4 bg-white/[0.03] rounded-xl border border-white/[0.12] hover:border-primary-glow/30 hover:bg-white/[0.05] transition-all duration-300">
+            <div className="group relative p-3 sm:p-4 bg-white/[0.03] rounded-xl border border-white/[0.12] hover:border-primary-glow/30 hover:bg-white/[0.05] transition-all duration-300">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="relative">
-                <div className="flex items-center gap-2 mb-3">
-                  <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
+                <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-primary/20 flex items-center justify-center">
                     <FileText className="h-4 w-4 text-primary-glow" />
                   </div>
                   <span className="text-white/80 font-mono text-xs uppercase">Blog Articles</span>
                 </div>
-                <AnimatedStat value={blogArticles.length} label={`${blogWords.toLocaleString()} words`} variant="primary" size="md" />
+                <AnimatedStat value={blogArticles.length} label={`${blogWords.toLocaleString()} words`} variant="primary" size="sm" />
               </div>
             </div>
             
