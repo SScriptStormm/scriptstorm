@@ -870,7 +870,7 @@ const Dashboard = () => {
 
                   {/* Content Type Filters + Inline Search */}
                   <div className="flex items-center justify-between gap-3">
-                    <div className="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1 flex-shrink min-w-0">
+                    <div className="flex gap-1.5 overflow-x-auto pb-2 -mx-1 px-1 flex-shrink min-w-0">
                       <Button
                         size="sm"
                         variant="ghost"
