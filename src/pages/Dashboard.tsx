@@ -748,9 +748,9 @@ const Dashboard = () => {
 
           <TabsContent value="projects">
             <GlassCard variant="default" glow hover={false}>
-          <GlassCardHeader className="px-4 sm:px-6">
-            <div className="flex flex-col gap-3 sm:gap-4">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+           <GlassCardHeader>
+             <div className="flex flex-col gap-4">
+               <div className="flex flex-row items-center justify-between gap-3">
                 <GlassCardTitle className="flex items-center gap-2 text-sm sm:text-base">
                   <FileText className="h-4 w-4 sm:h-5 sm:w-5 text-primary-glow" />
                   YOUR CONTENT PROJECTS

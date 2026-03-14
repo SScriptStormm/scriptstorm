@@ -66,7 +66,7 @@ export const MonthlyUsageCard = ({ subscriptionTier, articlesUsed, socialPostsUs
           </div>
           
           {/* Usage Breakdown */}
-          <div className="flex-1 space-y-3 sm:space-y-5">
+          <div className="flex-1 space-y-5">
             {/* Articles */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
