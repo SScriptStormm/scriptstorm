@@ -805,7 +805,7 @@ const Dashboard = () => {
                   </div>
 
                   {/* Status Filters */}
-                  <div className="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1">
+                  <div className="flex gap-1.5 overflow-x-auto pb-2 -mx-1 px-1">
                     <Button
                       size="sm"
                       variant="ghost"
