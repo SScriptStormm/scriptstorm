@@ -1,10 +1,19 @@
 
 
-## Reduce Content Panel Padding to 70px
+## Fix: Scrollbar Track Still Appears White
 
-Change the `sm:py-[80px]` to `sm:py-[70px]` on the empty-state content panels for both Calendar and Research tabs.
+### Root Cause
 
-### Files
-- **`src/components/dashboard/ContentCalendar.tsx`** — Change `sm:py-[80px]` → `sm:py-[70px]`
-- **`src/components/dashboard/ResearchReports.tsx`** — Change `sm:py-[80px]` → `sm:py-[70px]`
+The scrollbar track uses `rgba(0, 0, 0, 0.3)` — a **semi-transparent** black. On pages where the underlying background is white (the CSS variable `--background: 0 0% 100%`), this renders as light gray/white. The `color-scheme: dark` only affects the browser's *native* scrollbar fallback, not the custom `-webkit-scrollbar` styles which take priority.
+
+### Fix
+
+**File: `src/index.css`**
+
+Change the scrollbar track background from semi-transparent to fully opaque dark:
+
+- Line 199: `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)` (solid near-black)
+- Line 226 (Firefox): `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)`
+
+This ensures the track is always dark regardless of what's behind it.
 
