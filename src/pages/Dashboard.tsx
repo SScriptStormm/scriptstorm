@@ -1096,6 +1096,10 @@ const Dashboard = () => {
                           
                           {/* Actions */}
                           <div className="flex flex-col gap-2 pt-1">
+                            <Button size="sm" variant="ghost" className="w-full text-primary-glow/70 border border-primary-glow/20 hover:border-primary-glow/50 hover:text-primary-glow font-mono text-xs" onClick={(e) => { e.stopPropagation(); handleViewBrief(article); }}>
+                              <Info className="h-3 w-3 mr-1" />
+                              View Brief Details
+                            </Button>
                             {article.status === 'completed' ? <>
                                 <Button size="sm" className="w-full bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono text-xs" onClick={() => article.article_url && window.open(article.article_url, '_blank')}>
                                   <Download className="h-3 w-3 mr-1" />
