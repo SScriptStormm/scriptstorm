@@ -78,7 +78,7 @@ const ContentCalendar = ({ userId }: ContentCalendarProps) => {
   if (events.length === 0) {
     return (
       <GlassCard variant="default" glow hover={false}>
-        <GlassCardContent className="text-center py-[50px]">
+        <GlassCardContent className="text-center py-[50px] sm:py-[80px]">
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/[0.05] border border-white/[0.1] mb-4">
             <Calendar className="h-10 w-10 text-primary-glow" />
           </div>
