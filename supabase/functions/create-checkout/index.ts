@@ -44,24 +44,24 @@ serve(async (req) => {
     // Stripe Price IDs for all packages (Test Mode)
     const priceIds: Record<string, { monthly: string; annual: string }> = {
       starter: {
-        monthly: "price_1Sr4s7H0XahPXnwCZcVesu8B",
-        annual: "price_1Sr5L4H0XahPXnwCEet08STB"
+        monthly: "price_1SZEevH0XahPXnwCMlxyP8FE",
+        annual: "price_1SZEslH0XahPXnwC72g9KwsS"
       },
       growth: {
-        monthly: "price_1Sr4u5H0XahPXnwCqBxtrjbR",
-        annual: "price_1Sr5PKH0XahPXnwCQmNv6Nmk"
+        monthly: "price_1SZEgtH0XahPXnwCP6q7zf31",
+        annual: "price_1SZEwLH0XahPXnwCCA9fv6XP"
       },
       "starter-enterprise": {  // Scale tier
-        monthly: "price_1Sr4wsH0XahPXnwCvI42DrMP",
-        annual: "price_1Sr5QiH0XahPXnwClVIk54mv"
+        monthly: "price_1SZEhcH0XahPXnwCyzrMLV2Z",
+        annual: "price_1SZExYH0XahPXnwC8DWfKLLt"
       },
       "growth-enterprise": {   // Authority tier
-        monthly: "price_1Sr59MH0XahPXnwCcD4FjsZ0",
-        annual: "price_1Sr5RMH0XahPXnwCXmHnUbXM"
+        monthly: "price_1SZEjcH0XahPXnwC4DhIic4L",
+        annual: "price_1SZEzbH0XahPXnwCVDnWINbi"
       },
       "authority-enterprise": { // Dominance tier
-        monthly: "price_1Sr5CGH0XahPXnwClzRKjdJX",
-        annual: "price_1Sr5TdH0XahPXnwCOfj48N4k"
+        monthly: "price_1SZEnZH0XahPXnwCZbQeBQPM",
+        annual: "price_1SZF0ZH0XahPXnwCr9QNOkD1"
       }
     };
 
