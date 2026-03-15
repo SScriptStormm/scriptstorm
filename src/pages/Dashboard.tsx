@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FileText, Calendar as CalendarIcon, Clock, CheckCircle, AlertCircle, Zap, LogOut, RefreshCw, BarChart3, Target, Eye, Download, Edit, MessageSquare, User as UserIcon, Settings, LayoutDashboard, ChevronDown, Archive, Plus, ArrowRight, ChevronLeft, ChevronRight, Video, Package, Search, X, Sun, SunDim, Moon } from "lucide-react";
+import { FileText, Calendar as CalendarIcon, Clock, CheckCircle, AlertCircle, Zap, LogOut, RefreshCw, BarChart3, Target, Eye, Download, Edit, MessageSquare, User as UserIcon, Settings, LayoutDashboard, ChevronDown, Archive, Plus, ArrowRight, ChevronLeft, ChevronRight, Video, Package, Search, X, Sun, SunDim, Moon, Info } from "lucide-react";
 
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
@@ -52,6 +52,19 @@ interface Article {
   revisions_allowed?: number;
   delivery_timeframe?: number;
   delivery_deadline?: string;
+  content_goal?: string | null;
+  target_audience?: string | null;
+  tone?: string | null;
+  brand_voice?: string | null;
+  key_points?: string | null;
+  style_preferences?: string | null;
+  competitor_urls?: string | null;
+  reference_links?: string | null;
+  avoid_topics?: string | null;
+  specific_instructions?: string | null;
+  strategic_goals?: string[] | null;
+  kpis_to_track?: string[] | null;
+  youtube_script_length?: number | null;
 }
 const Dashboard = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -77,6 +90,8 @@ const Dashboard = () => {
   const [selectedPipelineArticleId, setSelectedPipelineArticleId] = useState<string | null>(null);
   const [previousMonthsOpen, setPreviousMonthsOpen] = useState(false);
   const [submittingRevision, setSubmittingRevision] = useState(false);
+  const [briefDetailArticle, setBriefDetailArticle] = useState<Article | null>(null);
+  const [briefDialogOpen, setBriefDialogOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const itemsPerPage = 10;
@@ -495,6 +510,10 @@ const Dashboard = () => {
     setSelectedArticle(article);
     setRevisionFeedback("");
     setRevisionDialogOpen(true);
+  };
+  const handleViewBrief = (article: Article) => {
+    setBriefDetailArticle(article);
+    setBriefDialogOpen(true);
   };
   const submitRevisionRequest = async () => {
     if (!selectedArticle || !revisionFeedback.trim()) {
@@ -1077,6 +1096,10 @@ const Dashboard = () => {
                           
                           {/* Actions */}
                           <div className="flex flex-col gap-2 pt-1">
+                            <Button size="sm" variant="ghost" className="w-full text-primary-glow/70 border border-primary-glow/20 hover:border-primary-glow/50 hover:text-primary-glow font-mono text-xs" onClick={(e) => { e.stopPropagation(); handleViewBrief(article); }}>
+                              <Info className="h-3 w-3 mr-1" />
+                              View Brief Details
+                            </Button>
                             {article.status === 'completed' ? <>
                                 <Button size="sm" className="w-full bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono text-xs" onClick={() => article.article_url && window.open(article.article_url, '_blank')}>
                                   <Download className="h-3 w-3 mr-1" />
@@ -1178,6 +1201,9 @@ const Dashboard = () => {
                             {/* Last Cell - Actions */}
                             <td className={`py-4 text-right border-r-2 ${isSelected ? 'border-primary-glow/60 rounded-r-lg' : 'border-white/[0.08]'}`}>
                               <div className="flex items-center gap-2 justify-end">
+                                <Button size="icon" variant="ghost" className="h-8 w-8 text-primary-glow/70 hover:text-primary-glow border border-primary-glow/20 hover:border-primary-glow/50" onClick={(e) => { e.stopPropagation(); handleViewBrief(article); }} title="View Brief Details">
+                                  <Info className="h-4 w-4" />
+                                </Button>
                                 {article.status === 'completed' ? <>
                                     <Button size="sm" className="bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono" onClick={() => article.article_url && window.open(article.article_url, '_blank')}>
                                       <Download className="h-4 w-4 mr-1" />
@@ -1353,6 +1379,63 @@ const Dashboard = () => {
                 </> : 'Submit Revision Request'}
             </Button>
           </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Brief Details Dialog */}
+      <Dialog open={briefDialogOpen} onOpenChange={setBriefDialogOpen}>
+        <DialogContent className="bg-black/95 border-primary-glow/30 max-w-lg max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-white font-mono tracking-wide flex items-center gap-2">
+              <Info className="h-5 w-5 text-primary-glow" />
+              Brief Details
+            </DialogTitle>
+            <DialogDescription className="text-white/70 font-mono text-sm">
+              {briefDetailArticle?.title}
+            </DialogDescription>
+          </DialogHeader>
+          
+          {briefDetailArticle && (
+            <div className="space-y-3 py-2">
+              {(() => {
+                const fields: { label: string; value: string | number | null | undefined }[] = [
+                  { label: 'Content Type', value: briefDetailArticle.content_type?.replace(/_/g, ' ') },
+                  { label: 'Content Goal', value: briefDetailArticle.content_goal },
+                  { label: 'Target Audience', value: briefDetailArticle.target_audience },
+                  { label: 'Target Keywords', value: briefDetailArticle.target_keywords?.join(', ') },
+                  { label: 'Tone', value: briefDetailArticle.tone },
+                  { label: 'Brand Voice', value: briefDetailArticle.brand_voice },
+                  { label: 'Key Points', value: briefDetailArticle.key_points },
+                  { label: 'Style Preferences', value: briefDetailArticle.style_preferences },
+                  { label: 'Word Count', value: briefDetailArticle.word_count },
+                  { label: 'Competitor URLs', value: briefDetailArticle.competitor_urls },
+                  { label: 'Reference Links', value: briefDetailArticle.reference_links },
+                  { label: 'Avoid Topics', value: briefDetailArticle.avoid_topics },
+                  { label: 'Specific Instructions', value: briefDetailArticle.specific_instructions },
+                  { label: 'Strategic Goals', value: briefDetailArticle.strategic_goals?.join(', ') },
+                  { label: 'KPIs to Track', value: briefDetailArticle.kpis_to_track?.join(', ') },
+                  ...(briefDetailArticle.youtube_script ? [{ label: 'YouTube Script Length', value: briefDetailArticle.youtube_script_length ? `${briefDetailArticle.youtube_script_length} minutes` : null }] : []),
+                ];
+
+                const populated = fields.filter(f => f.value != null && f.value !== '' && f.value !== 0);
+
+                if (populated.length === 0) {
+                  return (
+                    <p className="text-white/50 font-mono text-sm text-center py-6">
+                      No brief details available for this project.
+                    </p>
+                  );
+                }
+
+                return populated.map(({ label, value }) => (
+                  <div key={label} className="p-3 bg-white/[0.03] rounded-lg border border-white/[0.08]">
+                    <p className="text-primary-glow/80 font-mono text-xs uppercase tracking-wider mb-1">{label}</p>
+                    <p className="text-white font-mono text-sm whitespace-pre-wrap">{value}</p>
+                  </div>
+                ));
+              })()}
+            </div>
+          )}
         </DialogContent>
       </Dialog>
     </div>;
