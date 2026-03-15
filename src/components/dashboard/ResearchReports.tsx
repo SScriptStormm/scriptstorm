@@ -32,11 +32,11 @@ const ResearchReports = ({ userId }: ResearchReportsProps) => {
 
   const fetchReports = async () => {
     try {
-      const { data, error } = await supabase
-        .from('research_reports')
-        .select('*')
-        .eq('user_id', userId)
-        .order('uploaded_at', { ascending: false });
+      const { data, error } = await supabase.
+      from('research_reports').
+      select('*').
+      eq('user_id', userId).
+      order('uploaded_at', { ascending: false });
 
       if (error) throw error;
       setReports(data || []);
@@ -45,7 +45,7 @@ const ResearchReports = ({ userId }: ResearchReportsProps) => {
       toast({
         title: "Error",
         description: "Failed to load research reports.",
-        variant: "destructive",
+        variant: "destructive"
       });
     } finally {
       setLoading(false);
@@ -70,7 +70,7 @@ const ResearchReports = ({ userId }: ResearchReportsProps) => {
       toast({
         title: "Error",
         description: "File URL not available.",
-        variant: "destructive",
+        variant: "destructive"
       });
       return;
     }
@@ -82,14 +82,14 @@ const ResearchReports = ({ userId }: ResearchReportsProps) => {
     return (
       <div className="flex items-center justify-center py-12">
         <div className="w-12 h-12 border-4 border-primary-glow/30 border-t-primary-glow rounded-full animate-spin"></div>
-      </div>
-    );
+      </div>);
+
   }
 
   if (reports.length === 0) {
     return (
       <GlassCard variant="default" glow hover={false}>
-        <GlassCardContent className="py-12 text-center">
+        <GlassCardContent className="text-center py-[50px]">
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/[0.05] border border-white/[0.1] mb-4">
             <FileBarChart className="h-10 w-10 text-primary-glow" />
           </div>
@@ -98,8 +98,8 @@ const ResearchReports = ({ userId }: ResearchReportsProps) => {
             Your research reports will appear here once uploaded by our team.
           </p>
         </GlassCardContent>
-      </GlassCard>
-    );
+      </GlassCard>);
+
   }
 
   return (
@@ -112,17 +112,17 @@ const ResearchReports = ({ userId }: ResearchReportsProps) => {
       </GlassCardHeader>
       <GlassCardContent>
         <div className="space-y-4">
-          {reports.map((report) => (
-            <div 
-              key={report.id}
-              className="p-4 bg-white/[0.05] backdrop-blur-sm rounded-lg border border-white/[0.1] hover:bg-white/[0.08] hover:border-white/[0.15] transition-all"
-            >
+          {reports.map((report) =>
+          <div
+            key={report.id}
+            className="p-4 bg-white/[0.05] backdrop-blur-sm rounded-lg border border-white/[0.1] hover:bg-white/[0.08] hover:border-white/[0.15] transition-all">
+            
               <div className="flex items-start justify-between mb-3">
                 <div className="flex-1">
                   <h4 className="text-white font-mono text-sm mb-2">{report.title}</h4>
-                  {report.description && (
-                    <p className="text-white/70 font-mono text-xs mb-2">{report.description}</p>
-                  )}
+                  {report.description &&
+                <p className="text-white/70 font-mono text-xs mb-2">{report.description}</p>
+                }
                   {getReportTypeBadge(report.report_type)}
                 </div>
               </div>
@@ -130,23 +130,23 @@ const ResearchReports = ({ userId }: ResearchReportsProps) => {
                 <p className="text-white/50 font-mono text-xs">
                   Uploaded: {formatDate(report.uploaded_at)}
                 </p>
-                {report.file_url && (
-                  <Button
-                    size="sm"
-                    onClick={() => handleDownload(report.file_url!, report.file_name || 'report.pdf')}
-                    className="bg-primary/20 text-primary-glow border border-primary-glow/50 hover:bg-primary/30 hover:border-primary-glow font-mono text-xs"
-                  >
+                {report.file_url &&
+              <Button
+                size="sm"
+                onClick={() => handleDownload(report.file_url!, report.file_name || 'report.pdf')}
+                className="bg-primary/20 text-primary-glow border border-primary-glow/50 hover:bg-primary/30 hover:border-primary-glow font-mono text-xs">
+                
                     <Download className="h-3 w-3 mr-1" />
                     DOWNLOAD
                   </Button>
-                )}
+              }
               </div>
             </div>
-          ))}
+          )}
         </div>
       </GlassCardContent>
-    </GlassCard>
-  );
+    </GlassCard>);
+
 };
 
 export default ResearchReports;
