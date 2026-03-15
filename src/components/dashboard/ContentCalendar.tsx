@@ -30,11 +30,11 @@ const ContentCalendar = ({ userId }: ContentCalendarProps) => {
 
   const fetchEvents = async () => {
     try {
-      const { data, error } = await supabase
-        .from('content_calendar_events')
-        .select('*')
-        .eq('user_id', userId)
-        .order('scheduled_date', { ascending: true });
+      const { data, error } = await supabase.
+      from('content_calendar_events').
+      select('*').
+      eq('user_id', userId).
+      order('scheduled_date', { ascending: true });
 
       if (error) throw error;
       setEvents(data || []);
@@ -43,7 +43,7 @@ const ContentCalendar = ({ userId }: ContentCalendarProps) => {
       toast({
         title: "Error",
         description: "Failed to load calendar events.",
-        variant: "destructive",
+        variant: "destructive"
       });
     } finally {
       setLoading(false);
@@ -52,18 +52,18 @@ const ContentCalendar = ({ userId }: ContentCalendarProps) => {
 
   const getEventIcon = (type: string) => {
     switch (type) {
-      case 'article': return <FileText className="h-4 w-4" />;
-      case 'social_post': return <MessageSquare className="h-4 w-4" />;
-      default: return <Calendar className="h-4 w-4" />;
+      case 'article':return <FileText className="h-4 w-4" />;
+      case 'social_post':return <MessageSquare className="h-4 w-4" />;
+      default:return <Calendar className="h-4 w-4" />;
     }
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'published': return 'bg-green-500/20 text-green-400 border-green-500/30';
-      case 'scheduled': return 'bg-blue-500/20 text-blue-400 border-blue-500/30';
-      case 'cancelled': return 'bg-red-500/20 text-red-400 border-red-500/30';
-      default: return 'bg-gray-500/20 text-gray-400 border-gray-500/30';
+      case 'published':return 'bg-green-500/20 text-green-400 border-green-500/30';
+      case 'scheduled':return 'bg-blue-500/20 text-blue-400 border-blue-500/30';
+      case 'cancelled':return 'bg-red-500/20 text-red-400 border-red-500/30';
+      default:return 'bg-gray-500/20 text-gray-400 border-gray-500/30';
     }
   };
 
@@ -71,14 +71,14 @@ const ContentCalendar = ({ userId }: ContentCalendarProps) => {
     return (
       <div className="flex items-center justify-center py-12">
         <div className="w-12 h-12 border-4 border-primary-glow/30 border-t-primary-glow rounded-full animate-spin"></div>
-      </div>
-    );
+      </div>);
+
   }
 
   if (events.length === 0) {
     return (
       <GlassCard variant="default" glow hover={false}>
-        <GlassCardContent className="py-12 text-center">
+        <GlassCardContent className="text-center py-[50px]">
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/[0.05] border border-white/[0.1] mb-4">
             <Calendar className="h-10 w-10 text-primary-glow" />
           </div>
@@ -87,8 +87,8 @@ const ContentCalendar = ({ userId }: ContentCalendarProps) => {
             Your content calendar is empty. Events will appear here once scheduled.
           </p>
         </GlassCardContent>
-      </GlassCard>
-    );
+      </GlassCard>);
+
   }
 
   return (
@@ -106,11 +106,11 @@ const ContentCalendar = ({ userId }: ContentCalendarProps) => {
       </GlassCardHeader>
       <GlassCardContent>
         <div className="space-y-4">
-          {events.map((event) => (
-            <div 
-              key={event.id}
-              className="p-4 bg-white/[0.05] backdrop-blur-sm rounded-lg border border-white/[0.1] hover:bg-white/[0.08] hover:border-white/[0.15] transition-all"
-            >
+          {events.map((event) =>
+          <div
+            key={event.id}
+            className="p-4 bg-white/[0.05] backdrop-blur-sm rounded-lg border border-white/[0.1] hover:bg-white/[0.08] hover:border-white/[0.15] transition-all">
+            
               <div className="flex items-start justify-between mb-2">
                 <div className="flex items-center gap-2">
                   <div className="text-primary-glow">
@@ -122,18 +122,18 @@ const ContentCalendar = ({ userId }: ContentCalendarProps) => {
                   {event.status.toUpperCase()}
                 </Badge>
               </div>
-              {event.description && (
-                <p className="text-white/70 font-mono text-xs mb-2">{event.description}</p>
-              )}
+              {event.description &&
+            <p className="text-white/70 font-mono text-xs mb-2">{event.description}</p>
+            }
               <p className="text-primary-glow font-mono text-xs">
                 Scheduled: {formatDate(event.scheduled_date)} at {formatTime(event.scheduled_date)}
               </p>
             </div>
-          ))}
+          )}
         </div>
       </GlassCardContent>
-    </GlassCard>
-  );
+    </GlassCard>);
+
 };
 
 export default ContentCalendar;
