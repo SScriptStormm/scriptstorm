@@ -719,23 +719,23 @@ const Dashboard = () => {
         {/* Dashboard Features Tabs */}
         <Tabs defaultValue="projects" className="mb-8">
           <TabsList className="bg-black/60 backdrop-blur-xl border border-white/[0.1] rounded-lg p-1.5 sm:p-2 mb-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] w-full justify-center sm:w-auto sm:justify-start">
-            <TabsTrigger value="projects" className="font-mono text-white/60 transition-all duration-200 rounded-md px-2 py-1.5 sm:px-4 sm:py-2.5 text-xs sm:text-sm hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)]">
+            <TabsTrigger value="projects" className="font-mono text-white/60 transition-all duration-200 rounded-md px-2 py-2 sm:px-4 sm:py-2.5 text-xs sm:text-sm hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)]">
               <FileText className="h-4 w-4 mr-1 sm:mr-2" />
               PROJECTS
             </TabsTrigger>
             
-            {hasGrowth && <TabsTrigger value="calendar" className="font-mono text-white/60 transition-all duration-200 rounded-md px-2 py-1.5 sm:px-4 sm:py-2.5 text-xs sm:text-sm hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)]">
+            {hasGrowth && <TabsTrigger value="calendar" className="font-mono text-white/60 transition-all duration-200 rounded-md px-2 py-2 sm:px-4 sm:py-2.5 text-xs sm:text-sm hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)]">
                 <CalendarIcon className="h-4 w-4 mr-1 sm:mr-2" />
                 CALENDAR
               </TabsTrigger>}
             
-            {hasScale && <TabsTrigger value="reports" className="font-mono text-white/60 transition-all duration-200 rounded-md px-2 py-1.5 sm:px-4 sm:py-2.5 text-xs sm:text-sm hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)]">
+            {hasScale && <TabsTrigger value="reports" className="font-mono text-white/60 transition-all duration-200 rounded-md px-2 py-2 sm:px-4 sm:py-2.5 text-xs sm:text-sm hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)]">
                 <FileText className="h-4 w-4 mr-1 sm:mr-2" />
                 RESEARCH
               </TabsTrigger>}
             
             
-            {hasScale && <TabsTrigger value="support" className="font-mono text-white/60 transition-all duration-200 rounded-md px-2 py-1.5 sm:px-4 sm:py-2.5 text-xs sm:text-sm hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)] relative">
+            {hasScale && <TabsTrigger value="support" className="font-mono text-white/60 transition-all duration-200 rounded-md px-2 py-2 sm:px-4 sm:py-2.5 text-xs sm:text-sm hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)] relative">
                 <MessageSquare className="h-4 w-4 mr-1 sm:mr-2" />
                 SUPPORT
                 {(hasAuthority || hasDominance) && <Badge className="ml-2 bg-yellow-500/30 text-yellow-300 border-yellow-500/50 text-xs px-1 py-0">
@@ -810,7 +810,7 @@ const Dashboard = () => {
                       size="sm"
                       variant="ghost"
                       onClick={() => setStatusFilter('all')}
-                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-7 ${
+                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-8 sm:h-7 ${
                         statusFilter === 'all' 
                           ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
                           : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
@@ -822,7 +822,7 @@ const Dashboard = () => {
                       size="sm"
                       variant="ghost"
                       onClick={() => setStatusFilter('completed')}
-                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-7 ${
+                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-8 sm:h-7 ${
                         statusFilter === 'completed' 
                           ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
                           : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
@@ -834,7 +834,7 @@ const Dashboard = () => {
                       size="sm"
                       variant="ghost"
                       onClick={() => setStatusFilter('in_progress')}
-                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-7 ${
+                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-8 sm:h-7 ${
                         statusFilter === 'in_progress' 
                           ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
                           : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
@@ -846,7 +846,7 @@ const Dashboard = () => {
                       size="sm"
                       variant="ghost"
                       onClick={() => setStatusFilter('pending')}
-                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-7 ${
+                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-8 sm:h-7 ${
                         statusFilter === 'pending' 
                           ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
                           : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
@@ -858,7 +858,7 @@ const Dashboard = () => {
                       size="sm"
                       variant="ghost"
                       onClick={() => setStatusFilter('review')}
-                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-7 ${
+                      className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-8 sm:h-7 ${
                         statusFilter === 'review' 
                           ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
                           : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
@@ -875,7 +875,7 @@ const Dashboard = () => {
                         size="sm"
                         variant="ghost"
                         onClick={() => setContentTypeFilter('all')}
-                        className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-7 ${
+                        className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-8 sm:h-7 ${
                           contentTypeFilter === 'all' 
                             ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
                             : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
@@ -887,7 +887,7 @@ const Dashboard = () => {
                         size="sm"
                         variant="ghost"
                         onClick={() => setContentTypeFilter('blog_article')}
-                        className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-7 ${
+                        className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-8 sm:h-7 ${
                           contentTypeFilter === 'blog_article' 
                             ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
                             : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
@@ -900,7 +900,7 @@ const Dashboard = () => {
                         size="sm"
                         variant="ghost"
                         onClick={() => setContentTypeFilter('social_media')}
-                        className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-7 ${
+                        className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-8 sm:h-7 ${
                           contentTypeFilter === 'social_media' 
                             ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
                             : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
@@ -913,7 +913,7 @@ const Dashboard = () => {
                         size="sm"
                         variant="ghost"
                         onClick={() => setContentTypeFilter('youtube_script')}
-                        className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-7 ${
+                        className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-8 sm:h-7 ${
                           contentTypeFilter === 'youtube_script' 
                             ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
                             : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
@@ -926,7 +926,7 @@ const Dashboard = () => {
                         size="sm"
                         variant="ghost"
                         onClick={() => setContentTypeFilter('product_description')}
-                        className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-7 ${
+                        className={`font-mono text-xs whitespace-nowrap flex-shrink-0 transition-all duration-200 px-2 h-8 sm:h-7 ${
                           contentTypeFilter === 'product_description' 
                             ? 'bg-primary/20 text-white border border-primary-glow/60 shadow-[0_0_15px_hsl(221_83%_53%/0.3)] hover:bg-primary/20 hover:border-primary-glow/60 focus:ring-0 focus:ring-offset-0' 
                             : 'bg-white/[0.05] text-white/70 border border-white/[0.15] hover:bg-white/[0.08] hover:text-white hover:border-white/[0.25]'
@@ -1099,12 +1099,12 @@ const Dashboard = () => {
                   <table className="w-full border-collapse">
                     <thead>
                       <tr className="border-b border-primary-glow/20 text-left">
-                        <th className="text-white/70 font-mono text-sm pb-3">Project Title</th>
-                        <th className="text-white/70 font-mono text-sm pb-3">Type</th>
-                        <th className="text-white/70 font-mono text-sm pb-3">Status</th>
-                        <th className="text-white/70 font-mono text-sm pb-3">Delivery</th>
-                        <th className="text-white/70 font-mono text-sm pb-3">Revisions</th>
-                        <th className="text-white/70 font-mono text-sm pb-3 text-right">Actions</th>
+                        <th className="text-white/70 font-mono text-sm font-semibold pb-3">Project Title</th>
+                        <th className="text-white/70 font-mono text-sm font-semibold pb-3">Type</th>
+                        <th className="text-white/70 font-mono text-sm font-semibold pb-3">Status</th>
+                        <th className="text-white/70 font-mono text-sm font-semibold pb-3">Delivery</th>
+                        <th className="text-white/70 font-mono text-sm font-semibold pb-3">Revisions</th>
+                        <th className="text-white/70 font-mono text-sm font-semibold pb-3 text-right">Actions</th>
                       </tr>
                     </thead>
                     <tbody>

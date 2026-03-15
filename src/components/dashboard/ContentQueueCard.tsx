@@ -81,7 +81,7 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
             PRODUCTION SUMMARY
           </GlassCardTitle>
           <Select value={selectedMonth} onValueChange={setSelectedMonth}>
-            <SelectTrigger className="w-[160px] h-8 text-xs bg-white/[0.05] border-white/[0.12] text-white/80 font-mono uppercase tracking-wider">
+            <SelectTrigger className="w-[140px] sm:w-[160px] h-9 text-xs bg-white/[0.05] border-white/[0.12] text-white/80 font-mono uppercase tracking-wider">
               <SelectValue />
             </SelectTrigger>
             <SelectContent className="bg-[hsl(222,30%,12%)] border-white/[0.12] max-h-[240px]">
