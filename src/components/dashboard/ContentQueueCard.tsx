@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { GlassCard, GlassCardContent, GlassCardHeader, GlassCardTitle } from "@/components/ui/GlassCard";
 import { AnimatedStat } from "@/components/ui/AnimatedStat";
+import { formatMonthYear } from "@/lib/dateUtils";
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { BarChart3, FileText, MessageSquare, CreditCard, CheckCircle, Clock, AlertCircle, Video, Eye } from "lucide-react";
@@ -18,40 +19,39 @@ interface ContentQueueCardProps {
   articles: Article[];
 }
 
-type Period = "this_month" | "last_month" | "all_time";
-
-const getPeriodLabel = (period: Period) => {
-  switch (period) {
-    case "this_month": return "This Month's Status";
-    case "last_month": return "Last Month's Status";
-    case "all_time": return "All Time Status";
-  }
+const getMonthYear = (dateString: string): string => {
+  const d = new Date(dateString);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
 };
 
-const filterByPeriod = (articles: Article[], period: Period): Article[] => {
-  if (period === "all_time") return articles;
+const getMonthLabel = (monthYear: string): string => {
+  const [year, month] = monthYear.split('-');
+  return formatMonthYear(new Date(parseInt(year), parseInt(month) - 1, 1));
+};
 
+const getCurrentMonthYear = (): string => {
   const now = new Date();
-  let start: Date, end: Date;
-
-  if (period === "this_month") {
-    start = new Date(now.getFullYear(), now.getMonth(), 1);
-    end = new Date(now.getFullYear(), now.getMonth() + 1, 1);
-  } else {
-    start = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-    end = new Date(now.getFullYear(), now.getMonth(), 1);
-  }
-
-  return articles.filter(a => {
-    const d = new Date(a.created_at);
-    return d >= start && d < end;
-  });
+  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
 };
 
 export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
-  const [period, setPeriod] = useState<Period>("this_month");
+  const [selectedMonth, setSelectedMonth] = useState<string>(getCurrentMonthYear());
 
-  const filtered = useMemo(() => filterByPeriod(articles, period), [articles, period]);
+  const availableMonths = useMemo(() => {
+    const monthSet = new Map<string, number>();
+    articles.forEach(a => {
+      const my = getMonthYear(a.created_at);
+      monthSet.set(my, (monthSet.get(my) || 0) + 1);
+    });
+    return Array.from(monthSet.entries())
+      .sort(([a], [b]) => b.localeCompare(a))
+      .map(([value, count]) => ({ value, label: getMonthLabel(value), count }));
+  }, [articles]);
+
+  const filtered = useMemo(() => {
+    if (selectedMonth === "all_time") return articles;
+    return articles.filter(a => getMonthYear(a.created_at) === selectedMonth);
+  }, [articles, selectedMonth]);
 
   const completedCount = filtered.filter(a => a.status === 'completed').length;
   const inProgressCount = filtered.filter(a => a.status === 'in_progress').length;
