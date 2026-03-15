@@ -90,6 +90,8 @@ const Dashboard = () => {
   const [selectedPipelineArticleId, setSelectedPipelineArticleId] = useState<string | null>(null);
   const [previousMonthsOpen, setPreviousMonthsOpen] = useState(false);
   const [submittingRevision, setSubmittingRevision] = useState(false);
+  const [briefDetailArticle, setBriefDetailArticle] = useState<Article | null>(null);
+  const [briefDialogOpen, setBriefDialogOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const itemsPerPage = 10;
