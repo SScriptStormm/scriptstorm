@@ -1,19 +1,21 @@
 
 
-## Fix: Scrollbar Track Still Appears White
+## Update Stripe to Live Mode
 
-### Root Cause
+### Changes
 
-The scrollbar track uses `rgba(0, 0, 0, 0.3)` — a **semi-transparent** black. On pages where the underlying background is white (the CSS variable `--background: 0 0% 100%`), this renders as light gray/white. The `color-scheme: dark` only affects the browser's *native* scrollbar fallback, not the custom `-webkit-scrollbar` styles which take priority.
+**1. `supabase/functions/create-checkout/index.ts`** — Replace all 10 test-mode price IDs with the provided live-mode IDs:
 
-### Fix
+| Package | Monthly | Annual |
+|---------|---------|--------|
+| starter | `price_1SZEevH0XahPXnwCMlxyP8FE` | `price_1SZEslH0XahPXnwC72g9KwsS` |
+| growth | `price_1SZEgtH0XahPXnwCP6q7zf31` | `price_1SZEwLH0XahPXnwCCA9fv6XP` |
+| starter-enterprise (Scale) | `price_1SZEhcH0XahPXnwCyzrMLV2Z` | `price_1SZExYH0XahPXnwC8DWfKLLt` |
+| growth-enterprise (Authority) | `price_1SZEjcH0XahPXnwC4DhIic4L` | `price_1SZEzbH0XahPXnwCVDnWINbi` |
+| authority-enterprise (Dominance) | `price_1SZEnZH0XahPXnwCZbQeBQPM` | `price_1SZF0ZH0XahPXnwCr9QNOkD1` |
 
-**File: `src/index.css`**
+**2. Update `STRIPE_SECRET_KEY` secret** — Replace with the provided key so it matches the live-mode price IDs.
 
-Change the scrollbar track background from semi-transparent to fully opaque dark:
-
-- Line 199: `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)` (solid near-black)
-- Line 226 (Firefox): `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)`
-
-This ensures the track is always dark regardless of what's behind it.
+### Note
+The provided key (`mk_1RvaeQH0XahPXnwCtNpPLnIh`) has an unusual prefix. Standard Stripe live secret keys start with `sk_live_`. Please confirm this is the correct key before I proceed, as a mode mismatch between the key and price IDs will cause checkout failures.
 
