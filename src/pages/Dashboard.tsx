@@ -1099,12 +1099,12 @@ const Dashboard = () => {
                   <table className="w-full border-collapse">
                     <thead>
                       <tr className="border-b border-primary-glow/20 text-left">
-                        <th className="text-white/70 font-mono text-sm pb-3">Project Title</th>
-                        <th className="text-white/70 font-mono text-sm pb-3">Type</th>
-                        <th className="text-white/70 font-mono text-sm pb-3">Status</th>
-                        <th className="text-white/70 font-mono text-sm pb-3">Delivery</th>
-                        <th className="text-white/70 font-mono text-sm pb-3">Revisions</th>
-                        <th className="text-white/70 font-mono text-sm pb-3 text-right">Actions</th>
+                        <th className="text-white/70 font-mono text-sm font-semibold pb-3">Project Title</th>
+                        <th className="text-white/70 font-mono text-sm font-semibold pb-3">Type</th>
+                        <th className="text-white/70 font-mono text-sm font-semibold pb-3">Status</th>
+                        <th className="text-white/70 font-mono text-sm font-semibold pb-3">Delivery</th>
+                        <th className="text-white/70 font-mono text-sm font-semibold pb-3">Revisions</th>
+                        <th className="text-white/70 font-mono text-sm font-semibold pb-3 text-right">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
