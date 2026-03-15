@@ -511,6 +511,10 @@ const Dashboard = () => {
     setRevisionFeedback("");
     setRevisionDialogOpen(true);
   };
+  const handleViewBrief = (article: Article) => {
+    setBriefDetailArticle(article);
+    setBriefDialogOpen(true);
+  };
   const submitRevisionRequest = async () => {
     if (!selectedArticle || !revisionFeedback.trim()) {
       toast({
