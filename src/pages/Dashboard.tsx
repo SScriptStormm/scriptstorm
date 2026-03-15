@@ -1127,7 +1127,7 @@ const Dashboard = () => {
                         <th className="text-white/70 font-mono text-sm font-semibold pb-3">Status</th>
                         <th className="text-white/70 font-mono text-sm font-semibold pb-3">Delivery</th>
                         <th className="text-white/70 font-mono text-sm font-semibold pb-3">Revisions</th>
-                        <th className="text-white/70 font-mono text-sm font-semibold pb-3 text-right">Actions</th>
+                        <th className="text-white/70 font-mono text-sm font-semibold pb-3 text-right pr-2 border-r-2 border-transparent">Actions</th>
                       </tr>
                     </thead>
                     <tbody>

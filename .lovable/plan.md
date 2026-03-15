@@ -1,14 +1,19 @@
 
 
-## Fix: Align Info Icon with "Actions" Column Header
+## Fix: Scrollbar Track Still Appears White
 
-### Problem
-The Info icon button in the Actions column appears slightly offset to the right compared to the "Actions" header text. This is caused by the `border-r-2` on the `<td>` adding 2px of visual width that the `<th>` doesn't have, plus potential padding inconsistencies.
+### Root Cause
+
+The scrollbar track uses `rgba(0, 0, 0, 0.3)` — a **semi-transparent** black. On pages where the underlying background is white (the CSS variable `--background: 0 0% 100%`), this renders as light gray/white. The `color-scheme: dark` only affects the browser's *native* scrollbar fallback, not the custom `-webkit-scrollbar` styles which take priority.
 
 ### Fix
-Add matching `pr-2` padding to the Actions `<th>` header, and ensure the `<td>` also uses `pr-2` to account for the border width pushing content. Alternatively, add the same `border-r-2 border-transparent` to the `<th>` so both cells have identical box sizing.
 
-### File: `src/pages/Dashboard.tsx`
-- **Line 1130**: Add `pr-2` to the Actions `<th>` to match the td's effective right padding
-- **Line 1202**: Ensure the Actions `<td>` has consistent `pr-2` padding so the icon centers under the header text
+**File: `src/index.css`**
+
+Change the scrollbar track background from semi-transparent to fully opaque dark:
+
+- Line 199: `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)` (solid near-black)
+- Line 226 (Firefox): `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)`
+
+This ensures the track is always dark regardless of what's behind it.
 
