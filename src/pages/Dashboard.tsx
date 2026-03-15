@@ -52,6 +52,19 @@ interface Article {
   revisions_allowed?: number;
   delivery_timeframe?: number;
   delivery_deadline?: string;
+  content_goal?: string | null;
+  target_audience?: string | null;
+  tone?: string | null;
+  brand_voice?: string | null;
+  key_points?: string | null;
+  style_preferences?: string | null;
+  competitor_urls?: string | null;
+  reference_links?: string | null;
+  avoid_topics?: string | null;
+  specific_instructions?: string | null;
+  strategic_goals?: string[] | null;
+  kpis_to_track?: string[] | null;
+  youtube_script_length?: number | null;
 }
 const Dashboard = () => {
   const [user, setUser] = useState<User | null>(null);
