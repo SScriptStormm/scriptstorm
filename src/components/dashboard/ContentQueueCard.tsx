@@ -80,14 +80,17 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
             <BarChart3 className="h-5 w-5 text-primary-glow" />
             PRODUCTION SUMMARY
           </GlassCardTitle>
-          <Select value={period} onValueChange={(v) => setPeriod(v as Period)}>
-            <SelectTrigger className="w-[140px] h-8 text-xs bg-white/[0.05] border-white/[0.12] text-white/80 font-mono uppercase tracking-wider">
+          <Select value={selectedMonth} onValueChange={setSelectedMonth}>
+            <SelectTrigger className="w-[160px] h-8 text-xs bg-white/[0.05] border-white/[0.12] text-white/80 font-mono uppercase tracking-wider">
               <SelectValue />
             </SelectTrigger>
-            <SelectContent className="bg-[hsl(222,30%,12%)] border-white/[0.12]">
-              <SelectItem value="this_month" className="text-white/80 font-mono text-xs">This Month</SelectItem>
-              <SelectItem value="last_month" className="text-white/80 font-mono text-xs">Last Month</SelectItem>
-              <SelectItem value="all_time" className="text-white/80 font-mono text-xs">All Time</SelectItem>
+            <SelectContent className="bg-[hsl(222,30%,12%)] border-white/[0.12] max-h-[240px]">
+              {availableMonths.map(m => (
+                <SelectItem key={m.value} value={m.value} className="text-white/80 font-mono text-xs">
+                  {m.label} ({m.count})
+                </SelectItem>
+              ))}
+              <SelectItem value="all_time" className="text-white/80 font-mono text-xs">All Time ({articles.length})</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -96,7 +99,7 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
 
         {/* Status Overview */}
         <div className="mb-6">
-          <h3 className="text-white/60 font-mono text-xs uppercase tracking-wider mb-4">{getPeriodLabel(period)}</h3>
+          <h3 className="text-white/60 font-mono text-xs uppercase tracking-wider mb-4">{selectedMonth === 'all_time' ? 'All Time Status' : `${getMonthLabel(selectedMonth)} Status`}</h3>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 p-4 bg-white/[0.03] rounded-xl border border-white/[0.12]">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
