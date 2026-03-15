@@ -718,24 +718,24 @@ const Dashboard = () => {
 
         {/* Dashboard Features Tabs */}
         <Tabs defaultValue="projects" className="mb-8">
-          <TabsList className="bg-black/60 backdrop-blur-xl border border-white/[0.1] rounded-lg p-1.5 mb-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] w-full justify-center sm:w-auto sm:justify-start">
-            <TabsTrigger value="projects" className="font-mono text-white/60 transition-all duration-200 rounded-md px-2 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)]">
+          <TabsList className="bg-black/60 backdrop-blur-xl border border-white/[0.1] rounded-lg p-1.5 sm:p-2 mb-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] w-full justify-center sm:w-auto sm:justify-start">
+            <TabsTrigger value="projects" className="font-mono text-white/60 transition-all duration-200 rounded-md px-2 py-1.5 sm:px-4 sm:py-2.5 text-xs sm:text-sm hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)]">
               <FileText className="h-4 w-4 mr-1 sm:mr-2" />
               PROJECTS
             </TabsTrigger>
             
-            {hasGrowth && <TabsTrigger value="calendar" className="font-mono text-white/60 transition-all duration-200 rounded-md px-2 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)]">
+            {hasGrowth && <TabsTrigger value="calendar" className="font-mono text-white/60 transition-all duration-200 rounded-md px-2 py-1.5 sm:px-4 sm:py-2.5 text-xs sm:text-sm hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)]">
                 <CalendarIcon className="h-4 w-4 mr-1 sm:mr-2" />
                 CALENDAR
               </TabsTrigger>}
             
-            {hasScale && <TabsTrigger value="reports" className="font-mono text-white/60 transition-all duration-200 rounded-md px-2 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)]">
+            {hasScale && <TabsTrigger value="reports" className="font-mono text-white/60 transition-all duration-200 rounded-md px-2 py-1.5 sm:px-4 sm:py-2.5 text-xs sm:text-sm hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)]">
                 <FileText className="h-4 w-4 mr-1 sm:mr-2" />
                 RESEARCH
               </TabsTrigger>}
             
             
-            {hasScale && <TabsTrigger value="support" className="font-mono text-white/60 transition-all duration-200 rounded-md px-2 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)] relative">
+            {hasScale && <TabsTrigger value="support" className="font-mono text-white/60 transition-all duration-200 rounded-md px-2 py-1.5 sm:px-4 sm:py-2.5 text-xs sm:text-sm hover:text-white hover:bg-white/[0.08] data-[state=active]:bg-primary/20 data-[state=active]:text-white data-[state=active]:border data-[state=active]:border-primary-glow/50 data-[state=active]:shadow-[0_0_12px_hsl(221_83%_53%/0.25)] relative">
                 <MessageSquare className="h-4 w-4 mr-1 sm:mr-2" />
                 SUPPORT
                 {(hasAuthority || hasDominance) && <Badge className="ml-2 bg-yellow-500/30 text-yellow-300 border-yellow-500/50 text-xs px-1 py-0">
