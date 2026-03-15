@@ -1,19 +1,18 @@
 
 
-## Fix: Scrollbar Track Still Appears White
+## Current State
 
-### Root Cause
+All four tabs (PROJECTS, CALENDAR, RESEARCH, SUPPORT) have identical padding:
+- **Mobile**: `px-2 py-1.5`
+- **Desktop/Tablet (sm+)**: `px-4 py-2.5`
 
-The scrollbar track uses `rgba(0, 0, 0, 0.3)` — a **semi-transparent** black. On pages where the underlying background is white (the CSS variable `--background: 0 0% 100%`), this renders as light gray/white. The `color-scheme: dark` only affects the browser's *native* scrollbar fallback, not the custom `-webkit-scrollbar` styles which take priority.
+So CALENDAR and RESEARCH are not smaller than the others — they all share the same classes.
 
-### Fix
+## Plan
 
-**File: `src/index.css`**
+Change the desktop/tablet horizontal padding for **CALENDAR** and **RESEARCH** tabs from `sm:px-4` to `sm:px-[50px]` (50px as requested). Leave mobile padding (`px-2 py-1.5`) unchanged. Leave PROJECTS and SUPPORT tabs unchanged.
 
-Change the scrollbar track background from semi-transparent to fully opaque dark:
-
-- Line 199: `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)` (solid near-black)
-- Line 226 (Firefox): `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)`
-
-This ensures the track is always dark regardless of what's behind it.
+**Files to edit**: `src/pages/Dashboard.tsx` (lines 727 and 732)
+- CALENDAR tab: `sm:px-4` → `sm:px-[50px]`
+- RESEARCH tab: `sm:px-4` → `sm:px-[50px]`
 
