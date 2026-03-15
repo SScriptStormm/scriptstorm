@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { GlassCard, GlassCardContent, GlassCardHeader, GlassCardTitle } from "@/components/ui/GlassCard";
 import { AnimatedStat } from "@/components/ui/AnimatedStat";
+import { formatMonthYear } from "@/lib/dateUtils";
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { BarChart3, FileText, MessageSquare, CreditCard, CheckCircle, Clock, AlertCircle, Video, Eye } from "lucide-react";
@@ -18,40 +19,39 @@ interface ContentQueueCardProps {
   articles: Article[];
 }
 
-type Period = "this_month" | "last_month" | "all_time";
-
-const getPeriodLabel = (period: Period) => {
-  switch (period) {
-    case "this_month": return "This Month's Status";
-    case "last_month": return "Last Month's Status";
-    case "all_time": return "All Time Status";
-  }
+const getMonthYear = (dateString: string): string => {
+  const d = new Date(dateString);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
 };
 
-const filterByPeriod = (articles: Article[], period: Period): Article[] => {
-  if (period === "all_time") return articles;
+const getMonthLabel = (monthYear: string): string => {
+  const [year, month] = monthYear.split('-');
+  return formatMonthYear(new Date(parseInt(year), parseInt(month) - 1, 1));
+};
 
+const getCurrentMonthYear = (): string => {
   const now = new Date();
-  let start: Date, end: Date;
-
-  if (period === "this_month") {
-    start = new Date(now.getFullYear(), now.getMonth(), 1);
-    end = new Date(now.getFullYear(), now.getMonth() + 1, 1);
-  } else {
-    start = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-    end = new Date(now.getFullYear(), now.getMonth(), 1);
-  }
-
-  return articles.filter(a => {
-    const d = new Date(a.created_at);
-    return d >= start && d < end;
-  });
+  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
 };
 
 export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
-  const [period, setPeriod] = useState<Period>("this_month");
+  const [selectedMonth, setSelectedMonth] = useState<string>(getCurrentMonthYear());
 
-  const filtered = useMemo(() => filterByPeriod(articles, period), [articles, period]);
+  const availableMonths = useMemo(() => {
+    const monthSet = new Map<string, number>();
+    articles.forEach(a => {
+      const my = getMonthYear(a.created_at);
+      monthSet.set(my, (monthSet.get(my) || 0) + 1);
+    });
+    return Array.from(monthSet.entries())
+      .sort(([a], [b]) => b.localeCompare(a))
+      .map(([value, count]) => ({ value, label: getMonthLabel(value), count }));
+  }, [articles]);
+
+  const filtered = useMemo(() => {
+    if (selectedMonth === "all_time") return articles;
+    return articles.filter(a => getMonthYear(a.created_at) === selectedMonth);
+  }, [articles, selectedMonth]);
 
   const completedCount = filtered.filter(a => a.status === 'completed').length;
   const inProgressCount = filtered.filter(a => a.status === 'in_progress').length;
@@ -80,14 +80,17 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
             <BarChart3 className="h-5 w-5 text-primary-glow" />
             PRODUCTION SUMMARY
           </GlassCardTitle>
-          <Select value={period} onValueChange={(v) => setPeriod(v as Period)}>
-            <SelectTrigger className="w-[140px] h-8 text-xs bg-white/[0.05] border-white/[0.12] text-white/80 font-mono uppercase tracking-wider">
+          <Select value={selectedMonth} onValueChange={setSelectedMonth}>
+            <SelectTrigger className="w-[160px] h-8 text-xs bg-white/[0.05] border-white/[0.12] text-white/80 font-mono uppercase tracking-wider">
               <SelectValue />
             </SelectTrigger>
-            <SelectContent className="bg-[hsl(222,30%,12%)] border-white/[0.12]">
-              <SelectItem value="this_month" className="text-white/80 font-mono text-xs">This Month</SelectItem>
-              <SelectItem value="last_month" className="text-white/80 font-mono text-xs">Last Month</SelectItem>
-              <SelectItem value="all_time" className="text-white/80 font-mono text-xs">All Time</SelectItem>
+            <SelectContent className="bg-[hsl(222,30%,12%)] border-white/[0.12] max-h-[240px]">
+              {availableMonths.map(m => (
+                <SelectItem key={m.value} value={m.value} className="text-white/80 font-mono text-xs">
+                  {m.label} ({m.count})
+                </SelectItem>
+              ))}
+              <SelectItem value="all_time" className="text-white/80 font-mono text-xs">All Time ({articles.length})</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -96,7 +99,7 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
 
         {/* Status Overview */}
         <div className="mb-6">
-          <h3 className="text-white/60 font-mono text-xs uppercase tracking-wider mb-4">{getPeriodLabel(period)}</h3>
+          <h3 className="text-white/60 font-mono text-xs uppercase tracking-wider mb-4">{selectedMonth === 'all_time' ? 'All Time Status' : `${getMonthLabel(selectedMonth)} Status`}</h3>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 p-4 bg-white/[0.03] rounded-xl border border-white/[0.12]">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
