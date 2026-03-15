@@ -1201,6 +1201,9 @@ const Dashboard = () => {
                             {/* Last Cell - Actions */}
                             <td className={`py-4 text-right border-r-2 ${isSelected ? 'border-primary-glow/60 rounded-r-lg' : 'border-white/[0.08]'}`}>
                               <div className="flex items-center gap-2 justify-end">
+                                <Button size="icon" variant="ghost" className="h-8 w-8 text-primary-glow/70 hover:text-primary-glow border border-primary-glow/20 hover:border-primary-glow/50" onClick={(e) => { e.stopPropagation(); handleViewBrief(article); }} title="View Brief Details">
+                                  <Info className="h-4 w-4" />
+                                </Button>
                                 {article.status === 'completed' ? <>
                                     <Button size="sm" className="bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono" onClick={() => article.article_url && window.open(article.article_url, '_blank')}>
                                       <Download className="h-4 w-4 mr-1" />
