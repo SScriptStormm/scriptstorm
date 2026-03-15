@@ -101,7 +101,7 @@ export const MonthlyUsageCard = ({ subscriptionTier, articlesUsed, socialPostsUs
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <MessageSquare className="h-4 w-4 text-emerald-400" />
-                  <span className="text-white/80 font-mono text-xs uppercase tracking-wide">Social Posts</span>
+                  <span className="text-white/80 font-mono text-xs sm:text-sm uppercase tracking-wide">Social Posts</span>
                 </div>
                 <span className="text-white font-mono text-sm font-bold">
                   {socialPostsUsed} / {limits.socialPosts}
