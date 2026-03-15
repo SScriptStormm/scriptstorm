@@ -1381,6 +1381,63 @@ const Dashboard = () => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Brief Details Dialog */}
+      <Dialog open={briefDialogOpen} onOpenChange={setBriefDialogOpen}>
+        <DialogContent className="bg-black/95 border-primary-glow/30 max-w-lg max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-white font-mono tracking-wide flex items-center gap-2">
+              <Info className="h-5 w-5 text-primary-glow" />
+              Brief Details
+            </DialogTitle>
+            <DialogDescription className="text-white/70 font-mono text-sm">
+              {briefDetailArticle?.title}
+            </DialogDescription>
+          </DialogHeader>
+          
+          {briefDetailArticle && (
+            <div className="space-y-3 py-2">
+              {(() => {
+                const fields: { label: string; value: string | number | null | undefined }[] = [
+                  { label: 'Content Type', value: briefDetailArticle.content_type?.replace(/_/g, ' ') },
+                  { label: 'Content Goal', value: (briefDetailArticle as any).content_goal },
+                  { label: 'Target Audience', value: (briefDetailArticle as any).target_audience },
+                  { label: 'Target Keywords', value: briefDetailArticle.target_keywords?.join(', ') },
+                  { label: 'Tone', value: (briefDetailArticle as any).tone },
+                  { label: 'Brand Voice', value: (briefDetailArticle as any).brand_voice },
+                  { label: 'Key Points', value: (briefDetailArticle as any).key_points },
+                  { label: 'Style Preferences', value: (briefDetailArticle as any).style_preferences },
+                  { label: 'Word Count', value: briefDetailArticle.word_count },
+                  { label: 'Competitor URLs', value: (briefDetailArticle as any).competitor_urls },
+                  { label: 'Reference Links', value: (briefDetailArticle as any).reference_links },
+                  { label: 'Avoid Topics', value: (briefDetailArticle as any).avoid_topics },
+                  { label: 'Specific Instructions', value: (briefDetailArticle as any).specific_instructions },
+                  { label: 'Strategic Goals', value: (briefDetailArticle as any).strategic_goals?.join(', ') },
+                  { label: 'KPIs to Track', value: (briefDetailArticle as any).kpis_to_track?.join(', ') },
+                  ...(briefDetailArticle.youtube_script ? [{ label: 'YouTube Script Length', value: (briefDetailArticle as any).youtube_script_length ? `${(briefDetailArticle as any).youtube_script_length} minutes` : null }] : []),
+                ];
+
+                const populated = fields.filter(f => f.value != null && f.value !== '' && f.value !== 0);
+
+                if (populated.length === 0) {
+                  return (
+                    <p className="text-white/50 font-mono text-sm text-center py-6">
+                      No brief details available for this project.
+                    </p>
+                  );
+                }
+
+                return populated.map(({ label, value }) => (
+                  <div key={label} className="p-3 bg-white/[0.03] rounded-lg border border-white/[0.08]">
+                    <p className="text-primary-glow/80 font-mono text-xs uppercase tracking-wider mb-1">{label}</p>
+                    <p className="text-white font-mono text-sm whitespace-pre-wrap">{value}</p>
+                  </div>
+                ));
+              })()}
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>;
 };
 export default Dashboard;
