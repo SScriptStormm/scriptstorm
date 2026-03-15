@@ -1,19 +1,25 @@
 
 
-## Fix: Scrollbar Track Still Appears White
+## Upgrade Production Summary Period Filter
 
-### Root Cause
+### What Changes
+Replace the hardcoded 3-option period filter (This Month, Last Month, All Time) in `ContentQueueCard` with a dynamic month list derived from the article data — matching the same pattern used in the Content Projects filter.
 
-The scrollbar track uses `rgba(0, 0, 0, 0.3)` — a **semi-transparent** black. On pages where the underlying background is white (the CSS variable `--background: 0 0% 100%`), this renders as light gray/white. The `color-scheme: dark` only affects the browser's *native* scrollbar fallback, not the custom `-webkit-scrollbar` styles which take priority.
+### File: `src/components/dashboard/ContentQueueCard.tsx`
 
-### Fix
+1. **Remove** the `Period` type, `getPeriodLabel`, and `filterByPeriod` helpers (the hardcoded this_month/last_month/all_time logic)
 
-**File: `src/index.css`**
+2. **Add** dynamic month extraction helpers (reusing the same pattern from Dashboard.tsx):
+   - `getMonthYear(dateString)` — extracts `YYYY-MM` from a date
+   - `getMonthLabel(monthYear)` — formats to "March 2026" using `formatMonthYear` from `dateUtils`
+   - Compute `availableMonths` from article data, sorted reverse chronologically
+   - Default selected value: current month's `YYYY-MM` string
 
-Change the scrollbar track background from semi-transparent to fully opaque dark:
+3. **Update the Select dropdown** to list all available months with article counts, plus an "All Time" option at the bottom — same style as the Content Projects month filter
 
-- Line 199: `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)` (solid near-black)
-- Line 226 (Firefox): `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)`
+4. **Update filtering logic** to filter by the selected `YYYY-MM` value, or show everything for `"all_time"`
 
-This ensures the track is always dark regardless of what's behind it.
+5. **Update the section heading** to show the selected month name dynamically (e.g., "March 2026 Status" or "All Time Status")
+
+### No changes to mobile layout or visual styling — only the filter options and data logic.
 
