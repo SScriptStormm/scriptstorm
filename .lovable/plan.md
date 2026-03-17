@@ -1,13 +1,19 @@
 
 
-## Fix: Dialog Close Button Color
+## Fix: Scrollbar Track Still Appears White
 
-The X icon on the close button inherits the default text color (grey) instead of matching the blue/white theme.
+### Root Cause
 
-### Change in `src/components/ui/dialog.tsx`, line 46
+The scrollbar track uses `rgba(0, 0, 0, 0.3)` — a **semi-transparent** black. On pages where the underlying background is white (the CSS variable `--background: 0 0% 100%`), this renders as light gray/white. The `color-scheme: dark` only affects the browser's *native* scrollbar fallback, not the custom `-webkit-scrollbar` styles which take priority.
 
-**Current:** `<X className="h-4 w-4" />`
-**New:** `<X className="h-4 w-4 text-white" />`
+### Fix
 
-This makes the X icon white, matching the blue-white glassmorphic design of the dialog.
+**File: `src/index.css`**
+
+Change the scrollbar track background from semi-transparent to fully opaque dark:
+
+- Line 199: `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)` (solid near-black)
+- Line 226 (Firefox): `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)`
+
+This ensures the track is always dark regardless of what's behind it.
 
