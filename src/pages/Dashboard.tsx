@@ -1188,7 +1188,7 @@ const Dashboard = () => {
                                   {article.delivery_date ? formatDate(article.delivery_date) : 'Completed'}
                                 </span> : article.delivery_deadline ? <span className="text-yellow-400 font-mono text-xs md:text-sm font-semibold">
                                   {getTimeRemaining(article.delivery_deadline)}
-                                </span> : <span className="text-white/50 font-mono text-xs">—</span>}
+                                </span> : <span className="text-white/60 font-mono text-xs">—</span>}
                             </td>
                             
                             {/* Revisions Cell */}
