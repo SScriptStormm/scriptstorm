@@ -1195,7 +1195,7 @@ const Dashboard = () => {
                             <td className="py-4 align-top">
                               {article.status === 'completed' ? <span className={`font-mono text-xs md:text-sm ${(article.revisions_requested || 0) >= (article.revisions_allowed || 1) ? 'text-red-400' : 'text-white'}`}>
                                   {article.revisions_requested || 0} / {article.revisions_allowed === 999999 ? '∞' : article.revisions_allowed || 1}
-                                </span> : <span className="text-white/50 font-mono text-xs">—</span>}
+                                </span> : <span className="text-white/60 font-mono text-xs">—</span>}
                             </td>
                             
                             {/* Last Cell - Actions */}
