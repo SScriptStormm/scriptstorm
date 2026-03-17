@@ -1153,7 +1153,7 @@ const Dashboard = () => {
                                 <h3 className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/85 font-mono tracking-wider font-bold text-xs md:text-sm lg:text-base truncate max-w-[300px] lg:max-w-[400px]" title={article.title}>
                                   {article.title}
                                 </h3>
-                                {article.word_count > 0 && <p className="text-white/50 font-mono text-[10px] md:text-xs">{article.word_count} words</p>}
+                                {article.word_count > 0 && <p className="text-white/60 font-mono text-[11px] md:text-xs">{article.word_count} words</p>}
                               </div>
                             </td>
                             
