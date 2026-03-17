@@ -1173,7 +1173,7 @@ const Dashboard = () => {
                             
                             {/* Status Cell */}
                             <td className="py-4 align-top">
-                              <Badge className={`${getStatusColor(article.status)} font-mono tracking-wide text-[10px] md:text-xs inline-flex items-center gap-1`}>
+                              <Badge className={`${getStatusColor(article.status)} font-mono tracking-wide text-[11px] md:text-xs inline-flex items-center gap-1`}>
                                 {getStatusIcon(article.status)}
                                 {article.status === 'completed' ? '✅ Ready' : article.status === 'in_progress' ? '🔄 In Progress' : article.status === 'review' ? '🔍 In Review' : '⏳ Pending'}
                               </Badge>
