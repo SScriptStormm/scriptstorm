@@ -1,25 +1,19 @@
 
 
-## Dashboard Mobile Fixes
+## Fix: Scrollbar Track Still Appears White
 
-### 1. Reduce Monthly Usage label text size on mobile
+### Root Cause
 
-**File: `src/components/dashboard/MonthlyUsageCard.tsx`**
+The scrollbar track uses `rgba(0, 0, 0, 0.3)` — a **semi-transparent** black. On pages where the underlying background is white (the CSS variable `--background: 0 0% 100%`), this renders as light gray/white. The `color-scheme: dark` only affects the browser's *native* scrollbar fallback, not the custom `-webkit-scrollbar` styles which take priority.
 
-The labels "Articles", "Social Posts", and "Product Desc" currently use `text-xs sm:text-sm`. On mobile they render at `text-xs` (12px) which is fine, but the numbers next to them (`text-sm font-bold`) sit very close.
+### Fix
 
-- Lines 75, 104, 133: Change the label `text-xs sm:text-sm` to `text-[10px] sm:text-sm` to make labels slightly smaller on mobile
-- Lines 77, 106, 135: Add `gap-1` or reduce spacing between label row and number by changing the parent `justify-between` wrapper to also include `gap-1 sm:gap-2`
-- Lines 72, 101, 130: Add `gap-1 sm:gap-2` to the flex row containers to create more breathing room between label and number on mobile
+**File: `src/index.css`**
 
-### 2. Improve Brief Details dialog close button
+Change the scrollbar track background from semi-transparent to fully opaque dark:
 
-**File: `src/components/ui/dialog.tsx`**
+- Line 199: `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)` (solid near-black)
+- Line 226 (Firefox): `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)`
 
-The close button (line 45) is currently a tiny `h-4 w-4` X icon with `opacity-70` that fades in/out. It needs to be more visible and persistently styled while keeping the same design language.
-
-- Line 45: Update the `DialogPrimitive.Close` className to add a visible circular background, larger hit target, and always-visible styling:
-  - Change from `rounded-sm opacity-70` to `rounded-full opacity-100 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/40 p-1.5`
-  - Change the X icon from `h-4 w-4` to `h-4 w-4` (keep size but the padding makes it feel bigger)
-  - This creates a persistent, visible circular close button that matches the glassmorphic aesthetic
+This ensures the track is always dark regardless of what's behind it.
 
