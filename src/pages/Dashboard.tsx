@@ -1041,10 +1041,10 @@ const Dashboard = () => {
                         <div className={`space-y-3 ${isSelected ? 'pl-2' : ''}`}>
                           {/* Title and Word Count */}
                           <div>
-                            <h3 className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/70 font-mono tracking-wider font-bold text-sm mb-1 line-clamp-2">
+                            <h3 className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/85 font-mono tracking-wider font-bold text-sm mb-1 line-clamp-2">
                               {article.title}
                             </h3>
-                            {article.word_count > 0 && <p className="text-white/50 font-mono text-xs">{article.word_count} words</p>}
+                            {article.word_count > 0 && <p className="text-white/60 font-mono text-xs">{article.word_count} words</p>}
                           </div>
                           
                           {/* Content Type Badge */}
@@ -1150,10 +1150,10 @@ const Dashboard = () => {
                                 <div className="absolute left-1 top-3 bottom-3 w-[3px] rounded-full bg-primary-glow shadow-[0_0_12px_hsl(221_83%_53%/0.6)]" />
                               )}
                               <div className={isSelected ? 'pl-3' : ''}>
-                                <h3 className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/70 font-mono tracking-wider font-bold text-xs md:text-sm lg:text-base truncate max-w-[300px] lg:max-w-[400px]" title={article.title}>
+                                <h3 className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/85 font-mono tracking-wider font-bold text-xs md:text-sm lg:text-base truncate max-w-[300px] lg:max-w-[400px]" title={article.title}>
                                   {article.title}
                                 </h3>
-                                {article.word_count > 0 && <p className="text-white/50 font-mono text-[10px] md:text-xs">{article.word_count} words</p>}
+                                {article.word_count > 0 && <p className="text-white/60 font-mono text-[11px] md:text-xs">{article.word_count} words</p>}
                               </div>
                             </td>
                             
@@ -1163,7 +1163,7 @@ const Dashboard = () => {
                                 const typeInfo = getContentTypeInfo(article);
                                 const TypeIcon = typeInfo.icon;
                                 return (
-                                  <Badge className={`${typeInfo.colorClass} font-mono tracking-wide text-[10px] md:text-xs inline-flex items-center gap-1`}>
+                                  <Badge className={`${typeInfo.colorClass} font-mono tracking-wide text-[11px] md:text-xs inline-flex items-center gap-1`}>
                                     <TypeIcon className="h-3 w-3" />
                                     {typeInfo.shortLabel}
                                   </Badge>
@@ -1173,7 +1173,7 @@ const Dashboard = () => {
                             
                             {/* Status Cell */}
                             <td className="py-4 align-top">
-                              <Badge className={`${getStatusColor(article.status)} font-mono tracking-wide text-[10px] md:text-xs inline-flex items-center gap-1`}>
+                              <Badge className={`${getStatusColor(article.status)} font-mono tracking-wide text-[11px] md:text-xs inline-flex items-center gap-1`}>
                                 {getStatusIcon(article.status)}
                                 {article.status === 'completed' ? '✅ Ready' : article.status === 'in_progress' ? '🔄 In Progress' : article.status === 'review' ? '🔍 In Review' : '⏳ Pending'}
                               </Badge>
@@ -1188,14 +1188,14 @@ const Dashboard = () => {
                                   {article.delivery_date ? formatDate(article.delivery_date) : 'Completed'}
                                 </span> : article.delivery_deadline ? <span className="text-yellow-400 font-mono text-xs md:text-sm font-semibold">
                                   {getTimeRemaining(article.delivery_deadline)}
-                                </span> : <span className="text-white/50 font-mono text-xs">—</span>}
+                                </span> : <span className="text-white/60 font-mono text-xs">—</span>}
                             </td>
                             
                             {/* Revisions Cell */}
                             <td className="py-4 align-top">
                               {article.status === 'completed' ? <span className={`font-mono text-xs md:text-sm ${(article.revisions_requested || 0) >= (article.revisions_allowed || 1) ? 'text-red-400' : 'text-white'}`}>
                                   {article.revisions_requested || 0} / {article.revisions_allowed === 999999 ? '∞' : article.revisions_allowed || 1}
-                                </span> : <span className="text-white/50 font-mono text-xs">—</span>}
+                                </span> : <span className="text-white/60 font-mono text-xs">—</span>}
                             </td>
                             
                             {/* Last Cell - Actions */}
