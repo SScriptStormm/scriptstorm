@@ -1044,7 +1044,7 @@ const Dashboard = () => {
                             <h3 className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/85 font-mono tracking-wider font-bold text-sm mb-1 line-clamp-2">
                               {article.title}
                             </h3>
-                            {article.word_count > 0 && <p className="text-white/50 font-mono text-xs">{article.word_count} words</p>}
+                            {article.word_count > 0 && <p className="text-white/60 font-mono text-xs">{article.word_count} words</p>}
                           </div>
                           
                           {/* Content Type Badge */}
