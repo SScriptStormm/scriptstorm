@@ -69,10 +69,10 @@ export const MonthlyUsageCard = ({ subscriptionTier, articlesUsed, socialPostsUs
           <div className="flex-1 space-y-5">
             {/* Articles */}
             <div className="space-y-2">
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between gap-1 sm:gap-2">
                 <div className="flex items-center gap-2">
                   <FileText className="h-4 w-4 text-primary-glow" />
-                  <span className="text-white/80 font-mono text-xs sm:text-sm uppercase tracking-wide">Articles</span>
+                  <span className="text-white/80 font-mono text-[10px] sm:text-sm uppercase tracking-wide">Articles</span>
                 </div>
                 <span className="text-white font-mono text-sm font-bold">
                   {articlesUsed} / {limits.articles}
