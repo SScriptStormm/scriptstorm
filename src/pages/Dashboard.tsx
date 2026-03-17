@@ -1163,7 +1163,7 @@ const Dashboard = () => {
                                 const typeInfo = getContentTypeInfo(article);
                                 const TypeIcon = typeInfo.icon;
                                 return (
-                                  <Badge className={`${typeInfo.colorClass} font-mono tracking-wide text-[10px] md:text-xs inline-flex items-center gap-1`}>
+                                  <Badge className={`${typeInfo.colorClass} font-mono tracking-wide text-[11px] md:text-xs inline-flex items-center gap-1`}>
                                     <TypeIcon className="h-3 w-3" />
                                     {typeInfo.shortLabel}
                                   </Badge>
