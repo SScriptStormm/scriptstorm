@@ -375,21 +375,17 @@ const Dashboard = () => {
 
   // Helper function to get content type info
   const getContentTypeInfo = (article: Article) => {
-    if (article.youtube_script) {
+    // Check specific content_type first, then fall back to youtube_script flag
+    if (article.content_type === 'product_description') {
+      return { label: 'Product Desc', shortLabel: 'Product', icon: Package, colorClass: 'bg-purple-500/20 text-purple-400 border-purple-500/30' };
+    }
+    if (article.content_type === 'social_media' || article.content_type === 'social_media_post') {
+      return { label: 'Social Post', shortLabel: 'Social', icon: MessageSquare, colorClass: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' };
+    }
+    if (article.youtube_script && (!article.content_type || article.content_type === 'article' || article.content_type === 'blog_article')) {
       return { label: 'YouTube Script', shortLabel: 'YouTube', icon: Video, colorClass: 'bg-red-500/20 text-red-400 border-red-500/30' };
     }
-    switch (article.content_type) {
-      case 'blog_article':
-      case 'article':
-        return { label: 'Blog Article', shortLabel: 'Blog', icon: FileText, colorClass: 'bg-blue-500/20 text-blue-400 border-blue-500/30' };
-      case 'social_media':
-      case 'social_media_post':
-        return { label: 'Social Post', shortLabel: 'Social', icon: MessageSquare, colorClass: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' };
-      case 'product_description':
-        return { label: 'Product Desc', shortLabel: 'Product', icon: Package, colorClass: 'bg-purple-500/20 text-purple-400 border-purple-500/30' };
-      default:
-        return { label: 'Blog Article', shortLabel: 'Blog', icon: FileText, colorClass: 'bg-blue-500/20 text-blue-400 border-blue-500/30' };
-    }
+    return { label: 'Blog Article', shortLabel: 'Blog', icon: FileText, colorClass: 'bg-blue-500/20 text-blue-400 border-blue-500/30' };
   };
 
   // Filter articles by month first, then by status, then by content type
@@ -398,7 +394,7 @@ const Dashboard = () => {
   const filteredArticles = contentTypeFilter === 'all' 
     ? statusFilteredArticles 
     : statusFilteredArticles.filter(a => {
-        if (contentTypeFilter === 'youtube_script') return a.youtube_script;
+        if (contentTypeFilter === 'youtube_script') return a.youtube_script && (!a.content_type || a.content_type === 'article' || a.content_type === 'blog_article');
         if (contentTypeFilter === 'blog_article') return !a.youtube_script && (!a.content_type || a.content_type === 'article' || a.content_type === 'blog_article');
         if (contentTypeFilter === 'social_media') return !a.youtube_script && (a.content_type === 'social_media' || a.content_type === 'social_media_post');
         if (contentTypeFilter === 'product_description') return a.content_type === 'product_description';
