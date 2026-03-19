@@ -63,7 +63,7 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
   const blogArticles = filtered.filter(a => !a.content_type || a.content_type === 'article' || a.content_type === 'blog_article');
   const socialPosts = filtered.filter(a => a.content_type === 'social_media' || a.content_type === 'social_media_post');
   const productDescs = filtered.filter(a => a.content_type === 'product_description');
-  const youtubeScripts = filtered.filter(a => a.youtube_script && (!a.content_type || a.content_type === 'article' || a.content_type === 'blog_article'));
+  const youtubeScripts = filtered.filter(a => a.youtube_script);
   
   const blogWords = blogArticles.reduce((sum, a) => sum + (a.word_count || 0), 0);
   const socialWords = socialPosts.reduce((sum, a) => sum + (a.word_count || 0), 0);
