@@ -1,0 +1,1 @@
+UPDATE articles SET youtube_script = false WHERE id = '5976e9c9-845a-4c2d-893e-fa435df717a6'
