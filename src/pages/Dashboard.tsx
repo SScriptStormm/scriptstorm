@@ -394,7 +394,7 @@ const Dashboard = () => {
   const filteredArticles = contentTypeFilter === 'all' 
     ? statusFilteredArticles 
     : statusFilteredArticles.filter(a => {
-        if (contentTypeFilter === 'youtube_script') return a.youtube_script;
+        if (contentTypeFilter === 'youtube_script') return a.youtube_script && (!a.content_type || a.content_type === 'article' || a.content_type === 'blog_article');
         if (contentTypeFilter === 'blog_article') return !a.youtube_script && (!a.content_type || a.content_type === 'article' || a.content_type === 'blog_article');
         if (contentTypeFilter === 'social_media') return !a.youtube_script && (a.content_type === 'social_media' || a.content_type === 'social_media_post');
         if (contentTypeFilter === 'product_description') return a.content_type === 'product_description';
