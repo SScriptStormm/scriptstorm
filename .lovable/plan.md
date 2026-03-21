@@ -1,19 +1,19 @@
 
 
-## Fix: Scrollbar Track Still Appears White
+## Connect Live Stripe Secret Key
 
-### Root Cause
+### What needs to happen
+Update the `STRIPE_SECRET_KEY` secret in Supabase with your new live key (`sk_live_51OjakOH0X...`).
 
-The scrollbar track uses `rgba(0, 0, 0, 0.3)` — a **semi-transparent** black. On pages where the underlying background is white (the CSS variable `--background: 0 0% 100%`), this renders as light gray/white. The `color-scheme: dark` only affects the browser's *native* scrollbar fallback, not the custom `-webkit-scrollbar` styles which take priority.
+### Steps
+1. **Update the secret** using the secrets management tool to set `STRIPE_SECRET_KEY` to your provided live key
+2. **Update the `create-checkout` edge function** with live-mode Price IDs (the current ones are test-mode IDs based on naming convention)
+3. **Verify** the `customer-portal` edge function also uses `STRIPE_SECRET_KEY` (it should already work with the updated secret)
 
-### Fix
+### Important note
+The current `create-checkout` function contains **test-mode Price IDs** (e.g., `price_1SZEevH0XahPXnwCMlxyP8FE`). These will **not work** with a live secret key. You will need to provide the corresponding **live-mode Price IDs** from your Stripe Dashboard, or I can update them once you share them.
 
-**File: `src/index.css`**
-
-Change the scrollbar track background from semi-transparent to fully opaque dark:
-
-- Line 199: `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)` (solid near-black)
-- Line 226 (Firefox): `rgba(0, 0, 0, 0.3)` → `rgb(15, 15, 20)`
-
-This ensures the track is always dark regardless of what's behind it.
+### Security
+- The key will be stored securely as a Supabase secret, never in the codebase
+- Edge functions access it via `Deno.env.get("STRIPE_SECRET_KEY")` at runtime
 
