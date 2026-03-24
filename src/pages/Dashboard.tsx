@@ -1199,9 +1199,9 @@ const Dashboard = () => {
                             </td>
                             
                             {/* Last Cell - Actions */}
-                            <td className={`py-4 text-right pr-2 border-r-2 ${isSelected ? 'border-primary-glow/60 rounded-r-lg' : 'border-white/[0.08]'}`}>
+                            <td className={`py-4 text-right pr-3 border-r-2 ${isSelected ? 'border-primary-glow/60 rounded-r-lg' : 'border-white/[0.08]'}`}>
                               <div className="flex items-center gap-2 justify-end">
-                                <Button size="icon" variant="ghost" className="h-8 w-8 text-primary-glow/70 hover:text-primary-glow border border-primary-glow/20 hover:border-primary-glow/50" onClick={(e) => { e.stopPropagation(); handleViewBrief(article); }} title="View Brief Details">
+                                <Button size="icon" variant="ghost" className="h-8 w-8 text-primary-glow/70 hover:text-primary-glow border border-primary-glow/20 hover:border-primary-glow/50 hover:bg-primary-glow/10" onClick={(e) => { e.stopPropagation(); handleViewBrief(article); }} title="View Brief Details">
                                   <Info className="h-4 w-4" />
                                 </Button>
                                 {article.status === 'completed' ? <>
