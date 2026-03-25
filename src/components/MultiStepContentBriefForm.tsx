@@ -412,9 +412,7 @@ export function MultiStepContentBriefForm() {
                             className="bg-black/40 text-white placeholder:text-white/50 border-white/20 focus-visible:ring-primary focus-visible:border-primary h-12 text-base"
                           />
                         </FormControl>
-                        <div className="flex justify-end">
-                          <span className="text-xs text-white/50">{getCharCount(field.value, 200)}</span>
-                        </div>
+                        <p className="text-right text-xs text-white/50 mt-1">{getCharCount(field.value, 200)}</p>
                         <FormMessage />
                       </FormItem>
                     )}
