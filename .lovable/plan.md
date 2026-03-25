@@ -1,26 +1,22 @@
 
-## Fix: Pixel-Perfect Desktop Alignment for “View Brief Details” Under “Actions”
 
-### What I will change
-1. **Target only the desktop table block** in `src/pages/Dashboard.tsx` (the `hidden lg:block` section).
-2. Apply a **tiny horizontal nudge (about 2px left)** specifically to the “View Brief Details” icon position in the desktop actions cell so its visual center sits directly under the center of the “Actions” header text.
-3. Keep the current custom hover styling (`hover:bg-primary-glow/10`, border glow, text glow) unchanged since it already matches the dashboard aesthetic and avoids the default blue ghost hover.
+## Fix: Consistent Field Spacing in Content Brief Form (Step 1)
 
-### Implementation approach
-- In the desktop row actions area (around current lines ~1202–1205), add a small desktop-only alignment offset to the info action placement (via wrapper or icon-level class) rather than broad layout changes.
-- Keep the header and column structure intact to avoid side effects on completed rows (which include additional actions).
-- Do **not** touch the mobile/tablet card layout block (around ~1090–1110).
+### Problem
+The spacing between fields on Step 1 of the content brief form is visually inconsistent. The "Article Title" field includes a character count `<div>` below the input that adds extra vertical space before the next field. The "Content Type" and "Target Keywords" fields have different internal structures (no char count, or a keyword research info box), making the gaps between fields appear uneven.
 
-### Technical details
-- **File:** `src/pages/Dashboard.tsx`
-- **Scope:** Desktop table action cell only (`lg:block` table path)
-- **Likely class-level adjustment:** small left offset such as `mr-[2px]` on the icon-only placement path or `-translate-x-[2px]` on the info button in desktop context.
-- **No changes** to:
-  - mobile/tablet action button layout
-  - pagination
-  - hover color system beyond preserving existing custom classes
+### Solution
+In `src/components/MultiStepContentBriefForm.tsx`, normalize the internal spacing of all Step 1 fields:
 
-### Validation checklist
-1. Desktop viewport: confirm the info button is visually centered directly below “Actions”.
-2. Hover state: confirm no default bright-blue ghost background appears.
-3. Tablet and mobile previews: confirm layout remains exactly as-is (no spacing or action button regressions).
+1. **Title field (lines 415-417)**: The character count div sits between the input and `FormMessage`, adding uncontrolled space. Tighten it by adding `mt-1` and removing the implicit gap from `space-y-6` parent by keeping the char count closer to the input.
+
+2. **Target Keywords field (lines 474-479)**: The keyword research info box has `mt-2` which adds extra spacing within the FormItem. This is fine but should be consistent.
+
+3. **Wrap all FormItems consistently**: Ensure each `FormItem` produces a similar visual height footprint. The fix is to keep the `space-y-6` on the parent container but adjust internal element margins so each field block has consistent internal spacing:
+   - Title field: change char count wrapper from standalone div to a tighter `<p>` with `text-right mt-1` (remove the wrapping div's default flex gap)
+   - Content Type field: no changes needed
+   - Target Keywords field: keep `mt-2` on the info box — this is consistent with FormDescription-style spacing
+
+### File changed
+- `src/components/MultiStepContentBriefForm.tsx` — Step 1 field internal margins adjusted for visual consistency across all layouts
+
