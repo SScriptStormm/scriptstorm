@@ -406,13 +406,15 @@ export function MultiStepContentBriefForm() {
                       <FormItem>
                         <FormLabel className="text-white font-medium text-base">{getTitleLabel()}</FormLabel>
                         <FormControl>
-                          <Input 
-                            placeholder={getTitlePlaceholder()} 
-                            {...field} 
-                            className="bg-black/40 text-white placeholder:text-white/50 border-white/20 focus-visible:ring-primary focus-visible:border-primary h-12 text-base"
-                          />
+                          <div className="relative">
+                            <Input 
+                              placeholder={getTitlePlaceholder()} 
+                              {...field} 
+                              className="bg-black/40 text-white placeholder:text-white/50 border-white/20 focus-visible:ring-primary focus-visible:border-primary h-12 text-base"
+                            />
+                            <span className="absolute -bottom-5 right-0 text-xs text-white/50">{getCharCount(field.value, 200)}</span>
+                          </div>
                         </FormControl>
-                        <p className="text-right text-xs text-white/50 mt-1">{getCharCount(field.value, 200)}</p>
                         <FormMessage />
                       </FormItem>
                     )}
