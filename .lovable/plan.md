@@ -1,22 +1,42 @@
 
 
-## Fix: Consistent Field Spacing in Content Brief Form (Step 1)
+## Fix: Consistent Field Spacing in Content Brief Step 1
 
 ### Problem
-The spacing between fields on Step 1 of the content brief form is visually inconsistent. The "Article Title" field includes a character count `<div>` below the input that adds extra vertical space before the next field. The "Content Type" and "Target Keywords" fields have different internal structures (no char count, or a keyword research info box), making the gaps between fields appear uneven.
+The spacing between fields looks uneven because each field has different internal content heights:
+- **Title field**: has a character counter `<p>` below the input, adding ~20px of extra height
+- **Content Type field**: just a select dropdown, no extra elements
+- **Target Keywords field**: has a keyword research info box below the input, adding ~40px of extra height
+
+The parent container's `space-y-6` creates equal gaps between the *FormItem boundaries*, but since each FormItem has different internal height, the visual gap between the bottom of one input and the top of the next label varies.
 
 ### Solution
-In `src/components/MultiStepContentBriefForm.tsx`, normalize the internal spacing of all Step 1 fields:
+Make the character counter on the Title field **absolutely positioned** so it doesn't affect the FormItem's flow height. This keeps the counter visible but removes its impact on spacing.
 
-1. **Title field (lines 415-417)**: The character count div sits between the input and `FormMessage`, adding uncontrolled space. Tighten it by adding `mt-1` and removing the implicit gap from `space-y-6` parent by keeping the char count closer to the input.
+### Changes in `src/components/MultiStepContentBriefForm.tsx`
 
-2. **Target Keywords field (lines 474-479)**: The keyword research info box has `mt-2` which adds extra spacing within the FormItem. This is fine but should be consistent.
+**Title field (lines 406-417)**: Wrap the Input and char counter in a `relative` container, then position the char counter absolutely at the bottom-right of the input area:
 
-3. **Wrap all FormItems consistently**: Ensure each `FormItem` produces a similar visual height footprint. The fix is to keep the `space-y-6` on the parent container but adjust internal element margins so each field block has consistent internal spacing:
-   - Title field: change char count wrapper from standalone div to a tighter `<p>` with `text-right mt-1` (remove the wrapping div's default flex gap)
-   - Content Type field: no changes needed
-   - Target Keywords field: keep `mt-2` on the info box — this is consistent with FormDescription-style spacing
+```tsx
+<FormItem>
+  <FormLabel ...>...</FormLabel>
+  <FormControl>
+    <div className="relative">
+      <Input ... />
+      <span className="absolute -bottom-5 right-0 text-xs text-white/50">
+        {getCharCount(field.value, 200)}
+      </span>
+    </div>
+  </FormControl>
+  <FormMessage />
+</FormItem>
+```
 
-### File changed
-- `src/components/MultiStepContentBriefForm.tsx` — Step 1 field internal margins adjusted for visual consistency across all layouts
+This removes the char counter from the normal document flow, so all three fields will have the same effective height pattern (label → input → FormMessage), and `space-y-6` will produce visually even gaps.
+
+The keyword research info box under Target Keywords is intentionally styled as a feature callout and sits consistently below that field on all layouts, so it does not need adjustment.
+
+### Scope
+- Single file change: `src/components/MultiStepContentBriefForm.tsx`
+- Affects all layouts equally (desktop, tablet, mobile)
 
