@@ -1,47 +1,37 @@
 
 
-## Fix: Animate "Days Remaining" Number in Account Status Card
+## Fix: Blank Production Summary Filter When No Articles Exist for Current Month
 
 ### Problem
-The RadialProgress ring animates from 0 to the target value, but the center label showing days remaining (e.g. "217") appears instantly because it's passed as a static string via the `label` prop. When `label` is provided, RadialProgress displays it as-is instead of using its internal animated `displayValue`.
+The `selectedMonth` state initializes to the current month (e.g. `2026-04`), but `availableMonths` is built only from months that have articles. When no articles exist for the current month, the current month value isn't in the dropdown options, so the `Select` component shows a blank value.
 
 ### Solution
-Add a count-up animation state inside `AccountStatusCard` that animates the days remaining number from 0 to its final value, matching the ring animation timing.
+Ensure the current month is always included in the `availableMonths` list, even if it has 0 articles.
 
-### Changes
+### Change
+**File: `src/components/dashboard/ContentQueueCard.tsx`**, inside the `availableMonths` `useMemo` (lines 40-49):
 
-**File: `src/components/dashboard/AccountStatusCard.tsx`**
-
-1. Import `useState` and `useEffect` from React
-2. Add an animated counter that counts from 0 to `daysRemaining` over ~1 second (matching RadialProgress animation duration)
-3. Pass the animated value as the `label` prop instead of the static `daysRemaining`
+After building the month map from articles, check if the current month is present. If not, add it with a count of 0. This ensures the dropdown always has the current month as an option and the select displays correctly.
 
 ```tsx
-const [displayDays, setDisplayDays] = useState(0);
-
-useEffect(() => {
-  const duration = 1000;
-  const steps = 30;
-  const increment = daysRemaining / steps;
-  let current = 0;
-
-  const timer = setInterval(() => {
-    current += increment;
-    if (current >= daysRemaining) {
-      setDisplayDays(daysRemaining);
-      clearInterval(timer);
-    } else {
-      setDisplayDays(Math.floor(current));
-    }
-  }, duration / steps);
-
-  return () => clearInterval(timer);
-}, [daysRemaining]);
+const availableMonths = useMemo(() => {
+  const monthSet = new Map<string, number>();
+  articles.forEach(a => {
+    const my = getMonthYear(a.created_at);
+    monthSet.set(my, (monthSet.get(my) || 0) + 1);
+  });
+  // Always include current month
+  const current = getCurrentMonthYear();
+  if (!monthSet.has(current)) {
+    monthSet.set(current, 0);
+  }
+  return Array.from(monthSet.entries())
+    .sort(([a], [b]) => b.localeCompare(a))
+    .map(([value, count]) => ({ value, label: getMonthLabel(value), count }));
+}, [articles]);
 ```
 
-Then change `label={`${daysRemaining}`}` to `label={`${displayDays}`}`.
-
 ### Scope
-- Single file: `src/components/dashboard/AccountStatusCard.tsx`
-- All layouts affected equally (consistent animation everywhere)
+- Single file change
+- All layouts affected equally
 
