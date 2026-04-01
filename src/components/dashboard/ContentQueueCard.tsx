@@ -43,6 +43,10 @@ export const ContentQueueCard = ({ articles }: ContentQueueCardProps) => {
       const my = getMonthYear(a.created_at);
       monthSet.set(my, (monthSet.get(my) || 0) + 1);
     });
+    const current = getCurrentMonthYear();
+    if (!monthSet.has(current)) {
+      monthSet.set(current, 0);
+    }
     return Array.from(monthSet.entries())
       .sort(([a], [b]) => b.localeCompare(a))
       .map(([value, count]) => ({ value, label: getMonthLabel(value), count }));
