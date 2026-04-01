@@ -83,7 +83,7 @@ export const AccountStatusCard = ({ subscriptionTier, subscriptionEnd, isSubscri
               max={100}
               variant="primary"
               size="lg"
-              label={`${daysRemaining}`}
+              label={`${displayDays}`}
               sublabel="days left"
             />
           </div>
