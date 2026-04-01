@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { GlassCard, GlassCardContent, GlassCardHeader, GlassCardTitle } from "@/components/ui/GlassCard";
 import { HoloBadge } from "@/components/ui/HoloBadge";
 import { RadialProgress } from "@/components/ui/RadialProgress";
@@ -44,6 +45,27 @@ export const AccountStatusCard = ({ subscriptionTier, subscriptionEnd, isSubscri
   const daysUsed = cycleTotal - (daysRemaining % cycleTotal);
   const cycleProgress = (daysUsed / cycleTotal) * 100;
 
+  const [displayDays, setDisplayDays] = useState(0);
+
+  useEffect(() => {
+    const duration = 1000;
+    const steps = 30;
+    const increment = daysRemaining / steps;
+    let current = 0;
+
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= daysRemaining) {
+        setDisplayDays(daysRemaining);
+        clearInterval(timer);
+      } else {
+        setDisplayDays(Math.floor(current));
+      }
+    }, duration / steps);
+
+    return () => clearInterval(timer);
+  }, [daysRemaining]);
+
   return (
     <GlassCard variant={variant} glow hover={false}>
       <GlassCardHeader className="pb-2">
@@ -61,7 +83,7 @@ export const AccountStatusCard = ({ subscriptionTier, subscriptionEnd, isSubscri
               max={100}
               variant="primary"
               size="lg"
-              label={`${daysRemaining}`}
+              label={`${displayDays}`}
               sublabel="days left"
             />
           </div>
