@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { GlassCard, GlassCardContent, GlassCardHeader, GlassCardTitle } from "@/components/ui/GlassCard";
 import { HoloBadge } from "@/components/ui/HoloBadge";
 import { RadialProgress } from "@/components/ui/RadialProgress";
