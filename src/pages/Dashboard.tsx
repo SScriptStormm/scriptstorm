@@ -1096,7 +1096,7 @@ const Dashboard = () => {
                           
                           {/* Actions */}
                           <div className="flex flex-col gap-2 pt-1">
-                            <Button size="sm" variant="ghost" className="w-full text-primary-glow/70 border border-primary-glow/20 hover:border-primary-glow/50 hover:text-primary-glow font-mono text-xs" onClick={(e) => { e.stopPropagation(); handleViewBrief(article); }}>
+                            <Button size="sm" variant="ghost" className="w-full text-primary-glow/70 border border-primary-glow/20 hover:border-primary-glow/50 hover:text-primary-glow hover:bg-primary-glow/10 font-mono text-xs" onClick={(e) => { e.stopPropagation(); handleViewBrief(article); }}>
                               <Info className="h-3 w-3 mr-1" />
                               View Brief Details
                             </Button>
