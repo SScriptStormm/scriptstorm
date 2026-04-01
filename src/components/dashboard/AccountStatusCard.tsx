@@ -45,6 +45,27 @@ export const AccountStatusCard = ({ subscriptionTier, subscriptionEnd, isSubscri
   const daysUsed = cycleTotal - (daysRemaining % cycleTotal);
   const cycleProgress = (daysUsed / cycleTotal) * 100;
 
+  const [displayDays, setDisplayDays] = useState(0);
+
+  useEffect(() => {
+    const duration = 1000;
+    const steps = 30;
+    const increment = daysRemaining / steps;
+    let current = 0;
+
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= daysRemaining) {
+        setDisplayDays(daysRemaining);
+        clearInterval(timer);
+      } else {
+        setDisplayDays(Math.floor(current));
+      }
+    }, duration / steps);
+
+    return () => clearInterval(timer);
+  }, [daysRemaining]);
+
   return (
     <GlassCard variant={variant} glow hover={false}>
       <GlassCardHeader className="pb-2">
