@@ -1,15 +1,47 @@
 
 
-## Fix: Mobile/Tablet "View Brief Details" Button Hover Style
+## Fix: Animate "Days Remaining" Number in Account Status Card
 
 ### Problem
-The mobile/tablet "View Brief Details" button uses `variant="ghost"` which applies a default bright blue hover background (`hover:bg-accent`). The desktop version already overrides this with `hover:bg-primary-glow/10`, but the mobile/tablet version does not.
+The RadialProgress ring animates from 0 to the target value, but the center label showing days remaining (e.g. "217") appears instantly because it's passed as a static string via the `label` prop. When `label` is provided, RadialProgress displays it as-is instead of using its internal animated `displayValue`.
 
 ### Solution
-Add `hover:bg-primary-glow/10` to the mobile/tablet button's className (line 1099) to match the subtle glow hover used on the desktop version. No changes to the desktop layout.
+Add a count-up animation state inside `AccountStatusCard` that animates the days remaining number from 0 to its final value, matching the ring animation timing.
 
-### Change
-**File:** `src/pages/Dashboard.tsx`, line 1099
+### Changes
 
-Add `hover:bg-primary-glow/10` to the existing className string on the mobile/tablet View Brief Details button.
+**File: `src/components/dashboard/AccountStatusCard.tsx`**
+
+1. Import `useState` and `useEffect` from React
+2. Add an animated counter that counts from 0 to `daysRemaining` over ~1 second (matching RadialProgress animation duration)
+3. Pass the animated value as the `label` prop instead of the static `daysRemaining`
+
+```tsx
+const [displayDays, setDisplayDays] = useState(0);
+
+useEffect(() => {
+  const duration = 1000;
+  const steps = 30;
+  const increment = daysRemaining / steps;
+  let current = 0;
+
+  const timer = setInterval(() => {
+    current += increment;
+    if (current >= daysRemaining) {
+      setDisplayDays(daysRemaining);
+      clearInterval(timer);
+    } else {
+      setDisplayDays(Math.floor(current));
+    }
+  }, duration / steps);
+
+  return () => clearInterval(timer);
+}, [daysRemaining]);
+```
+
+Then change `label={`${daysRemaining}`}` to `label={`${displayDays}`}`.
+
+### Scope
+- Single file: `src/components/dashboard/AccountStatusCard.tsx`
+- All layouts affected equally (consistent animation everywhere)
 
