@@ -83,7 +83,7 @@ const Hero = () => {
                 variant="ghost-white" 
                 size="lg"
                 onClick={() => window.location.href = '/why-choose-us'}
-                className="relative w-full sm:w-auto text-sm sm:text-base md:text-base lg:text-lg xl:text-lg px-6 sm:px-6 md:px-7 lg:px-8 xl:px-9 py-3 sm:py-3.5 md:py-3.5 lg:py-4 xl:py-4 h-auto bg-black/30 backdrop-blur-md border-2 border-white/30 hover:border-white/60 shadow-neural hover:shadow-hologram transition-all duration-500 font-mono tracking-wide"
+                className="relative w-full sm:w-auto text-sm sm:text-base md:text-base lg:text-lg xl:text-lg px-6 sm:px-6 md:px-7 lg:px-8 xl:px-9 py-3 sm:py-3.5 md:py-3.5 lg:py-4 xl:py-4 h-auto bg-black/30 hover:bg-black/40 backdrop-blur-md border-2 border-white/30 hover:border-white/60 shadow-neural hover:shadow-hologram transition-all duration-500 font-mono tracking-wide"
               >
                 WHY CHOOSE US
               </Button>
@@ -94,7 +94,7 @@ const Hero = () => {
                 variant="ghost-white" 
                 size="lg"
                 onClick={() => window.location.href = '/auth'}
-                className="relative w-full sm:w-auto text-sm sm:text-base md:text-base lg:text-lg xl:text-lg px-6 sm:px-6 md:px-7 lg:px-8 xl:px-9 py-3 sm:py-3.5 md:py-3.5 lg:py-4 xl:py-4 h-auto bg-black/30 backdrop-blur-md border-2 border-white/30 hover:border-white/60 shadow-neural hover:shadow-hologram transition-all duration-500 font-mono tracking-wide"
+                className="relative w-full sm:w-auto text-sm sm:text-base md:text-base lg:text-lg xl:text-lg px-6 sm:px-6 md:px-7 lg:px-8 xl:px-9 py-3 sm:py-3.5 md:py-3.5 lg:py-4 xl:py-4 h-auto bg-black/30 hover:bg-black/40 backdrop-blur-md border-2 border-white/30 hover:border-white/60 shadow-neural hover:shadow-hologram transition-all duration-500 font-mono tracking-wide"
               >
                 CLIENT LOGIN
               </Button>
