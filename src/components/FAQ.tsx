@@ -22,7 +22,7 @@ const FAQ = () => {
     },
     {
       question: "What industries do you specialize in?",
-      answer: "Our system is specifically calibrated for the SaaS and eCommerce sectors. We understand the unique marketing challenges, audience demographics, and conversion goals of these B2B and B2C businesses, allowing us to generate highly relevant and effective content."
+      answer: "Our system is specifically calibrated for the SaaS and eCommerce sectors. We understand the unique marketing challenges, audience demographics, and conversion goals of these B2B and B2C businesses, allowing us to generate highly relevant and effective content. While our systems are optimized for SaaS and eCommerce brands, our automated workflows work equally well for consultants, coaches, and any business that needs high-quality content at scale."
     },
     {
       question: "How do I get started?",
