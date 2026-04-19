@@ -78,7 +78,7 @@ const Contact = () => {
             <Card className="bg-card/80 backdrop-blur-sm border-2 border-primary/20 shadow-xl">
               <CardHeader>
                 <CardTitle className="text-2xl text-foreground">Have Questions Before You Start?</CardTitle>
-                <p className="text-muted-foreground">Send us a message. We'll get back to you within 24 hours.</p>
+                <p className="text-muted-foreground">Send us a message. We'll get back to you within 1-2 business days.</p>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
