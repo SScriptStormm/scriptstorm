@@ -1,124 +1,52 @@
 import { GlassCard, GlassCardContent, GlassCardHeader, GlassCardTitle } from "@/components/ui/GlassCard";
 import { Button } from "@/components/ui/button";
-import { Mail, MessageSquare, Phone } from "lucide-react";
+import { Bot, Mail, MessageSquare, Users, Sparkles } from "lucide-react";
+import { toast } from "sonner";
 
 interface PrioritySupportProps {
   userEmail: string;
   subscriptionTier?: string;
 }
 
-type TierConfig = {
-  headerTitle: string;
-  badgeLabel: string;
-  badgeClass: string;
-  heroTitle: string;
-  heroDescription: string;
-  buttonLabel: string;
-  emailSubject: string;
-  features: { title: string; description: string }[];
-};
+type TierKey = "scale" | "authority" | "dominance";
 
-const getTierConfig = (tier: string): TierConfig => {
-  const t = tier.toLowerCase();
+const RESPONSE_TIMES: { key: TierKey; label: string; time: string }[] = [
+  { key: "scale", label: "Scale", time: "Within 12 business hours" },
+  { key: "authority", label: "Authority", time: "Within 6 business hours" },
+  { key: "dominance", label: "Dominance", time: "Within 2–4 business hours" },
+];
 
-  if (t === "dominance") {
-    return {
-      headerTitle: "PRIORITY SUPPORT + DEDICATED WORKSPACE",
-      badgeLabel: "VIP ACCESS",
-      badgeClass: "bg-amber-500/20 text-amber-300 border border-amber-500/30",
-      heroTitle: "White-Glove Concierge Support",
-      heroDescription:
-        "As a Dominance client, you have access to your dedicated client success workspace and our top-tier priority support team — handled with absolute precision.",
-      buttonLabel: "CONTACT VIP SUPPORT",
-      emailSubject: "Dominance VIP Support Request",
-      features: [
-        {
-          title: "Lightning Response Times",
-          description: "Top of the queue with responses within 2 business hours",
-        },
-        {
-          title: "Dedicated Client Success Workspace",
-          description: "Private workspace with your assigned strategist and content team",
-        },
-        {
-          title: "Unlimited Strategic Consultations",
-          description: "On-demand strategy sessions whenever you need them",
-        },
-      ],
-    };
-  }
-
-  if (t === "authority") {
-    return {
-      headerTitle: "PRIORITY SUPPORT PORTAL",
-      badgeLabel: "PRIORITY ACCESS",
-      badgeClass: "bg-yellow-500/20 text-yellow-400 border border-yellow-500/30",
-      heroTitle: "White-Glove Support",
-      heroDescription:
-        "As a premium client, you have access to our dedicated priority support team.",
-      buttonLabel: "CONTACT PRIORITY SUPPORT",
-      emailSubject: "Priority Support Request",
-      features: [
-        {
-          title: "Faster Response Times",
-          description: "Priority queue with responses within 4 business hours",
-        },
-        {
-          title: "Dedicated Account Manager",
-          description: "Direct access to your assigned content strategist",
-        },
-        {
-          title: "Strategic Consultations",
-          description: "Quarterly strategy sessions included with your plan",
-        },
-      ],
-    };
-  }
-
-  // Scale (default for this tab)
-  return {
-    headerTitle: "EFFICIENT SUPPORT PORTAL",
-    badgeLabel: "SCALE ACCESS",
-    badgeClass: "bg-purple-500/20 text-purple-300 border border-purple-500/30",
-    heroTitle: "Streamlined Support",
-    heroDescription:
-      "Streamlined communication for seamless project management. Our team is here to help keep your content engine running smoothly.",
-    buttonLabel: "CONTACT SUPPORT",
-    emailSubject: "Support Request",
-    features: [
-      {
-        title: "Standard Response Times",
-        description: "Responses within 24 business hours",
-      },
-      {
-        title: "Direct Project Communication",
-        description: "Streamlined channel to your content team",
-      },
-      {
-        title: "Seamless Project Management",
-        description: "Coordinated handling of revisions and deliverables",
-      },
-    ],
-  };
+const normalizeTier = (tier?: string): TierKey => {
+  const t = (tier || "").toLowerCase();
+  if (t === "authority") return "authority";
+  if (t === "dominance") return "dominance";
+  return "scale";
 };
 
 const PrioritySupport = ({ userEmail, subscriptionTier = "scale" }: PrioritySupportProps) => {
-  const config = getTierConfig(subscriptionTier);
+  const currentTier = normalizeTier(subscriptionTier);
+  const tierLabel = currentTier.charAt(0).toUpperCase() + currentTier.slice(1);
+
+  const handleLaunchAIChat = () => {
+    toast("AI Assistant coming soon", {
+      description: "Our 24/7 AI support agent is being integrated. In the meantime, please submit a support request.",
+    });
+  };
 
   const handleContactSupport = () => {
-    const subject = encodeURIComponent(config.emailSubject);
-    const body = encodeURIComponent(`
-Hello ScriptStorm Team,
+    const subject = encodeURIComponent(`Enterprise Support Request – ${tierLabel}`);
+    const body = encodeURIComponent(`Hello ScriptStorm Team,
 
-I need assistance with:
+Our support team can assist with the following:
 
 [Please describe your request here]
 
 Account Email: ${userEmail}
+Plan: ${tierLabel}
 
 Thank you,
 ${userEmail}
-    `);
+`);
 
     window.location.href = `mailto:support@scriptstorm.org?subject=${subject}&body=${body}`;
   };
@@ -126,54 +54,109 @@ ${userEmail}
   return (
     <GlassCard variant="default" glow>
       <GlassCardHeader>
-        <div className="flex items-center justify-between">
-          <GlassCardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
-            <MessageSquare className="h-5 w-5 text-primary-glow" />
-            {config.headerTitle}
-          </GlassCardTitle>
-          <div className={`px-3 py-1 ${config.badgeClass} rounded-full text-xs font-mono font-semibold`}>
-            {config.badgeLabel}
-          </div>
-        </div>
+        <GlassCardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
+          <MessageSquare className="h-5 w-5 text-primary-glow" />
+          ENTERPRISE SUPPORT CENTER
+        </GlassCardTitle>
+        <p className="text-white/70 font-mono text-xs sm:text-sm pt-1">
+          24/7 AI assistance + priority human response based on your plan.
+        </p>
       </GlassCardHeader>
       <GlassCardContent>
         <div className="space-y-6">
-          <div className="p-6 bg-white/[0.05] backdrop-blur-sm rounded-lg border border-white/[0.1] text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary-glow/20 border-2 border-primary-glow mb-4">
-              <Phone className="h-8 w-8 text-primary-glow" />
+          {/* AI Assistant Card */}
+          <div className="p-6 bg-white/[0.05] backdrop-blur-sm rounded-lg border border-white/[0.1]">
+            <div className="flex items-start gap-4">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary-glow/20 border-2 border-primary-glow shrink-0">
+                <Bot className="h-6 w-6 text-primary-glow" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3 className="text-white font-mono text-base sm:text-lg mb-1">24/7 AI Assistant</h3>
+                <p className="text-white/70 font-mono text-xs sm:text-sm mb-4">
+                  Instant answers to common questions: password reset, project status, billing, revisions, and more.
+                </p>
+                <Button
+                  onClick={handleLaunchAIChat}
+                  className="w-full sm:w-auto bg-primary hover:bg-primary-glow text-white font-mono tracking-wide border-2 border-primary-glow/50 hover:border-primary-glow shadow-cyber transition-all"
+                >
+                  <Sparkles className="h-4 w-4 mr-2" />
+                  LAUNCH AI CHAT
+                </Button>
+              </div>
             </div>
-            <h3 className="text-white font-mono text-lg mb-2">{config.heroTitle}</h3>
-            <p className="text-white/70 font-mono text-sm mb-4">
-              {config.heroDescription}
+          </div>
+
+          {/* Human Support Card */}
+          <div className="p-6 bg-white/[0.05] backdrop-blur-sm rounded-lg border border-white/[0.1]">
+            <div className="flex items-start gap-4 mb-4">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary-glow/20 border-2 border-primary-glow shrink-0">
+                <Users className="h-6 w-6 text-primary-glow" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3 className="text-white font-mono text-base sm:text-lg mb-1">Human Support Team</h3>
+                <p className="text-white/70 font-mono text-xs sm:text-sm">
+                  For complex issues not resolved by AI. Response times vary by plan:
+                </p>
+              </div>
+            </div>
+
+            {/* Response time table */}
+            <div className="rounded-lg border border-white/[0.1] overflow-hidden">
+              <div className="grid grid-cols-2 bg-white/[0.04] px-4 py-2 border-b border-white/[0.1]">
+                <div className="text-white/60 font-mono text-xs uppercase tracking-wider">Plan</div>
+                <div className="text-white/60 font-mono text-xs uppercase tracking-wider">Human Response Time</div>
+              </div>
+              {RESPONSE_TIMES.map((row) => {
+                const isCurrent = row.key === currentTier;
+                return (
+                  <div
+                    key={row.key}
+                    className={`grid grid-cols-2 px-4 py-3 border-b border-white/[0.05] last:border-b-0 transition-all ${
+                      isCurrent
+                        ? "bg-primary-glow/10 border-l-2 border-l-primary-glow"
+                        : "opacity-60"
+                    }`}
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className={`font-mono text-sm ${isCurrent ? "text-white" : "text-white/70"}`}>
+                        {row.label}
+                      </span>
+                      {isCurrent && (
+                        <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-primary-glow/20 text-primary-glow border border-primary-glow/30">
+                          YOUR PLAN
+                        </span>
+                      )}
+                    </div>
+                    <div className={`font-mono text-sm ${isCurrent ? "text-primary-glow" : "text-white/60"}`}>
+                      {row.time}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <p className="text-white/50 font-mono text-xs mt-3">
+              Business hours: Monday–Friday, 9 AM – 6 PM HKT (Hong Kong Time)
             </p>
+          </div>
+
+          {/* Contact Action Block */}
+          <div className="p-6 bg-white/[0.05] backdrop-blur-sm rounded-lg border border-white/[0.1] text-center">
             <Button
               onClick={handleContactSupport}
               className="w-full bg-primary hover:bg-primary-glow text-white font-mono tracking-wide border-2 border-primary-glow/50 hover:border-primary-glow shadow-cyber transition-all"
             >
               <Mail className="h-4 w-4 mr-2" />
-              {config.buttonLabel}
+              SUBMIT A SUPPORT REQUEST
             </Button>
+            {currentTier === "dominance" && (
+              <p className="text-amber-300 font-mono text-xs mt-3">
+                ★ Priority queue — your request is flagged for fastest response.
+              </p>
+            )}
           </div>
 
-          <div className="space-y-3">
-            {config.features.map((feature) => (
-              <div
-                key={feature.title}
-                className="p-4 bg-white/[0.05] backdrop-blur-sm rounded-lg border border-white/[0.1] hover:bg-white/[0.08] transition-all"
-              >
-                <div className="flex items-start gap-3">
-                  <div className="text-primary-glow font-mono text-sm">✓</div>
-                  <div>
-                    <h4 className="text-white font-mono text-sm mb-1">{feature.title}</h4>
-                    <p className="text-white/60 font-mono text-xs">
-                      {feature.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
+          {/* Footer */}
           <div className="p-4 bg-white/[0.03] rounded-lg border border-white/[0.1]">
             <p className="text-white/70 font-mono text-xs text-center">
               Support Email: <span className="text-primary-glow">support@scriptstorm.org</span>
