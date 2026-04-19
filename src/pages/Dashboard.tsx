@@ -1327,9 +1327,9 @@ const Dashboard = () => {
             </TabsContent>}
 
 
-          {/* Priority Support Tab (Authority, Dominance) */}
-          {hasAuthority && <TabsContent value="support">
-              <PrioritySupport userEmail={user?.email || ''} />
+          {/* Support Tab (Scale, Authority, Dominance) */}
+          {hasScale && <TabsContent value="support">
+              <PrioritySupport userEmail={user?.email || ''} subscriptionTier={subscriber?.subscription_tier || ''} />
             </TabsContent>}
 
         </Tabs>
