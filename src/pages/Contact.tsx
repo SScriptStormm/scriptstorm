@@ -164,7 +164,7 @@ const Contact = () => {
                       </div>
                       <div>
                         <h3 className="font-semibold text-foreground">Response Time</h3>
-                        <p className="text-muted-foreground">Within 24 hours</p>
+                        <p className="text-muted-foreground">Within 1-2 business days</p>
                       </div>
                     </div>
                   </CardContent>
@@ -187,8 +187,19 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Existing Client Note */}
-          <div className="max-w-6xl mx-auto mt-12">
+          {/* Existing Client Notes */}
+          <div className="max-w-6xl mx-auto mt-12 space-y-4">
+            <Card className="bg-primary/10 backdrop-blur-sm border border-primary/30 shadow-md">
+              <CardContent className="p-4">
+                <p className="text-sm text-foreground">
+                  📌 For existing ScriptStorm clients, please use your dashboard's support portal or email{" "}
+                  <a href="mailto:support@scriptstorm.org" className="text-primary-glow hover:text-primary font-semibold transition-colors">
+                    support@scriptstorm.org
+                  </a>.
+                </p>
+              </CardContent>
+            </Card>
+
             <Card className="bg-card/80 backdrop-blur-sm border-l-4 border-primary shadow-xl">
               <CardContent className="p-6">
                 <h3 className="font-semibold text-foreground mb-2">Already a ScriptStorm client?</h3>
