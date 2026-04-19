@@ -1,43 +1,63 @@
 
 
-## Consistency Check: Support Tab vs Pricing Page
+## Unified Enterprise Support Portal
 
-### Findings
+Rewrite `src/components/dashboard/PrioritySupport.tsx` so all three enterprise tiers (Scale, Authority, Dominance) see the **same portal layout**. The only tier-specific element is the highlighted response time row.
 
-**Pricing page promises (`src/components/Pricing.tsx`):**
-- **Scale tier** → "Efficient Support Portal: Streamlined communication for seamless project management."
-- **Authority tier** → "Priority Support Portal: Faster response times and dedicated handling for mission-critical projects."
-- **Dominance tier** → "Priority Support Portal + Dedicated Client Success Workspace" (white-glove).
+### File: `src/components/dashboard/PrioritySupport.tsx` (full rewrite)
 
-**Dashboard reality (`src/pages/Dashboard.tsx`):**
-- Tab trigger shown for Scale, Authority, Dominance (`hasScale`).
-- Tab content (`PrioritySupport` component) only renders for Authority, Dominance (`hasAuthority`).
-- Result: **Scale users see an empty Support tab** — inconsistent with the "Efficient Support Portal" they were sold.
+Replace the current `getTierConfig` tier-branching logic with a single unified layout. Keep the `subscriptionTier` prop — used only to highlight the user's row in the response time table and to flag Dominance's priority queue note.
 
-**`PrioritySupport` component itself** is hardcoded as "PRIORITY SUPPORT PORTAL" with Authority+ messaging (4-hour response, dedicated account manager, quarterly strategy sessions) — not appropriate for Scale tier either.
+**Layout structure (top to bottom):**
 
-### Answer to Your Question
-**No, it is not consistent.** Two specific gaps:
+1. **Header**
+   - Title: `ENTERPRISE SUPPORT CENTER` (icon: MessageSquare)
+   - Subtitle below title: `24/7 AI assistance + priority human response based on your plan.`
+   - No tier badge in the header.
 
-1. **Scale tier Support tab is empty** — pricing promises an "Efficient Support Portal" but the dashboard renders nothing.
-2. **No tier-aware messaging** in `PrioritySupport.tsx` — it shows the same Authority-level copy regardless of tier, so even if we showed it to Scale users as-is, it would over-promise.
+2. **AI Assistant Card** (glass panel, Bot icon)
+   - Heading: `24/7 AI Assistant`
+   - Description: `Instant answers to common questions: password reset, project status, billing, revisions, and more.`
+   - Button: `LAUNCH AI CHAT` — for now shows a toast "AI Assistant coming soon" (placeholder for n8n/Gumloop integration).
 
-### Recommended Fix (for approval)
+3. **Human Support Card** (glass panel, Users icon)
+   - Heading: `Human Support Team`
+   - Description: `For complex issues not resolved by AI. Response times vary by plan:`
+   - **Response time table** with 3 rows (Scale / Authority / Dominance). The user's current tier row is highlighted with `bg-primary-glow/10` and a left border accent. Other rows render at lower opacity.
+     - Scale → Within 12 business hours
+     - Authority → Within 6 business hours
+     - Dominance → Within 2–4 business hours
+   - Footnote below table: `Business hours: Monday–Friday, 9 AM – 6 PM HKT (Hong Kong Time)`
 
-**File: `src/components/dashboard/PrioritySupport.tsx`**
-- Accept a `subscriptionTier` prop.
-- Render tier-specific copy:
-  - **Scale** → "EFFICIENT SUPPORT PORTAL" header, no PRIORITY badge, copy: "Streamlined communication for seamless project management. Standard response times within 24 hours."
-  - **Authority** → Current "PRIORITY SUPPORT PORTAL" with 4-hour response, dedicated account manager, quarterly strategy sessions (unchanged).
-  - **Dominance** → "PRIORITY SUPPORT + DEDICATED WORKSPACE" header with the white-glove copy already alluded to in `PackageFeaturesWidget` (priority support + private client success workspace).
-- Email subject line adapts: "Support Request" (Scale) vs "Priority Support Request" (Authority/Dominance).
+4. **Contact Action Block**
+   - Button: `SUBMIT A SUPPORT REQUEST` — opens mailto to `support@scriptstorm.org` with subject `Enterprise Support Request – {Tier}` and a body template using `userEmail` (no "I/me/founder" wording, uses "our support team").
+   - For Dominance only, small note below the button: `★ Priority queue — your request is flagged for fastest response.`
 
-**File: `src/pages/Dashboard.tsx`**
-- Change line 1331 from `{hasAuthority && <TabsContent value="support">` to `{hasScale && <TabsContent value="support">`.
-- Pass `subscriptionTier={subscriber?.subscription_tier}` to `<PrioritySupport />`.
+5. **Footer line**
+   - `Support Email: support@scriptstorm.org`
+
+### Removed from current component
+
+- All "Dedicated account manager", "Quarterly strategy sessions", "Unlimited strategic consultations", "Private workspace / client success workspace" copy.
+- Tier-specific headers ("EFFICIENT SUPPORT PORTAL", "PRIORITY SUPPORT PORTAL", "PRIORITY SUPPORT + DEDICATED WORKSPACE").
+- Tier-specific badge pills (SCALE ACCESS / PRIORITY ACCESS / VIP ACCESS).
+- Any "white-glove", "founder", "I will" phrasing.
+
+### No changes needed in `src/pages/Dashboard.tsx`
+
+Already passes `subscriptionTier` and gates the tab on `hasScale` from the previous round.
+
+### Memory update
+
+Update `mem://features/contact-support-functionality-status` (or add a new memory) to record:
+- Enterprise Support Portal is now a unified UI for Scale/Authority/Dominance.
+- Tier only changes the highlighted response time row (12h / 6h / 2–4h business hours, HKT).
+- "Launch AI Chat" is a placeholder pending n8n integration.
+- No mention of dedicated managers, strategy sessions, or workspaces in Phase 1.
 
 ### Scope
-- 2 files
-- Logic + copy tied to existing tier flags (`hasScale`, `hasAuthority`, `hasDominance`)
-- All viewports affected equally
+
+- 1 component rewritten (`PrioritySupport.tsx`)
+- 1 memory file updated
+- No DB, no edge functions, no routing changes
 
