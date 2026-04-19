@@ -82,6 +82,10 @@ ${userEmail}
                   <Sparkles className="h-4 w-4 mr-2" />
                   LAUNCH AI CHAT
                 </Button>
+                <p className="text-white/60 font-mono text-xs mt-3">
+                  📧 Need human help? Use the "SUBMIT A SUPPORT REQUEST" button below. For billing questions, email{" "}
+                  <a href="mailto:billing@scriptstorm.org" className="text-primary-glow hover:underline">billing@scriptstorm.org</a>.
+                </p>
               </div>
             </div>
           </div>

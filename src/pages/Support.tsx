@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Mail, Clock, MessageSquare, Users } from "lucide-react";
+import { ArrowLeft, Mail, Clock, MessageSquare, Users, Receipt } from "lucide-react";
 
 const Support = () => {
   const [formData, setFormData] = useState({
@@ -73,6 +73,15 @@ const Support = () => {
       {/* Contact Content */}
       <section className="py-16">
         <div className="container mx-auto px-4">
+          {/* AI Assistant Banner */}
+          <div className="max-w-6xl mx-auto mb-8">
+            <div className="bg-primary/10 border border-primary/30 rounded-lg px-4 py-3">
+              <p className="text-sm text-foreground">
+                🔵 Already logged in? Use the <span className="font-semibold">AI Assistant</span> in your dashboard for instant answers to common questions (password reset, status, billing, revisions).
+              </p>
+            </div>
+          </div>
+
           <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
             
             {/* Support Form */}
@@ -191,6 +200,26 @@ const Support = () => {
                       <div>
                         <h3 className="font-semibold text-foreground">For Existing Customers</h3>
                         <p className="text-muted-foreground">Account, billing, and content support</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-card/80 backdrop-blur-sm border-2 border-primary/20 shadow-xl">
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-4">
+                      <div className="p-3 bg-primary/20 rounded-lg">
+                        <Receipt className="h-6 w-6 text-primary-glow" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-foreground">Billing Questions</h3>
+                        <p className="text-muted-foreground">
+                          For billing-specific issues, please email{" "}
+                          <a href="mailto:billing@scriptstorm.org" className="text-primary-glow hover:text-primary transition-colors">
+                            billing@scriptstorm.org
+                          </a>{" "}
+                          directly.
+                        </p>
                       </div>
                     </div>
                   </CardContent>
