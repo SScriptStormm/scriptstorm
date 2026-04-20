@@ -1,23 +1,17 @@
 
 
-## Remove "billing" mentions from two copy strings
+## Replace "billing" with "technical issues" in Support page banner
 
-Two tiny copy edits to stop directing billing questions through the AI Assistant and the generic support form (billing has its own channel: billing@scriptstorm.org).
+One copy edit on `/support` to align the AI Assistant banner with the dedicated billing channel.
 
-### File 1: `src/components/dashboard/PrioritySupport.tsx`
+### File: `src/pages/Support.tsx`
 
-In the AI Assistant card description, change:
-- From: `Instant answers to common questions: password reset, project status, billing, revisions, and more.`
-- To: `Instant answers to common questions: password reset, project status, revisions, and more.`
-
-### File 2: `src/pages/Support.tsx`
-
-In the support form's Subject input placeholder, change:
-- From: `Subject (e.g., Revision Request, Billing Question, Technical Issue)`
-- To: `Subject (e.g., Revision Request, Technical Issue)`
+In the blue AI Assistant banner below the hero, change:
+- From: `🔵 Already logged in? Use the AI Assistant in your dashboard for instant answers to common questions (password reset, status, billing, revisions).`
+- To: `🔵 Already logged in? Use the AI Assistant in your dashboard for instant answers to common questions (password reset, status, technical issues, revisions).`
 
 ### Scope
-- 2 string edits in 2 files
-- No memory updates needed (existing memories already document billing@ as a separate channel)
+- 1 string edit in 1 file
+- No memory updates needed
 - No DB, edge functions, or routing changes
 
