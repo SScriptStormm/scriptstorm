@@ -73,7 +73,7 @@ ${userEmail}
               <div className="flex-1 min-w-0">
                 <h3 className="text-white font-mono text-base sm:text-lg mb-1">24/7 AI Assistant</h3>
                 <p className="text-white/70 font-mono text-xs sm:text-sm mb-4">
-                  Instant answers to common questions: password reset, project status, billing, revisions, and more.
+                  Instant answers to common questions: password reset, project status, revisions, and more.
                 </p>
                 <Button
                   onClick={handleLaunchAIChat}

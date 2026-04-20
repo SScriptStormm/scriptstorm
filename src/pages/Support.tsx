@@ -128,7 +128,7 @@ const Support = () => {
                   <div>
                     <Input
                       name="subject"
-                      placeholder="Subject (e.g., Revision Request, Billing Question, Technical Issue)"
+                      placeholder="Subject (e.g., Revision Request, Technical Issue)"
                       value={formData.subject}
                       onChange={handleChange}
                       required
