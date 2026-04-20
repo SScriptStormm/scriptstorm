@@ -77,7 +77,7 @@ const Support = () => {
           <div className="max-w-6xl mx-auto mb-8">
             <div className="bg-primary/10 border border-primary/30 rounded-lg px-4 py-3">
               <p className="text-sm text-foreground">
-                🔵 Already logged in? Use the <span className="font-semibold">AI Assistant</span> in your dashboard for instant answers to common questions (password reset, status, billing, revisions).
+                🔵 Already logged in? Use the <span className="font-semibold">AI Assistant</span> in your dashboard for instant answers to common questions (password reset, status, technical issues, revisions).
               </p>
             </div>
           </div>
