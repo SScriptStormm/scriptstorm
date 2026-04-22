@@ -88,18 +88,14 @@ ${userEmail}
           </div>
 
           {/* Human Support Card */}
-          <div className="p-6 bg-white/[0.05] backdrop-blur-sm rounded-lg border border-white/[0.1]">
-            <div className="flex items-start gap-4 mb-4">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary-glow/20 border-2 border-primary-glow shrink-0">
-                <Users className="h-6 w-6 text-primary-glow" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="text-white font-mono text-base sm:text-lg mb-1">Human Support Team</h3>
-                <p className="text-white/70 font-mono text-xs sm:text-sm">
-                  For complex issues not resolved by AI. Response times vary by plan:
-                </p>
-              </div>
+          <div className="p-4 bg-white/[0.05] backdrop-blur-sm rounded-lg border border-white/[0.1] hover:bg-white/[0.08] hover:border-white/[0.15] transition-all">
+            <div className="flex items-center gap-2 mb-2">
+              <Users className="h-4 w-4 text-primary-glow" />
+              <h4 className="text-white font-mono text-sm">Human Support Team</h4>
             </div>
+            <p className="text-white/70 font-mono text-xs mb-3">
+              For complex issues not resolved by AI. Response times vary by plan:
+            </p>
 
             {/* Response time table */}
             <div className="rounded-lg border border-white/[0.1] overflow-hidden">
@@ -112,7 +108,7 @@ ${userEmail}
                 return (
                   <div
                     key={row.key}
-                    className={`grid grid-cols-2 px-4 py-3 border-b border-white/[0.05] last:border-b-0 transition-all ${
+                    className={`grid grid-cols-2 px-4 p-3 border-b border-white/[0.05] last:border-b-0 transition-all ${
                       isCurrent
                         ? "bg-primary-glow/10 border-l-2 border-l-primary-glow"
                         : "opacity-60"
