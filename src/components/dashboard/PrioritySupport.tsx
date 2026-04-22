@@ -58,7 +58,7 @@ ${userEmail}
           <MessageSquare className="h-5 w-5 text-primary-glow" />
           ENTERPRISE SUPPORT CENTER
         </GlassCardTitle>
-        <p className="text-white/70 font-mono text-xs sm:text-sm pt-1">
+        <p className="text-white/80 font-mono text-xs sm:text-sm pt-1">
           24/7 AI assistance + priority human response based on your plan.
         </p>
       </GlassCardHeader>
@@ -70,7 +70,7 @@ ${userEmail}
               <Bot className="h-4 w-4 text-primary-glow" />
               <h4 className="text-white font-mono text-sm">24/7 AI Assistant</h4>
             </div>
-            <p className="text-white/70 font-mono text-xs mb-3">
+            <p className="text-white/85 font-mono text-xs mb-3">
               Instant answers to common questions: password reset, project status, revisions, and more.
             </p>
             <Button
@@ -81,7 +81,7 @@ ${userEmail}
               <Sparkles className="h-3 w-3 mr-1" />
               LAUNCH AI CHAT
             </Button>
-            <p className="text-white/60 font-mono text-xs mt-3">
+            <p className="text-white/80 font-mono text-xs mt-3">
               📧 Need human help? Use the "SUBMIT A SUPPORT REQUEST" button below. For billing questions, email{" "}
               <a href="mailto:billing@scriptstorm.org" className="text-primary-glow hover:underline">billing@scriptstorm.org</a>.
             </p>
@@ -93,15 +93,15 @@ ${userEmail}
               <Users className="h-4 w-4 text-primary-glow" />
               <h4 className="text-white font-mono text-sm">Human Support Team</h4>
             </div>
-            <p className="text-white/70 font-mono text-xs mb-3">
+            <p className="text-white/85 font-mono text-xs mb-3">
               For complex issues not resolved by AI. Response times vary by plan:
             </p>
 
             {/* Response time table */}
             <div className="rounded-lg border border-white/[0.1] overflow-hidden">
               <div className="grid grid-cols-2 bg-white/[0.04] px-4 py-2 border-b border-white/[0.1]">
-                <div className="text-white/60 font-mono text-xs uppercase tracking-wider">Plan</div>
-                <div className="text-white/60 font-mono text-xs uppercase tracking-wider">Human Response Time</div>
+                <div className="text-white/75 font-mono text-xs uppercase tracking-wider">Plan</div>
+                <div className="text-white/75 font-mono text-xs uppercase tracking-wider">Human Response Time</div>
               </div>
               {RESPONSE_TIMES.map((row) => {
                 const isCurrent = row.key === currentTier;
@@ -111,11 +111,11 @@ ${userEmail}
                     className={`grid grid-cols-2 px-4 p-3 border-b border-white/[0.05] last:border-b-0 transition-all ${
                       isCurrent
                         ? "bg-primary-glow/10 border-l-2 border-l-primary-glow"
-                        : "opacity-60"
+                        : ""
                     }`}
                   >
                     <div className="flex items-center gap-2">
-                      <span className={`font-mono text-sm ${isCurrent ? "text-white" : "text-white/70"}`}>
+                      <span className={`font-mono text-sm ${isCurrent ? "text-white" : "text-white/85"}`}>
                         {row.label}
                       </span>
                       {isCurrent && (
@@ -124,7 +124,7 @@ ${userEmail}
                         </span>
                       )}
                     </div>
-                    <div className={`font-mono text-sm ${isCurrent ? "text-primary-glow" : "text-white/60"}`}>
+                    <div className={`font-mono text-sm ${isCurrent ? "text-primary-glow" : "text-white/80"}`}>
                       {row.time}
                     </div>
                   </div>
@@ -132,7 +132,7 @@ ${userEmail}
               })}
             </div>
 
-            <p className="text-white/50 font-mono text-xs mt-3">
+            <p className="text-white/75 font-mono text-xs mt-3">
               Business hours: Monday–Friday, 9 AM – 6 PM HKT (Hong Kong Time)
             </p>
           </div>
@@ -156,7 +156,7 @@ ${userEmail}
 
           {/* Footer */}
           <div className="p-4 bg-white/[0.03] rounded-lg border border-white/[0.1]">
-            <p className="text-white/70 font-mono text-xs text-center">
+            <p className="text-white/85 font-mono text-xs text-center">
               Support Email: <span className="text-primary-glow">support@scriptstorm.org</span>
             </p>
           </div>
