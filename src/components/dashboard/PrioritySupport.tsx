@@ -58,7 +58,7 @@ ${userEmail}
           <MessageSquare className="h-5 w-5 text-primary-glow" />
           ENTERPRISE SUPPORT CENTER
         </GlassCardTitle>
-        <p className="text-white/70 font-mono text-xs sm:text-sm pt-1">
+        <p className="text-white/80 font-mono text-xs sm:text-sm pt-1">
           24/7 AI assistance + priority human response based on your plan.
         </p>
       </GlassCardHeader>
@@ -70,7 +70,7 @@ ${userEmail}
               <Bot className="h-4 w-4 text-primary-glow" />
               <h4 className="text-white font-mono text-sm">24/7 AI Assistant</h4>
             </div>
-            <p className="text-white/70 font-mono text-xs mb-3">
+            <p className="text-white/85 font-mono text-xs mb-3">
               Instant answers to common questions: password reset, project status, revisions, and more.
             </p>
             <Button
@@ -81,7 +81,7 @@ ${userEmail}
               <Sparkles className="h-3 w-3 mr-1" />
               LAUNCH AI CHAT
             </Button>
-            <p className="text-white/60 font-mono text-xs mt-3">
+            <p className="text-white/80 font-mono text-xs mt-3">
               📧 Need human help? Use the "SUBMIT A SUPPORT REQUEST" button below. For billing questions, email{" "}
               <a href="mailto:billing@scriptstorm.org" className="text-primary-glow hover:underline">billing@scriptstorm.org</a>.
             </p>
