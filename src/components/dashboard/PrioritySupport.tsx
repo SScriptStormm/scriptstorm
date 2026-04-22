@@ -138,12 +138,13 @@ ${userEmail}
           </div>
 
           {/* Contact Action Block */}
-          <div className="p-6 bg-white/[0.05] backdrop-blur-sm rounded-lg border border-white/[0.1] text-center">
+          <div className="p-4 bg-white/[0.05] backdrop-blur-sm rounded-lg border border-white/[0.1] hover:bg-white/[0.08] hover:border-white/[0.15] transition-all text-center">
             <Button
+              size="sm"
               onClick={handleContactSupport}
-              className="w-full bg-primary hover:bg-primary-glow text-white font-mono tracking-wide border-2 border-primary-glow/50 hover:border-primary-glow shadow-cyber transition-all"
+              className="w-full bg-primary/20 text-primary-glow border border-primary-glow/50 hover:bg-primary/30 hover:border-primary-glow font-mono text-xs"
             >
-              <Mail className="h-4 w-4 mr-2" />
+              <Mail className="h-3 w-3 mr-1" />
               SUBMIT A SUPPORT REQUEST
             </Button>
             {currentTier === "dominance" && (
