@@ -1,41 +1,29 @@
 
 
-## Brighten Support Tab Text for Readability
+## Brighten Support Tab Buttons for Readability
 
-The Support tab copy is using low-opacity whites (`text-white/70`, `text-white/60`, `text-white/50`) that wash out against the glass background. Bumping these up will restore legibility while keeping the dashboard's glassmorphic look.
+The "LAUNCH AI CHAT" and "SUBMIT A SUPPORT REQUEST" buttons currently use a low-contrast translucent style (`bg-primary/20` + `text-primary-glow`) that blends into the glass background and is hard to read.
 
 ### Changes to `src/components/dashboard/PrioritySupport.tsx`
 
-**Card subtitle (under title)**
-- `text-white/70` → `text-white/80`
+Both buttons (`LAUNCH AI CHAT` and `SUBMIT A SUPPORT REQUEST`) — replace the current dim styling:
 
-**AI Assistant block**
-- Heading "24/7 AI Assistant": already `text-white` ✓
-- Description paragraph: `text-white/70` → `text-white/85`
-- Footer note (📧 Need human help…): `text-white/60` → `text-white/80`
+- **From:** `bg-primary/20 text-primary-glow border border-primary-glow/50 hover:bg-primary/30 hover:border-primary-glow font-mono text-xs`
+- **To:** `bg-primary text-white border border-primary-glow hover:bg-primary/90 hover:shadow-glow font-mono text-xs font-semibold`
 
-**Human Support block**
-- Heading "Human Support Team": already `text-white` ✓
-- Description paragraph: `text-white/70` → `text-white/85`
-- Response-time table header labels (Plan / Human Response Time): `text-white/60` → `text-white/75`
-- Non-current tier rows:
-  - Remove `opacity-60` (it dims the entire row)
-  - Plan label: `text-white/70` → `text-white/85`
-  - Time value: `text-white/60` → `text-white/80`
-- Current tier row stays as-is (already bright: `text-white` + `text-primary-glow`)
-- Business-hours footnote: `text-white/50` → `text-white/75`
+This gives the buttons:
+- Solid primary blue background (high contrast against glass)
+- Pure white text (maximum legibility)
+- Full-strength `primary-glow` border (no opacity modifier — respects `tailwind-color-constraints` memory)
+- Glow shadow on hover for clear interactive affordance
+- Semibold weight to match other dashboard CTAs
 
-**Contact Action block**
-- Dominance priority note: keep `text-amber-300` (already bright) ✓
-
-**Footer block**
-- "Support Email:" label: `text-white/70` → `text-white/85`
-- Email address: keep `text-primary-glow` ✓
+Layout, sizing (`size="sm"`), icons, copy, and handlers all unchanged. Only the two button class strings are touched.
 
 ### Result
-All secondary text moves from the 50–70% opacity range into the 75–85% range, matching the readability of sibling dashboard tabs without changing the glassmorphic aesthetic, layout, copy, or hover behavior.
+Both action buttons become clearly readable and visually prominent while keeping the dashboard's neon-futuristic aesthetic intact.
 
 ### Scope
-- 1 file edited (`PrioritySupport.tsx`) — opacity-only tweaks
+- 1 file edited (`PrioritySupport.tsx`) — 2 className swaps
 - No memory updates, no DB, no edge functions, no routing changes
 
