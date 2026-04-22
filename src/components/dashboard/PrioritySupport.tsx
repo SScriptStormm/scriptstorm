@@ -76,7 +76,7 @@ ${userEmail}
             <Button
               size="sm"
               onClick={handleLaunchAIChat}
-              className="bg-primary/20 text-primary-glow border border-primary-glow/50 hover:bg-primary/30 hover:border-primary-glow font-mono text-xs"
+              className="bg-primary text-white border border-primary-glow hover:bg-primary/90 hover:shadow-glow font-mono text-xs font-semibold"
             >
               <Sparkles className="h-3 w-3 mr-1" />
               LAUNCH AI CHAT
@@ -142,7 +142,7 @@ ${userEmail}
             <Button
               size="sm"
               onClick={handleContactSupport}
-              className="w-full bg-primary/20 text-primary-glow border border-primary-glow/50 hover:bg-primary/30 hover:border-primary-glow font-mono text-xs"
+              className="w-full bg-primary text-white border border-primary-glow hover:bg-primary/90 hover:shadow-glow font-mono text-xs font-semibold"
             >
               <Mail className="h-3 w-3 mr-1" />
               SUBMIT A SUPPORT REQUEST
