@@ -52,7 +52,7 @@ ${userEmail}
   };
 
   return (
-    <GlassCard variant="default" glow>
+    <GlassCard variant="default" glow hover={false}>
       <GlassCardHeader>
         <GlassCardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
           <MessageSquare className="h-5 w-5 text-primary-glow" />
@@ -65,44 +65,37 @@ ${userEmail}
       <GlassCardContent>
         <div className="space-y-6">
           {/* AI Assistant Card */}
-          <div className="p-6 bg-white/[0.05] backdrop-blur-sm rounded-lg border border-white/[0.1]">
-            <div className="flex items-start gap-4">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary-glow/20 border-2 border-primary-glow shrink-0">
-                <Bot className="h-6 w-6 text-primary-glow" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="text-white font-mono text-base sm:text-lg mb-1">24/7 AI Assistant</h3>
-                <p className="text-white/70 font-mono text-xs sm:text-sm mb-4">
-                  Instant answers to common questions: password reset, project status, revisions, and more.
-                </p>
-                <Button
-                  onClick={handleLaunchAIChat}
-                  className="w-full sm:w-auto bg-primary hover:bg-primary-glow text-white font-mono tracking-wide border-2 border-primary-glow/50 hover:border-primary-glow shadow-cyber transition-all"
-                >
-                  <Sparkles className="h-4 w-4 mr-2" />
-                  LAUNCH AI CHAT
-                </Button>
-                <p className="text-white/60 font-mono text-xs mt-3">
-                  📧 Need human help? Use the "SUBMIT A SUPPORT REQUEST" button below. For billing questions, email{" "}
-                  <a href="mailto:billing@scriptstorm.org" className="text-primary-glow hover:underline">billing@scriptstorm.org</a>.
-                </p>
-              </div>
+          <div className="p-4 bg-white/[0.05] backdrop-blur-sm rounded-lg border border-white/[0.1] hover:bg-white/[0.08] hover:border-white/[0.15] transition-all">
+            <div className="flex items-center gap-2 mb-2">
+              <Bot className="h-4 w-4 text-primary-glow" />
+              <h4 className="text-white font-mono text-sm">24/7 AI Assistant</h4>
             </div>
+            <p className="text-white/70 font-mono text-xs mb-3">
+              Instant answers to common questions: password reset, project status, revisions, and more.
+            </p>
+            <Button
+              size="sm"
+              onClick={handleLaunchAIChat}
+              className="bg-primary/20 text-primary-glow border border-primary-glow/50 hover:bg-primary/30 hover:border-primary-glow font-mono text-xs"
+            >
+              <Sparkles className="h-3 w-3 mr-1" />
+              LAUNCH AI CHAT
+            </Button>
+            <p className="text-white/60 font-mono text-xs mt-3">
+              📧 Need human help? Use the "SUBMIT A SUPPORT REQUEST" button below. For billing questions, email{" "}
+              <a href="mailto:billing@scriptstorm.org" className="text-primary-glow hover:underline">billing@scriptstorm.org</a>.
+            </p>
           </div>
 
           {/* Human Support Card */}
-          <div className="p-6 bg-white/[0.05] backdrop-blur-sm rounded-lg border border-white/[0.1]">
-            <div className="flex items-start gap-4 mb-4">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary-glow/20 border-2 border-primary-glow shrink-0">
-                <Users className="h-6 w-6 text-primary-glow" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="text-white font-mono text-base sm:text-lg mb-1">Human Support Team</h3>
-                <p className="text-white/70 font-mono text-xs sm:text-sm">
-                  For complex issues not resolved by AI. Response times vary by plan:
-                </p>
-              </div>
+          <div className="p-4 bg-white/[0.05] backdrop-blur-sm rounded-lg border border-white/[0.1] hover:bg-white/[0.08] hover:border-white/[0.15] transition-all">
+            <div className="flex items-center gap-2 mb-2">
+              <Users className="h-4 w-4 text-primary-glow" />
+              <h4 className="text-white font-mono text-sm">Human Support Team</h4>
             </div>
+            <p className="text-white/70 font-mono text-xs mb-3">
+              For complex issues not resolved by AI. Response times vary by plan:
+            </p>
 
             {/* Response time table */}
             <div className="rounded-lg border border-white/[0.1] overflow-hidden">
@@ -115,7 +108,7 @@ ${userEmail}
                 return (
                   <div
                     key={row.key}
-                    className={`grid grid-cols-2 px-4 py-3 border-b border-white/[0.05] last:border-b-0 transition-all ${
+                    className={`grid grid-cols-2 px-4 p-3 border-b border-white/[0.05] last:border-b-0 transition-all ${
                       isCurrent
                         ? "bg-primary-glow/10 border-l-2 border-l-primary-glow"
                         : "opacity-60"
@@ -145,12 +138,13 @@ ${userEmail}
           </div>
 
           {/* Contact Action Block */}
-          <div className="p-6 bg-white/[0.05] backdrop-blur-sm rounded-lg border border-white/[0.1] text-center">
+          <div className="p-4 bg-white/[0.05] backdrop-blur-sm rounded-lg border border-white/[0.1] hover:bg-white/[0.08] hover:border-white/[0.15] transition-all text-center">
             <Button
+              size="sm"
               onClick={handleContactSupport}
-              className="w-full bg-primary hover:bg-primary-glow text-white font-mono tracking-wide border-2 border-primary-glow/50 hover:border-primary-glow shadow-cyber transition-all"
+              className="w-full bg-primary/20 text-primary-glow border border-primary-glow/50 hover:bg-primary/30 hover:border-primary-glow font-mono text-xs"
             >
-              <Mail className="h-4 w-4 mr-2" />
+              <Mail className="h-3 w-3 mr-1" />
               SUBMIT A SUPPORT REQUEST
             </Button>
             {currentTier === "dominance" && (
