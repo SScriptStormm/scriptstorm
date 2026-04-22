@@ -1,37 +1,41 @@
 
 
-## Align Support Tab Design with Dashboard Pattern
+## Brighten Support Tab Text for Readability
 
-The Support tab (`PrioritySupport.tsx`) doesn't match sibling dashboard tabs (Research Reports, Content Calendar). It's using oversized padding, heavy buttons, mismatched hover behavior, and the wrong GlassCard config.
-
-### Issues found
-| Element | Current (Support tab) | Dashboard standard |
-|---|---|---|
-| Outer GlassCard | `glow` only — whole card scales on hover | `glow hover={false}` — non-interactive containers don't scale |
-| Inner blocks | `p-6`, no hover state | `p-4`, `hover:bg-white/[0.08] hover:border-white/[0.15] transition-all` |
-| Section headings | `text-base sm:text-lg` | `text-sm` |
-| Icon badges | Large 48px circular bg-primary-glow/20 with 2px border | Small inline icon `text-primary-glow` |
-| Buttons | Heavy: `bg-primary border-2 border-primary-glow/50 shadow-cyber` | Subtle: `bg-primary/20 text-primary-glow border border-primary-glow/50 hover:bg-primary/30` |
+The Support tab copy is using low-opacity whites (`text-white/70`, `text-white/60`, `text-white/50`) that wash out against the glass background. Bumping these up will restore legibility while keeping the dashboard's glassmorphic look.
 
 ### Changes to `src/components/dashboard/PrioritySupport.tsx`
 
-1. **Outer card** — add `hover={false}` so it stops scaling/glowing on hover (per UI affordance rule for non-interactive containers).
+**Card subtitle (under title)**
+- `text-white/70` → `text-white/80`
 
-2. **AI Assistant block** — reduce to `p-4`, add hover transition matching siblings, drop the oversized 48px icon badge in favor of a small inline `Bot` icon next to the heading (like ContentCalendar's event icon pattern). Heading down to `text-sm`. Convert LAUNCH AI CHAT button to the subtle download-style: `bg-primary/20 text-primary-glow border border-primary-glow/50 hover:bg-primary/30 hover:border-primary-glow font-mono text-xs`.
+**AI Assistant block**
+- Heading "24/7 AI Assistant": already `text-white` ✓
+- Description paragraph: `text-white/70` → `text-white/85`
+- Footer note (📧 Need human help…): `text-white/60` → `text-white/80`
 
-3. **Human Support block** — same treatment: `p-4`, hover transition, inline `Users` icon, `text-sm` heading. Response-time table stays but switches to inner `p-3` rows for tighter density.
+**Human Support block**
+- Heading "Human Support Team": already `text-white` ✓
+- Description paragraph: `text-white/70` → `text-white/85`
+- Response-time table header labels (Plan / Human Response Time): `text-white/60` → `text-white/75`
+- Non-current tier rows:
+  - Remove `opacity-60` (it dims the entire row)
+  - Plan label: `text-white/70` → `text-white/85`
+  - Time value: `text-white/60` → `text-white/80`
+- Current tier row stays as-is (already bright: `text-white` + `text-primary-glow`)
+- Business-hours footnote: `text-white/50` → `text-white/75`
 
-4. **Contact Action block** — reduce to `p-4`, hover transition. Convert SUBMIT A SUPPORT REQUEST button to the same subtle style as the AI button. Keep it full-width.
+**Contact Action block**
+- Dominance priority note: keep `text-amber-300` (already bright) ✓
 
-5. **Footer block** — keep as-is (already matches the muted footer pattern), just confirm `p-4` padding.
-
-6. Keep all copy, tier-highlight logic, mailto handler, and Dominance priority note unchanged.
+**Footer block**
+- "Support Email:" label: `text-white/70` → `text-white/85`
+- Email address: keep `text-primary-glow` ✓
 
 ### Result
-The Support tab will visually match Research Reports and Content Calendar: same card chrome, same inner-block padding, same hover behavior, same button weight, same typography scale. No structural or functional changes.
+All secondary text moves from the 50–70% opacity range into the 75–85% range, matching the readability of sibling dashboard tabs without changing the glassmorphic aesthetic, layout, copy, or hover behavior.
 
 ### Scope
-- 1 file edited (`PrioritySupport.tsx`)
-- No memory updates needed (existing `unified-glassmorphism-pattern`, `ui-affordance-hover-logic`, and `enterprise-support-portal` memories already cover this — this change brings the file into compliance)
-- No DB, edge functions, or routing changes
+- 1 file edited (`PrioritySupport.tsx`) — opacity-only tweaks
+- No memory updates, no DB, no edge functions, no routing changes
 
