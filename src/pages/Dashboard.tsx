@@ -65,6 +65,7 @@ interface Article {
   strategic_goals?: string[] | null;
   kpis_to_track?: string[] | null;
   youtube_script_length?: number | null;
+  content_draft?: string | null;
 }
 const Dashboard = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -514,6 +515,41 @@ const Dashboard = () => {
   const handleViewBrief = (article: Article) => {
     setBriefDetailArticle(article);
     setBriefDialogOpen(true);
+  };
+  const handleDownload = (article: Article) => {
+    // Primary path: hosted file URL provided by automation
+    if (article.article_url) {
+      window.open(article.article_url, '_blank');
+      return;
+    }
+    // Fallback path: deliver the content_draft as a downloadable .txt file
+    if (article.content_draft && article.content_draft.trim().length > 0) {
+      const safeTitle = (article.title || 'content')
+        .replace(/[^\w\s-]/g, '')
+        .trim()
+        .replace(/\s+/g, '_')
+        .slice(0, 80) || 'content';
+      const blob = new Blob([article.content_draft], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${safeTitle}.txt`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      toast({
+        title: "Download started",
+        description: `${article.title} downloaded as a .txt file.`
+      });
+      return;
+    }
+    // No content available
+    toast({
+      title: "Content not yet available",
+      description: "Your article is marked complete but no file was attached. Please contact support@scriptstorm.org.",
+      variant: "destructive"
+    });
   };
   const submitRevisionRequest = async () => {
     if (!selectedArticle || !revisionFeedback.trim()) {
@@ -1101,7 +1137,7 @@ const Dashboard = () => {
                               View Brief Details
                             </Button>
                             {article.status === 'completed' ? <>
-                                <Button size="sm" className="w-full bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono text-xs" onClick={() => article.article_url && window.open(article.article_url, '_blank')}>
+                                <Button size="sm" className="w-full bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono text-xs disabled:opacity-50 disabled:cursor-not-allowed" onClick={(e) => { e.stopPropagation(); handleDownload(article); }} disabled={!article.article_url && !article.content_draft}>
                                   <Download className="h-3 w-3 mr-1" />
                                   Download
                                 </Button>
@@ -1205,7 +1241,7 @@ const Dashboard = () => {
                                   <Info className="h-4 w-4" />
                                 </Button>
                                 {article.status === 'completed' ? <>
-                                    <Button size="sm" className="bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono" onClick={() => article.article_url && window.open(article.article_url, '_blank')}>
+                                    <Button size="sm" className="bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono disabled:opacity-50 disabled:cursor-not-allowed" onClick={(e) => { e.stopPropagation(); handleDownload(article); }} disabled={!article.article_url && !article.content_draft}>
                                       <Download className="h-4 w-4 mr-1" />
                                       Download
                                     </Button>
