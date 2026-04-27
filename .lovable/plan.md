@@ -1,29 +1,52 @@
 
+## Fix Completed Pipeline Stage + Broken Download Button
 
-## Brighten Support Tab Buttons for Readability
+🎉 Congrats on hitting 100%! There are two real bugs blocking the celebration. Verified against the DB — your "Grand Theft Auto 6 (GTA 6)" article has `status: completed`, `content_draft: present`, but `article_url: null`.
 
-The "LAUNCH AI CHAT" and "SUBMIT A SUPPORT REQUEST" buttons currently use a low-contrast translucent style (`bg-primary/20` + `text-primary-glow`) that blends into the glass background and is hard to read.
+### Bug 1 — Stage 5 stays yellow when status is `completed`
 
-### Changes to `src/components/dashboard/PrioritySupport.tsx`
+**File:** `src/components/dashboard/ContentPipelineCard.tsx`
 
-Both buttons (`LAUNCH AI CHAT` and `SUBMIT A SUPPORT REQUEST`) — replace the current dim styling:
+In `getProgress()`, completed status returns `step: 5`. The render loop then evaluates each stage as:
+- `isCompleted = stage.step < currentStep` → step 5 is NOT less than 5 → false
+- `isCurrent = stage.step === currentStep` → step 5 equals 5 → **true (amber/yellow)**
 
-- **From:** `bg-primary/20 text-primary-glow border border-primary-glow/50 hover:bg-primary/30 hover:border-primary-glow font-mono text-xs`
-- **To:** `bg-primary text-white border border-primary-glow hover:bg-primary/90 hover:shadow-glow font-mono text-xs font-semibold`
+So "Ready for Download" never turns green. **Fix:** when status is `completed`, return `step: 6` so all 5 stages satisfy `stage.step < 6` and render green. The connector line between stage 4 and 5 will also turn emerald. The bottom progress bar already correctly shows 100% + success variant — no change needed there.
 
-This gives the buttons:
-- Solid primary blue background (high contrast against glass)
-- Pure white text (maximum legibility)
-- Full-strength `primary-glow` border (no opacity modifier — respects `tailwind-color-constraints` memory)
-- Glow shadow on hover for clear interactive affordance
-- Semibold weight to match other dashboard CTAs
+```ts
+case 'completed': return { step: 6, progress: 100, message: 'Content ready for download!' };
+```
 
-Layout, sizing (`size="sm"`), icons, copy, and handlers all unchanged. Only the two button class strings are touched.
+### Bug 2 — Download button silently does nothing
 
-### Result
-Both action buttons become clearly readable and visually prominent while keeping the dashboard's neon-futuristic aesthetic intact.
+**File:** `src/pages/Dashboard.tsx` (two spots: mobile card ~line 1104, desktop table ~line 1208)
+
+Both buttons are wired as:
+```tsx
+onClick={() => article.article_url && window.open(article.article_url, '_blank')}
+```
+
+For your GTA 6 article, `article_url` is `null` (n8n stored the content in `content_draft` but never wrote the file URL). So the click is a silent no-op — looks broken.
+
+**Fix:** make the button actually deliver the content the user has, with graceful fallback:
+
+1. **Primary path:** if `article_url` is present → open it in a new tab (current behavior).
+2. **Fallback path:** if `article_url` is null but `content_draft` exists → generate a `.txt` (or `.md`) blob from `content_draft` on the fly and trigger a browser download named after the article title. This means every completed article is downloadable, even when n8n didn't attach a hosted URL.
+3. **Hard-disable state:** if neither exists → disable the button + tooltip "Content not yet available — please contact support."
+
+The `articles` row already includes `content_draft` (the dashboard query selects `*`), so no schema or query changes are needed. Add a small helper `downloadArticle(article)` shared by both the mobile and desktop buttons to keep logic in one place.
+
+### Optional quality improvement (recommend including)
+
+Update the article type in `Dashboard.tsx` to include `content_draft: string | null` if it isn't already typed, so TypeScript surfaces the fallback path cleanly.
 
 ### Scope
-- 1 file edited (`PrioritySupport.tsx`) — 2 className swaps
-- No memory updates, no DB, no edge functions, no routing changes
+- 2 files edited:
+  - `src/components/dashboard/ContentPipelineCard.tsx` — 1-line change in `getProgress`
+  - `src/pages/Dashboard.tsx` — add `downloadArticle` helper, wire both Download buttons to it, add disabled state when no content available
+- No DB / RLS / edge function / n8n changes
+- No memory updates needed
 
+### Result
+- Pipeline shows all 5 stages green ✅ when status is `completed` (matches the green progress bar)
+- Download button immediately delivers your GTA 6 content as a `.txt` file from `content_draft`, and continues to open `article_url` for any future articles where n8n attaches a hosted file

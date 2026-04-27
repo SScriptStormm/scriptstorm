@@ -33,7 +33,7 @@ export const ContentPipelineCard = ({ article, articlesCount, selectedId, onClea
       case 'pending': return { step: 2, progress: 20, message: 'Brief received, starting research...' };
       case 'in_progress': return { step: 3, progress: 60, message: 'AI writing in progress...' };
       case 'review': return { step: 4, progress: 80, message: 'Under quality review...' };
-      case 'completed': return { step: 5, progress: 100, message: 'Content ready for download!' };
+      case 'completed': return { step: 6, progress: 100, message: 'Content ready for download!' };
       default: return { step: 1, progress: 20, message: 'Estimated completion: Within 24 hours' };
     }
   };
