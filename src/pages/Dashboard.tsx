@@ -65,6 +65,7 @@ interface Article {
   strategic_goals?: string[] | null;
   kpis_to_track?: string[] | null;
   youtube_script_length?: number | null;
+  content_draft?: string | null;
 }
 const Dashboard = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -514,6 +515,41 @@ const Dashboard = () => {
   const handleViewBrief = (article: Article) => {
     setBriefDetailArticle(article);
     setBriefDialogOpen(true);
+  };
+  const handleDownload = (article: Article) => {
+    // Primary path: hosted file URL provided by automation
+    if (article.article_url) {
+      window.open(article.article_url, '_blank');
+      return;
+    }
+    // Fallback path: deliver the content_draft as a downloadable .txt file
+    if (article.content_draft && article.content_draft.trim().length > 0) {
+      const safeTitle = (article.title || 'content')
+        .replace(/[^\w\s-]/g, '')
+        .trim()
+        .replace(/\s+/g, '_')
+        .slice(0, 80) || 'content';
+      const blob = new Blob([article.content_draft], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${safeTitle}.txt`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      toast({
+        title: "Download started",
+        description: `${article.title} downloaded as a .txt file.`
+      });
+      return;
+    }
+    // No content available
+    toast({
+      title: "Content not yet available",
+      description: "Your article is marked complete but no file was attached. Please contact support@scriptstorm.org.",
+      variant: "destructive"
+    });
   };
   const submitRevisionRequest = async () => {
     if (!selectedArticle || !revisionFeedback.trim()) {
