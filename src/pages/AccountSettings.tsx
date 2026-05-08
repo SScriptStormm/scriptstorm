@@ -124,7 +124,7 @@ export default function AccountSettings() {
     const endDate = new Date(subscriber.subscription_end);
     const now = new Date();
     const daysUntilRenewal = Math.floor((endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
-    const isAnnual = daysUntilRenewal > 180;
+    const isAnnual = daysUntilRenewal >= 180;
 
     const tier = subscriber.subscription_tier as keyof typeof TIER_PRICES;
     const price = isAnnual ? TIER_PRICES[tier]?.annual : TIER_PRICES[tier]?.monthly;
