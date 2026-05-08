@@ -42,8 +42,8 @@ export const AccountStatusCard = ({ subscriptionTier, subscriptionEnd, isSubscri
     : 0;
   const isAnnual = daysRemaining >= 180;
   const cycleTotal = isAnnual ? 365 : 30;
-  const daysUsed = cycleTotal - (daysRemaining % cycleTotal);
-  const cycleProgress = (daysUsed / cycleTotal) * 100;
+  const daysInCycle = Math.min(daysRemaining, cycleTotal);
+  const cycleProgress = (daysInCycle / cycleTotal) * 100;
 
   const [displayDays, setDisplayDays] = useState(0);
 
@@ -79,7 +79,7 @@ export const AccountStatusCard = ({ subscriptionTier, subscriptionEnd, isSubscri
           {/* Radial Progress */}
           <div className="flex-shrink-0">
             <RadialProgress
-              value={100 - cycleProgress}
+              value={cycleProgress}
               max={100}
               variant="primary"
               size="lg"
