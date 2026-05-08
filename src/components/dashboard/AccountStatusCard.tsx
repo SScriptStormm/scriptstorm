@@ -40,7 +40,7 @@ export const AccountStatusCard = ({ subscriptionTier, subscriptionEnd, isSubscri
   const daysRemaining = subscriptionEnd 
     ? Math.max(0, Math.floor((new Date(subscriptionEnd).getTime() - Date.now()) / (1000 * 60 * 60 * 24)))
     : 0;
-  const isAnnual = daysRemaining > 180;
+  const isAnnual = daysRemaining >= 180;
   const cycleTotal = isAnnual ? 365 : 30;
   const daysUsed = cycleTotal - (daysRemaining % cycleTotal);
   const cycleProgress = (daysUsed / cycleTotal) * 100;
