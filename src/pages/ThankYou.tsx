@@ -1,12 +1,37 @@
+import { useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { CheckCircle, LayoutDashboard, FileText, Zap, ArrowRight } from "lucide-react";
 import { GlassCard, GlassCardContent } from "@/components/ui/GlassCard";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/components/ui/use-toast";
 import scriptStormLogo from "@/assets/scriptstorm-logo.png";
 
 const ThankYou = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const { toast } = useToast();
   const orderId = searchParams.get("order_id");
+
+  useEffect(() => {
+    let cancelled = false;
+    const sync = async () => {
+      toast({
+        title: "Activating your plan…",
+        description: "Syncing your subscription with Stripe.",
+        duration: 2500,
+      });
+      // Retry a few times in case the webhook is still in flight
+      for (let i = 0; i < 4 && !cancelled; i++) {
+        const { data, error } = await supabase.functions.invoke("check-subscription");
+        if (!error && data?.subscribed) return;
+        await new Promise((r) => setTimeout(r, 1500));
+      }
+    };
+    sync();
+    return () => {
+      cancelled = true;
+    };
+  }, [toast]);
 
   return (
     <div className="min-h-screen bg-gradient-hero bg-fixed relative overflow-hidden flex items-center justify-center p-4">
