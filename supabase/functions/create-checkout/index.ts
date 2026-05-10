@@ -1,6 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import Stripe from "https://esm.sh/stripe@14.21.0";
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -28,40 +27,7 @@ serve(async (req) => {
     const { selectedAddOns, packageType = "starter", billing = "monthly" } = await req.json();
     logStep("Request data", { selectedAddOns, packageType, billing });
 
-    // Require authenticated user so Stripe subscription maps back to the buyer
-    const authHeader = req.headers.get("Authorization");
-    if (!authHeader?.startsWith("Bearer ")) {
-      return new Response(JSON.stringify({ error: "Unauthorized" }), {
-        status: 401,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
-    }
-    const supabaseUser = createClient(
-      Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_ANON_KEY")!,
-      { global: { headers: { Authorization: authHeader } } },
-    );
-    const token = authHeader.replace("Bearer ", "");
-    const { data: claims, error: claimsErr } = await supabaseUser.auth.getClaims(token);
-    if (claimsErr || !claims?.claims?.sub || !claims?.claims?.email) {
-      return new Response(JSON.stringify({ error: "Unauthorized" }), {
-        status: 401,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
-    }
-    const userId = claims.claims.sub as string;
-    const userEmail = claims.claims.email as string;
-    logStep("Authenticated user", { userId, userEmail });
-
     const stripe = new Stripe(stripeKey, { apiVersion: "2023-10-16" });
-
-    // Check for existing customer
-    const customers = await stripe.customers.list({ email: userEmail, limit: 1 });
-    let customerId;
-    if (customers.data.length > 0) {
-      customerId = customers.data[0].id;
-      logStep("Found existing customer", { customerId });
-    }
 
     // Stripe Price IDs for all packages (Test Mode)
     const priceIds: Record<string, { monthly: string; annual: string }> = {
@@ -110,26 +76,22 @@ serve(async (req) => {
     const origin = req.headers.get("origin") || "https://akqbsuvbammezjyeospk.supabase.co";
     
     const session = await stripe.checkout.sessions.create({
-      customer: customerId,
-      customer_email: customerId ? undefined : userEmail,
+      customer_creation: "always",
       line_items: lineItems,
       mode: "subscription",
       payment_method_types: ["card"],
       success_url: `${origin}/thank-you?order_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/?canceled=true`,
       billing_address_collection: "required",
-      client_reference_id: userId,
       subscription_data: {
         metadata: {
-          user_id: userId,
-          user_email: userEmail,
           package_type: packageType,
+          billing,
         },
       },
       metadata: {
-        user_id: userId,
-        user_email: userEmail,
-        package_type: packageType
+        package_type: packageType,
+        billing,
       },
     });
 
