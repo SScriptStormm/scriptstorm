@@ -66,17 +66,6 @@ const Pricing = () => {
   const handleCheckout = async (packageType: string, selectedAddOns = {}) => {
     if (loadingStates[packageType]) return;
 
-    // Require an authenticated user so the Stripe subscription is mapped to them
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session?.user) {
-      toast({
-        title: "Please sign in first",
-        description: "Create an account or sign in so we can attach the subscription to your dashboard.",
-      });
-      window.location.href = "/auth";
-      return;
-    }
-
     setLoadingStates(prev => ({
       ...prev,
       [packageType]: true
