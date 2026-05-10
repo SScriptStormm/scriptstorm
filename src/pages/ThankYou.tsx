@@ -116,7 +116,7 @@ const ThankYou = () => {
 
             {/* Login instructions */}
             <div className="bg-primary/10 border border-primary/30 rounded-lg p-4 mb-5 text-sm text-white/80">
-              Your login details have been sent to your email. Please check your inbox and set your password.
+              Your login details have been sent to your email. Please check your inbox. You can change your password anytime from your account settings.
             </div>
 
             {/* CTA */}
