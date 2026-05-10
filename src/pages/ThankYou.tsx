@@ -114,12 +114,17 @@ const ThankYou = () => {
               Billed in USD · Cancel anytime
             </div>
 
+            {/* Login instructions */}
+            <div className="bg-primary/10 border border-primary/30 rounded-lg p-4 mb-5 text-sm text-white/80">
+              Your login details have been sent to your email. Please check your inbox and set your password.
+            </div>
+
             {/* CTA */}
             <button
-              onClick={() => navigate("/dashboard")}
+              onClick={() => navigate("/auth")}
               className="w-full py-3 px-6 rounded-lg font-semibold text-sm text-white bg-gradient-to-r from-primary to-primary-glow hover:shadow-[0_0_30px_hsl(221_83%_53%/0.4)] transition-all duration-300 flex items-center justify-center gap-2 mb-3"
             >
-              Go to My Dashboard
+              Log In Now
               <ArrowRight className="w-4 h-4" />
             </button>
 
