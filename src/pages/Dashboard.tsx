@@ -34,6 +34,7 @@ interface Subscriber {
   subscribed: boolean;
   subscription_tier: string | null;
   subscription_end: string | null;
+  billing_cycle?: string | null;
 }
 interface Article {
   id: string;
@@ -179,7 +180,7 @@ const Dashboard = () => {
       const {
         data,
         error
-      } = await supabase.from('subscribers').select('subscribed, subscription_tier, subscription_end').eq('user_id', id).single();
+      } = await supabase.from('subscribers').select('subscribed, subscription_tier, subscription_end, billing_cycle').eq('user_id', id).single();
       if (error && error.code !== 'PGRST116') {
         throw error;
       }
