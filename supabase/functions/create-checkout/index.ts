@@ -76,7 +76,6 @@ serve(async (req) => {
     const origin = req.headers.get("origin") || "https://akqbsuvbammezjyeospk.supabase.co";
     
     const session = await stripe.checkout.sessions.create({
-      customer_creation: "always",
       line_items: lineItems,
       mode: "subscription",
       payment_method_types: ["card"],
