@@ -45,6 +45,7 @@ interface SubscriberData {
   subscription_end: string | null;
   email: string;
   stripe_customer_id: string | null;
+  billing_cycle?: string | null;
 }
 
 const TIER_PRICES = {
@@ -124,7 +125,10 @@ export default function AccountSettings() {
     const endDate = new Date(subscriber.subscription_end);
     const now = new Date();
     const daysUntilRenewal = Math.floor((endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
-    const isAnnual = daysUntilRenewal >= 180;
+    // Prefer the explicit billing_cycle from Stripe; fall back to a days-remaining heuristic for legacy rows.
+    const isAnnual = subscriber.billing_cycle
+      ? subscriber.billing_cycle.toLowerCase() === "annual"
+      : daysUntilRenewal >= 180;
 
     const tier = subscriber.subscription_tier as keyof typeof TIER_PRICES;
     const price = isAnnual ? TIER_PRICES[tier]?.annual : TIER_PRICES[tier]?.monthly;

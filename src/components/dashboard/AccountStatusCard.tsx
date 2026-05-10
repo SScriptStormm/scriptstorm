@@ -10,6 +10,7 @@ interface AccountStatusCardProps {
   subscriptionTier: string;
   subscriptionEnd: string | null;
   isSubscribed: boolean;
+  billingCycle?: string | null;
 }
 
 const tierVariants: Record<string, "starter" | "growth" | "scale" | "authority" | "dominance"> = {
@@ -28,7 +29,7 @@ const tierEmojis: Record<string, string> = {
   dominance: "💎"
 };
 
-export const AccountStatusCard = ({ subscriptionTier, subscriptionEnd, isSubscribed }: AccountStatusCardProps) => {
+export const AccountStatusCard = ({ subscriptionTier, subscriptionEnd, isSubscribed, billingCycle }: AccountStatusCardProps) => {
   const tier = subscriptionTier.toLowerCase();
   const variant = tierVariants[tier] || "starter";
   const emoji = tierEmojis[tier] || "🚀";
@@ -40,7 +41,10 @@ export const AccountStatusCard = ({ subscriptionTier, subscriptionEnd, isSubscri
   const daysRemaining = subscriptionEnd 
     ? Math.max(0, Math.floor((new Date(subscriptionEnd).getTime() - Date.now()) / (1000 * 60 * 60 * 24)))
     : 0;
-  const isAnnual = daysRemaining >= 180;
+  // Prefer the explicit billing_cycle from Stripe; fall back to a days-remaining heuristic for legacy rows.
+  const isAnnual = billingCycle
+    ? billingCycle.toLowerCase() === "annual"
+    : daysRemaining >= 180;
   const cycleTotal = isAnnual ? 365 : 30;
   const daysInCycle = Math.min(daysRemaining, cycleTotal);
   const cycleProgress = (daysInCycle / cycleTotal) * 100;
