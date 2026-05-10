@@ -30,7 +30,6 @@ const supabaseAdmin = createClient(
 );
 
 async function syncSubscription(subscriptionId: string, fallback?: {
-  userId?: string | null;
   email?: string | null;
   customerId?: string | null;
 }) {
@@ -45,7 +44,6 @@ async function syncSubscription(subscriptionId: string, fallback?: {
     : null;
   const subscribed = ["active", "trialing"].includes(sub.status);
 
-  const userId = (sub.metadata?.user_id as string | undefined) ?? fallback?.userId ?? null;
   const customerId = (typeof sub.customer === "string" ? sub.customer : sub.customer?.id) ?? fallback?.customerId ?? null;
 
   let email = fallback?.email ?? null;
@@ -56,14 +54,15 @@ async function syncSubscription(subscriptionId: string, fallback?: {
     } catch (_) {}
   }
 
-  if (!userId) {
-    log("No user_id available, cannot upsert", { subscriptionId, customerId, email });
+  if (!email) {
+    log("No email available, cannot upsert", { subscriptionId, customerId });
     return;
   }
 
+  const normalizedEmail = email.trim().toLowerCase();
+
   const payload: Record<string, unknown> = {
-    user_id: userId,
-    email: email ?? "",
+    email: normalizedEmail,
     stripe_customer_id: customerId,
     subscribed,
     subscription_end: periodEnd,
@@ -72,11 +71,27 @@ async function syncSubscription(subscriptionId: string, fallback?: {
   };
   if (tier) payload.subscription_tier = tier;
 
-  const { error } = await supabaseAdmin
+  // Try to update an existing row by email first; if none, insert.
+  const { data: existing } = await supabaseAdmin
     .from("subscribers")
-    .upsert(payload, { onConflict: "user_id" });
-  if (error) log("Upsert error", { error });
-  else log("Synced subscription", { userId, tier, billingCycle, subscribed });
+    .select("id")
+    .ilike("email", normalizedEmail)
+    .maybeSingle();
+
+  if (existing?.id) {
+    const { error } = await supabaseAdmin
+      .from("subscribers")
+      .update(payload)
+      .eq("id", existing.id);
+    if (error) log("Update error", { error });
+    else log("Synced subscription (updated)", { email: normalizedEmail, tier, billingCycle, subscribed });
+  } else {
+    const { error } = await supabaseAdmin
+      .from("subscribers")
+      .insert(payload);
+    if (error) log("Insert error", { error });
+    else log("Synced subscription (inserted)", { email: normalizedEmail, tier, billingCycle, subscribed });
+  }
 }
 
 serve(async (req) => {
@@ -112,27 +127,12 @@ serve(async (req) => {
           : session.subscription?.id;
         if (!subscriptionId) break;
 
-        const userId =
-          (session.metadata?.user_id as string | undefined) ??
-          (session.client_reference_id as string | undefined) ??
-          null;
         const email = session.customer_details?.email ?? session.customer_email ?? null;
         const customerId = typeof session.customer === "string"
           ? session.customer
           : session.customer?.id ?? null;
 
-        // Backfill subscription metadata so future updates carry user_id
-        if (userId) {
-          try {
-            await stripe.subscriptions.update(subscriptionId, {
-              metadata: { user_id: userId },
-            });
-          } catch (e) {
-            log("Failed to set subscription metadata", { e: String(e) });
-          }
-        }
-
-        await syncSubscription(subscriptionId, { userId, email, customerId });
+        await syncSubscription(subscriptionId, { email, customerId });
         break;
       }
       case "customer.subscription.updated":
