@@ -746,6 +746,7 @@ const Dashboard = () => {
             subscriptionTier={subscriber?.subscription_tier || 'starter'}
             subscriptionEnd={subscriber?.subscription_end || null}
             isSubscribed={subscriber?.subscribed || false}
+            billingCycle={subscriber?.billing_cycle || null}
           />
           <MonthlyUsageCard 
             subscriptionTier={tier} 
