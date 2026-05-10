@@ -113,12 +113,13 @@ serve(async (req) => {
       log("No subscriptions on customer");
       await supabaseAdmin
         .from("subscribers")
-        .update({
+        .upsert({
+          user_id: userId,
+          email: userEmail ?? existing?.email ?? "",
           subscribed: false,
           stripe_customer_id: customerId,
           updated_at: new Date().toISOString(),
-        })
-        .eq("user_id", userId);
+        }, { onConflict: "user_id" });
       return new Response(
         JSON.stringify({ subscribed: false, reason: "no_subscription" }),
         { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
