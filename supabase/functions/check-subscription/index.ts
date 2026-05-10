@@ -137,20 +137,21 @@ serve(async (req) => {
 
     log("Resolved subscription", { tier, billingCycle, periodEnd, status: active.status });
 
-    const updatePayload: Record<string, unknown> = {
+    const upsertPayload: Record<string, unknown> = {
+      user_id: userId,
+      email: userEmail ?? existing?.email ?? "",
       subscribed,
       stripe_customer_id: customerId,
       subscription_end: periodEnd,
       billing_cycle: billingCycle,
       updated_at: new Date().toISOString(),
     };
-    if (tier) updatePayload.subscription_tier = tier;
+    if (tier) upsertPayload.subscription_tier = tier;
 
     const { error: updateErr } = await supabaseAdmin
       .from("subscribers")
-      .update(updatePayload)
-      .eq("user_id", userId);
-    if (updateErr) log("Update error", { updateErr });
+      .upsert(upsertPayload, { onConflict: "user_id" });
+    if (updateErr) log("Upsert error", { updateErr });
 
     return new Response(
       JSON.stringify({
