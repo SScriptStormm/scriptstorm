@@ -1,35 +1,54 @@
-## What this plan does
+## Goal
 
-Implements the subscription sync fix from `.lovable/plan.md` so a brand-new buyer who checks out (e.g. Scale Annual) lands on the dashboard with the correct tier, cycle, and renewal date.
+On the Stripe Checkout page, the **Contact email** field must be empty and editable so each customer types their own personal email. Today it's pre-filled (and effectively locked to) `hello@scriptstorm.org` because:
 
-## Steps
+1. `Pricing.tsx` blocks checkout unless the visitor is signed in, then forwards their session email.
+2. `create-checkout/index.ts` requires a JWT, reads the email from the token, and passes it to Stripe as `customer_email` (or reuses the matching Stripe Customer, which also pins the email).
 
-1. **Deploy `stripe-webhook` edge function** (public, `verify_jwt = false`)
-   - Verifies Stripe signature using `STRIPE_WEBHOOK_SECRET`
-   - Handles `checkout.session.completed`, `customer.subscription.updated`, `customer.subscription.deleted`
-   - Upserts `subscribers` row keyed on `user_id` (read from `client_reference_id` / subscription metadata) with: `email`, `stripe_customer_id`, `subscription_tier`, `billing_cycle`, `subscription_end`, `subscribed`
-   - Reuses the existing `PRICE_TO_TIER` map
+This is incompatible with the new flow you described:
 
-2. **Tie checkout to the signed-in user**
-   - `Pricing.tsx` + `EnterprisePackageCard.tsx`: require an authenticated session; redirect guests to `/auth`; pass `userId`/`userEmail` to `create-checkout`
-   - `create-checkout/index.ts`: validate JWT, drop the hardcoded `billing@scriptstorm.org`, set `client_reference_id: userId` and `subscription_data.metadata.user_id`
+> Customer pays first (with their own email) → Gumloop receives the webhook → Gumloop creates the account + sends welcome email → user logs in and can change email/password later.
 
-3. **Make `check-subscription` self-healing**
-   - Switch the `.update()` to an `.upsert()` keyed on `user_id` so a missing row gets created on first dashboard load
+So we need to make checkout **anonymous-friendly** and let Stripe own the email field.
 
-4. **Sync after Stripe redirect**
-   - `ThankYou.tsx`: on mount call `supabase.functions.invoke('check-subscription')` with a brief "Activating your plan…" toast
+## Changes
 
-5. **Config**
-   - Add `[functions.stripe-webhook] verify_jwt = false` to `supabase/config.toml`
-   - Request `STRIPE_WEBHOOK_SECRET` from you after you create the destination in Stripe and copy the `whsec_…` value
+### 1. `supabase/functions/create-checkout/index.ts`
+- Remove the `Authorization` header requirement and the `getClaims` block.
+- Remove the `stripe.customers.list({ email })` lookup and the `customer` / `customer_email` parameters from `stripe.checkout.sessions.create`.
+- Add `customer_creation: "always"` so Stripe creates a fresh customer per checkout, using whatever email the buyer types.
+- Drop `client_reference_id` and the `user_id` / `user_email` entries from `metadata` and `subscription_data.metadata` (we don't have a Supabase user yet). Keep `package_type` and `billing` in metadata so the webhook + Gumloop know what was bought.
 
-## After deploy — what you do in Stripe
+### 2. `src/components/Pricing.tsx` and `src/components/EnterprisePackageCard.tsx`
+- Remove the "require signed-in session / redirect to /auth" guard before calling `create-checkout`.
+- Stop passing `userId` / `userEmail` in the invoke body.
+- The "Subscribe" buttons go straight to Stripe Checkout for anyone.
 
-1. Create the destination in Stripe with URL:
-   `https://akqbsuvbammezjyeospk.supabase.co/functions/v1/stripe-webhook`
-2. Copy the `whsec_…` signing secret Stripe shows you
-3. Paste it into the secret prompt I'll send → I'll then run an end-to-end test (fresh user buys Scale Annual → dashboard shows Scale + ANNUAL badge + correct renewal date)
+### 3. `supabase/functions/stripe-webhook/index.ts`
+- Today it keys the `subscribers` row on `user_id` from `client_reference_id`. After this change there is no `user_id` at checkout time, so:
+  - On `checkout.session.completed` / `customer.subscription.*`, read the buyer email from `session.customer_details.email` (or `customer.email`) and the Stripe `customer` ID.
+  - Upsert `subscribers` keyed on `email` (not `user_id`) with `stripe_customer_id`, `subscription_tier`, `billing_cycle`, `subscription_end`, `subscribed`. Leave `user_id` null until Gumloop (or `check-subscription` after first login) backfills it.
 
-## Out of scope
-- Pricing page redesign, price changes, add-ons logic
+### 4. `supabase/functions/check-subscription/index.ts`
+- When called by a logged-in user, look up the `subscribers` row by `email` if `user_id` is missing and **stamp** `user_id` onto it (the "claim" step). This is what links a Gumloop-provisioned account to the Stripe customer that paid.
+
+### 5. DB
+- Add a partial unique index on `subscribers(email)` so the email-keyed upsert in the webhook is safe:
+  ```sql
+  create unique index if not exists subscribers_email_unique
+    on public.subscribers (lower(email));
+  ```
+- No schema column changes needed — `email` already exists.
+
+## Out of scope (for this step)
+- Wiring Gumloop itself (that's "step 2" — separate task once this checkout flow is live).
+- Letting users edit email/password from Account Settings (already supported by Supabase auth UI; no change needed here).
+- Pricing copy / layout.
+
+## Test plan after deploy
+1. Open the site in an **incognito** window (not logged in).
+2. Click "Subscribe" on Scale Annual → Stripe Checkout opens, **email field is empty and editable**.
+3. Enter a brand-new email (e.g. `test+stripe@yourdomain.com`), pay with `4242 4242 4242 4242`.
+4. In Stripe Dashboard → Customers, the new customer's email matches what was typed (not `hello@scriptstorm.org`).
+5. In Supabase → `subscribers` table, a row exists with that email, correct `subscription_tier`, `billing_cycle`, and `subscription_end`, `user_id` null.
+6. Sign up in your app using the same email → call `check-subscription` → row gets `user_id` stamped and dashboard shows Scale + ANNUAL.
