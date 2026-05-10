@@ -65,11 +65,29 @@ serve(async (req) => {
     );
 
     // Look up the existing subscriber row.
-    const { data: existing } = await supabaseAdmin
+    let { data: existing } = await supabaseAdmin
       .from("subscribers")
       .select("stripe_customer_id, email")
       .eq("user_id", userId)
       .maybeSingle();
+
+    // If no row is linked to this user yet, try to claim a row that the
+    // Stripe webhook created by email (anonymous-checkout flow).
+    if (!existing && userEmail) {
+      const { data: byEmail } = await supabaseAdmin
+        .from("subscribers")
+        .select("id, stripe_customer_id, email")
+        .ilike("email", userEmail)
+        .maybeSingle();
+      if (byEmail?.id) {
+        await supabaseAdmin
+          .from("subscribers")
+          .update({ user_id: userId, updated_at: new Date().toISOString() })
+          .eq("id", byEmail.id);
+        existing = { stripe_customer_id: byEmail.stripe_customer_id, email: byEmail.email };
+        log("Claimed subscriber row by email", { userId, email: userEmail });
+      }
+    }
 
     const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
     if (!stripeKey) throw new Error("Stripe secret key not configured");
