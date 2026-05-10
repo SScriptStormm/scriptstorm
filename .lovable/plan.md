@@ -1,53 +1,35 @@
-## Reality check: does it work for new subscribers today?
+## What this plan does
 
-No. There are three structural gaps that mean a brand-new client who buys "Scale Annual" will not see the right plan on the dashboard:
+Implements the subscription sync fix from `.lovable/plan.md` so a brand-new buyer who checks out (e.g. Scale Annual) lands on the dashboard with the correct tier, cycle, and renewal date.
 
-1. **Checkout is anonymous.** `create-checkout` hardcodes `userEmail = "billing@scriptstorm.org"` and `userId = "guest"`. The Stripe customer is shared, and the Supabase user_id is never attached to the Stripe subscription. There is no way to map back from Stripe to the buyer.
-2. **Nothing writes a `subscribers` row at purchase.** No `checkout.session.completed` webhook, no insert in `create-checkout`, no insert on the Thank You page. So a new buyer has zero rows in `subscribers`.
-3. **`check-subscription` only updates an existing row.** It does `.update().eq("user_id", userId)`, so even if Stripe has the subscription, the dashboard row stays empty for new users. The email fallback also collapses everyone to the shared `billing@scriptstorm.org` Stripe customer.
+## Steps
 
-Result: a new Scale Annual buyer would land on the dashboard with no plan, or with whatever the shared Stripe customer happens to resolve to — definitely not guaranteed to show "Scale Annual".
+1. **Deploy `stripe-webhook` edge function** (public, `verify_jwt = false`)
+   - Verifies Stripe signature using `STRIPE_WEBHOOK_SECRET`
+   - Handles `checkout.session.completed`, `customer.subscription.updated`, `customer.subscription.deleted`
+   - Upserts `subscribers` row keyed on `user_id` (read from `client_reference_id` / subscription metadata) with: `email`, `stripe_customer_id`, `subscription_tier`, `billing_cycle`, `subscription_end`, `subscribed`
+   - Reuses the existing `PRICE_TO_TIER` map
 
-## Plan
+2. **Tie checkout to the signed-in user**
+   - `Pricing.tsx` + `EnterprisePackageCard.tsx`: require an authenticated session; redirect guests to `/auth`; pass `userId`/`userEmail` to `create-checkout`
+   - `create-checkout/index.ts`: validate JWT, drop the hardcoded `billing@scriptstorm.org`, set `client_reference_id: userId` and `subscription_data.metadata.user_id`
 
-### 1. Tie checkout to the signed-in user
-File: `src/components/Pricing.tsx` and `src/components/EnterprisePackageCard.tsx`
-- Before invoking `create-checkout`, fetch the current Supabase session. If there is no user, route them to `/auth` first (or a guest-blocked toast).
-- Pass `userId` and `userEmail` in the request body.
+3. **Make `check-subscription` self-healing**
+   - Switch the `.update()` to an `.upsert()` keyed on `user_id` so a missing row gets created on first dashboard load
 
-File: `supabase/functions/create-checkout/index.ts`
-- Validate the JWT (same pattern as `customer-portal`/`check-subscription`), drop the hardcoded `billing@scriptstorm.org`.
-- Use the authenticated user's email for the Stripe customer lookup/creation.
-- Set `client_reference_id: userId` and `subscription_data.metadata.user_id` on the session so the subscription itself carries the Supabase user id.
+4. **Sync after Stripe redirect**
+   - `ThankYou.tsx`: on mount call `supabase.functions.invoke('check-subscription')` with a brief "Activating your plan…" toast
 
-### 2. Write the subscriber row at purchase via webhook
-New file: `supabase/functions/stripe-webhook/index.ts` (public, no JWT)
-- Verify the Stripe signature (`STRIPE_WEBHOOK_SECRET`).
-- Handle:
-  - `checkout.session.completed` → upsert into `subscribers` keyed on `user_id` (read from `client_reference_id` / metadata) with: `email`, `stripe_customer_id`, `subscription_tier`, `billing_cycle`, `subscription_end`, `subscribed=true`. Use the same `PRICE_TO_TIER` map already in `check-subscription`, plus `price.recurring.interval` for cycle.
-  - `customer.subscription.updated` / `customer.subscription.deleted` → update the same fields (handles upgrade/downgrade/cancel).
-- Add `STRIPE_WEBHOOK_SECRET` as a Supabase secret. Configure the webhook URL in the Stripe Dashboard.
-- Mark `verify_jwt = false` for this function in `supabase/config.toml`.
+5. **Config**
+   - Add `[functions.stripe-webhook] verify_jwt = false` to `supabase/config.toml`
+   - Request `STRIPE_WEBHOOK_SECRET` from you after you create the destination in Stripe and copy the `whsec_…` value
 
-### 3. Make `check-subscription` self-healing
-File: `supabase/functions/check-subscription/index.ts`
-- Change the `.update()` to an `.upsert()` keyed on `user_id`, so it also creates the row if missing.
-- Keep the Stripe interval → `billing_cycle` mapping already in place.
+## After deploy — what you do in Stripe
 
-### 4. Sync immediately after redirect
-File: `src/pages/ThankYou.tsx`
-- On mount, call `supabase.functions.invoke('check-subscription')` so the dashboard reflects the new plan even if the webhook arrives a few seconds later.
-- Show a brief "Activating your Scale Annual plan…" toast while it runs.
-
-### 5. Verification
-
-End-to-end checks I will run after implementation:
-- Sign in as a fresh test user, buy **Scale Annual** in Stripe test mode → dashboard shows: Tier badge "Scale", cycle badge "ANNUAL" (cyan + crown), radial arc near-full, renewal ~365d out. Account Settings billing line says "Annual · $12,450/yr".
-- Same user upgrades to **Authority Monthly** in the Stripe portal → after refresh: tier "Authority", cycle "MONTHLY" (rose + refresh), radial arc tied to a 30-day cycle, price `$1,797/mo`.
-- Cancel subscription → `subscribed=false`, status badge flips to INACTIVE.
-- Confirm the existing test account (`ethaprotect@gmail.com`, Scale Annual) still shows correctly.
+1. Create the destination in Stripe with URL:
+   `https://akqbsuvbammezjyeospk.supabase.co/functions/v1/stripe-webhook`
+2. Copy the `whsec_…` signing secret Stripe shows you
+3. Paste it into the secret prompt I'll send → I'll then run an end-to-end test (fresh user buys Scale Annual → dashboard shows Scale + ANNUAL badge + correct renewal date)
 
 ## Out of scope
-- Redesigning the pricing page or checkout UI.
-- Changing tier prices or Stripe price IDs.
-- Anything related to add-ons (`selectedAddOns` is currently unused on the backend).
+- Pricing page redesign, price changes, add-ons logic
