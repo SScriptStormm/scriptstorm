@@ -51,7 +51,7 @@ const Support = () => {
           <div className="flex justify-between items-center">
             <Link to="/help-center" className="flex items-center gap-2 text-primary-glow hover:text-primary transition-colors">
               <ArrowLeft className="h-4 w-4" />
-              <span className="font-mono tracking-[0.2em] font-bold uppercase">Back to Help Center</span>
+              <span className="font-mono tracking-wide">Back to Help Center</span>
             </Link>
           </div>
         </div>

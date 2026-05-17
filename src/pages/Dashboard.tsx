@@ -639,10 +639,10 @@ const Dashboard = () => {
             <div className="flex items-center gap-3 sm:gap-4">
               <img src={scriptStormLogo} alt="ScriptStorm" className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl shadow-cyber border border-primary-glow/30 hover:border-primary-glow/60 transition-all duration-300" />
               <div>
-                <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-white font-mono tracking-[0.2em] font-bold uppercase">
+                <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-white font-mono tracking-wide">
                   SCRIPTSTORM
                 </h1>
-                <p className="text-primary-glow/80 text-xs sm:text-sm font-mono tracking-[0.2em] font-bold uppercase">
+                <p className="text-primary-glow/80 text-xs sm:text-sm font-mono tracking-widest">
                   CLIENT DASHBOARD
                 </p>
               </div>
@@ -697,7 +697,7 @@ const Dashboard = () => {
                   {greetingData.icon === 'sunrise' && <Sun className="h-5 w-5 text-amber-400" />}
                   {greetingData.icon === 'sun' && <SunDim className="h-5 w-5 text-orange-400" />}
                   {greetingData.icon === 'moon' && <Moon className="h-5 w-5 text-blue-300" />}
-                  <h2 className="text-lg sm:text-xl font-bold text-white font-mono tracking-[0.2em] font-bold uppercase">
+                  <h2 className="text-lg sm:text-xl font-bold text-white font-mono tracking-wide">
                     {greetingData.text}
                   </h2>
                 </div>
@@ -1020,7 +1020,7 @@ const Dashboard = () => {
             {articles.length === 0 ? (
               <div className="py-12 text-center">
                 <FileText className="h-16 w-16 text-primary-glow/50 mx-auto mb-4" />
-                <p className="text-white font-mono tracking-[0.2em] font-bold uppercase text-xl mb-2">
+                <p className="text-white font-mono tracking-wide text-xl mb-2">
                   No Active Projects
                 </p>
                 <p className="text-white/70 font-mono text-sm mb-3">
@@ -1079,7 +1079,7 @@ const Dashboard = () => {
                         <div className={`space-y-3 ${isSelected ? 'pl-2' : ''}`}>
                           {/* Title and Word Count */}
                           <div>
-                            <h3 className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/85 font-mono tracking-[0.2em] font-bold uppercase font-bold text-sm mb-1 line-clamp-2">
+                            <h3 className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/85 font-mono tracking-wider font-bold text-sm mb-1 line-clamp-2">
                               {article.title}
                             </h3>
                             {article.word_count > 0 && <p className="text-white/60 font-mono text-xs">{article.word_count} words</p>}
@@ -1090,7 +1090,7 @@ const Dashboard = () => {
                             const typeInfo = getContentTypeInfo(article);
                             const TypeIcon = typeInfo.icon;
                             return (
-                              <Badge className={`${typeInfo.colorClass} font-mono tracking-[0.2em] font-bold uppercase text-xs inline-flex items-center gap-1`}>
+                              <Badge className={`${typeInfo.colorClass} font-mono tracking-wide text-xs inline-flex items-center gap-1`}>
                                 <TypeIcon className="h-3 w-3" />
                                 {typeInfo.shortLabel}
                               </Badge>
@@ -1099,7 +1099,7 @@ const Dashboard = () => {
                           
                           {/* Status Badge */}
                           <div>
-                            <Badge className={`${getStatusColor(article.status)} font-mono tracking-[0.2em] font-bold uppercase text-xs`}>
+                            <Badge className={`${getStatusColor(article.status)} font-mono tracking-wide text-xs`}>
                               {getStatusIcon(article.status)}
                               {article.status === 'completed' ? '✅ Ready' : article.status === 'in_progress' ? '🔄 In Progress' : article.status === 'review' ? '🔍 In Review' : '⏳ Pending'}
                             </Badge>
@@ -1188,7 +1188,7 @@ const Dashboard = () => {
                                 <div className="absolute left-1 top-3 bottom-3 w-[3px] rounded-full bg-primary-glow shadow-[0_0_12px_hsl(221_83%_53%/0.6)]" />
                               )}
                               <div className={isSelected ? 'pl-3' : ''}>
-                                <h3 className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/85 font-mono tracking-[0.2em] font-bold uppercase font-bold text-xs md:text-sm lg:text-base truncate max-w-[300px] lg:max-w-[400px]" title={article.title}>
+                                <h3 className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/85 font-mono tracking-wider font-bold text-xs md:text-sm lg:text-base truncate max-w-[300px] lg:max-w-[400px]" title={article.title}>
                                   {article.title}
                                 </h3>
                                 {article.word_count > 0 && <p className="text-white/60 font-mono text-[11px] md:text-xs">{article.word_count} words</p>}
@@ -1201,7 +1201,7 @@ const Dashboard = () => {
                                 const typeInfo = getContentTypeInfo(article);
                                 const TypeIcon = typeInfo.icon;
                                 return (
-                                  <Badge className={`${typeInfo.colorClass} font-mono tracking-[0.2em] font-bold uppercase text-[11px] md:text-xs inline-flex items-center gap-1`}>
+                                  <Badge className={`${typeInfo.colorClass} font-mono tracking-wide text-[11px] md:text-xs inline-flex items-center gap-1`}>
                                     <TypeIcon className="h-3 w-3" />
                                     {typeInfo.shortLabel}
                                   </Badge>
@@ -1211,7 +1211,7 @@ const Dashboard = () => {
                             
                             {/* Status Cell */}
                             <td className="py-4 align-top">
-                              <Badge className={`${getStatusColor(article.status)} font-mono tracking-[0.2em] font-bold uppercase text-[11px] md:text-xs inline-flex items-center gap-1`}>
+                              <Badge className={`${getStatusColor(article.status)} font-mono tracking-wide text-[11px] md:text-xs inline-flex items-center gap-1`}>
                                 {getStatusIcon(article.status)}
                                 {article.status === 'completed' ? '✅ Ready' : article.status === 'in_progress' ? '🔄 In Progress' : article.status === 'review' ? '🔍 In Review' : '⏳ Pending'}
                               </Badge>
@@ -1377,7 +1377,7 @@ const Dashboard = () => {
       <Dialog open={revisionDialogOpen} onOpenChange={setRevisionDialogOpen}>
         <DialogContent className="bg-black/95 border-primary-glow/30">
           <DialogHeader>
-            <DialogTitle className="text-white font-mono tracking-[0.2em] font-bold uppercase">
+            <DialogTitle className="text-white font-mono tracking-wide">
               Request Revision
             </DialogTitle>
             <DialogDescription className="text-white/70 font-mono">
@@ -1424,7 +1424,7 @@ const Dashboard = () => {
       <Dialog open={briefDialogOpen} onOpenChange={setBriefDialogOpen}>
         <DialogContent className="bg-black/95 border-primary-glow/30 max-w-lg max-h-[80vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="text-white font-mono tracking-[0.2em] font-bold uppercase flex items-center gap-2">
+            <DialogTitle className="text-white font-mono tracking-wide flex items-center gap-2">
               <Info className="h-5 w-5 text-primary-glow" />
               Brief Details
             </DialogTitle>

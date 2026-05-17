@@ -315,10 +315,10 @@ const Auth = () => {
             {/* Enhanced Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-300 motion-reduce:transition-none" />
           </div>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 animate-text-glow font-mono tracking-[0.2em]">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 animate-text-glow font-mono tracking-wide">
             SCRIPTSTORM
           </h1>
-          <p className="text-primary-glow font-mono tracking-[0.2em] text-xs sm:text-sm font-bold uppercase">
+          <p className="text-primary-glow/80 font-mono tracking-widest text-xs sm:text-sm">
             CLIENT DASHBOARD ACCESS
           </p>
         </div>
@@ -326,13 +326,11 @@ const Auth = () => {
         <Card className="relative bg-black/30 backdrop-blur-xl border-primary-glow/30 shadow-cyber hover:shadow-hologram transition-all duration-500">
           <div className="absolute inset-0 bg-gradient-cyber opacity-10 rounded-lg" />
           <CardHeader className="relative text-center space-y-2 px-4 sm:px-6">
-            <CardTitle className="text-lg sm:text-xl md:text-2xl text-white font-mono tracking-[0.2em] font-bold uppercase flex items-center justify-center gap-2 flex-wrap">
-              <span className="p-2 rounded-lg bg-primary/15 border border-primary-glow/20">
-                <Zap className="h-4 w-4 text-primary-glow animate-pulse" />
-              </span>
+            <CardTitle className="text-lg sm:text-xl md:text-2xl text-white font-mono tracking-wide flex items-center justify-center gap-2 flex-wrap">
+              <Zap className="h-5 w-5 sm:h-6 sm:w-6 text-primary-glow animate-pulse" />
               <span className="break-words">{showForgotPassword ? "RESET PASSWORD" : "CLIENT DASHBOARD ACCESS"}</span>
             </CardTitle>
-            <p className="text-white/95 text-xs sm:text-sm font-mono leading-relaxed pt-1">
+            <p className="text-white/70 text-xs sm:text-sm font-mono">
               {showForgotPassword ? "Enter your email to reset password" : "Sign in to access your client dashboard"}
             </p>
           </CardHeader>
@@ -347,7 +345,7 @@ const Auth = () => {
               )}
               
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-primary-glow font-mono tracking-[0.2em] text-[11px] font-bold uppercase flex items-center gap-2">
+                <Label htmlFor="email" className="text-white font-mono tracking-wide text-sm flex items-center gap-2">
                   EMAIL ADDRESS
                   {emailValid && <Check className="h-3 w-3 text-green-400" />}
                   {emailError && <X className="h-3 w-3 text-red-400" />}
@@ -379,7 +377,7 @@ const Auth = () => {
               
               {!showForgotPassword && (
                 <div className="space-y-2">
-                  <Label htmlFor="password" className="text-primary-glow font-mono tracking-[0.2em] text-[11px] font-bold uppercase flex items-center gap-2">
+                  <Label htmlFor="password" className="text-white font-mono tracking-wide text-sm flex items-center gap-2">
                     PASSWORD
                   </Label>
                   <div className="relative">
@@ -417,7 +415,7 @@ const Auth = () => {
                   />
                   <label
                     htmlFor="remember"
-                    className="text-sm text-white/95 font-mono cursor-pointer select-none"
+                    className="text-sm text-white/80 font-mono cursor-pointer select-none"
                   >
                     Remember me
                   </label>
@@ -430,7 +428,7 @@ const Auth = () => {
                 <Button
                   type="submit"
                   disabled={loading || isBlocked || (!emailValid && email !== "")}
-                  className="relative w-full bg-primary hover:bg-primary/90 text-white font-mono text-xs font-bold uppercase tracking-widest border border-primary-glow shadow-cyber hover:shadow-hologram transition-all duration-500 h-12 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="relative w-full bg-primary hover:bg-primary-glow text-white font-mono tracking-wide border-2 border-primary-glow/50 hover:border-primary-glow shadow-cyber hover:shadow-hologram transition-all duration-500 h-12 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? (
                     <div className="flex items-center gap-2">
@@ -458,7 +456,7 @@ const Auth = () => {
                   <div>
                     <button
                       onClick={() => setShowForgotPassword(true)}
-                      className="text-primary-glow hover:text-white font-mono text-xs tracking-[0.15em] uppercase font-bold transition-colors duration-300"
+                      className="text-primary-glow/70 hover:text-primary-glow font-mono text-xs tracking-wide transition-colors duration-300"
                     >
                       Forgot your password?
                     </button>
@@ -466,14 +464,14 @@ const Auth = () => {
                   
                   {/* New Account Info */}
                   <div className="pt-4 border-t border-primary-glow/20">
-                    <p className="text-white/95 text-xs font-mono mb-2">Don't have an account yet?</p>
+                    <p className="text-white/70 text-xs font-mono mb-2">Don't have an account yet?</p>
                     <Link 
                       to="/#pricing" 
-                      className="text-primary-glow hover:text-white font-mono text-sm tracking-[0.15em] uppercase font-bold transition-colors duration-300 border-b border-primary-glow/40 hover:border-primary-glow inline-block"
+                      className="text-primary-glow hover:text-primary-glow/80 font-mono text-sm tracking-wide transition-colors duration-300 border-b border-primary-glow/30 hover:border-primary-glow/60 inline-block"
                     >
                       View Our Packages →
                     </Link>
-                    <p className="text-white/80 text-xs font-mono mt-2 leading-relaxed">Accounts are created automatically when you purchase</p>
+                    <p className="text-white/50 text-xs font-mono mt-2">Accounts are created automatically when you purchase</p>
                   </div>
                 </>
               )}
@@ -481,16 +479,16 @@ const Auth = () => {
               {showForgotPassword && (
                 <button
                   onClick={() => setShowForgotPassword(false)}
-                  className="text-primary-glow hover:text-white font-mono text-sm tracking-[0.15em] uppercase font-bold transition-colors duration-300 border-b border-primary-glow/40 hover:border-primary-glow"
+                  className="text-primary-glow hover:text-primary-glow/80 font-mono text-sm tracking-wide transition-colors duration-300 border-b border-primary-glow/30 hover:border-primary-glow/60"
                 >
                   Back to login
                 </button>
               )}
             </div>
 
-            <div className="text-center text-white/80 text-xs font-mono tracking-[0.15em] uppercase">
+            <div className="text-center text-white/60 text-xs font-mono tracking-wide">
               <p>Secure authentication powered by</p>
-              <p className="text-primary-glow font-bold">AI CONTENT PRODUCTION ENGINE</p>
+              <p className="text-primary-glow">AI CONTENT PRODUCTION ENGINE</p>
             </div>
           </CardContent>
         </Card>

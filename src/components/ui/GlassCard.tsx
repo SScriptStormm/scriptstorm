@@ -141,7 +141,7 @@ const GlassCardDescription = React.forwardRef<HTMLParagraphElement, GlassCardDes
   ({ className, ...props }, ref) => (
     <p
       ref={ref}
-      className={cn("text-sm text-white/90 leading-relaxed", className)}
+      className={cn("text-sm text-white/60", className)}
       {...props}
     />
   )
