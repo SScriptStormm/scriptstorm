@@ -60,7 +60,7 @@ const PerformanceDashboard = ({ articles, monthlyLimit }: PerformanceDashboardPr
       {/* Performance Score Card */}
       <GlassCard variant="default" glow>
         <GlassCardHeader>
-          <GlassCardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
+          <GlassCardTitle className="flex items-center gap-2 text-white font-mono tracking-[0.2em] font-bold uppercase">
             <BarChart3 className="h-5 w-5 text-primary-glow" />
             AI-DRIVEN PERFORMANCE DASHBOARD
           </GlassCardTitle>
@@ -125,7 +125,7 @@ const PerformanceDashboard = ({ articles, monthlyLimit }: PerformanceDashboardPr
       {/* Content Performance Trend */}
       <GlassCard variant="default" glow>
         <GlassCardHeader>
-          <GlassCardTitle className="flex items-center gap-2 text-white font-mono tracking-wide text-sm">
+          <GlassCardTitle className="flex items-center gap-2 text-white font-mono tracking-[0.2em] font-bold uppercase text-sm">
             <TrendingUp className="h-4 w-4 text-primary-glow" />
             UTILIZATION RATE
           </GlassCardTitle>

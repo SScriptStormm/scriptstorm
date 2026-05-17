@@ -33,7 +33,7 @@ export const DashboardHeader = ({ onRefresh, onSignOut, refreshing }: DashboardH
               />
             </div>
             <div>
-              <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-white font-mono tracking-wider">
+              <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-white font-mono tracking-[0.2em] font-bold uppercaser">
                 SCRIPTSTORM
               </h1>
               <p className="text-primary-glow/80 text-xs sm:text-sm font-mono tracking-[0.25em] uppercase">
