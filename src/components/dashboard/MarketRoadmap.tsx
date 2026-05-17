@@ -93,7 +93,7 @@ const MarketRoadmap = ({ userId }: MarketRoadmapProps) => {
     <GlassCard variant="dominance" glow>
       <GlassCardHeader>
         <div className="flex items-center justify-between">
-          <GlassCardTitle className="flex items-center gap-2 text-white font-mono tracking-wide">
+          <GlassCardTitle className="flex items-center gap-2 text-white font-mono tracking-[0.2em] font-bold uppercase">
             <Target className="h-5 w-5 text-primary-glow" />
             MARKET DOMINANCE ROADMAP
           </GlassCardTitle>

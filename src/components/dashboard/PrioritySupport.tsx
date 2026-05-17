@@ -54,7 +54,7 @@ ${userEmail}
   return (
     <GlassCard variant="default" glow hover={false}>
       <GlassCardHeader>
-        <GlassCardTitle className="flex items-center gap-3 text-white font-mono tracking-wide">
+        <GlassCardTitle className="flex items-center gap-3 text-white font-mono tracking-[0.2em] font-bold uppercase">
           <span className="p-2 rounded-lg bg-primary/15 border border-primary-glow/20">
             <MessageSquare className="h-4 w-4 text-primary-glow" />
           </span>
