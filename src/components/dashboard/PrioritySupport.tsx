@@ -135,6 +135,9 @@ ${userEmail}
             <p className="text-white/75 font-mono text-xs mt-3">
               Business hours: Monday–Friday, 6 AM – 3 PM HKT (Hong Kong Time)
             </p>
+            <p className="text-white/70 font-mono text-xs mt-2">
+              No human responses on weekends (Saturday–Sunday). Inquiries submitted on weekends will be handled on the next business day (Monday). Our AI assistant remains available 24/7.
+            </p>
             <p className="text-white/70 font-mono text-xs mt-2 italic">
               For clients outside Asia, please expect responses within your next business day. Our AI assistant is always available for instant help.
             </p>
