@@ -1,19 +1,25 @@
-## Plan
+## Problem
 
-Update the Enterprise Support Center in the dashboard Support tab so it matches the approved Unified Mono Header direction much more closely than the current implementation.
+Checkout fails with:
+> `customer_creation` can only be used in `payment` mode.
 
-### What I’ll change
-1. Rework the section hierarchy in `PrioritySupport.tsx` so the layout reads as a cleaner mono-led information panel rather than a standard card stack.
-2. Tighten the typography system for clarity: stronger header row, clearer label/value separation, more readable body copy, and more disciplined spacing without changing any wording.
-3. Redesign the response-time area and policy notes to feel more editorial and less blocky, so the same text looks lighter and easier to scan.
-4. Keep the existing actions and business logic exactly the same — this is a presentation-only redesign.
+In `subscription` mode, Stripe always creates a Customer automatically, so `customer_creation: "always"` is rejected.
 
-### Technical details
-- Edit only `src/components/dashboard/PrioritySupport.tsx`.
-- Preserve all current text content.
-- Preserve existing click handlers (`handleLaunchAIChat`, `handleContactSupport`) and tier logic.
-- Use the project’s existing semantic styling tokens and dashboard visual language.
-- Avoid changing surrounding dashboard tabs or unrelated support pages.
+## Fix
 
-### Expected result
-The Support tab will look noticeably closer to the chosen preview direction: more structured, less wordy at a glance, and significantly easier to read while keeping the exact same copy.
+In `supabase/functions/create-checkout/index.ts`, delete the single line:
+
+```ts
+customer_creation: "always",
+```
+
+from the `stripe.checkout.sessions.create({ ... })` call.
+
+Nothing else changes. Because we already removed `customer` and `customer_email`, Stripe Checkout will still render an empty, editable email field, and a fresh Customer will be created per session using whatever email the buyer types.
+
+## Test
+
+1. Incognito → click Subscribe on any tier.
+2. Stripe Checkout opens with a blank email field.
+3. Enter a test email + `4242 4242 4242 4242` → payment succeeds.
+4. Stripe Dashboard → Customers shows the new customer with the typed email.
