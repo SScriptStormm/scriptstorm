@@ -58,11 +58,11 @@ ${userEmail}
           <span className="p-2 rounded-lg bg-primary/15 border border-primary-glow/20">
             <MessageSquare className="h-4 w-4 text-primary-glow" />
           </span>
-          <span className="text-xs sm:text-sm tracking-[0.2em] uppercase text-white/60 font-bold">
+          <span className="text-xs sm:text-sm tracking-[0.2em] uppercase text-white font-bold">
             ENTERPRISE SUPPORT CENTER
           </span>
         </GlassCardTitle>
-        <p className="text-white/90 text-base sm:text-lg font-medium tracking-tight pt-2">
+        <p className="text-white text-base sm:text-lg font-medium tracking-tight pt-2">
           24/7 AI assistance + priority human response based on your plan.
         </p>
       </GlassCardHeader>
@@ -81,12 +81,12 @@ ${userEmail}
                   24/7 AI Assistant
                 </span>
               </div>
-              <p className="text-white/75 text-sm leading-relaxed">
+              <p className="text-white/95 text-sm leading-relaxed">
                 Instant answers to common questions: password reset, project status, revisions, and more.
               </p>
               <div className="flex items-start gap-2 pt-1">
-                <HelpCircle className="h-3.5 w-3.5 text-white/40 mt-0.5 flex-shrink-0" />
-                <span className="text-xs text-white/50 leading-relaxed">
+                <HelpCircle className="h-3.5 w-3.5 text-white/70 mt-0.5 flex-shrink-0" />
+                <span className="text-xs text-white/90 leading-relaxed">
                   📧 Need human help? Use the "SUBMIT A SUPPORT REQUEST" button below. For billing questions, email{" "}
                   <a href="mailto:billing@scriptstorm.org" className="text-primary-glow hover:underline">
                     billing@scriptstorm.org
@@ -106,16 +106,16 @@ ${userEmail}
           {/* Human Support — tier cards */}
           <section className="space-y-4">
             <div className="flex flex-col gap-1">
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40 font-bold">
+              <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/80 font-bold">
                 Human Support Team
               </span>
-              <p className="text-white/70 text-sm italic">
+              <p className="text-white/95 text-sm">
                 For complex issues not resolved by AI. Response times vary by plan:
               </p>
             </div>
 
             <div className="space-y-2">
-              <div className="grid grid-cols-12 px-5 py-2 font-mono text-[9px] uppercase tracking-[0.2em] text-white/25">
+              <div className="grid grid-cols-12 px-5 py-2 font-mono text-[10px] uppercase tracking-[0.2em] text-white/70 font-bold">
                 <div className="col-span-7">Plan</div>
                 <div className="col-span-5 text-right">Human Response Time</div>
               </div>
@@ -132,7 +132,7 @@ ${userEmail}
                     }`}
                   >
                     <div className="col-span-7 flex items-center gap-3">
-                      <span className={`text-base sm:text-lg font-semibold ${isCurrent ? "text-white" : "text-white/70"}`}>
+                      <span className={`text-base sm:text-lg font-semibold ${isCurrent ? "text-white" : "text-white/95"}`}>
                         {row.label}
                       </span>
                       {isCurrent && (
@@ -141,7 +141,7 @@ ${userEmail}
                         </span>
                       )}
                     </div>
-                    <div className={`col-span-5 text-right font-mono text-sm ${isCurrent ? "text-primary-glow" : "text-white/45"}`}>
+                    <div className={`col-span-5 text-right font-mono text-sm font-medium ${isCurrent ? "text-primary-glow" : "text-white/90"}`}>
                       {row.time}
                     </div>
                   </div>
@@ -153,31 +153,31 @@ ${userEmail}
           {/* Logistics Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6 border-t border-white/[0.06]">
             <div className="space-y-2">
-              <div className="flex items-center gap-2 text-white/40">
+              <div className="flex items-center gap-2 text-primary-glow">
                 <Clock className="h-4 w-4" />
-                <span className="font-mono text-[10px] uppercase tracking-[0.2em] font-bold">Business Hours</span>
+                <span className="font-mono text-[11px] uppercase tracking-[0.2em] font-bold">Business Hours</span>
               </div>
-              <p className="text-xs text-white/70 leading-relaxed">
+              <p className="text-sm text-white/95 leading-relaxed">
                 Monday–Friday, 6 AM – 3 PM HKT (Hong Kong Time)
               </p>
             </div>
 
             <div className="space-y-2">
-              <div className="flex items-center gap-2 text-white/40">
+              <div className="flex items-center gap-2 text-primary-glow">
                 <CalendarOff className="h-4 w-4" />
-                <span className="font-mono text-[10px] uppercase tracking-[0.2em] font-bold">Weekend Policy</span>
+                <span className="font-mono text-[11px] uppercase tracking-[0.2em] font-bold">Weekend Policy</span>
               </div>
-              <p className="text-xs text-white/70 leading-relaxed">
+              <p className="text-sm text-white/95 leading-relaxed">
                 No human responses on weekends (Saturday–Sunday). Inquiries submitted on weekends will be handled on the next business day (Monday). Our AI assistant remains available 24/7.
               </p>
             </div>
 
             <div className="space-y-2">
-              <div className="flex items-center gap-2 text-white/40">
+              <div className="flex items-center gap-2 text-primary-glow">
                 <Globe2 className="h-4 w-4" />
-                <span className="font-mono text-[10px] uppercase tracking-[0.2em] font-bold">Global Notes</span>
+                <span className="font-mono text-[11px] uppercase tracking-[0.2em] font-bold">Global Notes</span>
               </div>
-              <p className="text-xs text-white/70 leading-relaxed italic">
+              <p className="text-sm text-white/95 leading-relaxed">
                 For clients outside Asia, please expect responses within your next business day. Our AI assistant is always available for instant help.
               </p>
             </div>
@@ -200,7 +200,7 @@ ${userEmail}
             )}
 
             <div className="text-center">
-              <span className="text-white/40 text-[10px] uppercase tracking-[0.2em] font-mono font-bold">
+              <span className="text-white/80 text-[11px] uppercase tracking-[0.2em] font-mono font-bold">
                 Support Email
               </span>
               <p className="text-sm text-primary-glow font-medium mt-1">support@scriptstorm.org</p>
