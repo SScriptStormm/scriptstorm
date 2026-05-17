@@ -642,7 +642,7 @@ const Dashboard = () => {
                 <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-white font-mono tracking-[0.2em] font-bold uppercase">
                   SCRIPTSTORM
                 </h1>
-                <p className="text-primary-glow/80 text-xs sm:text-sm font-mono tracking-[0.2em] font-bold uppercasest">
+                <p className="text-primary-glow/80 text-xs sm:text-sm font-mono tracking-[0.2em] font-bold uppercase">
                   CLIENT DASHBOARD
                 </p>
               </div>
@@ -1079,7 +1079,7 @@ const Dashboard = () => {
                         <div className={`space-y-3 ${isSelected ? 'pl-2' : ''}`}>
                           {/* Title and Word Count */}
                           <div>
-                            <h3 className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/85 font-mono tracking-[0.2em] font-bold uppercaser font-bold text-sm mb-1 line-clamp-2">
+                            <h3 className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/85 font-mono tracking-[0.2em] font-bold uppercase font-bold text-sm mb-1 line-clamp-2">
                               {article.title}
                             </h3>
                             {article.word_count > 0 && <p className="text-white/60 font-mono text-xs">{article.word_count} words</p>}
@@ -1188,7 +1188,7 @@ const Dashboard = () => {
                                 <div className="absolute left-1 top-3 bottom-3 w-[3px] rounded-full bg-primary-glow shadow-[0_0_12px_hsl(221_83%_53%/0.6)]" />
                               )}
                               <div className={isSelected ? 'pl-3' : ''}>
-                                <h3 className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/85 font-mono tracking-[0.2em] font-bold uppercaser font-bold text-xs md:text-sm lg:text-base truncate max-w-[300px] lg:max-w-[400px]" title={article.title}>
+                                <h3 className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/85 font-mono tracking-[0.2em] font-bold uppercase font-bold text-xs md:text-sm lg:text-base truncate max-w-[300px] lg:max-w-[400px]" title={article.title}>
                                   {article.title}
                                 </h3>
                                 {article.word_count > 0 && <p className="text-white/60 font-mono text-[11px] md:text-xs">{article.word_count} words</p>}
