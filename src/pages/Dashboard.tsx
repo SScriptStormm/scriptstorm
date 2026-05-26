@@ -1283,7 +1283,7 @@ const Dashboard = () => {
                                   <Info className="h-4 w-4" />
                                 </Button>
                                 {article.status === 'completed' ? <>
-                                    <Button size="sm" className="bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono disabled:opacity-50 disabled:cursor-not-allowed" onClick={(e) => { e.stopPropagation(); handleDownload(article); }} disabled={!article.article_url && !article.content_draft}>
+                                   <Button size="sm" className="bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono disabled:opacity-50 disabled:cursor-not-allowed" onClick={(e) => { e.stopPropagation(); handleDownload(article); }} disabled={article.status !== 'completed'}>
                                       <Download className="h-4 w-4 mr-1" />
                                       Download
                                     </Button>
