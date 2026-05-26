@@ -1,26 +1,46 @@
-# Fix the Download button — frontend only, n8n untouched
+# Align Auth + Dashboard with Enterprise Support Center Design
 
-## Root cause (recap)
-The most recent completed brief has `article_url = null` and `content_draft = ""` (empty string). The button's disabled rule is `!article.article_url && !article.content_draft`, and `!""` is `true`, so the button greys out. n8n flips the row to `completed` without writing any deliverable yet.
+## Design language to propagate
+
+Distilled from `PrioritySupport.tsx`:
+
+- **Card shell**: `GlassCard` with `bg-white/[0.04]` panels, `border-white/[0.08]`, `rounded-2xl`, generous `p-5 sm:p-6` padding.
+- **Section header**: small icon inside `p-2 rounded-lg bg-primary/15 border border-primary-glow/20` + a mono uppercase title `text-xs tracking-[0.2em] font-bold text-white`.
+- **Eyebrow / micro-labels**: `font-mono text-[10-11px] uppercase tracking-[0.2em] text-primary-glow font-bold`.
+- **Body copy**: `text-white/95` (never below `/80`) at `text-sm` / `text-base` with `leading-relaxed`.
+- **Primary CTA**: `bg-primary text-white border border-primary-glow hover:bg-primary/90 hover:shadow-glow font-mono text-xs font-bold uppercase tracking-widest`, generous vertical padding (`py-5/6`).
+- **Status dot**: ping-animated `bg-primary-glow` indicator.
+- **Accents**: `text-primary-glow` for links, key data, icons in section headers.
+
+## Scope
+
+Two phases — auth surfaces first (small, isolated), then logged-in surfaces.
+
+### Phase 1 — Auth surfaces
+1. `src/pages/Auth.tsx` — login + signup forms + reset-password view. Wrap form in `GlassCard`, swap labels/buttons/links to the mono-uppercase + primary-glow system, add the icon-tile section header ("SECURE LOGIN" / "RESET PASSWORD"), tighten input styling (dark glass inputs with `border-white/[0.08]`, focus ring `primary-glow`).
+
+### Phase 2 — Logged-in surfaces
+Audit and harmonize these to use the same header pattern, eyebrow labels, button styling, and text contrast (most already use `GlassCard`; gap is typography/CTAs/labels):
+
+- `src/pages/Dashboard.tsx`
+- `src/pages/AccountSettings.tsx`
+- `src/pages/ContentBrief.tsx`
+- `src/pages/HelpCenter.tsx`
+- `src/pages/Support.tsx`
+- `src/pages/OnboardingProcess.tsx`
+- `src/pages/PackageDetails.tsx`
+- Dashboard widgets in `src/components/dashboard/*` (header, status, pipeline, queue, calendar, usage, package features, performance, research, roadmap) — normalize titles to `font-mono uppercase tracking-[0.2em]`, eyebrows to `text-primary-glow`, body text to `text-white/95`, buttons to the mono primary style.
+
+Marketing/public pages (Index, AboutUs, Contact, WhyChooseUs, Privacy, Terms, Refund, ThankYou) are **not in scope** per the request ("pages that require login").
 
 ## Approach
-Keep n8n exactly as it is. Fix everything in `src/pages/Dashboard.tsx`:
 
-1. **Always enable the Download button when `status === 'completed'`.** Remove the empty-content disable.
-2. **Upgrade `handleDownload` with a smart fallback chain:**
-   - If `article_url` exists → open it in a new tab (current behaviour).
-   - Else if `content_draft` has real text → download it as `<title>.txt` (current behaviour).
-   - Else → generate a clean `<title>-brief.txt` on the fly containing the brief metadata already in the row (title, content type, target keywords, target audience, tone, word count, key points, notes, submitted/updated timestamps, status). This guarantees the user always gets a file when the pipeline says "completed".
-3. **Toast feedback** stays the same — success toast on download, with a clarifying message when the fallback brief is used (e.g. "Downloaded brief summary — full content will replace this file once delivered").
+1. Read each target file, identify the heading / label / CTA primitives that diverge.
+2. Apply consistent class swaps — no logic changes, no copy changes.
+3. Where many widgets repeat the same pattern (icon-tile + uppercase title), keep the change localized per file (no new shared component) to minimize blast radius.
+4. Verify build after each phase.
 
-## Files touched
-- `src/pages/Dashboard.tsx` only
-  - `handleDownload` function (~L520): add the metadata-fallback branch.
-  - Two Download buttons (~L1142 grid card, ~L1246 list row): change `disabled` to `disabled={article.status !== 'completed'}`.
-
-## Out of scope (per your ask)
-- No changes to n8n.
-- No DB migrations, no triggers, no row backfill.
-- No changes to `ContentPipelineCard` or any other component.
-
-That's it — one file, three small edits, button works for every completed brief from now on.
+## Out of scope
+- No copy edits.
+- No layout restructuring beyond what's needed for the header/CTA pattern.
+- No changes to public marketing pages or `index.css`/Tailwind tokens (existing tokens already cover everything).

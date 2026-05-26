@@ -545,10 +545,10 @@ const Dashboard = () => {
       });
       return;
     }
-    // No article content delivered yet
+    // No content available
     toast({
-      title: "Article not yet delivered",
-      description: "Your project is marked complete but the article file hasn't been attached yet. Please contact support@scriptstorm.org if this persists.",
+      title: "Content not yet available",
+      description: "Your article is marked complete but no file was attached. Please contact support@scriptstorm.org.",
       variant: "destructive"
     });
   };
@@ -1139,7 +1139,7 @@ const Dashboard = () => {
                               View Brief Details
                             </Button>
                             {article.status === 'completed' ? <>
-                               <Button size="sm" className="w-full bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono text-xs disabled:opacity-50 disabled:cursor-not-allowed" onClick={(e) => { e.stopPropagation(); handleDownload(article); }} disabled={!article.article_url && (!article.content_draft || article.content_draft.trim().length === 0)}>
+                                <Button size="sm" className="w-full bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono text-xs disabled:opacity-50 disabled:cursor-not-allowed" onClick={(e) => { e.stopPropagation(); handleDownload(article); }} disabled={!article.article_url && !article.content_draft}>
                                   <Download className="h-3 w-3 mr-1" />
                                   Download
                                 </Button>
@@ -1243,7 +1243,7 @@ const Dashboard = () => {
                                   <Info className="h-4 w-4" />
                                 </Button>
                                 {article.status === 'completed' ? <>
-                                   <Button size="sm" className="bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono disabled:opacity-50 disabled:cursor-not-allowed" onClick={(e) => { e.stopPropagation(); handleDownload(article); }} disabled={!article.article_url && (!article.content_draft || article.content_draft.trim().length === 0)}>
+                                    <Button size="sm" className="bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono disabled:opacity-50 disabled:cursor-not-allowed" onClick={(e) => { e.stopPropagation(); handleDownload(article); }} disabled={!article.article_url && !article.content_draft}>
                                       <Download className="h-4 w-4 mr-1" />
                                       Download
                                     </Button>
