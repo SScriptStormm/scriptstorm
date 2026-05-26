@@ -523,33 +523,73 @@ const Dashboard = () => {
       window.open(article.article_url, '_blank');
       return;
     }
-    // Fallback path: deliver the content_draft as a downloadable .txt file
-    if (article.content_draft && article.content_draft.trim().length > 0) {
-      const safeTitle = (article.title || 'content')
-        .replace(/[^\w\s-]/g, '')
-        .trim()
-        .replace(/\s+/g, '_')
-        .slice(0, 80) || 'content';
-      const blob = new Blob([article.content_draft], { type: 'text/plain;charset=utf-8' });
+    const safeTitle = (article.title || 'content')
+      .replace(/[^\w\s-]/g, '')
+      .trim()
+      .replace(/\s+/g, '_')
+      .slice(0, 80) || 'content';
+    const triggerDownload = (text: string, filename: string) => {
+      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = `${safeTitle}.txt`;
+      link.download = filename;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
+    };
+    // Fallback path: deliver the content_draft as a downloadable .txt file
+    if (article.content_draft && article.content_draft.trim().length > 0) {
+      triggerDownload(article.content_draft, `${safeTitle}.txt`);
       toast({
         title: "Download started",
         description: `${article.title} downloaded as a .txt file.`
       });
       return;
     }
-    // No content available
+    // Final fallback: generate a brief-summary .txt from the metadata we already have
+    const fmt = (label: string, value: unknown) => {
+      if (value === null || value === undefined) return null;
+      if (Array.isArray(value)) {
+        if (value.length === 0) return null;
+        return `${label}: ${value.join(', ')}`;
+      }
+      const str = String(value).trim();
+      if (!str) return null;
+      return `${label}: ${str}`;
+    };
+    const lines: (string | null)[] = [
+      `ScriptStorm — Content Brief Summary`,
+      `==================================`,
+      ``,
+      fmt('Title', article.title),
+      fmt('Status', article.status),
+      fmt('Content Type', article.youtube_script ? 'YouTube Script' : article.content_type),
+      fmt('Word Count', article.word_count),
+      fmt('Target Keywords', article.target_keywords),
+      fmt('Target Audience', article.target_audience),
+      fmt('Content Goal', article.content_goal),
+      fmt('Tone', article.tone),
+      fmt('Brand Voice', article.brand_voice),
+      fmt('Key Points', article.key_points),
+      fmt('Style Preferences', article.style_preferences),
+      fmt('Strategic Goals', article.strategic_goals),
+      fmt('KPIs To Track', article.kpis_to_track),
+      fmt('Competitor URLs', article.competitor_urls),
+      fmt('Reference Links', article.reference_links),
+      fmt('Avoid Topics', article.avoid_topics),
+      fmt('Specific Instructions', article.specific_instructions),
+      fmt('Notes', article.notes),
+      fmt('Submitted', article.created_at),
+      fmt('Delivery Deadline', article.delivery_deadline),
+      ``,
+      `Note: This is a brief summary. The full content file will replace this download once delivered.`,
+    ];
+    triggerDownload(lines.filter(Boolean).join('\n'), `${safeTitle}-brief.txt`);
     toast({
-      title: "Content not yet available",
-      description: "Your article is marked complete but no file was attached. Please contact support@scriptstorm.org.",
-      variant: "destructive"
+      title: "Brief summary downloaded",
+      description: "Full content will replace this file once delivered."
     });
   };
   const submitRevisionRequest = async () => {
@@ -1139,7 +1179,7 @@ const Dashboard = () => {
                               View Brief Details
                             </Button>
                             {article.status === 'completed' ? <>
-                                <Button size="sm" className="w-full bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono text-xs disabled:opacity-50 disabled:cursor-not-allowed" onClick={(e) => { e.stopPropagation(); handleDownload(article); }} disabled={!article.article_url && !article.content_draft}>
+                               <Button size="sm" className="w-full bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono text-xs disabled:opacity-50 disabled:cursor-not-allowed" onClick={(e) => { e.stopPropagation(); handleDownload(article); }} disabled={article.status !== 'completed'}>
                                   <Download className="h-3 w-3 mr-1" />
                                   Download
                                 </Button>
@@ -1243,7 +1283,7 @@ const Dashboard = () => {
                                   <Info className="h-4 w-4" />
                                 </Button>
                                 {article.status === 'completed' ? <>
-                                    <Button size="sm" className="bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono disabled:opacity-50 disabled:cursor-not-allowed" onClick={(e) => { e.stopPropagation(); handleDownload(article); }} disabled={!article.article_url && !article.content_draft}>
+                                   <Button size="sm" className="bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono disabled:opacity-50 disabled:cursor-not-allowed" onClick={(e) => { e.stopPropagation(); handleDownload(article); }} disabled={article.status !== 'completed'}>
                                       <Download className="h-4 w-4 mr-1" />
                                       Download
                                     </Button>
