@@ -1179,7 +1179,7 @@ const Dashboard = () => {
                               View Brief Details
                             </Button>
                             {article.status === 'completed' ? <>
-                                <Button size="sm" className="w-full bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono text-xs disabled:opacity-50 disabled:cursor-not-allowed" onClick={(e) => { e.stopPropagation(); handleDownload(article); }} disabled={!article.article_url && !article.content_draft}>
+                               <Button size="sm" className="w-full bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30 font-mono text-xs disabled:opacity-50 disabled:cursor-not-allowed" onClick={(e) => { e.stopPropagation(); handleDownload(article); }} disabled={article.status !== 'completed'}>
                                   <Download className="h-3 w-3 mr-1" />
                                   Download
                                 </Button>
