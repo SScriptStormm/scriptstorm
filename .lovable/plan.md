@@ -1,16 +1,25 @@
-## Full ScriptStorm verbatim site text dump
+## Complete ScriptStorm site text dump — all pages
 
-Crawl every public page of https://scriptstorm.org (Home, Pricing, Help Center / FAQ, Support, Terms, Privacy, and any other linked public pages), extract the rendered text exactly as visitors see it, and deliver it three ways:
+The current `scriptstorm-full-site-text.md` covers Home, Why Choose Us, Onboarding, Contact, Support, Help Center, and Pricing/FAQ/Footer. It is missing the legal and About pages.
 
-1. Posted inline in the chat for direct copy/paste into Kimi.
-2. Saved to `public/scriptstorm-full.md` (live at https://scriptstorm.org/scriptstorm-full.md after next publish).
-3. Saved as a Files-panel artifact `scriptstorm-full-site-text.md`.
+### What I'll add
+Extend the local extraction script to also pull verbatim text from:
+- `src/pages/AboutUs.tsx`
+- `src/pages/TermsOfService.tsx`
+- `src/pages/PrivacyPolicy.tsx`
+- `src/pages/RefundPolicy.tsx`
+- `src/pages/ThankYou.tsx`
+- `src/pages/NotFound.tsx`
+- `src/pages/OnboardingProcess.tsx` (re-verify)
+- `src/pages/PackageDetails.tsx`
+- `src/components/Footer.tsx` (full link list)
 
-### Method
-- Use Firecrawl (`map` + `scrape`) to discover and fetch each public page in markdown. Firecrawl renders JS so it works with the React app.
-- Exclude auth/in-app routes: `/auth`, `/dashboard`, `/account`, `/reset-password`, etc.
-- Include legal pages (Terms, Privacy) per your request.
-- Concatenate into one markdown file with each page as `## Page: <Title> — <URL>`.
+### Output
+Regenerate a single file with every public page concatenated under `## Page: <Name>` headers:
+- `/mnt/documents/scriptstorm-full-site-text.md` (downloadable artifact)
+- `public/scriptstorm-full.md` (live at `https://scriptstorm.org/scriptstorm-full.md` after publish)
 
-### Prerequisite
-Firecrawl connector must be linked to the project. If it isn't, I'll prompt you to connect it (one click) before crawling.
+### Delivery
+After regenerating, paste the new/missing sections (About, Terms, Privacy, Refund, Thank You, 404, Package Details) inline in chat so you can copy them straight into Kimi alongside the parts already pasted.
+
+Authenticated/in-app routes (Dashboard, Account Settings, Content Brief, Auth) are excluded since they are not public-facing marketing text.
