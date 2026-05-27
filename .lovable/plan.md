@@ -1,46 +1,40 @@
-# Align Auth + Dashboard with Enterprise Support Center Design
+## Generate a ScriptStorm Site Bundle for Kimi
 
-## Design language to propagate
+I'll produce a single markdown file containing all public-facing content of ScriptStorm, structured so Kimi (or any LLM) can ingest it in one paste/upload.
 
-Distilled from `PrioritySupport.tsx`:
+### What the bundle will include
 
-- **Card shell**: `GlassCard` with `bg-white/[0.04]` panels, `border-white/[0.08]`, `rounded-2xl`, generous `p-5 sm:p-6` padding.
-- **Section header**: small icon inside `p-2 rounded-lg bg-primary/15 border border-primary-glow/20` + a mono uppercase title `text-xs tracking-[0.2em] font-bold text-white`.
-- **Eyebrow / micro-labels**: `font-mono text-[10-11px] uppercase tracking-[0.2em] text-primary-glow font-bold`.
-- **Body copy**: `text-white/95` (never below `/80`) at `text-sm` / `text-base` with `leading-relaxed`.
-- **Primary CTA**: `bg-primary text-white border border-primary-glow hover:bg-primary/90 hover:shadow-glow font-mono text-xs font-bold uppercase tracking-widest`, generous vertical padding (`py-5/6`).
-- **Status dot**: ping-animated `bg-primary-glow` indicator.
-- **Accents**: `text-primary-glow` for links, key data, icons in section headers.
+1. **Site overview** — name, tagline, mission, target users, value proposition.
+2. **Brand & positioning** — 100% automated AI workflow messaging, tone, differentiators.
+3. **Pages content** (extracted from current source):
+   - Landing/Home (hero, features, social proof, CTAs)
+   - Pricing (all 5 tiers: Starter, Growth, Scale, Authority, Dominance — monthly & annual prices, features, deliverables, revision rounds, capacity)
+   - FAQ / Help Center
+   - Support / Enterprise Support Center (response times, channels)
+   - Auth pages (Login, Reset)
+   - Dashboard features summary (Projects, Pipeline, Calendar, Quota, Account)
+4. **Service deliverables** — Articles, Social Posts, YouTube Scripts, Product descriptions, word counts per content type.
+5. **Content workflow** — n8n automation pipeline stages (20/60/80/100%), AI research → drafting → plagiarism/AI detection → completion.
+6. **Tech & integrations** — Stripe billing, Supabase backend, AI stack messaging.
+7. **Contact info** — hello@scriptstorm.org, support response times (12h/6h/2–4h HKT by tier).
+8. **URLs** — scriptstorm.org, sitemap reference.
 
-## Scope
+### How I'll build it
 
-Two phases — auth surfaces first (small, isolated), then logged-in surfaces.
+- Script: `scripts/generate-site-bundle.ts` that reads `src/pages/*`, `src/components/**`, marketing copy, pricing data, and FAQ content, then concatenates into one well-structured markdown file.
+- Output: `/mnt/documents/scriptstorm-site-bundle.md` (delivered as a downloadable artifact).
+- Also save a copy to `public/scriptstorm.md` so you can link Kimi directly to `https://scriptstorm.org/scriptstorm.md`.
 
-### Phase 1 — Auth surfaces
-1. `src/pages/Auth.tsx` — login + signup forms + reset-password view. Wrap form in `GlassCard`, swap labels/buttons/links to the mono-uppercase + primary-glow system, add the icon-tile section header ("SECURE LOGIN" / "RESET PASSWORD"), tighten input styling (dark glass inputs with `border-white/[0.08]`, focus ring `primary-glow`).
+### How you'll use it with Kimi
 
-### Phase 2 — Logged-in surfaces
-Audit and harmonize these to use the same header pattern, eyebrow labels, button styling, and text contrast (most already use `GlassCard`; gap is typography/CTAs/labels):
+Two options after generation:
+- **Upload**: download the .md file and attach it in Kimi.
+- **Link**: paste `https://scriptstorm.org/scriptstorm.md` and ask Kimi to fetch it (works if Kimi has browsing).
 
-- `src/pages/Dashboard.tsx`
-- `src/pages/AccountSettings.tsx`
-- `src/pages/ContentBrief.tsx`
-- `src/pages/HelpCenter.tsx`
-- `src/pages/Support.tsx`
-- `src/pages/OnboardingProcess.tsx`
-- `src/pages/PackageDetails.tsx`
-- Dashboard widgets in `src/components/dashboard/*` (header, status, pipeline, queue, calendar, usage, package features, performance, research, roadmap) — normalize titles to `font-mono uppercase tracking-[0.2em]`, eyebrows to `text-primary-glow`, body text to `text-white/95`, buttons to the mono primary style.
+### Out of scope
 
-Marketing/public pages (Index, AboutUs, Contact, WhyChooseUs, Privacy, Terms, Refund, ThankYou) are **not in scope** per the request ("pages that require login").
+- No backend/source code dump (that's option 3).
+- No screenshots (that's option 4).
+- No private/admin/internal logic — only public-facing content.
 
-## Approach
-
-1. Read each target file, identify the heading / label / CTA primitives that diverge.
-2. Apply consistent class swaps — no logic changes, no copy changes.
-3. Where many widgets repeat the same pattern (icon-tile + uppercase title), keep the change localized per file (no new shared component) to minimize blast radius.
-4. Verify build after each phase.
-
-## Out of scope
-- No copy edits.
-- No layout restructuring beyond what's needed for the header/CTA pattern.
-- No changes to public marketing pages or `index.css`/Tailwind tokens (existing tokens already cover everything).
+Approve and I'll generate the bundle.
