@@ -666,3 +666,234 @@
 - LinkedIn
 - X (Twitter)
 - Email
+---
+
+## Page: About Us — /about-us
+
+**ABOUT SCRIPTSTORM**
+
+# We're Automating Content Creation
+
+ScriptStorm is a powerful, AI-driven content engine. We deliver high-quality, SEO-optimized content in record time—without the traditional agency overhead. Our fully automated system is built for founders and marketers who value speed, consistency, and results.
+
+### What Powers ScriptStorm
+
+- **Expert-Level AI Training** — Our systems are calibrated with industry-leading data to deliver content that sounds like you.
+- **Seamless Automation** — A refined, multi-step process ensures quality and consistency, every single time.
+- **Rapid Turnaround** — Get publish-ready content delivered on a predictable schedule, so you can stop waiting and start growing.
+- **Client-Obsessed Results** — Every piece of content has one goal: to drive measurable growth for your brand.
+
+### Our Mission
+
+We believe that scaling content shouldn't be a slow, expensive, or unpredictable process. Traditional agencies are bogged down by human bottlenecks. That's why we built ScriptStorm—a seamless automated system that delivers publish-ready content at the push of a button, making consistent, high-quality content accessible for every growing business.
+
+> "The traditional content model is broken. You're forced to choose between slow, expensive agencies and the unpredictable rollercoaster of freelancers. We built ScriptStorm to end that compromise. Our automated system is engineered for one thing: to deliver publish-ready, high-performing content with the reliability of clockwork. No excuses, no delays, no surprises."
+> — The ScriptStorm Founder
+
+### Our Values
+
+- **Speed & Automation** — We reject drawn-out processes. Our AI-powered workflow is engineered for one thing: delivering professional results in 24 hours or less, every time.
+- **Results-Driven Content** — Every piece of content is engineered for performance. From keyword research to structure, our system is optimized to drive traffic, engagement, and conversions.
+- **Guaranteed Quality** — We don't compromise. Every piece of content must pass our rigorous automated checks for originality, SEO, and readability before it ever reaches you.
+
+### Our Difference: The Engine, Not Just The Writers
+
+ScriptStorm isn't a team of freelance writers. It's a sophisticated AI assembly line fine-tuned for marketing content. While others rely on inconsistent human output, we offer:
+
+- **Unmatched Consistency** — Our AI produces on-brand content every time.
+- **Transparent Pricing** — No bloated retainers, just predictable monthly plans.
+- **Scalability** — Ramp your content volume up or down instantly, without meetings or headaches.
+
+### Ready to Experience the Difference?
+
+Join the forward-thinking brands that are leveraging AI to outpace their competition.
+[Get Started Today] [Learn Our Process]
+
+---
+
+## Page: Onboarding Process — /onboarding-process
+
+# 🚀 How Our AI Process Works
+
+A fully automated system delivering publish-ready content in 24 hours—powered by enterprise-grade AI.
+
+**24-Hour Turnaround Guaranteed**
+
+### 01. Submit Content Brief (Instantly) — Instant
+Submit your brief, and our system instantly:
+- Complete the brief form in your Client Dashboard
+- Automated workflow triggers instantly upon submission
+- 24-hour countdown begins immediately
+
+### 02. AI Research & Strategy — 2-4 hours
+Our system autonomously:
+- Conducts data-driven keyword research
+- Generates SEO-optimized content outlines
+- Maps high-impact topics to your business goals
+
+### 03. AI Content Creation — 12-18 hours
+Industry-trained AI drafts:
+- Conversion-focused content tailored to your brand
+- SEO-optimized structure with headers/keywords
+- Multiple drafts to ensure quality foundations
+
+### 04. AI Quality Control & Delivery — 2-4 hours
+Every piece undergoes:
+- Plagiarism and AI-detection screening
+- SEO scoring and readability checks
+- Instant delivery to your client dashboard
+
+### 05. Dashboard & Support — Ongoing
+Your content, managed in one place:
+- Real-Time Tracking: See the status of every request in your dedicated client dashboard
+- Streamlined Revisions: Submit revision requests directly through your dashboard for lightning-fast, AI-assisted tweaks
+- Instant Access: Download all approved, ready-to-publish files with one click
+
+### Why Our AI Process Works
+
+- **AI-Powered Precision** — Advanced AI algorithms ensure consistent, high-quality output without human error or delays.
+- **Data-Driven Results** — Real-time data research combined with AI optimization ensures maximum impact and up-to-date accuracy on your business goals and conversions.
+- **Lightning Fast AI** — Fully automated AI process delivers professional results in a fraction of typical timeframes with zero delays.
+
+### Common Questions About Our AI Process
+
+**What if I need revisions?** We offer AI-assisted revisions based on your plan: Starter (1 round), Growth (2 rounds), Scale (2 rounds), Authority (3 rounds), Dominance (unlimited, under our Fair Use policy). Simply submit your request through your client dashboard—our system will process and deliver the refined content within a few hours.
+
+**How does AI ensure the content matches my brand?** During the initial brief submission, our AI analyzes your brand voice, style, and any existing content you provide in your dashboard. This allows it to generate new content that maintains perfect consistency with your established tone and guidelines.
+
+**What if I'm not satisfied with the AI-generated content?** We offer a 100% satisfaction guarantee. If a piece of content doesn't meet your expectations after using your included revisions, we'll rewrite it or provide a prorated refund. We are confident in the quality our automated system delivers.
+
+**Can your AI handle urgent requests?** Our standard automated turnaround is a guaranteed 24 hours. For clients needing even faster delivery, our Dominance package includes a guaranteed 12-hour turnaround for all content.
+
+---
+
+## Page: Terms of Service — /terms-and-conditions
+
+# Terms of Service
+
+**1. Acceptance of Terms** — By accessing and using ScriptStorm's services, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
+
+**2. Description of Service** — ScriptStorm provides AI-powered content generation services through monthly subscriptions, delivering SEO articles, social media posts, and product descriptions optimized for SaaS and eCommerce businesses. Each subscription includes 24-hour orchestrated delivery and AI-assisted revisions.
+
+**3. User Responsibilities** — Users are responsible for:
+- Providing accurate and complete information when placing orders
+- Ensuring content requirements are clearly communicated
+- Reviewing and approving delivered content within the specified timeframe
+- Making timely payments for services rendered
+
+**4. Payment Terms** — Payment is processed monthly for subscription plans. We accept major credit cards and process payments through secure payment processors. All prices are in USD. Monthly subscriptions renew automatically unless cancelled before the next billing cycle.
+
+**5. Delivery and Revisions** — Content is delivered within 24 hours through our orchestrated AI workflow. Each subscription plan includes specific revision rounds: Starter (1), Growth (2), Scale (2), Authority (3), Dominance (unlimited with Fair Use). Revisions are completed within 24 hours of request.
+
+**6. Intellectual Property** — Upon full payment, clients receive full ownership and rights to the delivered content. ScriptStorm retains the right to showcase work samples for portfolio purposes unless otherwise agreed upon.
+
+**7. Refund Policy** — Our refund policy is governed by our complete Refund Policy, located at /refund-policy. Refund requests must be made within 48 hours of delivery and are subject to the terms outlined therein.
+
+**8. Limitation of Liability** — ScriptStorm's liability is limited to the amount paid for the specific service. We are not liable for any indirect, incidental, or consequential damages arising from the use of our services.
+
+**9. Privacy Policy** — We respect your privacy and are committed to protecting your personal information. We will not share, sell, or distribute your personal information to third parties without your consent, except as required by law.
+
+**10. Modifications to Terms** — ScriptStorm reserves the right to modify these terms at any time. Users will be notified of significant changes via email or through our website.
+
+**11. Contact Information** — For questions regarding these Terms of Service, please contact us at hello@scriptstorm.org
+
+---
+
+## Page: Privacy Policy — /privacy-policy
+
+# Privacy Policy
+
+**Information We Collect** — We collect information you provide directly to us when you subscribe to our AI content generation services, communicate with us during content delivery, or interact with our automated workflow systems.
+
+**How We Use Your Information** — We use the information we collect to deliver AI-generated content services through our monthly subscriptions, communicate about your content deliveries, process monthly payments, and provide ongoing support.
+
+**Information Sharing** — We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except as described in this policy.
+
+**Data Security** — We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.
+
+**Cookies** — We use cookies and similar technologies to enhance your experience on our website and analyze usage patterns.
+
+**Your Rights** — You have the right to access, update, or delete your personal information. Contact us to exercise these rights.
+
+**Changes to This Policy** — We may update this privacy policy from time to time. We will notify you of any changes by posting the new policy on this page.
+
+**Contact Us** — If you have any questions about this privacy policy, please contact us at: hello@scriptstorm.org
+
+---
+
+## Page: Refund Policy — /refund-policy
+
+# Refund Policy
+
+**Satisfaction Guarantee** — We stand behind our AI-powered content generation services with a satisfaction guarantee. If we fail to deliver content that meets the agreed specifications or timeline within your subscription plan, you may be eligible for a refund as outlined below.
+
+**Monthly Plan Policy** — As our service provides immediate access to our automated content generation system, all monthly sales are final. Refunds are only considered in the event of a consistent and verifiable failure of our service to deliver content as specified in our Satisfaction Guarantee.
+
+**Annual Plan Refund Policy** — Annual plans are eligible for a prorated refund, minus the value of any content already delivered, within the first 30 days of the subscription. After 30 days, annual plans are non-refundable.
+
+**How to Request a Refund** — To request a refund, please contact our team within 48 hours of delivery with your subscription details and specific concerns. We will work with you to resolve any issues before processing refund requests, as we are committed to client satisfaction.
+
+**Processing Time** — Once your refund is approved, it will be processed within 5-10 business days. The refund will be credited to your original payment method.
+
+**Non-Refundable Items** — The following situations are typically not eligible for refunds:
+- Change of mind after content has been delivered and approved
+- Content that meets specifications but doesn't achieve desired business results
+- Custom work that has been fully completed according to agreed specifications
+- Projects where significant revisions have been provided and accepted
+
+**Contact Us** — billing@scriptstorm.org
+
+---
+
+## Page: Thank You — /thank-you (post-checkout)
+
+# Welcome to ScriptStorm!
+
+Your subscription is now active.
+
+- **Your Dashboard Is Ready** — Your content pipeline and brief form are now active.
+- **Submit Your First Brief** — Head to your dashboard to submit a content brief and get your first draft.
+- **Fully Automated Delivery** — Our AI stack handles everything. No calls, no delays.
+
+Billed in USD · Cancel anytime
+
+Your login details have been sent to your email. Please check your inbox. You can change your password anytime from your account settings.
+
+[Log In Now] [Back to Homepage]
+
+---
+
+## Page: 404 Not Found
+
+# 404 — Page Not Found
+
+The page you're looking for doesn't exist or has been moved.
+
+[Return to Home]
+
+---
+
+## Page: Package Details — /package-details (authenticated)
+
+# Your Package Details
+
+Everything included in your subscription. (Tier-specific deliverables: word counts, monthly capacity, revision rounds, keyword research depth, delivery SLA, and AI stack are rendered per subscribed tier — Starter / Growth / Scale / Authority / Dominance.)
+
+---
+
+## Footer (sitewide)
+
+**Ready to Transform Your Content Marketing?**
+Stop the endless wait for quality content. Get premium, automated content that converts—delivered in 24 hours. Start Your First Draft.
+🚀 Start My 24-Hour Draft
+
+**ScriptStorm** — Premium content marketing services for SaaS and eCommerce brands. Delivered fast, optimized for SEO, guaranteed to convert.
+
+**Services:** SEO Blog Articles · Social Media Content · Email Copy · Content Strategy
+**Company:** About Us · Our Process · Case Studies (Coming Soon — Launching with our first client results!) · Contact
+**Support:** Help Center · Manage Subscription · Privacy Policy · Terms of Service · Refund Policy
+
+* Limited to 20 clients/month for 24-hr delivery
+
+© 2025 ScriptStorm. All rights reserved.
+LinkedIn · X (Twitter) · Email
