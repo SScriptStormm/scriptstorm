@@ -1,25 +1,31 @@
-## Complete ScriptStorm site text dump — all pages
+## Goal
+Send you the full user-visible text of the **Dashboard**, **Submit Content Brief**, **Account Settings**, and **Package Details** pages — with all tier-specific variations called out (Starter, Growth, Scale, Authority, Dominance).
 
-The current `scriptstorm-full-site-text.md` covers Home, Why Choose Us, Onboarding, Contact, Support, Help Center, and Pricing/FAQ/Footer. It is missing the legal and About pages.
+## Approach
+1. Run a local extraction script against:
+   - `src/pages/Dashboard.tsx` + all `src/components/dashboard/*.tsx`
+   - `src/pages/ContentBrief.tsx` (Submit Content Brief)
+   - `src/pages/AccountSettings.tsx`
+   - `src/pages/PackageDetails.tsx`
+2. For each page, produce one section per tier showing the exact copy that tier sees (quotas, labels, deliverables, revision counts, SLAs, badges, gating messages).
+3. Save the bundle to `/mnt/documents/scriptstorm-app-pages-by-tier.md` AND paste it inline in chat, split across messages if needed.
 
-### What I'll add
-Extend the local extraction script to also pull verbatim text from:
-- `src/pages/AboutUs.tsx`
-- `src/pages/TermsOfService.tsx`
-- `src/pages/PrivacyPolicy.tsx`
-- `src/pages/RefundPolicy.tsx`
-- `src/pages/ThankYou.tsx`
-- `src/pages/NotFound.tsx`
-- `src/pages/OnboardingProcess.tsx` (re-verify)
-- `src/pages/PackageDetails.tsx`
-- `src/components/Footer.tsx` (full link list)
+## Format per page
+```
+### [Page Name]
+Shared text (headers, labels, buttons, toasts)
 
-### Output
-Regenerate a single file with every public page concatenated under `## Page: <Name>` headers:
-- `/mnt/documents/scriptstorm-full-site-text.md` (downloadable artifact)
-- `public/scriptstorm-full.md` (live at `https://scriptstorm.org/scriptstorm-full.md` after publish)
+#### Starter tier view
+...tier-conditional copy...
 
-### Delivery
-After regenerating, paste the new/missing sections (About, Terms, Privacy, Refund, Thank You, 404, Package Details) inline in chat so you can copy them straight into Kimi alongside the parts already pasted.
+#### Growth tier view
+...
 
-Authenticated/in-app routes (Dashboard, Account Settings, Content Brief, Auth) are excluded since they are not public-facing marketing text.
+#### Scale / Authority / Dominance tier views
+...
+```
+
+## Notes
+- No code or design changes — pure text extraction.
+- Tier differences will come from the tier-mapping logic already in `PackageFeaturesWidget`, `QuotaUsageWidget`, `PackageDetails`, and `AccountSettings`.
+- If the result exceeds one chat message, I'll paste it in 2 parts.
